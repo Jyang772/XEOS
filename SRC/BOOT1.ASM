@@ -1,0 +1,202 @@
+; -----------------------------------------------------------------------------
+; XEOS - x86 Experimental Operating System
+; 
+; Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)
+; All rights reserved
+; 
+; Redistribution and use in source and binary forms, with or without
+; modification, are permitted provided that the following conditions are met:
+; 
+;  -   Redistributions of source code must retain the above copyright notice,
+;      this list of conditions and the following disclaimer.
+;  -   Redistributions in binary form must reproduce the above copyright
+;      notice, this list of conditions and the following disclaimer in the
+;      documentation and/or other materials provided with the distribution.
+;  -   Neither the name of 'Jean-David Gadina' nor the names of its
+;      contributors may be used to endorse or promote products derived from
+;      this software without specific prior written permission.
+; 
+; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+; IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+; ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+; LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+; CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+; SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+; INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+; CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+; ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+; POSSIBILITY OF SUCH DAMAGE.
+; ------------------------------------------------------------------------------
+
+; $Id$
+
+;-------------------------------------------------------------------------------
+; XEOS first stage bootloader
+; 
+; The binary form of this file must no be larger than 512 bytes (one sector).
+; The last two bytes have to be the standard PC boot signature (0xAA55).
+; 
+; Note about compiling:
+;
+; This file has to be compiled as a flat-form binary file.
+; 
+; The following compilers have been successfully tested:
+; 
+;       - NASM - The Netwide Assembler
+;       - YASM - The Yasm Modular Assembler
+; 
+; Other compilers have not been tested.
+; 
+; Examples:
+; 
+;       - nasm -f bin -o [boot.flp] [boot.asm]
+;       - yasm -f bin -o [boot.flp] [boot.asm]
+; 
+; It can then be copied to a floppy disk image (as it contains a valid MBR):
+; 
+;       - dd -conv=notrunc if=[bin] of=[floppy]
+;-------------------------------------------------------------------------------
+
+; Forces the 16 bits mode for the BIOS
+BITS    16
+
+; Includes the FAT-12 MBR, so the beginning of the binary will be a valid
+; FAT-12 floppy drive
+%include "MBR-FAT12.ASM"
+
+;-------------------------------------------------------------------------------
+; First stage bootloader
+; 
+; This section is the bootloader's code that will be runned by the BIOS.
+; 
+; At this time, the memory layout is the following:
+; 
+;       - 0x0000 - 0x0040:  ISR vectors addresses (Interrupt Service Routine)
+;       - 0x0040 - 0x0100:  BIOS data
+;       - 0x0100 - 0x07C0:  Free
+;       - 0x07C0 - 0x07E0:  Bootloader
+;       - 0x7CE0 - 0xA000:  Free
+;       - 0xA000 - 0xC000:  BIOS video sub-system
+;       - 0xC000 - 0xF000:  BIOS ROM
+;       - 0xF000 - 0xFFFF:  System ROM
+;-------------------------------------------------------------------------------
+XEOS.boot.stage1:
+    
+    ; Jumps to the effective code (bypasses the includes)
+    jmp     .start
+    
+    ;-------------------------------------------------------------------------------
+    ; Includes
+    ;
+    ; Placed here to avoid problems with the MBR short jump.
+    ;-------------------------------------------------------------------------------
+    %include "MACROS.ASM"       ; General macros
+    %include "IO.ASM"           ; IO procedures
+    %include "BIOS-INT.ASM"     ; BIOS interrupts
+    %include "BIOS-VIDEO.ASM"   ; BIOS video services
+    %include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
+    %include "ASCII.ASM"        ; ASCII table
+    
+    ; We are redefining 'XEOS.boot.stage1', as the include files are declaring
+    ; global procedures
+    XEOS.boot.stage1.start:
+    
+    ; Clears the interrupts as we are setting-up the stack space
+    cli
+    
+    ; Sets up 4K of stack after the bootloader
+    mov     ax,         07CEh
+    mov     ss,         ax
+    mov     sp,         4096
+    
+    ; Restores the interrupts
+    sti
+    
+    ; Sets the data segment to where we were loaded by the BIOS (07C0h),
+    ; so we don't have to add 07C0h to all our data
+    mov     ax,         07C0h
+    mov     ds,         ax
+    
+    ; Saves the boot device number
+    mov     dl,         $XEOS.mbr.driveNumber
+    
+    ; Clears the screen
+    @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.lightGray
+    
+    ; Prints the greeting
+    @BIOS.video.print   XEOS.boot.stage1.greet
+    
+    ; Tries to find the second stage bootloader
+    jmp     .loadSecondStage
+    
+    ; The first bootloader is limited to 512 bytes, we we need to load a
+    ; second stage bootloader to efficienttly load the kernel
+    .loadSecondStage:
+    
+    ; Loads the root directory of the floppy
+    ; 
+    ; 1)    Gets the size of the root directory
+    ; 2)    Gets the start of the root directory
+    .loadRootDirectory
+    
+    ; An entry of the root directory is 32 bits
+    mov     ax,         0x0020
+    
+    ; Number of root directory entries
+    mov     bx,         $XEOS.mbr.maxRootDirEntries
+    mul     WORD bx
+    
+    ; Number of sectors used by the root directory
+    mov     bx,         $XEOS.mbr.bytesPerSector
+    div     bx
+    
+    ; Stores the size of the root directory in CX
+    xchg    cx,         ax
+    
+    ; Number of file allocation tables
+    mov     al,         $XEOS.mbr.numberOfFat
+    
+    ; Multiplies by the number of sectors that a FAT uses
+    mov     bx,         $XEOS.mbr.sectorsPerFat
+    mul     bx
+    
+    ; Adds the number of reserved sectors, so we now have the starting
+    ; sector of the root directory
+    add     ax,         $XEOS.mbr.reservedSectors
+    
+    ; Now we can guess and store the starting sector for the data
+    mov     [ XEOS.boot1.dataSectorStart ], ax
+    add     [ XEOS.boot1.dataSectorStart ], cx
+    
+    ; Sectors will be read after this bootloader (ES:BX = 07C0h:512)
+    mov     bx,         512
+    
+    call    XEOS.io.readSectors
+    
+    ; Infinite load
+    jmp     $
+
+;-------------------------------------------------------------------------------
+; Variables definition
+;-------------------------------------------------------------------------------
+
+; Strings
+XEOS.boot.files.stage2      db  'BOOT2   BIN'
+XEOS.boot.stage1.greet      db  $ASCII.NL, $ASCII.SPC,\
+                                'Booting XEOS...',\
+                                $ASCII.NL, $ASCII.NUL
+
+; Start of the floppy data sector
+XEOS.boot1.dataSectorStart  dw  0
+
+;-------------------------------------------------------------------------------
+; Ends of the boot sector
+;-------------------------------------------------------------------------------
+
+; Pads the remainder of the boot sector with '0', so we'll be able to write the
+; boot signature
+times   510 - ( $ - $$ ) db  $ASCII.NUL
+
+; 0x1FE (2) - Boot sector signature
+dw      $BIOS.boot.signature
