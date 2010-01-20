@@ -71,13 +71,13 @@ XEOS.io.readSectors:
     mov     al,         1
     
     ; Track number
-    mov     ch,         BYTE [XEOS.io.absoluteTrack]
+    mov     ch,         BYTE [ XEOS.io.absoluteTrack ]
     
     ; Sector number
-    mov     cl,         BYTE [XEOS.io.absoluteSector]
+    mov     cl,         BYTE [ XEOS.io.absoluteSector ]
     
     ; Head number
-    mov     dh,         BYTE [XEOS.io.absoluteHead]
+    mov     dh,         BYTE [ XEOS.io.absoluteHead ]
     
     ; Drive number
     mov     dl,         $XEOS.mbr.driveNumber
@@ -105,7 +105,7 @@ XEOS.io.readSectors:
     @XEOS.reg.restore
     
     ; Memory area in which the next sector will be read
-    add     bx,         WORD [$XEOS.mbr.bytesPerSector]
+    add     bx,         WORD [ $XEOS.mbr.bytesPerSector ]
     
     ; We are now reading the next sector
     inc     ax
@@ -154,8 +154,8 @@ XEOS.io.lbaToChs:
     div     bx
     
     ; Stores the absolute head and absolute track
-    mov     BYTE [XEOS.io.absoluteHead],    dl
-    mov     BYTE [XEOS.io.absoluteTrack],   al
+    mov     BYTE [ XEOS.io.absoluteHead ],  dl
+    mov     BYTE [ XEOS.io.absoluteTrack ], al
     
     @XEOS.reg.restore
     
