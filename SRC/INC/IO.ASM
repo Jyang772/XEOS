@@ -55,6 +55,8 @@ XEOS.io.readSectors:
     
     .start:
     
+    @XEOS.reg.save
+    
     ; Resets the floppy controller
     call    BIOS.llds.resetFloppyDrive
     
@@ -95,6 +97,15 @@ XEOS.io.readSectors:
     call    XEOS.error.fatal
     
     .succes:
+    
+    @XEOS.reg.restore
+    
+    ; Memory area in which the next sector will be read
+    add     bx, WORD [$XEOS.mbr.bytesPerSector]
+    
+    ; We are now reading the next sector
+    inc     ax
+    loop    XEOS.io.readSectors
     
     ret
    
