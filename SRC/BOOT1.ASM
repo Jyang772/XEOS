@@ -127,9 +127,6 @@ XEOS.boot.stage1:
     ; Prints the greeting
     @BIOS.video.print   XEOS.boot.stage1.greet
     
-    ; Tries to find the second stage bootloader
-    jmp     .loadSecondStage
-    
     ; The first bootloader is limited to 512 bytes, we we need to load a
     ; second stage bootloader to efficienttly load the kernel
     .loadSecondStage:
@@ -173,6 +170,13 @@ XEOS.boot.stage1:
     mov     bx,         512
     
     call    XEOS.io.readSectors
+    
+    ; Reads the root directory
+    ; 
+    ; The content of the root directory is now in memory, just after this
+    ; bootloader.
+    ; We are going to read it to find the second stage bootloader.
+    .readRootDirectory:
     
     ; Infinite load
     jmp     $

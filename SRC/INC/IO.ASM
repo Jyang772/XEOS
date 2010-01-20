@@ -105,7 +105,7 @@ XEOS.io.readSectors:
     @XEOS.reg.restore
     
     ; Memory area in which the next sector will be read
-    add     bx, WORD [$XEOS.mbr.bytesPerSector]
+    add     bx,         WORD [$XEOS.mbr.bytesPerSector]
     
     ; We are now reading the next sector
     inc     ax
