@@ -50,7 +50,10 @@
 ;-------------------------------------------------------------------------------
 XEOS.io.readSectors:
     
-    xor di, di
+    ; Resets DI, so we can count the number of read tries
+    xor     di,         di
+    
+    .start:
     
     ; Resets the floppy controller
     call    BIOS.llds.resetFloppyDrive
@@ -76,13 +79,22 @@ XEOS.io.readSectors:
     ; Calls the BIOS low level disk services
     $BIOS.int.llds
     
-    ; Checks for errors
-    jnc     .success
+    ; Checks if an error occued
+    jnc     .succes
     
-    ; Error reading the sectors
-    call XEOS.error.fatal
+    ; Increases the number of read tries
+    inc     di
     
-    .success:
+    ; 5 possible retries, in case of error
+    cmp     di,         5
+    
+    ; Tries to reset again
+    jb     .start
+    
+    ; 5 retries - Fatal error
+    call    XEOS.error.fatal
+    
+    .succes:
     
     ret
    
