@@ -60,6 +60,10 @@ XEOS.io.readSectors:
     ; Resets the floppy controller
     call    BIOS.llds.resetFloppyDrive
     
+    ; Converts the logical block address to cluster, head and cylinder
+    ; (needed for int 13h)
+    call    XEOS.io.lbaToChs
+    
     ; Read sectors (BIOS low level disk services function)
     mov     ah,         2
     
