@@ -166,8 +166,8 @@ XEOS.boot.stage1:
     mov     [ XEOS.boot1.dataSectorStart ], ax
     add     [ XEOS.boot1.dataSectorStart ], cx
     
-    ; Sectors will be read after this bootloader (ES:BX = 07C0h:512)
-    mov     bx,         512
+    ; Sectors will be read after the stack space (ES:BX = 07C0h:4096)
+    mov     bx,         4096
     
     call    XEOS.io.readSectors
     
@@ -180,7 +180,7 @@ XEOS.boot.stage1:
     
     ; Infinite load
     jmp     $
-
+    
 ;-------------------------------------------------------------------------------
 ; Variables definition
 ;-------------------------------------------------------------------------------
