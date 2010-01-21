@@ -169,6 +169,7 @@ XEOS.boot.stage1:
     ; Sectors will be read after the stack space (ES:BX = 07C0h:4096)
     mov     bx,         4096
     
+    ; Reads the necessary sectors to load the root directory into memory
     call    XEOS.io.readSectors
     
     ; Reads the root directory
@@ -178,7 +179,6 @@ XEOS.boot.stage1:
     ; We are going to read it to find the second stage bootloader.
     .readRootDirectory:
     
-    ; Infinite load
     jmp     $
     
 ;-------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ XEOS.boot.stage1:
 ;-------------------------------------------------------------------------------
 
 ; Strings
-XEOS.boot.files.stage2      db  'BOOT2   BIN'
+XEOS.files.stage2           db  'BOOT2   BIN'
 XEOS.boot.stage1.greet      db  $ASCII.NL, $ASCII.SPC,\
                                 'Booting XEOS...',\
                                 $ASCII.NL, $ASCII.NUL
