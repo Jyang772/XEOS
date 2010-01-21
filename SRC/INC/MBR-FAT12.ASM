@@ -43,7 +43,7 @@
 ;-------------------------------------------------------------------------------
 
 ; 0x00 (2) - Jumps to the bootloader code (bypass the MBR)
-jmp     short   $XEOS.mbr.jump
+jmp                     short   $XEOS.mbr.jump
 
 ; 0x02 (1) - Padding
 nop
@@ -51,23 +51,23 @@ nop
 ; 0x03 (8) - OEM name
 ; 
 ; This value determines in which system disk was formatted
-db      $XEOS.mbr.oemName
+MBR.oemName             db      $XEOS.mbr.oemName
 
 ; 0x0B (2) - Bytes per sector
-dw      $XEOS.mbr.bytesPerSector
+MBR.bytesPerSector      dw      $XEOS.mbr.bytesPerSector
 
 ; 0x0D (1) - Sectors per cluster
-db      $XEOS.mbr.sectorsPerCluster
+MBR.sectorsPerCluster   db      $XEOS.mbr.sectorsPerCluster
 
 ; 0x0E (2) - Reserved sector count
 ; 
 ; The number of sectors before the first FAT in the file system image.
 ; Should be 1 for FAT12/FAT16. Usually 32 for FAT32.
-dw      $XEOS.mbr.reservedSectors
+MBR.reservedSectors dw      $XEOS.mbr.reservedSectors
 
 ; 0x10 (1) - Number of file allocation tables
 ; Almost always 2
-db      $XEOS.mbr.numberOfFat
+MBR.numberOfFat         db      $XEOS.mbr.numberOfFat
 
 ; 0x11 (2) - Maximum number of root directory entries
 ; 
@@ -76,10 +76,10 @@ db      $XEOS.mbr.numberOfFat
 ; directory ends on a sector boundary (i.e. such that its size becomes a
 ; multiple of the sector size).
 ; 224 is typical for floppy disks
-dw      $XEOS.mbr.maxRootDirEntries
+MBR.maxRootDirEntries   dw      $XEOS.mbr.maxRootDirEntries
 
 ; 0x13 (2) - Total sectors
-dw      $XEOS.mbr.totalSectors
+MBR.totalSectors        dw      $XEOS.mbr.totalSectors
 
 ; 0x15 (1) - Media descriptor
 ; 
@@ -97,43 +97,43 @@ dw      $XEOS.mbr.totalSectors
 ;   - 0xFD	5.25" Double sided, 40 tracks per side, 9 sectors per track (360K)
 ;   - 0xFE	5.25" Single sided, 40 tracks per side, 8 sectors per track (160K)
 ;   - 0xFF	5.25" Double sided, 40 tracks per side, 8 sectors per track (320K)
-db      $XEOS.mbr.mediaDescriptor
+MBR.mediaDescriptor     db      $XEOS.mbr.mediaDescriptor
 
 ; 0x16 (2) - Sectors per File Allocation Table for FAT12/FAT16
-dw      $XEOS.mbr.sectorsPerFat
+MBR.sectorsPerFat       dw      $XEOS.mbr.sectorsPerFat
 
 ; 0x18 (2) - Sectors per track
-dw      $XEOS.mbr.sectorsPerTrack
+MBR.sectorsPerTrack     dw      $XEOS.mbr.sectorsPerTrack
 
 ; 0x1A (2) - Number of heads per cylinder
-dw      $XEOS.mbr.headsPerCylinder
+MBR.headsPerCylinder    dw      $XEOS.mbr.headsPerCylinder
 
 ; 0x1C (4) -  Hidden sectors
-dd      $XEOS.mbr.hiddenSectors
+MBR.hiddenSectors       dd      $XEOS.mbr.hiddenSectors
 
 ; 0x20 (4) - Number of LBA sectors
-dd      $XEOS.mbr.lbaSectors
+MBR.lbaSectors          dd      $XEOS.mbr.lbaSectors
 
 ; 0x24 (1) - Physical drive number
-db      $XEOS.mbr.driveNumber
+MBR.driveNumber         db      $XEOS.mbr.driveNumber
 
 ; 0x25 (1) - Reserved ("current head")
 ; 
 ; In Windows NT bit 0 is a dirty flag to request chkdsk at boot time
 ; Bit 1 requests surface scan too.
-db      $XEOS.mbr.reserved
+MBR.reserved            db      $XEOS.mbr.reserved
 
 ; 0x26 (1) - Extended boot signature
-db      $XEOS.mbr.bootSignature
+MBR.bootSignature       db      $XEOS.mbr.bootSignature
 
 ; 0x27 (4) - Volume ID (serial number)
-dd      $XEOS.mbr.volumeId
+MBR.volumeId            dd      $XEOS.mbr.volumeId
 
 ; 0x2B (11) - Volume label
-db      $XEOS.mbr.volumeLabel
+MBR.volumeLabel         db      $XEOS.mbr.volumeLabel
 
 ; 0x36 - (8) - FAT file system type
 ; 
 ; This is not meant to be used to determine drive type, however, some utilities
 ; use it in this way.
-db      $XEOS.mbr.filesystem
+MBR.filesystem          db      $XEOS.mbr.filesystem
