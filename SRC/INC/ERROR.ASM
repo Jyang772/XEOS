@@ -49,7 +49,7 @@
 ; Fatal error - waits for the user to press a key, and reboots the PC
 ;-------------------------------------------------------------------------------
 XEOS.error.fatal:
-        
+    
     ; Prints the fatal error message
     @BIOS.video.print    XEOS.error.messages.fatal
     
@@ -71,6 +71,6 @@ XEOS.error.fatal:
 ; Strings
 XEOS.error.messages.fatal   db  $ASCII.NL, $ASCII.SPC,\
                             'Fatal error: press any key to reboot...',\
-                            $ASCII.NUL
+                            $ASCII.NL, $ASCII.NUL
 
 %endif
