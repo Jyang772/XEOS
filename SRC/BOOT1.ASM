@@ -205,7 +205,7 @@ XEOS.boot.stage1:
     ; Tries to find the name of the second stage bootloader
     rep     cmpsb
     
-    ; Restores the data address
+    ; Restores the address of the data we are reading
     pop     di
     
     ; The file was found - We are going to load it
