@@ -72,15 +72,22 @@ BITS    16
 ; 
 ; At this time, the memory layout is the following:
 ; 
-;       - 0x0000 - 0x0040:  ISR vectors addresses (Interrupt Service Routine)
-;       - 0x0040 - 0x0100:  BIOS data
-;       - 0x0100 - 0x07C0:  Free
-;       - 0x07C0 - 0x07E0:  Bootloader
-;       - 0x7CE0 - 0xA000:  Free
-;       - 0xA000 - 0xC000:  BIOS video sub-system
-;       - 0xC000 - 0xF000:  BIOS ROM
+;       - 0x0000 - 0x003F:  ISR vectors addresses (Interrupt Service Routine)
+;       - 0x0040 - 0x004F:  BIOS data
+;       - 0x0050 - 0x07BF:  Free
+;       - 0x07C0 - 0x07DF:  Bootloader
+;       - 0x7CE0 - 0x9FFF:  Free
+;       - 0xA000 - 0xBFFF:  BIOS video sub-system
+;       - 0xC000 - 0xEFFF:  BIOS ROM
 ;       - 0xF000 - 0xFFFF:  System ROM
+; 
+; Note that those addresses uses the segment:offset addressing mode:
+; 
+;   base address = base address * segment size (16) + offset
+; 
+; So 0x07C0 is 0x07C0:0 which is 0x07C00.
 ;-------------------------------------------------------------------------------
+
 XEOS.boot.stage1:
     
     ; Jumps to the effective code (bypasses the includes)
@@ -136,18 +143,18 @@ XEOS.boot.stage1:
     ; 
     ; The structure of the FAT-12 root directory is:
     ; 
-    ;       - 0x00 - 0x08:  File name
-    ;       - 0x08 - 0x0B:  File extension
-    ;       - 0x0B - 0x0C:  File attributes
-    ;       - 0x0C - 0x0D:  Reserved
-    ;       - 0x0D - 0x0E:  Create time - fine resolution
-    ;       - 0x0E - 0x10:  Create time - hours, minutes and seconds
-    ;       - 0x10 - 0x12:  Create date
-    ;       - 0x12 - 0x14:  Last access date
-    ;       - 0x14 - 0x16:  EA-Index (used by OS/2 and NT)
-    ;       - 0x16 - 0x18:  Last modified time
-    ;       - 0x18 - 0x1A:  Last modified date
-    ;       - 0x1A - 0x1C:  First cluster of the file
+    ;       - 0x00 - 0x07:  File name
+    ;       - 0x08 - 0x0A:  File extension
+    ;       - 0x0B - 0x0B:  File attributes
+    ;       - 0x0C - 0x0C:  Reserved
+    ;       - 0x0D - 0x0D:  Create time - fine resolution
+    ;       - 0x0E - 0x0F:  Create time - hours, minutes and seconds
+    ;       - 0x10 - 0x11:  Create date
+    ;       - 0x12 - 0x13:  Last access date
+    ;       - 0x14 - 0x15:  EA-Index (used by OS/2 and NT)
+    ;       - 0x16 - 0x17:  Last modified time
+    ;       - 0x18 - 0x19:  Last modified date
+    ;       - 0x1A - 0x1B:  First cluster of the file
     ;       - 0x1C - 0x20:  File size in bytes
     .loadRootDirectory
     
