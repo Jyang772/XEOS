@@ -240,10 +240,27 @@ XEOS.boot.stage1:
     ; directory
     .loadSecondStage:
     
-    ; Saves the first cluster of the second stage bootloader
+    ; Saves the first cluster of the second stage bootloader (first cluster
+    ; is located at location 0x1A of a root directory entry)
     mov     ax,         WORD [ di ]
     add     ax,         1Ah
     mov     WORD [ XEOS.boot1.boot2Cluster ], dx 
+    
+    ; We now have to read the file allocation table
+    .readFat:
+    
+    ; Resets AX
+    xor     ax,         ax
+    
+    ; Number of file allocation tables
+    mov     al,         BYTE $XEOS.mbr.numberOfFat
+    
+    ; Multiplies by the number of sectors that a FAT uses
+    mov     cx,         $XEOS.mbr.sectorsPerFat
+    mul     cx
+    
+    ; Stores the size of the FAT in CX
+    mov     cx,         ax
     
     ; Infinite loop
     jmp     $
