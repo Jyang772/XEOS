@@ -116,8 +116,8 @@ XEOS.io.readSectors:
 ;-------------------------------------------------------------------------------
 ; Converts LBA (Logical Block Addressing) to CHS (Cylinder Head Sector)
 ; 
-; The result values will be placed in absoluteSector, absoluteHead and
-; absoluteTrack.
+; The result values will be placed in XEOS.io.absoluteSector,
+; XEOS.io.absoluteHead and XEOS.io.absoluteTrack.
 ; 
 ; Formulas:
 ;   
@@ -162,10 +162,43 @@ XEOS.io.lbaToChs:
     ret
 
 ;-------------------------------------------------------------------------------
+; Converts a cluster number to LBA (Logical Block Addressing)
+; 
+; The result values will be placed in AX.
+; 
+; Formula:
+;   
+;   LBA	= (cluster - 2 ) * sectors per cluster
+; 
+; Necessary register values:
+;       
+;       - ax:       The cluster number to convert
+;-------------------------------------------------------------------------------
+XEOS.io.clusterToLba:
+    
+    ; Saves the vaue of CX as we are going to use it
+    push    cx
+    
+    ; Substracts 2 to the cluster number
+    sub     ax,         2
+    
+    ; Resets CS
+    xor     cx,         cx
+    
+    ; Multiplies by the number of sectors per cluster
+    mov     cl,         BYTE $XEOS.mbr.sectorsPerCluster
+    mul     cx
+    
+    ; Restores CX
+    pop     cx
+    
+    ret
+
+;-------------------------------------------------------------------------------
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-; Storage for the XEOS_boot1_lbaToChs procedure
+; Storage for the XEOS.io.lbaToChs procedure
 XEOS.io.absoluteSector      db  0
 XEOS.io.absoluteHead        db  0
 XEOS.io.absoluteTrack       db  0
