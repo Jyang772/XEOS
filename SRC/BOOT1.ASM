@@ -262,6 +262,15 @@ XEOS.boot.stage1:
     ; Stores the size of the FAT in CX
     mov     cx,         ax
     
+    ; Location of the FAT
+    mov     ax, WORD $XEOS.mbr.reservedSectors
+    
+    ; Sectors will be read after the stack space (ES:BX = 07C0h:4096)
+    mov     bx,         4096
+    
+    ; Reads the necessary sectors to load the FAT into memory
+    call    XEOS.io.readSectors
+    
     ; Infinite loop
     jmp     $
     
