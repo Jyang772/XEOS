@@ -133,9 +133,6 @@ XEOS.boot.stage1:
     .findSecondStage:
     
     ; Loads the root directory of the floppy
-    ; 
-    ; 1)    Gets the size of the root directory
-    ; 2)    Gets the start of the root directory
     .loadRootDirectory
     
     ; An entry of the root directory is 32 bits
@@ -227,6 +224,11 @@ XEOS.boot.stage1:
     ; directory
     .loadSecondStage:
     
+    ; Saves the first cluster of the second stage bootloader
+    mov     ax,         WORD [ di ]
+    add     ax,         1Ah
+    mov     WORD [ XEOS.boot1.boot2Cluster ], dx 
+    
     ; Infinite loop
     jmp     $
     
@@ -242,6 +244,9 @@ XEOS.boot.stage1.greet      db  $ASCII.NL, $ASCII.SPC,\
 
 ; Start of the floppy data sector
 XEOS.boot1.dataSectorStart  dw  0
+
+; First cluster of the second stage bootloader
+XEOS.boot1.boot2Cluster     dw  0
 
 ;-------------------------------------------------------------------------------
 ; Ends of the boot sector
