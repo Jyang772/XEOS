@@ -133,6 +133,22 @@ XEOS.boot.stage1:
     .findSecondStage:
     
     ; Loads the root directory of the floppy
+    ; 
+    ; The structure of the FAT-12 root directory is:
+    ; 
+    ;       - 0x00 - 0x08:  File name
+    ;       - 0x08 - 0x0B:  File extension
+    ;       - 0x0B - 0x0C:  File attributes
+    ;       - 0x0C - 0x0D:  Reserved
+    ;       - 0x0D - 0x0E:  Create time - fine resolution
+    ;       - 0x0E - 0x10:  Create time - hours, minutes and seconds
+    ;       - 0x10 - 0x12:  Create date
+    ;       - 0x12 - 0x14:  Last access date
+    ;       - 0x14 - 0x16:  EA-Index (used by OS/2 and NT)
+    ;       - 0x16 - 0x18:  Last modified time
+    ;       - 0x18 - 0x1A:  Last modified date
+    ;       - 0x1A - 0x1C:  First cluster of the file
+    ;       - 0x1C - 0x20:  File size in bytes
     .loadRootDirectory
     
     ; An entry of the root directory is 32 bits
