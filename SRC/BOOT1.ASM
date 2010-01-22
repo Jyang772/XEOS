@@ -102,21 +102,22 @@ XEOS.boot.stage1:
     ; global procedures
     XEOS.boot.stage1.start:
     
-    ; Clears the interrupts as we are setting-up the stack space
+    ; Clears the interrupts as we are setting-up the segments and stack space
     cli
     
-    ; Sets up 4K of stack after the bootloader
-    mov     ax,         07CEh
+    ; Sets the data and extra segments to where we were loaded by the BIOS
+    ; (07C0h), so we don't have to add 07C0h to all our data
+    mov     ax,         07C0h
+    mov     ds,         ax
+    mov     es,         ax
+    
+    ; Sets up 4KB of stack space after this bootloader
+    xor     ax,         ax
     mov     ss,         ax
     mov     sp,         4096
     
     ; Restores the interrupts
     sti
-    
-    ; Sets the data segment to where we were loaded by the BIOS (07C0h),
-    ; so we don't have to add 07C0h to all our data
-    mov     ax,         07C0h
-    mov     ds,         ax
     
     ; Saves the boot device number
     mov     dl,         $XEOS.mbr.driveNumber
@@ -129,7 +130,7 @@ XEOS.boot.stage1:
     
     ; The first bootloader is limited to 512 bytes, we we need to load a
     ; second stage bootloader to efficienttly load the kernel
-    .loadSecondStage:
+    .findSecondStage:
     
     ; Loads the root directory of the floppy
     ; 
@@ -138,7 +139,7 @@ XEOS.boot.stage1:
     .loadRootDirectory
     
     ; An entry of the root directory is 32 bits
-    mov     ax,         0x0020
+    mov     ax,         32
     
     ; Number of root directory entries
     mov     bx,         $XEOS.mbr.maxRootDirEntries
@@ -179,6 +180,54 @@ XEOS.boot.stage1:
     ; We are going to read it to find the second stage bootloader.
     .readRootDirectory:
     
+    ; Location of the data we read into memory
+    mov     di,         4096
+    
+    ; Number of entries to read
+    mov     cx,         WORD $XEOS.mbr.maxRootDirEntries
+    
+    ; We are going to loop through the root directory entries to find the name
+    ; of the second stage bootloader file
+    .readRootDirectoryLoop:
+    
+    ; Saves the loop counter
+    push    cx
+    
+    ; FAT12 filenames are limited to 11 characters
+    mov     cx,         11
+    
+    ; Name of the second stage bootloader file
+    mov     si,         XEOS.files.stage2
+    
+    ; Saves the memory address in which the root directory was loaded
+    push    di
+    
+    ; Tries to find the name of the second stage bootloader
+    rep     cmpsb
+    
+    ; Restores the data address
+    pop     di
+    
+    ; The file was found - We are going to load it
+    je      .loadSecondStage
+    
+    ; Restores the loop counter
+    pop     cx
+    
+    ; Address of the next entry
+    add     di,         32
+    
+    ; Reads the next entry
+    loop    .readRootDirectoryLoop
+    
+    ; The second stage bootloader was not found - Issues a fatal error
+    call    XEOS.error.fatal
+    
+    ; At this time, the second stage bootloader has been located in the root
+    ; directory
+    .loadSecondStage:
+    
+    ; Infinite loop
     jmp     $
     
 ;-------------------------------------------------------------------------------
