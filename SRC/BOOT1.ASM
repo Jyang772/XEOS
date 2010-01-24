@@ -274,6 +274,15 @@ XEOS.boot.stage1:
     ; Reads the necessary sectors to load the FAT into memory
     call    XEOS.io.readSectors
     
+    ; We are going to load the second stage bootloader at the top of the free
+    ; memory (0x0050:0 => 0x0500)
+    mov     ax,         0050h
+    mov     es,         ax
+    xor     bx,         bx
+    
+    ; Saves the value of BX
+    push    bx
+    
     ; Infinite loop
     jmp     $
     
