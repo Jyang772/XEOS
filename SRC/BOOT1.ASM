@@ -93,11 +93,11 @@ XEOS.boot.stage1:
     ; Jumps to the effective code (bypasses the includes)
     jmp     .start
     
-    ;-------------------------------------------------------------------------------
+    ;---------------------------------------------------------------------------
     ; Includes
     ;
     ; Placed here to avoid problems with the MBR short jump.
-    ;-------------------------------------------------------------------------------
+    ;---------------------------------------------------------------------------
     %include "MACROS.ASM"       ; General macros
     %include "IO.ASM"           ; IO procedures
     %include "BIOS-INT.ASM"     ; BIOS interrupts
@@ -282,6 +282,74 @@ XEOS.boot.stage1:
     
     ; Saves the value of BX
     push    bx
+    
+    ; Time to load the second stage bootloader into memory
+    .loadSecondStageFile:
+    
+    ; We are going to read from the first cluster of the second stage bootloader
+    mov     ax,         WORD [ XEOS.boot1.boot2Cluster ]
+    
+    ; Restores the offset of the read operation
+    pop     bx
+    
+    ; Converts the cluster number to a logical block address
+    call    XEOS.io.clusterToLba
+    add     ax, WORD [ XEOS.boot1.dataSectorStart ]
+    
+    ; Number of sectors to read
+    xor     cx,         cx
+    mov     cl, BYTE $XEOS.mbr.sectorsPerCluster
+    
+    ; Reads the necessary sectors to load the second stage bootloader into
+    ; memory
+    call    XEOS.io.readSectors
+    
+    ; Saves the offset of the read operation
+    push    bx
+    
+    mov     ax,         WORD [ XEOS.boot1.boot2Cluster ]
+    mov     cx,         ax
+    mov     dx,         ax
+    shr     dx,         1
+    add     cx,         dx
+    mov     bx,         4096
+    add     bx,         cx
+    mov     dx,         WORD [ bx ]
+    test    ax,         1
+    
+    jnz     .clusterOdd
+    
+    .clusterEven:
+    
+    ; Low twelve bits
+    and     dx,         0000111111111111b
+    jmp     .nextCluster
+    
+    .clusterOdd:
+    
+    ; Hight twelve bits
+    shr     dx,         4
+    
+    .nextCluster:
+    
+    mov     WORD [ XEOS.boot1.boot2Cluster ],   dx
+    
+    ; Checks for the end of the file
+    cmp     dx,         0FF0h
+    
+    ; Continues loading the file, as there is still data to read
+    jb      .loadSecondStageFile
+    
+    ; End of file detected, so the second stage bootloader file has been
+    ; completely loaded into memory
+    .executeSecondStage:
+    
+    ; Pushes the instruction pointer (IP) and code segment (CS) on the stack
+    push    WORD 0050h
+    push    WORD 0000h
+    
+    ; Executes the second stage bootloader
+    retf
     
     ; Infinite loop
     jmp     $
