@@ -38,7 +38,7 @@
 %ifndef BIOS_INT_ASM
 %define BIOS_INT_ASM
 
-; BIOS' services
+; BIOS services
 %define $BIOS.int.printScreen   int 05h
 %define $BIOS.int.video         int 10h
 %define $BIOS.int.equipment     int 11h
