@@ -160,11 +160,11 @@ XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 '* All rights reserved                                                         *',\
                                 $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.gdt            db  'Installing GDT...',\
+XEOS.boot.stage2.gdt            db  '[ BOOT2 ]: Installing the global descriptor table - GDT...',\
                                     $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.a20            db  'Enabling A20...',\
+XEOS.boot.stage2.a20            db  '[ BOOT2 ]: Enabling the A20 address line...',\
                                     $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.pMode          db  'Entering protected mode...',\
+XEOS.boot.stage2.pMode          db  '[ BOOT2 ]: Switching the CPU to 32 bits protected mode...',\
                                     $ASCII.NL, $ASCII.NUL
