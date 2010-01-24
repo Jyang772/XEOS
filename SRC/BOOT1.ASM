@@ -249,9 +249,8 @@ XEOS.boot.stage1:
     
     ; Saves the first cluster of the second stage bootloader (first cluster
     ; is located at location 0x1A of a root directory entry)
-    mov     ax,         WORD [ di ]
-    add     ax,         1Ah
-    mov     WORD [ XEOS.boot1.boot2Cluster ], dx 
+    mov     ax,         WORD [ di + 1Ah ]
+    mov     WORD [ XEOS.boot1.boot2Cluster ],   ax 
     
     ; We now have to read the file allocation table
     .readFat:
