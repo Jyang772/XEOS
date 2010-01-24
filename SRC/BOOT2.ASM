@@ -78,6 +78,7 @@ jmp     XEOS.boot.stage2
 %include "BIOS-VIDEO.ASM"   ; BIOS video services
 %include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
 %include "ASCII.ASM"        ; ASCII table
+%include "GDT.ASM"          ; GDT - Global Descriptor Table
 
 XEOS.boot.stage2:
     
