@@ -54,6 +54,8 @@
 ;-------------------------------------------------------------------------------
 %include "MACROS.ASM"       ; General macros
 %include "BIOS-INT.ASM"     ; BIOS interrupts
+%include "BIOS-VIDEO.ASM"   ; BIOS video services
+%include "ERROR.ASM"        ; Error management
 
 ;-------------------------------------------------------------------------------
 ; Enables A20 through the system control port
@@ -85,6 +87,53 @@ XEOS.a20.enable.bios:
     ; Calls the BIOS miscellaneous services
     $BIOS.int.misc
     
+    ; Checks for an error
+    jnc     .success
+    
+    ; Prints the error message
+    @BIOS.video.print   XEOS.a20.enable.bios.error
+    
+    ; Waits for a key (BIOS keyboard services function)
+    xor     ax,         ax
+    
+    ; Calls the BIOS keyboard services
+    $BIOS.int.keyboard
+    
+    ; Checks if the pressed key was 'K'
+    cmp     al,         75
+    
+    ; Yes - Enables A20 through the keyboard controller
+    je      .keyboardController
+    
+    ; Checks if the pressed key was 'k'
+    cmp     al,         107
+    
+    ; Yes - Enables A20 through the keyboard controller
+    je     .keyboardController
+    
+    .reboot:
+    
+    ; Prints the reboot message
+    @BIOS.video.print   XEOS.a20.enable.bios.error.reboot
+    
+    ; Reboots the system
+    $BIOS.int.reboot
+    
+    .keyboardController:
+    
+    ; User feedback - Displays a 'K' on the screen
+    mov     al,         75
+    mov     ah,         0Eh
+    $BIOS.int.video
+    
+    ; Prints the confirmation message
+    @BIOS.video.print   XEOS.a20.enable.bios.error.keyboard
+    
+    ; Enables A20 through the keyboard controller
+    call    XEOS.a20.enable.keyboard.control
+    
+    .success
+    
     @XEOS.reg.restore
     
     ret
@@ -110,5 +159,24 @@ XEOS.a20.enable.keyboard.out:
     @XEOS.reg.restore
     
     ret
+
+;-------------------------------------------------------------------------------
+; Variables definition
+;-------------------------------------------------------------------------------
+
+; Strings
+XEOS.a20.enable.bios.error          db  $ASCII.NL,\
+                                        '           Error: A20 cannot be enabled with the BIOS!',\
+                                        $ASCII.NL, $ASCII.NL,\
+                                        '                  Press ', 39 , 'K', 39 ,' to enable A20 through the keyboard controller,',\
+                                        $ASCII.NL,\
+                                        '                  or any other key to reboot the system: ',\
+                                        $ASCII.NUL
+XEOS.a20.enable.bios.error.reboot   db  $ASCII.NL, $ASCII.NL,\
+                                        '           Rebooting...',\
+                                        $ASCII.NUL
+XEOS.a20.enable.bios.error.keyboard db  $ASCII.NL, $ASCII.NL,\
+                                        '           Enabling A20 through the keyboard controller...',\
+                                        $ASCII.NL, $ASCII.NL, $ASCII.NUL
 
 %endif
