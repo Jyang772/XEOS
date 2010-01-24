@@ -69,8 +69,8 @@ XEOS.error.fatal:
 ;-------------------------------------------------------------------------------
 
 ; Strings
-XEOS.error.messages.fatal   db  $ASCII.NL, $ASCII.SPC,\
+XEOS.error.messages.fatal   db  $ASCII.NL,\
                             'Fatal error: press any key to reboot...',\
-                            $ASCII.NL, $ASCII.NUL
+                            $ASCII.NL, $ASCII.NL, $ASCII.NUL
 
 %endif
