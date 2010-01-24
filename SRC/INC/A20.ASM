@@ -152,7 +152,7 @@ XEOS.a20.enable.keyboard.control:
     mov	    al,         00DDh
     
     ; Sends the command to the keyboard control port
-    out	    0064,       al
+    out	    0064h,      al
     
     @XEOS.reg.restore
     
