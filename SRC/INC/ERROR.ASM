@@ -54,7 +54,7 @@ XEOS.error.fatal:
     @BIOS.video.print    XEOS.error.messages.fatal
     
     ; Waits for a key (BIOS keyboard services function)
-    xor,    ax,         ax
+    xor     ax,         ax
     
     ; Calls the BIOS keyboard services
     $BIOS.int.keyboard
