@@ -90,6 +90,9 @@ XEOS.boot.stage2:
     ; Restores the interrupts
     sti
     
+    ; Clears the screen
+    @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.darkGray
+    
     ; Prints the greeting
     @BIOS.video.print    XEOS.boot.stage2.greet
     
@@ -119,8 +122,6 @@ XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 'Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)',\
                                 $ASCII.NL,\
                                 'All rights reserved',\
-                                $ASCII.NL, $ASCII.NL,\
-                                'Blood, Sweat & Code (& Assembly)',\
                                 $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
 
 XEOS.boot.stage2.kernelFind     db  'Trying to find the XEOS kernel...',\
