@@ -39,41 +39,41 @@
 %define ASCII_ASM
 
 ; Control characters
-%define $ASCII.NUL  00h
-%define $ASCII.SOH  01h
-%define $ASCII.STX  02h
-%define $ASCII.ETX  03h
-%define $ASCII.EOT  04h
-%define $ASCII.ENQ  05h
-%define $ASCII.ACK  06h
-%define $ASCII.BEL  07h
-%define $ASCII.BS   08h
-%define $ASCII.TAB  09h
-%define $ASCII.LF   0Ah
-%define $ASCII.VT   0Bh
-%define $ASCII.FF   0Ch
-%define $ASCII.CR   0Dh
-%define $ASCII.SO   0Eh
-%define $ASCII.SI   0Fh
-%define $ASCII.DLE  10h
-%define $ASCII.DC1  11h
-%define $ASCII.DC2  12h
-%define $ASCII.DC3  13h
-%define $ASCII.DC4  14h
-%define $ASCII.NAK  15h
-%define $ASCII.SYN  16h
-%define $ASCII.ETB  17h
-%define $ASCII.CAN  18h
-%define $ASCII.EM   19h
-%define $ASCII.SUB  1Ah
-%define $ASCII.ESC  1Bh
-%define $ASCII.FS   1Ch
-%define $ASCII.GS   1Dh
-%define $ASCII.RS   1Eh
-%define $ASCII.US   1Fh
+%define $ASCII.NUL      0x00
+%define $ASCII.SOH      0x01
+%define $ASCII.STX      0x02
+%define $ASCII.ETX      0x03
+%define $ASCII.EOT      0x04
+%define $ASCII.ENQ      0x05
+%define $ASCII.ACK      0x06
+%define $ASCII.BEL      0x07
+%define $ASCII.BS       0x08
+%define $ASCII.TAB      0x09
+%define $ASCII.LF       0x0A
+%define $ASCII.VT       0x0B
+%define $ASCII.FF       0x0C
+%define $ASCII.CR       0x0D
+%define $ASCII.SO       0x0E
+%define $ASCII.SI       0x0F
+%define $ASCII.DLE      0x10
+%define $ASCII.DC1      0x11
+%define $ASCII.DC2      0x12
+%define $ASCII.DC3      0x13
+%define $ASCII.DC4      0x14
+%define $ASCII.NAK      0x15
+%define $ASCII.SYN      0x16
+%define $ASCII.ETB      0x17
+%define $ASCII.CAN      0x18
+%define $ASCII.EM       0x19
+%define $ASCII.SUB      0x1A
+%define $ASCII.ESC      0x1B
+%define $ASCII.FS       0x1C
+%define $ASCII.GS       0x1D
+%define $ASCII.RS       0x1E
+%define $ASCII.US       0x1F
 
 ; Space character
-%define $ASCII.SPC  20h
+%define $ASCII.SPC      0x20
 
 ; New line character (CRLF)
 %define $ASCII.NL   $ASCII.CR, $ASCII.LF

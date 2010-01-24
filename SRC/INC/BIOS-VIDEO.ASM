@@ -53,22 +53,22 @@
 %define $BIOS.video.screen.rows             25
 
 ; BIOS colors
-%define $BIOS.video.colors.black            00h
-%define $BIOS.video.colors.blue             01h
-%define $BIOS.video.colors.green            02h
-%define $BIOS.video.colors.cyan             03h
-%define $BIOS.video.colors.red              04h
-%define $BIOS.video.colors.magenta          05h
-%define $BIOS.video.colors.brown            06h
-%define $BIOS.video.colors.lightGray        07h
-%define $BIOS.video.colors.darkGray         08h
-%define $BIOS.video.colors.lightBlue        09h
-%define $BIOS.video.colors.lightGreen       0Ah
-%define $BIOS.video.colors.lightCyan        0Bh
-%define $BIOS.video.colors.lightRed         0Ch
-%define $BIOS.video.colors.lightMagenta     0Dh
-%define $BIOS.video.colors.lightBrown       0Eh
-%define $BIOS.video.colors.white            0Fh
+%define $BIOS.video.colors.black            0x00
+%define $BIOS.video.colors.blue             0x01
+%define $BIOS.video.colors.green            0x02
+%define $BIOS.video.colors.cyan             0x03
+%define $BIOS.video.colors.red              0x04
+%define $BIOS.video.colors.magenta          0x05
+%define $BIOS.video.colors.brown            0x06
+%define $BIOS.video.colors.lightGray        0x07
+%define $BIOS.video.colors.darkGray         0x08
+%define $BIOS.video.colors.lightBlue        0x09
+%define $BIOS.video.colors.lightGreen       0x0A
+%define $BIOS.video.colors.lightCyan        0x0B
+%define $BIOS.video.colors.lightRed         0x0C
+%define $BIOS.video.colors.lightMagenta     0x0D
+%define $BIOS.video.colors.lightBrown       0x0E
+%define $BIOS.video.colors.white            0x0F
 
 ;-------------------------------------------------------------------------------
 ; Computes the value of a BIOS screen color into a register
@@ -173,7 +173,7 @@
 BIOS.video.print:
     
     ; Outputs a single character (BIOS video services function)
-    mov     ah,         0Eh
+    mov     ah,         0x0E
     
     ; Process a byte from the string
     .repeat:

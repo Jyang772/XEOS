@@ -87,15 +87,15 @@ XEOS.boot.stage2:
     cli
     
     ; Sets the data and extra segments to where we were loaded by the first
-    ; stage bootloader (0050h), so we don't have to add 0050h to all our data
-    mov     ax,         0050h
+    ; stage bootloader (0x50), so we don't have to add 0x50 to all our data
+    mov     ax,         0x50
     mov     ds,         ax
     mov     es,         ax
     
     ; Sets up the stack (0x9000-0xFFFF)
-    mov     ax,         09000h
+    mov     ax,         0x9000
     mov     ss,         ax
-    mov     sp,         0FFFFh
+    mov     sp,         0xFFFF
     
     ; Restores the interrupts
     sti

@@ -59,7 +59,7 @@ XEOS.io.readSectors:
     @XEOS.reg.save
     
     ; Converts the logical block address to cluster, head and cylinder
-    ; (needed for int 13h)
+    ; (needed for int 0x13)
     call    XEOS.io.lbaToChs
     
     ; Read sectors (BIOS low level disk services function)

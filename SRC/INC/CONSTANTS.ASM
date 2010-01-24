@@ -50,7 +50,7 @@
 %define $XEOS.mbr.numberOfFat           2
 %define $XEOS.mbr.maxRootDirEntries     224
 %define $XEOS.mbr.totalSectors          2880
-%define $XEOS.mbr.mediaDescriptor       0F8h
+%define $XEOS.mbr.mediaDescriptor       0xF8
 %define $XEOS.mbr.sectorsPerFat         9
 %define $XEOS.mbr.sectorsPerTrack       18
 %define $XEOS.mbr.headsPerCylinder      2
@@ -59,7 +59,7 @@
 %define $XEOS.mbr.driveNumber           0
 %define $XEOS.mbr.reserved              0
 %define $XEOS.mbr.bootSignature         41
-%define $XEOS.mbr.volumeId              00000000h
+%define $XEOS.mbr.volumeId              0
 %define $XEOS.mbr.volumeLabel           "XEOS-0.1", 32, 32, 32
 %define $XEOS.mbr.filesystem            "FAT12", 32, 32, 32
 

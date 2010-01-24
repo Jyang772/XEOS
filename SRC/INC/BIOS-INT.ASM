@@ -39,17 +39,17 @@
 %define BIOS_INT_ASM
 
 ; BIOS services
-%define $BIOS.int.printScreen   int 05h
-%define $BIOS.int.video         int 10h
-%define $BIOS.int.equipment     int 11h
-%define $BIOS.int.memorySize    int 12h
-%define $BIOS.int.llds          int 13h
-%define $BIOS.int.serialIo      int 14h
-%define $BIOS.int.misc          int 15h
-%define $BIOS.int.keyboard      int 16h
-%define $BIOS.int.printer       int 17h
-%define $BIOS.int.bootFailure   int 18h
-%define $BIOS.int.reboot        int 19h
-%define $BIOS.int.clock         int 1Ah
+%define $BIOS.int.printScreen   int 0x05
+%define $BIOS.int.video         int 0x10
+%define $BIOS.int.equipment     int 0x11
+%define $BIOS.int.memorySize    int 0x12
+%define $BIOS.int.llds          int 0x13
+%define $BIOS.int.serialIo      int 0x14
+%define $BIOS.int.misc          int 0x15
+%define $BIOS.int.keyboard      int 0x16
+%define $BIOS.int.printer       int 0x17
+%define $BIOS.int.bootFailure   int 0x18
+%define $BIOS.int.reboot        int 0x19
+%define $BIOS.int.clock         int 0x1A
 
 %endif

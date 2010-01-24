@@ -71,7 +71,7 @@ XEOS.a20.enable.systemControl:
     mov     al,         2
     
     ; Writes to the system control port
-    out     0092h,      al
+    out     0x92,       al
     
     @XEOS.reg.restore
     
@@ -85,7 +85,7 @@ XEOS.a20.enable.bios:
     @XEOS.reg.save
     
     ; A20 enabling function ( BIOS miscellaneous services function)
-    mov     ax,         02401h
+    mov     ax,         0x2401
     
     ; Calls the BIOS miscellaneous services
     $BIOS.int.misc
@@ -103,13 +103,13 @@ XEOS.a20.enable.bios:
     $BIOS.int.keyboard
     
     ; Checks if the pressed key was 'K'
-    cmp     al,         75
+    cmp     al,         0x4B
     
     ; Yes - Enables A20 through the keyboard controller
     je      .keyboardController
     
     ; Checks if the pressed key was 'k'
-    cmp     al,         107
+    cmp     al,         0x6B
     
     ; Yes - Enables A20 through the keyboard controller
     je     .keyboardController
@@ -125,8 +125,8 @@ XEOS.a20.enable.bios:
     .keyboardController:
     
     ; User feedback - Displays a 'K' on the screen
-    mov     al,         75
-    mov     ah,         0Eh
+    mov     al,         0x4B
+    mov     ah,         0x0E
     $BIOS.int.video
     
     ; Prints the confirmation message
@@ -149,10 +149,10 @@ XEOS.a20.enable.keyboard.control:
     @XEOS.reg.save
     
     ; A20 enabling command
-    mov	    al,         00DDh
+    mov	    al,         0xDD
     
     ; Sends the command to the keyboard control port
-    out	    0064h,      al
+    out	    0x64,       al
     
     @XEOS.reg.restore
     
@@ -177,7 +177,7 @@ XEOS.a20.enable.keyboard.out:
 XEOS.a20.enable.bios.error          db  $ASCII.NL,\
                                         '         ERROR: A-20 cannot be enabled with the BIOS!',\
                                         $ASCII.NL, $ASCII.NL,\
-                                        '         Press ', 39 , 'K', 39 ,' to enable A-20 through the keyboard controller,',\
+                                        '         Press ', 0x27 , 'K', 0x27 ,' to enable A-20 through the keyboard controller,',\
                                         $ASCII.NL,\
                                         '         or any other key to reboot the system: ',\
                                         $ASCII.NUL

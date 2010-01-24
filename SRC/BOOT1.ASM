@@ -113,15 +113,15 @@ XEOS.boot.stage1:
     cli
     
     ; Sets the data and extra segments to where we were loaded by the BIOS
-    ; (07C0h), so we don't have to add 07C0h to all our data
-    mov     ax,         07C0h
+    ; (0x07C0), so we don't have to add 0x07C0 to all our data
+    mov     ax,         0x07C0
     mov     ds,         ax
     mov     es,         ax
     
     ; Sets up 4KB of stack space after this bootloader
     xor     ax,         ax
     mov     ss,         ax
-    mov     sp,         4096
+    mov     sp,         0x1000
     
     ; Restores the interrupts
     sti
@@ -156,7 +156,7 @@ XEOS.boot.stage1:
     .loadRootDirectory
     
     ; An entry of the root directory is 32 bits
-    mov     ax,         32
+    mov     ax,         0x20
     
     ; Number of root directory entries
     mov     bx,         $XEOS.mbr.maxRootDirEntries
@@ -184,8 +184,8 @@ XEOS.boot.stage1:
     mov     [ XEOS.boot1.dataSectorStart ], ax
     add     [ XEOS.boot1.dataSectorStart ], cx
     
-    ; Sectors will be read after the stack space (ES:BX = 07C0h:4096)
-    mov     bx,         4096
+    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
+    mov     bx,         0x1000
     
     ; Reads the necessary sectors to load the root directory into memory
     call    XEOS.io.readSectors
@@ -198,7 +198,7 @@ XEOS.boot.stage1:
     .readRootDirectory:
     
     ; Location of the data we read into memory
-    mov     di,         4096
+    mov     di,         0x1000
     
     ; Number of entries to read
     mov     cx,         WORD $XEOS.mbr.maxRootDirEntries
@@ -211,7 +211,7 @@ XEOS.boot.stage1:
     push    cx
     
     ; FAT12 filenames are limited to 11 characters
-    mov     cx,         11
+    mov     cx,         0x0B
     
     ; Name of the second stage bootloader file
     mov     si,         XEOS.files.stage2
@@ -232,7 +232,7 @@ XEOS.boot.stage1:
     pop     cx
     
     ; Address of the next entry
-    add     di,         32
+    add     di,         0x20
     
     ; Reads the next entry
     loop    .readRootDirectoryLoop
@@ -246,7 +246,7 @@ XEOS.boot.stage1:
     
     ; Saves the first cluster of the second stage bootloader (first cluster
     ; is located at location 0x1A of a root directory entry)
-    mov     ax,         WORD [ di + 1Ah ]
+    mov     ax,         WORD [ di + 0x1A ]
     mov     WORD [ XEOS.boot1.boot2Cluster ],   ax 
     
     ; We now have to read the file allocation table
@@ -268,15 +268,15 @@ XEOS.boot.stage1:
     ; Location of the FAT
     mov     ax, WORD $XEOS.mbr.reservedSectors
     
-    ; Sectors will be read after the stack space (ES:BX = 07C0h:4096)
-    mov     bx,         4096
+    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
+    mov     bx,         0x1000
     
     ; Reads the necessary sectors to load the FAT into memory
     call    XEOS.io.readSectors
     
     ; We are going to load the second stage bootloader at the top of the free
-    ; memory (0x0050:0 => 0x0500)
-    mov     ax,         0050h
+    ; memory (0x50:0 => 0x0500)
+    mov     ax,         0x50
     mov     es,         ax
     xor     bx,         bx
     
@@ -312,7 +312,7 @@ XEOS.boot.stage1:
     mov     dx,         ax
     shr     dx,         1
     add     cx,         dx
-    mov     bx,         4096
+    mov     bx,         0x1000
     add     bx,         cx
     mov     dx,         WORD [ bx ]
     test    ax,         1
@@ -335,7 +335,7 @@ XEOS.boot.stage1:
     mov     WORD [ XEOS.boot1.boot2Cluster ],   dx
     
     ; Checks for the end of the file
-    cmp     dx,         0FF0h
+    cmp     dx,         0x0FF0
     
     ; Continues loading the file, as there is still data to read
     jb      .loadSecondStageFile
@@ -345,8 +345,8 @@ XEOS.boot.stage1:
     .executeSecondStage:
     
     ; Pushes the instruction pointer (IP) and code segment (CS) on the stack
-    push    WORD 0050h
-    push    WORD 0000h
+    push    WORD 0x0050
+    push    WORD 0x0000
     
     ; Executes the second stage bootloader
     retf
