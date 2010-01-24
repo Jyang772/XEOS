@@ -49,8 +49,8 @@
 ;-------------------------------------------------------------------------------
 
 ; BIOS screen dimensions
-%define $BIOS.video.screen.cols         80
-%define $BIOS.video.screen.rows         25
+%define $BIOS.video.screen.cols             80
+%define $BIOS.video.screen.rows             25
 
 ; BIOS colors
 %define $BIOS.video.colors.black            00h
@@ -67,7 +67,7 @@
 %define $BIOS.video.colors.lightCyan        0Bh
 %define $BIOS.video.colors.lightRed         0Ch
 %define $BIOS.video.colors.lightMagenta     0Dh
-%define $BIOS.video.colors.yellow           0Eh
+%define $BIOS.video.colors.lightBrown       0Eh
 %define $BIOS.video.colors.white            0Fh
 
 ;-------------------------------------------------------------------------------
