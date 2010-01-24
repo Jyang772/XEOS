@@ -57,9 +57,6 @@ XEOS.io.readSectors:
     
     @XEOS.reg.save
     
-    ; Resets the floppy controller
-    call    BIOS.llds.resetFloppyDrive
-    
     ; Converts the logical block address to cluster, head and cylinder
     ; (needed for int 13h)
     call    XEOS.io.lbaToChs
@@ -87,6 +84,11 @@ XEOS.io.readSectors:
     
     ; Checks if an error occued
     jnc     .succes
+    
+    ; Resets the floppy controller
+    call    BIOS.llds.resetFloppyDrive
+    
+    @XEOS.reg.save
     
     ; Increases the number of read tries
     inc     di
