@@ -61,7 +61,6 @@ BITS    16
 ; Horizontal ruler
 %define HR              '--------------------------------------------------------------------------------'
 
-
 ;-------------------------------------------------------------------------------
 ; Second stage bootloader
 ; 
@@ -71,7 +70,9 @@ BITS    16
 ; Jumps to the effective code section
 jmp     XEOS.boot.stage2
 
+;-------------------------------------------------------------------------------
 ; Includes
+;-------------------------------------------------------------------------------
 %include "MACROS.ASM"       ; General macros
 %include "BIOS-INT.ASM"     ; BIOS interrupts
 %include "BIOS-VIDEO.ASM"   ; BIOS video services
