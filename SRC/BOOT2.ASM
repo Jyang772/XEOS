@@ -111,6 +111,24 @@ XEOS.boot.stage2:
     ; Prints the find kernel message
     @BIOS.video.print    XEOS.boot.stage2.pMode
     
+    ; Installs the GDT
+    call    XEOS.gdt.install
+    
+    ; Time to switch the CPU to 32bits protected mode
+    .enterProtectedMode:
+    
+    ; Clears the interrupts
+    cli
+    
+    ; Gets the value of the primary control register
+    mov     eax,        cr0
+    
+    ; Sets the lowest bit, indicating the system must run in protected mode
+    or      eax,        1
+    
+    ; Sets the new value - We are now in 32bits protected mode
+    mov     cr0,        eax
+    
     ; Infinite loop
     jmp     $
 
