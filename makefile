@@ -180,4 +180,5 @@ _umount:
 	@echo "    *** Un-mounting the floppy image"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(UMOUNT) $(DIR_BUILD_MNT))
 	@$(UMOUNT) $(DIR_BUILD_MNT)
+	@sudo killall -SIGKILL diskimages-helper
 
