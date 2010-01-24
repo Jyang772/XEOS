@@ -38,7 +38,7 @@
 ; 
 ; The GDT is composed of three descriptors:
 ;       
-;       - NULL descriptor - All zeros
+;       - Null descriptor - All zeros
 ;       - Code descriptor - Memory area that can be executed
 ;       - Data descriptor - Memory area that contains data
 ; 
@@ -46,7 +46,7 @@
 ;       
 ;       - Bits  0 - 15: Segment limit (0-15)
 ;       - Bits 16 - 30: Base address (0-23)
-;       - Bit  40:      Access bit (virtual memory)
+;       - Bit  40:      Access bit (only for virtual memory)
 ;       - Bits 41 - 43: Descriptor type
 ;                           Bit 41: Readable and writeable
 ;                                       0:  Read only (data segment)
@@ -62,7 +62,7 @@
 ;                           0:      System descriptor
 ;                           1:      Code or data descriptor
 ;       - Bits 45 - 46: Descriptor privilege level (rings 0 to 3)
-;       - Bit  47:      Segment is in memory (virtual memory)
+;       - Bit  47:      Segment is in memory (only for virtual memory)
 ;       - Bits 48 - 51: Segment limit (16-19)
 ;       - Bit  52:      Reserved (for OS)
 ;       - Bit  53:      Reserved
@@ -72,12 +72,82 @@
 ;       - Bit  55:      Granularity
 ;                           0:      None
 ;                           1:      Limit is multiplied by 4K
-;       - Bits 56 - 63: Base address (24-32)
+;       - Bits 56 - 63: Base address (24-31)
 ;-------------------------------------------------------------------------------
 
 %ifndef GDT_ASM
 %define GDT_ASM
 
+;-------------------------------------------------------------------------------
+; Null descriptor
+;-------------------------------------------------------------------------------
 
+; 8 bytes of zeros
+dd  0
+dd  0
+
+;-------------------------------------------------------------------------------
+; Code descriptor
+;-------------------------------------------------------------------------------
+
+; Segment limit (0-15)
+dw  0FFFFh
+
+; Base address (0-15)
+dw  0
+
+; Base address (16-23)
+db  0
+
+; Access:                   0       - Not using virtual memory
+; Descriptor type:          1       - Read and execute
+;                           0       - ???
+;                           1       - Code descriptor
+; Descriptor bit:           1       - Code/Data descriptor
+; Privilege level:          00      - Ring 0 (kernel level)
+; In memory:                0       - Not using virtual memory
+db  00011010b
+
+; Segment limit (16-19):    1111    - High bits for the segment limit
+; OS reserved:              0       - Nothing
+; Reserved:                 0       - Nothing
+; Segment type:             1       - 32 bits
+; Granularity:              1       - Segments bounded by 4K
+db  11001111b
+
+; Base address (24-31)
+db  0
+
+;-------------------------------------------------------------------------------
+; Data descriptor
+;-------------------------------------------------------------------------------
+
+; Segment limit (0-15)
+dw  0FFFFh
+
+; Base address (0-15)
+dw  0
+
+; Base address (16-23)
+db  0
+
+; Access:                   0       - Not using virtual memory
+; Descriptor type:          1       - Read and write
+;                           0       - ???
+;                           0       - Data descriptor
+; Descriptor bit:           1       - Code/Data descriptor
+; Privilege level:          00      - Ring 0 (kernel level)
+; In memory:                0       - Not using virtual memory
+db  00010010b
+
+; Segment limit (16-19):    1111    - High bits for the segment limit
+; OS reserved:              0       - Nothing
+; Reserved:                 0       - Nothing
+; Segment type:             1       - 32 bits
+; Granularity:              1       - Segments bounded by 4K
+db  11001111b
+
+; Base address (24-31)
+db  0
 
 %endif
