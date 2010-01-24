@@ -79,7 +79,7 @@ jmp     XEOS.boot.stage2
 ;-------------------------------------------------------------------------------
 
 ; Horizontal ruler
-%define HR              '*******************************************************************************', $ASCII.NL
+%define HR              '    ************************************************************************', $ASCII.NL
 
 XEOS.boot.stage2:
     
@@ -103,11 +103,11 @@ XEOS.boot.stage2:
     ; Clears the screen
     @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.lightBlue
     
-    ; Prints the greeting
-    @BIOS.video.print    XEOS.boot.stage2.greet
-    
     ; Prints the copyright notice
     @BIOS.video.print    XEOS.boot.stage2.copyright
+    
+    ; Prints status message
+    @BIOS.video.print    XEOS.boot.stage2.greet
     
     ; Prints status message
     @BIOS.video.print    XEOS.boot.stage2.gdt
@@ -146,25 +146,24 @@ XEOS.boot.stage2:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.boot.stage2.greet          db  $ASCII.NL,\
-                                'Entering the second stage bootloader...',\
-                                $ASCII.NL, $ASCII.NUL
-
 XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
-                                '* XEOS - x86 Experimental Operating System                                    *',\
+                                '    *               XEOS - x86 Experimental Operating System               *',\
                                 $ASCII.NL,\
-                                '*                                                                             *',\
+                                '    *                                                                      *',\
                                 $ASCII.NL,\
-                                '* Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)                *',\
+                                '    *     Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)     *',\
                                 $ASCII.NL,\
-                                '* All rights reserved                                                         *',\
+                                '    *                   All rights (and wrongs) reserved                   *',\
                                 $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.gdt            db  '[ BOOT2 ]: Installing the global descriptor table - GDT...',\
+XEOS.boot.stage2.greet          db  '<BOOT2>: Entering the second stage bootloader...',\
+                                $ASCII.NL, $ASCII.NUL
+
+XEOS.boot.stage2.gdt            db  '<BOOT2>: Installing the global descriptor table - GDT...',\
                                     $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.a20            db  '[ BOOT2 ]: Enabling the A20 address line...',\
+XEOS.boot.stage2.a20            db  '<BOOT2>: Enabling the A-20 address line...',\
                                     $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.pMode          db  '[ BOOT2 ]: Switching the CPU to 32 bits protected mode...',\
+XEOS.boot.stage2.pMode          db  '<BOOT2>: Switching the CPU to 32 bits protected mode...',\
                                     $ASCII.NL, $ASCII.NUL

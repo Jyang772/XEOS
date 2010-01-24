@@ -71,7 +71,7 @@ XEOS.a20.enable.systemControl:
     mov     al,         2
     
     ; Writes to the system control port
-    out     0x92,       al
+    out     0092h,      al
     
     @XEOS.reg.restore
     
@@ -175,17 +175,17 @@ XEOS.a20.enable.keyboard.out:
 
 ; Strings
 XEOS.a20.enable.bios.error          db  $ASCII.NL,\
-                                        '           Error: A20 cannot be enabled with the BIOS!',\
+                                        '         ERROR: A-20 cannot be enabled with the BIOS!',\
                                         $ASCII.NL, $ASCII.NL,\
-                                        '                  Press ', 39 , 'K', 39 ,' to enable A20 through the keyboard controller,',\
+                                        '         Press ', 39 , 'K', 39 ,' to enable A-20 through the keyboard controller,',\
                                         $ASCII.NL,\
-                                        '                  or any other key to reboot the system: ',\
+                                        '         or any other key to reboot the system: ',\
                                         $ASCII.NUL
 XEOS.a20.enable.bios.error.reboot   db  $ASCII.NL, $ASCII.NL,\
-                                        '           Rebooting...',\
+                                        '         Rebooting...',\
                                         $ASCII.NUL
 XEOS.a20.enable.bios.error.keyboard db  $ASCII.NL, $ASCII.NL,\
-                                        '           Enabling A20 through the keyboard controller...',\
+                                        '         Enabling A-20 through the keyboard controller...',\
                                         $ASCII.NL, $ASCII.NL, $ASCII.NUL
 
 %endif
