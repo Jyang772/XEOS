@@ -78,6 +78,9 @@
 %ifndef GDT_ASM
 %define GDT_ASM
 
+; GDT start address
+XEOS.gdt.start:
+
 ;-------------------------------------------------------------------------------
 ; Null descriptor
 ;-------------------------------------------------------------------------------
@@ -150,4 +153,13 @@ db  11001111b
 ; Base address (24-31)
 db  0
 
+; GDT end address
+XEOS.gdt.end:
+
+; Pointer for the GDT
+XEOS.gdt:
+    
+    dw  XEOS.gdt.end - XEOS.gdt.start - 1
+    dd  XEOS.gdt.start 
+    
 %endif
