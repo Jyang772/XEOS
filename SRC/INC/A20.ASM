@@ -34,12 +34,15 @@
 ;-------------------------------------------------------------------------------
 ; Procedures to enable the A20 address line
 ; 
-; In order to be compatible with older processors, x86 processors only have
-; access to 20 address lines (address bus - lines 0-19). In such a case,
-; memory is limited to 1MB.
+; The 8086 processor was originally designed with a 20bits address bus
+; (20 address lines - 0-19).
+; The processor had access to 2^20 bytes of addressable memory (about 1MB).
 ; 
-; To allow the OS to access 4GB of memory (in 32 bits protected mode), the 20th
-; address line needs to be enabled.
+; In order to be compatible with older processors, x86 processors are powered
+; on in real mode, meaning they only have access to the firts 20 address lines.
+; 
+; In order to enter the 32 bits protected mode, and have access to more than
+; 4GB of addressable memory (2^32), the 20th address line needs to be enabled.
 ; 
 ; Several ways of enabling the 20th address lines are available, but some of
 ; them are specific to some BIOS. The most portable way is to enable A20
