@@ -146,7 +146,7 @@ XEOS.io.lbaToChs:
     inc     dl
     
     ; Stores the absolute sector
-    mov     BYTE [XEOS.io.absoluteSector],  dl
+    mov     BYTE [ XEOS.io.absoluteSector ],    dl
     
     ; Clears DX
     xor     dx,         dx
