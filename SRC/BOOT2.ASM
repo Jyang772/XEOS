@@ -82,14 +82,19 @@ jmp     XEOS.boot.stage2
 
 XEOS.boot.stage2:
     
-    ; Clears the interrupts
+    ; Clears the interrupts as we are setting-up the segments and stack space
     cli
     
-    ; Set DS to CS, as we are now in the second stage bootloader
-    push    cs
-    push    cs
-    pop     ds
-    pop     es
+    ; Sets the data and extra segments to where we were loaded by the first
+    ; stage bootloader (0050h), so we don't have to add 0050h to all our data
+    mov     ax,         0050h
+    mov     ds,         ax
+    mov     es,         ax
+    
+    ; Sets up the stack (0x9000-0xFFFF)
+    mov     ax,         09000h
+    mov     ss,         ax
+    mov     sp,         0FFFFh
     
     ; Restores the interrupts
     sti
