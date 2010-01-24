@@ -48,7 +48,7 @@
 %define $BIOS.int.misc          int 15h
 %define $BIOS.int.keyboard      int 16h
 %define $BIOS.int.printer       int 17h
-%define $BIOS.int.basic         int 18h
+%define $BIOS.int.bootFailure   int 18h
 %define $BIOS.int.reboot        int 19h
 %define $BIOS.int.clock         int 1Ah
 
