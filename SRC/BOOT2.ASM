@@ -85,13 +85,15 @@ XEOS.boot.stage2:
     
     ; Set DS to CS, as we are now in the second stage bootloader
     push    cs
+    push    cs
     pop     ds
+    pop     es
     
     ; Restores the interrupts
     sti
     
     ; Clears the screen
-    @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.darkGray
+    @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.lightBlue
     
     ; Prints the greeting
     @BIOS.video.print    XEOS.boot.stage2.greet
@@ -100,10 +102,7 @@ XEOS.boot.stage2:
     @BIOS.video.print    XEOS.boot.stage2.copyright
     
     ; Prints the find kernel message
-    @BIOS.video.print    XEOS.boot.stage2.kernelFind
-    
-    ; Prints the load kernel message
-    @BIOS.video.print    XEOS.boot.stage2.kernelLoad
+    @BIOS.video.print    XEOS.boot.stage2.pMode
     
     ; Infinite loop
     jmp     $
@@ -124,8 +123,5 @@ XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 'All rights reserved',\
                                 $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.kernelFind     db  'Trying to find the XEOS kernel...',\
-                                $ASCII.NL, $ASCII.NUL
-
-XEOS.boot.stage2.kernelLoad     db  'Loading the XEOS kernel...',\
+XEOS.boot.stage2.pMode          db  'Entering protected mode...',\
                                 $ASCII.NL, $ASCII.NUL
