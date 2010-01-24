@@ -156,10 +156,31 @@ db  0
 ; GDT end address
 XEOS.gdt.end:
 
+;-------------------------------------------------------------------------------
 ; Pointer for the GDT
-XEOS.gdt:
+;-------------------------------------------------------------------------------
+XEOS.gdt.pointer:
     
     dw  XEOS.gdt.end - XEOS.gdt.start - 1
-    dd  XEOS.gdt.start 
+    dd  XEOS.gdt.start
+
+;-------------------------------------------------------------------------------
+; Installation of the GDT
+;-------------------------------------------------------------------------------
+XEOS.gdt.install:
     
+    @XEOS.reg.save
+    
+    ; Clears the interrupts
+    cli
+    
+    lgdt    [ XEOS.gdt.pointer ]
+    
+    ; Restores the interrupts
+    sti
+    
+    @XEOS.reg.restore
+    
+    ret
+
 %endif
