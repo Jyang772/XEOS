@@ -78,6 +78,11 @@
 %ifndef GDT_ASM
 %define GDT_ASM
 
+;-------------------------------------------------------------------------------
+; Includes
+;-------------------------------------------------------------------------------
+%include "MACROS.ASM"       ; General macros
+
 ; GDT start address
 XEOS.gdt.start:
 

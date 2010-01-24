@@ -42,6 +42,7 @@
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "CONSTANTS.ASM"    ; General constants
+%include "MACROS.ASM"       ; General macros
 %include "BIOS-INT.ASM"     ; BIOS interrupts
 %include "ERROR.ASM"        ; Error management
 
