@@ -50,9 +50,25 @@
 %define A20_ASM
 
 ;-------------------------------------------------------------------------------
+; Includes
+;-------------------------------------------------------------------------------
+%include "MACROS.ASM"       ; General macros
+%include "BIOS-INT.ASM"     ; BIOS interrupts
+
+;-------------------------------------------------------------------------------
 ; Enables A20 through the system control port
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.systemControl:
+    
+    @XEOS.reg.save
+    
+    ; Bits 2 enables A20
+    mov     al,         2
+    
+    ; Writes to the system control port
+    out     0x92,       al
+    
+    @XEOS.reg.restore
     
     ret
 
@@ -61,6 +77,16 @@ XEOS.a20.enable.systemControl:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.bios:
     
+    @XEOS.reg.save
+    
+    ; A20 enabling function ( BIOS miscellaneous services function)
+    mov     ax,         02401h
+    
+    ; Calls the BIOS miscellaneous services
+    $BIOS.int.misc
+    
+    @XEOS.reg.restore
+    
     ret
 
 ;-------------------------------------------------------------------------------
@@ -68,12 +94,20 @@ XEOS.a20.enable.bios:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.control:
     
+    @XEOS.reg.save
+    
+    @XEOS.reg.restore
+    
     ret
 
 ;-------------------------------------------------------------------------------
 ; Enables A20 through the keyboard out port
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.out:
+    
+    @XEOS.reg.save
+    
+    @XEOS.reg.restore
     
     ret
 
