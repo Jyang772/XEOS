@@ -55,13 +55,6 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
-; Definitions & Macros
-;-------------------------------------------------------------------------------
-
-; Horizontal ruler
-%define HR              '--------------------------------------------------------------------------------'
-
-;-------------------------------------------------------------------------------
 ; Second stage bootloader
 ; 
 ; The main XEOS bootloader, which is responsible to load the kernel.
@@ -79,6 +72,14 @@ jmp     XEOS.boot.stage2
 %include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
 %include "ASCII.ASM"        ; ASCII table
 %include "GDT.ASM"          ; GDT - Global Descriptor Table
+%include "A20.ASM"          ; 20th address line enabling
+
+;-------------------------------------------------------------------------------
+; Definitions & Macros
+;-------------------------------------------------------------------------------
+
+; Horizontal ruler
+%define HR              '*******************************************************************************', $ASCII.NL
 
 XEOS.boot.stage2:
     
@@ -108,14 +109,23 @@ XEOS.boot.stage2:
     ; Prints the copyright notice
     @BIOS.video.print    XEOS.boot.stage2.copyright
     
-    ; Prints the find kernel message
-    @BIOS.video.print    XEOS.boot.stage2.pMode
+    ; Prints status message
+    @BIOS.video.print    XEOS.boot.stage2.gdt
     
     ; Installs the GDT
     call    XEOS.gdt.install
     
+    ; Prints status message
+    @BIOS.video.print    XEOS.boot.stage2.a20
+    
+    ; Enables A20 - 20th address line on the address bus to access 4GB of memory
+    call    XEOS.a20.enable.bios
+    
     ; Time to switch the CPU to 32bits protected mode
     .enterProtectedMode:
+    
+    ; Prints status message
+    @BIOS.video.print    XEOS.boot.stage2.pMode
     
     ; Clears the interrupts
     cli
@@ -141,12 +151,20 @@ XEOS.boot.stage2.greet          db  $ASCII.NL,\
                                 $ASCII.NL, $ASCII.NUL
 
 XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
-                                'XEOS - x86 Experimental Operating System',\
-                                $ASCII.NL, $ASCII.NL,\
-                                'Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)',\
+                                '* XEOS - x86 Experimental Operating System                                    *',\
                                 $ASCII.NL,\
-                                'All rights reserved',\
+                                '*                                                                             *',\
+                                $ASCII.NL,\
+                                '* Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)                *',\
+                                $ASCII.NL,\
+                                '* All rights reserved                                                         *',\
                                 $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
 
+XEOS.boot.stage2.gdt            db  'Installing GDT...',\
+                                    $ASCII.NL, $ASCII.NUL
+
+XEOS.boot.stage2.a20            db  'Enabling A20...',\
+                                    $ASCII.NL, $ASCII.NUL
+
 XEOS.boot.stage2.pMode          db  'Entering protected mode...',\
-                                $ASCII.NL, $ASCII.NUL
+                                    $ASCII.NL, $ASCII.NUL
