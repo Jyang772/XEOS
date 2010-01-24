@@ -142,11 +142,17 @@ XEOS.a20.enable.bios:
     ret
 
 ;-------------------------------------------------------------------------------
-; Enables A20 through the keyboard controll port
+; Enables A20 through the keyboard control port
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.control:
     
     @XEOS.reg.save
+    
+    ; A20 enabling command
+    mov	    al,         00DDh
+    
+    ; Sends the command to the keyboard control port
+    out	    0064,       al
     
     @XEOS.reg.restore
     
