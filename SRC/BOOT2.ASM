@@ -59,7 +59,7 @@ BITS    16
 ;-------------------------------------------------------------------------------
 
 ; Horizontal ruler
-%define HR              '------------------------------------------------------------------------------'
+%define HR              '--------------------------------------------------------------------------------'
 
 
 ;-------------------------------------------------------------------------------
@@ -109,24 +109,22 @@ XEOS.boot.stage2:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.boot.stage2.greet          db  $ASCII.NL, $ASCII.SPC,\
+XEOS.boot.stage2.greet          db  $ASCII.NL,\
                                 'Entering the second stage bootloader...',\
                                 $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.copyright      db  $ASCII.NL, $ASCII.SPC, HR, $ASCII.SPC, $ASCII.SPC,\
+XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 'XEOS - x86 Experimental Operating System',\
-                                $ASCII.NL, $ASCII.NL, $ASCII.SPC,\
+                                $ASCII.NL, $ASCII.NL,\
                                 'Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)',\
-                                $ASCII.NL, $ASCII.SPC,\
+                                $ASCII.NL,\
                                 'All rights reserved',\
-                                $ASCII.NL, $ASCII.NL, $ASCII.SPC,\
+                                $ASCII.NL, $ASCII.NL,\
                                 'Blood, Sweat & Code (& Assembly)',\
-                                $ASCII.NL, $ASCII.SPC, HR, $ASCII.SPC, $ASCII.NL, $ASCII.NUL
+                                $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.kernelFind     db  $ASCII.SPC,\
-                                'Trying to find the XEOS kernel...',\
+XEOS.boot.stage2.kernelFind     db  'Trying to find the XEOS kernel...',\
                                 $ASCII.NL, $ASCII.NUL
 
-XEOS.boot.stage2.kernelLoad     db  $ASCII.SPC,\
-                                'Loading the XEOS kernel...',\
+XEOS.boot.stage2.kernelLoad     db  'Loading the XEOS kernel...',\
                                 $ASCII.NL, $ASCII.NUL
