@@ -129,9 +129,6 @@ XEOS.boot.stage1:
     ; Saves the boot device number
     mov     dl,         $XEOS.mbr.driveNumber
     
-    ; Clears the screen
-    @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.lightGray
-    
     ; Prints the greeting
     @BIOS.video.print   XEOS.boot.stage1.greet
     
