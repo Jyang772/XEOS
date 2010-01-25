@@ -77,6 +77,59 @@
 %define $XEOS.video.colors.white            0x0F
 
 ;-------------------------------------------------------------------------------
+; Sets EDI to the memory address for the current cursor position
+; 
+; THIS MACRO IS PRIVATE! DO NOT CALL IT FROM OUTSIDE THIS FILE AS IT
+; MODIFIED THE EDI REGISTER!
+; 
+; Video memory is linear, so in order to write a character to a specific
+; position, the following formula can be used:
+;   
+;   x + ( y * screen width )
+; 
+; Also note that a displayed character takes two bytes of memory. One for the
+; character itself, an the other one for the display attributes (color, etc).
+;-------------------------------------------------------------------------------
+%macro @XEOS.video._private.currentPosition 0
+    
+    ; Pointer to the start of the video memory
+    mov     edi,        $XEOS.video.memory
+    
+    ; Resets EAX
+    xor     eax,        eax
+    
+    ; Two bytes per character displayed
+    mov     ecx,        $XEOS.video.screen.cols * 2
+    
+    ; Current Y position
+    mov     al,         BYTE [ XEOS.video.cursor.y ]
+    
+    ; Y poition multiplied by the screen width
+    mul     ecx
+    
+    ; Saves the resulting value
+    push    eax
+    
+    ; Current X position
+    mov     al,         BYTE [ XEOS.video.cursor.x ]
+    
+    ; Again, two bytes per character displayed
+    mov     cl,         2
+    mul     cl
+    
+    ; Restores the value of the previous computation (Y * screen width)
+    pop     ecx
+    
+    ; Adds X
+    add	    eax,        ecx
+    
+    ; EDI is now a pointer to the video memory area corresponding to the
+    ; current cursor position
+    add     edi,        eax
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
 ; Computes the value of a BIOS screen color into a register
 ; 
 ; Parameter 1:  The register in which to place the color value
@@ -115,7 +168,7 @@ XEOS.video.print:
 XEOS.video.cursor.x     db  0
 XEOS.video.cursor.y     db  0
 
-; Current character attribute
-XEOS.video.attribute    db  0
+; Current character attribute (default is white on light blue)
+XEOS.video.attribute    db  0x9F
 
 %endif
