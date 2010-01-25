@@ -81,6 +81,7 @@ jmp     XEOS.boot.stage2
 ; Horizontal ruler
 %define HR              '    ************************************************************************', $ASCII.NL
 
+; Prints a new line with a message, prefixed by the prompt
 %macro @XEOS.boot.stage2.print 1
 
 @BIOS.video.print    XEOS.boot.stage2.prompt
