@@ -83,11 +83,11 @@ jmp     XEOS.boot.stage2
 
 ; Prints a new line with a message, prefixed by the prompt
 %macro @XEOS.boot.stage2.print 1
-
-@BIOS.video.print    XEOS.boot.stage2.prompt
-@BIOS.video.print    %1
-@BIOS.video.print    XEOS.boot.stage2.nl
-
+    
+    @BIOS.video.print    XEOS.boot.stage2.prompt
+    @BIOS.video.print    %1
+    @BIOS.video.print    XEOS.boot.stage2.nl
+    
 %endmacro
 
 XEOS.boot.stage2:
