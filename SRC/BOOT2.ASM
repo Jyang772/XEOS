@@ -81,6 +81,14 @@ jmp     XEOS.boot.stage2
 ; Horizontal ruler
 %define HR              '    ************************************************************************', $ASCII.NL
 
+%macro @XEOS.boot.stage2.print 1
+
+@BIOS.video.print    XEOS.boot.stage2.prompt
+@BIOS.video.print    %1
+@BIOS.video.print    XEOS.boot.stage2.nl
+
+%endmacro
+
 XEOS.boot.stage2:
     
     ; Clears the interrupts as we are setting-up the segments and stack space
@@ -104,19 +112,19 @@ XEOS.boot.stage2:
     @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.lightBlue
     
     ; Prints the copyright notice
-    @BIOS.video.print    XEOS.boot.stage2.copyright
+    @BIOS.video.print       XEOS.boot.stage2.copyright
     
     ; Prints status message
-    @BIOS.video.print    XEOS.boot.stage2.greet
+    @XEOS.boot.stage2.print XEOS.boot.stage2.greet
     
     ; Prints status message
-    @BIOS.video.print    XEOS.boot.stage2.gdt
+    @XEOS.boot.stage2.print XEOS.boot.stage2.gdt
     
     ; Installs the GDT
     call    XEOS.gdt.install
     
     ; Prints status message
-    @BIOS.video.print    XEOS.boot.stage2.a20
+    @XEOS.boot.stage2.print XEOS.boot.stage2.a20
     
     ; Enables A20 - 20th address line on the address bus to access 4GB of memory
     call    XEOS.a20.enable.bios
@@ -125,7 +133,7 @@ XEOS.boot.stage2:
     .enterProtectedMode:
     
     ; Prints status message
-    @BIOS.video.print    XEOS.boot.stage2.pMode
+    @XEOS.boot.stage2.print XEOS.boot.stage2.pMode
     
     ; Clears the interrupts
     cli
@@ -153,17 +161,11 @@ XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 $ASCII.NL,\
                                 '    *     Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)     *',\
                                 $ASCII.NL,\
-                                '    *                   All rights (and wrongs) reserved                   *',\
+                                '    *                    All rights (& wrongs) reserved                    *',\
                                 $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
-
-XEOS.boot.stage2.greet          db  '<BOOT2>: Entering the second stage bootloader...',\
-                                $ASCII.NL, $ASCII.NUL
-
-XEOS.boot.stage2.gdt            db  '<BOOT2>: Installing the global descriptor table - GDT...',\
-                                    $ASCII.NL, $ASCII.NUL
-
-XEOS.boot.stage2.a20            db  '<BOOT2>: Enabling the A-20 address line...',\
-                                    $ASCII.NL, $ASCII.NUL
-
-XEOS.boot.stage2.pMode          db  '<BOOT2>: Switching the CPU to 32 bits protected mode...',\
-                                    $ASCII.NL, $ASCII.NUL
+XEOS.boot.stage2.nl             db   $ASCII.NL,  $ASCII.NUL         
+XEOS.boot.stage2.prompt         db  '<BOOT2>: ', $ASCII.NUL
+XEOS.boot.stage2.greet          db  'Entering the second stage bootloader...', $ASCII.NUL
+XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
+XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
+XEOS.boot.stage2.pMode          db  'Switching the CPU to 32 bits protected mode...', $ASCII.NUL
