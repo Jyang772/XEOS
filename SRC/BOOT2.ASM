@@ -130,6 +130,11 @@ XEOS.boot.stage2:
     ; Enables A20 - 20th address line on the address bus to access 4GB of memory
     call    XEOS.a20.enable.bios
     
+    
+    @XEOS.boot.stage2.print XEOS.boot.stage2.loadRoot
+    @XEOS.boot.stage2.print XEOS.boot.stage2.findKernel
+    @XEOS.boot.stage2.print XEOS.boot.stage2.loadKernel
+    
     ; Time to switch the CPU to 32bits protected mode
     .enterProtectedMode:
     
@@ -169,4 +174,7 @@ XEOS.boot.stage2.prompt         db  '<BOOT2>: ', $ASCII.NUL
 XEOS.boot.stage2.greet          db  'Entering the second stage bootloader...', $ASCII.NUL
 XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
 XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
+XEOS.boot.stage2.loadRoot       db  'Loading the FAT-12 root directory into memory...', $ASCII.NUL
+XEOS.boot.stage2.findKernel     db  'Trying to find the XEOS kernel (KERNEL.BIN)...', $ASCII.NUL
+XEOS.boot.stage2.loadKernel     db  'Loading the XEOS kernel into memory...', $ASCII.NUL
 XEOS.boot.stage2.pMode          db  'Switching the CPU to 32 bits protected mode...', $ASCII.NUL
