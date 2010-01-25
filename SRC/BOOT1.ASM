@@ -61,6 +61,11 @@
 ; Forces the 16 bits mode for the BIOS
 BITS    16
 
+; We are in 16 bits real mode
+%ifndef $XEOS.cpu.realMode    
+%define $XEOS.cpu.realMode 1
+%endif
+
 ; Includes the FAT-12 MBR, so the beginning of the binary will be a valid
 ; FAT-12 floppy drive
 %include "MBR-FAT12.ASM"

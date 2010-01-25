@@ -54,6 +54,11 @@
 ; Forces the 16 bits mode for the BIOS
 BITS    16
 
+; We are in 16 bits real mode
+%ifndef $XEOS.cpu.realMode    
+%define $XEOS.cpu.realMode 1
+%endif
+
 ;-------------------------------------------------------------------------------
 ; Second stage bootloader
 ; 
@@ -151,6 +156,9 @@ XEOS.boot.stage2:
     
     ; Sets the new value - We are now in 32bits protected mode
     mov     cr0,        eax
+    
+    ; We are now in 32 bits realmode
+    %undef $XEOS.cpu.realMode
     
     ; Infinite loop
     jmp     $
