@@ -112,7 +112,10 @@ XEOS.video.print:
 ;-------------------------------------------------------------------------------
 
 ; Current position of the cursor
-XEOS.video.cursor.x db  0
-XEOS.video.cursor.y db  0
+XEOS.video.cursor.x     db  0
+XEOS.video.cursor.y     db  0
+
+; Current character attribute
+XEOS.video.attribute    db  0
 
 %endif
