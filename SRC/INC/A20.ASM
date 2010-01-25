@@ -165,7 +165,85 @@ XEOS.a20.enable.keyboard.out:
     
     @XEOS.reg.save
     
+    ; Clears the interrupts
+    cli
+    
+    ; Waits for the input buffer to be empty
+    call    XEOS.a20.enable.keyboard.out.wait.in
+    
+    ; Disables the keyboard
+    mov     al,         0xAD
+    out     0x64,       al
+    
+    ; Waits for the input buffer to be empty
+    call    XEOS.a20.enable.keyboard.out.wait.in
+    
+    ; Tells the keyboard controller to read the output port
+    mov     al,         0xD0
+    out     0x64,       al
+    
+    ; Waits for the output buffer to be empty
+    call    XEOS.a20.enable.keyboard.out.wait.out
+    
+    ; Stores the data of the output port in the stack
+    in      al,         0x60
+    push    eax
+    
+    ; Waits for the input buffer to be empty
+    call    XEOS.a20.enable.keyboard.out.wait.in
+    
+    ; Writes the output port
+    mov     al,         0xD1
+    out     0x64,       al
+    
+    ; Waits for the input buffer to be empty
+    call    XEOS.a20.enable.keyboard.out.wait.in
+    
+    ; Restores data from the output port
+    pop     eax
+    
+    ; Bit 1 enables A20
+    or      al,         2
+    
+    ; Writes the data to the output port
+    out     0x60,       al
+    
+    ; Waits for the input buffer to be empty
+    call    XEOS.a20.enable.keyboard.out.wait.in
+    
+    ; Re-enables the keyboard
+    mov     al,         0xAE
+    out     0x64,       al
+    
+    ; Waits for the input buffer to be empty
+    call    XEOS.a20.enable.keyboard.out.wait.in
+    
+    ; Restores the interrupts
+    sti
+    
     @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; Waits for the input buffer of the keyboard controller to be empty
+;-------------------------------------------------------------------------------
+XEOS.a20.enable.keyboard.out.wait.in:
+    
+    in      al,         0x64
+    test    al,         2
+    jnz     XEOS.a20.enable.keyboard.out.wait.in
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; Waits for the output buffer of the keyboard controller to be empty
+;-------------------------------------------------------------------------------
+XEOS.a20.enable.keyboard.out.wait.out:
+    
+    in      al,         0x64
+    test    al,         1
+    jz      XEOS.a20.enable.keyboard.out.wait.out
     
     ret
 
