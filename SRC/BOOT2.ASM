@@ -130,7 +130,6 @@ XEOS.boot.stage2:
     ; Enables A20 - 20th address line on the address bus to access 4GB of memory
     call    XEOS.a20.enable.bios
     
-    
     @XEOS.boot.stage2.print XEOS.boot.stage2.loadRoot
     @XEOS.boot.stage2.print XEOS.boot.stage2.findKernel
     @XEOS.boot.stage2.print XEOS.boot.stage2.loadKernel
