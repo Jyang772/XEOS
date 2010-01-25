@@ -78,6 +78,7 @@ jmp     XEOS.boot.stage2
 %include "ASCII.ASM"        ; ASCII table
 %include "GDT.ASM"          ; GDT - Global Descriptor Table
 %include "A20.ASM"          ; 20th address line enabling
+%include "VIDEO.ASM"        ; XEOS video services
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
