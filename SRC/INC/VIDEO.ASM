@@ -139,11 +139,11 @@
 %macro @XEOS.video.createScreenColor 3
     
     ; Stores the background color
-    mov %1, %3
-    shl %1, 4
+    mov     %1,         %3
+    shl     %1,         4
     
     ; Stores the foreground color
-    add %1, %2
+    add     %1,         %2
     
 %endmacro
 
@@ -152,7 +152,26 @@
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.setBackgroundColor 1
     
+    ; Saves AX as we are going to alter it
+    push    ax
     
+    ; Resets AX
+    xor     ax,         ax
+    
+    ; Places the color in AL
+    mov     al,         BYTE %1
+    
+    ; Background color is the 4 high bits
+    shl     al,         4
+    
+    ; Clears the existing background color
+    and     [ XEOS.video.attribute ],   BYTE 00001111b
+    
+    ; Sets the new background color
+    or      [ XEOS.video.attribute ],   al
+    
+    ; Restores AX
+    pop     ax
     
 %endmacro
 
@@ -161,7 +180,26 @@
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.setForegroundColor 1
     
+    ; Saves AX as we are going to alter it
+    push    ax
     
+    ; Resets AX
+    xor     ax,         ax
+    
+    ; Places the color in AL
+    mov     al,         BYTE %1
+    
+    ; Foreground color is the 4 low bits
+    and     al,         00001111b
+    
+    ; Clears the existing foreground color
+    and     [ XEOS.video.attribute ],   BYTE 11110000b
+    
+    ; Sets the new foreground color
+    or      [ XEOS.video.attribute ],   al
+    
+    ; Restores AX
+    pop     ax
     
 %endmacro
 
