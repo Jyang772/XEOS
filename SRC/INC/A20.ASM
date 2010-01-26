@@ -96,44 +96,103 @@ XEOS.a20.enable.bios:
     ; Prints the error message
     @BIOS.video.print   XEOS.a20.enable.bios.error
     
+    ; Asks the user for a choice
+    .ask
+    
     ; Waits for a key (BIOS keyboard services function)
     xor     ax,         ax
     
     ; Calls the BIOS keyboard services
     $BIOS.int.keyboard
     
-    ; Checks if the pressed key was 'K'
-    cmp     al,         0x4B
+    ; Checks if the pressed key was '1'
+    cmp     al,         0x31
     
     ; Yes - Enables A20 through the keyboard controller
-    je      .keyboardController
+    je      .keyboardOut
     
-    ; Checks if the pressed key was 'k'
-    cmp     al,         0x6B
+    ; Checks if the pressed key was '2'
+    cmp     al,         0x32
     
     ; Yes - Enables A20 through the keyboard controller
     je     .keyboardController
     
-    .reboot:
+    ; Checks if the pressed key was '3'
+    cmp     al,         0x33
     
-    ; Prints the reboot message
-    @BIOS.video.print   XEOS.a20.enable.bios.error.reboot
+    ; Yes - Enables A20 through the keyboard controller
+    je     .systemController
     
-    ; Reboots the system
-    $BIOS.int.reboot
+    ; Checks if the pressed key was '4'
+    cmp     al,         0x34
     
-    .keyboardController:
+    ; Yes - Enables A20 through the keyboard controller
+    je     .reboot
     
-    ; User feedback - Displays a 'K' on the screen
-    mov     al,         0x4B
+    ; Unknown choice
+    @BIOS.video.print   XEOS.a20.enable.bios.fallback.unknown
+    
+    ; Asks again
+    je      .ask
+    
+    ; Fallback - A-20 will be enabled through the keyboard out port
+    .keyboardOut:
+    
+    ; User feedback - Displays a '1' on the screen
+    mov     al,         0x31
     mov     ah,         0x0E
     $BIOS.int.video
     
     ; Prints the confirmation message
-    @BIOS.video.print   XEOS.a20.enable.bios.error.keyboard
+    @BIOS.video.print   XEOS.a20.enable.bios.fallback.keyboardOut
     
     ; Enables A20 through the keyboard controller
     call    XEOS.a20.enable.keyboard.control
+    je      .success
+    
+    ; Fallback - A-20 will be enabled through the keyboard control port
+    .keyboardController:
+    
+    ; User feedback - Displays a '2' on the screen
+    mov     al,         0x32
+    mov     ah,         0x0E
+    $BIOS.int.video
+    
+    ; Prints the confirmation message
+    @BIOS.video.print   XEOS.a20.enable.bios.fallback.keyboardControl
+    
+    ; Enables A20 through the keyboard controller
+    call    XEOS.a20.enable.keyboard.control
+    je      .success
+    
+    ; Fallback - A-20 will be enabled through the system control port
+    .systemController:
+    
+    ; User feedback - Displays a '3' on the screen
+    mov     al,         0x33
+    mov     ah,         0x0E
+    $BIOS.int.video
+    
+    ; Prints the confirmation message
+    @BIOS.video.print   XEOS.a20.enable.bios.fallback.systemControl
+    
+    ; Enables A20 through the keyboard controller
+    call    XEOS.a20.enable.keyboard.control
+    je      .success
+    
+    ; Fallback - Reboot the system
+    .reboot:
+    
+    ; User feedback - Displays a '4' on the screen
+    mov     al,         0x34
+    mov     ah,         0x0E
+    $BIOS.int.video
+    
+    ; Prints the reboot message
+    @BIOS.video.print   XEOS.a20.enable.bios.fallback.reboot
+    
+    ; Reboots the system
+    $BIOS.int.reboot
     
     .success
     
@@ -252,18 +311,37 @@ XEOS.a20.enable.keyboard.out.wait.out:
 ;-------------------------------------------------------------------------------
 
 ; Strings
-XEOS.a20.enable.bios.error          db  $ASCII.NL,\
-                                        '         ERROR: A-20 cannot be enabled with the BIOS!',\
-                                        $ASCII.NL, $ASCII.NL,\
-                                        '         Press ', 0x27 , 'K', 0x27 ,' to enable A-20 through the keyboard controller,',\
-                                        $ASCII.NL,\
-                                        '         or any other key to reboot the system: ',\
-                                        $ASCII.NUL
-XEOS.a20.enable.bios.error.reboot   db  $ASCII.NL, $ASCII.NL,\
-                                        '         Rebooting...',\
-                                        $ASCII.NUL
-XEOS.a20.enable.bios.error.keyboard db  $ASCII.NL, $ASCII.NL,\
-                                        '         Enabling A-20 through the keyboard controller...',\
-                                        $ASCII.NL, $ASCII.NL, $ASCII.NUL
+XEOS.a20.enable.bios.error                      db  $ASCII.NL,\
+                                                    '         ERROR: A-20 cannot be enabled with the BIOS!',\
+                                                    $ASCII.NL,\
+                                                    '         Choose an alternate solution form the list below:',\
+                                                    $ASCII.NL, $ASCII.NL,\
+                                                    '             1 - Enable A-20 through the keyboard output port (recommended)',\
+                                                    $ASCII.NL,\
+                                                    '             2 - Enable A-20 through the keyboard control port',\
+                                                    $ASCII.NL,\
+                                                    '             3 - Enable A-20 through the system control port',\
+                                                    $ASCII.NL,\
+                                                    '             4 - Reboot the system',\
+                                                    $ASCII.NL, $ASCII.NL,\
+                                                    '         Please enter your choice: ',\
+                                                    $ASCII.NUL
+XEOS.a20.enable.bios.fallback.keyboardOut       db  $ASCII.NL, $ASCII.NL,\
+                                                    '         Enabling A-20 through the keyboard output port...',\
+                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
+XEOS.a20.enable.bios.fallback.keyboardControl   db  $ASCII.NL, $ASCII.NL,\
+                                                    '         Enabling A-20 through the keyboard control port...',\
+                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
+XEOS.a20.enable.bios.fallback.systemControl     db  $ASCII.NL, $ASCII.NL,\
+                                                    '         Enabling A-20 through the system control port...',\
+                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
+XEOS.a20.enable.bios.fallback.reboot            db  $ASCII.NL, $ASCII.NL,\
+                                                    '         Rebooting the system...',\
+                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
+XEOS.a20.enable.bios.fallback.unknown           db  $ASCII.NL, $ASCII.NL,\
+                                                    '         Invalid choice. A-20 still needs to be enabled...',\
+                                                    $ASCII.NL,\
+                                                    '         Press ', 39, '1', 39, ' if you don', 39, 't know what this is about: ',\
+                                                    $ASCII.NUL
 
 %endif
