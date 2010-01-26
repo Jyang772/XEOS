@@ -115,9 +115,6 @@ XEOS.boot.stage2:
     ; Restores the interrupts
     sti
     
-    ; Clears the screen
-    @BIOS.video.clearScreen $BIOS.video.colors.white, $BIOS.video.colors.lightBlue
-    
     ; Prints the copyright notice
     @BIOS.video.print       XEOS.boot.stage2.copyright
     
