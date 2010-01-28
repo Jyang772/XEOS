@@ -104,7 +104,7 @@ XEOS.boot.stage1:
     ; Placed here to avoid problems with the MBR short jump.
     ;---------------------------------------------------------------------------
     %include "MACROS.ASM"       ; General macros
-    %include "IO.ASM"           ; IO procedures
+    %include "IO-FAT12.ASM"     ; FAT-12 IO procedures
     %include "BIOS-INT.ASM"     ; BIOS interrupts
     %include "BIOS-VIDEO.ASM"   ; BIOS video services
     %include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
@@ -193,7 +193,7 @@ XEOS.boot.stage1:
     mov     bx,         0x1000
     
     ; Reads the necessary sectors to load the root directory into memory
-    call    XEOS.io.readSectors
+    call    XEOS.io.fat12.readSectors
     
     ; Reads the root directory
     ; 
@@ -277,7 +277,7 @@ XEOS.boot.stage1:
     mov     bx,         0x1000
     
     ; Reads the necessary sectors to load the FAT into memory
-    call    XEOS.io.readSectors
+    call    XEOS.io.fat12.readSectors
     
     ; We are going to load the second stage bootloader at the top of the free
     ; memory (0x50:0 => 0x0500)
@@ -298,7 +298,7 @@ XEOS.boot.stage1:
     pop     bx
     
     ; Converts the cluster number to a logical block address
-    call    XEOS.io.clusterToLba
+    call    XEOS.io.fat12.clusterToLba
     add     ax, WORD [ XEOS.boot1.dataSectorStart ]
     
     ; Number of sectors to read
@@ -307,7 +307,7 @@ XEOS.boot.stage1:
     
     ; Reads the necessary sectors to load the second stage bootloader into
     ; memory
-    call    XEOS.io.readSectors
+    call    XEOS.io.fat12.readSectors
     
     ; Saves the offset of the read operation
     push    bx

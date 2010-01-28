@@ -49,7 +49,7 @@
 ;-------------------------------------------------------------------------------
 ; 
 ;-------------------------------------------------------------------------------
-XEOS.io.readSectors:
+XEOS.io.fat12.readSectors:
     
     ; Resets DI, so we can count the number of read tries
     xor     di,         di
@@ -60,7 +60,7 @@ XEOS.io.readSectors:
     
     ; Converts the logical block address to cluster, head and cylinder
     ; (needed for int 0x13)
-    call    XEOS.io.lbaToChs
+    call    XEOS.io.fat12.lbaToChs
     
     ; Read sectors (BIOS low level disk services function)
     mov     ah,         2
@@ -69,13 +69,13 @@ XEOS.io.readSectors:
     mov     al,         1
     
     ; Track number
-    mov     ch,         BYTE [ XEOS.io.absoluteTrack ]
+    mov     ch,         BYTE [ XEOS.io.fat12.absoluteTrack ]
     
     ; Sector number
-    mov     cl,         BYTE [ XEOS.io.absoluteSector ]
+    mov     cl,         BYTE [ XEOS.io.fat12.absoluteSector ]
     
     ; Head number
-    mov     dh,         BYTE [ XEOS.io.absoluteHead ]
+    mov     dh,         BYTE [ XEOS.io.fat12.absoluteHead ]
     
     ; Drive number
     mov     dl,         $XEOS.mbr.driveNumber
@@ -112,15 +112,15 @@ XEOS.io.readSectors:
     
     ; We are now reading the next sector
     inc     ax
-    loop    XEOS.io.readSectors
+    loop    XEOS.io.fat12.readSectors
     
     ret
    
 ;-------------------------------------------------------------------------------
 ; Converts LBA (Logical Block Addressing) to CHS (Cylinder Head Sector)
 ; 
-; The result values will be placed in XEOS.io.absoluteSector,
-; XEOS.io.absoluteHead and XEOS.io.absoluteTrack.
+; The result values will be placed in XEOS.io.fat12.absoluteSector,
+; XEOS.io.fat12.absoluteHead and XEOS.io.fat12.absoluteTrack.
 ; 
 ; Formulas:
 ;   
@@ -132,7 +132,7 @@ XEOS.io.readSectors:
 ;       
 ;       - ax:       The LBA address to convert
 ;-------------------------------------------------------------------------------
-XEOS.io.lbaToChs:
+XEOS.io.fat12.lbaToChs:
     
     @XEOS.reg.save
     
@@ -147,7 +147,7 @@ XEOS.io.lbaToChs:
     inc     dl
     
     ; Stores the absolute sector
-    mov     BYTE [ XEOS.io.absoluteSector ],    dl
+    mov     BYTE [ XEOS.io.fat12.absoluteSector ],    dl
     
     ; Clears DX
     xor     dx,         dx
@@ -157,8 +157,8 @@ XEOS.io.lbaToChs:
     div     bx
     
     ; Stores the absolute head and absolute track
-    mov     BYTE [ XEOS.io.absoluteHead ],  dl
-    mov     BYTE [ XEOS.io.absoluteTrack ], al
+    mov     BYTE [ XEOS.io.fat12.absoluteHead ],  dl
+    mov     BYTE [ XEOS.io.fat12.absoluteTrack ], al
     
     @XEOS.reg.restore
     
@@ -177,7 +177,7 @@ XEOS.io.lbaToChs:
 ;       
 ;       - ax:       The cluster number to convert
 ;-------------------------------------------------------------------------------
-XEOS.io.clusterToLba:
+XEOS.io.fat12.clusterToLba:
     
     ; Saves the vaue of CX as we are going to use it
     push    cx
@@ -201,9 +201,9 @@ XEOS.io.clusterToLba:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-; Storage for the XEOS.io.lbaToChs procedure
-XEOS.io.absoluteSector      db  0
-XEOS.io.absoluteHead        db  0
-XEOS.io.absoluteTrack       db  0
+; Storage for the XEOS.io.fat12.lbaToChs procedure
+XEOS.io.fat12.absoluteSector      db  0
+XEOS.io.fat12.absoluteHead        db  0
+XEOS.io.fat12.absoluteTrack       db  0
 
 %endif
