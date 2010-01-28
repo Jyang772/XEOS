@@ -198,12 +198,78 @@ XEOS.io.fat12.clusterToLba:
     ret
 
 ;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.io.fat12.loadRootDirectory:
+    
+    @XEOS.reg.save
+    
+    ; Saves BX as we are going to alter it
+    push    bx
+    
+    ; An entry of the root directory is 32 bits
+    mov     ax,         0x20
+    
+    ; Number of root directory entries
+    mov     bx,         $XEOS.mbr.maxRootDirEntries
+    mul     WORD bx
+    
+    ; Number of sectors used by the root directory
+    mov     bx,         $XEOS.mbr.bytesPerSector
+    div     bx
+    
+    ; Stores the size of the root directory in CX
+    xchg    cx,         ax
+    
+    ; Number of file allocation tables
+    mov     al,         $XEOS.mbr.numberOfFat
+    
+    ; Multiplies by the number of sectors that a FAT uses
+    mov     bx,         $XEOS.mbr.sectorsPerFat
+    mul     bx
+    
+    ; Adds the number of reserved sectors, so we now have the starting
+    ; sector of the root directory
+    add     ax,         $XEOS.mbr.reservedSectors
+    
+    ; Now we can guess and store the starting sector for the data
+    mov     [ XEOS.io.fat12.rootDirectoryStart ], ax
+    add     [ XEOS.io.fat12.rootDirectoryStart ], cx
+    
+    ; Restores BX
+    pop     bx
+    
+    ; Reads the necessary sectors to load the root directory into memory
+    call    XEOS.io.fat12.readSectors
+    
+    @XEOS.reg.restore
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.io.fat12.findFile:
+    v
+    ret
+
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.io.fat12.loadFile:
+    
+    ret
+
+;-------------------------------------------------------------------------------
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
 ; Storage for the XEOS.io.fat12.lbaToChs procedure
-XEOS.io.fat12.absoluteSector      db  0
-XEOS.io.fat12.absoluteHead        db  0
-XEOS.io.fat12.absoluteTrack       db  0
+XEOS.io.fat12.absoluteSector        db  0
+XEOS.io.fat12.absoluteHead          db  0
+XEOS.io.fat12.absoluteTrack         db  0
+
+; Storage for the XEOS.io.fat12.loadRootDirectory procedure
+XEOS.io.fat12.rootDirectoryStart    dw  0
 
 %endif

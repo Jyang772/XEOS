@@ -160,40 +160,11 @@ XEOS.boot.stage1:
     ;       - 0x1C - 0x20:  File size in bytes
     .loadRootDirectory
     
-    ; An entry of the root directory is 32 bits
-    mov     ax,         0x20
-    
-    ; Number of root directory entries
-    mov     bx,         $XEOS.mbr.maxRootDirEntries
-    mul     WORD bx
-    
-    ; Number of sectors used by the root directory
-    mov     bx,         $XEOS.mbr.bytesPerSector
-    div     bx
-    
-    ; Stores the size of the root directory in CX
-    xchg    cx,         ax
-    
-    ; Number of file allocation tables
-    mov     al,         $XEOS.mbr.numberOfFat
-    
-    ; Multiplies by the number of sectors that a FAT uses
-    mov     bx,         $XEOS.mbr.sectorsPerFat
-    mul     bx
-    
-    ; Adds the number of reserved sectors, so we now have the starting
-    ; sector of the root directory
-    add     ax,         $XEOS.mbr.reservedSectors
-    
-    ; Now we can guess and store the starting sector for the data
-    mov     [ XEOS.boot1.dataSectorStart ], ax
-    add     [ XEOS.boot1.dataSectorStart ], cx
-    
-    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
+    ; Loads the root directory into memory
+    ; 
+    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000).
     mov     bx,         0x1000
-    
-    ; Reads the necessary sectors to load the root directory into memory
-    call    XEOS.io.fat12.readSectors
+    call    XEOS.io.fat12.loadRootDirectory
     
     ; Reads the root directory
     ; 
@@ -299,7 +270,7 @@ XEOS.boot.stage1:
     
     ; Converts the cluster number to a logical block address
     call    XEOS.io.fat12.clusterToLba
-    add     ax, WORD [ XEOS.boot1.dataSectorStart ]
+    add     ax, WORD [ XEOS.io.fat12.rootDirectoryStart ]
     
     ; Number of sectors to read
     xor     cx,         cx
@@ -368,9 +339,6 @@ XEOS.files.stage2           db  'BOOT2   BIN'
 XEOS.boot.stage1.greet      db  $ASCII.NL,\
                                 'Booting XEOS...',\
                                 $ASCII.NL, $ASCII.NUL
-
-; Start of the floppy data sector
-XEOS.boot1.dataSectorStart  dw  0
 
 ; First cluster of the second stage bootloader
 XEOS.boot1.boot2Cluster     dw  0
