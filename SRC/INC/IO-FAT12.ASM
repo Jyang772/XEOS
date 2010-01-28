@@ -198,7 +198,12 @@ XEOS.io.fat12.clusterToLba:
     ret
 
 ;-------------------------------------------------------------------------------
+; Loads the FAT-12 root directory into memory
 ; 
+; Necessary register values:
+;       
+;       - bx:       The offset at which the root directory will be loaded
+;                   (will be ES:BX)
 ;-------------------------------------------------------------------------------
 XEOS.io.fat12.loadRootDirectory:
     
