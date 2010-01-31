@@ -118,8 +118,10 @@ XEOS.boot.stage2:
     ; Prints the copyright notice
     @BIOS.video.print       XEOS.boot.stage2.copyright
     
-    ; Prints status message
+    ; Prints status messages
     @XEOS.boot.stage2.print XEOS.boot.stage2.greet
+    @XEOS.boot.stage2.print XEOS.boot.stage2.revision
+    @XEOS.boot.stage2.print XEOS.boot.stage2.date
     
     ; Prints status message
     @XEOS.boot.stage2.print XEOS.boot.stage2.gdt
@@ -176,6 +178,8 @@ XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
 XEOS.boot.stage2.nl             db   $ASCII.NL,  $ASCII.NUL         
 XEOS.boot.stage2.prompt         db  '<BOOT2>: ', $ASCII.NUL
+XEOS.boot.stage2.revision       db  '$Revision$', $ASCII.NUL
+XEOS.boot.stage2.date           db  '$Date$', $ASCII.NUL
 XEOS.boot.stage2.greet          db  'Entering the second stage bootloader...', $ASCII.NUL
 XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
 XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
