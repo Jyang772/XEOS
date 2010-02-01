@@ -156,100 +156,14 @@ XEOS.boot.stage1:
     ; Tries to find the second stage bootloader file in the root directory
     call    XEOS.io.fat12.findFile
     
-    ; At this time, the second stage bootloader has been located in the root
-    ; directory
-    .loadSecondStage:
-    
-    ; We now have to read the file allocation table
-    .readFat:
-    
-    ; Resets AX
-    xor     ax,         ax
-    
-    ; Number of file allocation tables
-    mov     al,         BYTE $XEOS.mbr.numberOfFat
-    
-    ; Multiplies by the number of sectors that a FAT uses
-    mov     cx,         $XEOS.mbr.sectorsPerFat
-    mul     cx
-    
-    ; Stores the size of the FAT in CX
-    mov     cx,         ax
-    
-    ; Location of the FAT
-    mov     ax, WORD $XEOS.mbr.reservedSectors
-    
-    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
-    mov     bx,         0x1000
-    
-    ; Reads the necessary sectors to load the FAT into memory
-    call    XEOS.io.fat12.readSectors
-    
     ; We are going to load the second stage bootloader at the top of the free
     ; memory (0x50:0 => 0x0500)
     mov     ax,         0x50
-    mov     es,         ax
-    xor     bx,         bx
     
-    ; Saves the value of BX
-    push    bx
-    
-    ; Time to load the second stage bootloader into memory
-    .loadSecondStageFile:
-    
-    ; We are going to read from the first cluster of the second stage bootloader
-    mov     ax,         WORD [ XEOS.io.fat12.firstDataCluster ]
-    
-    ; Restores the offset of the read operation
-    pop     bx
-    
-    ; Converts the cluster number to a logical block address
-    call    XEOS.io.fat12.clusterToLba
-    add     ax, WORD [ XEOS.io.fat12.rootDirectoryStart ]
-    
-    ; Number of sectors to read
-    xor     cx,         cx
-    mov     cl, BYTE $XEOS.mbr.sectorsPerCluster
-    
-    ; Reads the necessary sectors to load the second stage bootloader into
-    ; memory
-    call    XEOS.io.fat12.readSectors
-    
-    ; Saves the offset of the read operation
-    push    bx
-    
-    mov     ax,         WORD [ XEOS.io.fat12.firstDataCluster ]
-    mov     cx,         ax
-    mov     dx,         ax
-    shr     dx,         1
-    add     cx,         dx
+    ; FAT sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
     mov     bx,         0x1000
-    add     bx,         cx
-    mov     dx,         WORD [ bx ]
-    test    ax,         1
     
-    jnz     .clusterOdd
-    
-    .clusterEven:
-    
-    ; Low twelve bits
-    and     dx,         0000111111111111b
-    jmp     .nextCluster
-    
-    .clusterOdd:
-    
-    ; Hight twelve bits
-    shr     dx,         4
-    
-    .nextCluster:
-    
-    mov     WORD [ XEOS.io.fat12.firstDataCluster ],    dx
-    
-    ; Checks for the end of the file
-    cmp     dx,         0x0FF0
-    
-    ; Continues loading the file, as there is still data to read
-    jb      .loadSecondStageFile
+    call    XEOS.io.fat12.loadFile
     
     ; End of file detected, so the second stage bootloader file has been
     ; completely loaded into memory
@@ -272,7 +186,7 @@ XEOS.boot.stage1:
 ; Strings
 XEOS.files.stage2           db  'BOOT2   BIN'
 XEOS.boot.stage1.greet      db  $ASCII.NL,\
-                                'Booting XEOS...',\
+                                'XEOS boot...',\
                                 $ASCII.NL, $ASCII.NUL
 
 ;-------------------------------------------------------------------------------
