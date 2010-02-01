@@ -200,6 +200,22 @@ XEOS.io.fat12.clusterToLba:
 ;-------------------------------------------------------------------------------
 ; Loads the FAT-12 root directory into memory
 ; 
+; The structure of the FAT-12 root directory is:
+; 
+;       - 0x00 - 0x07:  File name
+;       - 0x08 - 0x0A:  File extension
+;       - 0x0B - 0x0B:  File attributes
+;       - 0x0C - 0x0C:  Reserved
+;       - 0x0D - 0x0D:  Create time - fine resolution
+;       - 0x0E - 0x0F:  Create time - hours, minutes and seconds
+;       - 0x10 - 0x11:  Create date
+;       - 0x12 - 0x13:  Last access date
+;       - 0x14 - 0x15:  EA-Index (used by OS/2 and NT)
+;       - 0x16 - 0x17:  Last modified time
+;       - 0x18 - 0x19:  Last modified date
+;       - 0x1A - 0x1B:  First cluster of the file
+;       - 0x1C - 0x20:  File size in bytes
+; 
 ; Necessary register values:
 ;       
 ;       - bx:       The offset at which the root directory will be loaded
@@ -252,9 +268,73 @@ XEOS.io.fat12.loadRootDirectory:
     ret
 
 ;-------------------------------------------------------------------------------
+; Finds a file name in the FAT-12 root directory
 ; 
+; Note that the root directory must be loaded in memory before calling this
+; procedure (see XEOS.io.fat12.loadRootDirectory).
+; If the file name is found, its starting cluster will be saved in
+; XEOS.io.fat12.firstDataCluster. Otherwise, a fatal error will occure.
+; 
+; Necessary register values:
+; 
+;       - DI:       The offset at which the root directory is loaded
+;       - SI:       The address of the filename to find
 ;-------------------------------------------------------------------------------
 XEOS.io.fat12.findFile:
+    
+    @XEOS.reg.save
+    
+    ; Number of entries to read
+    mov     cx,         WORD $XEOS.mbr.maxRootDirEntries
+    
+    ; We are going to loop through the root directory entries to find the name
+    ; of the second stage bootloader file
+    .readRootDirectoryLoop:
+    
+    ; Saves the loop counter
+    push    cx
+    
+    ; FAT12 filenames are limited to 11 characters
+    mov     cx,         0x0B
+    
+    ; Saves the memory address containing the file name
+    push    si
+    
+    ; Saves the memory address in which the root directory was loaded
+    push    di
+    
+    ; Tries to find the name of the second stage bootloader
+    rep     cmpsb
+    
+    ; Restores the address of the data we are reading
+    pop     di
+    
+    ; Restores the address of the file name
+    pop     si
+    
+    ; Restores the loop counter
+    pop     cx
+    
+    ; The file was found - We are going to load it
+    je      .found
+    
+    ; Address of the next entry
+    add     di,         0x20
+    
+    ; Reads the next entry
+    loop    .readRootDirectoryLoop
+    
+    ; The second stage bootloader was not found - Issues a fatal error
+    call    XEOS.error.fatal
+    
+    .found
+    
+    ; Saves the first cluster of the second stage bootloader (first cluster
+    ; is located at location 0x1A of a root directory entry)
+    mov     ax,         WORD [ di + 0x1A ]
+    mov     WORD [ XEOS.io.fat12.firstDataCluster ],    ax 
+    
+    @XEOS.reg.restore
     
     ret
 
@@ -276,5 +356,8 @@ XEOS.io.fat12.absoluteTrack         db  0
 
 ; Storage for the XEOS.io.fat12.loadRootDirectory procedure
 XEOS.io.fat12.rootDirectoryStart    dw  0
+
+; Storage for the XEOS.io.fat12.findFile procedure
+XEOS.io.fat12.firstDataCluster      dw  0
 
 %endif

@@ -141,89 +141,24 @@ XEOS.boot.stage1:
     ; second stage bootloader to efficienttly load the kernel
     .findSecondStage:
     
-    ; Loads the root directory of the floppy
-    ; 
-    ; The structure of the FAT-12 root directory is:
-    ; 
-    ;       - 0x00 - 0x07:  File name
-    ;       - 0x08 - 0x0A:  File extension
-    ;       - 0x0B - 0x0B:  File attributes
-    ;       - 0x0C - 0x0C:  Reserved
-    ;       - 0x0D - 0x0D:  Create time - fine resolution
-    ;       - 0x0E - 0x0F:  Create time - hours, minutes and seconds
-    ;       - 0x10 - 0x11:  Create date
-    ;       - 0x12 - 0x13:  Last access date
-    ;       - 0x14 - 0x15:  EA-Index (used by OS/2 and NT)
-    ;       - 0x16 - 0x17:  Last modified time
-    ;       - 0x18 - 0x19:  Last modified date
-    ;       - 0x1A - 0x1B:  First cluster of the file
-    ;       - 0x1C - 0x20:  File size in bytes
-    .loadRootDirectory
-    
     ; Loads the root directory into memory
     ; 
     ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000).
     mov     bx,         0x1000
     call    XEOS.io.fat12.loadRootDirectory
     
-    ; Reads the root directory
-    ; 
-    ; The content of the root directory is now in memory, just after this
-    ; bootloader.
-    ; We are going to read it to find the second stage bootloader.
-    .readRootDirectory:
-    
     ; Location of the data we read into memory
     mov     di,         0x1000
-    
-    ; Number of entries to read
-    mov     cx,         WORD $XEOS.mbr.maxRootDirEntries
-    
-    ; We are going to loop through the root directory entries to find the name
-    ; of the second stage bootloader file
-    .readRootDirectoryLoop:
-    
-    ; Saves the loop counter
-    push    cx
-    
-    ; FAT12 filenames are limited to 11 characters
-    mov     cx,         0x0B
     
     ; Name of the second stage bootloader file
     mov     si,         XEOS.files.stage2
     
-    ; Saves the memory address in which the root directory was loaded
-    push    di
-    
-    ; Tries to find the name of the second stage bootloader
-    rep     cmpsb
-    
-    ; Restores the address of the data we are reading
-    pop     di
-    
-    ; The file was found - We are going to load it
-    je      .loadSecondStage
-    
-    ; Restores the loop counter
-    pop     cx
-    
-    ; Address of the next entry
-    add     di,         0x20
-    
-    ; Reads the next entry
-    loop    .readRootDirectoryLoop
-    
-    ; The second stage bootloader was not found - Issues a fatal error
-    call    XEOS.error.fatal
+    ; Tries to find the second stage bootloader file in the root directory
+    call    XEOS.io.fat12.findFile
     
     ; At this time, the second stage bootloader has been located in the root
     ; directory
     .loadSecondStage:
-    
-    ; Saves the first cluster of the second stage bootloader (first cluster
-    ; is located at location 0x1A of a root directory entry)
-    mov     ax,         WORD [ di + 0x1A ]
-    mov     WORD [ XEOS.boot1.boot2Cluster ],   ax 
     
     ; We now have to read the file allocation table
     .readFat:
@@ -263,7 +198,7 @@ XEOS.boot.stage1:
     .loadSecondStageFile:
     
     ; We are going to read from the first cluster of the second stage bootloader
-    mov     ax,         WORD [ XEOS.boot1.boot2Cluster ]
+    mov     ax,         WORD [ XEOS.io.fat12.firstDataCluster ]
     
     ; Restores the offset of the read operation
     pop     bx
@@ -283,7 +218,7 @@ XEOS.boot.stage1:
     ; Saves the offset of the read operation
     push    bx
     
-    mov     ax,         WORD [ XEOS.boot1.boot2Cluster ]
+    mov     ax,         WORD [ XEOS.io.fat12.firstDataCluster ]
     mov     cx,         ax
     mov     dx,         ax
     shr     dx,         1
@@ -308,7 +243,7 @@ XEOS.boot.stage1:
     
     .nextCluster:
     
-    mov     WORD [ XEOS.boot1.boot2Cluster ],   dx
+    mov     WORD [ XEOS.io.fat12.firstDataCluster ],    dx
     
     ; Checks for the end of the file
     cmp     dx,         0x0FF0
@@ -339,9 +274,6 @@ XEOS.files.stage2           db  'BOOT2   BIN'
 XEOS.boot.stage1.greet      db  $ASCII.NL,\
                                 'Booting XEOS...',\
                                 $ASCII.NL, $ASCII.NUL
-
-; First cluster of the second stage bootloader
-XEOS.boot1.boot2Cluster     dw  0
 
 ;-------------------------------------------------------------------------------
 ; Ends of the boot sector
