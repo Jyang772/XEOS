@@ -47,6 +47,9 @@
 %include "ASCII.ASM"        ; ASCII table
 %include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
 
+; We are in 16 bits mode
+BITS    16
+
 ;-------------------------------------------------------------------------------
 ; 
 ;-------------------------------------------------------------------------------

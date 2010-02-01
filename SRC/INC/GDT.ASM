@@ -78,13 +78,13 @@
 %ifndef GDT_ASM
 %define GDT_ASM
 
-; Forces the 16 bits mode for the BIOS
-BITS    16
-
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "MACROS.ASM"       ; General macros
+
+; We are in 16 bits mode
+BITS    16
 
 ;-------------------------------------------------------------------------------
 ; Addresses of the descriptors

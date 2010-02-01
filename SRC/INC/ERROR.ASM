@@ -45,6 +45,9 @@
 %include "BIOS-VIDEO.ASM"   ; BIOS video services
 %include "ASCII.ASM"        ; ASCII table
 
+; We are in 16 bits mode
+BITS    16
+
 ;-------------------------------------------------------------------------------
 ; Fatal error - waits for the user to press a key, and reboots the PC
 ;-------------------------------------------------------------------------------

@@ -51,9 +51,6 @@
 ;       - yasm -f bin -o [boot.flp] [boot.asm]
 ;-------------------------------------------------------------------------------
 
-; Forces the 16 bits mode for the BIOS
-BITS    16
-
 ; We are in 16 bits real mode
 %ifndef $XEOS.cpu.realMode    
 %define $XEOS.cpu.realMode 1
@@ -77,6 +74,9 @@ jmp     XEOS.boot.stage2
 %include "GDT.ASM"          ; GDT - Global Descriptor Table
 %include "A20.ASM"          ; 20th address line enabling
 %include "VIDEO.ASM"        ; XEOS video services
+
+; We are in 16 bits mode
+BITS    16
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros

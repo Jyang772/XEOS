@@ -46,6 +46,9 @@
 %include "BIOS-INT.ASM"     ; BIOS interrupts
 %include "ERROR.ASM"        ; Error management
 
+; We are in 16 bits mode
+BITS    16
+
 ;-------------------------------------------------------------------------------
 ; Resets the floppy disk
 ;-------------------------------------------------------------------------------

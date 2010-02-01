@@ -51,9 +51,6 @@
 ;       - yasm -f bin -o [boot.flp] [boot.asm]
 ;-------------------------------------------------------------------------------
 
-; We are now in 32 bits protected mode
-BITS    32
-
 ; Location at which we were loaded by the second stage bootloader (1MB)
 ORG     0x100000
 
@@ -66,6 +63,9 @@ jmp     XEOS.kernel
 %include "MACROS.ASM"       ; General macros
 %include "ASCII.ASM"        ; ASCII table
 %include "VIDEO.ASM"        ; XEOS video services
+
+; We are in 32 bits mode
+BITS    32
 
 ;-------------------------------------------------------------------------------
 ; Second stage bootloader

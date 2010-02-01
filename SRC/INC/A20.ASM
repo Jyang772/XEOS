@@ -60,6 +60,9 @@
 %include "BIOS-VIDEO.ASM"   ; BIOS video services
 %include "ERROR.ASM"        ; Error management
 
+; We are in 16 bits mode
+BITS    16
+
 ;-------------------------------------------------------------------------------
 ; Enables A20 through the system control port
 ;-------------------------------------------------------------------------------

@@ -58,7 +58,7 @@
 ;       - dd -conv=notrunc if=[bin] of=[floppy]
 ;-------------------------------------------------------------------------------
 
-; Forces the 16 bits mode for the BIOS
+; We are in 16 bits mode
 BITS    16
 
 ; We are in 16 bits real mode
@@ -109,6 +109,9 @@ XEOS.boot.stage1:
     %include "BIOS-VIDEO.ASM"   ; BIOS video services
     %include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
     %include "ASCII.ASM"        ; ASCII table
+    
+    ; Redefines we are in 16 bits mode (as we've include files)
+    BITS    16
     
     ; We are redefining 'XEOS.boot.stage1', as the include files are declaring
     ; global procedures
