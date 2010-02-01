@@ -45,6 +45,7 @@
 %include "BIOS-INT.ASM"     ; BIOS interrupts
 %include "ERROR.ASM"        ; Error management
 %include "ASCII.ASM"        ; ASCII table
+%include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
 
 ;-------------------------------------------------------------------------------
 ; 
