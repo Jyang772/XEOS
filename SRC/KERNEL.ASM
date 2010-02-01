@@ -54,8 +54,8 @@
 ; We are now in 32 bits protected mode
 BITS    32
 
-; Location at which we were loaded by the secod stage bootloader (0x1000)
-ORG 0x1000
+; Location at which we were loaded by the second stage bootloader (1MB)
+ORG 0x100000
 
 ; Jumps to the effective code section
 jmp     XEOS.kernel
