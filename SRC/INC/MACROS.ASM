@@ -54,6 +54,7 @@
         push    sp
         push    bp
         push    si
+        push    di
         
     %else
         
@@ -74,6 +75,7 @@
         
         ; Manually restores the registers to the stack, as the 'popa'
         ; instruction is only available on 80286 processors and later
+        pop     di
         pop     si
         pop     bp
         pop     sp
