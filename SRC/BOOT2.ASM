@@ -60,7 +60,7 @@ BITS    16
 %endif
 
 ; Location at which we were loaded by the first stage bootloader (0x50:0)
-ORG 0x500
+ORG     0x500
 
 ; Jumps to the effective code section
 jmp     XEOS.boot.stage2
