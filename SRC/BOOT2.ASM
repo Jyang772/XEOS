@@ -59,17 +59,11 @@ BITS    16
 %define $XEOS.cpu.realMode 1
 %endif
 
-;-------------------------------------------------------------------------------
-; Second stage bootloader
-; 
-; The main XEOS bootloader, which is responsible to load the kernel.
-;-------------------------------------------------------------------------------
+; Location at which we were loaded by the first stage bootloader (0x50:0)
+ORG 0x500
 
 ; Jumps to the effective code section
 jmp     XEOS.boot.stage2
-
-; Location at which we were loaded by the first stage bootloader (0x50:0)
-ORG 0x500
 
 ;-------------------------------------------------------------------------------
 ; Includes
@@ -100,6 +94,11 @@ ORG 0x500
     
 %endmacro
 
+;-------------------------------------------------------------------------------
+; Second stage bootloader
+; 
+; The main XEOS bootloader, which is responsible to load the kernel.
+;-------------------------------------------------------------------------------
 XEOS.boot.stage2:
     
     ; Clears the interrupts as we are setting-up the segments and stack space
