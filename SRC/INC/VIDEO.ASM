@@ -204,6 +204,50 @@
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Clears the screen using the current character attrinute
+;-------------------------------------------------------------------------------
+XEOS.video.clear:
+    
+    @XEOS.reg.save
+    
+    ; Computes the number of characters to write to clear the screen
+    mov     ax,         $XEOS.video.screen.rows
+    mov     ecx,        $XEOS.video.screen.cols
+    mul     ecx
+    
+    ; Stores the result in CX, so we can loop
+    mov     ecx,        eax
+    
+    ; Start of the video memory
+    mov     edi,        $XEOS.video.memory
+    
+    ; Clears a character on the screen
+    .clear:
+        
+        ; Space character (ASCII 32)
+        mov     al,     BYTE 0x20
+        
+        ; Current character attribute
+        mov     ah,     BYTE [ XEOS.video.attribute ]
+        
+        ; Clears the current character by writing a space
+        mov     [ edi ],    WORD ax
+        
+        ; Next character can now be processed
+        add     edi,    BYTE 2
+        
+        ; Continues clearing till we reached the end of the screen
+        loop    .clear
+    
+    ; Update the cursor position
+    mov     [ XEOS.video.cursor.x ],    BYTE 0
+    mov     [ XEOS.video.cursor.y ],    BYTE 0
+    
+    @XEOS.reg.restore
+    
+    ret
+
+;-------------------------------------------------------------------------------
 ; 
 ;-------------------------------------------------------------------------------
 XEOS.video.print:
