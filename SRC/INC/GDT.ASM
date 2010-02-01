@@ -78,6 +78,9 @@
 %ifndef GDT_ASM
 %define GDT_ASM
 
+; Forces the 16 bits mode for the BIOS
+BITS    16
+
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
@@ -113,8 +116,8 @@ db  0
 ;                           1       - Code descriptor
 ; Descriptor bit:           1       - Code/Data descriptor
 ; Privilege level:          00      - Ring 0 (kernel level)
-; In memory:                0       - Not using virtual memory
-db  00011010b
+; In memory:                1       - ???
+db  10011010b
 
 ; Segment limit (16-19):    1111    - High bits for the segment limit
 ; OS reserved:              0       - Nothing
@@ -145,8 +148,8 @@ db  0
 ;                           0       - Data descriptor
 ; Descriptor bit:           1       - Code/Data descriptor
 ; Privilege level:          00      - Ring 0 (kernel level)
-; In memory:                0       - Not using virtual memory
-db  00010010b
+; In memory:                1       - ???
+db  10010010b
 
 ; Segment limit (16-19):    1111    - High bits for the segment limit
 ; OS reserved:              0       - Nothing
