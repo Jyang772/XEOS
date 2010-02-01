@@ -75,6 +75,7 @@ jmp     XEOS.boot.stage2
 %include "BIOS-INT.ASM"     ; BIOS interrupts
 %include "BIOS-VIDEO.ASM"   ; BIOS video services
 %include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
+%include "IO-FAT12.ASM"     ; FAT-12 IO procedures
 %include "ASCII.ASM"        ; ASCII table
 %include "GDT.ASM"          ; GDT - Global Descriptor Table
 %include "A20.ASM"          ; 20th address line enabling
@@ -107,10 +108,10 @@ XEOS.boot.stage2:
     mov     ds,         ax
     mov     es,         ax
     
-    ; Sets up the stack (0x9000-0xFFFF)
-    mov     ax,         0x9000
+    ; Sets up 4KB of stack space
+    xor     ax,         ax
     mov     ss,         ax
-    mov     sp,         0xFFFF
+    mov     sp,         0x1000
     
     ; Restores the interrupts
     sti
@@ -124,6 +125,39 @@ XEOS.boot.stage2:
     @XEOS.boot.stage2.print XEOS.boot.stage2.date
     
     ; Prints status message
+    @XEOS.boot.stage2.print XEOS.boot.stage2.loadRoot
+    
+    ; Loads the root directory into memory
+    ; 
+    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000).
+    mov     bx,         0x1000
+    call    XEOS.io.fat12.loadRootDirectory
+    
+    ; Prints status message
+    @XEOS.boot.stage2.print XEOS.boot.stage2.findKernel
+    
+    ; Location of the data we read into memory
+    mov     di,         0x1000
+    
+    ; Name of the kernel file
+    mov     si,         XEOS.files.kernel
+    
+    ; Tries to find the kernel file in the root directory
+    call    XEOS.io.fat12.findFile
+    
+    ; Prints status message
+    @XEOS.boot.stage2.print XEOS.boot.stage2.loadKernel
+    
+    ; We are going to load the kernel at 0x1000:0
+    mov     ax,         0x1000
+    
+    ; FAT sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
+    mov     bx,         0x1000
+    
+    ; Loads the kernel into memory
+    call    XEOS.io.fat12.loadFile
+    
+    ; Prints status message
     @XEOS.boot.stage2.print XEOS.boot.stage2.gdt
     
     ; Installs the GDT
@@ -134,10 +168,6 @@ XEOS.boot.stage2:
     
     ; Enables A20 - 20th address line on the address bus to access 4GB of memory
     call    XEOS.a20.enable.bios
-    
-    @XEOS.boot.stage2.print XEOS.boot.stage2.loadRoot
-    @XEOS.boot.stage2.print XEOS.boot.stage2.findKernel
-    @XEOS.boot.stage2.print XEOS.boot.stage2.loadKernel
     
     ; Time to switch the CPU to 32bits protected mode
     .enterProtectedMode:
@@ -167,6 +197,7 @@ XEOS.boot.stage2:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
+XEOS.files.kernel               db  'KERNEL  BIN'
 XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 '    *               XEOS - x86 Experimental Operating System               *',\
                                 $ASCII.NL,\

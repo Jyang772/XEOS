@@ -81,7 +81,7 @@ BITS    16
 ;       - 0x0040 - 0x004F:  BIOS data
 ;       - 0x0050 - 0x07BF:  Free
 ;       - 0x07C0 - 0x07DF:  Bootloader
-;       - 0x7CE0 - 0x9FFF:  Free
+;       - 0x07CE - 0x9FFF:  Free
 ;       - 0xA000 - 0xBFFF:  BIOS video sub-system
 ;       - 0xC000 - 0xEFFF:  BIOS ROM
 ;       - 0xF000 - 0xFFFF:  System ROM
@@ -123,7 +123,7 @@ XEOS.boot.stage1:
     mov     ds,         ax
     mov     es,         ax
     
-    ; Sets up 4KB of stack space after this bootloader
+    ; Sets up 4KB of stack space
     xor     ax,         ax
     mov     ss,         ax
     mov     sp,         0x1000
@@ -163,6 +163,7 @@ XEOS.boot.stage1:
     ; FAT sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
     mov     bx,         0x1000
     
+    ; Loads the second stage bootloader into memory
     call    XEOS.io.fat12.loadFile
     
     ; End of file detected, so the second stage bootloader file has been
