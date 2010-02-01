@@ -215,7 +215,7 @@ XEOS.video.clear:
     mov     ecx,        $XEOS.video.screen.cols
     mul     ecx
     
-    ; Stores the result in CX, so we can loop
+    ; Stores the result in ECX, so we can loop
     mov     ecx,        eax
     
     ; Start of the video memory
@@ -225,16 +225,16 @@ XEOS.video.clear:
     .clear:
         
         ; Space character (ASCII 32)
-        mov     al,     BYTE 0x20
+        mov     al,         BYTE 0x20
         
         ; Current character attribute
-        mov     ah,     BYTE [ XEOS.video.attribute ]
+        mov     ah,         BYTE [ XEOS.video.attribute ]
         
         ; Clears the current character by writing a space
         mov     [ edi ],    WORD ax
         
         ; Next character can now be processed
-        add     edi,    BYTE 2
+        add     edi,        BYTE 2
         
         ; Continues clearing till we reached the end of the screen
         loop    .clear
@@ -244,6 +244,67 @@ XEOS.video.clear:
     mov     [ XEOS.video.cursor.y ],    BYTE 0
     
     @XEOS.reg.restore
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; Scrolls the screen by one line
+;-------------------------------------------------------------------------------
+XEOS.video.scroll:
+    
+    @XEOS.reg.save
+    
+    ; Start of the video memory
+    mov     edi,        $XEOS.video.memory
+    
+    ; Computes the number of characters that will need to be rewritten
+    ; (we won't rewrite the last line, as it will be cleared)
+    mov     eax,        $XEOS.video.screen.rows - 1
+    mov     ecx,        $XEOS.video.screen.cols
+    mul     ecx
+    
+    ; Stores the result in ECX, so we can loop
+    mov     ecx,        eax
+    
+    ; Moves the characters one line up
+    .scroll
+        
+        ; Writes the character on the next line (same X position) to the current
+        ; position
+        mov     ax,         WORD [ edi + ( $XEOS.video.screen.cols * 2 ) ]
+        mov     [ edi ]     WORD ax
+        
+        ; Next character can now be processed
+        add     edi,        BYTE 2
+        
+        ; Continues moving character till we reached the last line
+        loop    .scroll
+    
+    ; Now we have to clear the last line
+    mov     ecx,        $XEOS.video.screen.cols
+    
+    ; Clears a character on the screen
+    .clear:
+        
+        ; Space character (ASCII 32)
+        mov     al,         0x20
+        
+        ; Current character attribute
+        mov     ah,         BYTE [ XEOS.video.attribute ]
+        
+        ; Clears the current character by writing a space
+        mov     [ edi ]     WORD ax
+        
+        ; Next character can now be processed
+        add     edi,        BYTE 2
+        
+        ; Continues clearing till we reached the end of the screen
+        loop    .clear
+        
+    @XEOS.reg.restore
+    
+    ; Updates the cursor position, as we now have an available line
+    dec     BYTE [ XEOS.video.cursor.y ]
     
     ret
 
