@@ -60,8 +60,6 @@ jmp     XEOS.kernel
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.ASM"       ; General macros
-%include "ASCII.ASM"        ; ASCII table
 %include "VIDEO.ASM"        ; XEOS video services
 
 ; We are in 32 bits mode
