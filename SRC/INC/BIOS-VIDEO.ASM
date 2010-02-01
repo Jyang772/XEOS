@@ -187,8 +187,8 @@ BIOS.video.print:
         ; End of the string detected
         je      .done
         
-    ; Calls the BIOS video services
-    $BIOS.int.video
+        ; Calls the BIOS video services
+        $BIOS.int.video
         
         ; Process the next byte from the string
         jmp     .repeat

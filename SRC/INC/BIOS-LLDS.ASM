@@ -59,7 +59,7 @@ BIOS.llds.resetFloppyDrive:
     .start:
     
     ; Floppy reset (BIOS low level disk services function)
-    mov     ax,         0
+    xor     ax,         ax
     
     ; Drive number
     mov dl,             $XEOS.mbr.driveNumber

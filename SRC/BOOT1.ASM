@@ -131,9 +131,6 @@ XEOS.boot.stage1:
     ; Restores the interrupts
     sti
     
-    ; Saves the boot device number
-    mov     dl,         $XEOS.mbr.driveNumber
-    
     ; Prints the greeting
     @BIOS.video.print   XEOS.boot.stage1.greet
     
@@ -187,7 +184,7 @@ XEOS.boot.stage1:
 ; Strings
 XEOS.files.stage2           db  'BOOT2   BIN'
 XEOS.boot.stage1.greet      db  $ASCII.NL,\
-                                'XEOS boot...',\
+                                'XEOS BOOT',\
                                 $ASCII.NL, $ASCII.NUL
 
 ;-------------------------------------------------------------------------------

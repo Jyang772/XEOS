@@ -288,7 +288,7 @@ XEOS.io.fat12.findFile:
     mov     cx,         WORD $XEOS.mbr.maxRootDirEntries
     
     ; We are going to loop through the root directory entries to find the name
-    ; of the second stage bootloader file
+    ; of the file
     .readRootDirectoryLoop:
     
     ; Saves the loop counter
@@ -303,7 +303,7 @@ XEOS.io.fat12.findFile:
     ; Saves the memory address in which the root directory was loaded
     push    di
     
-    ; Tries to find the name of the second stage bootloader
+    ; Tries to find the name of the file
     rep     cmpsb
     
     ; Restores the address of the data we are reading
@@ -324,13 +324,13 @@ XEOS.io.fat12.findFile:
     ; Reads the next entry
     loop    .readRootDirectoryLoop
     
-    ; The second stage bootloader was not found - Issues a fatal error
+    ; The file was not found - Issues a fatal error
     call    XEOS.error.fatal
     
     .found
     
-    ; Saves the first cluster of the second stage bootloader (first cluster
-    ; is located at location 0x1A of a root directory entry)
+    ; Saves the first cluster of the file (first cluster is located at location
+    ; 0x1A of a root directory entry)
     mov     ax,         WORD [ di + 0x1A ]
     mov     WORD [ XEOS.io.fat12.firstDataCluster ],    ax 
     
@@ -389,10 +389,11 @@ XEOS.io.fat12.loadFile:
     ; Saves the value of BX
     push    bx
     
-    ; Time to load the second stage bootloader into memory
-    .loadSecondStageFile:
+    mov     [ XEOS.io.fat12.fileSectors ],  WORD 0
     
-    ; We are going to read from the first cluster of the second stage bootloader
+    .read:
+    
+    ; We are going to read from the first cluster of the file
     mov     ax,         WORD [ XEOS.io.fat12.firstDataCluster ]
     
     ; Restores the offset of the read operation
@@ -406,9 +407,10 @@ XEOS.io.fat12.loadFile:
     xor     cx,         cx
     mov     cl, BYTE $XEOS.mbr.sectorsPerCluster
     
-    ; Reads the necessary sectors to load the second stage bootloader into
-    ; memory
+    ; Reads the necessary sectors to load the file into memory
     call    XEOS.io.fat12.readSectors
+    
+    inc     WORD [ XEOS.io.fat12.fileSectors ]
     
     ; Saves the offset of the read operation
     push    bx
@@ -444,7 +446,7 @@ XEOS.io.fat12.loadFile:
     cmp     dx,         0x0FF0
     
     ; Continues loading the file, as there is still data to read
-    jb      .loadSecondStageFile
+    jb      .read
     
     ; The value of BX is still on the stack, but we don't need it anymore
     pop     bx
@@ -467,5 +469,8 @@ XEOS.io.fat12.rootDirectoryStart    dw  0
 
 ; Storage for the XEOS.io.fat12.findFile procedure
 XEOS.io.fat12.firstDataCluster      dw  0
+
+; Storage for the XEOS.io.fat12.loadFile procedure
+XEOS.io.fat12.fileSectors           dw  0
 
 %endif
