@@ -68,6 +68,9 @@ BITS    16
 ; Jumps to the effective code section
 jmp     XEOS.boot.stage2
 
+; Location at which we were loaded by the first stage bootloader (0x50:0)
+ORG 0x500
+
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
@@ -104,14 +107,14 @@ XEOS.boot.stage2:
     
     ; Sets the data and extra segments to where we were loaded by the first
     ; stage bootloader (0x50), so we don't have to add 0x50 to all our data
-    mov     ax,         0x50
+    xor     ax,         ax
     mov     ds,         ax
     mov     es,         ax
     
-    ; Sets up 4KB of stack space
+    ; Sets up the stack space
     xor     ax,         ax
     mov     ss,         ax
-    mov     sp,         0x1000
+    mov     sp,         0xFFFF
     
     ; Restores the interrupts
     sti

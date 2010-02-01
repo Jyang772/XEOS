@@ -123,10 +123,10 @@ XEOS.boot.stage1:
     mov     ds,         ax
     mov     es,         ax
     
-    ; Sets up 4KB of stack space
+    ; Sets up the of stack space
     xor     ax,         ax
     mov     ss,         ax
-    mov     sp,         0x1000
+    mov     sp,         0xFFFF
     
     ; Restores the interrupts
     sti
