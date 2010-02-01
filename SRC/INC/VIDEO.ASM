@@ -315,7 +315,77 @@ XEOS.video.print:
     
     @XEOS.reg.save
     
+    ; Process a byte from the string
+    .repeat:
+        
+        ; Checks if we have reached the maximum width
+        cmp     [ XEOS.video.cursor.x ], BYTE $XEOS.video.screen.cols
+        
+        ; No - we can print a character
+        jne     .colAvailable
+        
+        ; Increases the Y position and resets X
+        inc     BYTE [ XEOS.video.cursor.y ]
+        mov     [ XEOS.video.cursor.x ],    BYTE 0
+        
+        ; A free column is now available for display
+        .colAvailable:
+        
+        ; Checks if we have reached the maximum height
+        cmp     [ XEOS.video.cursor.y ], BYTE $XEOS.video.screen.rows
+        
+        ; No - We can print a character
+        jne     .rowAvailable
+        
+        ; Scrolls the screen
+        call    XEOS.video.scroll
+        
+        .rowAvailable:
+        
+        ; Gets the current cursor position
+        @XEOS.video._private.currentPosition
+        
+        ; Current character attribute
+        mov     ah,         [ XEOS.video.attribute ]
+        
+        ; Gets a byte from the string placed in SI (will be placed in AL)
+        lodsb
+        
+        ; Checks for the end of the string (ASCII 0)
+        cmp     al,         0
+        je      .done
+        
+        cmp     al,         10
+        je      .lineFeed
+        
+        cmp     al,         13
+        je      .carriageReturn
+        
+        ; Prints the current character
+        mov	    [ edi ],        WORD ax
+        
+        ; Moves the cursor
+        inc BYTE [ XEOS.video.cursor.x ]
+        
+        ; Process the next byte from the string
+        jmp     .repeat
+        
+    ; ASCII 10 - LF
+    .lineFeed:
+        
+        ; Updates the cursor position
+        inc BYTE [ XEOS.video.cursor.y ]
+        jmp     .repeat
+        
+    ; ASCII 13 - CR
+    .carriageReturn:
+        
+        ; Updates the cursor position
+        mov     [ XEOS.video.cursor.x ], BYTE 0
+        jmp     .repeat
     
+    ; End of the string
+    .done:
     
     @XEOS.reg.restore
     
