@@ -51,5 +51,31 @@
 ;       - yasm -f bin -o [boot.flp] [boot.asm]
 ;-------------------------------------------------------------------------------
 
-; Infinite loop
-jmp     $
+; We are now in 32 bits protected mode
+BITS    32
+
+; Location at which we were loaded by the secod stage bootloader (0x1000)
+ORG 0x1000
+
+; Jumps to the effective code section
+jmp     XEOS.kernel
+
+;-------------------------------------------------------------------------------
+; Includes
+;-------------------------------------------------------------------------------
+%include "MACROS.ASM"       ; General macros
+%include "ASCII.ASM"        ; ASCII table
+%include "VIDEO.ASM"        ; XEOS video services
+
+;-------------------------------------------------------------------------------
+; Second stage bootloader
+; 
+; The main XEOS bootloader, which is responsible to load the kernel.
+;-------------------------------------------------------------------------------
+XEOS.kernel:
+    
+    ; Clears the screen
+    call    XEOS.video.clear
+    
+    ; Infinite loop
+    jmp     $
