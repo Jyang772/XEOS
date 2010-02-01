@@ -86,6 +86,13 @@ BITS    16
 ;-------------------------------------------------------------------------------
 %include "MACROS.ASM"       ; General macros
 
+;-------------------------------------------------------------------------------
+; Addresses of the descriptors
+;-------------------------------------------------------------------------------
+%define $XEOS.gdt.descriptors.null  0x00
+%define $XEOS.gdt.descriptors.code  0x08
+%define $XEOS.gdt.descriptors.data  0x10
+
 ; GDT start address
 XEOS.gdt.start:
 
