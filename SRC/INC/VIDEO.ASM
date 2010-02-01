@@ -204,7 +204,7 @@
 %endmacro
 
 ;-------------------------------------------------------------------------------
-; Clears the screen using the current character attrinute
+; Clears the screen using the current character attribute
 ;-------------------------------------------------------------------------------
 XEOS.video.clear:
     
