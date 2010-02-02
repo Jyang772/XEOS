@@ -228,6 +228,18 @@ BITS    32
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Prints a string
+; 
+; Parameter 1:  The address of the string to print
+;-------------------------------------------------------------------------------
+%macro @XEOS.video.print  1
+    
+    mov     si,     %1
+    call    XEOS.video.print
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
 ; Clears the screen using the current character attribute
 ;-------------------------------------------------------------------------------
 XEOS.video.clear:
