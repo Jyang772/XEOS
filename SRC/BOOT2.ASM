@@ -220,7 +220,9 @@ XEOS.boot.stage2:
     ; We are now in 32 bits realmode
     %undef  $XEOS.cpu.realMode
     
-    ; We are doing a far jump using our code descriptor, so CS is fixed
+    ; We are doing a far jump using our code descriptor
+    ; 
+    ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
     jmp	    $XEOS.gdt.descriptors.code:.kernelSetup
 
 ; We are now in 32 bits mode
