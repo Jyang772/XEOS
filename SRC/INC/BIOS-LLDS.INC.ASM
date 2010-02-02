@@ -41,10 +41,10 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.ASM"    ; General constants
-%include "MACROS.ASM"       ; General macros
-%include "BIOS-INT.ASM"     ; BIOS interrupts
-%include "ERROR.ASM"        ; Error management
+%include "CONSTANTS.INC.ASM"    ; General constants
+%include "MACROS.INC.ASM"       ; General macros
+%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
+%include "ERROR.INC.ASM"        ; Error management
 
 ; We are in 16 bits mode
 BITS    16

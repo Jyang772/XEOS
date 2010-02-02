@@ -65,16 +65,16 @@ jmp     XEOS.boot.stage2
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.ASM"    ; General constants
-%include "MACROS.ASM"       ; General macros
-%include "BIOS-INT.ASM"     ; BIOS interrupts
-%include "BIOS-VIDEO.ASM"   ; BIOS video services
-%include "BIOS-LLDS.ASM"    ; BIOS low-level disk services
-%include "IO-FAT12.ASM"     ; FAT-12 IO procedures
-%include "ASCII.ASM"        ; ASCII table
-%include "GDT.ASM"          ; GDT - Global Descriptor Table
-%include "A20.ASM"          ; 20th address line enabling
-%include "VIDEO.ASM"        ; XEOS video services
+%include "CONSTANTS.INC.ASM"    ; General constants
+%include "MACROS.INC.ASM"       ; General macros
+%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
+%include "BIOS-VIDEO.INC.ASM"   ; BIOS video services
+%include "BIOS-LLDS.INC.ASM"    ; BIOS low-level disk services
+%include "IO-FAT12.INC.ASM"     ; FAT-12 IO procedures
+%include "ASCII.INC.ASM"        ; ASCII table
+%include "GDT.INC.ASM"          ; GDT - Global Descriptor Table
+%include "A20.INC.ASM"          ; 20th address line enabling
+%include "VIDEO.INC.ASM"        ; XEOS video services
 
 ; We are in 16 bits mode
 BITS    16

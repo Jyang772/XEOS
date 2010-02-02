@@ -40,10 +40,10 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.ASM"    ; General constants
-%include "BIOS-INT.ASM"     ; BIOS interrupts
-%include "BIOS-VIDEO.ASM"   ; BIOS video services
-%include "ASCII.ASM"        ; ASCII table
+%include "CONSTANTS.INC.ASM"    ; General constants
+%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
+%include "BIOS-VIDEO.INC.ASM"   ; BIOS video services
+%include "ASCII.INC.ASM"        ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16

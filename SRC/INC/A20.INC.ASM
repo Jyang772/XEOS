@@ -55,10 +55,10 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.ASM"       ; General macros
-%include "BIOS-INT.ASM"     ; BIOS interrupts
-%include "BIOS-VIDEO.ASM"   ; BIOS video services
-%include "ERROR.ASM"        ; Error management
+%include "MACROS.INC.ASM"       ; General macros
+%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
+%include "BIOS-VIDEO.INC.ASM"   ; BIOS video services
+%include "ERROR.INC.ASM"        ; Error management
 
 ; We are in 16 bits mode
 BITS    16

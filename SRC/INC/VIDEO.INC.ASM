@@ -45,7 +45,7 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.ASM"       ; General macros
+%include "MACROS.INC.ASM"       ; General macros
 
 ; We are in 32 bits mode
 BITS    32
