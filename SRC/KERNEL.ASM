@@ -64,16 +64,35 @@ jmp     XEOS.kernel
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "VIDEO.INC.32.ASM"         ; XEOS video services
+%include "ASCII.INC.ASM"            ; ASCII table
+%include "GDT.INC.ASM"              ; GDT - Global Descriptor Table
 
 ;-------------------------------------------------------------------------------
-; Second stage bootloader
-; 
-; The main XEOS bootloader, which is responsible to load the kernel.
+; XEOS kernel
 ;-------------------------------------------------------------------------------
 XEOS.kernel:
+    
+    ; Sets the data segments
+    mov     ax,         $XEOS.gdt.descriptors.data
+    mov     ds,         ax
+    mov     es,         ax
+    
+    ; Sets up the stack space
+    mov     ss,         ax
+    mov     esp,        0x90000
     
     ; Clears the screen
     call    XEOS.video.clear
     
+    ; Hello kernel message : )
+    mov     si,         XEOS.kernel.hello
+    call    XEOS.video.print
+    
     ; Infinite loop
     jmp     $
+
+;-------------------------------------------------------------------------------
+; Variables definition
+;-------------------------------------------------------------------------------
+
+XEOS.kernel.hello               db  'Hello world from the XEOS kernel!', $ASCII.NUL
