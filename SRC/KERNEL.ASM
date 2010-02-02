@@ -66,6 +66,7 @@ jmp     XEOS.kernel
 %include "VIDEO.INC.32.ASM"         ; XEOS video services
 %include "ASCII.INC.ASM"            ; ASCII table
 %include "GDT.INC.ASM"              ; GDT - Global Descriptor Table
+%include "SMBIOS.INC.32.ASM"        ; SMBIOS
 
 ; Prints a new line with a message, prefixed by the prompt
 %macro @XEOS.kernel.print 1
@@ -100,16 +101,32 @@ XEOS.kernel:
     @XEOS.kernel.print  XEOS.kernel.greet
     @XEOS.kernel.print  XEOS.kernel.revision
     @XEOS.kernel.print  XEOS.kernel.date
+    @XEOS.kernel.print  XEOS.kernel.smbios.search
+    
+    ; Tries to find the SMBIOS table
+    call    XEOS.smbios.find
+    
+    ; Checks if the table was found
+    cmp     ax,         0
+    
+    ; If yes, we can continue and display the SMBIOS informations
+    jg      .displaySmbiosInfos
+    
+    ; SMBIOS not found - Issues a fatal error
+    
+    ; Displays the SMBIOS informations
+    .displaySmbiosInfos:
     
     ; Infinite loop
     jmp     $
-
+    
 ;-------------------------------------------------------------------------------
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
 XEOS.kernel.nl                  db   $ASCII.NL,  $ASCII.NUL         
 XEOS.kernel.prompt              db  '<XEOS>: ', $ASCII.NUL
+XEOS.kernel.smbios.search       db  'Locating the SMBIOS table...', $ASCII.NUL
 XEOS.kernel.greet               db  'Entering the XEOS kernel...', $ASCII.NUL
 XEOS.kernel.revision            db  '$Revision$', $ASCII.NUL
 XEOS.kernel.date                db  '$Date$', $ASCII.NUL
