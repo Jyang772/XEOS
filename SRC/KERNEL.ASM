@@ -98,6 +98,8 @@ XEOS.kernel:
     
     ; Kernel message
     @XEOS.kernel.print  XEOS.kernel.greet
+    @XEOS.kernel.print  XEOS.kernel.revision
+    @XEOS.kernel.print  XEOS.kernel.date
     
     ; Infinite loop
     jmp     $
@@ -109,6 +111,8 @@ XEOS.kernel:
 XEOS.kernel.nl                  db   $ASCII.NL,  $ASCII.NUL         
 XEOS.kernel.prompt              db  '<XEOS>: ', $ASCII.NUL
 XEOS.kernel.greet               db  'Entering the XEOS kernel...', $ASCII.NUL
+XEOS.kernel.revision            db  '$Revision$', $ASCII.NUL
+XEOS.kernel.date                db  '$Date$', $ASCII.NUL
 XEOS.kernel.logo                db  $ASCII.NL,\
                                     '    ------------------------------------------------------------------------   ', $ASCII.NL,\
                                     '                                                                               ', $ASCII.NL,\
