@@ -66,6 +66,7 @@ jmp     XEOS.kernel
 %include "VIDEO.INC.32.ASM"         ; XEOS video services
 %include "ASCII.INC.ASM"            ; ASCII table
 %include "GDT.INC.ASM"              ; GDT - Global Descriptor Table
+%include "ERROR.INC.32.ASM"         ; Error management
 %include "SMBIOS.INC.32.ASM"        ; SMBIOS
 
 ; Prints a new line with a message, prefixed by the prompt
@@ -113,6 +114,7 @@ XEOS.kernel:
     jg      .displaySmbiosInfos
     
     ; SMBIOS not found - Issues a fatal error
+    @XEOS.error.fatal XEOS.kernel.smbios.error
     
     ; Displays the SMBIOS informations
     .displaySmbiosInfos:
@@ -127,6 +129,7 @@ XEOS.kernel:
 XEOS.kernel.nl                  db   $ASCII.NL,  $ASCII.NUL         
 XEOS.kernel.prompt              db  '<XEOS>: ', $ASCII.NUL
 XEOS.kernel.smbios.search       db  'Locating the SMBIOS table...', $ASCII.NUL
+XEOS.kernel.smbios.error        db  'Unable to locate the SMBIOS table.', $ASCII.NUL
 XEOS.kernel.greet               db  'Entering the XEOS kernel...', $ASCII.NUL
 XEOS.kernel.revision            db  '$Revision$', $ASCII.NUL
 XEOS.kernel.date                db  '$Date$', $ASCII.NUL
