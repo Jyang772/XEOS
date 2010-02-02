@@ -62,16 +62,82 @@ XEOS.smbios.find:
     
     @XEOS.reg.save
     
+    ; String to look for (SMBIOS signature)
+    mov     edi,        XEOS.smbios.anchor
     
+    ; Start of the memory location we need to scan
+    mov     esi,        [ XEOS.smbios.memory.start ]
     
-    @XEOS.reg.restore
+    ; Computes the ammount of memory we need to scan
+    xor     ecx,        ecx
+    mov     eax,        [ XEOS.smbios.memory.end ]
+    sub     eax,        [ XEOS.smbios.memory.start ]
     
-    ret
+    ; Divides by 4, as we will read by 4 bytes
+    mov     ebx,        4
+    div     ebx
+    
+    ; Stores the amount of memory to scan in ECX, so we can loop
+    xchg    ecx,        eax
+    
+    ; Now, let's scan the memory for the SMBIOS signature
+    .loop
+        
+        ; Saves the loop counter
+        push    ecx
+        
+        ; SMBIOS signature is 4 bytes
+        mov     ecx,        4
+        
+        ; Saves ESI and EDI
+        push    esi
+        push    edi
+        
+        ; Compares the memory bytes with the SMBIOS signature
+        rep     cmpsb
+        
+        ; Restores ESI and EDI
+        pop     edi
+        pop     esi
+        pop     ecx
+        
+        ; SMBIOS signature found
+        je      .found
+        
+        ; We are going to read the next 4 bytes
+        add     esi,        4
+        
+        ; Continues scanning the memory
+        loop    .loop
+        
+    .notFound
+        
+        @XEOS.reg.restore
+        
+        ; Result code - SMBIOS table was not found
+        xor     eax,        eax
+        
+        ret
+        
+    .found
+        
+        ; Stores the memory location of the SMBIOS table
+        mov     [ XEOS.smbios.table ],  esi
+        
+        @XEOS.reg.restore
+        
+        ; Result code - SMBIOS table was found
+        mov     eax,        1
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; Variables
 ;-------------------------------------------------------------------------------
 
-
+XEOS.smbios.anchor          db  0x5F, 0x53, 0x4D, 0x5F
+XEOS.smbios.memory.start    dd  0x000F0000
+XEOS.smbios.memory.end      dd  0x000FFFFF
+XEOS.smbios.table           dd  0
 
 %endif
