@@ -33,6 +33,8 @@
 
 ;-------------------------------------------------------------------------------
 ; Defines, macros and procedures for the BIOS low-level disk services
+; 
+; Those procedures and macros are intended to be used only in 16 bits read mode.
 ;-------------------------------------------------------------------------------
 
 %ifndef __BIOS_LLDS_INC_16_ASM__

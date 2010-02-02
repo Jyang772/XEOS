@@ -33,6 +33,8 @@
 
 ;-------------------------------------------------------------------------------
 ; Error management
+; 
+; Those procedures and macros are intended to be used only in 16 bits read mode.
 ;-------------------------------------------------------------------------------
 %ifndef __ERROR_INC_16_ASM__
 %define __ERROR_INC_16_ASM__

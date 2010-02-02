@@ -33,6 +33,8 @@
 
 ;-------------------------------------------------------------------------------
 ; Defines, macros and procedures for the BIOS video services
+; 
+; Those procedures and macros are intended to be used only in 16 bits read mode.
 ;-------------------------------------------------------------------------------
 
 %ifndef __BIOS_VIDEO_INC_16_ASM__

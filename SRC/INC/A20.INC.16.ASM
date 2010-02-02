@@ -47,6 +47,8 @@
 ; Several ways of enabling the 20th address lines are available, but some of
 ; them are specific to some BIOS. The most portable way is to enable A20
 ; through the keyboard controller.
+; 
+; Those procedures and macros are intended to be used only in 16 bits read mode.
 ;-------------------------------------------------------------------------------
 
 %ifndef __A20_INC_16_ASM__
