@@ -63,7 +63,7 @@
 %include "ERROR.INC.16.ASM"         ; Error management
 
 ; We are in 16 bits mode
-BITS    16
+;BITS    16
 
 ;-------------------------------------------------------------------------------
 ; Enables A20 through the system control port
@@ -96,7 +96,7 @@ XEOS.a20.enable.bios:
     $BIOS.int.misc
     
     ; Checks for an error
-    jnc     .success
+    jc     .success
     
     ; Prints the error message
     @BIOS.video.print   XEOS.a20.enable.bios.error
@@ -151,8 +151,8 @@ XEOS.a20.enable.bios:
     ; Prints the confirmation message
     @BIOS.video.print   XEOS.a20.enable.bios.fallback.keyboardOut
     
-    ; Enables A20 through the keyboard controller
-    call    XEOS.a20.enable.keyboard.control
+    ; Enables A20 through the keyboard out port
+    call    XEOS.a20.enable.keyboard.out
     je      .success
     
     ; Fallback - A-20 will be enabled through the keyboard control port
@@ -216,7 +216,7 @@ XEOS.a20.enable.keyboard.control:
     mov	    al,         0xDD
     
     ; Sends the command to the keyboard control port
-    out	    0x64,       al
+    out     0x64,       al
     
     @XEOS.reg.restore
     
