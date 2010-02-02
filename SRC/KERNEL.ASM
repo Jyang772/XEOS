@@ -67,6 +67,15 @@ jmp     XEOS.kernel
 %include "ASCII.INC.ASM"            ; ASCII table
 %include "GDT.INC.ASM"              ; GDT - Global Descriptor Table
 
+; Prints a new line with a message, prefixed by the prompt
+%macro @XEOS.kernel.print 1
+    
+    @XEOS.video.print    XEOS.kernel.prompt
+    @XEOS.video.print    %1
+    @XEOS.video.print    XEOS.kernel.nl
+    
+%endmacro
+
 ;-------------------------------------------------------------------------------
 ; XEOS kernel
 ;-------------------------------------------------------------------------------
@@ -84,9 +93,11 @@ XEOS.kernel:
     ; Clears the screen
     call    XEOS.video.clear
     
-    ; Hello kernel message : )
-    mov     si,         XEOS.kernel.hello
-    call    XEOS.video.print
+    ; Kernel logo
+    @XEOS.video.print   XEOS.kernel.logo
+    
+    ; Kernel message
+    @XEOS.kernel.print  XEOS.kernel.greet
     
     ; Infinite loop
     jmp     $
@@ -95,4 +106,24 @@ XEOS.kernel:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.kernel.hello               db  'Hello world from the XEOS kernel!', $ASCII.NUL
+XEOS.kernel.nl                  db   $ASCII.NL,  $ASCII.NUL         
+XEOS.kernel.prompt              db  '<XEOS>: ', $ASCII.NUL
+XEOS.kernel.greet               db  'Entering the XEOS kernel...', $ASCII.NUL
+XEOS.kernel.logo                db  $ASCII.NL,\
+                                    '    ------------------------------------------------------------------------   ', $ASCII.NL,\
+                                    '                                                                               ', $ASCII.NL,\
+                                    '           00000     00000  00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
+                                    '            00000   00000   00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
+                                    '              000000000     000          000       000  000                    ', $ASCII.NL,\
+                                    '               0000000      00000000000  000       000  0000000000000          ', $ASCII.NL,\
+                                    '              000000000     000          000       000            000          ', $ASCII.NL,\
+                                    '            00000   00000   00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
+                                    '           00000     00000  00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
+                                    '                                                                               ', $ASCII.NL,\
+                                    '                    XEOS - x86 Experimental Operating System                   ', $ASCII.NL,\
+                                    '                                                                               ', $ASCII.NL,\
+                                    '          Copyright (C) 2010 Jean-David Gadina (macmade0eosgarden.com)         ', $ASCII.NL,\
+                                    '                         All rights (& wrongs) reserved                        ', $ASCII.NL,\
+                                    '                                                                               ', $ASCII.NL,\
+                                    '    ------------------------------------------------------------------------   ', $ASCII.NL,\
+                                    $ASCII.NL, $ASCII.NUL
