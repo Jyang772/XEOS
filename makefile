@@ -37,6 +37,15 @@
 DEBUG           = 1
 
 #-------------------------------------------------------------------------------
+# Emulation
+#-------------------------------------------------------------------------------
+
+CPU             = 486
+RAM             = 16
+VGA             = std
+SMP             = 1
+
+#-------------------------------------------------------------------------------
 # Software
 #-------------------------------------------------------------------------------
 
@@ -47,6 +56,7 @@ DD              = dd
 MOUNT           = sudo mount
 UMOUNT          = sudo umount
 HDID            = hdid
+EMU             = /usr/local/macmade/sw/qemu/bin/qemu
 
 #-------------------------------------------------------------------------------
 # Software arguments
@@ -58,6 +68,7 @@ ARGS_RM         = -rf
 ARGS_DD         = conv=notrunc
 ARGS_MOUNT      = -t msdos
 ARGS_HDID       = -nobrowse -nomount
+ARGS_EMU        = -smbios type=1 -boot order=a -M pc -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM)
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -137,6 +148,12 @@ _FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
 # Build the full project
 all: _build_setup $(_FILES_BIN_BUILD) _mbr _mount _copy _umount
 	
+# Tests the OS by launching the emulator
+test:
+	@echo "    *** Launching the emulator"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(EMU) $(ARGS_EMU) -fda $(FLOPPY_OUT))
+	@$(EMU) $(ARGS_EMU) -fda $(FLOPPY_OUT)
+
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
