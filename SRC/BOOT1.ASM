@@ -110,9 +110,6 @@ XEOS.boot.stage1:
     %include "BIOS-LLDS.INC.16.ASM"     ; BIOS low-level disk services
     %include "ASCII.INC.ASM"            ; ASCII table
     
-    ; Redefines we are in 16 bits mode (as we've include files)
-    BITS    16
-    
     ; We are redefining 'XEOS.boot.stage1', as the include files are declaring
     ; global procedures
     XEOS.boot.stage1.start:

@@ -59,6 +59,9 @@
 ; Location at which we were loaded by the first stage bootloader (0x50:0)
 ORG     0x500
 
+; We are in 16 bits mode
+BITS    16
+
 ; Jumps to the effective code section
 jmp     XEOS.boot.stage2
 
@@ -74,10 +77,6 @@ jmp     XEOS.boot.stage2
 %include "ASCII.INC.ASM"            ; ASCII table
 %include "GDT.INC.ASM"              ; GDT - Global Descriptor Table
 %include "A20.INC.16.ASM"           ; 20th address line enabling
-%include "VIDEO.INC.32.ASM"         ; XEOS video services
-
-; We are in 16 bits mode
-BITS    16
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
