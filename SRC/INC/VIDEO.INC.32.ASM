@@ -46,6 +46,7 @@
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "MACROS.INC.ASM"           ; General macros
+%include "CRT-CONTROLLER.INC.ASM"   ; CRT microcontroller
 
 ; We are in 32 bits mode
 BITS    32
@@ -207,6 +208,26 @@ BITS    32
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+%macro @XEOS.video.cursor.move 2
+    
+    ; Saves BX as we are going to alter it
+    push    bx
+    
+    ; Stores the X and Y positions in BX
+    mov     bh,         %1
+    mov     bl,         %2
+    
+    ; Moves the cursor position
+    call    XEOS.video.cursor.move
+    
+    ; Restores BX
+    pop     bx
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
 ; Clears the screen using the current character attribute
 ;-------------------------------------------------------------------------------
 XEOS.video.clear:
@@ -245,6 +266,9 @@ XEOS.video.clear:
     ; Update the cursor position
     mov     [ XEOS.video.cursor.x ],    BYTE 0
     mov     [ XEOS.video.cursor.y ],    BYTE 0
+    
+    ; Updates the hardware cursor
+    call    XEOS.video.cursor.update
     
     @XEOS.reg.restore
     
@@ -314,11 +338,71 @@ XEOS.video.scroll:
 ;-------------------------------------------------------------------------------
 ; 
 ;-------------------------------------------------------------------------------
+XEOS.video.cursor.move:
+    
+    @XEOS.reg.save
+    
+    ; First, we need to compute the new cursor location:
+    ; 
+    ;       cursor location = x + ( y * screen width )
+    .newPosition:
+    
+    ; Resets CX
+    xor     eax,        eax
+    
+    ; Number of available columns
+    mov     ecx,        $XEOS.video.screen.cols
+    
+    ; New Y posotion
+    mov     al,         bl
+    
+    ; Multiplies Y by the number of columns
+    mul     ecx
+    
+    ; Adds the X position
+    add     al,         bh
+    
+    ; Stores the new cursor posotion in EBX
+    mov     ebx,        eax
+    
+    ; Tells the CRT microcontroller we are going to change to high byte for
+    ; the cursor location
+    mov     al,         $XEOS.crt.controller.cursorLocationHigh
+    mov     dx,         $XEOS.crt.controller.registers.data
+    out     dx,         al
+    
+    ; Writes the new high byte value for the cursor location
+    mov     al,         bh
+    mov     dx,         $XEOS.crt.controller.registers.index
+    out     dx,         al
+    
+    ; Tells the CRT microcontroller we are going to change to low byte for
+    ; the cursor location
+    mov     al,         $XEOS.crt.controller.cursorLocationLow
+    mov     dx,         $XEOS.crt.controller.registers.data
+    out     dx,         al
+    
+    ; Writes the new low byte value for the cursor location
+    mov     al,         bl
+    mov     dx,         $XEOS.crt.controller.registers.index
+    out     dx,         al
+    
+    @XEOS.reg.restore
+    
+    ret
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
 XEOS.video.cursor.update:
     
     @XEOS.reg.save
     
+    ; Current cursor position
+    mov     bh,         [ XEOS.video.cursor.x ]
+    mov     bl,         [ XEOS.video.cursor.y ]
     
+    ; Moves the cursor to the current position
+    call    XEOS.video.cursor.move
     
     @XEOS.reg.restore
     
@@ -402,6 +486,9 @@ XEOS.video.print:
     
     ; End of the string
     .done:
+    
+    ; Updates the hardware cursor
+    call    XEOS.video.cursor.update
     
     @XEOS.reg.restore
     

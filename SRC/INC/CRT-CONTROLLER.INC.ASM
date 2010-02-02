@@ -43,8 +43,8 @@
 ;-------------------------------------------------------------------------------
 
 ; Location of the video memory
-%define $XEOS.crt.controller.registers.index                0x03D5
 %define $XEOS.crt.controller.registers.data                 0x03D4
+%define $XEOS.crt.controller.registers.index                0x03D5
 
 ; Indices for the index register
 %define $XEOS.crt.controller.horizontalTotal                0x0000
