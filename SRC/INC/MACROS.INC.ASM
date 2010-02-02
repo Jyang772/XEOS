@@ -34,8 +34,8 @@
 ;-------------------------------------------------------------------------------
 ; General purpose macros
 ;-------------------------------------------------------------------------------
-%ifndef MACROS_ASM
-%define MACROS_ASM
+%ifndef __MACROS_INC_ASM__
+%define __MACROS_INC_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Saves the values of the AX, BX, CX and DX registers in the stack

@@ -34,18 +34,18 @@
 ;-------------------------------------------------------------------------------
 ; IO procedures
 ;-------------------------------------------------------------------------------
-%ifndef IO_ASM
-%define IO_ASM
+%ifndef __IO_FAT12_INC_16_ASM__
+%define __IO_FAT12_INC_16_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.INC.ASM"    ; General constants
-%include "MACROS.INC.ASM"       ; General macros
-%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
-%include "ERROR.INC.ASM"        ; Error management
-%include "ASCII.INC.ASM"        ; ASCII table
-%include "BIOS-LLDS.INC.ASM"    ; BIOS low-level disk services
+%include "CONSTANTS.INC.ASM"        ; General constants
+%include "MACROS.INC.ASM"           ; General macros
+%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
+%include "ERROR.INC.16.ASM"         ; Error management
+%include "ASCII.INC.ASM"            ; ASCII table
+%include "BIOS-LLDS.INC.16.ASM"     ; BIOS low-level disk services
 
 ; We are in 16 bits mode
 BITS    16

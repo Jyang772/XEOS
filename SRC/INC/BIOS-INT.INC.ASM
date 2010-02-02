@@ -35,8 +35,8 @@
 ; BIOS interrupts
 ;-------------------------------------------------------------------------------
 
-%ifndef BIOS_INT_ASM
-%define BIOS_INT_ASM
+%ifndef __BIOS_INT_INC_ASM__
+%define __BIOS_INT_INC_ASM__
 
 ; BIOS services
 %define $BIOS.int.printScreen   int 0x05

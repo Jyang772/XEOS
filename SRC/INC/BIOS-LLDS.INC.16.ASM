@@ -35,16 +35,16 @@
 ; Defines, macros and procedures for the BIOS low-level disk services
 ;-------------------------------------------------------------------------------
 
-%ifndef BIOS_LLDS_ASM
-%define BIOS_LLDS_ASM
+%ifndef __BIOS_LLDS_INC_16_ASM__
+%define __BIOS_LLDS_INC_16_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.INC.ASM"    ; General constants
-%include "MACROS.INC.ASM"       ; General macros
-%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
-%include "ERROR.INC.ASM"        ; Error management
+%include "CONSTANTS.INC.ASM"        ; General constants
+%include "MACROS.INC.ASM"           ; General macros
+%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
+%include "ERROR.INC.16.ASM"         ; Error management
 
 ; We are in 16 bits mode
 BITS    16

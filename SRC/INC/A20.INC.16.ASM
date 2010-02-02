@@ -49,16 +49,16 @@
 ; through the keyboard controller.
 ;-------------------------------------------------------------------------------
 
-%ifndef A20_ASM
-%define A20_ASM
+%ifndef __A20_INC_16_ASM__
+%define __A20_INC_16_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.INC.ASM"       ; General macros
-%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
-%include "BIOS-VIDEO.INC.ASM"   ; BIOS video services
-%include "ERROR.INC.ASM"        ; Error management
+%include "MACROS.INC.ASM"           ; General macros
+%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
+%include "BIOS-VIDEO.INC.16.ASM"    ; BIOS video services
+%include "ERROR.INC.16.ASM"         ; Error management
 
 ; We are in 16 bits mode
 BITS    16

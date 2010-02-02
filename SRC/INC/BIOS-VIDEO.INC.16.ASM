@@ -35,14 +35,14 @@
 ; Defines, macros and procedures for the BIOS video services
 ;-------------------------------------------------------------------------------
 
-%ifndef BIOS_VIDEO_ASM
-%define BIOS_VIDEO_ASM
+%ifndef __BIOS_VIDEO_INC_16_ASM__
+%define __BIOS_VIDEO_INC_16_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.INC.ASM"       ; General macros
-%include "BIOS-INT.INC.ASM"     ; BIOS interrupts
+%include "MACROS.INC.ASM"           ; General macros
+%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
 
 ; We are in 16 bits mode
 BITS    16

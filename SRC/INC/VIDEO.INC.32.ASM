@@ -39,13 +39,13 @@
 ; 'BIOS-VIDEO.ASM' file.
 ;-------------------------------------------------------------------------------
 
-%ifndef VIDEO_ASM
-%define VIDEO_ASM
+%ifndef __VIDEO_INC_32_ASM__
+%define __VIDEO_INC_32_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.INC.ASM"       ; General macros
+%include "MACROS.INC.ASM"           ; General macros
 
 ; We are in 32 bits mode
 BITS    32
