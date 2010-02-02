@@ -115,19 +115,19 @@ XEOS.kernel.revision            db  '$Revision$', $ASCII.NUL
 XEOS.kernel.date                db  '$Date$', $ASCII.NUL
 XEOS.kernel.logo                db  $ASCII.NL,\
                                     '    ------------------------------------------------------------------------   ', $ASCII.NL,\
-                                    '                                                                               ', $ASCII.NL,\
-                                    '           00000     00000  00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
-                                    '            00000   00000   00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
-                                    '              000000000     000          000       000  000                    ', $ASCII.NL,\
-                                    '               0000000      00000000000  000       000  0000000000000          ', $ASCII.NL,\
-                                    '              000000000     000          000       000            000          ', $ASCII.NL,\
-                                    '            00000   00000   00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
-                                    '           00000     00000  00000000000  0000000000000  0000000000000          ', $ASCII.NL,\
-                                    '                                                                               ', $ASCII.NL,\
-                                    '                    XEOS - x86 Experimental Operating System                   ', $ASCII.NL,\
-                                    '                                                                               ', $ASCII.NL,\
-                                    '          Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)         ', $ASCII.NL,\
-                                    '                         All rights (& wrongs) reserved                        ', $ASCII.NL,\
-                                    '                                                                               ', $ASCII.NL,\
+                                    '   |                                                                        |  ', $ASCII.NL,\
+                                    '   |       00000     00000  00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                    '   |        00000   00000   00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                    '   |          000000000     000          000       000  000                 |  ', $ASCII.NL,\
+                                    '   |           0000000      00000000000  000       000  0000000000000       |  ', $ASCII.NL,\
+                                    '   |          000000000     000          000       000            000       |  ', $ASCII.NL,\
+                                    '   |        00000   00000   00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                    '   |       00000     00000  00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                    '   |                                                                        |  ', $ASCII.NL,\
+                                    '   |                XEOS - x86 Experimental Operating System                |  ', $ASCII.NL,\
+                                    '   |                                                                        |  ', $ASCII.NL,\
+                                    '   |      Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)      |  ', $ASCII.NL,\
+                                    '   |                     All rights (& wrongs) reserved                     |  ', $ASCII.NL,\
+                                    '   |                                                                        |  ', $ASCII.NL,\
                                     '    ------------------------------------------------------------------------   ', $ASCII.NL,\
                                     $ASCII.NL, $ASCII.NUL
