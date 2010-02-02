@@ -54,6 +54,9 @@
 ; Location at which we were loaded by the second stage bootloader (1MB)
 ORG     0x100000
 
+; We are in 32 bits mode
+BITS    32
+
 ; Jumps to the effective code section
 jmp     XEOS.kernel
 
@@ -61,9 +64,6 @@ jmp     XEOS.kernel
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "VIDEO.ASM"        ; XEOS video services
-
-; We are in 32 bits mode
-BITS    32
 
 ;-------------------------------------------------------------------------------
 ; Second stage bootloader
