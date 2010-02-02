@@ -41,6 +41,9 @@
 ; data to management applications that use CIM (the WBEM data model) or direct
 ; access and eliminates the need for error prone operations like probing system
 ; hardware for presence detection.
+; 
+; Those procedures and macros are intended to be used only in 32 bits protected
+; mode.
 ;-------------------------------------------------------------------------------
 
 %ifndef __SMBIOS_INC_32_ASM__

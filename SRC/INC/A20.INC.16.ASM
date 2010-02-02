@@ -48,7 +48,7 @@
 ; them are specific to some BIOS. The most portable way is to enable A20
 ; through the keyboard controller.
 ; 
-; Those procedures and macros are intended to be used only in 16 bits read mode.
+; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
 
 %ifndef __A20_INC_16_ASM__

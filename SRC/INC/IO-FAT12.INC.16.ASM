@@ -34,7 +34,7 @@
 ;-------------------------------------------------------------------------------
 ; IO procedures
 ; 
-; Those procedures and macros are intended to be used only in 16 bits read mode.
+; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
 %ifndef __IO_FAT12_INC_16_ASM__
 %define __IO_FAT12_INC_16_ASM__
