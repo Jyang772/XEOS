@@ -96,7 +96,7 @@ XEOS.a20.enable.bios:
     $BIOS.int.misc
     
     ; Checks for an error
-    jc     .success
+    jnc     .success
     
     ; Prints the error message
     @BIOS.video.print   XEOS.a20.enable.bios.error
