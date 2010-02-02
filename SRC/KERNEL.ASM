@@ -122,7 +122,7 @@ XEOS.kernel.logo                db  $ASCII.NL,\
                                     '                                                                               ', $ASCII.NL,\
                                     '                    XEOS - x86 Experimental Operating System                   ', $ASCII.NL,\
                                     '                                                                               ', $ASCII.NL,\
-                                    '          Copyright (C) 2010 Jean-David Gadina (macmade0eosgarden.com)         ', $ASCII.NL,\
+                                    '          Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)         ', $ASCII.NL,\
                                     '                         All rights (& wrongs) reserved                        ', $ASCII.NL,\
                                     '                                                                               ', $ASCII.NL,\
                                     '    ------------------------------------------------------------------------   ', $ASCII.NL,\
