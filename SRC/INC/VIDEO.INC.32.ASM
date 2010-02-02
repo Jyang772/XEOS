@@ -333,6 +333,9 @@ XEOS.video.scroll:
     ; Updates the cursor position, as we now have an available line
     dec     BYTE [ XEOS.video.cursor.y ]
     
+    ; Updates the hardware cursor
+    call    XEOS.video.cursor.update
+    
     ret
 
 ;-------------------------------------------------------------------------------
