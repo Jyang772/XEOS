@@ -107,14 +107,30 @@ XEOS.kernel:
     ; Tries to find the SMBIOS table
     call    XEOS.smbios.find
     
-    ; Checks if the table was found
-    cmp     ax,         0
+    ; Checks the result stored in EAX
+    cmp     eax,        0
     
-    ; If yes, we can continue and display the SMBIOS informations
-    jg      .displaySmbiosInfos
+    ; If 0, we can continue and display the SMBIOS informations
+    je     .displaySmbiosInfos
+    
+    ; Checks the error code and display the corresponding error message
+    cmp     eax,        $XEOS.smbios.error.notFound
+    je      .smbiosNotFound
+    cmp     eax,        $XEOS.smbios.error.invalidChecksum
+    je      .smbiosInvalid
+    
+    ; Unknow SMBIOS error
+    @XEOS.error.fatal XEOS.kernel.smbios.error.unknown
     
     ; SMBIOS not found - Issues a fatal error
-    @XEOS.error.fatal XEOS.kernel.smbios.error
+    .smbiosNotFound:
+        
+        @XEOS.error.fatal XEOS.kernel.smbios.error.notFound
+        
+    ; Invalid SMBIOS checksum - Issues a fatal error
+    .smbiosInvalid:
+        
+        @XEOS.error.fatal XEOS.kernel.smbios.error.checksum
     
     ; Displays the SMBIOS informations
     .displaySmbiosInfos:
@@ -126,28 +142,30 @@ XEOS.kernel:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.kernel.nl                  db   $ASCII.NL,  $ASCII.NUL         
-XEOS.kernel.prompt              db  '<XEOS>: ', $ASCII.NUL
-XEOS.kernel.smbios.search       db  'Locating the SMBIOS table...', $ASCII.NUL
-XEOS.kernel.smbios.error        db  'Unable to locate the SMBIOS table.', $ASCII.NUL
-XEOS.kernel.greet               db  'Entering the XEOS kernel...', $ASCII.NUL
-XEOS.kernel.revision            db  '$Revision$', $ASCII.NUL
-XEOS.kernel.date                db  '$Date$', $ASCII.NUL
-XEOS.kernel.logo                db  $ASCII.NL,\
-                                    '    ------------------------------------------------------------------------   ', $ASCII.NL,\
-                                    '   |                                                                        |  ', $ASCII.NL,\
-                                    '   |       00000     00000  00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
-                                    '   |        00000   00000   00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
-                                    '   |          000000000     000          000       000  000                 |  ', $ASCII.NL,\
-                                    '   |           0000000      00000000000  000       000  0000000000000       |  ', $ASCII.NL,\
-                                    '   |          000000000     000          000       000            000       |  ', $ASCII.NL,\
-                                    '   |        00000   00000   00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
-                                    '   |       00000     00000  00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
-                                    '   |                                                                        |  ', $ASCII.NL,\
-                                    '   |                XEOS - x86 Experimental Operating System                |  ', $ASCII.NL,\
-                                    '   |                                                                        |  ', $ASCII.NL,\
-                                    '   |      Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)      |  ', $ASCII.NL,\
-                                    '   |                     All rights (& wrongs) reserved                     |  ', $ASCII.NL,\
-                                    '   |                                                                        |  ', $ASCII.NL,\
-                                    '    ------------------------------------------------------------------------   ', $ASCII.NL,\
-                                    $ASCII.NL, $ASCII.NUL
+XEOS.kernel.nl                      db   $ASCII.NL,  $ASCII.NUL         
+XEOS.kernel.prompt                  db  '<XEOS>: ', $ASCII.NUL
+XEOS.kernel.smbios.search           db  'Locating the SMBIOS table...', $ASCII.NUL
+XEOS.kernel.smbios.error.notFound   db  'Unable to locate the SMBIOS table.', $ASCII.NUL
+XEOS.kernel.smbios.error.checksum   db  'Invalid SMBIOS table checksum.', $ASCII.NUL
+XEOS.kernel.smbios.error.unknown    db  'Unknown SMBIOS error.', $ASCII.NUL
+XEOS.kernel.greet                   db  'Entering the XEOS kernel...', $ASCII.NUL
+XEOS.kernel.revision                db  '$Revision$', $ASCII.NUL
+XEOS.kernel.date                    db  '$Date$', $ASCII.NUL
+XEOS.kernel.logo                    db  $ASCII.NL,\
+                                        '    ------------------------------------------------------------------------   ', $ASCII.NL,\
+                                        '   |                                                                        |  ', $ASCII.NL,\
+                                        '   |       00000     00000  00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                        '   |        00000   00000   00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                        '   |          000000000     000          000       000  000                 |  ', $ASCII.NL,\
+                                        '   |           0000000      00000000000  000       000  0000000000000       |  ', $ASCII.NL,\
+                                        '   |          000000000     000          000       000            000       |  ', $ASCII.NL,\
+                                        '   |        00000   00000   00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                        '   |       00000     00000  00000000000  0000000000000  0000000000000       |  ', $ASCII.NL,\
+                                        '   |                                                                        |  ', $ASCII.NL,\
+                                        '   |                XEOS - x86 Experimental Operating System                |  ', $ASCII.NL,\
+                                        '   |                                                                        |  ', $ASCII.NL,\
+                                        '   |      Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)      |  ', $ASCII.NL,\
+                                        '   |                     All rights (& wrongs) reserved                     |  ', $ASCII.NL,\
+                                        '   |                                                                        |  ', $ASCII.NL,\
+                                        '    ------------------------------------------------------------------------   ', $ASCII.NL,\
+                                        $ASCII.NL, $ASCII.NUL

@@ -61,12 +61,19 @@ BITS    32
 ; Definitions
 ;-------------------------------------------------------------------------------
 
+; Error codes
+%define $XEOS.smbios.error.notFound             1
+%define $XEOS.smbios.error.invalidChecksum      2
+
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
 XEOS.smbios.find:
     
     @XEOS.reg.save
     
     ; String to look for (SMBIOS signature)
-    mov     edi,        XEOS.smbios.anchor
+    mov     edi,        XEOS.smbios.anchor1
     
     ; Start of the memory location we need to scan
     mov     esi,        [ XEOS.smbios.memory.start ]
@@ -118,7 +125,7 @@ XEOS.smbios.find:
         @XEOS.reg.restore
         
         ; Result code - SMBIOS table was not found
-        xor     eax,        eax
+        mov     eax,        1
         
         ret
         
@@ -130,7 +137,7 @@ XEOS.smbios.find:
         @XEOS.reg.restore
         
         ; Result code - SMBIOS table was found
-        mov     eax,        1
+        xor     eax,        eax
         
         ret
 
@@ -138,7 +145,8 @@ XEOS.smbios.find:
 ; Variables
 ;-------------------------------------------------------------------------------
 
-XEOS.smbios.anchor          db  0x5F, 0x53, 0x4D, 0x5F
+XEOS.smbios.anchor1         db  0x5F, 0x53, 0x4D, 0x5F
+XEOS.smbios.anchor2         db  0x5F, 0x44, 0x4D, 0x49, 0x5F
 XEOS.smbios.memory.start    dd  0x000F0000
 XEOS.smbios.memory.end      dd  0x000FFFFF
 XEOS.smbios.table           dd  0
