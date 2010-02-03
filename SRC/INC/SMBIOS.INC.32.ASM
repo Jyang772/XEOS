@@ -73,7 +73,7 @@ XEOS.smbios.find:
     @XEOS.reg.save
     
     ; String to look for (SMBIOS signature)
-    mov     edi,        XEOS.smbios.anchor1
+    mov     edi,        XEOS.smbios.signature
     
     ; Start of the memory location we need to scan
     mov     esi,        [ XEOS.smbios.memory.start ]
@@ -91,12 +91,12 @@ XEOS.smbios.find:
     xchg    ecx,        eax
     
     ; Now, let's scan the memory for the SMBIOS signature
-    .loop
+    .checkSignature
         
         ; Saves the loop counter
         push    ecx
         
-        ; SMBIOS signature is 4 bytes
+        ; SMBIOS signature is 4 bytes (_SM_)
         mov     ecx,        4
         
         ; Saves ESI and EDI
@@ -106,21 +106,19 @@ XEOS.smbios.find:
         ; Compares the memory bytes with the SMBIOS signature
         rep     cmpsb
         
-        ; Restores ESI and EDI
+        ; Restores the saved registers
         pop     edi
         pop     esi
         pop     ecx
         
         ; SMBIOS signature found
-        je      .found
+        je      .signatureFound
         
         ; We are going to read the next 4 bytes
         add     esi,        4
         
         ; Continues scanning the memory
-        loop    .loop
-        
-    .notFound
+        loop    .checkSignature
         
         @XEOS.reg.restore
         
@@ -128,8 +126,82 @@ XEOS.smbios.find:
         mov     eax,        1
         
         ret
+    
+    ; The SMBIOS signature was found
+    .signatureFound
         
-    .found
+        ; Now we need to check the DMI signature, located at offset 0x10
+        add     esi,        10h
+        mov     edi,        XEOS.smbios.dmiSignature
+        
+        ; Saves the initial loop counter, so we'll be able to continue the
+        ; memory scan if the DMI signature is not present at the expected
+        ; location (meaning we haven't located the SMBIOS)
+        push    ecx
+        
+        ; DMI signature is 5 bytes (_DMI_)
+        mov     ecx,        5
+        
+        ; Saves ESI and EDI
+        push    esi
+        push    edi
+        
+        ; Compares the memory bytes with the DMI signature
+        rep     cmpsb
+        
+        ; Restores the saved registers
+        pop     edi
+        pop     esi
+        pop     ecx
+        
+        ; DMI signature found
+        je      .dmiSignatureFound
+        
+        ; Not found - Go back to the memory scanning
+        sub     esi,        0x0C
+        loop    .checkSignature
+    
+    ; The DMI signature was found
+    .dmiSignatureFound:
+        
+        ; No we need to check the length of the entry point structure
+        sub     esi,        0x0B
+        mov     edi,        XEOS.smbios.entryPointLength
+        
+        ; Saves the initial loop counter, so we'll be able to continue the
+        ; memory scan if the length is not correct (meaning we haven't located
+        ; the SMBIOS)
+        push    ecx
+        
+        ; Entry point length is 1 bytes (0x1F)
+        mov     ecx,        1
+        
+        ; Saves ESI and EDI
+        push    esi
+        push    edi
+        
+        ; Compares the memory bytes with the entry point length
+        rep     cmpsb
+        
+        ; Restores the saved registers
+        pop     edi
+        pop     esi
+        pop     ecx
+        
+        ; Entry point length is correct
+        je      .entryPointLengthCorrect
+        
+        ; Incorrect - Go back to the memory scanning
+        inc     esi
+        loop    .checkSignature
+    
+    ; The entry point length is correct
+    ; 
+    ; This means we surely located the SMBIOS.
+    .entryPointLengthCorrect:
+        
+        ; Back to the start of the entry point structure
+        sub     esi,        0x05
         
         ; Stores the memory location of the SMBIOS table
         mov     [ XEOS.smbios.table ],  esi
@@ -145,10 +217,11 @@ XEOS.smbios.find:
 ; Variables
 ;-------------------------------------------------------------------------------
 
-XEOS.smbios.anchor1         db  0x5F, 0x53, 0x4D, 0x5F
-XEOS.smbios.anchor2         db  0x5F, 0x44, 0x4D, 0x49, 0x5F
-XEOS.smbios.memory.start    dd  0x000F0000
-XEOS.smbios.memory.end      dd  0x000FFFFF
-XEOS.smbios.table           dd  0
+XEOS.smbios.signature           db  0x5F, 0x53, 0x4D, 0x5F
+XEOS.smbios.dmiSignature        db  0x5F, 0x44, 0x4D, 0x49, 0x5F
+XEOS.smbios.entryPointLength    db  0x1F
+XEOS.smbios.memory.start        dd  0x000F0000
+XEOS.smbios.memory.end          dd  0x000FFFFF
+XEOS.smbios.table               dd  0
 
 %endif
