@@ -246,7 +246,7 @@ BITS    32
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.print  1
     
-    mov     si,     %1
+    mov     esi,    %1
     call    XEOS.video.print
     
 %endmacro
