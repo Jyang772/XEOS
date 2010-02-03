@@ -58,7 +58,7 @@ DD              = dd
 MOUNT           = sudo mount
 UMOUNT          = sudo umount
 HDID            = hdid
-EMU             = /usr/local/macmade/sw/qemu/bin/qemu
+EMU             = qemu
 
 #-------------------------------------------------------------------------------
 # Software arguments
