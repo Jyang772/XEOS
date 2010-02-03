@@ -44,6 +44,8 @@ CPU             = 486
 RAM             = 16
 VGA             = std
 SMP             = 1
+MACHINE         = pc
+SOUND           = sb16
 
 #-------------------------------------------------------------------------------
 # Software
@@ -68,7 +70,7 @@ ARGS_RM         = -rf
 ARGS_DD         = conv=notrunc
 ARGS_MOUNT      = -t msdos
 ARGS_HDID       = -nobrowse -nomount
-ARGS_EMU        = -smbios type=1 -boot order=a -M pc -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM)
+ARGS_EMU        = -smbios type=1 -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND)
 
 #-------------------------------------------------------------------------------
 # Paths
