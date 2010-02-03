@@ -58,25 +58,54 @@
 BITS    32
 
 ;-------------------------------------------------------------------------------
-; Definitions
-;-------------------------------------------------------------------------------
-
-; Error codes
-%define $XEOS.smbios.error.notFound             1
-%define $XEOS.smbios.error.invalidChecksum      2
-
-;-------------------------------------------------------------------------------
 ; 
 ;-------------------------------------------------------------------------------
 XEOS.smbios.verifyChecksum:
     
     @XEOS.reg.save
     
+    ; Address of the SMBIOS entry point structure
+    mov     esi,        [ XEOS.smbios.table ]
     
+    ; Resets the registers we are going to use
+    xor     eax,        eax
+    xor     edx,        edx
     
+    ; Length of the SMBIOS entry point structure
+    movzx   ecx,        BYTE [ XEOS.smbios.entryPointLength ]
+    
+    ; Process each byte of the SMBIOS entry point structure
+    .loop:
+        
+        ; Loads the current byte
+        lodsb
+        
+        ; Adds it to the other bytes, stored in DL
+        add     dl,         al
+        
+        ; Process the next byte till the end of the SMBIOS entry point structure
+        loop    .loop
+    
+    ; DL should be 0 for a valid SMBIOS entry point structure
+    cmp     dl,         0
+    
+    je     .success
+        
     @XEOS.reg.restore
     
+    ; Error - Invalid checksum
+    mov     eax,        1
+    
     ret
+    
+    .success:
+        
+        @XEOS.reg.restore
+        
+        ; Success - Valid checksum
+        xor     eax,        eax
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; 
@@ -100,7 +129,7 @@ XEOS.smbios.find:
     mov     ebx,        4
     div     ebx
     
-    ; Stores the amount of memory to scan in ECX, so we can loop
+    ; Stores the amount of memory to scan in ECX, so we can loopx
     xchg    ecx,        eax
     
     ; Now, let's scan the memory for the SMBIOS signature
@@ -136,7 +165,7 @@ XEOS.smbios.find:
         @XEOS.reg.restore
         
         ; Result code - SMBIOS table was not found
-        mov     eax,        $XEOS.smbios.error.notFound
+        mov     eax,        1
         
         ret
     
@@ -219,30 +248,10 @@ XEOS.smbios.find:
         ; Stores the memory location of the SMBIOS table
         mov     [ XEOS.smbios.table ],  esi
         
-        ; Now that we found the SMBIOS entry point, we need to verify its
-        ; checksum
-        call    XEOS.smbios.verifyChecksum
-        
-        ; Checks the result code
-        cmp     eax,        0
-        
-        jne     .checksumError
-        
         @XEOS.reg.restore
         
-        ; Result code - SMBIOS table was found and is valid
+        ; Result code - SMBIOS table was found
         xor     eax,        eax
-        
-        je      .done
-        
-    .checksumError:
-        
-        @XEOS.reg.restore
-        
-        ; Result code - SMBIOS table was found but is valid
-        mov     eax,        $XEOS.smbios.error.invalidChecksum
-        
-    .done:
         
         ret
 

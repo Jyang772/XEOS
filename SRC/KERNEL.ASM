@@ -104,36 +104,41 @@ XEOS.kernel:
     @XEOS.kernel.print  XEOS.kernel.date
     @XEOS.kernel.print  XEOS.kernel.smbios.search
     
-    ; Tries to find the SMBIOS table
+    ; Tries to find the SMBIOS entry point
     call    XEOS.smbios.find
     
     ; Checks the result stored in EAX
     cmp     eax,        0
     
-    ; If 0, we can continue and display the SMBIOS informations
-    je     .displaySmbiosInfos
-    
-    ; Checks the error code and display the corresponding error message
-    cmp     eax,        $XEOS.smbios.error.notFound
-    je      .smbiosNotFound
-    cmp     eax,        $XEOS.smbios.error.invalidChecksum
-    je      .smbiosInvalid
-    
-    ; Unknow SMBIOS error
-    @XEOS.error.fatal XEOS.kernel.smbios.error.unknown
+    ; If 0, the SMBIOS entry point was found
+    je     .smbiosChecksum
     
     ; SMBIOS not found - Issues a fatal error
-    .smbiosNotFound:
-        
-        @XEOS.error.fatal XEOS.kernel.smbios.error.notFound
-        
-    ; Invalid SMBIOS checksum - Issues a fatal error
-    .smbiosInvalid:
-        
-        @XEOS.error.fatal XEOS.kernel.smbios.error.checksum
+    @XEOS.error.fatal XEOS.kernel.smbios.error.notFound
     
-    ; Displays the SMBIOS informations
-    .displaySmbiosInfos:
+    ; Verifies the SMBIOS entry point checksum
+    .smbiosChecksum:
+    
+    ; Status message
+    @XEOS.kernel.print  XEOS.kernel.smbios.checksum
+    
+    ; Verifies the SMBIOS entry point checksum
+    call    XEOS.smbios.verifyChecksum
+    
+    ; Checks the result stored in EAX
+    cmp     eax,        0
+    
+    ; If 0, the SMBIOS entry point is valid
+    je     .smbiosValid
+    
+    ; Invalid SMBIOS entry point - Issues a fatal error
+    @XEOS.error.fatal XEOS.kernel.smbios.error.checksum
+    
+    ; The SMBIOS entry point is valid
+    .smbiosValid:
+    
+    ; Status message
+    @XEOS.kernel.print  XEOS.kernel.smbios.valid
     
     ; Infinite loop
     jmp     $
@@ -144,10 +149,11 @@ XEOS.kernel:
 
 XEOS.kernel.nl                      db   $ASCII.NL,  $ASCII.NUL         
 XEOS.kernel.prompt                  db  '<XEOS>: ', $ASCII.NUL
-XEOS.kernel.smbios.search           db  'Locating the SMBIOS table...', $ASCII.NUL
+XEOS.kernel.smbios.search           db  'Locating the SMBIOS entry point...', $ASCII.NUL
+XEOS.kernel.smbios.checksum         db  'Checksumming the SMBIOS entry point...', $ASCII.NUL
+XEOS.kernel.smbios.valid            db  'Found a valid SMBIOS entry point...', $ASCII.NUL
 XEOS.kernel.smbios.error.notFound   db  'Unable to locate the SMBIOS table.', $ASCII.NUL
 XEOS.kernel.smbios.error.checksum   db  'Invalid SMBIOS table checksum.', $ASCII.NUL
-XEOS.kernel.smbios.error.unknown    db  'Unknown SMBIOS error.', $ASCII.NUL
 XEOS.kernel.greet                   db  'Entering the XEOS kernel...', $ASCII.NUL
 XEOS.kernel.revision                db  '$Revision$', $ASCII.NUL
 XEOS.kernel.date                    db  '$Date$', $ASCII.NUL
