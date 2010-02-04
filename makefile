@@ -34,70 +34,73 @@
 #-------------------------------------------------------------------------------
 # Debug options
 #-------------------------------------------------------------------------------
-DEBUG           = 1
+DEBUG               = 1
 
 #-------------------------------------------------------------------------------
 # Emulation
 #-------------------------------------------------------------------------------
 
-CPU             = 486
-RAM             = 16
-VGA             = std
-SMP             = 1
-MACHINE         = pc
-SOUND           = sb16
+CPU                 = 486
+RAM                 = 16
+VGA                 = std
+SMP                 = 1
+MACHINE             = pc
+SOUND               = sb16
 
 #-------------------------------------------------------------------------------
 # Software
 #-------------------------------------------------------------------------------
 
-AS              = nasm
-CP              = cp
-RM              = rm
-DD              = dd
-MOUNT           = sudo mount
-UMOUNT          = sudo umount
-HDID            = hdid
-EMU             = qemu
+AS                  = nasm
+CP                  = cp
+RM                  = rm
+DD                  = dd
+MOUNT               = sudo mount
+UMOUNT              = sudo umount
+HDID                = hdid
+EMU                 = qemu
 
 #-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_AS         = -f bin -I $(DIR_SRC_INC)
-ARGS_CP         = 
-ARGS_RM         = -rf
-ARGS_DD         = conv=notrunc
-ARGS_MOUNT      = -t msdos
-ARGS_HDID       = -nobrowse -nomount
-ARGS_EMU        = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND)
+ARGS_AS             = -f bin -I $(DIR_SRC_BOOT_INC)
+ARGS_CP             = 
+ARGS_RM             = -rf
+ARGS_DD             = conv=notrunc
+ARGS_MOUNT          = -t msdos
+ARGS_HDID           = -nobrowse -nomount
+ARGS_EMU            = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND)
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD       = ./BUILD/
-DIR_BUILD_BIN   = $(DIR_BUILD)BIN/
-DIR_BUILD_MNT   = $(DIR_BUILD)MNT/
-DIR_RES         = ./RES/
-DIR_SRC         = ./SRC/
-DIR_SRC_INC     = $(DIR_SRC)INC/
+DIR_BUILD           = ./build/
+DIR_BUILD_BIN       = $(DIR_BUILD)bin/
+DIR_BUILD_MNT       = $(DIR_BUILD)mnt/
+DIR_RES             = ./res/
+DIR_SRC             = ./src/
+DIR_SRC_BOOT        = $(DIR_SRC)boot/
+DIR_SRC_BOOT_INC    = $(DIR_SRC)boot/include/
+DIR_SRC_CORE        = $(DIR_SRC)core/
+DIR_SRC_CORE_INC    = $(DIR_SRC)core/include/
 
 #-------------------------------------------------------------------------------
 # Resources
 #-------------------------------------------------------------------------------
 
-FLOPPY          = XEOS.FLP
-FLOPPY_IN       = $(DIR_RES)$(FLOPPY)
-FLOPPY_OUT      = $(DIR_BUILD)$(FLOPPY)
-MBR				= $(DIR_BUILD_BIN)BOOT1$(EXT_BIN)
+FLOPPY              = xeos.flp
+FLOPPY_IN           = $(DIR_RES)$(FLOPPY)
+FLOPPY_OUT          = $(DIR_BUILD)$(FLOPPY)
+MBR				    = $(DIR_BUILD_BIN)boot1$(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # File extensions
 #-------------------------------------------------------------------------------
 
-EXT_ASM         = .ASM
-EXT_BIN         = .BIN
+EXT_ASM             = .asm
+EXT_BIN             = .bin
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -108,7 +111,7 @@ VPATH =
 vpath
 
 # Define the search paths for source files
-vpath %$(EXT_ASM) $(DIR_SRC)
+vpath %$(EXT_ASM) $(DIR_SRC_BOOT)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -125,7 +128,7 @@ vpath %$(EXT_ASM) $(DIR_SRC)
 #-------------------------------------------------------------------------------
 
 # Gets every assembly file in the source directory
-_FILES_ASM        = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
+_FILES_ASM        = $(foreach dir,$(DIR_SRC_BOOT),$(wildcard $(DIR_SRC_BOOT)*$(EXT_ASM)))
 
 # Gets only the file name of the assembly files
 _FILES_ASM_REL    = $(notdir $(_FILES_ASM))
@@ -148,7 +151,7 @@ _FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: _build_setup $(_FILES_BIN_BUILD) _mbr _mount _copy _umount
+all: _build_setup _boot
 	
 # Tests the OS by launching the emulator
 test:
@@ -167,8 +170,11 @@ _build_setup:
 	@if [ ! -d $(DIR_BUILD_BIN) ]; then mkdir $(DIR_BUILD_BIN); fi
 	@if [ ! -d $(DIR_BUILD_MNT) ]; then mkdir $(DIR_BUILD_MNT); fi
 
+# Creates the boot files
+_boot: $(_FILES_BIN_BUILD) _mbr _mount _copy _umount
+	
 # Copies the MBR to the floppy image
-_mbr: $(DIR_BUILD_BIN)BOOT1$(EXT_BIN)
+_mbr: $(DIR_BUILD_BIN)boot1$(EXT_BIN)
 	@echo "    *** Copying empty floppy image ($(FLOPPY_IN)) to the build directory ($(DIR_BUILD))"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT))
 	@$(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT)
