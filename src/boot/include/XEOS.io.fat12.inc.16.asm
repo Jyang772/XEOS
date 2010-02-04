@@ -36,18 +36,18 @@
 ; 
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
-%ifndef __IO_FAT12_INC_16_ASM__
-%define __IO_FAT12_INC_16_ASM__
+%ifndef __XEOS_IO_FAT12_INC_16_ASM__
+%define __XEOS_IO_FAT12_INC_16_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.INC.ASM"        ; General constants
-%include "MACROS.INC.ASM"           ; General macros
-%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
-%include "ERROR.INC.16.ASM"         ; Error management
-%include "ASCII.INC.ASM"            ; ASCII table
-%include "BIOS-LLDS.INC.16.ASM"     ; BIOS low-level disk services
+%include "XEOS.constants.inc.asm"       ; General constants
+%include "XEOS.macros.inc.asm"          ; General macros
+%include "BIOS.int.inc.asm"             ; BIOS interrupts
+%include "XEOS.error.inc.16.asm"        ; Error management
+%include "XEOS.ascii.inc.asm"           ; ASCII table
+%include "BIOS.llds.inc.16.asm"         ; BIOS low-level disk services
 
 ; We are in 16 bits mode
 BITS    16

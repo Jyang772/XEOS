@@ -35,8 +35,8 @@
 ; ASCII table definition
 ;-------------------------------------------------------------------------------
 
-%ifndef __ASCII_INC_ASM__
-%define __ASCII_INC_ASM__
+%ifndef __XEOS_ASCII_INC_ASM__
+%define __XEOS_ASCII_INC_ASM__
 
 ; Control characters
 %define $ASCII.NUL      0x00

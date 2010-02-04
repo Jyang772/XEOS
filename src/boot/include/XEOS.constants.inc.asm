@@ -35,8 +35,8 @@
 ; Constants
 ;-------------------------------------------------------------------------------
 
-%ifndef __CONSTANTS_INC_ASM__
-%define __CONSTANTS_INC_ASM__
+%ifndef __XEOS_CONSTANTS_INC_ASM__
+%define __XEOS_CONSTANTS_INC_ASM__
 
 ; Standard PC boot signature
 %define $BIOS.boot.signature            0xAA55

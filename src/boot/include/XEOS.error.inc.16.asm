@@ -36,16 +36,16 @@
 ; 
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
-%ifndef __ERROR_INC_16_ASM__
-%define __ERROR_INC_16_ASM__
+%ifndef __XEOS_ERROR_INC_16_ASM__
+%define __XEOS_ERROR_INC_16_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.INC.ASM"        ; General constants
-%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
-%include "BIOS-VIDEO.INC.16.ASM"    ; BIOS video services
-%include "ASCII.INC.ASM"            ; ASCII table
+%include "XEOS.constants.inc.asm"       ; General constants
+%include "BIOS.int.inc.asm"             ; BIOS interrupts
+%include "BIOS.video.inc.16.asm"        ; BIOS video services
+%include "XEOS.ascii.inc.asm"           ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16

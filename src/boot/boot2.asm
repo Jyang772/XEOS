@@ -68,15 +68,15 @@ jmp     XEOS.boot.stage2
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.INC.ASM"        ; General constants
-%include "MACROS.INC.ASM"           ; General macros
-%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
-%include "BIOS-VIDEO.INC.16.ASM"    ; BIOS video services
-%include "BIOS-LLDS.INC.16.ASM"     ; BIOS low-level disk services
-%include "IO-FAT12.INC.16.ASM"      ; FAT-12 IO procedures
-%include "ASCII.INC.ASM"            ; ASCII table
-%include "GDT.INC.ASM"              ; GDT - Global Descriptor Table
-%include "A20.INC.16.ASM"           ; 20th address line enabling
+%include "XEOS.constants.inc.asm"       ; General constants
+%include "XEOS.macros.inc.asm"          ; General macros
+%include "BIOS.int.inc.asm"             ; BIOS interrupts
+%include "BIOS.video.inc.16.asm"        ; BIOS video services
+%include "BIOS.llds.inc.16.asm"         ; BIOS low-level disk services
+%include "XEOS.io.fat12.inc.16.asm"     ; FAT-12 IO procedures
+%include "XEOS.ascii.inc.asm"           ; ASCII table
+%include "XEOS.gdt.inc.asm"             ; GDT - Global Descriptor Table
+%include "XEOS.a20.inc.16.asm"          ; 20th address line enabling
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros

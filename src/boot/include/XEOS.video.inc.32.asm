@@ -39,14 +39,14 @@
 ; 'BIOS-VIDEO.ASM' file.
 ;-------------------------------------------------------------------------------
 
-%ifndef __VIDEO_INC_32_ASM__
-%define __VIDEO_INC_32_ASM__
+%ifndef __XEOS_VIDEO_INC_32_ASM__
+%define __XEOS_VIDEO_INC_32_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.INC.ASM"           ; General macros
-%include "CRT-CONTROLLER.INC.ASM"   ; CRT microcontroller
+%include "XEOS.macros.inc.asm"          ; General macros
+%include "XEOS.crt-controller.inc.asm"  ; CRT microcontroller
 
 ; We are in 32 bits mode
 BITS    32

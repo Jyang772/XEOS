@@ -34,7 +34,7 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "CONSTANTS.INC.ASM"        ; General constants
+%include "XEOS.constants.inc.asm"        ; General constants
 
 ; We are in 16 bits mode
 BITS    16

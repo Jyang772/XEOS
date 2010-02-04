@@ -37,14 +37,14 @@
 ; Those procedures and macros are intended to be used only in 32 bits protected
 ; mode.
 ;-------------------------------------------------------------------------------
-%ifndef __ERROR_INC_32_ASM__
-%define __ERROR_INC_32_ASM__
+%ifndef __XEOS_ERROR_INC_32_ASM__
+%define __XEOS_ERROR_INC_32_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "BIOS-VIDEO.INC.16.ASM"    ; XEOS video services
-%include "ASCII.INC.ASM"            ; ASCII table
+%include "BIOS.video.inc.16.asm"        ; XEOS video services
+%include "XEOS.ascii.inc.asm"           ; ASCII table
 
 ; We are in 32 bits mode
 BITS    32

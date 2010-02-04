@@ -46,14 +46,14 @@
 ; mode.
 ;-------------------------------------------------------------------------------
 
-%ifndef __SMBIOS_INC_32_ASM__
-%define __SMBIOS_INC_32_ASM__
+%ifndef __XEOS_SMBIOS_INC_32_ASM__
+%define __XEOS_SMBIOS_INC_32_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.INC.ASM"           ; General macros
-%include "VIDEO.INC.32.ASM"         ; XEOS video services
+%include "XEOS.macros.inc.asm"          ; General macros
+%include "XEOS.video.inc.32.asm"        ; XEOS video services
 
 ; We are in 32 bits mode
 BITS    32

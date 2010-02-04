@@ -63,11 +63,11 @@ jmp     XEOS.kernel
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "VIDEO.INC.32.ASM"         ; XEOS video services
-%include "ASCII.INC.ASM"            ; ASCII table
-%include "GDT.INC.ASM"              ; GDT - Global Descriptor Table
-%include "ERROR.INC.32.ASM"         ; Error management
-%include "SMBIOS.INC.32.ASM"        ; SMBIOS
+%include "XEOS.video.inc.32.asm"        ; XEOS video services
+%include "XEOS.ascii.inc.asm"           ; ASCII table
+%include "XEOS.gdt.inc.asm"             ; GDT - Global Descriptor Table
+%include "XEOS.error.inc.32.asm"        ; Error management
+%include "XEOS.smbios.inc.32.asm"       ; SMBIOS
 
 ; Prints a new line with a message, prefixed by the prompt
 %macro @XEOS.kernel.print 1

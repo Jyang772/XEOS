@@ -75,13 +75,13 @@
 ;       - Bits 56 - 63: Base address (24-31)
 ;-------------------------------------------------------------------------------
 
-%ifndef __GDT_INC_ASM__
-%define __GDT_INC_ASM__
+%ifndef __XEOS_GDT_INC_ASM__
+%define __XEOS_GDT_INC_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.INC.ASM"       ; General macros
+%include "XEOS.macros.inc.asm"      ; General macros
 
 ;-------------------------------------------------------------------------------
 ; Addresses of the descriptors

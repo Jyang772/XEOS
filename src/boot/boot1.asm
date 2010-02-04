@@ -68,7 +68,7 @@ BITS    16
 
 ; Includes the FAT-12 MBR, so the beginning of the binary will be a valid
 ; FAT-12 floppy drive
-%include "MBR-FAT12.INC.16.ASM"
+%include "XEOS.mbr.fat12.inc.16.asm"
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
@@ -103,12 +103,12 @@ XEOS.boot.stage1:
     ;
     ; Placed here to avoid problems with the MBR short jump.
     ;---------------------------------------------------------------------------
-    %include "MACROS.INC.ASM"           ; General macros
-    %include "IO-FAT12.INC.16.ASM"      ; FAT-12 IO procedures
-    %include "BIOS-INT.INC.ASM"         ; BIOS interrupts
-    %include "BIOS-VIDEO.INC.16.ASM"    ; BIOS video services
-    %include "BIOS-LLDS.INC.16.ASM"     ; BIOS low-level disk services
-    %include "ASCII.INC.ASM"            ; ASCII table
+    %include "XEOS.macros.inc.asm"      ; General macros
+    %include "XEOS.io.fat12.inc.16.asm" ; FAT-12 IO procedures
+    %include "BIOS.int.inc.asm"         ; BIOS interrupts
+    %include "BIOS.video.inc.16.asm"    ; BIOS video services
+    %include "BIOS.llds.inc.16.asm"     ; BIOS low-level disk services
+    %include "XEOS.ascii.inc.asm"       ; ASCII table
     
     ; We are redefining 'XEOS.boot.stage1', as the include files are declaring
     ; global procedures

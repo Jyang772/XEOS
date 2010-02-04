@@ -43,8 +43,8 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "MACROS.INC.ASM"           ; General macros
-%include "BIOS-INT.INC.ASM"         ; BIOS interrupts
+%include "XEOS.macros.inc.asm"          ; General macros
+%include "BIOS.int.inc.asm"             ; BIOS interrupts
 
 ; We are in 16 bits mode
 BITS    16

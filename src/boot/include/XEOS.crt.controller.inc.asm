@@ -35,8 +35,8 @@
 ; Defines, macros and procedures for the CRT microcontroller
 ;-------------------------------------------------------------------------------
 
-%ifndef __CRT_CONTROLLER_INC_ASM__
-%define __CRT_CONTROLLER_INC_ASM__
+%ifndef __XEOS_CRT_CONTROLLER_INC_ASM__
+%define __XEOS_CRT_CONTROLLER_INC_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Definitions
