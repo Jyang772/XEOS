@@ -295,8 +295,6 @@ XEOS.smbios.displayInformations:
     
     .done:
         
-        @XEOS.video.print   done
-    
     @XEOS.reg.restore
     
     ret

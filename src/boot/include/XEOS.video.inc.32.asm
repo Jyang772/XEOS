@@ -46,7 +46,7 @@
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "XEOS.macros.inc.asm"          ; General macros
-%include "XEOS.crt-controller.inc.asm"  ; CRT microcontroller
+%include "XEOS.crt.controller.inc.asm"  ; CRT microcontroller
 
 ; We are in 32 bits mode
 BITS    32
