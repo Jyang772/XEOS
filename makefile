@@ -70,7 +70,7 @@ ARGS_RM         = -rf
 ARGS_DD         = conv=notrunc
 ARGS_MOUNT      = -t msdos
 ARGS_HDID       = -nobrowse -nomount
-ARGS_EMU        = -smbios type=1 -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND)
+ARGS_EMU        = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND)
 
 #-------------------------------------------------------------------------------
 # Paths
