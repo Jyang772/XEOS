@@ -93,7 +93,7 @@ DIR_SRC_CORE_INC    = $(DIR_SRC)core/include/
 FLOPPY              = xeos.flp
 FLOPPY_IN           = $(DIR_RES)$(FLOPPY)
 FLOPPY_OUT          = $(DIR_BUILD)$(FLOPPY)
-MBR				    = $(DIR_BUILD_BIN)boot1$(EXT_BIN)
+MBR				    = BOOT1.BIN
 
 #-------------------------------------------------------------------------------
 # File extensions
@@ -178,15 +178,15 @@ _mbr: $(DIR_BUILD_BIN)boot1$(EXT_BIN)
 	@echo "    *** Copying empty floppy image ($(FLOPPY_IN)) to the build directory ($(DIR_BUILD))"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT))
 	@$(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT)
-	@echo "    *** Copying the bootloader ($(MBR)) into the installation floppy MBR ($(FLOPPY_OUT))"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(DD) $(ARGS_DD) if=$(MBR) of=$(FLOPPY_OUT))
-	@$(DD) $(ARGS_DD) if=$(MBR) of=$(FLOPPY_OUT)
+	@echo "    *** Copying the bootloader ($(DIR_BUILD_BIN)$(MBR)) into the installation floppy MBR ($(FLOPPY_OUT))"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN)$(MBR) of=$(FLOPPY_OUT))
+	@$(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN)$(MBR) of=$(FLOPPY_OUT)
 
 # Compiles an assembly file
 $(DIR_BUILD_BIN)%$(EXT_BIN): %$(EXT_ASM)
 	@echo "    *** Compiling assembly file $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $@ $<)
-	@$(AS) $(ARGS_AS) -o $@ $<
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $<)
+	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $<
 
 # Mounts the floppy drive image
 _mount:
