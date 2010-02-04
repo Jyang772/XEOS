@@ -53,9 +53,253 @@
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "MACROS.INC.ASM"           ; General macros
+%include "VIDEO.INC.32.ASM"         ; XEOS video services
 
 ; We are in 32 bits mode
 BITS    32
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.biosInfos:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.systemInfos:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.systemEnclosure:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.processorInfos:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.cacheInfos:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.systemSlots:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.physicalMemoryArray:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.memoryDeviceType:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.memoryArrayMappedAddress:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.display.systemBootInfos:
+    
+    @XEOS.reg.save
+    
+    
+    
+    @XEOS.reg.restore
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; 
+;-------------------------------------------------------------------------------
+XEOS.smbios.displayInformations:
+    
+    @XEOS.reg.save
+    
+    ; Address of the SMBIOS entry point structure
+    mov     esi,        [ XEOS.smbios.table ]
+    
+    ; Address of the SMBIOS structures is located at offset 0x18
+    add     esi,        0x18
+    
+    ; Loads the address
+    lodsd
+    
+    ; Stores it in EBX
+    xchg    ebx,        eax
+    
+    ; Next is the number of SMBIOS structures
+    lodsw
+    
+    xchg ah, al
+    
+    ; Stores it in ECX, so we can loop through the SMBIOS structures
+    xchg    ecx,        eax
+    
+    ; ESI now points to the SMBIOS structures
+    mov     esi,        ebx
+    
+    ; Loads the structure type
+    lodsb
+    
+    cmp     al,         0
+    je      .biosInfos
+    
+    cmp     al,         1
+    je      .systemInfos
+    
+    cmp     al,         3
+    je      .systemEnclosure
+    
+    cmp     al,         4
+    je      .processorInfos
+    
+    cmp     al,         7
+    je      .cacheInfos
+    
+    cmp     al,         9
+    je      .systemSlots
+    
+    cmp     al,         16
+    je      .physicalMemoryArray
+    
+    cmp     al,         17
+    je      .memoryDeviceType
+    
+    cmp     al,         19
+    je      .memoryArrayMappedAddress
+    
+    cmp     al,         32
+    je      .systemBootInfos
+    
+    jmp     .done
+    
+    .biosInfos:
+        
+        call    XEOS.smbios.display.biosInfos
+    
+    .systemInfos:
+        
+        call    XEOS.smbios.display.systemInfos
+    
+    .systemEnclosure:
+        
+        call    XEOS.smbios.display.systemEnclosure
+    
+    .processorInfos:
+        
+        call    XEOS.smbios.display.processorInfos
+    
+    .cacheInfos:
+        
+        call    XEOS.smbios.display.cacheInfos
+    
+    .systemSlots:
+        
+        call    XEOS.smbios.display.systemSlots
+    
+    .physicalMemoryArray:
+        
+        call    XEOS.smbios.display.physicalMemoryArray
+    
+    .memoryDeviceType:
+        
+        call    XEOS.smbios.display.memoryDeviceType
+    
+    .memoryArrayMappedAddress:
+        
+        call    XEOS.smbios.display.memoryArrayMappedAddress
+    
+    .systemBootInfos:
+        
+        call    XEOS.smbios.display.systemBootInfos
+    
+    .done:
+        
+        @XEOS.video.print   done
+    
+    @XEOS.reg.restore
+    
+    ret
 
 ;-------------------------------------------------------------------------------
 ; 
