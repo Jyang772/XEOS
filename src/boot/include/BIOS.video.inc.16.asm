@@ -107,7 +107,7 @@ BITS    16
     mov     ah,     2
     
     ; Page number
-    mov     bh,     0
+    xor     bh,     bh
     
     ; XY coordinates
     mov     dh,     %1
@@ -134,13 +134,13 @@ BITS    16
     mov     ah,     6
     
     ; Number of lines to scroll (0 means clear)
-    mov     al,     0
+    xor     al,     al
     
     ; Sets the screen color
     @BIOS.video.createScreenColor bh, %1, %2
     
     ; XY coordinates
-    mov     cx,     0
+    xor     cx,     cx
     
     ; Width and height
     mov     dl,     $BIOS.video.screen.cols - 1
