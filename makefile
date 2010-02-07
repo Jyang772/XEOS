@@ -115,7 +115,7 @@ vpath
 .SUFFIXES:
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_ASM) $(EXT_BIN)
+.SUFFIXES:
 
 #-------------------------------------------------------------------------------
 # Built-in targets

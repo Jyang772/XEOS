@@ -40,23 +40,39 @@ DEBUG               = 1
 # Software
 #-------------------------------------------------------------------------------
 
-MAKE                = make
+AS                  = nasm
+CC                  = /usr/local/xeos-build/gcc/bin/i386-elf-gcc
+LD                  = /usr/local/xeos-build/binutils/bin/i386-elf-ld
+RM                  = rm
 
 #-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_MAKE           = 
+ARGS_AS             = -f elf -I $(DIR_SRC_INC)
+ARGS_CC             = -nostdlib -nostartfiles -nodefaultlibs -pedantic -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
+ARGS_LD             = -T linker.ld
+ARGS_RM             = -rf
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD           = ../../build/
+DIR_BUILD           = ../../../build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
 DIR_SRC             = ./
-DIR_SRC_INC         = $(DIR_SRC)include/
-DIR_SRC_KERNEL      = $(DIR_SRC)kernel/
+DIR_SRC_INC         = $(DIR_SRC)../include/
+PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
+PATH               := /usr/local/xeos-build/gcc/i386-elf/bin:$(PATH)
+
+#-------------------------------------------------------------------------------
+# File extensions
+#-------------------------------------------------------------------------------
+
+EXT_ASM             = .asm
+EXT_C               = .c
+EXT_H               = .h
+EXT_BIN             = .bin
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -66,6 +82,11 @@ DIR_SRC_KERNEL      = $(DIR_SRC)kernel/
 VPATH =
 vpath
 
+# Define the search paths for source files
+vpath %$(EXT_ASM) $(DIR_SRC)
+vpath %$(EXT_C) $(DIR_SRC)
+vpath %$(EXT_H) $(DIR_SRC_INC)
+
 #-------------------------------------------------------------------------------
 # File suffixes
 #-------------------------------------------------------------------------------
@@ -74,29 +95,33 @@ vpath
 .SUFFIXES:
 
 # Adds the suffixes used in this file
-.SUFFIXES:
+.SUFFIXES: $(EXT_ASM) $(EXT_C) $(EXT_H) $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean kernel
+.PHONY: all clean
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: kernel
-	
+all:
+	@echo "    *** Compiling the kernel initialisation file"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)kernel-init.o kernel-init.asm)
+	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)kernel-init.o kernel-init.asm
+	@echo "    *** Compiling the kernel file"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC) $(ARGS_CC) -o $(DIR_BUILD_BIN)kernel.o -c kernel.c)
+	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_BIN)kernel.o -c kernel.c
+	@echo "    *** Linking the kernel parts"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_BIN)kernel-init.o $(DIR_BUILD_BIN)kernel.o)
+	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_BIN)kernel-init.o $(DIR_BUILD_BIN)kernel.o
+
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
-
-# Builds the kernel
-kernel:
-	@echo "    *** Building the kernel"
-	@cd $(DIR_SRC_KERNEL) && $(MAKE)
