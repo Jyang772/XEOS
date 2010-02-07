@@ -43,6 +43,7 @@ PREFIX              = /usr/local/xeos-build
 #-------------------------------------------------------------------------------
 
 RM                  = rm
+TAR                 = tar
 MAKE                = make
 
 #-------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ MAKE                = make
 #-------------------------------------------------------------------------------
 
 ARGS_RM             = -rf
+ARGS_TAR            = -xf
 ARGS_MAKE           = 
 
 #-------------------------------------------------------------------------------
@@ -71,10 +73,10 @@ DIR_BUILD_GMP       = $(DIR_BUILD)gmp/
 DIR_BUILD_MPFR      = $(DIR_BUILD)mpfr/
 DIR_BUILD_GCC       = $(DIR_BUILD)gcc/
 DIR_SRC             = ./src/
-DIR_SRC_BINUTILS    = $(DIR_SRC)binutils-$(VERSION_BINUTILS)/
-DIR_SRC_GMP         = $(DIR_SRC)gmp-$(VERSION_GMP)/
-DIR_SRC_MPFR        = $(DIR_SRC)mpfr-$(VERSION_MPFR)/
-DIR_SRC_GCC         = $(DIR_SRC)gcc-$(VERSION_GCC)/
+SRC_BINUTILS        = $(DIR_SRC)binutils-$(VERSION_BINUTILS).tar.bz2
+SRC_GMP             = $(DIR_SRC)gmp-$(VERSION_GMP).tar.bz2
+SRC_MPFR            = $(DIR_SRC)mpfr-$(VERSION_MPFR).tar.gz
+SRC_GCC             = $(DIR_SRC)gcc-$(VERSION_GCC).tar.bz2
 DIR_TMP             = ./tmp/
 
 #-------------------------------------------------------------------------------
@@ -82,14 +84,14 @@ DIR_TMP             = ./tmp/
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean _binutils _gmp _mpfr _gcc
+.PHONY: all clean _clean_tmp _binutils _gmp _mpfr _gcc
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: _binutils _gmp _mpfr _gcc
+all: _clean_tmp _binutils _gmp _mpfr _gcc
 
 # Cleans the build files
 clean:
@@ -99,3 +101,19 @@ clean:
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_MPFR)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_GCC)*
 
+_clean_tmp:
+	@echo "    *** Cleaning the temporary files"
+	@$(RM) $(ARGS_RM) $(DIR_TMP)*
+
+_binutils:
+	@echo "    *** Unpacking binutils ($(VERSION_BINUTILS))"
+	@$(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP)
+	@export PREFIX=$(PREFIX)
+	@export TARGET=$(TARGET)
+	@echo "    *** Configuring binutils ($(VERSION_BINUTILS))"
+	cd $(DIR_BUILD_BINUTILS) && exec ../../$(DIR_TMP)binutils-$(VERSION_BINUTILS)/configure --prefix=$(PREFIX) --target=$(TARGET) --disable-nls
+	@echo "    *** Compiling binutils ($(VERSION_BINUTILS))"
+	cd $(DIR_BUILD_BINUTILS) && $(MAKE) all
+	@echo "    *** Installing binutils ($(VERSION_BINUTILS))"
+	cd $(DIR_BUILD_BINUTILS) && $(MAKE) install
+	@cd ../../
