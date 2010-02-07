@@ -31,6 +31,8 @@
 
 /* $Id$ */
 
+int XEOS_kernel_main( void );
+
 int XEOS_kernel_main( void )
 {
     return 0;
