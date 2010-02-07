@@ -75,6 +75,7 @@ DIR_SRC_BINUTILS    = $(DIR_SRC)binutils-$(VERSION_BINUTILS)/
 DIR_SRC_GMP         = $(DIR_SRC)gmp-$(VERSION_GMP)/
 DIR_SRC_MPFR        = $(DIR_SRC)mpfr-$(VERSION_MPFR)/
 DIR_SRC_GCC         = $(DIR_SRC)gcc-$(VERSION_GCC)/
+DIR_TMP             = ./tmp/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
