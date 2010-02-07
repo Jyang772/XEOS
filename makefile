@@ -80,6 +80,9 @@ DIR_BUILD           = ./build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/
 DIR_BUILD_BIN_BOOT	= $(DIR_BUILD_BIN)boot/
 DIR_BUILD_BIN_CORE	= $(DIR_BUILD_BIN)core/
+DIR_BUILD_OBJ       = $(DIR_BUILD)obj/
+DIR_BUILD_OBJ_BOOT	= $(DIR_BUILD_OBJ)boot/
+DIR_BUILD_OBJ_CORE	= $(DIR_BUILD_OBJ)core/
 DIR_BUILD_MNT       = $(DIR_BUILD)mount/
 DIR_BUILD_REL       = $(DIR_BUILD)release/
 DIR_RES             = ./res/
@@ -144,6 +147,10 @@ clean:
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN_BOOT)*
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN_CORE)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN_CORE)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_BOOT)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_BOOT)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_CORE)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_CORE)*
 
 # Builds the boot files
 boot:

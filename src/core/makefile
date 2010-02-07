@@ -54,6 +54,7 @@ ARGS_MAKE           =
 
 DIR_BUILD           = ../../build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
+DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/
 DIR_SRC             = ./
 DIR_SRC_INC         = $(DIR_SRC)include/
 DIR_SRC_KERNEL      = $(DIR_SRC)kernel/
@@ -95,6 +96,8 @@ clean:
 	@echo "    *** Cleaning all build files"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*
 
 # Builds the kernel
 kernel:

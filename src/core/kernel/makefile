@@ -60,6 +60,7 @@ ARGS_RM             = -rf
 
 DIR_BUILD           = ../../../build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
+DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/
 DIR_SRC             = ./
 DIR_SRC_INC         = $(DIR_SRC)../include/
 PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
@@ -112,16 +113,18 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 all:
 	@echo "    *** Compiling the kernel initialisation file"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)kernel-init.o kernel-init.asm)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)kernel-init.o kernel-init.asm
+	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ)kernel-init.o kernel-init.asm
 	@echo "    *** Compiling the kernel file"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC) $(ARGS_CC) -o $(DIR_BUILD_BIN)kernel.o -c kernel.c)
-	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_BIN)kernel.o -c kernel.c
+	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)kernel.o -c kernel.c
 	@echo "    *** Linking the kernel parts"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_BIN)kernel-init.o $(DIR_BUILD_BIN)kernel.o)
-	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_BIN)kernel-init.o $(DIR_BUILD_BIN)kernel.o
+	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ)kernel-init.o $(DIR_BUILD_OBJ)kernel.o
 
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*
