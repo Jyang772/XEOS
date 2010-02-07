@@ -105,7 +105,7 @@ clean:
 
 binutils:
 	@echo "    *** Unpacking binutils ($(VERSION_BINUTILS))"
-	@if [ ! -f $(DIR_TMP)binutils-$($VERSION_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP); fi
+	@if [ ! -d $(DIR_TMP)binutils-$(VERSION_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP); fi
 	@export PREFIX=$(PREFIX)
 	@export TARGET=$(TARGET)
 	@echo "    *** Configuring binutils ($(VERSION_BINUTILS))"
