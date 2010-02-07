@@ -91,7 +91,7 @@ DIR_TMP             = ./tmp/
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: _clean_tmp _binutils _gmp _mpfr _gcc
+all: binutils gmp mpfr gcc
 
 # Cleans the build files
 clean:
@@ -101,11 +101,9 @@ clean:
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_MPFR)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_GCC)*
 
-_clean_tmp:
+binutils:
 	@echo "    *** Cleaning the temporary files"
-	@$(RM) $(ARGS_RM) $(DIR_TMP)*
-
-_binutils:
+	@$(RM) $(ARGS_RM) $(DIR_TMP)binutils-$(VERSION_BINUTILS)
 	@echo "    *** Unpacking binutils ($(VERSION_BINUTILS))"
 	@$(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP)
 	@export PREFIX=$(PREFIX)
