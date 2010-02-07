@@ -76,7 +76,7 @@ DIR_SRC             = ./src/
 SRC_BINUTILS        = $(DIR_SRC)binutils-$(VERSION_BINUTILS).tar.bz2
 SRC_GMP             = $(DIR_SRC)gmp-$(VERSION_GMP).tar.bz2
 SRC_MPFR            = $(DIR_SRC)mpfr-$(VERSION_MPFR).tar.gz
-SRC_GCC             = $(DIR_SRC)gcc-$(VERSION_GCC).tar.bz2
+SRC_GCC             = $(DIR_SRC)gcc-core-$(VERSION_GCC).tar.bz2
 DIR_TMP             = ./tmp/
 
 #-------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ DIR_TMP             = ./tmp/
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean _clean_tmp _binutils _gmp _mpfr _gcc
+.PHONY: all clean binutils gmp mpfr gcc
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -106,11 +106,24 @@ clean:
 binutils:
 	@echo "    *** Unpacking binutils ($(VERSION_BINUTILS))"
 	@if [ ! -d $(DIR_TMP)binutils-$(VERSION_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP); fi
-	@export PREFIX=$(PREFIX)
+	@export PREFIX=$(PREFIX)/binutils
 	@export TARGET=$(TARGET)
 	@echo "    *** Configuring binutils ($(VERSION_BINUTILS))"
-	cd $(DIR_BUILD_BINUTILS) && exec ../../$(DIR_TMP)binutils-$(VERSION_BINUTILS)/configure --prefix=$(PREFIX) --target=$(TARGET) --disable-nls
+	@cd $(DIR_BUILD_BINUTILS) && exec ../../$(DIR_TMP)binutils-$(VERSION_BINUTILS)/configure --prefix=$(PREFIX)/binutils --target=$(TARGET) --disable-nls --disable-werror
 	@echo "    *** Compiling binutils ($(VERSION_BINUTILS))"
 	cd $(DIR_BUILD_BINUTILS) && $(MAKE) all
 	@echo "    *** Installing binutils ($(VERSION_BINUTILS))"
 	cd $(DIR_BUILD_BINUTILS) && sudo $(MAKE) install
+
+gcc:
+	@echo "    *** Unpacking gcc ($(VERSION_GCC))"
+	@if [ ! -d $(DIR_TMP)gcc-$(VERSION_GCC) ]; then $(TAR) $(ARGS_TAR) $(SRC_GCC) -C $(DIR_TMP); fi
+	@export PREFIX=$(PREFIX)/gcc
+	@export TARGET=$(TARGET)
+	@export PATH=$(PREFIX)/binutils/bin/:$$PATH
+	@echo "    *** Configuring gcc ($(VERSION_GCC))"
+	@cd $(DIR_BUILD_GCC) && exec ../../$(DIR_TMP)gcc-$(VERSION_GCC)/configure --prefix=$(PREFIX)/gcc --target=$(TARGET) --disable-nls --enable-languages=c --without-headers
+	@echo "    *** Compiling gcc ($(VERSION_GCC))"
+	cd $(DIR_BUILD_GCC) && $(MAKE) all-gcc
+	@echo "    *** Installing gcc ($(VERSION_GCC))"
+	cd $(DIR_BUILD_GCC) && sudo $(MAKE) install-gcc
