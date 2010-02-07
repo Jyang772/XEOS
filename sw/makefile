@@ -87,6 +87,15 @@ DIR_TMP             = ./tmp/
 .PHONY: all clean binutils gmp mpfr gcc
 
 #-------------------------------------------------------------------------------
+# Shell variables
+#-------------------------------------------------------------------------------
+
+PATH                := $(PREFIX)/binutils/bin:$(PATH)
+LD_LIBRARY_PATH     := $(PREFIX)/gmp/lib:$(PREFIX)/mpfr/lib:$(LD_LIBRARY_PATH)
+LPATH               := $(PREFIX)/gmp/lib:$(PREFIX)/mpfr/lib:$(LPATH)
+CPATH               := $(PREFIX)/gmp/include:$(PREFIX)/mpfr/include:$(CPATH)
+
+#-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
@@ -106,8 +115,6 @@ clean:
 binutils:
 	@echo "    *** Unpacking binutils ($(VERSION_BINUTILS))"
 	@if [ ! -d $(DIR_TMP)binutils-$(VERSION_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP); fi
-	@export PREFIX=$(PREFIX)/binutils
-	@export TARGET=$(TARGET)
 	@echo "    *** Configuring binutils ($(VERSION_BINUTILS))"
 	@cd $(DIR_BUILD_BINUTILS) && exec ../../$(DIR_TMP)binutils-$(VERSION_BINUTILS)/configure --prefix=$(PREFIX)/binutils --target=$(TARGET) --disable-nls --disable-werror
 	@echo "    *** Compiling binutils ($(VERSION_BINUTILS))"
@@ -115,12 +122,29 @@ binutils:
 	@echo "    *** Installing binutils ($(VERSION_BINUTILS))"
 	cd $(DIR_BUILD_BINUTILS) && sudo $(MAKE) install
 
+gmp:
+	@echo "    *** Unpacking gmp ($(VERSION_GMP))"
+	@if [ ! -d $(DIR_TMP)gmp-$(VERSION_GMP) ]; then $(TAR) $(ARGS_TAR) $(SRC_GMP) -C $(DIR_TMP); fi
+	@echo "    *** Configuring gmp ($(VERSION_GMP))"
+	@cd $(DIR_BUILD_GMP) && exec ../../$(DIR_TMP)gmp-$(VERSION_GMP)/configure --prefix=$(PREFIX)/gmp
+	@echo "    *** Compiling gmp ($(VERSION_GMP))"
+	cd $(DIR_BUILD_GMP) && $(MAKE)
+	@echo "    *** Installing gmp ($(VERSION_GMP))"
+	cd $(DIR_BUILD_GMP) && sudo $(MAKE) install
+
+mpfr:
+	@echo "    *** Unpacking mpfr ($(VERSION_MPFR))"
+	@if [ ! -d $(DIR_TMP)mpfr-$(VERSION_MPFR) ]; then $(TAR) $(ARGS_TAR) $(SRC_MPFR) -C $(DIR_TMP); fi
+	@echo "    *** Configuring mpfr ($(VERSION_MPFR))"
+	@cd $(DIR_BUILD_MPFR) && exec ../../$(DIR_TMP)mpfr-$(VERSION_MPFR)/configure --prefix=$(PREFIX)/mpfr
+	@echo "    *** Compiling mpfr ($(VERSION_MPFR))"
+	cd $(DIR_BUILD_MPFR) && $(MAKE)
+	@echo "    *** Installing mpfr ($(VERSION_MPFR))"
+	cd $(DIR_BUILD_MPFR) && sudo $(MAKE) install
+
 gcc:
 	@echo "    *** Unpacking gcc ($(VERSION_GCC))"
 	@if [ ! -d $(DIR_TMP)gcc-$(VERSION_GCC) ]; then $(TAR) $(ARGS_TAR) $(SRC_GCC) -C $(DIR_TMP); fi
-	@export PREFIX=$(PREFIX)/gcc
-	@export TARGET=$(TARGET)
-	@export PATH=$(PREFIX)/binutils/bin/:$$PATH
 	@echo "    *** Configuring gcc ($(VERSION_GCC))"
 	@cd $(DIR_BUILD_GCC) && exec ../../$(DIR_TMP)gcc-$(VERSION_GCC)/configure --prefix=$(PREFIX)/gcc --target=$(TARGET) --disable-nls --enable-languages=c --without-headers
 	@echo "    *** Compiling gcc ($(VERSION_GCC))"
