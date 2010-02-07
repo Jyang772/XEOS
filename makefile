@@ -51,7 +51,7 @@ SOUND               = sb16
 # Software
 #-------------------------------------------------------------------------------
 
-AS                  = nasm
+MAKE                = make
 CP                  = cp
 RM                  = rm
 DD                  = dd
@@ -64,7 +64,7 @@ EMU                 = qemu
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_AS             = -f bin -I $(DIR_SRC_BOOT_INC)
+ARGS_MAKE           = 
 ARGS_CP             = 
 ARGS_RM             = -rf
 ARGS_DD             = conv=notrunc
@@ -78,13 +78,17 @@ ARGS_EMU            = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $
 
 DIR_BUILD           = ./build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/
-DIR_BUILD_MNT       = $(DIR_BUILD)mnt/
+DIR_BUILD_BIN_BOOT	= $(DIR_BUILD_BIN)boot/
+DIR_BUILD_BIN_CORE	= $(DIR_BUILD_BIN)core/
+DIR_BUILD_MNT       = $(DIR_BUILD)mount/
+DIR_BUILD_REL       = $(DIR_BUILD)release/
 DIR_RES             = ./res/
 DIR_SRC             = ./src/
 DIR_SRC_BOOT        = $(DIR_SRC)boot/
-DIR_SRC_BOOT_INC    = $(DIR_SRC)boot/include/
+DIR_SRC_BOOT_INC    = $(DIR_SRC_BOOT)include/
 DIR_SRC_CORE        = $(DIR_SRC)core/
-DIR_SRC_CORE_INC    = $(DIR_SRC)core/include/
+DIR_SRC_CORE_INC    = $(DIR_SRC_CORE)include/
+DIR_SW              = ./sw/
 
 #-------------------------------------------------------------------------------
 # Resources
@@ -92,15 +96,8 @@ DIR_SRC_CORE_INC    = $(DIR_SRC)core/include/
 
 FLOPPY              = xeos.flp
 FLOPPY_IN           = $(DIR_RES)$(FLOPPY)
-FLOPPY_OUT          = $(DIR_BUILD)$(FLOPPY)
-MBR				    = BOOT1.BIN
-
-#-------------------------------------------------------------------------------
-# File extensions
-#-------------------------------------------------------------------------------
-
-EXT_ASM             = .asm
-EXT_BIN             = .bin
+FLOPPY_OUT          = $(DIR_BUILD_REL)$(FLOPPY)
+MBR                 = BOOT1.BIN
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -109,9 +106,6 @@ EXT_BIN             = .bin
 # Clear any existing search path
 VPATH =
 vpath
-
-# Define the search paths for source files
-vpath %$(EXT_ASM) $(DIR_SRC_BOOT)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -124,34 +118,18 @@ vpath %$(EXT_ASM) $(DIR_SRC_BOOT)
 .SUFFIXES: $(EXT_ASM) $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
-# Macros
-#-------------------------------------------------------------------------------
-
-# Gets every assembly file in the source directory
-_FILES_ASM        = $(foreach dir,$(DIR_SRC_BOOT),$(wildcard $(DIR_SRC_BOOT)*$(EXT_ASM)))
-
-# Gets only the file name of the assembly files
-_FILES_ASM_REL    = $(notdir $(_FILES_ASM))
-
-# Replace the code extension by the binary one
-_FILES_ASM_BIN    = $(subst $(EXT_ASM),$(EXT_BIN),$(_FILES_ASM_REL))
-
-# Prefix all binary files with the build directory
-_FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
-
-#-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean _build_setup  _mbr _mount _mount _copy _umount
+.PHONY: all clean test boot core cross _mbr _mount _copy _umount
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: _build_setup _boot
+all: boot core _mbr _mount _copy _umount
 	
 # Tests the OS by launching the emulator
 test:
@@ -162,31 +140,34 @@ test:
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN_BOOT)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN_BOOT)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN_CORE)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN_CORE)*
 
-# Creates the necessary directories in the build directory
-_build_setup:
-	@if [ ! -d $(DIR_BUILD_BIN) ]; then mkdir $(DIR_BUILD_BIN); fi
-	@if [ ! -d $(DIR_BUILD_MNT) ]; then mkdir $(DIR_BUILD_MNT); fi
+# Builds the boot files
+boot:
+	@echo "    *** Building the boot files"
+	@cd $(DIR_SRC_BOOT) && $(MAKE)
 
-# Creates the boot files
-_boot: $(_FILES_BIN_BUILD) _mbr _mount _copy _umount
+# Builds the core files
+core:
+	@echo "    *** Building the core files"
+	@cd $(DIR_SRC_CORE) && $(MAKE)
+
+# Builds the cross-compiler
+cross:
+	@echo "    *** Building the cross-compiler"
+	@cd $(DIR_SW) && $(MAKE)
 	
 # Copies the MBR to the floppy image
-_mbr: $(DIR_BUILD_BIN)boot1$(EXT_BIN)
-	@echo "    *** Copying empty floppy image ($(FLOPPY_IN)) to the build directory ($(DIR_BUILD))"
+_mbr:
+	@echo "    *** Copying empty floppy image ($(FLOPPY_IN)) to the build directory ($(DIR_BUILD_MNT))"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT))
 	@$(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT)
-	@echo "    *** Copying the bootloader ($(DIR_BUILD_BIN)$(MBR)) into the installation floppy MBR ($(FLOPPY_OUT))"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN)$(MBR) of=$(FLOPPY_OUT))
-	@$(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN)$(MBR) of=$(FLOPPY_OUT)
-
-# Compiles an assembly file
-$(DIR_BUILD_BIN)%$(EXT_BIN): %$(EXT_ASM)
-	@echo "    *** Compiling assembly file $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $<)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $<
+	@echo "    *** Copying the bootloader ($(DIR_BUILD_BIN_BOOT)$(MBR)) into the installation floppy MBR ($(FLOPPY_OUT))"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN_BOOT)$(MBR) of=$(FLOPPY_OUT))
+	@$(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN_BOOT)$(MBR) of=$(FLOPPY_OUT)
 
 # Mounts the floppy drive image
 _mount:
@@ -195,10 +176,10 @@ _mount:
 	@$(MOUNT) $(ARGS_MOUNT) `$(HDID) $(ARGS_HDID) $(FLOPPY_OUT)` $(DIR_BUILD_MNT)
 
 # Copy the build files to the floppy drive
-_copy: #_mount
+_copy:
 	@echo "    *** Copying the build files to the floppy drive"
-	$(if $(filter 1,$(DEBUG)), @echo "        --- for bin in $(DIR_BUILD_BIN)*; do if [ $$bin != $(MBR) ]; then cp -f $$bin $(DIR_BUILD_MNT); fi; done")
-	@for bin in $(DIR_BUILD_BIN)*; do if [ $$bin != $(MBR) ]; then cp -f $$bin $(DIR_BUILD_MNT); fi; done
+	$(if $(filter 1,$(DEBUG)), @echo "        --- for bin in $(DIR_BUILD_BIN_BOOT)*; do if [ $$bin != $(MBR) ]; then cp -f $$bin $(DIR_BUILD_MNT); fi; done")
+	@for bin in $(DIR_BUILD_BIN_BOOT)*; do if [ $$bin != $(MBR) ]; then cp -f $$bin $(DIR_BUILD_MNT); fi; done
 
 # Un-mounts the floppy drive image
 _umount:

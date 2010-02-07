@@ -41,13 +41,17 @@ DEBUG               = 1
 #-------------------------------------------------------------------------------
 
 AS                  = nasm
+CC                  = /usr/local/xeos-build/gcc/bin/i386-elf-gcc
+LD                  = /usr/local/xeos-build/binutils/bin/i386-elf-ld
 RM                  = rm
 
 #-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_AS             = -f bin -I $(DIR_SRC_INC)
+ARGS_AS             = -f elf -I $(DIR_SRC_INC)
+ARGS_CC             = -nostdlib -nostartfiles -nodefaultlibs -pedantic -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
+ARGS_LD             = -T linker.ld
 ARGS_RM             = -rf
 
 #-------------------------------------------------------------------------------
@@ -55,15 +59,19 @@ ARGS_RM             = -rf
 #-------------------------------------------------------------------------------
 
 DIR_BUILD           = ../../build/
-DIR_BUILD_BIN       = $(DIR_BUILD)bin/boot/
-DIR_SRC             = ../../src/boot/
+DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
+DIR_SRC             = ../../src/core/
 DIR_SRC_INC         = $(DIR_SRC)include/
+PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
+PATH               := /usr/local/xeos-build/gcc/i386-elf/bin:$(PATH)
 
 #-------------------------------------------------------------------------------
 # File extensions
 #-------------------------------------------------------------------------------
 
 EXT_ASM             = .asm
+EXT_C               = .c
+EXT_H               = .h
 EXT_BIN             = .bin
 
 #-------------------------------------------------------------------------------
@@ -76,6 +84,8 @@ vpath
 
 # Define the search paths for source files
 vpath %$(EXT_ASM) $(DIR_SRC)
+vpath %$(EXT_C) $(DIR_SRC)
+vpath %$(EXT_H) $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -85,23 +95,7 @@ vpath %$(EXT_ASM) $(DIR_SRC)
 .SUFFIXES:
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_ASM) $(EXT_BIN)
-
-#-------------------------------------------------------------------------------
-# Macros
-#-------------------------------------------------------------------------------
-
-# Gets every assembly file in the source directory
-_FILES_ASM        = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
-
-# Gets only the file name of the assembly files
-_FILES_ASM_REL    = $(notdir $(_FILES_ASM))
-
-# Replace the code extension by the binary one
-_FILES_ASM_BIN    = $(subst $(EXT_ASM),$(EXT_BIN),$(_FILES_ASM_REL))
-
-# Prefix all binary files with the build directory
-_FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
+.SUFFIXES: $(EXT_ASM) $(EXT_C) $(EXT_H) $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -115,16 +109,16 @@ _FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_BIN_BUILD)
+all:
+	@echo "    *** Compiling the kernel initialisation file"
+	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)kernel-init.o kernel-init.asm
+	@echo "    *** Compiling the kernel file"
+	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_BIN)kernel.o -c kernel.c
+	@echo "    *** Linking the kernel parts"
+	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)kernel.bin $(DIR_BUILD_BIN)kernel-init.o $(DIR_BUILD_BIN)kernel.o
 
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
-	
-# Compiles an assembly file
-$(DIR_BUILD_BIN)%$(EXT_BIN): %$(EXT_ASM)
-	@echo "    *** Compiling assembly file $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $<)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $<
