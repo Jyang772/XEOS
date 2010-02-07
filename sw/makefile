@@ -100,12 +100,12 @@ clean:
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_GMP)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_MPFR)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_GCC)*
+	@echo "    *** Cleaning all temporary files"
+	@$(RM) $(ARGS_RM) $(DIR_TMP)*
 
 binutils:
-	@echo "    *** Cleaning the temporary files"
-	@$(RM) $(ARGS_RM) $(DIR_TMP)binutils-$(VERSION_BINUTILS)
 	@echo "    *** Unpacking binutils ($(VERSION_BINUTILS))"
-	@$(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP)
+	@if [ ! -f $(DIR_TMP)binutils-$($VERSION_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP); fi
 	@export PREFIX=$(PREFIX)
 	@export TARGET=$(TARGET)
 	@echo "    *** Configuring binutils ($(VERSION_BINUTILS))"
