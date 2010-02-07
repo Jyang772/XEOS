@@ -114,4 +114,3 @@ binutils:
 	cd $(DIR_BUILD_BINUTILS) && $(MAKE) all
 	@echo "    *** Installing binutils ($(VERSION_BINUTILS))"
 	cd $(DIR_BUILD_BINUTILS) && sudo $(MAKE) install
-	@cd ../../
