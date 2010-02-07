@@ -112,42 +112,50 @@ clean:
 	@echo "    *** Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_TMP)*
 
+# Builds BinUtils
 binutils:
 	@echo "    *** Unpacking binutils ($(VERSION_BINUTILS))"
 	@if [ ! -d $(DIR_TMP)binutils-$(VERSION_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(SRC_BINUTILS) -C $(DIR_TMP); fi
 	@echo "    *** Configuring binutils ($(VERSION_BINUTILS))"
 	@cd $(DIR_BUILD_BINUTILS) && exec ../../$(DIR_TMP)binutils-$(VERSION_BINUTILS)/configure --prefix=$(PREFIX)/binutils --target=$(TARGET) --disable-nls --disable-werror
 	@echo "    *** Compiling binutils ($(VERSION_BINUTILS))"
-	cd $(DIR_BUILD_BINUTILS) && $(MAKE) all
+	@cd $(DIR_BUILD_BINUTILS) && $(MAKE) all
 	@echo "    *** Installing binutils ($(VERSION_BINUTILS))"
-	cd $(DIR_BUILD_BINUTILS) && sudo $(MAKE) install
+	@cd $(DIR_BUILD_BINUTILS) && sudo $(MAKE) install
 
+# Builds GMP
 gmp:
 	@echo "    *** Unpacking gmp ($(VERSION_GMP))"
 	@if [ ! -d $(DIR_TMP)gmp-$(VERSION_GMP) ]; then $(TAR) $(ARGS_TAR) $(SRC_GMP) -C $(DIR_TMP); fi
 	@echo "    *** Configuring gmp ($(VERSION_GMP))"
 	@cd $(DIR_BUILD_GMP) && exec ../../$(DIR_TMP)gmp-$(VERSION_GMP)/configure --prefix=$(PREFIX)/gmp
 	@echo "    *** Compiling gmp ($(VERSION_GMP))"
-	cd $(DIR_BUILD_GMP) && $(MAKE)
+	@cd $(DIR_BUILD_GMP) && $(MAKE)
 	@echo "    *** Installing gmp ($(VERSION_GMP))"
-	cd $(DIR_BUILD_GMP) && sudo $(MAKE) install
+	@cd $(DIR_BUILD_GMP) && sudo $(MAKE) install
 
+# Builds MPFR
 mpfr:
 	@echo "    *** Unpacking mpfr ($(VERSION_MPFR))"
 	@if [ ! -d $(DIR_TMP)mpfr-$(VERSION_MPFR) ]; then $(TAR) $(ARGS_TAR) $(SRC_MPFR) -C $(DIR_TMP); fi
 	@echo "    *** Configuring mpfr ($(VERSION_MPFR))"
 	@cd $(DIR_BUILD_MPFR) && exec ../../$(DIR_TMP)mpfr-$(VERSION_MPFR)/configure --prefix=$(PREFIX)/mpfr
 	@echo "    *** Compiling mpfr ($(VERSION_MPFR))"
-	cd $(DIR_BUILD_MPFR) && $(MAKE)
+	@cd $(DIR_BUILD_MPFR) && $(MAKE)
 	@echo "    *** Installing mpfr ($(VERSION_MPFR))"
-	cd $(DIR_BUILD_MPFR) && sudo $(MAKE) install
+	@cd $(DIR_BUILD_MPFR) && sudo $(MAKE) install
 
+# Builds GCC & LibGCC
 gcc:
 	@echo "    *** Unpacking gcc ($(VERSION_GCC))"
 	@if [ ! -d $(DIR_TMP)gcc-$(VERSION_GCC) ]; then $(TAR) $(ARGS_TAR) $(SRC_GCC) -C $(DIR_TMP); fi
 	@echo "    *** Configuring gcc ($(VERSION_GCC))"
 	@cd $(DIR_BUILD_GCC) && exec ../../$(DIR_TMP)gcc-$(VERSION_GCC)/configure --prefix=$(PREFIX)/gcc --target=$(TARGET) --disable-nls --enable-languages=c --without-headers
 	@echo "    *** Compiling gcc ($(VERSION_GCC))"
-	cd $(DIR_BUILD_GCC) && $(MAKE) all-gcc
+	@cd $(DIR_BUILD_GCC) && $(MAKE) all-gcc
 	@echo "    *** Installing gcc ($(VERSION_GCC))"
-	cd $(DIR_BUILD_GCC) && sudo $(MAKE) install-gcc
+	@cd $(DIR_BUILD_GCC) && sudo $(MAKE) install-gcc
+	@echo "    *** Compiling libgcc ($(VERSION_GCC))"
+	@cd $(DIR_BUILD_GCC) && $(MAKE) all-target-libgcc
+	@echo "    *** Installing libgcc ($(VERSION_GCC))"
+	@cd $(DIR_BUILD_GCC) && sudo $(MAKE) install-target-libgcc
