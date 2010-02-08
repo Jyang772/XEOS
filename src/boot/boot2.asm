@@ -77,6 +77,7 @@ jmp     XEOS.boot.stage2
 %include "XEOS.ascii.inc.asm"           ; ASCII table
 %include "XEOS.gdt.inc.asm"             ; GDT - Global Descriptor Table
 %include "XEOS.a20.inc.16.asm"          ; 20th address line enabling
+%include "XEOS.elf.inc.16.asm"          ; ELF support
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -115,9 +116,7 @@ XEOS.boot.stage2.date           db  '$Date$', $ASCII.NUL
 XEOS.boot.stage2.greet          db  'Entering the second stage bootloader...', $ASCII.NUL
 XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
 XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
-XEOS.boot.stage2.loadRoot       db  'Loading the FAT-12 root directory into memory...', $ASCII.NUL
-XEOS.boot.stage2.findKernel     db  'Trying to find the XEOS kernel (KERNEL.BIN)...', $ASCII.NUL
-XEOS.boot.stage2.loadKernel     db  'Loading the XEOS kernel into memory...', $ASCII.NUL
+XEOS.boot.stage2.loadKernel     db  'Finding and loading the XEOS kernel into memory...', $ASCII.NUL
 XEOS.boot.stage2.pMode          db  'Switching the CPU to 32 bits protected mode...', $ASCII.NUL
 XEOS.boot.stage2.execKernel     db  'Moving and executing the XEOS kernel...', $ASCII.NUL
 
@@ -152,39 +151,19 @@ XEOS.boot.stage2:
     @XEOS.boot.stage2.print XEOS.boot.stage2.greet
     @XEOS.boot.stage2.print XEOS.boot.stage2.revision
     @XEOS.boot.stage2.print XEOS.boot.stage2.date
-    
-    ; Prints status message
-    @XEOS.boot.stage2.print XEOS.boot.stage2.loadRoot
-    
-    ; Loads the root directory into memory
-    ; 
-    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000).
-    mov     bx,         0x1000
-    call    XEOS.io.fat12.loadRootDirectory
-    
-    ; Prints status message
-    @XEOS.boot.stage2.print XEOS.boot.stage2.findKernel
-    
-    ; Location of the data we read into memory
-    mov     di,         0x1000
-    
-    ; Name of the kernel file
-    mov     si,         XEOS.files.kernel
-    
-    ; Tries to find the kernel file in the root directory
-    call    XEOS.io.fat12.findFile
-    
-    ; Prints status message
     @XEOS.boot.stage2.print XEOS.boot.stage2.loadKernel
     
+    ; Name of the kernel file
+    mov     si,             XEOS.files.kernel
+    
     ; We are going to load the kernel at 0x1000:0
-    mov     ax,         0x1000
+    mov     ax,             0x1000
     
-    ; FAT sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
-    mov     bx,         0x1000
+    ; Buffer will be placed after the stack space (ES:BX = 0x07C0:0x1000).
+    mov     bx,             0x1000
     
-    ; Loads the kernel into memory
-    call    XEOS.io.fat12.loadFile
+    ; Loads the kernel file
+    call    XEOS.elf.load
     
     ; Prints status message
     @XEOS.boot.stage2.print XEOS.boot.stage2.gdt

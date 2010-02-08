@@ -52,11 +52,52 @@ BITS    16
 ;-------------------------------------------------------------------------------
 ; 
 ;-------------------------------------------------------------------------------
-XEOS.elf.checkFile:
+XEOS.elf.check:
     
     @XEOS.reg.save
     
     
+    
+    @XEOS.reg.restore
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; Loads an ELF file into memory
+; 
+; Necessary register values:
+;       
+;       - si:       The name of the file to load
+;       - ax:       The memory address at which the file will be loaded
+;       - bx:       The memory address at which the buffer will be created
+;                   (the buffer is used to load the FAT root directory and
+;                   the file allocation table, so be sure to have enough
+;                   memory available)
+;-------------------------------------------------------------------------------
+XEOS.elf.load:
+    
+    @XEOS.reg.save
+    
+    ; Saves some registers
+    push    ax
+    push    bx
+    
+    ; Loads the root directory into memory
+    call    XEOS.io.fat12.loadRootDirectory
+    
+    ; Location of the data we read into memory
+    pop     bx
+    push    bx
+    
+    ; Tries to find the kernel file in the root directory
+    call    XEOS.io.fat12.findFile
+    
+    ; Restores the needed memory registers
+    pop     bx
+    pop     ax
+    
+    ; Loads the kernel into memory
+    call    XEOS.io.fat12.loadFile
     
     @XEOS.reg.restore
     
