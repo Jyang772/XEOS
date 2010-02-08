@@ -31,27 +31,34 @@
 
 /* $Id$ */
 
+/* The kernel entry point (from the kernel-init.asm file) */
 ENTRY( XEOS.kernel.init )
 
+/* Setup for the available sections */
 SECTIONS
-{    
+{
+    /* The kernel is loaded in memory at 1MB */
     . = 0x00100000;
     
+    /* Machine code */
     .text :
     {
         *( .text )
     }
     
+    /* Constant data */
     .rodata ALIGN( 0x1000 ) :
     {
         *( .rodata )
     }
-
+    
+    /* Initialized data */
     .data ALIGN( 0x1000 ) :
     {
         *( .data )
     }
     
+    /* Uninitialized data */
     .bss :
     {
         sbss = .;
