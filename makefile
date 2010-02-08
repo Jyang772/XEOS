@@ -58,7 +58,7 @@ DD                  = dd
 MOUNT               = sudo mount
 UMOUNT              = sudo umount
 HDID                = hdid
-EMU                 = qemu
+EMU                 = /usr/local/xeos-build/qemu/bin/qemu
 
 #-------------------------------------------------------------------------------
 # Software arguments
