@@ -62,6 +62,7 @@ VERSION_BINUTILS    = 2.20
 VERSION_GMP         = 4.3.2
 VERSION_MPFR        = 2.4.2
 VERSION_GCC         = 4.4.3
+VERSION_QEMU        = 0.12.2
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -72,11 +73,13 @@ DIR_BUILD_BINUTILS  = $(DIR_BUILD)binutils/
 DIR_BUILD_GMP       = $(DIR_BUILD)gmp/
 DIR_BUILD_MPFR      = $(DIR_BUILD)mpfr/
 DIR_BUILD_GCC       = $(DIR_BUILD)gcc/
+DIR_BUILD_QEMU      = $(DIR_BUILD)qemu/
 DIR_SRC             = ./src/
 SRC_BINUTILS        = $(DIR_SRC)binutils-$(VERSION_BINUTILS).tar.bz2
 SRC_GMP             = $(DIR_SRC)gmp-$(VERSION_GMP).tar.bz2
 SRC_MPFR            = $(DIR_SRC)mpfr-$(VERSION_MPFR).tar.gz
 SRC_GCC             = $(DIR_SRC)gcc-core-$(VERSION_GCC).tar.bz2
+SRC_QEMU            = $(DIR_SRC)qemu-$(VERSION_QEMU).tar.gz
 DIR_TMP             = ./tmp/
 
 #-------------------------------------------------------------------------------
@@ -100,7 +103,7 @@ CPATH               := $(PREFIX)/gmp/include:$(PREFIX)/mpfr/include:$(CPATH)
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: binutils gmp mpfr gcc
+all: binutils gmp mpfr gcc qemu
 
 # Cleans the build files
 clean:
@@ -159,3 +162,14 @@ gcc:
 	@cd $(DIR_BUILD_GCC) && $(MAKE) all-target-libgcc
 	@echo "    *** Installing libgcc ($(VERSION_GCC))"
 	@cd $(DIR_BUILD_GCC) && sudo $(MAKE) install-target-libgcc
+
+# Builds Quemu
+qemu:
+	@echo "    *** Unpacking qemu ($(VERSION_QEMU))"
+	@if [ ! -d $(DIR_TMP)qemu-$(VERSION_QEMU) ]; then $(TAR) $(ARGS_TAR) $(SRC_QEMU) -C $(DIR_TMP); fi
+	@echo "    *** Configuring qemu ($(VERSION_QEMU))"
+	@cd $(DIR_BUILD_QEMU) && exec ../../$(DIR_TMP)qemu-$(VERSION_QEMU)/configure --prefix=$(PREFIX)/qemu --enable-system --enable-user --target-list="i386-softmmu x86_64-softmmu arm-softmmu cris-softmmu m68k-softmmu microblaze-softmmu mips-softmmu mipsel-softmmu mips64-softmmu mips64el-softmmu ppc-softmmu ppcemb-softmmu ppc64-softmmu sh4-softmmu sh4eb-softmmu sparc-softmmu sparc64-softmmu"
+	@echo "    *** Compiling qemu ($(VERSION_QEMU))"
+	@cd $(DIR_BUILD_QEMU) && $(MAKE)
+	@echo "    *** Installing qemu ($(VERSION_QEMU))"
+	@cd $(DIR_BUILD_QEMU) && sudo $(MAKE) install
