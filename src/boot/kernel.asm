@@ -140,9 +140,6 @@ XEOS.kernel:
     ; Status message
     @XEOS.kernel.print  XEOS.kernel.smbios.valid
     
-    ; Displays SMBIOS informations
-    call    XEOS.smbios.displayInformations
-    
     ; Infinite loop
     jmp     $
 
