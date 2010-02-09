@@ -31,38 +31,9 @@
 
 /* $Id$ */
 
-#include "kmacros.h"
-#include "kvideo.h"
-
-/* Video attribute byte */
-static unsigned char kvideo_attr = 0x00;
-
-void kvideo_clear( void )
-{
-    unsigned char * mem;
-    unsigned int    memSize;
-    unsigned int    i;
-    
-    mem     = ( unsigned char * )KVIDEO_MEM;
-    memSize = KVIDEO_COLS * KVIDEO_ROWS;
-    i       = 0;
-    
-    for( i = 0; i < memSize; i++ ) {
-        
-        mem[ 0 ] = 0x20;
-        mem[ 1 ] = kvideo_attr;
-        mem     += 2;
-    }
-}
-
-void kvideo_set_bg( kvideo_color color )
-{
-    kvideo_attr &= ( 0x0F );
-    kvideo_attr |= ( color << 4 );
-}
-
-void kvideo_set_fg( kvideo_color color )
-{
-    kvideo_attr &= ( 0xF0 );
-    kvideo_attr |= color;
-}
+/* Bitwise operations */
+#define KBIT_FLAG( x )       ( 1 << ( x ) )
+#define KBIT_SET( v, f )     ( v ) |= ( f )
+#define KBIT_CLEAR( v, f )   ( v ) &= ~( f )
+#define KBIT_ISSET( v, f )   ( ( v ) & ( f ) )
+#define KBIT_TOGGLE( v, f )  ( v ) ^= ( f )
