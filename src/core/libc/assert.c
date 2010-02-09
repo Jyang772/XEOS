@@ -31,26 +31,20 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_ASSERT_H__
-#define __LIBC_ASSERT_H__
-#pragma once
+#include "assert.h"
+#include "stdio.h"
+#include "stdlib.h"
 
-/**
- * Macro used for internal error detection. (Ignored if NDEBUG is defined where
- * <assert.h> is included.) If expression equals zero, message printed on stderr
- * and abort called to terminate execution. Source filename and line number in
- * message are from preprocessor macros __FILE__ and __LINE__.
- */
-#ifdef NDEBUG
-    
-    #define assert( expression ) ( ( void )0 )
-    
-#else
-    
-    #define assert( expression ) ( expression ) ? ( ( void )0 ) : __libc_assert( #expression, __FILE__, __LINE__ )
-    
-#endif
-
-void __libc_assert( char * expression, char * file, int line );
-
-#endif /* __LIBC_ASSERT_H__ */
+void __libc_assert( char * expression, char * file, int line )
+{
+    fprintf(
+        stderr,
+        "Assertion failed: %s\n"
+        "File:             %s\n"
+        "Line:             %d\n",
+        x,
+        y,
+        z
+    );
+    abort();
+}
