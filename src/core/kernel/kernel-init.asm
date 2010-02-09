@@ -58,7 +58,7 @@ BITS    32
 global  XEOS.kernel.init
 
 ; XEOS kernel is written in C, and is linked with the file
-extern  XEOS_kernel_main
+extern  kmain
 
 ;-------------------------------------------------------------------------------
 ; XEOS kernel entry point
@@ -75,7 +75,7 @@ XEOS.kernel.init:
     mov     esp,        0x90000
     
     ; Calls the XEOS kernel
-    call    XEOS_kernel_main
+    call    kmain
     
     ; Infinite loop
     jmp     $
