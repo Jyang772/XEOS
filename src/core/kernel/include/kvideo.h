@@ -31,6 +31,10 @@
 
 /* $Id$ */
 
+#ifndef __KVIDEO_H__
+#define __KVIDEO_H__
+#pragma once
+
 /* Location of the video memory */
 #define KVIDEO_MEM 0xB8000
 
@@ -64,3 +68,5 @@ typedef enum
 void kvideo_clear( void );
 void kvideo_set_bg( kvideo_color color );
 void kvideo_set_fg( kvideo_color color );
+
+#endif /* __KVIDEO_H__ */

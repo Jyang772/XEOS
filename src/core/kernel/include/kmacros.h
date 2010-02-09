@@ -31,9 +31,15 @@
 
 /* $Id$ */
 
+#ifndef __KMACROS_H__
+#define __KMACROS_H__
+#pragma once
+
 /* Bitwise operations */
 #define KBIT_FLAG( x )       ( 1 << ( x ) )
 #define KBIT_SET( v, f )     ( v ) |= ( f )
 #define KBIT_CLEAR( v, f )   ( v ) &= ~( f )
 #define KBIT_ISSET( v, f )   ( ( v ) & ( f ) )
 #define KBIT_TOGGLE( v, f )  ( v ) ^= ( f )
+
+#endif /* __KMACROS_H__ */
