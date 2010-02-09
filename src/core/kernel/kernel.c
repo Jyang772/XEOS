@@ -31,9 +31,13 @@
 
 /* $Id$ */
 
-int XEOS_kernel_main( void );
+#include "kernel-video.h"
 
-int XEOS_kernel_main( void )
+void kmain( void );
+
+void kmain( void )
 {
-    return 0;
+    kvideo_clear();
+    
+    for(;;);
 }
