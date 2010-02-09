@@ -78,11 +78,8 @@ ARGS_EMU            = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $
 
 DIR_BUILD           = ./build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/
-DIR_BUILD_BIN_BOOT	= $(DIR_BUILD_BIN)boot/
-DIR_BUILD_BIN_CORE	= $(DIR_BUILD_BIN)core/
-DIR_BUILD_OBJ       = $(DIR_BUILD)obj/
-DIR_BUILD_OBJ_BOOT	= $(DIR_BUILD_OBJ)boot/
-DIR_BUILD_OBJ_CORE	= $(DIR_BUILD_OBJ)core/
+DIR_BUILD_BIN_BOOT  = $(DIR_BUILD_BIN)boot/
+DIR_BUILD_BIN_CORE  = $(DIR_BUILD_BIN)core/
 DIR_BUILD_MNT       = $(DIR_BUILD)mount/
 DIR_BUILD_REL       = $(DIR_BUILD)release/
 DIR_RES             = ./res/
@@ -142,15 +139,8 @@ test:
 
 # Cleans the build files
 clean:
-	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN_BOOT)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN_BOOT)*
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN_CORE)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN_CORE)*
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_BOOT)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_BOOT)*
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_CORE)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_CORE)*
+	@cd $(DIR_SRC_BOOT) && $(MAKE) clean
+	@cd $(DIR_SRC_CORE) && $(MAKE) clean
 
 # Builds the boot files
 boot:
@@ -186,7 +176,9 @@ _mount:
 _copy:
 	@echo "    *** Copying the build files to the floppy drive"
 	$(if $(filter 1,$(DEBUG)), @echo "        --- for bin in $(DIR_BUILD_BIN_BOOT)*; do if [ $$bin != $(MBR) ]; then cp -f $$bin $(DIR_BUILD_MNT); fi; done")
-	@for bin in $(DIR_BUILD_BIN_BOOT)*; do if [ $$bin != $(MBR) ]; then cp -f $$bin $(DIR_BUILD_MNT); fi; done
+	@for bin in $(DIR_BUILD_BIN_BOOT)*; do cp -f $$bin $(DIR_BUILD_MNT); done
+	$(if $(filter 1,$(DEBUG)), @echo "        --- for bin in $(DIR_BUILD_BIN_CORE)*; do if [ $$bin != $(MBR) ]; then cp -f $$bin $(DIR_BUILD_MNT); fi; done")
+	@for bin in $(DIR_BUILD_BIN_CORE)*; do cp -f $$bin $(DIR_BUILD_MNT); done
 
 # Un-mounts the floppy drive image
 _umount:

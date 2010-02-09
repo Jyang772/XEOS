@@ -93,11 +93,7 @@ all: kernel
 	
 # Cleans the build files
 clean:
-	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*
+	@cd $(DIR_SRC_KERNEL) && $(MAKE) clean
 
 # Builds the kernel
 kernel:
