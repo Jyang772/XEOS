@@ -31,7 +31,7 @@
 
 /* $Id$ */
 
-#include "kernel-video.h"
+#include "kvideo.h"
 
 /* Video attribute byte */
 static unsigned char kvideo_attr = 0x00;
