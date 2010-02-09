@@ -31,24 +31,4 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_ERRNO_H__
-#define __LIBC_ERRNO_H__
-#pragma once
-
-/**
- * Object to which certain library functions assign specific positive values
- * on error
- */
-extern unsigned int errno;
-
-/**
- * Code used for domain errors
- */
-#define EDOM    0x01
-
-/**
- * Code used for range errors
- */
-#define ERANGE  0x02
-
-#endif /* __LIBC_ERRNO_H__ */
+unsigned int errno = 0;
