@@ -116,7 +116,7 @@ XEOS.boot.stage2.date           db  '$Date$', $ASCII.NUL
 XEOS.boot.stage2.greet          db  'Entering the second stage bootloader...', $ASCII.NUL
 XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
 XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
-XEOS.boot.stage2.loadKernel     db  'Finding and loading the XEOS kernel into memory...', $ASCII.NUL
+XEOS.boot.stage2.loadKernel     db  'Loading the XEOS kernel into memory...', $ASCII.NUL
 XEOS.boot.stage2.pMode          db  'Switching the CPU to 32 bits protected mode...', $ASCII.NUL
 XEOS.boot.stage2.execKernel     db  'Moving and executing the XEOS kernel...', $ASCII.NUL
 
@@ -242,6 +242,7 @@ XEOS.boot.stage2.kernelSetup:
         ; We loaded it at 0x1000:0 in real mode, so the protected mode
         ; address is 0x10000 (0x1000 * 16 + 0).
         mov     esi,        0x10000
+        add     esi,        0x1000
         
         ; Final destination for the kernel code (1MB)
         mov     edi,        0x100000
