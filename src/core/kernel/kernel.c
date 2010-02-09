@@ -37,6 +37,8 @@ void kmain( void );
 
 void kmain( void )
 {
+    kvideo_set_fg( KVIDEO_COLOR_WHITE );
+    kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
     kvideo_clear();
     
     for(;;);

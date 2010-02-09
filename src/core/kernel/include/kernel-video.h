@@ -32,28 +32,35 @@
 /* $Id$ */
 
 /* Location of the video memory */
-#define KVIDEO_MEM                   0xB8000
+#define KVIDEO_MEM 0xB8000
 
 /* BIOS screen dimensions */
-#define KVIDEO_COLS                  80
-#define KVIDEO_ROWS                  25
+#define KVIDEO_COLS 80
+#define KVIDEO_ROWS 25
 
 /* BIOS colors */
-#define KVIDEO_COLOR_BLACK           0x00
-#define KVIDEO_COLOR_BLUE            0x01
-#define KVIDEO_COLOR_GREEN           0x02
-#define KVIDEO_COLOR_CYAN            0x03
-#define KVIDEO_COLOR_RED             0x04
-#define KVIDEO_COLOR_MAGENTA         0x05
-#define KVIDEO_COLOR_BROWN           0x06
-#define KVIDEO_COLOR_LIGHTGRAY       0x07
-#define KVIDEO_COLOR_DARKGRAY        0x08
-#define KVIDEO_COLOR_LIGHTBLUE       0x09
-#define KVIDEO_COLOR_LIGHTGREEN      0x0A
-#define KVIDEO_COLOR_LIGHTCYAN       0x0B
-#define KVIDEO_COLOR_LIGHTRED        0x0C
-#define KVIDEO_COLOR_LIGHTMAGENTA    0x0D
-#define KVIDEO_COLOR_LIGHTBROWN      0x0E
-#define KVIDEO_COLOR_WHITE           0x0F
+typedef enum
+{
+    
+    KVIDEO_COLOR_BLACK        = 0x00,
+    KVIDEO_COLOR_BLUE         = 0x01,
+    KVIDEO_COLOR_GREEN        = 0x02,
+    KVIDEO_COLOR_CYAN         = 0x03,
+    KVIDEO_COLOR_RED          = 0x04,
+    KVIDEO_COLOR_MAGENTA      = 0x05,
+    KVIDEO_COLOR_BROWN        = 0x06,
+    KVIDEO_COLOR_LIGHTGRAY    = 0x07,
+    KVIDEO_COLOR_DARKGRAY     = 0x08,
+    KVIDEO_COLOR_LIGHTBLUE    = 0x09,
+    KVIDEO_COLOR_LIGHTGREEN   = 0x0A,
+    KVIDEO_COLOR_LIGHTCYAN    = 0x0B,
+    KVIDEO_COLOR_LIGHTRED     = 0x0C,
+    KVIDEO_COLOR_LIGHTMAGENTA = 0x0D,
+    KVIDEO_COLOR_LIGHTBROWN   = 0x0E,
+    KVIDEO_COLOR_WHITE        = 0x0F
+    
+} kvideo_color;
 
 void kvideo_clear( void );
+void kvideo_set_bg( kvideo_color color );
+void kvideo_set_fg( kvideo_color color );

@@ -33,6 +33,9 @@
 
 #include "kernel-video.h"
 
+/* Video attribute byte */
+static unsigned char kvideo_attr = 0x00;
+
 void kvideo_clear( void )
 {
     unsigned char * mem;
@@ -46,7 +49,19 @@ void kvideo_clear( void )
     for( i = 0; i < memSize; i++ ) {
         
         mem[ 0 ] = 0x20;
-        mem[ 1 ] = 0x9F;
+        mem[ 1 ] = kvideo_attr;
         mem     += 2;
     }
+}
+
+void kvideo_set_bg( kvideo_color color )
+{
+    kvideo_attr &= ( 0x0F );
+    kvideo_attr |= ( color << 4 );
+}
+
+void kvideo_set_fg( kvideo_color color )
+{
+    kvideo_attr &= ( 0xF0 );
+    kvideo_attr |= color;
 }
