@@ -38,7 +38,7 @@
 /**
  * Null pointer constant.
  */
-typedef NULL ( ( void * )0 )
+#define NULL ( ( void * )0 )
 
 /**
  * Offset (in bytes) of member m from start of structure type stype.
