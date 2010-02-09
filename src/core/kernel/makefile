@@ -50,7 +50,7 @@ RM                  = rm
 #-------------------------------------------------------------------------------
 
 ARGS_AS             = -f elf -I $(DIR_SRC_INC)
-ARGS_CC             = -nostdlib -nostartfiles -nodefaultlibs -pedantic -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
+ARGS_CC             = -I $(DIR_SRC_INC) -I $(DIR_INC) -nostdlib -nostartfiles -nodefaultlibs -pedantic -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
 ARGS_LD             = -T linker.ld
 ARGS_RM             = -rf
 
@@ -60,9 +60,10 @@ ARGS_RM             = -rf
 
 DIR_BUILD           = ../../../build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
-DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/
+DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/kernel/
 DIR_SRC             = ./
-DIR_SRC_INC         = $(DIR_SRC)../include/
+DIR_SRC_INC         = $(DIR_SRC)include/
+DIR_INC             = $(DIR_SRC)../include/
 PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
 PATH               := /usr/local/xeos-build/gcc/i386-elf/bin:$(PATH)
 
@@ -73,6 +74,7 @@ PATH               := /usr/local/xeos-build/gcc/i386-elf/bin:$(PATH)
 EXT_ASM             = .asm
 EXT_C               = .c
 EXT_H               = .h
+EXT_OBJ             = .o
 EXT_BIN             = .bin
 
 #-------------------------------------------------------------------------------
@@ -96,7 +98,27 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 .SUFFIXES:
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_ASM) $(EXT_C) $(EXT_H) $(EXT_BIN)
+.SUFFIXES: $(EXT_ASM) $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+
+#-------------------------------------------------------------------------------
+# Macros
+#-------------------------------------------------------------------------------
+
+# Gets every code file in the source directory
+_FILES_ASM           = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
+_FILES_C             = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
+
+# Gets only the file name of the code files
+_FILES_ASM_REL       = $(notdir $(_FILES_ASM))
+_FILES_C_REL         = $(notdir $(_FILES_C))
+
+# Replace the code extension by the object one
+_FILES_ASM_OBJ       = $(subst $(EXT_ASM),$(EXT_ASM)$(EXT_OBJ),$(_FILES_ASM_REL))
+_FILES_C_OBJ         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
+
+# Prefix all binary files with the build directory
+_FILES_ASM_OBJ_BUILD = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_ASM_OBJ))
+_FILES_C_OBJ_BUILD   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -110,16 +132,10 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:
-	@echo "    *** Compiling the kernel initialisation file"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)kernel-init.o kernel-init.asm)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ)kernel-init.o kernel-init.asm
-	@echo "    *** Compiling the kernel file"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC) $(ARGS_CC) -o $(DIR_BUILD_BIN)kernel.o -c kernel.c)
-	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)kernel.o -c kernel.c
+all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD)
 	@echo "    *** Linking the kernel parts"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_BIN)kernel-init.o $(DIR_BUILD_BIN)kernel.o)
-	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ)kernel-init.o $(DIR_BUILD_OBJ)kernel.o
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_BIN)*)
+	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ)*
 
 # Cleans the build files
 clean:
@@ -128,3 +144,15 @@ clean:
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*
+	
+# Compiles an assembly file
+$(DIR_BUILD_OBJ)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
+	@echo "    *** Compiling assembly file $< into $@"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ)$(@F) $<)
+	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ)$(@F) $<
+	
+# Compiles an C file
+$(DIR_BUILD_OBJ)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	@echo "    *** Compiling C file $< into $@"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $<)
+	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $<
