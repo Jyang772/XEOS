@@ -50,9 +50,100 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
+; Checks the ELF header to ensure it's a valid ELF binary file
 ; 
+; The ELF header has the following structure:
+;       
+;       - BYTE  e_ident[ 16 ]   File identification
+;       - WORD  e_type          Object file type
+;       - WORD  e_machine       Required architecture
+;       - DWORD e_version       Object file version
+;       - DWORD e_entry         Entry point address
+;       - DWORD e_phoff         Program header table's file offset
+;       - DWORD e_shoff         Section header table's file offset
+;       - DWORD e_flags         Processor-specific flags
+;       - WORD  e_ehsize        ELF header's size
+;       - WORD  e_phentsize     Size of an entry in the program header table
+;                               (all entries are the same size)
+;       - WORD  e_phnum         Number of entries in the program header table
+;       - WORD  e_shentsize     Section header's size
+;       - WORD  e_shnum         Number of entries in the section header table
+;       - WORD  e_shstrndx      Section header table index of the entry
+;                               associated with the section name string table
+; 
+; Necessary register values:
+;       
+;       - ax:       The memory address at which the file is loaded
 ;-------------------------------------------------------------------------------
-XEOS.elf.check:
+XEOS.elf.checkHeader:
+    
+    @XEOS.reg.save
+    
+    mov     es,         ax
+    xor     ax,         ax
+    mov     di,         ax
+    
+    mov     si,         XEOS.elf.signature
+    mov     cx,         4
+    
+    rep     cmpsb
+    
+    je      .validSignature
+    
+    call    XEOS.error.fatal
+    
+    .validSignature:
+        
+        push    ds
+        push    si
+        
+        mov     ax,         es
+        mov     ds,         ax
+        mov     ax,         di
+        mov     si,         ax
+        
+        lodsb
+        
+        cmp     al,         0x01
+        
+        je      .validClass
+        
+        pop     si
+        pop     ds
+        
+        call    XEOS.error.fatal
+        
+    .validClass:
+        
+        lodsb
+        
+        cmp     al,         0x00
+        
+        jg      .validEncoding
+        
+        pop     si
+        pop     ds
+        
+        call    XEOS.error.fatal
+        
+    .validEncoding:
+        
+        pop     si
+        pop     ds
+    
+    @XEOS.reg.restore
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; Gets the entry point address of an ELF file, loaded in memory
+; 
+; 
+; Necessary register values:
+;       
+;       - ax:       The memory address at which the file is loaded
+;-------------------------------------------------------------------------------
+XEOS.elf.getEntryPointAddress:
     
     @XEOS.reg.save
     
@@ -61,7 +152,7 @@ XEOS.elf.check:
     @XEOS.reg.restore
     
     ret
-
+    
 ;-------------------------------------------------------------------------------
 ; Loads an ELF file into memory
 ; 
@@ -96,17 +187,32 @@ XEOS.elf.load:
     pop     bx
     pop     ax
     
+    ; Saves AX again
+    push    ax
+    
     ; Loads the kernel into memory
     call    XEOS.io.fat12.loadFile
+    
+    ; Checks the ELF header
+    pop     ax
+    push    ax
+    call    XEOS.elf.checkHeader
+    
+    ; Restores AX
+    pop    ax
+    
+    ; Gets the address of the entry point
+    call    XEOS.elf.getEntryPointAddress
     
     @XEOS.reg.restore
     
     ret
 
 ;-------------------------------------------------------------------------------
-; Variables definition
+; Variables
 ;-------------------------------------------------------------------------------
 
-
+XEOS.elf.signature      db  0x7F, 0x45, 0x4C, 0x46
+XEOS.elf.entryPoint     dd  0
 
 %endif
