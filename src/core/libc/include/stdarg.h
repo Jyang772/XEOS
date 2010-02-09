@@ -35,6 +35,41 @@
 #define __LIBC_STDARG_H__
 #pragma once
 
-
+#ifndef __GNUC__
+    
+    /**
+     * Type of object holding context information
+     */
+    typedef char * va_list;
+    
+    /**
+     * Initialisation macro which must be called once before any unnamed
+     * argument is accessed. Stores context information in ap. lastarg is the
+     * last named parameter of the function.
+     */
+    #define va_start( ap, lastarg ) ap = ( char * ) & lastarg + sizeof( int )
+    
+    /**
+     *  Yields value of the type (type) and value of the next unnamed argument.
+     */
+    #define va_arg( ap, type ) *( type * )( ap += sizeof( type ), ap - sizeof( type ) )
+    
+    /**
+     * Termination macro which must be called once after argument processing
+     * and before exit from function.
+     */
+    #define va_end( ap ) ap = 0
+    
+#else
+    
+    /**
+     * Use of GCC builtin
+     */
+    typedef __builtin_va_list va_list;
+    #define va_start( ap, param ) __builtin_va_start( ap, param )
+    #define va_end( ap ) __builtin_va_end( ap )
+    #define va_arg( ap, typ e) __builtin_va_arg( ap, type )
+    
+#endif
 
 #endif /* __LIBC_STDARG_H__ */
