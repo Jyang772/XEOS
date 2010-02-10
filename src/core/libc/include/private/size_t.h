@@ -38,6 +38,6 @@
 /**
  * Type for objects declared to store result of sizeof operator.
  */
-typedef unsigned int size_t
+typedef unsigned int size_t;
 
 #endif /* __LIBC_PRIVATE_SIZE_T_H__ */
