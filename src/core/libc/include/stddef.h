@@ -55,6 +55,4 @@ typedef int ptrdiff_t
  */
 typedef unsigned int size_t
 
-#define offsetof(x, y) 
-
 #endif /* __LIBC_STDDEF_H__ */
