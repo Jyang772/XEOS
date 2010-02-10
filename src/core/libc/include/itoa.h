@@ -35,6 +35,6 @@
 #define __LIBC_ITOA_H__
 #pragma once
 
-void itoa( int n, char s[] )
+void itoa( int n, char s[] );
 
 #endif /* __LIBC_ITOA_H__ */
