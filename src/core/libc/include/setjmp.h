@@ -35,6 +35,35 @@
 #define __LIBC_SETJMP_H__
 #pragma once
 
+/**
+ * Type of object holding context information
+ */
+typedef struct
+{
+    
+    unsigned long eax;
+    unsigned long ebx;
+    unsigned long ecx;
+    unsigned long edx;
+    unsigned long esi;
+    unsigned long edi;
+    unsigned long ebp;
+    unsigned long esp;
+    unsigned long eip;
+    
+} jmp_buf[ 1 ];
 
+/**
+ * Saves context information in env and returns zero. Subsequent call to
+ * longjmp with same env returns non-zero.
+ */
+int setjmp( jmp_buf env );
+
+/**
+ * Restores context saved by most recent call to setjmp with specified env.
+ * Execution resumes as a second return from setjmp, with returned value val
+ * if specified value non-zero, or 1 otherwise.
+ */
+void longjmp( jmp_buf env, int val );
 
 #endif /* __LIBC_SETJMP_H__ */
