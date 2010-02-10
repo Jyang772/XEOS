@@ -35,6 +35,66 @@
 #define __LIBC_SIGNAL_H__
 #pragma once
 
+/**
+ * Abnormal termination
+ */
+#define SIGABRT 0x01
 
+/**
+ * Arithmetic error
+ */
+#define SIGFPE  0x02
+
+/**
+ * Invalid execution
+ */
+#define SIGILL  0x03
+
+/**
+ * (Asynchronous) interactive attention
+ */
+#define SIGINT  0x04
+
+/**
+ * Illegal storage access
+ */
+#define SIGSEGV 0x05
+
+/**
+ * (Asynchronous) termination request
+ */
+#define SIGTERM 0x06
+
+/**
+ * Specifies default signal handling
+ */
+#define SIG_DFL 0x07
+
+/**
+ * Signal return value indicating error
+ */
+#define SIG_ERR 0x08
+
+/**
+ * Specifies that signal should be ignored
+ */
+#define SIG_IGN 0x09
+
+/**
+ * Install handler for subsequent signal sig. If handler is SIG_DFL,
+ * implementation-defined default behaviour will be used; if SIG_IGN, signal
+ * will be ignored; otherwise function pointed to by handler will be invoked
+ * with argument sig. In the last case, handling is restored to default
+ * behaviour before handler is called. If handler returns, execution resumes
+ * where signal occurred. signal returns the previous handler or SIG_ERR on
+ * error. Initial state is implementation-defined. Implementations may may
+ * define signals additional to those listed here.
+ */
+void ( *signal( int sig, void( *handler )( int ) ) )( int );
+
+/**
+ * Sends signal sig. Returns zero on success.
+ */
+int raise( int sig );
 
 #endif /* __LIBC_SIGNAL_H__ */
