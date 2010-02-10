@@ -39,12 +39,16 @@ void __libc_assert( char * expression, char * file, int line )
 {
     fprintf(
         stderr,
-        "Assertion failed: %s\n"
-        "File:             %s\n"
-        "Line:             %d\n",
-        x,
-        y,
-        z
+        "Fatal error - assertion failed:"
+        "    "
+        "    %s\n"
+        "    "
+        "File: %s\n"
+        "Line: %d\n",
+        expression,
+        file,
+        line
     );
+    
     abort();
 }
