@@ -144,7 +144,7 @@ struct lconv
      * Format for non-negative monetary values, with values as for n_sign_posn
      */
     char p_sign_posn;
-}
+};
 
 /**
  * Returns pointer to formatting information for current locale
@@ -161,31 +161,31 @@ char * setlocale( int category, const char * locale );
 /**
  * Category argument for all categories
  */
-LC_ALL      0x01
+#define LC_ALL      0x01
 
 /**
  * Category for numeric formatting information
  */
-LC_NUMERIC  0x02
+#define LC_NUMERIC  0x02
 
 /**
  * Category for monetary formatting information
  */
-LC_MONETARY 0x03
+#define LC_MONETARY 0x03
 
 /**
  * Category for information affecting collating functions
  */
-LC_COLLATE  0x04
+#define LC_COLLATE  0x04
 
 /**
  * Category for information affecting character class tests functions
  */
-LC_CTYPE    0x05
+#define LC_CTYPE    0x05
 
 /**
  * Category for information affecting time conversions functions
  */
-LC_TIME     0x06
+#define LC_TIME     0x06
 
 #endif /* __LIBC_LOCALE_H__ */
