@@ -35,10 +35,8 @@
 #define __LIBC_STDDEF_H__
 #pragma once
 
-/**
- * Null pointer constant.
- */
-#define NULL ( ( void * )0 )
+#include "private/null.h"
+#include "private/size_t.h"
 
 /**
  * Offset (in bytes) of member m from start of structure type stype.
@@ -49,10 +47,5 @@ offsetof( stype, m ) ( size_t ) &( ( ( stype * ) 0 )->m )
  * Type for objects declared to store result of subtracting pointers.
  */
 typedef int ptrdiff_t
-
-/**
- * Type for objects declared to store result of sizeof operator.
- */
-typedef unsigned int size_t
 
 #endif /* __LIBC_STDDEF_H__ */
