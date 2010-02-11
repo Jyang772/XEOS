@@ -31,3 +31,34 @@
 
 /* $Id$ */
 
+#include "hal.h"
+
+unsigned char hal_port_in( unsigned short int port )
+{
+    unsigned char value;
+    
+    __asm__(
+        
+        "movw   %[port],    %%dx;"
+        "in     %%dx,       %%al;"
+        "movb   %%al,       %[value];"
+        
+        : [ value ] "=m" ( value )
+        : [ port ] "m" ( port )
+    );
+    
+    return value;
+}
+
+void hal_port_out( unsigned short int port, unsigned char value )
+{
+    __asm__(
+        
+        "movb   %[value],   %%al;"
+        "movw   %[port],    %%dx;"
+        "out    %%al,       %%dx;"
+        
+        : 
+        : [ port ] "m" ( port ), [ value ] "m" ( value )
+    );
+}
