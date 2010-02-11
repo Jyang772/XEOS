@@ -42,4 +42,7 @@
 #define KBIT_ISSET( v, f )   ( ( v ) & ( f ) )
 #define KBIT_TOGGLE( v, f )  ( v ) ^= ( f )
 
+#define KMAX( a, b ) ( ( a > b ) ? a : b )
+#define KMIN( a, b ) ( ( a < b ) ? a : b )
+
 #endif /* __KMACROS_H__ */
