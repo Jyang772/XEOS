@@ -35,6 +35,79 @@
 #define __LIBC_LIMITS_H__
 #pragma once
 
+/**
+ * Number of bits in a char
+ */
+#define CHAR_BIT    8
 
+/**
+ * Maximum value of type char
+ */
+#define CHAR_MAX    127
+
+/**
+ * Minimum value of type char
+ */
+#define CHAR_MIN    ( -CHAR_MAX - 1 )
+
+/**
+ * Maximum value of type signed char
+ */
+#define SCHAR_MAX   127
+
+/**
+ * Minimum value of type signed char
+ */
+#define SCHAR_MIN   ( -SCHAR_MAX - 1 )
+
+/**
+ * Maximum value of type unsigned char
+ */
+#define UCHAR_MAX   255
+
+/**
+ * Maximum value of type short
+ */
+#define SHRT_MAX    32767
+
+/**
+ * Minimum value of type short
+ */
+#define SHRT_MIN    ( -SHRT_MAX - 1 )
+
+/**
+ * Maximum value of type unsigned short
+ */
+#define USHRT_MAX   65535U
+
+/**
+ * Maximum value of type int
+ */
+#define INT_MAX     32767
+
+/**
+ * Minimum value of type int
+ */
+#define INT_MIN     ( -INT_MAX - 1 )
+
+/**
+ * Maximum value of type unsigned int
+ */
+#define UINT_MAX    65535U
+
+/**
+ * Maximum value of type long
+ */
+#define LONG_MAX    2147483647L
+
+/**
+ * Minimum value of type long
+ */
+#define LONG_MIN    ( -LONG_MAX - 1 )
+
+/**
+ * Maximum value of type unsigned long
+ */
+#define ULONG_MAX   4294967295UL
 
 #endif /* __LIBC_LIMITS_H__ */
