@@ -51,7 +51,7 @@ RM                  = rm
 
 ARGS_AS             = -f elf -I $(DIR_SRC_INC)
 ARGS_CC             = -I $(DIR_SRC_INC) -I $(DIR_INC) -nostdlib -nostartfiles -nodefaultlibs -pedantic -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
-ARGS_LD             = -T linker.ld
+ARGS_LD             = 
 ARGS_RM             = -rf
 
 #-------------------------------------------------------------------------------
@@ -133,9 +133,6 @@ _FILES_C_OBJ_BUILD   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
 
 # Build the full project
 all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD)
-	@echo "    *** Linking the kernel parts"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_BIN)*)
-	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ)*
 
 # Cleans the build files
 clean:
