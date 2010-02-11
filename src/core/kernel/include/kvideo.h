@@ -68,5 +68,8 @@ typedef enum
 void kvideo_clear( void );
 void kvideo_set_bg( kvideo_color color );
 void kvideo_set_fg( kvideo_color color );
+void kvideo_cursor_move( unsigned int x, unsigned int y );
+unsigned int kvideo_cursor_x( void );
+unsigned int kvideo_cursor_y( void );
 
 #endif /* __KVIDEO_H__ */
