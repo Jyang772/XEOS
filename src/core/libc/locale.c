@@ -37,23 +37,23 @@
 
 struct lconv __libc_locale =
 {
-    "."
-    ""
-    ""
-    ""
-    ""
-    ""
-    ""
-    ""
-    ""
-    ""
-    CHAR_MAX
-    CHAR_MAX
-    CHAR_MAX
-    CHAR_MAX
-    CHAR_MAX
-    CHAR_MAX
-    CHAR_MAX
+    ".",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    CHAR_MAX,
+    CHAR_MAX,
+    CHAR_MAX,
+    CHAR_MAX,
+    CHAR_MAX,
+    CHAR_MAX,
+    CHAR_MAX,
     CHAR_MAX
 };
 
