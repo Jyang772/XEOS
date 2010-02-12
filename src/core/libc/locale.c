@@ -33,7 +33,6 @@
 
 #include "locale.h"
 #include "limits.h"
-#include "string.h"
 
 struct lconv __libc_locale =
 {
@@ -56,36 +55,3 @@ struct lconv __libc_locale =
     CHAR_MAX,
     CHAR_MAX
 };
-
-/**
- * Returns pointer to formatting information for current locale
- */
-struct lconv * localeconv( void )
-{
-    return &__libc_locale;
-}
-
-/**
- * Sets components of locale according to specified category and locale.
- * Returns string describing new locale or null on error. (Implementations are
- * permitted to define values of category additional to those describe here.)
- */
-char * setlocale( int category, const char * locale )
-{
-    ( void )category;
-    
-    if( locale == NULL ) {
-        
-        return "C";
-        
-    } else if ( ( strcmp( locale, "C" ) == 0) || ( strcmp( locale, "" ) == 0 ) ) {
-        
-        return "C";
-        
-    } else if ( ( strcmp( locale, "POSIX" ) == 0) ) {
-        
-        return "POSIX";
-    }
-    
-    return NULL;
-}
