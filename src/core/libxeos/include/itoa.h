@@ -31,10 +31,10 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_ITOA_H__
-#define __LIBC_ITOA_H__
+#ifndef __LIBXEOS_ITOA_H__
+#define __LIBXEOS_ITOA_H__
 #pragma once
 
 void itoa( int n, char s[] );
 
-#endif /* __LIBC_ITOA_H__ */
+#endif /* __LIBXEOS_ITOA_H__ */

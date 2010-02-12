@@ -32,9 +32,9 @@
 /* $Id$ */
 
 #include "itoa.h"
-#include "string.h"
+#include <string.h>
 
-static void __libc_itoa_reverse( char s[] )
+static void __libxeos_itoa_reverse( char s[] )
 {
     int i;
     int j;
@@ -77,5 +77,5 @@ void itoa( int n, char s[] )
     
     s[ i ] = '\0';
     
-    __libc_itoa_reverse( s );
+    __libxeos_itoa_reverse( s );
 }
