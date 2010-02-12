@@ -58,11 +58,13 @@ DIR_BUILD            = ../../build/
 DIR_BUILD_BIN        = $(DIR_BUILD)bin/core/
 DIR_BUILD_OBJ        = $(DIR_BUILD)obj/core/
 DIR_BUILD_OBJ_LIBC   = $(DIR_BUILD_OBJ)libc/
+DIR_BUILD_OBJ_LIBC   = $(DIR_BUILD_OBJ)libxeos/
 DIR_BUILD_OBJ_HAL    = $(DIR_BUILD_OBJ)hal/
 DIR_BUILD_OBJ_KERNEL = $(DIR_BUILD_OBJ)kernel/
 DIR_SRC              = ./
 DIR_SRC_INC          = $(DIR_SRC)include/
 DIR_SRC_LIBC         = $(DIR_SRC)libc/
+DIR_SRC_LIBC         = $(DIR_SRC)libxeos/
 DIR_SRC_HAL          = $(DIR_SRC)hal/
 DIR_SRC_KERNEL       = $(DIR_SRC)kernel/
 
@@ -99,16 +101,19 @@ vpath
 all:
 	@echo "    *** Building the C standard library"
 	@cd $(DIR_SRC_LIBC) && $(MAKE)
+	@echo "    *** Building the XEOS standard library"
+	@cd $(DIR_SRC_LIBXEOS) && $(MAKE)
 	@echo "    *** Building the harware abstraction layer"
 	@cd $(DIR_SRC_HAL) && $(MAKE)
 	@echo "    *** Building the kernel"
 	@cd $(DIR_SRC_KERNEL) && $(MAKE)
 	@echo "    *** Linking the kernel"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_HAL)*)
-	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_HAL)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_LIBXEOS)* $(DIR_BUILD_OBJ_HAL)*)
+	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_LIBXEOS)* $(DIR_BUILD_OBJ_HAL)*
 	
 # Cleans the build files
 clean:
 	@cd $(DIR_SRC_LIBC) && $(MAKE) clean
+	@cd $(DIR_SRC_LIBXEOS) && $(MAKE) clean
 	@cd $(DIR_SRC_HAL) && $(MAKE) clean
 	@cd $(DIR_SRC_KERNEL) && $(MAKE) clean
