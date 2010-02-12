@@ -35,8 +35,8 @@
 #define __LIBC_STDDEF_H__
 #pragma once
 
-#include "private/__null.h"
-#include "private/__size_t.h"
+#include <private/__null.h>
+#include <private/__size_t.h>
 
 /**
  * Offset (in bytes) of member m from start of structure type stype.

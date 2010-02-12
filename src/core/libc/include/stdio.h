@@ -35,9 +35,9 @@
 #define __LIBC_STDIO_H__
 #pragma once
 
-#include "private/__null.h"
-#include "private/__size_t.h"
-#include "stdarg.h"
+#include <private/__null.h>
+#include <private/__size_t.h>
+#include <stdarg.h>
 
 /**
  * Size of buffer used by setbuf.
