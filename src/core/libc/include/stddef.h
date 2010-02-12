@@ -41,7 +41,7 @@
 /**
  * Offset (in bytes) of member m from start of structure type stype.
  */
-offsetof( stype, m ) ( size_t ) &( ( ( stype * ) 0 )->m )
+#define offsetof( stype, m ) ( size_t ) &( ( ( stype * ) 0 )->m )
 
 /**
  * Type for objects declared to store result of subtracting pointers.
