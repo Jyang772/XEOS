@@ -35,6 +35,71 @@
 #define __LIBC_CTYPE_H__
 #pragma once
 
+/**
+ * isalpha( c ) or isdigit( c )
+ */
+int isalnum( int c );
 
+/**
+ * isupper( c ) or islower( c )
+ */
+int isalpha( int c );
+
+/**
+ * Is control character. In ASCII, control characters are 0x00 (NUL) to
+ * 0x1F (US), and 0x7F (DEL)
+ */
+int iscntrl( int c );
+
+/**
+ * Is decimal digit
+ */
+int isdigit( int c );
+
+/**
+ * Is printing character other than space
+ */
+int isgraph( int c );
+
+/**
+ * Is lower-case letter
+ */
+int islower( int c );
+
+/**
+ * Is printing character (including space). In ASCII, printing characters are
+ * 0x20 (' ') to 0x7E ('~')
+ */
+int isprint( int c );
+
+/**
+ * Is printing character other than space, letter, digit
+ */
+int ispunct( int c );
+
+/**
+ * Is space, formfeed, newline, carriage return, tab, vertical tab
+ */
+int isspace( int c );
+
+/**
+ * Is upper-case letter
+ */
+int isupper( int c );
+
+/**
+ * Is hexadecimal digit
+ */
+int isxdigit( int c );
+
+/**
+ * Return lower-case equivalent
+ */
+int tolower( int c );
+
+/**
+ * Return upper-case equivalent
+ */
+int toupper( int c );
 
 #endif /* __LIBC_CTYPE_H__ */
