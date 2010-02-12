@@ -54,19 +54,19 @@ ARGS_LD             = -T linker.ld
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD            = ../../build/
-DIR_BUILD_BIN        = $(DIR_BUILD)bin/core/
-DIR_BUILD_OBJ        = $(DIR_BUILD)obj/core/
-DIR_BUILD_OBJ_LIBC   = $(DIR_BUILD_OBJ)libc/
-DIR_BUILD_OBJ_LIBC   = $(DIR_BUILD_OBJ)libxeos/
-DIR_BUILD_OBJ_HAL    = $(DIR_BUILD_OBJ)hal/
-DIR_BUILD_OBJ_KERNEL = $(DIR_BUILD_OBJ)kernel/
-DIR_SRC              = ./
-DIR_SRC_INC          = $(DIR_SRC)include/
-DIR_SRC_LIBC         = $(DIR_SRC)libc/
-DIR_SRC_LIBC         = $(DIR_SRC)libxeos/
-DIR_SRC_HAL          = $(DIR_SRC)hal/
-DIR_SRC_KERNEL       = $(DIR_SRC)kernel/
+DIR_BUILD             = ../../build/
+DIR_BUILD_BIN         = $(DIR_BUILD)bin/core/
+DIR_BUILD_OBJ         = $(DIR_BUILD)obj/core/
+DIR_BUILD_OBJ_LIBC    = $(DIR_BUILD_OBJ)libc/
+DIR_BUILD_OBJ_LIBXEOS = $(DIR_BUILD_OBJ)libxeos/
+DIR_BUILD_OBJ_HAL     = $(DIR_BUILD_OBJ)hal/
+DIR_BUILD_OBJ_KERNEL  = $(DIR_BUILD_OBJ)kernel/
+DIR_SRC               = ./
+DIR_SRC_INC           = $(DIR_SRC)include/
+DIR_SRC_LIBC          = $(DIR_SRC)libc/
+DIR_SRC_LIBXEOS		  = $(DIR_SRC)libxeos/
+DIR_SRC_HAL           = $(DIR_SRC)hal/
+DIR_SRC_KERNEL        = $(DIR_SRC)kernel/
 
 #-------------------------------------------------------------------------------
 # Search paths
