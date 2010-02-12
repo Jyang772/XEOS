@@ -137,8 +137,6 @@ all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD)
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*
 	

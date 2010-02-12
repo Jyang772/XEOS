@@ -124,13 +124,11 @@ _FILES_C_OBJ_BUILD   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_TEST_OBJ_BUILD)
 	
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*
 	
