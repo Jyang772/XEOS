@@ -35,8 +35,8 @@
 #define __LIBC_STDLIB_H__
 #pragma once
 
-#include "private/null.h"
-#include "private/size_t.h"
+#include "private/__null.h"
+#include "private/__size_t.h"
 
 /**
  * Value for status argument to exit indicating failure.

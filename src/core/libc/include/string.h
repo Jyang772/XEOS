@@ -35,8 +35,8 @@
 #define __LIBC_STRING_H__
 #pragma once
 
-#include "private/null.h"
-#include "private/size_t.h"
+#include "private/__null.h"
+#include "private/__size_t.h"
 
 /**
  * Copies ct to s including terminating NUL and returns s.

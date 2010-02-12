@@ -35,7 +35,7 @@
 #define __LIBC_LOCALE_H__
 #pragma once
 
-#include "private/null.h"
+#include "private/__null.h"
 
 /**
  * Describes formatting of monetary and other numeric values
