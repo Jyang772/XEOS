@@ -87,8 +87,7 @@ double ldexp( double x, int n );
 
 /**
  * If x non-zero, returns value, with absolute value in interval [1/2, 1],
- * and assigns to * exp integer
-such that product of return value and 2 raised
+ * and assigns to * exp integer such that product of return value and 2 raised
  * to the power * exp equals x; if x zero, both return value and * exp are zero
  */
 double frexp( double x, int * exp );
