@@ -61,6 +61,7 @@ DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
 DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/libc/
 DIR_SRC             = ./
 DIR_SRC_LOCALE      = $(DIR_SRC)locale/
+DIR_SRC_MATH        = $(DIR_SRC)math/
 DIR_SRC_STDIO	    = $(DIR_SRC)stdio/
 DIR_SRC_STDLIB	    = $(DIR_SRC)stdlib/
 DIR_SRC_STRING	    = $(DIR_SRC)string/
@@ -89,6 +90,7 @@ vpath
 # Define the search paths for source files
 vpath %$(EXT_C) $(DIR_SRC)
 vpath %$(EXT_C) $(DIR_SRC_LOCALE)
+vpath %$(EXT_C) $(DIR_SRC_MATH)
 vpath %$(EXT_C) $(DIR_SRC_STDIO)
 vpath %$(EXT_C) $(DIR_SRC_STDLIB)
 vpath %$(EXT_C) $(DIR_SRC_STRING)
@@ -111,6 +113,7 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 # Gets every code file in the source directory
 _FILES_C                  = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
 _FILES_C_LOCALE           = $(foreach dir,$(DIR_SRC_LOCALE),$(wildcard $(DIR_SRC_LOCALE)*$(EXT_C)))
+_FILES_C_MATH             = $(foreach dir,$(DIR_SRC_MATH),$(wildcard $(DIR_SRC_MATH)*$(EXT_C)))
 _FILES_C_STDIO            = $(foreach dir,$(DIR_SRC_STDIO),$(wildcard $(DIR_SRC_STDIO)*$(EXT_C)))
 _FILES_C_STDLIB           = $(foreach dir,$(DIR_SRC_STDLIB),$(wildcard $(DIR_SRC_STDLIB)*$(EXT_C)))
 _FILES_C_STRING           = $(foreach dir,$(DIR_SRC_STRING),$(wildcard $(DIR_SRC_STRING)*$(EXT_C)))
@@ -118,13 +121,15 @@ _FILES_C_STRING           = $(foreach dir,$(DIR_SRC_STRING),$(wildcard $(DIR_SRC
 # Gets only the file name of the code files
 _FILES_C_REL              = $(notdir $(_FILES_C))
 _FILES_C_REL_LOCALE       = $(notdir $(_FILES_C_LOCALE))
+_FILES_C_REL_MATH         = $(notdir $(_FILES_C_MATH))
 _FILES_C_REL_STDIO        = $(notdir $(_FILES_C_STDIO))
 _FILES_C_REL_STDLIB       = $(notdir $(_FILES_C_STDLIB))
 _FILES_C_REL_STRING       = $(notdir $(_FILES_C_STRING))
 
 # Replace the code extension by the object one
 _FILES_C_OBJ              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
-_FILES_C_OBJ_LOCALE        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_LOCALE))
+_FILES_C_OBJ_LOCALE       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_LOCALE))
+_FILES_C_OBJ_MATH         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MATH))
 _FILES_C_OBJ_STDIO        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STDIO))
 _FILES_C_OBJ_STDLIB       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STDLIB))
 _FILES_C_OBJ_STRING       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STRING))
@@ -132,6 +137,7 @@ _FILES_C_OBJ_STRING       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_S
 # Prefix all binary files with the build directory
 _FILES_C_OBJ_BUILD        = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
 _FILES_C_OBJ_BUILD_LOCALE = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_LOCALE))
+_FILES_C_OBJ_BUILD_MATH   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_MATH))
 _FILES_C_OBJ_BUILD_STDIO  = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STDIO))
 _FILES_C_OBJ_BUILD_STDLIB = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STDLIB))
 _FILES_C_OBJ_BUILD_STRING = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STRING))
@@ -148,7 +154,7 @@ _FILES_C_OBJ_BUILD_STRING = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STRING))
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_LOCALE) $(_FILES_C_OBJ_BUILD_STDIO) $(_FILES_C_OBJ_BUILD_STDLIB) $(_FILES_C_OBJ_BUILD_STRING)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_LOCALE) $(_FILES_C_OBJ_BUILD_MATH) $(_FILES_C_OBJ_BUILD_STDIO) $(_FILES_C_OBJ_BUILD_STDLIB) $(_FILES_C_OBJ_BUILD_STRING)
 	
 # Cleans the build files
 clean:
