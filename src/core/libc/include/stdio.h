@@ -192,32 +192,84 @@ int setvbuf( FILE * stream, char * buf, int mode, size_t size );
 void setbuf( FILE * stream, char * buf );
 
 /**
- * 
+ * Converts (according to format format) and writes output to stream stream.
+ * Number of characters written, or negative value on error, is returned.
+ * Conversion specifications consist of:
+ *      
+ *      -   %
+ *      -   (optional) flag:
+ *          
+ *          -       left adjust
+ *          +       always sign
+ *          space   space if no sign
+ *          0       zero pad
+ *          #       Alternate form: for conversion character o, first digit will
+ *                  be zero, for [xX], prefix 0x or 0X to non-zero value, for
+ *                  [eEfgG], always decimal point, for [gG] trailing zeros not
+ *                  removed.
+ *          
+ *      -   (optional) minimum width: if specified as *, value taken from next
+ *          argument (which must be int).
+ *      -   (optional) . (separating width from precision):
+ *      -   (optional) precision: for conversion character s, maximum characters
+ *          to be printed from the string, for [eEf], digits after decimal
+ *          point, for [gG], significant digits, for an integer, minimum number
+ *          of digits to be printed. If specified as *, value taken from next
+ *          argument (which must be int).
+ *      -   (optional) length modifier:
+ *              
+ *          h       short or unsigned short
+ *          l       long or unsigned long
+ *          L       long double
+ *          
+ *      conversion character:
+ *          
+ *          d,i     int argument, printed in signed decimal notation
+ *          o       int argument, printed in unsigned octal notation
+ *          x,X     int argument, printed in unsigned hexadecimal notation
+ *          u       int argument, printed in unsigned decimal notation
+ *          c       int argument, printed as single character
+ *          s       char* argument
+ *          f       double argument, printed with format [-]mmm.ddd
+ *          e,E     double argument, printed with format [-]m.dddddd(e|E)(+|-)xx
+ *          g,G     double argument
+ *          p       void * argument, printed as pointer
+ *          n       int * argument : the number of characters written to this
+ *                  point is written into argument
+ *          %       no argument; prints %  
  */
 int fprintf( FILE * stream, const char * format, ... );
 
 /**
- * 
+ * printf( f, ... ) is equivalent to fprintf( stdout, f, ... )
  */
 int printf( const char * format, ... );
 
 /**
- * 
+ * Like fprintf, but output written into string s, which must be large enough
+ * to hold the output, rather than to a stream. Output is NUL-terminated.
+ * Returns length (excluding the terminating NUL).
  */
 int sprintf( char * s, const char * format, ... );
 
 /**
- * 
+ * Equivalent to fprintf with variable argument list replaced by arg, which must
+ * have been initialised by the va_start macro (and may have been used in calls
+ * to va_arg).
  */
-int vfprintf (FILE * stream, const char * format, va_list arg );
+int vfprintf( FILE * stream, const char * format, va_list arg );
 
 /**
- * 
+ * Equivalent to printf with variable argument list replaced by arg, which must
+ * have been initialised by the va_start macro (and may have been used in calls
+ * to va_arg).
  */
 int vprintf( const char * format, va_list arg );
 
 /**
- * 
+ * Equivalent to sprintf with variable argument list replaced by arg, which must
+ * have been initialised by the va_start macro (and may have been used in calls
+ * to va_arg).
  */
 int vsprintf( char * s, const char * format, va_list arg );
 
@@ -247,14 +299,15 @@ int fgetc( FILE * stream );
 char * fgets( char * s, int n, FILE * stream );
 
 /**
- * 
+ * Writes c, to stream stream. Returns c, or EOF on error.
  */
 int fputc( int c, FILE * stream );
 
 /**
- * 
+ * Writes s, to (output) stream stream. Returns non-negative on success or EOF
+ * on error.
  */
-char * fputs( const char * s, FILE * stream );
+int fputs( const char * s, FILE * stream );
 
 /**
  * 
@@ -272,9 +325,9 @@ int getchar( void );
 char * gets( char * s );
 
 /**
- * 
+ * Equivalent to fputc except that it may be a macro.
  */
-int putc( int c, FILE * stream );
+#define putc( c, stream ) fputc( c, stream )
 
 /**
  * 
@@ -282,7 +335,8 @@ int putc( int c, FILE * stream );
 int putchar( int c );
 
 /**
- * 
+ * Writes s (excluding terminating NUL) and a newline to stdout. Returns
+ * non-negative on success, EOF on error.
  */
 int puts( const char * s );
 
@@ -312,37 +366,39 @@ int fseek( FILE * stream, long offset, int origin );
 long ftell( FILE * stream );
 
 /**
- * 
+ * Equivalent to fseek(stream, 0L, SEEK_SET); clearerr(stream).
  */
 void rewind( FILE * stream );
 
 /**
- * 
+ * Stores current file position for stream stream in * ptr.
+ * Returns non-zero on error.
  */
 int fgetpos( FILE * stream, fpos_t * ptr );
 
 /**
- * 
+ * Sets current position of stream stream to * ptr. Returns non-zero on error.
  */
 int fsetpos( FILE * stream, const fpos_t * ptr );
 
 /**
- * 
+ * Clears end-of-file and error indicators for stream stream.
  */
 void clearerr( FILE * stream );
 
 /**
- * 
+ * Returns non-zero if end-of-file indicator is set for stream stream.
  */
 int feof( FILE * stream );
 
 /**
- * 
+ * Returns non-zero if error indicator is set for stream stream.
  */
 int ferror( FILE * stream );
 
 /**
- * 
+ * Prints s (if non-null) and strerror(errno) to standard error as would:
+ * fprintf( stderr, "%s: %s\n", ( s != NULL ? s : "" ), strerror( errno ) )
  */
 void perror( const char * s );
 
