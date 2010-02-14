@@ -49,11 +49,11 @@ char * setlocale( int category, const char * locale )
         
         return "C";
         
-    } else if ( ( strcmp( locale, "C" ) == 0) || ( strcmp( locale, "" ) == 0 ) ) {
+    } else if( ( strcmp( locale, "C" ) == 0 ) || ( strcmp( locale, "" ) == 0 ) ) {
         
         return "C";
         
-    } else if ( ( strcmp( locale, "POSIX" ) == 0) ) {
+    } else if( ( strcmp( locale, "POSIX" ) == 0 ) ) {
         
         return "POSIX";
     }
