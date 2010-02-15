@@ -99,24 +99,24 @@ time_t mktime( struct tm * tp );
 /**
  * Returns the given time as a string of the form: Sun Jan 3 13:08:42 1988\n\0
  */
-char* asctime( const struct tm * tp );
+char * asctime( const struct tm * tp );
 
 /**
  * Returns string equivalent to calendar time tp converted to local time.
  * Equivalent to: asctime( localtime( tp ) )
  */
-char* ctime( const time_t * tp );
+char * ctime( const time_t * tp );
 
 /**
  * Returns calendar time * tp converted to Coordinated Universal Time, or NULL
  * if not available.
  */
-struct tm* gmtime( const time_t * tp );
+struct tm * gmtime( const time_t * tp );
 
 /**
  * Returns calendar time * tp converted into local time.
  */
-struct tm* localtime( const time_t * tp );
+struct tm * localtime( const time_t * tp );
 
 /**
  * Formats * tp into s according to fmt. Places no more than smax characters
