@@ -41,5 +41,5 @@ extern unsigned char __libc_ctype_punct;
  */
 int ispunct( int c )
 {
-    return ( c > 256 ) 0 : ( ( c & __libc_ctype_punct ) : 1 : 0 );
+    return ( c > 255 ) 0 : ( ( c & __libc_ctype_punct ) : 1 : 0 );
 }

@@ -41,5 +41,5 @@ extern unsigned char __libc_ctype_alpha;
  */
 int isalpha( int c )
 {
-    return ( c > 256 ) 0 : ( ( c & __libc_ctype_alpha ) : 1 : 0 );
+    return ( c > 255 ) 0 : ( ( c & __libc_ctype_alpha ) : 1 : 0 );
 }
