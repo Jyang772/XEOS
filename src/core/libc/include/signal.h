@@ -39,6 +39,10 @@
 extern "C" {
 #endif
 
+void __libc_signal_dfl( int sig );
+void __libc_signal_err( int sig );
+void __libc_signal_ign( int sig );
+
 /**
  * Abnormal termination
  */
@@ -72,17 +76,17 @@ extern "C" {
 /**
  * Specifies default signal handling
  */
-#define SIG_DFL 0x07
+#define SIG_DFL __libc_signal_dfl
 
 /**
  * Signal return value indicating error
  */
-#define SIG_ERR 0x08
+#define SIG_ERR __libc_signal_err
 
 /**
  * Specifies that signal should be ignored
  */
-#define SIG_IGN 0x09
+#define SIG_IGN __libc_signal_ign
 
 /**
  * Install handler for subsequent signal sig. If handler is SIG_DFL,
@@ -94,7 +98,7 @@ extern "C" {
  * error. Initial state is implementation-defined. Implementations may may
  * define signals additional to those listed here.
  */
-void ( *signal( int sig, void( *handler )( int ) ) )( int );
+void ( * signal( int sig, void( * handler )( int ) ) )( int );
 
 /**
  * Sends signal sig. Returns zero on success.
