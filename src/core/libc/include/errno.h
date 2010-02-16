@@ -35,6 +35,10 @@
 #define __LIBC_ERRNO_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Object to which certain library functions assign specific positive values
  * on error
@@ -50,5 +54,9 @@ extern unsigned int errno;
  * Code used for range errors
  */
 #define ERANGE  0x02
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_ERRNO_H__ */

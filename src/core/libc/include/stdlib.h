@@ -38,6 +38,10 @@
 #include <private/__null.h>
 #include <private/__size_t.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Value for status argument to exit indicating failure.
  */
@@ -232,5 +236,9 @@ int rand( void );
  * Initial seed is 1.
  */
 void srand( unsigned int seed );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_STDLIB_H__ */

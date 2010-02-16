@@ -35,6 +35,10 @@
 #define __LIBC_ASSERT_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Macro used for internal error detection. (Ignored if NDEBUG is defined where
  * <assert.h> is included.) If expression equals zero, message printed on stderr
@@ -52,5 +56,9 @@
 #endif
 
 void __libc_assert( char * expression, char * file, int line );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_ASSERT_H__ */

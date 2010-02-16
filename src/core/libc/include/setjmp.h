@@ -35,6 +35,10 @@
 #define __LIBC_SETJMP_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Type of object holding context information
  */
@@ -65,5 +69,9 @@ int setjmp( jmp_buf env );
  * if specified value non-zero, or 1 otherwise.
  */
 void longjmp( jmp_buf env, int val );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_SETJMP_H__ */

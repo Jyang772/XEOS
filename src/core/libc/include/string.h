@@ -38,6 +38,10 @@
 #include <private/__null.h>
 #include <private/__size_t.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Copies ct to s including terminating NUL and returns s.
  */
@@ -165,5 +169,9 @@ void * memchr( const void * cs, int c, size_t n );
  * Replaces each of the first n characters of s by c and returns s.
  */
 void * memset( void * s, int c, size_t n );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_STRING_H__ */

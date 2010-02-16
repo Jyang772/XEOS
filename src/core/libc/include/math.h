@@ -35,6 +35,10 @@
 #define __LIBC_MATH_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Magnitude returned (with correct sign) on overflow error
  */
@@ -153,5 +157,9 @@ double cosh( double x );
  * Hyperbolic tangent of x
  */
 double tanh( double x );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_MATH_H__ */

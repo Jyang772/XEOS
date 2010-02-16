@@ -38,6 +38,10 @@
 #include <private/__null.h>
 #include <private/__size_t.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Offset (in bytes) of member m from start of structure type stype.
  */
@@ -47,5 +51,9 @@
  * Type for objects declared to store result of subtracting pointers.
  */
 typedef int ptrdiff_t
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_STDDEF_H__ */

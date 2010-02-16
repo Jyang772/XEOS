@@ -35,6 +35,10 @@
 #define __LIBC_CTYPE_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * isalpha( c ) or isdigit( c )
  */
@@ -101,5 +105,9 @@ int tolower( int c );
  * Return upper-case equivalent
  */
 int toupper( int c );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_CTYPE_H__ */

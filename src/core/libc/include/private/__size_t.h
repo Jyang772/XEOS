@@ -35,9 +35,17 @@
 #define __LIBC_PRIVATE_SIZE_T_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Type for objects declared to store result of sizeof operator.
  */
 typedef unsigned int size_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_PRIVATE_SIZE_T_H__ */

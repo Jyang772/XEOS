@@ -35,6 +35,10 @@
 #define __LIBC_SIGNAL_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Abnormal termination
  */
@@ -96,5 +100,9 @@ void ( *signal( int sig, void( *handler )( int ) ) )( int );
  * Sends signal sig. Returns zero on success.
  */
 int raise( int sig );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_SIGNAL_H__ */

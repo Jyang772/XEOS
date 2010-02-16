@@ -35,6 +35,10 @@
 #define __LIBC_LIMITS_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Number of bits in a char
  */
@@ -109,5 +113,9 @@
  * Maximum value of type unsigned long
  */
 #define ULONG_MAX   4294967295UL
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_LIMITS_H__ */

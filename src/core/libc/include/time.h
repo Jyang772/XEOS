@@ -38,6 +38,10 @@
 #include <private/__null.h>
 #include <private/__size_t.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * The number of clock_t units per second.
  */
@@ -148,5 +152,9 @@ struct tm * localtime( const time_t * tp );
  *      
  */
 size_t strftime( char * s, size_t smax, const char * fmt, const struct tm * tp );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_TIME_H__ */

@@ -35,9 +35,17 @@
 #define __LIBC_PRIVATE_NULL_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Null pointer constant.
  */
 #define NULL ( ( void * )0 )
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_PRIVATE_NULL_H__ */

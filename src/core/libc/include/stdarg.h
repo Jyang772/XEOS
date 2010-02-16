@@ -35,6 +35,10 @@
 #define __LIBC_STDARG_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef __GNUC__
     
     /**
@@ -70,6 +74,10 @@
     #define va_end( ap ) __builtin_va_end( ap )
     #define va_arg( ap, type ) __builtin_va_arg( ap, type )
     
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif /* __LIBC_STDARG_H__ */

@@ -35,6 +35,14 @@
 #define __LIBC_FLOAT_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_FLOAT_H__ */

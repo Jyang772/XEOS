@@ -37,6 +37,10 @@
 
 #include <private/__null.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Describes formatting of monetary and other numeric values
  */
@@ -187,5 +191,9 @@ char * setlocale( int category, const char * locale );
  * Category for information affecting time conversions functions
  */
 #define LC_TIME     0x06
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_LOCALE_H__ */

@@ -39,6 +39,10 @@
 #include <private/__size_t.h>
 #include <stdarg.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Size of buffer used by setbuf.
  */
@@ -401,6 +405,10 @@ int ferror( FILE * stream );
  * fprintf( stderr, "%s: %s\n", ( s != NULL ? s : "" ), strerror( errno ) )
  */
 void perror( const char * s );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBC_STDIO_H__ */
 
