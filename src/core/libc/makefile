@@ -62,6 +62,7 @@ DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/libc/
 DIR_SRC             = ./
 DIR_SRC_LOCALE      = $(DIR_SRC)locale/
 DIR_SRC_MATH        = $(DIR_SRC)math/
+DIR_SRC_SIGNAL      = $(DIR_SRC)signal/
 DIR_SRC_STDIO       = $(DIR_SRC)stdio/
 DIR_SRC_STDLIB      = $(DIR_SRC)stdlib/
 DIR_SRC_STRING      = $(DIR_SRC)string/
@@ -92,6 +93,7 @@ vpath
 vpath %$(EXT_C) $(DIR_SRC)
 vpath %$(EXT_C) $(DIR_SRC_LOCALE)
 vpath %$(EXT_C) $(DIR_SRC_MATH)
+vpath %$(EXT_C) $(DIR_SRC_SIGNAL)
 vpath %$(EXT_C) $(DIR_SRC_STDIO)
 vpath %$(EXT_C) $(DIR_SRC_STDLIB)
 vpath %$(EXT_C) $(DIR_SRC_STRING)
@@ -116,6 +118,7 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 _FILES_C                  = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
 _FILES_C_LOCALE           = $(foreach dir,$(DIR_SRC_LOCALE),$(wildcard $(DIR_SRC_LOCALE)*$(EXT_C)))
 _FILES_C_MATH             = $(foreach dir,$(DIR_SRC_MATH),$(wildcard $(DIR_SRC_MATH)*$(EXT_C)))
+_FILES_C_SIGNAL           = $(foreach dir,$(DIR_SRC_SIGNAL),$(wildcard $(DIR_SRC_SIGNAL)*$(EXT_C)))
 _FILES_C_STDIO            = $(foreach dir,$(DIR_SRC_STDIO),$(wildcard $(DIR_SRC_STDIO)*$(EXT_C)))
 _FILES_C_STDLIB           = $(foreach dir,$(DIR_SRC_STDLIB),$(wildcard $(DIR_SRC_STDLIB)*$(EXT_C)))
 _FILES_C_STRING           = $(foreach dir,$(DIR_SRC_STRING),$(wildcard $(DIR_SRC_STRING)*$(EXT_C)))
@@ -125,6 +128,7 @@ _FILES_C_TIME             = $(foreach dir,$(DIR_SRC_TIME),$(wildcard $(DIR_SRC_T
 _FILES_C_REL              = $(notdir $(_FILES_C))
 _FILES_C_REL_LOCALE       = $(notdir $(_FILES_C_LOCALE))
 _FILES_C_REL_MATH         = $(notdir $(_FILES_C_MATH))
+_FILES_C_REL_SIGNAL       = $(notdir $(_FILES_C_SIGNAL))
 _FILES_C_REL_STDIO        = $(notdir $(_FILES_C_STDIO))
 _FILES_C_REL_STDLIB       = $(notdir $(_FILES_C_STDLIB))
 _FILES_C_REL_STRING       = $(notdir $(_FILES_C_STRING))
@@ -134,6 +138,7 @@ _FILES_C_REL_TIME         = $(notdir $(_FILES_C_TIME))
 _FILES_C_OBJ              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
 _FILES_C_OBJ_LOCALE       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_LOCALE))
 _FILES_C_OBJ_MATH         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MATH))
+_FILES_C_OBJ_SIGNAL       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SIGNAL))
 _FILES_C_OBJ_STDIO        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STDIO))
 _FILES_C_OBJ_STDLIB       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STDLIB))
 _FILES_C_OBJ_STRING       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STRING))
@@ -143,6 +148,7 @@ _FILES_C_OBJ_TIME         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_T
 _FILES_C_OBJ_BUILD        = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
 _FILES_C_OBJ_BUILD_LOCALE = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_LOCALE))
 _FILES_C_OBJ_BUILD_MATH   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_MATH))
+_FILES_C_OBJ_BUILD_SIGNAL = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SIGNAL))
 _FILES_C_OBJ_BUILD_STDIO  = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STDIO))
 _FILES_C_OBJ_BUILD_STDLIB = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STDLIB))
 _FILES_C_OBJ_BUILD_STRING = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STRING))
@@ -160,7 +166,7 @@ _FILES_C_OBJ_BUILD_TIME   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_TIME))
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_LOCALE) $(_FILES_C_OBJ_BUILD_MATH) $(_FILES_C_OBJ_BUILD_STDIO) $(_FILES_C_OBJ_BUILD_STDLIB) $(_FILES_C_OBJ_BUILD_STRING) $(_FILES_C_OBJ_BUILD_TIME)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_LOCALE) $(_FILES_C_OBJ_BUILD_MATH) $(_FILES_C_OBJ_BUILD_SIGNAL) $(_FILES_C_OBJ_BUILD_STDIO) $(_FILES_C_OBJ_BUILD_STDLIB) $(_FILES_C_OBJ_BUILD_STRING) $(_FILES_C_OBJ_BUILD_TIME)
 	
 # Cleans the build files
 clean:
