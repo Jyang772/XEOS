@@ -50,7 +50,7 @@ extern "C" {
 /**
  * Type for objects declared to store result of subtracting pointers.
  */
-typedef int ptrdiff_t
+typedef int ptrdiff_t;
 
 #ifdef __cplusplus
 }
