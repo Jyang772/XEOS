@@ -32,17 +32,25 @@
 /* $Id$ */
 
 #include "private/kvideo.h"
-#include "syscalls.h"
 
-void kmain( void );
+extern unsigned char __kvideo_attr;
 
-void kmain( void )
+void kvideo_clear( void )
 {
-    kvideo_set_fg( KVIDEO_COLOR_WHITE );
-    kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
-    kvideo_clear();
+    unsigned char * mem;
+    unsigned int    memSize;
+    unsigned int    i;
     
-    syscall( SYS_test );
+    mem     = ( unsigned char * )KVIDEO_MEM;
+    memSize = KVIDEO_COLS * KVIDEO_ROWS;
+    i       = 0;
     
-    for( ; ; );
+    for( i = 0; i < memSize; i++ ) {
+        
+        mem[ 0 ] = 0x20;
+        mem[ 1 ] = __kvideo_attr;
+        mem     += 2;
+    }
+    
+    kvideo_cursor_move( 0, 0 );
 }

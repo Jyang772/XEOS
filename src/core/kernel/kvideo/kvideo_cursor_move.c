@@ -31,18 +31,27 @@
 
 /* $Id$ */
 
+#include <hal/hal.h>
+#include <xeos/xeos.h>
+
 #include "private/kvideo.h"
-#include "syscalls.h"
 
-void kmain( void );
+extern unsigned int __kvideo_x;
+extern unsigned int __kvideo_y;
 
-void kmain( void )
+void kvideo_cursor_move( unsigned int x, unsigned int y )
 {
-    kvideo_set_fg( KVIDEO_COLOR_WHITE );
-    kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
-    kvideo_clear();
+    unsigned int cursor_pos;
     
-    syscall( SYS_test );
+    __kvideo_x = x;
+    __kvideo_y = y;
     
-    for( ; ; );
+    x          = MIN( x, KVIDEO_COLS - 1 );
+    y          = MIN( y, KVIDEO_ROWS - 1 );
+    cursor_pos = x + ( y * KVIDEO_COLS );
+    
+    hal_io_port_out( CRTC_DATA_REGISTER, CRTC_CURSOR_LOCATION_HIGH );
+    hal_io_port_out( CRTC_INDEX_REGISTER, cursor_pos >> 8 );
+    hal_io_port_out( CRTC_DATA_REGISTER, CRTC_CURSOR_LOCATION_LOW );
+    hal_io_port_out( CRTC_INDEX_REGISTER, cursor_pos & 0x00FF );
 }

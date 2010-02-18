@@ -31,18 +31,11 @@
 
 /* $Id$ */
 
+extern unsigned int __kvideo_x;
+
 #include "private/kvideo.h"
-#include "syscalls.h"
 
-void kmain( void );
-
-void kmain( void )
+unsigned int kvideo_cursor_x( void )
 {
-    kvideo_set_fg( KVIDEO_COLOR_WHITE );
-    kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
-    kvideo_clear();
-    
-    syscall( SYS_test );
-    
-    for( ; ; );
+    return __kvideo_x;
 }

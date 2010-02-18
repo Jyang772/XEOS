@@ -31,18 +31,9 @@
 
 /* $Id$ */
 
-#include "private/kvideo.h"
-#include "syscalls.h"
+/* Video attribute byte */
+unsigned char __kvideo_attr = 0x00;
 
-void kmain( void );
-
-void kmain( void )
-{
-    kvideo_set_fg( KVIDEO_COLOR_WHITE );
-    kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
-    kvideo_clear();
-    
-    syscall( SYS_test );
-    
-    for( ; ; );
-}
+/* Cursor position */
+unsigned int __kvideo_x     = 0x00;
+unsigned int __kvideo_y     = 0x00;

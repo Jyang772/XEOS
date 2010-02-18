@@ -31,70 +31,12 @@
 
 /* $Id$ */
 
-#include <hal/hal.h>
-#include <xeos/xeos.h>
+extern unsigned char __kvideo_attr;
 
 #include "private/kvideo.h"
-
-/* Video attribute byte */
-static unsigned char __kvideo_attr = 0x00;
-
-/* Cursor position */
-static unsigned int __kvideo_x     = 0x00;
-static unsigned int __kvideo_y     = 0x00;
-
-void kvideo_cursor_move( unsigned int x, unsigned int y )
-{
-    unsigned int cursor_pos;
-    
-    x          = MIN( x, KVIDEO_COLS - 1 );
-    y          = MIN( y, KVIDEO_ROWS - 1 );
-    cursor_pos = x + ( y * KVIDEO_COLS );
-    
-    hal_io_port_out( CRTC_DATA_REGISTER, CRTC_CURSOR_LOCATION_HIGH );
-    hal_io_port_out( CRTC_INDEX_REGISTER, cursor_pos >> 8 );
-    hal_io_port_out( CRTC_DATA_REGISTER, CRTC_CURSOR_LOCATION_LOW );
-    hal_io_port_out( CRTC_INDEX_REGISTER, cursor_pos & 0x00FF );
-}
-
-unsigned int kvideo_cursor_x( void )
-{
-    return __kvideo_x;
-}
-
-unsigned int kvideo_cursor_y( void )
-{
-    return __kvideo_y;
-}
-
-void kvideo_clear( void )
-{
-    unsigned char * mem;
-    unsigned int    memSize;
-    unsigned int    i;
-    
-    mem     = ( unsigned char * )KVIDEO_MEM;
-    memSize = KVIDEO_COLS * KVIDEO_ROWS;
-    i       = 0;
-    
-    for( i = 0; i < memSize; i++ ) {
-        
-        mem[ 0 ] = 0x20;
-        mem[ 1 ] = __kvideo_attr;
-        mem     += 2;
-    }
-    
-    kvideo_cursor_move( 0, 0 );
-}
 
 void kvideo_set_bg( kvideo_color color )
 {
     __kvideo_attr &= ( 0x0F );
     __kvideo_attr |= ( color << 4 );
-}
-
-void kvideo_set_fg( kvideo_color color )
-{
-    __kvideo_attr &= ( 0xF0 );
-    __kvideo_attr |= color;
 }

@@ -31,18 +31,12 @@
 
 /* $Id$ */
 
+extern unsigned char __kvideo_attr;
+
 #include "private/kvideo.h"
-#include "syscalls.h"
 
-void kmain( void );
-
-void kmain( void )
+void kvideo_set_fg( kvideo_color color )
 {
-    kvideo_set_fg( KVIDEO_COLOR_WHITE );
-    kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
-    kvideo_clear();
-    
-    syscall( SYS_test );
-    
-    for( ; ; );
+    __kvideo_attr &= ( 0xF0 );
+    __kvideo_attr |= color;
 }
