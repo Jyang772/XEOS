@@ -33,6 +33,7 @@
 
 #include <hal/hal.h>
 #include <hal/crtc.h>
+#include <xeos/xeos.h>
 
 #include "private/kvideo.h"
 
@@ -47,8 +48,8 @@ void kvideo_cursor_move( unsigned int x, unsigned int y )
 {
     unsigned int cursor_pos;
     
-    x          = KMIN( x, KVIDEO_COLS - 1 );
-    y          = KMIN( y, KVIDEO_ROWS - 1 );
+    x          = MIN( x, KVIDEO_COLS - 1 );
+    y          = MIN( y, KVIDEO_ROWS - 1 );
     cursor_pos = x + ( y * KVIDEO_COLS );
     
     hal_port_out( CRTC_DATA_REGISTER, CRTC_CURSOR_LOCATION_HIGH );
