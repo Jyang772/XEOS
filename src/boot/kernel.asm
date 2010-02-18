@@ -84,7 +84,7 @@ jmp     XEOS.kernel
 XEOS.kernel:
     
     ; Sets the data segments
-    mov     ax,         $XEOS.gdt.descriptors.data
+    mov     ax,         $XEOS.gdt.descriptors.data.kernel
     mov     ds,         ax
     mov     es,         ax
     

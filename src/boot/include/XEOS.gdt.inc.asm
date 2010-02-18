@@ -86,9 +86,11 @@
 ;-------------------------------------------------------------------------------
 ; Addresses of the descriptors
 ;-------------------------------------------------------------------------------
-%define $XEOS.gdt.descriptors.null  0x00
-%define $XEOS.gdt.descriptors.code  0x08
-%define $XEOS.gdt.descriptors.data  0x10
+%define $XEOS.gdt.descriptors.null          0x00
+%define $XEOS.gdt.descriptors.code.kernel   0x08
+%define $XEOS.gdt.descriptors.data.kernel   0x10
+%define $XEOS.gdt.descriptors.code.user     0x18
+%define $XEOS.gdt.descriptors.data.user     0x20
 
 ; GDT start address
 XEOS.gdt.start:
@@ -102,7 +104,7 @@ dd  0
 dd  0
 
 ;-------------------------------------------------------------------------------
-; Code descriptor
+; Kernel space code descriptor
 ;-------------------------------------------------------------------------------
 
 ; Segment limit (0-15)
@@ -134,7 +136,7 @@ db  11001111b
 db  0
 
 ;-------------------------------------------------------------------------------
-; Data descriptor
+; Kernel space data descriptor
 ;-------------------------------------------------------------------------------
 
 ; Segment limit (0-15)
@@ -154,6 +156,70 @@ db  0
 ; Privilege level:          00      - Ring 0 (kernel level)
 ; In memory:                1       - ???
 db  10010010b
+
+; Segment limit (16-19):    1111    - High bits for the segment limit
+; OS reserved:              0       - Nothing
+; Reserved:                 0       - Nothing
+; Segment type:             1       - 32 bits
+; Granularity:              1       - Segments bounded by 4K
+db  11001111b
+
+; Base address (24-31)
+db  0
+
+;-------------------------------------------------------------------------------
+; User space code descriptor
+;-------------------------------------------------------------------------------
+
+; Segment limit (0-15)
+dw  0xFFFF
+
+; Base address (0-15)
+dw  0
+
+; Base address (16-23)
+db  0
+
+; Access:                   0       - Not using virtual memory
+; Descriptor type:          1       - Read and execute
+;                           0       - ???
+;                           1       - Code descriptor
+; Descriptor bit:           1       - Code/Data descriptor
+; Privilege level:          11      - Ring 3 (user level)
+; In memory:                1       - ???
+db  11111010b
+
+; Segment limit (16-19):    1111    - High bits for the segment limit
+; OS reserved:              0       - Nothing
+; Reserved:                 0       - Nothing
+; Segment type:             1       - 32 bits
+; Granularity:              1       - Segments bounded by 4K
+db  11001111b
+
+; Base address (24-31)
+db  0
+
+;-------------------------------------------------------------------------------
+; User space data descriptor
+;-------------------------------------------------------------------------------
+
+; Segment limit (0-15)
+dw  0xFFFF
+
+; Base address (0-15)
+dw  0
+
+; Base address (16-23)
+db  0
+
+; Access:                   0       - Not using virtual memory
+; Descriptor type:          1       - Read and write
+;                           0       - ???
+;                           0       - Data descriptor
+; Descriptor bit:           1       - Code/Data descriptor
+; Privilege level:          11      - Ring 3 (user level)
+; In memory:                1       - ???
+db  11110010b
 
 ; Segment limit (16-19):    1111    - High bits for the segment limit
 ; OS reserved:              0       - Nothing

@@ -202,7 +202,7 @@ XEOS.boot.stage2:
     ; We are doing a far jump using our code descriptor
     ; 
     ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-    jmp	    $XEOS.gdt.descriptors.code:.kernelSetup
+    jmp	    $XEOS.gdt.descriptors.code.kernel:.kernelSetup
 
 ; We are now in 32 bits mode
 BITS    32
@@ -214,7 +214,7 @@ BITS    32
 XEOS.boot.stage2.kernelSetup:
     
     ; Sets the data segments to the GDT data descriptor
-    mov     ax,         $XEOS.gdt.descriptors.data
+    mov     ax,         $XEOS.gdt.descriptors.data.kernel
     mov     ds,         ax
     mov     ss,         ax
     mov     es,         ax
@@ -252,7 +252,7 @@ XEOS.boot.stage2.kernelSetup:
         rep     movsd
     
     ; We can now jump to the kernel code
-    jmp     $XEOS.gdt.descriptors.code:0x100000
+    jmp     $XEOS.gdt.descriptors.code.kernel:0x100000
     
     ; Infinite loop
     jmp     $
