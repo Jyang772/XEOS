@@ -31,8 +31,8 @@
 
 /* $Id$ */
 
-#ifndef __KVIDEO_H__
-#define __KVIDEO_H__
+#ifndef __KERNEL_VIDEO_H__
+#define __KERNEL_VIDEO_H__
 #pragma once
 
 /* Location of the video memory */
@@ -72,4 +72,4 @@ void kvideo_cursor_move( unsigned int x, unsigned int y );
 unsigned int kvideo_cursor_x( void );
 unsigned int kvideo_cursor_y( void );
 
-#endif /* __KVIDEO_H__ */
+#endif /* __KERNEL_VIDEO_H__ */
