@@ -99,7 +99,7 @@ jmp     XEOS.boot.stage2
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.files.kernel               db  'KERNEL  BIN'
+XEOS.files.kernel               db  'KERNEL  ELF'
 XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
                                 '    *               XEOS - x86 Experimental Operating System               *',\
                                 $ASCII.NL,\

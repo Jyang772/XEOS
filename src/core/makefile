@@ -109,7 +109,7 @@ all:
 	@cd $(DIR_SRC_KERNEL) && $(MAKE)
 	@echo "    *** Linking the kernel"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_LIBXEOS)* $(DIR_BUILD_OBJ_HAL)*)
-	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_LIBXEOS)* $(DIR_BUILD_OBJ_HAL)*
+	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.ELF $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_LIBXEOS)* $(DIR_BUILD_OBJ_HAL)*
 	
 # Cleans the build files
 clean:
