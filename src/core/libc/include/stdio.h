@@ -355,17 +355,24 @@ int ungetc( int c, FILE * stream );
 size_t fread( void * ptr, size_t size, size_t nobj, FILE * stream );
 
 /**
- * 
+ * Writes to stream stream, nobj objects of size size from array ptr.
+ * Returns number of objects written.
  */
 size_t fwrite( const void * ptr, size_t size, size_t nobj, FILE * stream );
 
 /**
- * 
+ * Sets file position for stream stream and clears end-of-file indicator.
+ * For a binary stream, file position is set to offset bytes from the position
+ * indicated by origin: beginning of file for SEEK_SET, current position for
+ * SEEK_CUR, or end of file for SEEK_END. Behaviour is similar for a text
+ * stream, but offset must be zero or, for SEEK_SET only, a value returned by
+ * ftell.
+ * Returns non-zero on error.
  */
 int fseek( FILE * stream, long offset, int origin );
 
 /**
- * 
+ * Returns current file position for stream stream, or -1 on error.
  */
 long ftell( FILE * stream );
 
