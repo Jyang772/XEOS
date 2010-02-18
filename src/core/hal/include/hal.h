@@ -31,5 +31,19 @@
 
 /* $Id$ */
 
+#ifndef __HAL_H__
+#define __HAL_H__
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 unsigned char hal_port_in( unsigned short int port );
 void hal_port_out( unsigned short int port, unsigned char value );
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __HAL_H__ */

@@ -31,9 +31,13 @@
 
 /* $Id$ */
 
-#ifndef __CRTC_H__
-#define __CRTC_H__
+#ifndef __HAL_CRTC_H__
+#define __HAL_CRTC_H__
 #pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define CRTC_DATA_REGISTER                 0x03D4
 #define CRTC_INDEX_REGISTER                0x03D5
@@ -64,4 +68,8 @@
 #define CRTC_CRTC_MODE_CONTROL             0x0017
 #define CRTC_LINE_COMPARE                  0x0018
 
-#endif /* __CRTC_H__ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __HAL_CRTC_H__ */
