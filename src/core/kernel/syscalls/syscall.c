@@ -43,7 +43,7 @@ void syscall( unsigned char n )
     __asm__(
         
         "movb   %[syscall],     %%al;"
-        "int    $0x32;"
+        "int    $0x20;"
         
         : 
         : [ syscall ] "m" ( n )
