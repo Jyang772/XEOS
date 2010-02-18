@@ -42,5 +42,5 @@ void kmain( void )
     kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
     kvideo_clear();
     
-    for(;;);
+    for( ; ; );
 }
