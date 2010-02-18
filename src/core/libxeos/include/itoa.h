@@ -35,6 +35,16 @@
 #define __LIBXEOS_ITOA_H__
 #pragma once
 
-void itoa( int n, char s[] );
+#include <xeos/types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void itoa( XSInteger n, XSChar s[] );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __LIBXEOS_ITOA_H__ */

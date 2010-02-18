@@ -34,7 +34,7 @@
 #include "itoa.h"
 #include <string.h>
 
-static void __libxeos_itoa_reverse( char s[] )
+static void __libxeos_itoa_reverse( XSChar s[] )
 {
     int i;
     int j;
@@ -52,7 +52,7 @@ static void __libxeos_itoa_reverse( char s[] )
     }
 }
 
-void itoa( int n, char s[] )
+void itoa( XSInteger n, XSChar s[] )
 {
     int i;
     int sign;
