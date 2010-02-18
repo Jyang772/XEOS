@@ -163,7 +163,7 @@ unsigned char __libc_ctype_ascii[ 256 ] = {
     
 };
 
-/* ASCII properties */
+/* ASCII properties masks */
 unsigned char __libc_ctype_alnum  = 0x0E;
 unsigned char __libc_ctype_alpha  = 0x0C;
 unsigned char __libc_ctype_cntrl  = 0x01;
