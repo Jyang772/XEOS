@@ -34,7 +34,7 @@
 #include <hal/hal.h>
 #include <hal/crtc.h>
 
-#include "kvideo.h"
+#include "private/kvideo.h"
 
 /* Video attribute byte */
 static unsigned char __kvideo_attr = 0x00;

@@ -31,7 +31,7 @@
 
 /* $Id$ */
 
-#include "kvideo.h"
+#include "private/kvideo.h"
 
 void kmain( void );
 
