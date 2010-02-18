@@ -31,12 +31,21 @@
 
 /* $Id$ */
 
-#ifndef __HAL_H__
-#define __HAL_H__
-#pragma once
+#include "io.h"
 
-#include <hal/cpu.h>
-#include <hal/io.h>
-#include <hal/crtc.h>
-
-#endif /* __HAL_H__ */
+unsigned char hal_io_port_in( unsigned short int port )
+{
+    unsigned char value;
+    
+    __asm__(
+        
+        "movw   %[port],    %%dx;"
+        "in     %%dx,       %%al;"
+        "movb   %%al,       %[value];"
+        
+        : [ value ] "=m" ( value )
+        : [ port ] "m" ( port )
+    );
+    
+    return value;
+}

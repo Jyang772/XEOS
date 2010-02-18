@@ -31,12 +31,19 @@
 
 /* $Id$ */
 
-#ifndef __HAL_H__
-#define __HAL_H__
+#ifndef __HAL_IO_H__
+#define __HAL_IO_H__
 #pragma once
 
-#include <hal/cpu.h>
-#include <hal/io.h>
-#include <hal/crtc.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#endif /* __HAL_H__ */
+unsigned char hal_io_port_in( unsigned short int port );
+void hal_io_port_out( unsigned short int port, unsigned char value );
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __HAL_IO_H__ */
