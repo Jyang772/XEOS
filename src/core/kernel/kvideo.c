@@ -34,7 +34,6 @@
 #include <hal/hal.h>
 #include <hal/crtc.h>
 
-#include "kmacros.h"
 #include "kvideo.h"
 
 /* Video attribute byte */

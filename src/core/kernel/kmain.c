@@ -31,7 +31,6 @@
 
 /* $Id$ */
 
-#include "kmacros.h"
 #include "kvideo.h"
 
 void kmain( void );
