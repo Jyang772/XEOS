@@ -31,19 +31,12 @@
 
 /* $Id$ */
 
-#ifndef __HAL_CPU_H__
-#define __HAL_CPU_H__
-#pragma once
+#include "cpu.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void hal_cpu_cli( void );
-void hal_cpu_sti( void );
-
-#ifdef __cplusplus
+void hal_cpu_cli( void )
+{
+    __asm__(
+        
+        "cli;"
+    );
 }
-#endif
-
-#endif /* __HAL_CPU_H__ */
