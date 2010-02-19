@@ -87,7 +87,7 @@ extern "C" {
 /**
  * Maximum value of type int
  */
-#define INT_MAX     32767
+#define INT_MAX     2147483647
 
 /**
  * Minimum value of type int
@@ -97,7 +97,7 @@ extern "C" {
 /**
  * Maximum value of type unsigned int
  */
-#define UINT_MAX    65535U
+#define UINT_MAX    4294967295U
 
 /**
  * Maximum value of type long
