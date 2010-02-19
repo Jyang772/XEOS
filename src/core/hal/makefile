@@ -48,7 +48,7 @@ RM                  = rm
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_CC             = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -nostdlib -nostartfiles -nodefaultlibs -pedantic -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
+ARGS_CC             = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -nostdlib -nostartfiles -nodefaultlibs -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
 ARGS_LD             = 
 ARGS_RM             = -rf
 
@@ -61,6 +61,7 @@ DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
 DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/hal/
 DIR_SRC             = ./
 DIR_SRC_CPU      	= $(DIR_SRC)cpu/
+DIR_SRC_IDT       	= $(DIR_SRC)idt/
 DIR_SRC_IO        	= $(DIR_SRC)io/
 DIR_SRC_INC         = $(DIR_SRC)include/
 DIR_INC             = $(DIR_SRC)../include/
@@ -87,6 +88,7 @@ vpath
 # Define the search paths for source files
 vpath %$(EXT_C) $(DIR_SRC)
 vpath %$(EXT_C) $(DIR_SRC_CPU)
+vpath %$(EXT_C) $(DIR_SRC_IDT)
 vpath %$(EXT_C) $(DIR_SRC_IO)
 vpath %$(EXT_H) $(DIR_SRC_INC)
 
@@ -107,21 +109,25 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 # Gets every code file in the source directory
 _FILES_C                  = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
 _FILES_C_CPU              = $(foreach dir,$(DIR_SRC_CPU),$(wildcard $(DIR_SRC_CPU)*$(EXT_C)))
+_FILES_C_IDT              = $(foreach dir,$(DIR_SRC_IDT),$(wildcard $(DIR_SRC_IDT)*$(EXT_C)))
 _FILES_C_IO               = $(foreach dir,$(DIR_SRC_IO),$(wildcard $(DIR_SRC_IO)*$(EXT_C)))
 
 # Gets only the file name of the code files
 _FILES_C_REL              = $(notdir $(_FILES_C))
 _FILES_C_REL_CPU          = $(notdir $(_FILES_C_CPU))
+_FILES_C_REL_IDT          = $(notdir $(_FILES_C_IDT))
 _FILES_C_REL_IO           = $(notdir $(_FILES_C_IO))
 
 # Replace the code extension by the object one
 _FILES_C_OBJ              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
 _FILES_C_OBJ_CPU          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_CPU))
+_FILES_C_OBJ_IDT          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_IDT))
 _FILES_C_OBJ_IO           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_IO))
 
 # Prefix all binary files with the build directory
 _FILES_C_OBJ_BUILD        = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
 _FILES_C_OBJ_BUILD_CPU    = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_CPU))
+_FILES_C_OBJ_BUILD_IDT    = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_IDT))
 _FILES_C_OBJ_BUILD_IO     = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_IO))
 
 #-------------------------------------------------------------------------------
@@ -136,7 +142,7 @@ _FILES_C_OBJ_BUILD_IO     = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_IO))
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CPU) $(_FILES_C_OBJ_BUILD_IO)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CPU) $(_FILES_C_OBJ_BUILD_IDT) $(_FILES_C_OBJ_BUILD_IO)
 	
 # Cleans the build files
 clean:
