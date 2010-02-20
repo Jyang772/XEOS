@@ -32,15 +32,15 @@
 /* $Id$ */
 
 #include <hal/hal.h>
-#include "private/kvideo.h"
+#include "private/video.h"
 #include "private/kint.h"
 
-void kmain( void );
-void kmain( void )
+void kernel_main( void );
+void kernel_main( void )
 {
-    kvideo_set_fg( KVIDEO_COLOR_WHITE );
-    kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
-    kvideo_clear();
+    kernel_video_set_fg( KERNEL_VIDEO_COLOR_WHITE );
+    kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
+    kernel_video_clear();
     
     hal_idt_init( 0x08, kint_default_handler );
     

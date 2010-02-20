@@ -32,8 +32,8 @@
 /* $Id$ */
 
 /* Video attribute byte */
-unsigned char __kvideo_attr = 0x00;
+unsigned char __kernel_video_attr = 0x00;
 
 /* Cursor position */
-unsigned int __kvideo_x     = 0x00;
-unsigned int __kvideo_y     = 0x00;
+unsigned int __kernel_video_x     = 0x00;
+unsigned int __kernel_video_y     = 0x00;

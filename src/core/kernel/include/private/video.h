@@ -36,40 +36,40 @@
 #pragma once
 
 /* Location of the video memory */
-#define KVIDEO_MEM 0xB8000
+#define KERNEL_VIDEO_MEM    0xB8000
 
 /* BIOS screen dimensions */
-#define KVIDEO_COLS 80
-#define KVIDEO_ROWS 25
+#define KERNEL_VIDEO_COLS   80
+#define KERNEL_VIDEO_ROWS   25
 
 /* BIOS colors */
 typedef enum
 {
     
-    KVIDEO_COLOR_BLACK        = 0x00,
-    KVIDEO_COLOR_BLUE         = 0x01,
-    KVIDEO_COLOR_GREEN        = 0x02,
-    KVIDEO_COLOR_CYAN         = 0x03,
-    KVIDEO_COLOR_RED          = 0x04,
-    KVIDEO_COLOR_MAGENTA      = 0x05,
-    KVIDEO_COLOR_BROWN        = 0x06,
-    KVIDEO_COLOR_LIGHTGRAY    = 0x07,
-    KVIDEO_COLOR_DARKGRAY     = 0x08,
-    KVIDEO_COLOR_LIGHTBLUE    = 0x09,
-    KVIDEO_COLOR_LIGHTGREEN   = 0x0A,
-    KVIDEO_COLOR_LIGHTCYAN    = 0x0B,
-    KVIDEO_COLOR_LIGHTRED     = 0x0C,
-    KVIDEO_COLOR_LIGHTMAGENTA = 0x0D,
-    KVIDEO_COLOR_LIGHTBROWN   = 0x0E,
-    KVIDEO_COLOR_WHITE        = 0x0F
+    KERNEL_VIDEO_COLOR_BLACK        = 0x00,
+    KERNEL_VIDEO_COLOR_BLUE         = 0x01,
+    KERNEL_VIDEO_COLOR_GREEN        = 0x02,
+    KERNEL_VIDEO_COLOR_CYAN         = 0x03,
+    KERNEL_VIDEO_COLOR_RED          = 0x04,
+    KERNEL_VIDEO_COLOR_MAGENTA      = 0x05,
+    KERNEL_VIDEO_COLOR_BROWN        = 0x06,
+    KERNEL_VIDEO_COLOR_LIGHTGRAY    = 0x07,
+    KERNEL_VIDEO_COLOR_DARKGRAY     = 0x08,
+    KERNEL_VIDEO_COLOR_LIGHTBLUE    = 0x09,
+    KERNEL_VIDEO_COLOR_LIGHTGREEN   = 0x0A,
+    KERNEL_VIDEO_COLOR_LIGHTCYAN    = 0x0B,
+    KERNEL_VIDEO_COLOR_LIGHTRED     = 0x0C,
+    KERNEL_VIDEO_COLOR_LIGHTMAGENTA = 0x0D,
+    KERNEL_VIDEO_COLOR_LIGHTBROWN   = 0x0E,
+    KERNEL_VIDEO_COLOR_WHITE        = 0x0F
     
-} kvideo_color;
+} kernel_video_color;
 
-void kvideo_clear( void );
-void kvideo_set_bg( kvideo_color color );
-void kvideo_set_fg( kvideo_color color );
-void kvideo_cursor_move( unsigned int x, unsigned int y );
-unsigned int kvideo_cursor_x( void );
-unsigned int kvideo_cursor_y( void );
+void kernel_video_clear( void );
+void kernel_video_set_bg( kernel_video_color color );
+void kernel_video_set_fg( kernel_video_color color );
+void kernel_video_cursor_move( unsigned int x, unsigned int y );
+unsigned int kernel_video_cursor_x( void );
+unsigned int kernel_video_cursor_y( void );
 
 #endif /* __KERNEL_VIDEO_H__ */
