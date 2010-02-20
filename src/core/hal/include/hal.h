@@ -39,5 +39,6 @@
 #include <hal/io.h>
 #include <hal/crtc.h>
 #include <hal/idt.h>
+#include <hal/interrupts.h>
 
 #endif /* __HAL_H__ */
