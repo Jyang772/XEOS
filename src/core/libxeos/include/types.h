@@ -35,6 +35,8 @@
 #define __LIBXEOS_TYPES_H__
 #pragma once
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -43,17 +45,17 @@ extern "C" {
  * Types
  ******************************************************************************/
 
-typedef char                            XSChar;
-typedef unsigned char                   XSUChar;
-typedef short                           XSShortInteger;
-typedef unsigned short                  XSUShortInteger;
-typedef int                             XSInteger;
-typedef unsigned int                    XSUInteger;
-typedef long                            XSLongInteger;
-typedef unsigned long                   XSULongInteger;
-typedef float                           XSFloat;
-typedef double                          XSDouble;
-typedef enum { FALSE = 0, TRUE = 1 }    XSBoolean;
+typedef char                                XSChar;
+typedef unsigned char                       XSUChar;
+typedef short                               XSShortInteger;
+typedef unsigned short                      XSUShortInteger;
+typedef int                                 XSInteger;
+typedef unsigned int                        XSUInteger;
+typedef long                                XSLongInteger;
+typedef unsigned long                       XSULongInteger;
+typedef float                               XSFloat;
+typedef double                              XSDouble;
+typedef enum { FALSE = false, TRUE = true } XSBoolean;
 
 #ifdef __cplusplus
 }
