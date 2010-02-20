@@ -31,13 +31,19 @@
 
 /* $Id$ */
 
-#ifndef __HAL_H__
-#define __HAL_H__
-#pragma once
+#include "idt.h"
 
-#include <hal/cpu.h>
-#include <hal/io.h>
-#include <hal/crtc.h>
-#include <hal/idt.h>
+struct hal_idt_entry __hal_idt[ HAL_IDT_MAX_DESCRIPTORS ];
+struct hal_idt_ptr __hal_idt_ptr;
 
-#endif /* __HAL_H__ */
+void __hal_idt_load( void );
+void __hal_idt_load( void )
+{
+    __asm__(
+        
+        "lidt (%[ptr])"
+        
+        : 
+        : [ ptr ] "p" ( ( char * )&__hal_idt_ptr )
+    );
+}

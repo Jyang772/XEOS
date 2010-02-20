@@ -31,13 +31,20 @@
 
 /* $Id$ */
 
-#ifndef __HAL_H__
-#define __HAL_H__
-#pragma once
+#include "idt.h"
 
-#include <hal/cpu.h>
-#include <hal/io.h>
-#include <hal/crtc.h>
-#include <hal/idt.h>
+extern struct hal_idt_entry __hal_idt[];
 
-#endif /* __HAL_H__ */
+void hal_idt_set_descriptor( unsigned int i, hal_irq_handler handler, uint16_t sel, uint8_t flags )
+{
+    if( i >= HAL_IDT_MAX_DESCRIPTORS ) {
+        
+        return;
+    }
+    
+    __hal_idt[ i ].address_low  = ( uint16_t )( ( uintptr_t )&( * handler ) & 0xFFFF );
+    __hal_idt[ i ].address_high = ( uint16_t )( ( ( uintptr_t )&( * handler ) >> 16 & 0xFFFF ) );
+    __hal_idt[ i ].selector     = sel;
+    __hal_idt[ i ].reserved     = 0;
+    __hal_idt[ i ].flags        = flags;
+}

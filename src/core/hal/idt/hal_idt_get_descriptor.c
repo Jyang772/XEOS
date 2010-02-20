@@ -31,13 +31,16 @@
 
 /* $Id$ */
 
-#ifndef __HAL_H__
-#define __HAL_H__
-#pragma once
+#include "idt.h"
 
-#include <hal/cpu.h>
-#include <hal/io.h>
-#include <hal/crtc.h>
-#include <hal/idt.h>
+extern struct hal_idt_entry __hal_idt[];
 
-#endif /* __HAL_H__ */
+struct hal_idt_entry * hal_idt_get_descriptor( unsigned int i )
+{
+    if( i >= HAL_IDT_MAX_DESCRIPTORS ) {
+        
+        return ( struct hal_idt_entry * )0;
+    }
+    
+    return ( struct hal_idt_entry * )&__hal_idt[ i ];
+}

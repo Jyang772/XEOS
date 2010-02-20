@@ -31,13 +31,44 @@
 
 /* $Id$ */
 
-#ifndef __HAL_H__
-#define __HAL_H__
+#ifndef __HAL_IDT_H__
+#define __HAL_IDT_H__
 #pragma once
 
-#include <hal/cpu.h>
-#include <hal/io.h>
-#include <hal/crtc.h>
-#include <hal/idt.h>
+#include <stdint.h>
 
-#endif /* __HAL_H__ */
+#define HAL_IDT_MAX_DESCRIPTORS 256
+
+#define HAL_IDT_FLAG_16BITS     0x06    /* 00000110 */
+#define HAL_IDT_FLAG_32BITS     0x0E    /* 00001110 */
+#define HAL_IDT_FLAG_RING1      0x40    /* 01000000 */
+#define HAL_IDT_FLAG_RING2      0x20    /* 00100000 */
+#define HAL_IDT_FLAG_RING3      0x60    /* 01100000 */
+#define HAL_IDT_FLAG_PRESENT    0x80    /* 10000000 */
+
+struct hal_idt_entry
+{
+    
+    uint16_t    address_low;
+    uint16_t    selector;
+    uint8_t     reserved;
+    uint8_t     flags;
+    uint16_t    address_high;
+    
+} __attribute__( ( packed ) );
+
+struct hal_idt_ptr
+{
+    
+    uint16_t    limit;
+    uint32_t    base;
+    
+} __attribute__( ( packed ) );
+
+typedef void ( * hal_irq_handler )( void );
+
+void hal_idt_init( uint16_t sel, hal_irq_handler default_handler );
+struct hal_idt_entry * hal_idt_get_descriptor( unsigned int i );
+void hal_idt_set_descriptor( unsigned int i, hal_irq_handler handler, uint16_t sel, uint8_t flags );
+
+#endif /* __HAL_IDT_H__ */
