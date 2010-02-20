@@ -62,6 +62,7 @@ DIR_BUILD           = ../../../build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
 DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/kernel/
 DIR_SRC             = ./
+DIR_SRC_KINT        = $(DIR_SRC)kint/
 DIR_SRC_KVIDEO      = $(DIR_SRC)kvideo/
 DIR_SRC_SYSCALLS    = $(DIR_SRC)syscalls/
 DIR_SRC_INC         = $(DIR_SRC)include/
@@ -91,6 +92,7 @@ vpath
 vpath %$(EXT_ASM) $(DIR_SRC)
 vpath %$(EXT_C)   $(DIR_SRC)
 vpath %$(EXT_C)   $(DIR_SRC_KVIDEO)
+vpath %$(EXT_C)   $(DIR_SRC_KINT)
 vpath %$(EXT_C)   $(DIR_SRC_SYSCALLS)
 vpath %$(EXT_H)   $(DIR_SRC_INC)
 
@@ -111,24 +113,28 @@ vpath %$(EXT_H)   $(DIR_SRC_INC)
 # Gets every code file in the source directory
 _FILES_ASM                  = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
 _FILES_C                    = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
+_FILES_C_KINT               = $(foreach dir,$(DIR_SRC_KINT),$(wildcard $(DIR_SRC_KINT)*$(EXT_C)))
 _FILES_C_KVIDEO             = $(foreach dir,$(DIR_SRC_KVIDEO),$(wildcard $(DIR_SRC_KVIDEO)*$(EXT_C)))
 _FILES_C_SYSCALLS           = $(foreach dir,$(DIR_SRC_SYSCALLS),$(wildcard $(DIR_SRC_SYSCALLS)*$(EXT_C)))
 
 # Gets only the file name of the code files
 _FILES_ASM_REL              = $(notdir $(_FILES_ASM))
 _FILES_C_REL                = $(notdir $(_FILES_C))
+_FILES_C_REL_KINT           = $(notdir $(_FILES_C_KINT))
 _FILES_C_REL_KVIDEO         = $(notdir $(_FILES_C_KVIDEO))
 _FILES_C_REL_SYSCALLS       = $(notdir $(_FILES_C_SYSCALLS))
 
 # Replace the code extension by the object one
 _FILES_ASM_OBJ              = $(subst $(EXT_ASM),$(EXT_ASM)$(EXT_OBJ),$(_FILES_ASM_REL))
 _FILES_C_OBJ                = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
+_FILES_C_OBJ_KINT           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_KINT))
 _FILES_C_OBJ_KVIDEO         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_KVIDEO))
 _FILES_C_OBJ_SYSCALLS       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSCALLS))
 
 # Prefix all binary files with the build directory
 _FILES_ASM_OBJ_BUILD        = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_ASM_OBJ))
 _FILES_C_OBJ_BUILD          = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_KINT     = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_KINT))
 _FILES_C_OBJ_BUILD_KVIDEO   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_KVIDEO))
 _FILES_C_OBJ_BUILD_SYSCALLS = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SYSCALLS))
 
@@ -144,7 +150,7 @@ _FILES_C_OBJ_BUILD_SYSCALLS = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SYSCAL
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_KVIDEO) $(_FILES_C_OBJ_BUILD_SYSCALLS)
+all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_KINT) $(_FILES_C_OBJ_BUILD_KVIDEO) $(_FILES_C_OBJ_BUILD_SYSCALLS)
 	
 # Cleans the build files
 clean:

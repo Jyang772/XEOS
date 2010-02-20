@@ -31,18 +31,39 @@
 
 /* $Id$ */
 
+#include <hal/hal.h>
 #include "private/kvideo.h"
-#include "syscalls.h"
+#include "private/kint.h"
 
 void kmain( void );
-
 void kmain( void )
 {
     kvideo_set_fg( KVIDEO_COLOR_WHITE );
     kvideo_set_bg( KVIDEO_COLOR_LIGHTBLUE );
     kvideo_clear();
     
-    syscall( SYS_test );
+    hal_idt_init( 0x08, kint_default_handler );
+    
+    hal_idt_set_descriptor( HAL_INT_DIVIDE_ERROR,                   kint_divide_error,                   0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_DEBUG_EXCEPTION,                kint_debug_exception,                0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_NMI_INTERRUPT,                  kint_nmi_interrupt,                  0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_BREAKPOINT_EXCEPTION,           kint_breakpoint_exception,           0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_OVERFLOW_EXCEPTION,             kint_overflow_exception,             0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_BOUND_RANGE_EXCEEDED_EXCEPTION, kint_bound_range_exceeded_exception, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_INVALID_OPCODE_EXCEPTION,       kint_invalid_opcode_exception,       0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_DEVICE_NOT_AVAILABLE_EXCEPTION, kint_device_not_available_exception, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_DOUBLE_FAULT_EXCEPTION,         kint_double_fault_exception,         0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_COPROCESSOR_SEGMENT_OVERRUN,    kint_coprocessor_segment_overrun,    0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_INVALID_TSS_EXCEPTION,          kint_invalid_tss_exception,          0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_SEGMENT_NOT_PRESENT,            kint_segment_not_present,            0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_STACK_FAULT_EXCEPTION,          kint_stack_fault_exception,          0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_GENERAL_PROTECTION_EXCEPTION,   kint_general_protection_exception,   0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_PAGE_FAULT_EXCEPTION,           kint_page_fault_exception,           0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_FLOATING_POINT_ERROR_EXCEPTION, kint_floating_point_error_exception, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_ALIGNMENT_CHECK_EXCEPTION,      kint_alignment_check_exception,      0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_MACHINE_CHECK_EXCEPTION,        kint_machine_check_exception,        0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_SIMD_FLOATING_POINT_EXCEPTION,  kint_simd_floating_point_exception,  0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
     
     for( ; ; );
 }
+
