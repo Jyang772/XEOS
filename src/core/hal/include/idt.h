@@ -46,6 +46,59 @@
 #define HAL_IDT_FLAG_RING3      0x60    /* 01100000 */
 #define HAL_IDT_FLAG_PRESENT    0x80    /* 10000000 */
 
+/**
+ * A descriptor for an IDT takes the following formats. Some of the format
+ * changes depending on what type of descriptor this is:
+ *      
+ *      Bits 0-15:
+ *          
+ *          Interrupt:  Offset address - Bits 0-15 of IR address
+ *          Trap Gate:  Offset address - Bits 0-15 of IR address
+ *          Task Gate:  Not used.
+ *      
+ *      Bits 16-31:
+ *          
+ *          Interrupt:  Segment selector (useually 0x10)
+ *          Trap Gate:  Segment selector (useually 0x10)
+ *          Task Gate:  TSS Selector
+ *      
+ *      Bits 31-35:     Not used
+ *      
+ *      Bits 36-38:
+ *          
+ *          Interrupt:  Reserved. Must be 0.
+ *          Trap Gate:  Reserved. Must be 0.
+ *          Task Gate:  Not used.
+ *      
+ *      Bits 39-41:
+ *          
+ *          Interrupt:  Of the format 0D110, where D determins size:
+ *              
+ *              01110 - 32 bit descriptor
+ *              00110 - 16 bit descriptor
+ *              
+ *          Trap Gate: Of the format 0D111, where D determins size
+ *              
+ *              01111 - 32 bit descriptor
+ *              00111 - 16 bit descriptor
+ *              
+ *          Task Gate:  Must be 00101
+ *      
+ *      Bits 42-44: Descriptor Privilege Level (DPL)
+ *          
+ *          00:     Ring 0
+ *          01:     Ring 1
+ *          10:     Ring 2
+ *          11:     Ring 3
+ *      
+ *      Bit 45: Segment is present (1: present, 0: not present)
+ *      
+ *      Bits 46-62:
+ *          
+ *          Interrupt:  Offset address - Bits 16-31 of IR address
+ *          Trap Gate:  Offset address - Bits 16-31 of IR address
+ *          Task Gate:  Not used
+ */
 struct hal_idt_entry
 {
     
