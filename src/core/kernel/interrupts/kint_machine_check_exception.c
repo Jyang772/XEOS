@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_machine_check_exception( void )
+void kernel_interrupt_machine_check_exception( void )
 {}

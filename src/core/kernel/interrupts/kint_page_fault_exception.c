@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_page_fault_exception( void )
+void kernel_interrupt_page_fault_exception( void )
 {}

@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_general_protection_exception( void )
+void kernel_interrupt_general_protection_exception( void )
 {}

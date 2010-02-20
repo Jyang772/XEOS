@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_nmi_interrupt( void )
+void kernel_interrupt_nmi_interrupt( void )
 {}

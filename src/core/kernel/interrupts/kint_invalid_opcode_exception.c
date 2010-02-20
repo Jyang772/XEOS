@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_invalid_opcode_exception( void )
+void kernel_interrupt_invalid_opcode_exception( void )
 {}

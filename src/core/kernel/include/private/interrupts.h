@@ -35,25 +35,25 @@
 #define __KERNEL_INTERRUPTS_H__
 #pragma once
 
-void kint_default_handler( void );
-void kint_divide_error( void );
-void kint_debug_exception( void );
-void kint_nmi_interrupt( void );
-void kint_breakpoint_exception( void );
-void kint_overflow_exception( void );
-void kint_bound_range_exceeded_exception( void );
-void kint_invalid_opcode_exception( void );
-void kint_device_not_available_exception( void );
-void kint_double_fault_exception( void );
-void kint_coprocessor_segment_overrun( void );
-void kint_invalid_tss_exception( void );
-void kint_segment_not_present( void );
-void kint_stack_fault_exception( void );
-void kint_general_protection_exception( void );
-void kint_page_fault_exception( void );
-void kint_floating_point_error_exception( void );
-void kint_alignment_check_exception( void );
-void kint_machine_check_exception( void );
-void kint_simd_floating_point_exception( void );
+void kernel_interrupt_default_handler( void );
+void kernel_interrupt_divide_error( void );
+void kernel_interrupt_debug_exception( void );
+void kernel_interrupt_nmi_interrupt( void );
+void kernel_interrupt_breakpoint_exception( void );
+void kernel_interrupt_overflow_exception( void );
+void kernel_interrupt_bound_range_exceeded_exception( void );
+void kernel_interrupt_invalid_opcode_exception( void );
+void kernel_interrupt_device_not_available_exception( void );
+void kernel_interrupt_double_fault_exception( void );
+void kernel_interrupt_coprocessor_segment_overrun( void );
+void kernel_interrupt_invalid_tss_exception( void );
+void kernel_interrupt_segment_not_present( void );
+void kernel_interrupt_stack_fault_exception( void );
+void kernel_interrupt_general_protection_exception( void );
+void kernel_interrupt_page_fault_exception( void );
+void kernel_interrupt_floating_point_error_exception( void );
+void kernel_interrupt_alignment_check_exception( void );
+void kernel_interrupt_machine_check_exception( void );
+void kernel_interrupt_simd_floating_point_exception( void );
 
 #endif /* __KERNEL_INTERRUPTS_H__ */

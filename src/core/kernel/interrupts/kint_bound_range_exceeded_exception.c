@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_bound_range_exceeded_exception( void )
+void kernel_interrupt_bound_range_exceeded_exception( void )
 {}

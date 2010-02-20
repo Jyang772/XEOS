@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_default_handler( void )
+void kernel_interrupt_default_handler( void )
 {}

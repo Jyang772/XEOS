@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_divide_error( void )
+void kernel_interrupt_divide_error( void )
 {}

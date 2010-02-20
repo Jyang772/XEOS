@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_simd_floating_point_exception( void )
+void kernel_interrupt_simd_floating_point_exception( void )
 {}

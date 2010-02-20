@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_overflow_exception( void )
+void kernel_interrupt_overflow_exception( void )
 {}

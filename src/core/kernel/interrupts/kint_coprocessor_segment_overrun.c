@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_coprocessor_segment_overrun( void )
+void kernel_interrupt_coprocessor_segment_overrun( void )
 {}

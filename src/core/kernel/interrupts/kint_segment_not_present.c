@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_segment_not_present( void )
+void kernel_interrupt_segment_not_present( void )
 {}

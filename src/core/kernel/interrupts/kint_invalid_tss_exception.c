@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_invalid_tss_exception( void )
+void kernel_interrupt_invalid_tss_exception( void )
 {}

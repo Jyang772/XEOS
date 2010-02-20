@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_breakpoint_exception( void )
+void kernel_interrupt_breakpoint_exception( void )
 {}

@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_alignment_check_exception( void )
+void kernel_interrupt_alignment_check_exception( void )
 {}

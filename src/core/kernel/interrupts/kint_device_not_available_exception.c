@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_device_not_available_exception( void )
+void kernel_interrupt_device_not_available_exception( void )
 {}

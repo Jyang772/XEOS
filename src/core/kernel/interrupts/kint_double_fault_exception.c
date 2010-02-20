@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_double_fault_exception( void )
+void kernel_interrupt_double_fault_exception( void )
 {}

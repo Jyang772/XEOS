@@ -33,5 +33,5 @@
 
 #include "private/kint.h"
 
-void kint_debug_exception( void )
+void kernel_interrupt_debug_exception( void )
 {}
