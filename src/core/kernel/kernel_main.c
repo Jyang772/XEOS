@@ -34,6 +34,7 @@
 #include <hal/hal.h>
 #include "private/video.h"
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_main( void );
 void kernel_main( void )
