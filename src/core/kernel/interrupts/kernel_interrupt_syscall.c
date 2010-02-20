@@ -35,4 +35,61 @@
 #include "syscalls.h"
 
 void kernel_interrupt_syscall( void )
-{}
+{
+    unsigned char syscall;
+    
+    __asm__(
+        
+        "mov    %%al,   %[n]"
+        
+        : [ n ] "=m" ( syscall )
+    );
+    
+    switch( syscall ) {
+        
+        case SYS_exit:
+            
+            
+            break;
+            
+        case SYS_read:
+            
+            
+            break;
+            
+        case SYS_write:
+            
+            
+            break;
+            
+        case SYS_open:
+            
+            
+            break;
+            
+        case SYS_close:
+            
+            
+            break;
+            
+        case SYS_time:
+            
+            
+            break;
+            
+        case SYS_brk:
+            
+            
+            break;
+            
+        case SYS_reboot:
+            
+            
+            break;
+            
+        case SYS_mmap:
+            
+            
+            break;
+    }
+}

@@ -47,8 +47,6 @@ void syscall( unsigned char n );
 #define SYS_reboot          88
 #define SYS_mmap            90
 
-#define SYS_test            100
-
 #define SYS_MAX_SYSCALL     256
 
 #endif /* __KERNEL_SYSCALLS_H__ */
