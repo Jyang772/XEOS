@@ -67,7 +67,7 @@ extern "C" {
 /**
  * Maximum value of type unsigned char
  */
-#define UCHAR_MAX   255
+#define UCHAR_MAX   255U
 
 /**
  * Maximum value of type short
