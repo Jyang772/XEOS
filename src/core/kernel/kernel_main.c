@@ -39,10 +39,6 @@
 void kernel_main( void );
 void kernel_main( void )
 {
-    kernel_video_set_fg( KERNEL_VIDEO_COLOR_WHITE );
-    kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
-    kernel_video_clear();
-    
     hal_idt_init( 0x08, kernel_interrupt_default_handler );
     
     hal_idt_set_descriptor( HAL_INT_DIVIDE_ERROR,                   kernel_interrupt_divide_error,                   0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
@@ -64,6 +60,10 @@ void kernel_main( void )
     hal_idt_set_descriptor( HAL_INT_ALIGNMENT_CHECK_EXCEPTION,      kernel_interrupt_alignment_check_exception,      0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
     hal_idt_set_descriptor( HAL_INT_MACHINE_CHECK_EXCEPTION,        kernel_interrupt_machine_check_exception,        0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
     hal_idt_set_descriptor( HAL_INT_SIMD_FLOATING_POINT_EXCEPTION,  kernel_interrupt_simd_floating_point_exception,  0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    
+    kernel_video_set_fg( KERNEL_VIDEO_COLOR_WHITE );
+    kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
+    kernel_video_clear();
     
     for( ; ; );
 }
