@@ -99,5 +99,7 @@ void kernel_main( void )
     
     kernel_video_prompt( "Registering the system calls..." );
     
+    hal_idt_set_descriptor( 0x20, kernel_interrupt_syscall, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    
     for( ; ; );
 }

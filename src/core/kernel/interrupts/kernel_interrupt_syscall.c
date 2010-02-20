@@ -31,30 +31,8 @@
 
 /* $Id$ */
 
-#ifndef __KERNEL_INTERRUPTS_H__
-#define __KERNEL_INTERRUPTS_H__
-#pragma once
+#include "private/interrupts.h"
+#include "syscalls.h"
 
-void kernel_interrupt_default_handler( void );
-void kernel_interrupt_divide_error( void );
-void kernel_interrupt_debug_exception( void );
-void kernel_interrupt_nmi_interrupt( void );
-void kernel_interrupt_breakpoint_exception( void );
-void kernel_interrupt_overflow_exception( void );
-void kernel_interrupt_bound_range_exceeded_exception( void );
-void kernel_interrupt_invalid_opcode_exception( void );
-void kernel_interrupt_device_not_available_exception( void );
-void kernel_interrupt_double_fault_exception( void );
-void kernel_interrupt_coprocessor_segment_overrun( void );
-void kernel_interrupt_invalid_tss_exception( void );
-void kernel_interrupt_segment_not_present( void );
-void kernel_interrupt_stack_fault_exception( void );
-void kernel_interrupt_general_protection_exception( void );
-void kernel_interrupt_page_fault_exception( void );
-void kernel_interrupt_floating_point_error_exception( void );
-void kernel_interrupt_alignment_check_exception( void );
-void kernel_interrupt_machine_check_exception( void );
-void kernel_interrupt_simd_floating_point_exception( void );
-void kernel_interrupt_syscall( void );
-
-#endif /* __KERNEL_INTERRUPTS_H__ */
+void kernel_interrupt_syscall( void )
+{}
