@@ -35,7 +35,7 @@ extern unsigned char __kernel_video_attr;
 
 #include "private/video.h"
 
-void kernel_video_set_fg( kvideo_color color )
+void kernel_video_set_fg( kernel_video_color color )
 {
     __kernel_video_attr &= ( 0xF0 );
     __kernel_video_attr |= color;

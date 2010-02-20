@@ -31,7 +31,7 @@
 
 /* $Id$ */
 
-#include "private/kint.h"
+#include "private/interrupts.h"
 
 void kernel_interrupt_stack_fault_exception( void )
 {}

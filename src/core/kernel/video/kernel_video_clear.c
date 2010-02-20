@@ -35,14 +35,14 @@
 
 extern unsigned char __kernel_video_attr;
 
-void kvideo_clear( void )
+void kernel_video_clear( void )
 {
     unsigned char * mem;
     unsigned int    memSize;
     unsigned int    i;
     
     mem     = ( unsigned char * )KERNEL_VIDEO_MEM;
-    memSize = KVIDEO_COLS * KERNEL_VIDEO_ROWS;
+    memSize = KERNEL_VIDEO_COLS * KERNEL_VIDEO_ROWS;
     i       = 0;
     
     for( i = 0; i < memSize; i++ ) {

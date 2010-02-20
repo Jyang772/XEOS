@@ -31,7 +31,7 @@
 
 /* $Id$ */
 
-#include "private/kint.h"
+#include "private/interrupts.h"
 
 void kernel_interrupt_machine_check_exception( void )
 {}

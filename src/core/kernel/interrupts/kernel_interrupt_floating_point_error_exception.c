@@ -31,7 +31,7 @@
 
 /* $Id$ */
 
-#include "private/kint.h"
+#include "private/interrupts.h"
 
 void kernel_interrupt_floating_point_error_exception( void )
 {}
