@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_invalid_opcode_exception( void )
-{}
+{
+    panic( "Invalid Opcode Exception (#UD)" );
+}

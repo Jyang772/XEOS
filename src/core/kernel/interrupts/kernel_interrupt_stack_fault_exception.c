@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_stack_fault_exception( void )
-{}
+{
+    panic( "Stack Fault Exception (#SS)" );
+}

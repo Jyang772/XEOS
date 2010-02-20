@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_bound_range_exceeded_exception( void )
-{}
+{
+    panic( "BOUND Range Exceeded Exception (#BR)" );
+}

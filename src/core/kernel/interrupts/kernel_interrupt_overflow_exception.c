@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_overflow_exception( void )
-{}
+{
+    panic( "Overflow Exception (#OF)" );
+}

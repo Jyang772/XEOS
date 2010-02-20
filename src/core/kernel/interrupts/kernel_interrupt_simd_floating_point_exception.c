@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_simd_floating_point_exception( void )
-{}
+{
+    panic( "SIMD Floating-Point Exception (#XF)" );
+}

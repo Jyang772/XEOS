@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_machine_check_exception( void )
-{}
+{
+    panic( "Machine-Check Exception (#MC)" );
+}

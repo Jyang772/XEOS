@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_device_not_available_exception( void )
-{}
+{
+    panic( "Device Not Available Exception (#NM)" );
+}

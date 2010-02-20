@@ -32,6 +32,9 @@
 /* $Id$ */
 
 #include "private/interrupts.h"
+#include "system.h"
 
 void kernel_interrupt_nmi_interrupt( void )
-{}
+{
+    panic( "NMI Interrupt" );
+}
