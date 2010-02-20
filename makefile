@@ -70,8 +70,8 @@ ARGS_RM             = -rf
 ARGS_DD             = conv=notrunc
 ARGS_MOUNT          = -t msdos
 ARGS_HDID           = -nobrowse -nomount
-ARGS_EMU            = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND) -d $(ARGS_EMU_LOG)
-ARGS_EMU_LOG		= out_asm,in_asm,op,op_opt,int,exec,cpu,pcall,cpu_reset
+ARGS_EMU            = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND) $(ARGS_EMU_LOG)
+ARGS_EMU_LOG		= -d out_asm,in_asm,op,op_opt,int,exec,cpu,pcall,cpu_reset
 
 #-------------------------------------------------------------------------------
 # Paths
