@@ -124,7 +124,7 @@
  * exceptions can be handled serially. If, however, the processor cannot handle
  * them serially, it signals the double-fault exception.
  */
-#define HAL_INT_DEOUBLE_FAULT_EXCEPTION             8
+#define HAL_INT_DOUBLE_FAULT_EXCEPTION              8
  
 /**
  * Interrupt 9 — Coprocessor Segment Overrun
