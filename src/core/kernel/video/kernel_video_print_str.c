@@ -35,7 +35,7 @@
 
 extern unsigned char __kernel_video_attr;
 
-void kernel_video_write_str( char * s )
+void kernel_video_print_str( char * s )
 {
     unsigned char * mem;
     unsigned char c;

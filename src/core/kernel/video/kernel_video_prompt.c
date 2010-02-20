@@ -35,7 +35,7 @@
 
 void kernel_video_prompt( char * s )
 {
-    kernel_video_write_str( "<XEOS>: " );
-    kernel_video_write_str( s );
-    kernel_video_write_str( "\n" );
+    kernel_video_print_str( "<XEOS>: " );
+    kernel_video_print_str( s );
+    kernel_video_print_str( "\n" );
 }

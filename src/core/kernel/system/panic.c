@@ -40,7 +40,7 @@ void panic( char * s )
     kernel_video_set_bg( KERNEL_VIDEO_COLOR_BLACK );
     kernel_video_clear();
     
-    kernel_video_write_str(
+    kernel_video_print_str(
         "\n"
         "    ************************************************************************\n"
         "    *                                                                      *\n"
@@ -51,11 +51,11 @@ void panic( char * s )
     );
     
     kernel_video_prompt( "A fatal error occured:" );
-    kernel_video_write_str( "\n" );
+    kernel_video_print_str( "\n" );
     kernel_video_set_fg( KERNEL_VIDEO_COLOR_RED );
-    kernel_video_write_str( s );
+    kernel_video_print_str( s );
     kernel_video_set_fg( KERNEL_VIDEO_COLOR_WHITE );
-    kernel_video_write_str( "\n\n" );
+    kernel_video_print_str( "\n\n" );
     kernel_video_prompt( "Please reboot the system..." );
     
     for( ; ; );
