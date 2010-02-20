@@ -31,11 +31,11 @@
 
 /* $Id$ */
 
-extern unsigned int __kvideo_y;
+extern unsigned int __kernel_video_x;
 
-#include "private/kvideo.h"
+#include "private/video.h"
 
-unsigned int kvideo_cursor_y( void )
+unsigned int kernel_video_cursor_x( void )
 {
-    return __kvideo_y;
+    return __kernel_video_x;
 }

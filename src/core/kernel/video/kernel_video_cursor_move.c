@@ -34,21 +34,21 @@
 #include <hal/hal.h>
 #include <xeos/xeos.h>
 
-#include "private/kvideo.h"
+#include "private/video.h"
 
-extern unsigned int __kvideo_x;
-extern unsigned int __kvideo_y;
+extern unsigned int __kernel_video_x;
+extern unsigned int __kernel_video_y;
 
-void kvideo_cursor_move( unsigned int x, unsigned int y )
+void kernel_video_cursor_move( unsigned int x, unsigned int y )
 {
     unsigned int cursor_pos;
     
-    __kvideo_x = x;
-    __kvideo_y = y;
+    __kernel_video_x = x;
+    __kernel_video_y = y;
     
-    x          = MIN( x, KVIDEO_COLS - 1 );
-    y          = MIN( y, KVIDEO_ROWS - 1 );
-    cursor_pos = x + ( y * KVIDEO_COLS );
+    x          = MIN( x, KERNEL_VIDEO_COLS - 1 );
+    y          = MIN( y, KERNEL_VIDEO_ROWS - 1 );
+    cursor_pos = x + ( y * KERNEL_VIDEO_COLS );
     
     hal_io_port_out( CRTC_DATA_REGISTER, CRTC_CURSOR_LOCATION_HIGH );
     hal_io_port_out( CRTC_INDEX_REGISTER, cursor_pos >> 8 );

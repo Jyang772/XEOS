@@ -31,11 +31,26 @@
 
 /* $Id$ */
 
-extern unsigned int __kvideo_x;
+#include "private/video.h"
 
-#include "private/kvideo.h"
+extern unsigned char __kernel_video_attr;
 
-unsigned int kvideo_cursor_x( void )
+void kvideo_clear( void )
 {
-    return __kvideo_x;
+    unsigned char * mem;
+    unsigned int    memSize;
+    unsigned int    i;
+    
+    mem     = ( unsigned char * )KERNEL_VIDEO_MEM;
+    memSize = KVIDEO_COLS * KERNEL_VIDEO_ROWS;
+    i       = 0;
+    
+    for( i = 0; i < memSize; i++ ) {
+        
+        mem[ 0 ] = 0x20;
+        mem[ 1 ] = __kernel_video_attr;
+        mem     += 2;
+    }
+    
+    kernel_video_cursor_move( 0, 0 );
 }

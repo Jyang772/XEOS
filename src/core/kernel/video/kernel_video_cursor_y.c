@@ -31,12 +31,11 @@
 
 /* $Id$ */
 
-extern unsigned char __kvideo_attr;
+extern unsigned int __kernel_video_y;
 
-#include "private/kvideo.h"
+#include "private/video.h"
 
-void kvideo_set_bg( kvideo_color color )
+unsigned int kernel_video_cursor_y( void )
 {
-    __kvideo_attr &= ( 0x0F );
-    __kvideo_attr |= ( color << 4 );
+    return __kernel_video_y;
 }
