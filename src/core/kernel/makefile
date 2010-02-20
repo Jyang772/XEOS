@@ -65,6 +65,7 @@ DIR_SRC             = ./
 DIR_SRC_INTERRUPTS  = $(DIR_SRC)interrupts/
 DIR_SRC_VIDEO       = $(DIR_SRC)video/
 DIR_SRC_SYSCALLS    = $(DIR_SRC)syscalls/
+DIR_SRC_SYSTEM      = $(DIR_SRC)system/
 DIR_SRC_INC         = $(DIR_SRC)include/
 DIR_INC             = $(DIR_SRC)../include/
 PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
@@ -94,6 +95,7 @@ vpath %$(EXT_C)   $(DIR_SRC)
 vpath %$(EXT_C)   $(DIR_SRC_VIDEO)
 vpath %$(EXT_C)   $(DIR_SRC_INTERRUPTS)
 vpath %$(EXT_C)   $(DIR_SRC_SYSCALLS)
+vpath %$(EXT_C)   $(DIR_SRC_SYSTEM)
 vpath %$(EXT_H)   $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
@@ -111,32 +113,36 @@ vpath %$(EXT_H)   $(DIR_SRC_INC)
 #-------------------------------------------------------------------------------
 
 # Gets every code file in the source directory
-_FILES_ASM                  	= $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
-_FILES_C                    	= $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
-_FILES_C_INTERRUPTS         	= $(foreach dir,$(DIR_SRC_INTERRUPTS),$(wildcard $(DIR_SRC_INTERRUPTS)*$(EXT_C)))
-_FILES_C_VIDEO             		= $(foreach dir,$(DIR_SRC_VIDEO),$(wildcard $(DIR_SRC_VIDEO)*$(EXT_C)))
-_FILES_C_SYSCALLS           	= $(foreach dir,$(DIR_SRC_SYSCALLS),$(wildcard $(DIR_SRC_SYSCALLS)*$(EXT_C)))
+_FILES_ASM                      = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
+_FILES_C                        = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
+_FILES_C_INTERRUPTS             = $(foreach dir,$(DIR_SRC_INTERRUPTS),$(wildcard $(DIR_SRC_INTERRUPTS)*$(EXT_C)))
+_FILES_C_VIDEO                  = $(foreach dir,$(DIR_SRC_VIDEO),$(wildcard $(DIR_SRC_VIDEO)*$(EXT_C)))
+_FILES_C_SYSCALLS               = $(foreach dir,$(DIR_SRC_SYSCALLS),$(wildcard $(DIR_SRC_SYSCALLS)*$(EXT_C)))
+_FILES_C_SYSTEM                 = $(foreach dir,$(DIR_SRC_SYSTEM),$(wildcard $(DIR_SRC_SYSTEM)*$(EXT_C)))
 
 # Gets only the file name of the code files
-_FILES_ASM_REL              	= $(notdir $(_FILES_ASM))
-_FILES_C_REL                	= $(notdir $(_FILES_C))
-_FILES_C_REL_INTERRUPTS     	= $(notdir $(_FILES_C_INTERRUPTS))
-_FILES_C_REL_VIDEO         		= $(notdir $(_FILES_C_VIDEO))
-_FILES_C_REL_SYSCALLS       	= $(notdir $(_FILES_C_SYSCALLS))
+_FILES_ASM_REL                  = $(notdir $(_FILES_ASM))
+_FILES_C_REL                    = $(notdir $(_FILES_C))
+_FILES_C_REL_INTERRUPTS         = $(notdir $(_FILES_C_INTERRUPTS))
+_FILES_C_REL_VIDEO              = $(notdir $(_FILES_C_VIDEO))
+_FILES_C_REL_SYSCALLS           = $(notdir $(_FILES_C_SYSCALLS))
+_FILES_C_REL_SYSTEM             = $(notdir $(_FILES_C_SYSTEM))
 
 # Replace the code extension by the object one
-_FILES_ASM_OBJ              	= $(subst $(EXT_ASM),$(EXT_ASM)$(EXT_OBJ),$(_FILES_ASM_REL))
-_FILES_C_OBJ                	= $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
-_FILES_C_OBJ_INTERRUPTS    	 	= $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_INTERRUPTS))
-_FILES_C_OBJ_VIDEO         		= $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_VIDEO))
-_FILES_C_OBJ_SYSCALLS       	= $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSCALLS))
+_FILES_ASM_OBJ                  = $(subst $(EXT_ASM),$(EXT_ASM)$(EXT_OBJ),$(_FILES_ASM_REL))
+_FILES_C_OBJ                    = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
+_FILES_C_OBJ_INTERRUPTS         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_INTERRUPTS))
+_FILES_C_OBJ_VIDEO              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_VIDEO))
+_FILES_C_OBJ_SYSCALLS           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSCALLS))
+_FILES_C_OBJ_SYSTEM             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSTEM))
 
 # Prefix all binary files with the build directory
-_FILES_ASM_OBJ_BUILD        	= $(addprefix $(DIR_BUILD_OBJ),$(_FILES_ASM_OBJ))
-_FILES_C_OBJ_BUILD          	= $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_INTERRUPTS	= $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_INTERRUPTS))
-_FILES_C_OBJ_BUILD_VIDEO   		= $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_VIDEO))
-_FILES_C_OBJ_BUILD_SYSCALLS 	= $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SYSCALLS))
+_FILES_ASM_OBJ_BUILD            = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_ASM_OBJ))
+_FILES_C_OBJ_BUILD              = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_INTERRUPTS   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_INTERRUPTS))
+_FILES_C_OBJ_BUILD_VIDEO        = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_VIDEO))
+_FILES_C_OBJ_BUILD_SYSCALLS     = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SYSCALLS))
+_FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SYSTEM))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -150,7 +156,7 @@ _FILES_C_OBJ_BUILD_SYSCALLS 	= $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SYSCA
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUPTS) $(_FILES_C_OBJ_BUILD_VIDEO) $(_FILES_C_OBJ_BUILD_SYSCALLS)
+all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUPTS) $(_FILES_C_OBJ_BUILD_VIDEO) $(_FILES_C_OBJ_BUILD_SYSCALLS) $(_FILES_C_OBJ_BUILD_SYSTEM)
 	
 # Cleans the build files
 clean:
