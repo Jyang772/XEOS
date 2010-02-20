@@ -36,6 +36,8 @@
 #include "private/interrupts.h"
 #include "system.h"
 
+void kernel_video_scroll( void );
+
 void kernel_main( void );
 void kernel_main( void )
 {
@@ -65,6 +67,26 @@ void kernel_main( void )
     kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
     kernel_video_clear();
     
+    kernel_video_print_str(
+        "\n"
+        "    ------------------------------------------------------------------------ \n"
+        "   |                                                                        |\n"
+        "   |       00000     00000  00000000000  0000000000000  0000000000000       |\n"
+        "   |        00000   00000   00000000000  0000000000000  0000000000000       |\n"
+        "   |          000000000     000          000       000  000                 |\n"
+        "   |           0000000      00000000000  000       000  0000000000000       |\n"
+        "   |          000000000     000          000       000            000       |\n"
+        "   |        00000   00000   00000000000  0000000000000  0000000000000       |\n"
+        "   |       00000     00000  00000000000  0000000000000  0000000000000       |\n"
+        "   |                                                                        |\n"
+        "   |                XEOS - x86 Experimental Operating System                |\n"
+        "   |                                                                        |\n"
+        "   |      Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)      |\n"
+        "   |                     All rights (& wrongs) reserved                     |\n"
+        "   |                                                                        |\n"
+        "    ------------------------------------------------------------------------ \n"
+        "\n"
+    );
+    
     for( ; ; );
 }
-
