@@ -72,6 +72,6 @@ void kernel_video_cursor_move( unsigned int x, unsigned int y );
 unsigned int kernel_video_cursor_x( void );
 unsigned int kernel_video_cursor_y( void );
 void kernel_video_prompt( char * s );
-void kernel_video_print_str( char * s );
+void kernel_video_print( char * s );
 
 #endif /* __KERNEL_VIDEO_H__ */

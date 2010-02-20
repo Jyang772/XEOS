@@ -46,7 +46,7 @@ void kernel_main( void )
     kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
     kernel_video_clear();
     
-    kernel_video_print_str(
+    kernel_video_print(
         "\n"
         "    ------------------------------------------------------------------------ \n"
         "   |                                                                        |\n"
