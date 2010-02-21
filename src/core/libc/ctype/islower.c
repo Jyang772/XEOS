@@ -41,5 +41,5 @@ extern unsigned char __libc_ctype_lower;
  */
 int islower( int c )
 {
-    return ( c > 255 ) 0 : ( ( c & __libc_ctype_lower ) : 1 : 0 );
+    return ( c > 255 ) ? 0 : ( ( c & __libc_ctype_lower ) ? 1 : 0 );
 }

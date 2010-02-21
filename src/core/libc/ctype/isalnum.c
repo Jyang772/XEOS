@@ -41,5 +41,5 @@ extern unsigned char __libc_ctype_alnum;
  */
 int isalnum( int c )
 {
-    return ( c > 255 ) 0 : ( ( c & __libc_ctype_alnum ) : 1 : 0 );
+    return ( c > 255 ) ? 0 : ( ( c & __libc_ctype_alnum ) ? 1 : 0 );
 }

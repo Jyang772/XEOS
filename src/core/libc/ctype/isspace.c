@@ -41,5 +41,5 @@ extern unsigned char __libc_ctype_space;
  */
 int isspace( int c )
 {
-    return ( c > 255 ) 0 : ( ( c & __libc_ctype_space ) : 1 : 0 );
+    return ( c > 255 ) ? 0 : ( ( c & __libc_ctype_space ) ? 1 : 0 );
 }
