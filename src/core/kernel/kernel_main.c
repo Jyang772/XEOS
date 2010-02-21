@@ -37,8 +37,6 @@
 #include "system.h"
 #include "syscalls.h"
 
-void kernel_video_scroll( void );
-
 void kernel_main( void );
 void kernel_main( void )
 {

@@ -31,48 +31,34 @@
 
 /* $Id$ */
 
-#ifndef __KERNEL_VIDEO_H__
-#define __KERNEL_VIDEO_H__
-#pragma once
+#include "private/video.h"
 
-/* Location of the video memory */
-#define KERNEL_VIDEO_MEM    0xB8000
+extern unsigned char __kernel_video_attr;
 
-/* BIOS screen dimensions */
-#define KERNEL_VIDEO_COLS   80
-#define KERNEL_VIDEO_ROWS   25
-
-/* BIOS colors */
-typedef enum
+void kernel_video_scroll( unsigned int n )
 {
+    unsigned char * mem;
+    unsigned int    i;
     
-    KERNEL_VIDEO_COLOR_BLACK        = 0x00,
-    KERNEL_VIDEO_COLOR_BLUE         = 0x01,
-    KERNEL_VIDEO_COLOR_GREEN        = 0x02,
-    KERNEL_VIDEO_COLOR_CYAN         = 0x03,
-    KERNEL_VIDEO_COLOR_RED          = 0x04,
-    KERNEL_VIDEO_COLOR_MAGENTA      = 0x05,
-    KERNEL_VIDEO_COLOR_BROWN        = 0x06,
-    KERNEL_VIDEO_COLOR_LIGHTGRAY    = 0x07,
-    KERNEL_VIDEO_COLOR_DARKGRAY     = 0x08,
-    KERNEL_VIDEO_COLOR_LIGHTBLUE    = 0x09,
-    KERNEL_VIDEO_COLOR_LIGHTGREEN   = 0x0A,
-    KERNEL_VIDEO_COLOR_LIGHTCYAN    = 0x0B,
-    KERNEL_VIDEO_COLOR_LIGHTRED     = 0x0C,
-    KERNEL_VIDEO_COLOR_LIGHTMAGENTA = 0x0D,
-    KERNEL_VIDEO_COLOR_LIGHTBROWN   = 0x0E,
-    KERNEL_VIDEO_COLOR_WHITE        = 0x0F
+    if( n >= KERNEL_VIDEO_ROWS ) {
+        
+        kernel_video_clear();
+        
+        return;
+    }
     
-} kernel_video_color;
-
-void kernel_video_clear( void );
-void kernel_video_set_bg( kernel_video_color color );
-void kernel_video_set_fg( kernel_video_color color );
-void kernel_video_cursor_move( unsigned int x, unsigned int y );
-unsigned int kernel_video_cursor_x( void );
-unsigned int kernel_video_cursor_y( void );
-void kernel_video_prompt( char * s );
-void kernel_video_print( char * s );
-void kernel_video_scroll( unsigned int n );
-
-#endif /* __KERNEL_VIDEO_H__ */
+    mem = ( unsigned char * )KERNEL_VIDEO_MEM;
+    
+    for( i = 0; i < ( KERNEL_VIDEO_COLS * ( KERNEL_VIDEO_ROWS - n ) ) * 2; i++ ) {
+        
+        mem[ i ] = mem[ i + ( KERNEL_VIDEO_COLS * 2 * n ) ];
+    }
+    
+    mem += i;
+    
+    for( i = 0; i < KERNEL_VIDEO_COLS * 2 * n; i += 2 ) {
+        
+        mem[ i ]     = ' ';
+        mem[ i + 1 ] = __kernel_video_attr;
+    }
+}
