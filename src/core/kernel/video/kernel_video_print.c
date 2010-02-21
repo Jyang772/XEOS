@@ -46,7 +46,25 @@ void kernel_video_print( char * s )
     y = kernel_video_cursor_y();
     c = s[ 0 ];
     
-    while( c != '\0' ) {
+    while( 1 ) {
+        
+        if( x == KERNEL_VIDEO_COLS ) {
+            
+            x = 0;
+            
+            y++;
+        }
+        
+        if( y == KERNEL_VIDEO_ROWS ) {
+            
+            kernel_video_scroll( 1 );
+            y--;
+        }
+        
+        if( c == '\0' ) {
+            
+            break;
+        }
         
         if( c == '\n' ) {
             
@@ -56,13 +74,6 @@ void kernel_video_print( char * s )
             c = *( ++s );
             
             continue;
-        }
-        
-        if( x == KERNEL_VIDEO_COLS ) {
-            
-            x = 0;
-            
-            y++;
         }
         
         mem      = ( unsigned char * )KERNEL_VIDEO_MEM;
