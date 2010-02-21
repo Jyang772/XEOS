@@ -37,6 +37,10 @@
 #include "system.h"
 #include "syscalls.h"
 
+#define KERNEL_CODE_SEGMENT      0x08
+#define KERNEL_SYSCALL_INTERRUPT 0x20
+#define KERNEL_INTERRUPT_FLAGS   HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS
+
 void kernel_main( void );
 void kernel_main( void )
 {
@@ -75,29 +79,29 @@ void kernel_main( void )
     
     kernel_video_prompt( "Registering the exception handlers..." );
     
-    hal_idt_set_descriptor( HAL_INT_DIVIDE_ERROR,                   kernel_interrupt_divide_error,                   0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_DEBUG_EXCEPTION,                kernel_interrupt_debug_exception,                0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_NMI_INTERRUPT,                  kernel_interrupt_nmi_interrupt,                  0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_BREAKPOINT_EXCEPTION,           kernel_interrupt_breakpoint_exception,           0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_OVERFLOW_EXCEPTION,             kernel_interrupt_overflow_exception,             0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_BOUND_RANGE_EXCEEDED_EXCEPTION, kernel_interrupt_bound_range_exceeded_exception, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_INVALID_OPCODE_EXCEPTION,       kernel_interrupt_invalid_opcode_exception,       0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_DEVICE_NOT_AVAILABLE_EXCEPTION, kernel_interrupt_device_not_available_exception, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_DOUBLE_FAULT_EXCEPTION,         kernel_interrupt_double_fault_exception,         0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_COPROCESSOR_SEGMENT_OVERRUN,    kernel_interrupt_coprocessor_segment_overrun,    0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_INVALID_TSS_EXCEPTION,          kernel_interrupt_invalid_tss_exception,          0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_SEGMENT_NOT_PRESENT,            kernel_interrupt_segment_not_present,            0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_STACK_FAULT_EXCEPTION,          kernel_interrupt_stack_fault_exception,          0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_GENERAL_PROTECTION_EXCEPTION,   kernel_interrupt_general_protection_exception,   0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_PAGE_FAULT_EXCEPTION,           kernel_interrupt_page_fault_exception,           0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_FLOATING_POINT_ERROR_EXCEPTION, kernel_interrupt_floating_point_error_exception, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_ALIGNMENT_CHECK_EXCEPTION,      kernel_interrupt_alignment_check_exception,      0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_MACHINE_CHECK_EXCEPTION,        kernel_interrupt_machine_check_exception,        0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
-    hal_idt_set_descriptor( HAL_INT_SIMD_FLOATING_POINT_EXCEPTION,  kernel_interrupt_simd_floating_point_exception,  0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( HAL_INT_DIVIDE_ERROR,                   kernel_interrupt_divide_error,                   KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_DEBUG_EXCEPTION,                kernel_interrupt_debug_exception,                KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_NMI_INTERRUPT,                  kernel_interrupt_nmi_interrupt,                  KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_BREAKPOINT_EXCEPTION,           kernel_interrupt_breakpoint_exception,           KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_OVERFLOW_EXCEPTION,             kernel_interrupt_overflow_exception,             KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_BOUND_RANGE_EXCEEDED_EXCEPTION, kernel_interrupt_bound_range_exceeded_exception, KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_INVALID_OPCODE_EXCEPTION,       kernel_interrupt_invalid_opcode_exception,       KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_DEVICE_NOT_AVAILABLE_EXCEPTION, kernel_interrupt_device_not_available_exception, KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_DOUBLE_FAULT_EXCEPTION,         kernel_interrupt_double_fault_exception,         KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_COPROCESSOR_SEGMENT_OVERRUN,    kernel_interrupt_coprocessor_segment_overrun,    KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_INVALID_TSS_EXCEPTION,          kernel_interrupt_invalid_tss_exception,          KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_SEGMENT_NOT_PRESENT,            kernel_interrupt_segment_not_present,            KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_STACK_FAULT_EXCEPTION,          kernel_interrupt_stack_fault_exception,          KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_GENERAL_PROTECTION_EXCEPTION,   kernel_interrupt_general_protection_exception,   KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_PAGE_FAULT_EXCEPTION,           kernel_interrupt_page_fault_exception,           KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_FLOATING_POINT_ERROR_EXCEPTION, kernel_interrupt_floating_point_error_exception, KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_ALIGNMENT_CHECK_EXCEPTION,      kernel_interrupt_alignment_check_exception,      KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_MACHINE_CHECK_EXCEPTION,        kernel_interrupt_machine_check_exception,        KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    hal_idt_set_descriptor( HAL_INT_SIMD_FLOATING_POINT_EXCEPTION,  kernel_interrupt_simd_floating_point_exception,  KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
     
     kernel_video_prompt( "Registering the system calls..." );
     
-    hal_idt_set_descriptor( 0x20, kernel_interrupt_syscall, 0x08, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
+    hal_idt_set_descriptor( KERNEL_SYSCALL_INTERRUPT, kernel_interrupt_syscall, KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
     
     for( ; ; );
 }
