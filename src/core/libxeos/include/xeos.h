@@ -63,7 +63,6 @@
 #include <xeos/geometry.h>
 #include <xeos/color.h>
 #include <xeos/string.h>
-#include <xeos/itoa.h>
 #include <xeos/log.h>
 
 #endif /* __LIBXEOS_XEOS_H__ */
