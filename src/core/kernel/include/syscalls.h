@@ -35,6 +35,10 @@
 #define __KERNEL_SYSCALLS_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void syscall( unsigned char n );
 
 #define SYS_exit            1
@@ -48,5 +52,9 @@ void syscall( unsigned char n );
 #define SYS_mmap            90
 
 #define SYS_MAX_SYSCALL     256
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __KERNEL_SYSCALLS_H__ */

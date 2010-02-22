@@ -35,6 +35,10 @@
 #define __KERNEL_INTERRUPTS_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void kernel_interrupt_default_handler( void );
 void kernel_interrupt_divide_error( void );
 void kernel_interrupt_debug_exception( void );
@@ -56,5 +60,9 @@ void kernel_interrupt_alignment_check_exception( void );
 void kernel_interrupt_machine_check_exception( void );
 void kernel_interrupt_simd_floating_point_exception( void );
 void kernel_interrupt_syscall( void );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __KERNEL_INTERRUPTS_H__ */

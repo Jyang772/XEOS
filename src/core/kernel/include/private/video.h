@@ -35,6 +35,10 @@
 #define __KERNEL_VIDEO_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Location of the video memory */
 #define KERNEL_VIDEO_MEM    0xB8000
 
@@ -74,5 +78,9 @@ unsigned int kernel_video_cursor_y( void );
 void kernel_video_prompt( char * s );
 void kernel_video_print( char * s );
 void kernel_video_scroll( unsigned int n );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __KERNEL_VIDEO_H__ */

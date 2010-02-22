@@ -35,6 +35,14 @@
 #define __KERNEL_SYSTEM_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void panic( char * s );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __KERNEL_SYSTEM_H__ */
