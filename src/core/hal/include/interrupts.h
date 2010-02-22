@@ -35,6 +35,10 @@
 #define __HAL_INTERRUPTS_H__
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Interrupt 0 — Divide Error Exception (#DE)
  * 
@@ -245,5 +249,9 @@
  * and the particular exception unmasked for this interrupt to be generated.
  */
 #define HAL_INT_SIMD_FLOATING_POINT_EXCEPTION       19
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __HAL_INTERRUPTS_H__ */

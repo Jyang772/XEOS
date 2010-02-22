@@ -37,6 +37,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define HAL_IDT_MAX_DESCRIPTORS 256
 
 #define HAL_IDT_FLAG_16BITS     0x06    /* 00000110 */
@@ -47,7 +51,7 @@
 #define HAL_IDT_FLAG_PRESENT    0x80    /* 10000000 */
 
 /**
- * A descriptor for an IDT takes the following formats. Some of the format
+ * A descriptor for the IDT takes the following formats. Some of the format
  * changes depending on what type of descriptor this is:
  *      
  *      Bits 0-15:
@@ -123,5 +127,9 @@ typedef void ( * hal_irq_handler )( void );
 void hal_idt_init( uint16_t sel, hal_irq_handler default_handler );
 struct hal_idt_entry * hal_idt_get_descriptor( unsigned int i );
 void hal_idt_set_descriptor( unsigned int i, hal_irq_handler handler, uint16_t sel, uint8_t flags );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __HAL_IDT_H__ */
