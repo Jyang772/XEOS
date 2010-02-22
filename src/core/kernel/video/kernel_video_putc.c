@@ -31,59 +31,53 @@
 
 /* $Id$ */
 
-#ifndef __KERNEL_VIDEO_H__
-#define __KERNEL_VIDEO_H__
-#pragma once
-
 #include <stdbool.h>
+#include "private/video.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+extern unsigned char __kernel_video_attr;
+extern unsigned int __kernel_video_x;
+extern unsigned int __kernel_video_y;
 
-/* Location of the video memory */
-#define KERNEL_VIDEO_MEM    0xB8000
-
-/* BIOS screen dimensions */
-#define KERNEL_VIDEO_COLS   80
-#define KERNEL_VIDEO_ROWS   25
-
-/* BIOS colors */
-typedef enum
+void kernel_video_putc( char c, bool update_cursor )
 {
+    unsigned char * mem;
     
-    KERNEL_VIDEO_COLOR_BLACK        = 0x00,
-    KERNEL_VIDEO_COLOR_BLUE         = 0x01,
-    KERNEL_VIDEO_COLOR_GREEN        = 0x02,
-    KERNEL_VIDEO_COLOR_CYAN         = 0x03,
-    KERNEL_VIDEO_COLOR_RED          = 0x04,
-    KERNEL_VIDEO_COLOR_MAGENTA      = 0x05,
-    KERNEL_VIDEO_COLOR_BROWN        = 0x06,
-    KERNEL_VIDEO_COLOR_LIGHTGRAY    = 0x07,
-    KERNEL_VIDEO_COLOR_DARKGRAY     = 0x08,
-    KERNEL_VIDEO_COLOR_LIGHTBLUE    = 0x09,
-    KERNEL_VIDEO_COLOR_LIGHTGREEN   = 0x0A,
-    KERNEL_VIDEO_COLOR_LIGHTCYAN    = 0x0B,
-    KERNEL_VIDEO_COLOR_LIGHTRED     = 0x0C,
-    KERNEL_VIDEO_COLOR_LIGHTMAGENTA = 0x0D,
-    KERNEL_VIDEO_COLOR_LIGHTBROWN   = 0x0E,
-    KERNEL_VIDEO_COLOR_WHITE        = 0x0F
+    if( c == '\0' ) {
+        
+        return;
+    }
     
-} kernel_video_color;
-
-void kernel_video_clear( void );
-void kernel_video_set_bg( kernel_video_color color );
-void kernel_video_set_fg( kernel_video_color color );
-void kernel_video_cursor_move( unsigned int x, unsigned int y );
-unsigned int kernel_video_cursor_x( void );
-unsigned int kernel_video_cursor_y( void );
-void kernel_video_prompt( char * s );
-void kernel_video_print( char * s );
-void kernel_video_putc( char c, bool update_cursor );
-void kernel_video_scroll( unsigned int n );
-
-#ifdef __cplusplus
+    if( __kernel_video_x == KERNEL_VIDEO_COLS ) {
+        
+        __kernel_video_x = 0;
+        
+        __kernel_video_y++;
+    }
+    
+    if( __kernel_video_y == KERNEL_VIDEO_ROWS ) {
+        
+        kernel_video_scroll( 1 );
+        __kernel_video_y--;
+    }
+    
+    if( c == '\n' ) {
+        
+        __kernel_video_y++;
+        
+        __kernel_video_x = 0;
+        
+    } else {
+        
+        mem      = ( unsigned char * )KERNEL_VIDEO_MEM;
+        mem     += 2 * ( __kernel_video_x + ( __kernel_video_y * KERNEL_VIDEO_COLS ) );
+        mem[ 0 ] = c;
+        mem[ 1 ] = __kernel_video_attr;
+        
+        __kernel_video_x++;
+    }
+    
+    if( update_cursor == true ) {
+        
+        kernel_video_cursor_move( __kernel_video_x, __kernel_video_y );
+    }
 }
-#endif
-
-#endif /* __KERNEL_VIDEO_H__ */

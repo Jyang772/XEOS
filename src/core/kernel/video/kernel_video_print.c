@@ -31,59 +31,23 @@
 
 /* $Id$ */
 
+#include <stdbool.h>
 #include "private/video.h"
-
-extern unsigned char __kernel_video_attr;
 
 void kernel_video_print( char * s )
 {
-    unsigned char * mem;
-    unsigned char c;
     unsigned int x;
     unsigned int y;
     
+    while( *( s ) != '\0' ) {
+        
+        kernel_video_putc( *( s ), false );
+        
+        s++;
+    }
+    
     x = kernel_video_cursor_x();
     y = kernel_video_cursor_y();
-    c = s[ 0 ];
-    
-    while( 1 ) {
-        
-        if( x == KERNEL_VIDEO_COLS ) {
-            
-            x = 0;
-            
-            y++;
-        }
-        
-        if( y == KERNEL_VIDEO_ROWS ) {
-            
-            kernel_video_scroll( 1 );
-            y--;
-        }
-        
-        if( c == '\0' ) {
-            
-            break;
-        }
-        
-        if( c == '\n' ) {
-            
-            y++;
-            
-            x = 0;
-            c = *( ++s );
-            
-            continue;
-        }
-        
-        mem      = ( unsigned char * )KERNEL_VIDEO_MEM;
-        mem     += 2 * ( x + ( y * KERNEL_VIDEO_COLS ) );
-        mem[ 0 ] = c;
-        mem[ 1 ] = __kernel_video_attr;
-        c        = *( ++s );
-        
-        x++;
-    }
     
     kernel_video_cursor_move( x, y );
 }
