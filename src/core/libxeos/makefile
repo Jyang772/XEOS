@@ -60,9 +60,10 @@ DIR_BUILD           = ../../../build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
 DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/libxeos/
 DIR_SRC             = ./
-DIR_SRC_COLOR      	= $(DIR_SRC)color/
+DIR_SRC_COLOR       = $(DIR_SRC)color/
 DIR_SRC_GEOMETRY    = $(DIR_SRC)geometry/
 DIR_SRC_LOG         = $(DIR_SRC)log/
+DIR_SRC_STRING      = $(DIR_SRC)string/
 DIR_SRC_INC         = $(DIR_SRC)include/
 DIR_INC             = $(DIR_SRC)../include/
 PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
@@ -90,6 +91,8 @@ vpath %$(EXT_C) $(DIR_SRC)
 vpath %$(EXT_C) $(DIR_SRC_COLOR)
 vpath %$(EXT_C) $(DIR_SRC_GEOMETRY)
 vpath %$(EXT_C) $(DIR_SRC_LOG)
+vpath %$(EXT_C) $(DIR_SRC_STRING)
+vpath %$(EXT_H) $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -110,24 +113,28 @@ _FILES_C                    = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(E
 _FILES_C_COLOR              = $(foreach dir,$(DIR_SRC_COLOR),$(wildcard $(DIR_SRC_COLOR)*$(EXT_C)))
 _FILES_C_GEOMETRY           = $(foreach dir,$(DIR_SRC_GEOMETRY),$(wildcard $(DIR_SRC_GEOMETRY)*$(EXT_C)))
 _FILES_C_LOG                = $(foreach dir,$(DIR_SRC_LOG),$(wildcard $(DIR_SRC_LOG)*$(EXT_C)))
+_FILES_C_STRING             = $(foreach dir,$(DIR_SRC_STRING),$(wildcard $(DIR_SRC_STRING)*$(EXT_C)))
 
 # Gets only the file name of the code files
 _FILES_C_REL                = $(notdir $(_FILES_C))
 _FILES_C_REL_COLOR          = $(notdir $(_FILES_C_COLOR))
 _FILES_C_REL_GEOMETRY       = $(notdir $(_FILES_C_GEOMETRY))
 _FILES_C_REL_LOG            = $(notdir $(_FILES_C_LOG))
+_FILES_C_REL_STRING         = $(notdir $(_FILES_C_STRING))
 
 # Replace the code extension by the object one
 _FILES_C_OBJ                = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
 _FILES_C_OBJ_COLOR          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COLOR))
 _FILES_C_OBJ_GEOMETRY       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_GEOMETRY))
 _FILES_C_OBJ_LOG            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_LOG))
+_FILES_C_OBJ_STRING         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STRING))
 
 # Prefix all binary files with the build directory
 _FILES_C_OBJ_BUILD          = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
 _FILES_C_OBJ_BUILD_COLOR    = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_COLOR))
 _FILES_C_OBJ_BUILD_GEOMETRY = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_GEOMETRY))
 _FILES_C_OBJ_BUILD_LOG      = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_LOG))
+_FILES_C_OBJ_BUILD_STRING   = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_STRING))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -141,7 +148,7 @@ _FILES_C_OBJ_BUILD_LOG      = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_LOG))
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_COLOR) $(_FILES_C_OBJ_BUILD_GEOMETRY) $(_FILES_C_OBJ_BUILD_LOG)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_COLOR) $(_FILES_C_OBJ_BUILD_GEOMETRY) $(_FILES_C_OBJ_BUILD_LOG) $(_FILES_C_OBJ_BUILD_STRING)
 	
 # Cleans the build files
 clean:
