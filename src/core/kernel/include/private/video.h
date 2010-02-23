@@ -79,6 +79,7 @@ unsigned int kernel_video_cursor_x( void );
 unsigned int kernel_video_cursor_y( void );
 void kernel_video_prompt( char * s );
 void kernel_video_print( char * s );
+void kernel_video_printf( char * format, ... );
 void kernel_video_putc( char c, bool update_cursor );
 void kernel_video_scroll( unsigned int n );
 
