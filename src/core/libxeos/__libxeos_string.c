@@ -31,35 +31,29 @@
 
 /* $Id$ */
 
-#ifndef __LIBXEOS_STRING_H__
-#define __LIBXEOS_STRING_H__
-#pragma once
+#include <string.h>
+#include "string.h"
 
-#include <xeos/types.h>
+XSChar __libxeos_string_hex_chars[] = {
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'A', 'B', 'C', 'D', 'E', 'F'
+};
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/*******************************************************************************
- * Types
- ******************************************************************************/
-
-typedef XSChar * XSCString;
-typedef enum
+void __libxeos_string_reverse( XSChar s[] );
+void __libxeos_string_reverse( XSChar s[] )
 {
+    int i;
+    int j;
+    char c;
     
-    XSASCIIStringEncoding = 0x00,
-    XSUTF8StringEncoding  = 0x01
+    j = strlen( s ) - 1;
     
-} XSStringEncoding;
-
-void itoa( int n, char s[], int radix );
-void utoa( unsigned int n, char s[], int radix );
-
-#ifdef __cplusplus
+    for( i = 0; i < j; i++ ) {
+        
+        c      = s[ i ];
+        s[ i ] = s[ j ];
+        s[ j ] = c;
+        
+        j--;
+    }
 }
-#endif
-
-#endif /* __LIBXEOS_STRING_H__ */
-
