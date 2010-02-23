@@ -54,7 +54,7 @@ void kernel_video_putc( char c, bool update_cursor )
         __kernel_video_y++;
     }
     
-    if( __kernel_video_y == KERNEL_VIDEO_ROWS ) {
+    if( __kernel_video_y == KERNEL_VIDEO_ROWS - 1 ) {
         
         kernel_video_scroll( 1 );
         __kernel_video_y--;
