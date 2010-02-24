@@ -32,6 +32,7 @@
 /* $Id$ */
 
 #include <hal/hal.h>
+#include <xeos/xeos.h>
 #include "private/video.h"
 #include "private/interrupts.h"
 #include "system.h"
@@ -44,6 +45,9 @@
 void kernel_main( void );
 void kernel_main( void )
 {
+    hal_smbios_table_entry * smbios;
+    hal_smbios_infos       * smbios_infos;
+    
     kernel_video_set_fg( KERNEL_VIDEO_COLOR_WHITE );
     kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
     kernel_video_clear();
@@ -102,6 +106,22 @@ void kernel_main( void )
     kernel_video_prompt( "Registering the system calls..." );
     
     hal_idt_set_descriptor( KERNEL_SYSCALL_INTERRUPT, kernel_interrupt_syscall, KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
+    
+    kernel_video_prompt( "Locating the SMBIOS entry point..." );
+    
+    if( ( smbios = hal_smbios_find_entry() ) == NULL ) {
+        
+        kernel_video_prompt( "SMBIOS entry point not found..." );
+        for( ; ; );
+    }
+    
+    kernel_video_promptf( "SMBIOS entry point found at %p...", smbios );
+    kernel_video_promptf( "%u SMBIOS structures found at %X...", smbios->structures_count, smbios->structure_table_address );
+    kernel_video_promptf( "SMBIOS version: %u.%u", ( unsigned int )smbios->version_major,  ( unsigned int )smbios->version_minor );
+    
+    kernel_video_prompt( "Getting SMBIOS informations..." );
+    
+    smbios_infos = hal_smbios_get_infos( smbios );
     
     for( ; ; );
 }
