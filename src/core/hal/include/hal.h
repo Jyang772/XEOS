@@ -40,5 +40,6 @@
 #include <hal/crtc.h>
 #include <hal/idt.h>
 #include <hal/interrupts.h>
+#include <hal/smbios.h>
 
 #endif /* __HAL_H__ */
