@@ -46,10 +46,9 @@ hal_smbios_physical_memory_array __hal_smbios_physical_memory_array;
 hal_smbios_memory_device         __hal_smbios_memory_device;
 hal_smbios_memory_mapped_address __hal_smbios_memory_mapped_address;
 hal_smbios_system_boot_infos     __hal_smbios_system_boot_infos;
-bool                             __hal_smbios_infos_processed       = false;
-hal_smbios_infos                 __hal_smbios_infos = {
-    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
-};
+hal_smbios_bios_characteristics  __hal_smbios_bios_characteristics;
+bool                             __hal_smbios_infos_processed = false;
+hal_smbios_infos                 __hal_smbios_infos = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 
 void __hal_smbios_process_struct_bios_infos( uint8_t * mem );
 void __hal_smbios_process_struct_system_infos( uint8_t * mem );

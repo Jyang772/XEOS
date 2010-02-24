@@ -209,35 +209,81 @@ typedef struct
     uint16_t     handle;
     uintptr_t    address;
     
-} hal_smbios_structure_header;
+} __attribute__( ( packed ) ) hal_smbios_structure_header;
+
+typedef struct
+{
+    
+    bool characteristics;
+    bool isa;
+    bool mca;
+    bool eisa;
+    bool pci;
+    bool pcmcia;
+    bool plug_and_play;
+    bool apm;
+    bool upgradeable;
+    bool shadowing;
+    bool vl_vesa;
+    bool escd;
+    bool boot_cd;
+    bool boot_select;
+    bool rom_socketed;
+    bool boot_pcmcia;
+    bool edd;
+    bool service_floppy_nec9800_japan;
+    bool service_floppy_toshiba_japan;
+    bool service_floppy_525_360kb;
+    bool service_floppy_525_1200kb;
+    bool service_floppy_35_720kb;
+    bool service_floppy_35_2880kb;
+    bool service_print_screen;
+    bool service_keyboard;
+    bool service_serial;
+    bool service_printer;
+    bool service_video_cga_mono;
+    bool nec_pc98;
+    
+} __attribute__( ( packed ) ) hal_smbios_bios_characteristics;
+
+typedef struct
+{
+    
+    hal_smbios_structure_header header;
+    char * vendor;
+    char * version;
+    char * date;
+    uintptr_t address;
+    unsigned int rom_size;
+    unsigned int release_major;
+    unsigned int release_minor;
+    hal_smbios_bios_characteristics * characteristics;
+    unsigned int embedded_controller_firmware_major;
+    unsigned int embedded_controller_firmware_minor;
+    
+    
+} __attribute__( ( packed ) ) hal_smbios_bios_infos;
 
 typedef struct
 {
     
     hal_smbios_structure_header header;
     
-} hal_smbios_bios_infos;
+} __attribute__( ( packed ) ) hal_smbios_system_infos;
 
 typedef struct
 {
     
     hal_smbios_structure_header header;
     
-} hal_smbios_system_infos;
+} __attribute__( ( packed ) ) hal_smbios_system_enclosure;
 
 typedef struct
 {
     
     hal_smbios_structure_header header;
     
-} hal_smbios_system_enclosure;
-
-typedef struct
-{
-    
-    hal_smbios_structure_header header;
-    
-} hal_smbios_processor_infos;
+} __attribute__( ( packed ) ) hal_smbios_processor_infos;
 
 typedef struct
 {
@@ -251,35 +297,35 @@ typedef struct
     
     hal_smbios_structure_header header;
     
-} hal_smbios_system_slots;
+} __attribute__( ( packed ) ) hal_smbios_system_slots;
 
 typedef struct
 {
     
     hal_smbios_structure_header header;
     
-} hal_smbios_physical_memory_array;
+} __attribute__( ( packed ) ) hal_smbios_physical_memory_array;
 
 typedef struct
 {
     
     hal_smbios_structure_header header;
     
-} hal_smbios_memory_device;
+} __attribute__( ( packed ) ) hal_smbios_memory_device;
 
 typedef struct
 {
     
     hal_smbios_structure_header header;
     
-} hal_smbios_memory_mapped_address;
+} __attribute__( ( packed ) ) hal_smbios_memory_mapped_address;
 
 typedef struct
 {
     
     hal_smbios_structure_header header;
     
-} hal_smbios_system_boot_infos;
+} __attribute__( ( packed ) ) hal_smbios_system_boot_infos;
 
 typedef struct
 {
@@ -295,7 +341,7 @@ typedef struct
     hal_smbios_memory_mapped_address * memory_mapped_address;
     hal_smbios_system_boot_infos     * system_boot_infos;
     
-} hal_smbios_infos;
+} __attribute__( ( packed ) ) hal_smbios_infos;
 
 hal_smbios_table_entry * hal_smbios_find_entry( void );
 bool hal_smbios_verifiy_checksum( hal_smbios_table_entry * entry );
