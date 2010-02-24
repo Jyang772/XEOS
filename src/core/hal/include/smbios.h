@@ -290,6 +290,29 @@ typedef struct
 {
     
     hal_smbios_structure_header header;
+    char * socket;
+    uint8_t type;
+    uint8_t family;
+    char * manufacturer;
+    uint64_t id;
+    char * version;
+    uint8_t voltage;
+    uint16_t external_clock;
+    uint16_t max_speed;
+    uint16_t speed;
+    uint8_t status;
+    uint8_t upgrade;
+    uint16_t cache_l1_handle;
+    uint16_t cache_l2_handle;
+    uint16_t cache_l3_handle;
+    char * serial_number;
+    char * asset_tag;
+    char * part_number;
+    uint8_t core_count;
+    uint8_t core_enabled;
+    uint8_t thread_count;
+    uint16_t characteristics;
+    uint16_t family2;
     
 } __attribute__( ( packed ) ) hal_smbios_processor_infos;
 
