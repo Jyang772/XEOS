@@ -377,7 +377,7 @@ typedef struct
 hal_smbios_table_entry * hal_smbios_find_entry( void );
 bool hal_smbios_verifiy_checksum( hal_smbios_table_entry * entry );
 bool hal_smbios_verifiy_intermediate_checksum( hal_smbios_table_entry * entry );
-hal_smbios_infos * hal_smbios_get_infos( hal_smbios_table_entry * entry );
+void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type );
 
 #ifdef __cplusplus
 }

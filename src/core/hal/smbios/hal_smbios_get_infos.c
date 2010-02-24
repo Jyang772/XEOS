@@ -38,6 +38,7 @@
 extern bool             __hal_smbios_infos_processed;
 extern hal_smbios_infos __hal_smbios_infos;
 
+uint8_t * __hal_smbios_find_struct( hal_smbios_table_entry * entry, uint8_t type );
 void __hal_smbios_process_struct_bios_infos( uint8_t * mem );
 void __hal_smbios_process_struct_system_infos( uint8_t * mem );
 void __hal_smbios_process_struct_system_enclosure( uint8_t * mem );
@@ -49,99 +50,107 @@ void __hal_smbios_process_struct_memory_device( uint8_t * mem );
 void __hal_smbios_process_struct_memory_mapped_address( uint8_t * mem );
 void __hal_smbios_process_struct_system_boot_infos( uint8_t * mem );
 
-hal_smbios_infos * hal_smbios_get_infos( hal_smbios_table_entry * entry )
+void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
 {
-    uint8_t      type;
-    uint8_t      length;
-    uint16_t     handle;
-    uint8_t    * mem;
-    unsigned int i;
-    
-    if( __hal_smbios_infos_processed == true ) {
-        
-        return &__hal_smbios_infos;
-    }
-    
-    __hal_smbios_infos_processed = true;
+    uint8_t * mem;
     
     mem = ( uint8_t * )entry->structure_table_address;
     
-    for( i = 0; i < entry->structures_count; i++ ) {
+    switch( type ) {
         
-        type   = ( uint8_t )*( mem );
-        length = ( uint8_t )*( mem + 1 );
-        handle = ( uint16_t )*( mem + 2 );
-        
-        switch( type ) {
+        case HAL_SMBIOS_STRUCT_BIOS_INFORMATION:
             
-            case HAL_SMBIOS_STRUCT_BIOS_INFORMATION:
+            if( __hal_smbios_infos.bios_infos == NULL ) {
                 
-                __hal_smbios_process_struct_bios_infos( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_SYSTEM_INFORMATION:
-                
-                __hal_smbios_process_struct_system_infos( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_SYSTEM_ENCLOSURE:
-                
-                __hal_smbios_process_struct_system_enclosure( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_PROCESSOR_INFORMATION:
-                
-                __hal_smbios_process_struct_processor_infos( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_CACHE_INFORMATION:
-                
-                __hal_smbios_process_struct_cache_infos( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_SYSTEM_SLOTS:
-                
-                __hal_smbios_process_struct_system_slots( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_PHYSICAL_MEMORY_ARRAY:
-                
-                __hal_smbios_process_struct_physical_memory_array( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_MEMORY_DEVICE:
-                
-                __hal_smbios_process_struct_memory_device( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_MEMORY_ARRAY_MAPPED_ADDRESS:
-                
-                __hal_smbios_process_struct_memory_mapped_address( mem );
-                break;
-                
-            case HAL_SMBIOS_STRUCT_SYSTEM_BOOT_INFORMATION:
-                
-                __hal_smbios_process_struct_system_boot_infos( mem );
-                break;
-                
-            default:
-                
-                break;
-        }
-        
-        mem += length;
-        
-        while( 1 ) {
-            
-            if( *( mem ) == '\0' && *( mem + 1 ) == '\0' ) {
-                
-                mem += 2;
-                break;
+                __hal_smbios_process_struct_bios_infos( __hal_smbios_find_struct( entry, type ) );
             }
             
-            mem++;
-        }
+            return __hal_smbios_infos.bios_infos;
+            
+        case HAL_SMBIOS_STRUCT_SYSTEM_INFORMATION:
+            
+            if( __hal_smbios_infos.system_infos == NULL ) {
+                
+                __hal_smbios_process_struct_system_infos( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.system_infos;
+            
+        case HAL_SMBIOS_STRUCT_SYSTEM_ENCLOSURE:
+            
+            if( __hal_smbios_infos.system_enclosure == NULL ) {
+                
+                __hal_smbios_process_struct_system_enclosure( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.system_enclosure;
+            
+        case HAL_SMBIOS_STRUCT_PROCESSOR_INFORMATION:
+            
+            if( __hal_smbios_infos.processor_infos == NULL ) {
+                
+                __hal_smbios_process_struct_processor_infos( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.processor_infos;
+            
+        case HAL_SMBIOS_STRUCT_CACHE_INFORMATION:
+            
+            if( __hal_smbios_infos.cache_infos == NULL ) {
+                
+                __hal_smbios_process_struct_cache_infos( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.cache_infos;
+            
+        case HAL_SMBIOS_STRUCT_SYSTEM_SLOTS:
+            
+            if( __hal_smbios_infos.system_slots == NULL ) {
+                
+                __hal_smbios_process_struct_system_slots( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.system_slots;
+            
+        case HAL_SMBIOS_STRUCT_PHYSICAL_MEMORY_ARRAY:
+            
+            if( __hal_smbios_infos.physical_memory_array == NULL ) {
+                
+                __hal_smbios_process_struct_physical_memory_array( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.physical_memory_array;
+            
+        case HAL_SMBIOS_STRUCT_MEMORY_DEVICE:
+            
+            if( __hal_smbios_infos.memory_device == NULL ) {
+                
+                __hal_smbios_process_struct_memory_device( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.memory_device;
+            
+        case HAL_SMBIOS_STRUCT_MEMORY_ARRAY_MAPPED_ADDRESS:
+            
+            if( __hal_smbios_infos.memory_mapped_address == NULL ) {
+                
+                __hal_smbios_process_struct_memory_mapped_address( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.memory_mapped_address;
+            
+        case HAL_SMBIOS_STRUCT_SYSTEM_BOOT_INFORMATION:
+            
+            if( __hal_smbios_infos.system_boot_infos == NULL ) {
+                
+                __hal_smbios_process_struct_system_boot_infos( __hal_smbios_find_struct( entry, type ) );
+            }
+            
+            return __hal_smbios_infos.system_boot_infos;
+            
+        default:
+            
+            return NULL;
+            break;
     }
-    
-    return &__hal_smbios_infos;
 }

@@ -49,9 +49,9 @@ hal_smbios_memory_device         __hal_smbios_memory_device;
 hal_smbios_memory_mapped_address __hal_smbios_memory_mapped_address;
 hal_smbios_system_boot_infos     __hal_smbios_system_boot_infos;
 hal_smbios_bios_characteristics  __hal_smbios_bios_characteristics;
-bool                             __hal_smbios_infos_processed = false;
 hal_smbios_infos                 __hal_smbios_infos = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 
+uint8_t * __hal_smbios_find_struct( hal_smbios_table_entry * entry, uint8_t type );
 void __hal_smbios_process_struct_bios_infos( uint8_t * mem );
 void __hal_smbios_process_struct_system_infos( uint8_t * mem );
 void __hal_smbios_process_struct_system_enclosure( uint8_t * mem );
@@ -63,6 +63,44 @@ void __hal_smbios_process_struct_memory_device( uint8_t * mem );
 void __hal_smbios_process_struct_memory_mapped_address( uint8_t * mem );
 void __hal_smbios_process_struct_system_boot_infos( uint8_t * mem );
 
+uint8_t * __hal_smbios_find_struct( hal_smbios_table_entry * entry, uint8_t type )
+{
+    uint8_t    * mem;
+    uint8_t      s_type;
+    uint8_t      s_length;
+    uint16_t     s_handle;
+    unsigned int i;
+    
+    mem = ( uint8_t * )entry->structure_table_address;
+    
+    for( i = 0; i < entry->structures_count; i++ ) {
+        
+        s_type   = ( uint8_t )*( mem );
+        s_length = ( uint8_t )*( mem + 1 );
+        s_handle = ( uint16_t )*( mem + 2 );
+        
+        if( s_type == type ) {
+            
+            return mem;
+        }
+        
+        mem += s_length;
+        
+        while( 1 ) {
+            
+            if( *( mem ) == '\0' && *( mem + 1 ) == '\0' ) {
+                
+                mem += 2;
+                break;
+            }
+            
+            mem++;
+        }
+    }
+    
+    return NULL;
+}
+
 void __hal_smbios_process_struct_bios_infos( uint8_t * mem )
 {
     uintptr_t start_str1;
@@ -70,6 +108,11 @@ void __hal_smbios_process_struct_bios_infos( uint8_t * mem )
     uintptr_t start_str3;
     uint32_t  characteristics;
     char      characteristics_ext;
+    
+    if( mem == NULL ) {
+        
+        return;
+    }
     
     __hal_smbios_bios_infos.header.type    = ( uint8_t )*( mem );
     __hal_smbios_bios_infos.header.length  = ( uint8_t )*( mem + 0x01 );
@@ -139,6 +182,11 @@ void __hal_smbios_process_struct_bios_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_infos( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_system_infos.header.type    = ( uint8_t )*( mem );
     __hal_smbios_system_infos.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_system_infos.header.handle  = ( uint8_t )*( mem + 2 );
@@ -149,6 +197,11 @@ void __hal_smbios_process_struct_system_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_enclosure( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_system_enclosure.header.type    = ( uint8_t )*( mem );
     __hal_smbios_system_enclosure.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_system_enclosure.header.handle  = ( uint8_t )*( mem + 2 );
@@ -159,6 +212,11 @@ void __hal_smbios_process_struct_system_enclosure( uint8_t * mem )
 
 void __hal_smbios_process_struct_processor_infos( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_processor_infos.header.type    = ( uint8_t )*( mem );
     __hal_smbios_processor_infos.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_processor_infos.header.handle  = ( uint8_t )*( mem + 2 );
@@ -169,6 +227,11 @@ void __hal_smbios_process_struct_processor_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_cache_infos( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_cache_infos.header.type    = ( uint8_t )*( mem );
     __hal_smbios_cache_infos.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_cache_infos.header.handle  = ( uint8_t )*( mem + 2 );
@@ -179,6 +242,11 @@ void __hal_smbios_process_struct_cache_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_slots( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_system_slots.header.type    = ( uint8_t )*( mem );
     __hal_smbios_system_slots.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_system_slots.header.handle  = ( uint8_t )*( mem + 2 );
@@ -189,6 +257,11 @@ void __hal_smbios_process_struct_system_slots( uint8_t * mem )
 
 void __hal_smbios_process_struct_physical_memory_array( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_physical_memory_array.header.type    = ( uint8_t )*( mem );
     __hal_smbios_physical_memory_array.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_physical_memory_array.header.handle  = ( uint8_t )*( mem + 2 );
@@ -199,6 +272,11 @@ void __hal_smbios_process_struct_physical_memory_array( uint8_t * mem )
 
 void __hal_smbios_process_struct_memory_device( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_memory_device.header.type    = ( uint8_t )*( mem );
     __hal_smbios_memory_device.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_memory_device.header.handle  = ( uint8_t )*( mem + 2 );
@@ -209,6 +287,11 @@ void __hal_smbios_process_struct_memory_device( uint8_t * mem )
 
 void __hal_smbios_process_struct_memory_mapped_address( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_memory_mapped_address.header.type    = ( uint8_t )*( mem );
     __hal_smbios_memory_mapped_address.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_memory_mapped_address.header.handle  = ( uint8_t )*( mem + 2 );
@@ -219,6 +302,11 @@ void __hal_smbios_process_struct_memory_mapped_address( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_boot_infos( uint8_t * mem )
 {
+    if( mem == NULL ) {
+        
+        return;
+    }
+    
     __hal_smbios_system_boot_infos.header.type    = ( uint8_t )*( mem );
     __hal_smbios_system_boot_infos.header.length  = ( uint8_t )*( mem + 1 );
     __hal_smbios_system_boot_infos.header.handle  = ( uint8_t )*( mem + 2 );
