@@ -36,6 +36,8 @@
 #include <string.h>
 #include "smbios.h"
 
+#include <kernel/private/video.h>
+
 hal_smbios_bios_infos            __hal_smbios_bios_infos;
 hal_smbios_system_infos          __hal_smbios_system_infos;
 hal_smbios_system_enclosure      __hal_smbios_system_enclosure;
@@ -63,12 +65,76 @@ void __hal_smbios_process_struct_system_boot_infos( uint8_t * mem );
 
 void __hal_smbios_process_struct_bios_infos( uint8_t * mem )
 {
+    uintptr_t start_str1;
+    uintptr_t start_str2;
+    uintptr_t start_str3;
+    uint32_t  characteristics;
+    char      characteristics_ext;
+    
     __hal_smbios_bios_infos.header.type    = ( uint8_t )*( mem );
-    __hal_smbios_bios_infos.header.length  = ( uint8_t )*( mem + 1 );
-    __hal_smbios_bios_infos.header.handle  = ( uint8_t )*( mem + 2 );
+    __hal_smbios_bios_infos.header.length  = ( uint8_t )*( mem + 0x01 );
+    __hal_smbios_bios_infos.header.handle  = ( uint8_t )*( mem + 0x02 );
     __hal_smbios_bios_infos.header.address = ( uintptr_t )mem;
     
-    __hal_smbios_infos.bios_infos = &__hal_smbios_bios_infos;
+    __hal_smbios_bios_infos.address                            = ( uintptr_t )*( mem + 0x06 );
+    __hal_smbios_bios_infos.rom_size                           = ( unsigned int )*( mem + 0x09 );
+    __hal_smbios_bios_infos.release_major                      = ( unsigned int )*( mem + 0x14 );
+    __hal_smbios_bios_infos.release_minor                      = ( unsigned int )*( mem + 0x15 );
+    __hal_smbios_bios_infos.embedded_controller_firmware_major = ( unsigned int )*( mem + 0x16 );
+    __hal_smbios_bios_infos.embedded_controller_firmware_minor = ( unsigned int )*( mem + 0x17 );
+    
+    characteristics     = ( uint16_t )*( mem + 0x0A );
+    characteristics_ext = ( char )*( mem + 0x12 );
+    
+    __hal_smbios_bios_characteristics.characteristics              = ( characteristics & 0x00000008 ) ? true : false;
+    __hal_smbios_bios_characteristics.isa                          = ( characteristics & 0x00000010 ) ? true : false;
+    __hal_smbios_bios_characteristics.mca                          = ( characteristics & 0x00000020 ) ? true : false;
+    __hal_smbios_bios_characteristics.eisa                         = ( characteristics & 0x00000040 ) ? true : false;
+    __hal_smbios_bios_characteristics.pci                          = ( characteristics & 0x00000080 ) ? true : false;
+    __hal_smbios_bios_characteristics.pcmcia                       = ( characteristics & 0x00000100 ) ? true : false;
+    __hal_smbios_bios_characteristics.plug_and_play                = ( characteristics & 0x00000200 ) ? true : false;
+    __hal_smbios_bios_characteristics.apm                          = ( characteristics & 0x00000400 ) ? true : false;
+    __hal_smbios_bios_characteristics.upgradeable                  = ( characteristics & 0x00000800 ) ? true : false;
+    __hal_smbios_bios_characteristics.shadowing                    = ( characteristics & 0x00001000 ) ? true : false;
+    __hal_smbios_bios_characteristics.vl_vesa                      = ( characteristics & 0x00002000 ) ? true : false;
+    __hal_smbios_bios_characteristics.escd                         = ( characteristics & 0x00004000 ) ? true : false;
+    __hal_smbios_bios_characteristics.boot_cd                      = ( characteristics & 0x00008000 ) ? true : false;
+    __hal_smbios_bios_characteristics.boot_select                  = ( characteristics & 0x00010000 ) ? true : false;
+    __hal_smbios_bios_characteristics.rom_socketed                 = ( characteristics & 0x00020000 ) ? true : false;
+    __hal_smbios_bios_characteristics.boot_pcmcia                  = ( characteristics & 0x00040000 ) ? true : false;
+    __hal_smbios_bios_characteristics.edd                          = ( characteristics & 0x00080000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_floppy_nec9800_japan = ( characteristics & 0x00100000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_floppy_toshiba_japan = ( characteristics & 0x00200000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_floppy_525_360kb     = ( characteristics & 0x00400000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_floppy_525_1200kb    = ( characteristics & 0x00800000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_floppy_35_720kb      = ( characteristics & 0x01000000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_floppy_35_2880kb     = ( characteristics & 0x02000000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_print_screen         = ( characteristics & 0x04000000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_keyboard             = ( characteristics & 0x08000000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_serial               = ( characteristics & 0x10000000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_printer              = ( characteristics & 0x20000000 ) ? true : false;
+    __hal_smbios_bios_characteristics.service_video_cga_mono       = ( characteristics & 0x40000000 ) ? true : false;
+    __hal_smbios_bios_characteristics.nec_pc98                     = ( characteristics & 0x80000000 ) ? true : false;
+    
+    __hal_smbios_bios_characteristics.acpi                 = ( characteristics_ext & 0x01 ) ? true : false;
+    __hal_smbios_bios_characteristics.usb_legacy           = ( characteristics_ext & 0x02 ) ? true : false;
+    __hal_smbios_bios_characteristics.agp                  = ( characteristics_ext & 0x04 ) ? true : false;
+    __hal_smbios_bios_characteristics.i20                  = ( characteristics_ext & 0x08 ) ? true : false;
+    __hal_smbios_bios_characteristics.ls120                = ( characteristics_ext & 0x10 ) ? true : false;
+    __hal_smbios_bios_characteristics.boot_atapi_zip_drive = ( characteristics_ext & 0x20 ) ? true : false;
+    __hal_smbios_bios_characteristics.boot_1394            = ( characteristics_ext & 0x40 ) ? true : false;
+    __hal_smbios_bios_characteristics.smart_battery        = ( characteristics_ext & 0x80 ) ? true : false;
+    
+    start_str1 = ( uintptr_t )( mem + 0x18 );
+    start_str2 = start_str1 + strlen( ( char * )( start_str1 ) ) + 1;
+    start_str3 = start_str2 + strlen( ( char * )( start_str2 ) ) + 1;
+    
+    __hal_smbios_bios_infos.vendor  = ( char * )( ( ( char )*( mem + 0x04 ) == 1 ) ? start_str1 : ( ( ( char )*( mem + 0x04 ) == 2 ) ? start_str2 : start_str3 ) );
+    __hal_smbios_bios_infos.version = ( char * )( ( ( char )*( mem + 0x05 ) == 1 ) ? start_str1 : ( ( ( char )*( mem + 0x05 ) == 2 ) ? start_str2 : start_str3 ) );
+    __hal_smbios_bios_infos.date    = ( char * )( ( ( char )*( mem + 0x08 ) == 1 ) ? start_str1 : ( ( ( char )*( mem + 0x08 ) == 2 ) ? start_str2 : start_str3 ) );
+    
+    __hal_smbios_bios_infos.characteristics = &__hal_smbios_bios_characteristics;
+    __hal_smbios_infos.bios_infos           = &__hal_smbios_bios_infos;
 }
 
 void __hal_smbios_process_struct_system_infos( uint8_t * mem )

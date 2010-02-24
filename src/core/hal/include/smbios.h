@@ -243,6 +243,14 @@ typedef struct
     bool service_printer;
     bool service_video_cga_mono;
     bool nec_pc98;
+    bool acpi;
+    bool usb_legacy;
+    bool agp;
+    bool i20;
+    bool ls120;
+    bool boot_atapi_zip_drive;
+    bool boot_1394;
+    bool smart_battery;
     
 } __attribute__( ( packed ) ) hal_smbios_bios_characteristics;
 
