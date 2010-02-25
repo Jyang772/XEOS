@@ -71,5 +71,5 @@ void itoa( int n, char s[], int radix )
     
     s[ i ] = '\0';
     
-    __libxeos_string_reverse( s );
+    XSStringReverse( s );
 }

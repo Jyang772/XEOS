@@ -31,9 +31,23 @@
 
 /* $Id$ */
 
+#include <string.h>
 #include "string.h"
 
-XSChar __libxeos_string_hex_chars[] = {
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    'A', 'B', 'C', 'D', 'E', 'F'
-};
+void XSStringReverse( XSChar s[] )
+{
+    int i;
+    int j;
+    char c;
+    
+    j = strlen( s ) - 1;
+    
+    for( i = 0; i < j; i++ ) {
+        
+        c      = s[ i ];
+        s[ i ] = s[ j ];
+        s[ j ] = c;
+        
+        j--;
+    }
+}

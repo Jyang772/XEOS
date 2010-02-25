@@ -56,6 +56,7 @@ typedef enum
 
 void itoa( int n, char s[], int radix );
 void utoa( unsigned int n, char s[], int radix );
+void XSStringReverse( XSChar s[] );
 
 #ifdef __cplusplus
 }
