@@ -83,9 +83,6 @@ jmp     XEOS.boot.stage2
 ; Definitions & Macros
 ;-------------------------------------------------------------------------------
 
-; Horizontal ruler
-%define HR              '    ************************************************************************', $ASCII.NL
-
 ; Prints a new line with a message, prefixed by the prompt
 %macro @XEOS.boot.stage2.print 1
     
@@ -100,19 +97,11 @@ jmp     XEOS.boot.stage2
 ;-------------------------------------------------------------------------------
 
 XEOS.files.kernel               db  'KERNEL  ELF'
-XEOS.boot.stage2.copyright      db  $ASCII.NL, HR,\
-                                '    *               XEOS - x86 Experimental Operating System               *',\
-                                $ASCII.NL,\
-                                '    *                                                                      *',\
-                                $ASCII.NL,\
-                                '    *     Copyright (C) 2010 Jean-David Gadina (macmade@eosgarden.com)     *',\
-                                $ASCII.NL,\
-                                '    *                    All rights (& wrongs) reserved                    *',\
-                                $ASCII.NL, HR, $ASCII.NL, $ASCII.NUL
-XEOS.boot.stage2.nl             db   $ASCII.NL,  $ASCII.NUL         
+XEOS.boot.stage2.nl             db   $ASCII.NL,  $ASCII.NUL
+XEOS.boot.stage2.hr             db  '         --------------------------------------------------------------------', $ASCII.NL, $ASCII.NUL
 XEOS.boot.stage2.prompt         db  '<BOOT2>: ', $ASCII.NUL
-XEOS.boot.stage2.revision       db  '$Revision$', $ASCII.NUL
-XEOS.boot.stage2.date           db  '$Date$', $ASCII.NUL
+XEOS.boot.stage2.revision       db  '         $Revision$', $ASCII.NL, $ASCII.NUL
+XEOS.boot.stage2.date           db  '         $Date$', $ASCII.NL, $ASCII.NUL
 XEOS.boot.stage2.greet          db  'Entering the second stage bootloader...', $ASCII.NUL
 XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
 XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
@@ -144,13 +133,13 @@ XEOS.boot.stage2:
     ; Restores the interrupts
     sti
     
-    ; Prints the copyright notice
-    @BIOS.video.print       XEOS.boot.stage2.copyright
-    
     ; Prints status messages
+    @BIOS.video.print       XEOS.boot.stage2.nl
     @XEOS.boot.stage2.print XEOS.boot.stage2.greet
-    @XEOS.boot.stage2.print XEOS.boot.stage2.revision
-    @XEOS.boot.stage2.print XEOS.boot.stage2.date
+    @BIOS.video.print       XEOS.boot.stage2.hr
+    @BIOS.video.print       XEOS.boot.stage2.revision
+    @BIOS.video.print       XEOS.boot.stage2.date
+    @BIOS.video.print       XEOS.boot.stage2.nl
     @XEOS.boot.stage2.print XEOS.boot.stage2.loadKernel
     
     ; Name of the kernel file
