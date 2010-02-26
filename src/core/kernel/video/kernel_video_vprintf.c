@@ -40,6 +40,7 @@ void kernel_video_vprintf( char * format, va_list arg )
     unsigned int y;
     int          va_int;
     unsigned int va_uint;
+    double       va_double;
     char         va_char;
     char       * va_char_ptr;
     uintptr_t    va_uint_ptr;
@@ -72,6 +73,14 @@ void kernel_video_vprintf( char * format, va_list arg )
                         va_int = va_arg( arg, int );
                         
                         itoa( va_int, nbuf, 10 );
+                        kernel_video_print( nbuf );
+                        break;
+                    
+                    case 'f':
+                        
+                        va_double = va_arg( arg, double );
+                        
+                        itoa( ( int )va_double, nbuf, 10 );
                         kernel_video_print( nbuf );
                         break;
                         
@@ -113,7 +122,15 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_char_ptr = va_arg( arg, char * );
                         
-                        kernel_video_print( va_char_ptr );
+                        if( va_char_ptr == NULL ) {
+                            
+                            kernel_video_print( "(NULL)" );
+                            
+                        } else {
+                            
+                            kernel_video_print( va_char_ptr );
+                        }
+                        
                         break;
                         
                     case 'p':
