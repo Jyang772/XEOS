@@ -38,15 +38,18 @@
 #include "system.h"
 #include "syscalls.h"
 
-#define KERNEL_CODE_SEGMENT      0x08
-#define KERNEL_SYSCALL_INTERRUPT 0x20
-#define KERNEL_INTERRUPT_FLAGS   HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS
+#define KERNEL_CODE_SEGMENT         0x08
+#define KERNEL_SYSCALL_INTERRUPT    0x20
+#define KERNEL_INTERRUPT_FLAGS      HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS
+
+#define KERNEL_HR                   "        --------------------------------------------------------------------"
 
 void kernel_main( void );
 void kernel_main( void )
 {
-    hal_smbios_table_entry * smbios;
-    hal_smbios_infos       * smbios_infos;
+    hal_smbios_table_entry     * smbios;
+    hal_smbios_bios_infos      * bios_infos;
+    hal_smbios_processor_infos * infos_cpu;
     
     kernel_video_set_fg( KERNEL_VIDEO_COLOR_WHITE );
     kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
@@ -73,9 +76,11 @@ void kernel_main( void )
         "\n"
     );
     
-    kernel_video_prompt( "Entering the XEOS kernel..." );
-    kernel_video_prompt( "$Revision$" );
-    kernel_video_prompt( "$Date$" );
+    kernel_video_prompt( "Entering the XEOS kernel:\n" KERNEL_HR );
+    kernel_video_print(
+        "        $Revision$\n"
+        "        $Date$\n\n"
+    );
     
     kernel_video_prompt( "Initializing the IDT (Interrupt Descriptor Table)..." );
     
@@ -107,21 +112,94 @@ void kernel_main( void )
     
     hal_idt_set_descriptor( KERNEL_SYSCALL_INTERRUPT, kernel_interrupt_syscall, KERNEL_CODE_SEGMENT, KERNEL_INTERRUPT_FLAGS );
     
-    kernel_video_prompt( "Locating the SMBIOS entry point..." );
-    
+    kernel_video_print( "\n" );
+    kernel_video_prompt( "Locating the SMBIOS entry point:\n" KERNEL_HR );
+        
     if( ( smbios = hal_smbios_find_entry() ) == NULL ) {
         
-        kernel_video_prompt( "SMBIOS entry point not found..." );
+        /* Fatal error */
+        
+        kernel_video_printf( "        SMBIOS entry point not found!" );
         for( ; ; );
     }
     
-    kernel_video_promptf( "SMBIOS entry point found at %p...", smbios );
-    kernel_video_promptf( "%u SMBIOS structures found at %X...", smbios->structures_count, smbios->structure_table_address );
-    kernel_video_promptf( "SMBIOS version: %u.%u", ( unsigned int )smbios->version_major,  ( unsigned int )smbios->version_minor );
+    kernel_video_printf(
+        "        Entry point address:   %p\n"
+        "        Number of structures:  %u\n"
+        "        Start address:         %p\n"
+        "        SMBIOS version:        %u.%u\n",
+        smbios,
+        smbios->structures_count,
+        smbios->structure_table_address,
+        ( unsigned int )smbios->version_major,
+        ( unsigned int )smbios->version_minor
+    );
     
-    kernel_video_prompt( "Getting SMBIOS informations..." );
+    kernel_video_print( "\n" );
+    kernel_video_prompt( "Getting BIOS informations:\n" KERNEL_HR );
     
-    smbios_infos = hal_smbios_get_infos( smbios );
+    bios_infos = ( hal_smbios_bios_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_BIOS_INFORMATION );
+    
+    kernel_video_printf(
+        "        BIOS vendor:         %s\n"
+        "        BIOS version:        %s\n"
+        "        BIOS release date:   %s\n",
+        ( bios_infos->vendor  == NULL ) ? "Unknown" : bios_infos->vendor,
+        ( bios_infos->version == NULL ) ? "Unknown" : bios_infos->version,
+        ( bios_infos->date    == NULL ) ? "Unknown" : bios_infos->date
+    );
+    
+    if( bios_infos->release_major < 0xFF ) {
+        
+        kernel_video_printf(
+            "        System BIOS version: %i.%i\n",
+            bios_infos->release_major,
+            bios_infos->release_minor
+        );
+        
+    } else {
+        
+        kernel_video_print( "        System BIOS version: Unknown\n" );
+    }
+    
+    if( bios_infos->embedded_controller_firmware_major < 0xFF ) {
+        
+        kernel_video_printf(
+            "        ECF version:         %i.%i\n",
+            bios_infos->embedded_controller_firmware_major,
+            bios_infos->embedded_controller_firmware_minor
+        );
+        
+    } else {
+        
+        kernel_video_print( "        ECF version:         Unknown\n" );
+    }
+    
+    kernel_video_print( "\n" );
+    kernel_video_prompt( "Getting CPU informations:\n" KERNEL_HR );
+    
+    infos_cpu = ( hal_smbios_processor_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_PROCESSOR_INFORMATION );
+    
+    kernel_video_printf(
+        "        CPU socket:          %s\n"
+        "        CPU type:            %s\n"
+        "        CPU family:          %s\n"
+        "        CPU manufacturer:    %s\n"
+        "        CPU version:         %s\n"
+        "        CPU voltage:         %f\n"
+        "        CPU serial number:   %s\n"
+        "        CPU asset tag:       %s\n"
+        "        CPU part number:     %s\n",
+        ( infos_cpu->socket == NULL ) ? "Unknown" : infos_cpu->socket,
+        hal_smbios_processor_type_string( infos_cpu->type ),
+        hal_smbios_processor_family_string( infos_cpu->family ),
+        ( infos_cpu->manufacturer == NULL ) ? "Unknown" : infos_cpu->manufacturer,
+        ( infos_cpu->version      == NULL ) ? "Unknown" : infos_cpu->version,
+        infos_cpu->voltage,
+        ( infos_cpu->serial_number == NULL ) ? "Unknown" : infos_cpu->serial_number,
+        ( infos_cpu->asset_tag     == NULL ) ? "Unknown" : infos_cpu->asset_tag,
+        ( infos_cpu->part_number   == NULL ) ? "Unknown" : infos_cpu->part_number
+    );
     
     for( ; ; );
 }
