@@ -48,7 +48,8 @@ void kernel_main( void );
 void kernel_main( void )
 {
     hal_smbios_table_entry     * smbios;
-    hal_smbios_bios_infos      * bios_infos;
+    hal_smbios_bios_infos      * infos_bios;
+    hal_smbios_system_infos    * infos_sys;
     hal_smbios_processor_infos * infos_cpu;
     
     kernel_video_set_fg( KERNEL_VIDEO_COLOR_WHITE );
@@ -138,23 +139,23 @@ void kernel_main( void )
     kernel_video_print( "\n" );
     kernel_video_prompt( "Getting BIOS informations:\n" KERNEL_HR );
     
-    bios_infos = ( hal_smbios_bios_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_BIOS_INFORMATION );
+    infos_bios = ( hal_smbios_bios_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_BIOS_INFORMATION );
     
     kernel_video_printf(
         "        BIOS vendor:         %s\n"
         "        BIOS version:        %s\n"
         "        BIOS release date:   %s\n",
-        ( bios_infos->vendor  == NULL ) ? "Unknown" : bios_infos->vendor,
-        ( bios_infos->version == NULL ) ? "Unknown" : bios_infos->version,
-        ( bios_infos->date    == NULL ) ? "Unknown" : bios_infos->date
+        ( infos_bios->vendor  == NULL ) ? "Unknown" : infos_bios->vendor,
+        ( infos_bios->version == NULL ) ? "Unknown" : infos_bios->version,
+        ( infos_bios->date    == NULL ) ? "Unknown" : infos_bios->date
     );
     
-    if( bios_infos->release_major < 0xFF ) {
+    if( infos_bios->release_major < 0xFF ) {
         
         kernel_video_printf(
             "        System BIOS version: %i.%i\n",
-            bios_infos->release_major,
-            bios_infos->release_minor
+            infos_bios->release_major,
+            infos_bios->release_minor
         );
         
     } else {
@@ -162,18 +163,42 @@ void kernel_main( void )
         kernel_video_print( "        System BIOS version: Unknown\n" );
     }
     
-    if( bios_infos->embedded_controller_firmware_major < 0xFF ) {
+    if( infos_bios->embedded_controller_firmware_major < 0xFF ) {
         
         kernel_video_printf(
             "        ECF version:         %i.%i\n",
-            bios_infos->embedded_controller_firmware_major,
-            bios_infos->embedded_controller_firmware_minor
+            infos_bios->embedded_controller_firmware_major,
+            infos_bios->embedded_controller_firmware_minor
         );
         
     } else {
         
         kernel_video_print( "        ECF version:         Unknown\n" );
     }
+    
+    kernel_video_print( "\n" );
+    kernel_video_prompt( "Getting system informations:\n" KERNEL_HR );
+    
+    infos_sys = ( hal_smbios_system_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_SYSTEM_INFORMATION );
+    
+    kernel_video_printf(
+        "        Manufacturer:  %s\n"
+        "        Product name:  %s\n"
+        "        Version:       %s\n"
+        "        Serial number: %s\n"
+        "        UUID:          %s\n"
+        "        Wake-up type:  %s\n"
+        "        SKU number:    %s\n"
+        "        Family:        %s\n",
+        ( infos_sys->manufacturer  == NULL ) ? "Unknown" : infos_sys->manufacturer,
+        ( infos_sys->product_name  == NULL ) ? "Unknown" : infos_sys->product_name,
+        ( infos_sys->version       == NULL ) ? "Unknown" : infos_sys->version,
+        ( infos_sys->serial_number == NULL ) ? "Unknown" : infos_sys->serial_number,
+        hal_smbios_uuid_string( &( infos_sys->uuid ) ),
+        "Unknown",
+        ( infos_sys->sku_number == NULL ) ? "Unknown" : infos_sys->sku_number,
+        ( infos_sys->family     == NULL ) ? "Unknown" : infos_sys->family
+    );
     
     kernel_video_print( "\n" );
     kernel_video_prompt( "Getting CPU informations:\n" KERNEL_HR );
