@@ -45,18 +45,191 @@
  */
 
 #include "stdio.h"
+#include "string.h"
+#include "float.h"
+#include "ctype.h"
 
-FILE * stdin;
-FILE * stdout;
-FILE * stderr;
+FILE __libc_stdio_stdin;
+FILE __libc_stdio_stdout;
+FILE __libc_stdio_stderr;
+
+FILE * stdin  = &__libc_stdio_stdin;
+FILE * stdout = &__libc_stdio_stdout;
+FILE * stderr = &__libc_stdio_stderr;
+
+#define __libc_stdio_printf_putc( c ) ( ( stream == NULL ) ? *( s++ ) = ( char )c : putc( c, stream ) )
+#define __libc_stdio_printf_void( x ) ( ( void )( x ) )
+
+static void __libc_stdio_printf_double_convert( double num, char type, size_t width, int precision, char * result );
+static int __libc_stdio_printf_examine( const char ** format, FILE * stream, char * s, va_list * arg, int count );
 
 int __libc_stdio_printf( const char * format, va_list arg, FILE * stream, char * s );
 int __libc_stdio_printf( const char * format, va_list arg, FILE * stream, char * s )
 {
+    unsigned int count;
+    size_t       length;
+    int          va_int;
+    double       va_dbl;
+    unsigned int va_uint;
+    int        * va_int_ptr;
+    const char * va_char_ptr;
+    char       * num_ptr;
+    char         num_buf[ 50 ];
+    int          extra;
+    
+    count = 0;
+    
+    while( 1 ) {
+        
+        if( *( format ) == '\0' ) {
+            
+            break;
+            
+        }
+        
+        if( *( format ) == '%' ) {
+            
+            format++;
+            
+            if( *( format ) == 'd' ) {
+                
+                va_int = va_arg( arg, int );
+                
+                if( va_int < 0 ) {
+                    
+                    va_uint = -va_int;
+                    
+                } else {
+                    
+                    va_uint = va_int;
+                }
+                
+                num_ptr = num_buf;
+                
+                do {
+                    
+                    *( num_ptr++ ) = ( char )( '0' + va_uint % 10 );
+                    va_uint       /= 10;
+                    
+                } while( va_uint > 0 );
+                
+                if( va_int < 0 ) {
+                    
+                    *( num_ptr++ ) = '-';
+                }
+                
+                do {
+                    
+                    num_ptr--;
+                    __libc_stdio_printf_putc( *( num_ptr ) );
+                    count++;
+                    
+                } while( num_ptr != num_buf );
+                
+            } else if( strchr( "eEgGfF", *( format ) ) != NULL && *( format ) != 0 ) {
+                
+                va_dbl = va_arg( arg, double );
+                
+                __libc_stdio_printf_double_convert( va_dbl, *( format ), 0, 6, num_buf );
+                
+                length = strlen( num_buf );
+                
+                if( stream == NULL ) {
+                    
+                    memcpy( s, num_buf, length );
+                    
+                    s += length;
+                    
+                } else {
+                    
+                    fputs( num_buf, stream );
+                }
+                
+                count += length;
+                
+            } else if( *( format ) == 's' ) {
+                
+                va_char_ptr = va_arg( arg, const char * );
+                
+                if( va_char_ptr == NULL ) {
+                    
+                    va_char_ptr = "(NULL)";
+                }
+                
+                if( stream == NULL ) {
+                    
+                    length = strlen( va_char_ptr );
+                    
+                    memcpy( s, va_char_ptr, length );
+                    
+                    s     += length;
+                    count += length;
+                    
+                } else {
+                    
+                    fputs( va_char_ptr, stream );
+                    
+                    count += strlen( va_char_ptr );
+                }
+                
+            } else if( *( format ) == 'c' ) {
+                
+                va_int = va_arg( arg, int );
+                
+                __libc_stdio_printf_putc( va_int );
+                
+                count++;
+                
+            } else if( *( format ) == 'n' ) {
+                
+                va_int_ptr      = va_arg( arg, int * );
+                *( va_int_ptr ) = count;
+                
+            } else if( *( format ) == '%' ) {
+                
+                __libc_stdio_printf_putc( '%' );
+                count++;
+                
+            } else {
+                
+                extra = __libc_stdio_printf_examine( &format, stream, s, &arg, count );
+                count += extra;
+                
+                if( s != NULL ) {
+                    
+                    s += extra;
+                }
+            }
+            
+        } else {
+            
+            __libc_stdio_printf_putc( *( format ) );
+            
+            count++;
+        }
+        
+        format++;
+    }
+    
+    return count;
+}
+
+static void __libc_stdio_printf_double_convert( double num, char type, size_t width, int precision, char * result )
+{
+    ( void )num;
+    ( void )type;
+    ( void )width;
+    ( void )precision;
+    ( void )result;
+}
+
+static int __libc_stdio_printf_examine( const char ** format, FILE * stream, char * s, va_list * arg, int count )
+{
     ( void )format;
-    ( void )arg;
     ( void )stream;
     ( void )s;
+    ( void )arg;
+    ( void )count;
     
     return 0;
 }
