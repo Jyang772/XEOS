@@ -203,6 +203,8 @@ void __hal_smbios_process_struct_bios_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_infos( uint8_t * mem )
 {
+    hal_smbios_uuid * uuid;
+    
     if( mem == NULL ) {
         
         return;
@@ -212,6 +214,46 @@ void __hal_smbios_process_struct_system_infos( uint8_t * mem )
     __hal_smbios_system_infos.header.length  = ( uint8_t )*( mem + 0x01 );
     __hal_smbios_system_infos.header.handle  = ( uint8_t )*( mem + 0x02 );
     __hal_smbios_system_infos.header.address = ( uintptr_t )mem;
+    
+    uuid = &( __hal_smbios_system_infos.uuid );
+    
+    uuid->time_low            = ( uint32_t )0;
+    uuid->time_mid            = ( uint16_t )0;
+    uuid->time_hi_and_version = ( uint16_t )0;
+    
+    uuid->time_low |= ( ( uint8_t )*( mem + 0x08 ) ) << 24;
+    uuid->time_low |= ( ( uint8_t )*( mem + 0x09 ) ) << 16;
+    uuid->time_low |= ( ( uint8_t )*( mem + 0x0A ) ) << 8;
+    uuid->time_low |= ( ( uint8_t )*( mem + 0x0B ) );
+    
+    uuid->time_mid |= ( ( uint8_t )*( mem + 0x0D ) ) << 8;
+    uuid->time_mid |= ( ( uint8_t )*( mem + 0x0C ) );
+    
+    uuid->time_hi_and_version |= ( ( uint8_t )*( mem + 0x0F ) ) << 8;
+    uuid->time_hi_and_version |= ( ( uint8_t )*( mem + 0x0E ) );
+    
+    uuid->clock_seq_hi_and_reserved = ( uint8_t )*( mem + 0x10 );
+    uuid->clock_seq_low             = ( uint8_t )*( mem + 0x11 );
+    uuid->node[ 0 ]                 = ( uint8_t )*( mem + 0x12 );
+    uuid->node[ 1 ]                 = ( uint8_t )*( mem + 0x13 );
+    uuid->node[ 2 ]                 = ( uint8_t )*( mem + 0x14 );
+    uuid->node[ 3 ]                 = ( uint8_t )*( mem + 0x15 );
+    uuid->node[ 4 ]                 = ( uint8_t )*( mem + 0x16 );
+    uuid->node[ 5 ]                 = ( uint8_t )*( mem + 0x17 );
+    
+    
+    /*
+    The UUID
+    00 11 22 33 - 44 55 - 66 77
+    33 22 11 00 - 55 44 - 77 66
+    */
+    
+    __hal_smbios_system_infos.manufacturer  = __hal_smbios_get_string( mem + __hal_smbios_processor_infos.header.length, *( mem + 0x04 ) );
+    __hal_smbios_system_infos.product_name  = __hal_smbios_get_string( mem + __hal_smbios_processor_infos.header.length, *( mem + 0x05 ) );
+    __hal_smbios_system_infos.version       = __hal_smbios_get_string( mem + __hal_smbios_processor_infos.header.length, *( mem + 0x06 ) );
+    __hal_smbios_system_infos.serial_number = __hal_smbios_get_string( mem + __hal_smbios_processor_infos.header.length, *( mem + 0x07 ) );
+    __hal_smbios_system_infos.sku_number    = __hal_smbios_get_string( mem + __hal_smbios_processor_infos.header.length, *( mem + 0x19 ) );
+    __hal_smbios_system_infos.family        = __hal_smbios_get_string( mem + __hal_smbios_processor_infos.header.length, *( mem + 0x1A ) );
     
     __hal_smbios_infos.system_infos = &__hal_smbios_system_infos;
 }
