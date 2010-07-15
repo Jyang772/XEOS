@@ -79,38 +79,26 @@ char * hal_smbios_uuid_string( hal_smbios_uuid * uuid )
     __hal_smbios_uuid_string_str[ 35 ] = ( char )( ( ( char * )uuid )[ 31 ] );
     __hal_smbios_uuid_string_str[ 36 ] = '\0';
     
-    for( i = 0; i < 37; i++ ) {
-        
-        if( __hal_smbios_uuid_string_str[ i ] == '-' ) {
-            
+    for( i = 0; i < 37; i++ )
+    {
+        if( __hal_smbios_uuid_string_str[ i ] == '-' )
+        {
             continue;
         }
         
-        if( __hal_smbios_uuid_string_str[ i ] < 9 ) {
-            
+        if( __hal_smbios_uuid_string_str[ i ] < 9 )
+        {
             __hal_smbios_uuid_string_str[ i ] = __hal_smbios_uuid_string_str[ i ] + 48;
-            
-        } else if( __hal_smbios_uuid_string_str[ i ] < 16 ) {
-            
+        }
+        else if( __hal_smbios_uuid_string_str[ i ] < 16 )
+        {
             __hal_smbios_uuid_string_str[ i ] = __hal_smbios_uuid_string_str[ i ] + 55;
-            
-        } else {
-            
+        }
+        else
+        {
             __hal_smbios_uuid_string_str[ i ] = '.';
         }
     }
     
     return ( char * )__hal_smbios_uuid_string_str;
 }
-
-
-/*
-
-    uint32_t time_low;
-    uint16_t time_mid;
-    uint16_t time_hi_and_version;
-    uint8_t clock_seq_hi_and_reserved;
-    uint8_t clock_seq_low;
-    uint8_t node[ 6 ];
-
-*/

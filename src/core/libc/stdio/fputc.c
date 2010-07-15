@@ -42,8 +42,8 @@ int fputc( int c, FILE * stream )
     
     buf[ 0 ] = ( char )c;
     
-    if( fwrite( buf, 1, 1, stream ) != 1 ) {
-        
+    if( fwrite( buf, 1, 1, stream ) != 1 )
+    {
         return EOF;
     }
     

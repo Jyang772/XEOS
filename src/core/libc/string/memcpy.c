@@ -60,13 +60,13 @@ void * memcpy( void * s, const void * ct, size_t n )
     ct2 = ( unsigned int * )ct;
     end = ( unsigned int * )( ( char * )p + ( n & ~0x03 ) );
     
-    while( p != end ) {
-        
+    while( p != end )
+    {
         *( p )++ = *( ct2 )++;
     }
     
-    switch( n & 0x03 ) {
-        
+    switch( n & 0x03 )
+    {
         case 0:
             
             break;

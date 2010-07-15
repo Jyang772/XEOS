@@ -42,30 +42,30 @@ void itoa( int n, char s[], int radix )
     unsigned int i;
     int sign;
     
-    if( radix > 16 ) {
-        
+    if( radix > 16 )
+    {
         radix = 16;
-        
-    } else if( radix < 2 ) {
-        
+    }
+    else if( radix < 2 )
+    {
         radix = 10;
     }
     
-    if( ( sign = n ) < 0 ) {
-        
+    if( ( sign = n ) < 0 )
+    {
         n = -n;
     }
     
     i = 0;
     
-    do {
-        
+    do
+    {
         s[ i++ ] = __libxeos_string_hex_chars[ n % radix ];
-        
-    } while( ( n /= radix ) > 0 );
+    }
+    while( ( n /= radix ) > 0 );
     
-    if( sign < 0 ) {
-        
+    if( sign < 0 )
+    {
         s[ i++ ] = '-';
     }
     

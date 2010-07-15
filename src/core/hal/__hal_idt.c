@@ -39,8 +39,8 @@ struct hal_idt_ptr __hal_idt_ptr;
 void __hal_idt_load( void );
 void __hal_idt_load( void )
 {
-    __asm__(
-        
+    __asm__
+    (
         "lidt (%[ptr])"
         
         : 

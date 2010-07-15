@@ -42,32 +42,32 @@ void kernel_video_putc( char c, bool update_cursor )
 {
     unsigned char * mem;
     
-    if( c == '\0' ) {
-        
+    if( c == '\0' )
+    {
         return;
     }
     
-    if( __kernel_video_x == KERNEL_VIDEO_COLS ) {
-        
+    if( __kernel_video_x == KERNEL_VIDEO_COLS )
+    {
         __kernel_video_x = 0;
         
         __kernel_video_y++;
     }
     
-    if( __kernel_video_y == KERNEL_VIDEO_ROWS - 1 ) {
-        
+    if( __kernel_video_y == KERNEL_VIDEO_ROWS - 1 )
+    {
         kernel_video_scroll( 1 );
         __kernel_video_y--;
     }
     
-    if( c == '\n' ) {
-        
+    if( c == '\n' )
+    {
         __kernel_video_y++;
         
         __kernel_video_x = 0;
-        
-    } else {
-        
+    }
+    else
+    {
         mem      = ( unsigned char * )KERNEL_VIDEO_MEM;
         mem     += 2 * ( __kernel_video_x + ( __kernel_video_y * KERNEL_VIDEO_COLS ) );
         mem[ 0 ] = c;
@@ -76,8 +76,8 @@ void kernel_video_putc( char c, bool update_cursor )
         __kernel_video_x++;
     }
     
-    if( update_cursor == true ) {
-        
+    if( update_cursor == true )
+    {
         kernel_video_cursor_move( __kernel_video_x, __kernel_video_y );
     }
 }

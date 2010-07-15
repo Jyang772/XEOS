@@ -37,7 +37,8 @@
 
 void __libc_assert( char * expression, char * file, int line )
 {
-    fprintf(
+    fprintf
+    (
         stderr,
         "Fatal error - assertion failed:"
         "    "

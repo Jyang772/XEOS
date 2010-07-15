@@ -39,8 +39,8 @@ int raise( int sig )
 {
     void ( * handler )( int );
     
-    if( sig > SIGTERM ) {
-        
+    if( sig > SIGTERM )
+    {
         return -1;
     }
     

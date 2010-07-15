@@ -41,8 +41,8 @@ int fgetpos( FILE * stream, fpos_t * ptr )
 {
     long ret = ftell( stream );
     
-    if( ret == -1 ) {
-        
+    if( ret == -1 )
+    {
         return -1;
     }
     

@@ -39,8 +39,8 @@ void kernel_video_print( char * s )
     unsigned int x;
     unsigned int y;
     
-    while( *( s ) != '\0' ) {
-        
+    while( *( s ) != '\0' )
+    {
         kernel_video_putc( *( s ), false );
         
         s++;

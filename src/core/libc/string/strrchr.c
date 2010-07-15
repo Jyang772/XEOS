@@ -55,10 +55,10 @@ char * strrchr( const char * cs, int c )
     
     p = cs + strlen( cs );
     
-    while( p >= cs ) {
-        
-        if( *( p ) == ( char )c ) {
-            
+    while( p >= cs )
+    {
+        if( *( p ) == ( char )c )
+        {
             return ( char * )p;
         }
         

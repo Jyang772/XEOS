@@ -55,13 +55,13 @@ char * strcat( char * s, const char * ct )
     
     p = s;
     
-    while( *( p ) != '\0' ) {
-        
+    while( *( p ) != '\0' )
+    {
         p++;
     }
     
-    while( ( *( p ) = *( ct ) ) != '\0' ) {
-        
+    while( ( *( p ) = *( ct ) ) != '\0' )
+    {
         p++;
         ct++;
     }

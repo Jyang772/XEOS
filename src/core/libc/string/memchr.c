@@ -58,10 +58,10 @@ void * memchr( const void * cs, int c, size_t n )
     p = ( const unsigned char * )cs;
     x = 0;
     
-    while( x < n ) {
-        
-        if( *( p ) == ( unsigned char )c ) {
-            
+    while( x < n )
+    {
+        if( *( p ) == ( unsigned char )c )
+        {
             return ( void * )p;
         }
         

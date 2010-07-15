@@ -55,8 +55,8 @@ size_t strlen( const char * cs )
     
     p = cs;
     
-    while( *( p ) != '\0' ) {
-        
+    while( *( p ) != '\0' )
+    {
         p++;
     }
     

@@ -46,19 +46,22 @@ extern "C" {
  * Macros
  ******************************************************************************/
 
-#define XSLogPoint( p )     XSLog(                                          \
+#define XSLogPoint( p )     XSLog                                           \
+                            (                                               \
                                     "X: %f\n"                               \
                                     "Y: %f",                                \
                                     p.x,                                    \
                                     p.y                                     \
                             )
-#define XSLogSize( s )      XSLog(                                          \
+#define XSLogSize( s )      XSLog                                           \
+                            (                                               \
                                     "Width:  %f\n"                          \
                                     "Height: %f",                           \
                                     s.width,                                \
                                     s.height                                \
                             )
-#define XSLogRect( r )      XSLog(                                          \
+#define XSLogRect( r )      XSLog                                           \
+                            (                                               \
                                     "X:      %f\n"                          \
                                     "Y:      %f\n",                         \
                                     "Width:  %f\n",                         \
@@ -68,13 +71,15 @@ extern "C" {
                                     r.size.width,                           \
                                     r.size.height                           \
                             )
-#define XSLogRange( r )     XSLog(                                          \
+#define XSLogRange( r )     XSLog                                           \
+                            (                                               \
                                     "Location: %f\n"                        \
                                     "Length  : %f",                         \
                                     r.location,                             \
                                     r.length                                \
                             )
-#define XSLogRGBColor( c )  XSLog(                                          \
+#define XSLogRGBColor( c )  XSLog                                           \
+                            (                                               \
                                     "Red:   %f\n"                           \
                                     "Green: %f\n",                          \
                                     "Blue:  %f\n",                          \
@@ -84,7 +89,8 @@ extern "C" {
                                     c.blue,                                 \
                                     c.alpha                                 \
                             )
-#define XSLogHSVColor( c )  XSLog(                                          \
+#define XSLogHSVColor( c )  XSLog                                           \
+                            (                                               \
                                     "Hue:        %f\n"                      \
                                     "Saturation: %f\n",                     \
                                     "Value:      %f\n",                     \
@@ -94,7 +100,8 @@ extern "C" {
                                     c.value,                                \
                                     c.alpha                                 \
                             )
-#define XSLogHSLColor( c )  XSLog(                                          \
+#define XSLogHSLColor( c )  XSLog                                           \
+                            (                                               \
                                     "Hue:        %f\n"                      \
                                     "Saturation: %f\n",                     \
                                     "Luminance:  %f\n",                     \

@@ -37,8 +37,8 @@ extern void ( * __libc_signal_handlers[] )( int );
 
 void ( * signal( int sig, void( * handler )( int ) ) )( int )
 {
-    if( sig <= SIGTERM ) {
-        
+    if( sig <= SIGTERM )
+    {
         __libc_signal_handlers[ sig ] = handler;
     }
     

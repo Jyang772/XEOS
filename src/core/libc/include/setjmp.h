@@ -44,7 +44,6 @@ extern "C" {
  */
 typedef struct
 {
-    
     unsigned long eax;
     unsigned long ebx;
     unsigned long ecx;
@@ -54,8 +53,8 @@ typedef struct
     unsigned long ebp;
     unsigned long esp;
     unsigned long eip;
-    
-} jmp_buf[ 1 ];
+}
+jmp_buf[ 1 ];
 
 /**
  * Saves context information in env and returns zero. Subsequent call to

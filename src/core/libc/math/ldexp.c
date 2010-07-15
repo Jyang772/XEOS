@@ -69,8 +69,8 @@ double ldexp( double x, int n )
     hex_exp = bin_exp / 4;
     adj_exp = bin_exp - ( hex_exp * 4 );
     
-    if( adj_exp < 0 ) {
-        
+    if( adj_exp < 0 )
+    {
         hex_exp = hex_exp -1;
         adj_exp = 4 + adj_exp;
     }
@@ -78,8 +78,8 @@ double ldexp( double x, int n )
     split.s[ 0 ] = split.s[ 0 ] & 0x80FF;
     split.s[ 0 ] = split.s[ 0 ] | ( ( ( hex_exp + 64 ) << 8 ) & 0x7F00 );
     
-    while( adj_exp > 0 ) {
-        
+    while( adj_exp > 0 )
+    {
         split.d = split.d * 2;
         
         --adj_exp;

@@ -59,22 +59,22 @@ void * memmove( void * s, const void * ct, size_t n )
     p   = s;
     ct2 = ct;
     
-    if( p <= ct2 ) {
-        
-        for( x = 0; x < n; x++ ) {
-            
+    if( p <= ct2 )
+    {
+        for( x = 0; x < n; x++ )
+        {
             *( p ) = *( ct2 );
             
             p++;
             ct2++;
         }
-        
-    } else {
-        
-        if( n != 0 ) {
-            
-            for( x = n - 1; x > 0; x-- ) {
-                
+    }
+    else
+    {
+        if( n != 0 )
+        {
+            for( x = n - 1; x > 0; x-- )
+            {
                 *( p + x ) = *( ct2 + x );
             }
             

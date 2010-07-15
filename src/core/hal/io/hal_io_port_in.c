@@ -37,8 +37,8 @@ unsigned char hal_io_port_in( unsigned short int port )
 {
     unsigned char value;
     
-    __asm__(
-        
+    __asm__
+    (
         "movw   %[port],    %%dx;"
         "in     %%dx,       %%al;"
         "movb   %%al,       %[value];"

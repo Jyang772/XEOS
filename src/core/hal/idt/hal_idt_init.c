@@ -48,8 +48,8 @@ void hal_idt_init( uint16_t sel, hal_irq_handler default_handler )
     __hal_idt_ptr.limit = ( uint16_t )( sizeof( struct hal_idt_entry ) * HAL_IDT_MAX_DESCRIPTORS ) - 1;
     __hal_idt_ptr.base  = ( uint32_t )&__hal_idt;
     
-    for( i = 0; i < HAL_IDT_MAX_DESCRIPTORS; i++ ) {
-        
+    for( i = 0; i < HAL_IDT_MAX_DESCRIPTORS; i++ )
+    {
         hal_idt_set_descriptor( i, default_handler, sel, HAL_IDT_FLAG_PRESENT | HAL_IDT_FLAG_32BITS );
     }
     

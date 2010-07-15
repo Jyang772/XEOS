@@ -55,8 +55,8 @@ double ceil( double x )
     
     y = ( int )x;
     
-    if( ( double )y < x ) {
-        
+    if( ( double )y < x )
+    {
         y++;
     }
     

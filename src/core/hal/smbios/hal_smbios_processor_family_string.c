@@ -37,8 +37,8 @@
 
 char * hal_smbios_processor_family_string( uint8_t number )
 {
-    switch( ( unsigned int )number ) {
-        
+    switch( ( unsigned int )number )
+    {
         case 0x01:
             
             return "Other";

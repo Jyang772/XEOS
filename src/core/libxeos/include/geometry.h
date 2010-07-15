@@ -47,57 +47,52 @@ extern "C" {
  
 typedef struct
 {
-    
     XSFloat x;
     XSFloat y;
-    
-} XSPoint;
+}
+XSPoint;
 
 typedef XSPoint * XSPointArray;
 typedef XSPoint * XSPointPointer;
 
 typedef struct
 {
-    
     XSFloat width;
     XSFloat height;
-    
-} XSSize;
+}
+XSSize;
 
 typedef XSSize * XSSizeArray;
 typedef XSSize * XSSizePointer;
 
 typedef struct
 {
-    
     XSPoint origin;
     XSSize  size;
-    
-} XSRect;
+}
+XSRect;
 
 typedef XSRect * XSRectArray;
 typedef XSRect * XSRectPointer;
 
 typedef struct
 {
-    
     XSLongInteger location;
     XSLongInteger length;
-    
-} XSRange;
+}
+XSRange;
 
 typedef XSRange * XSRangeArray;
 typedef XSRange * XSRangePointer;
 
 typedef struct
 {
-    
     XSFloat left;
     XSFloat top;
     XSFloat right;
     XSFloat bottom;
-    
-} XSEdgeInset;
+}
+XSEdgeInset;
 
 typedef XSEdgeInset * XSEdgeInsetArray;
 typedef XSEdgeInset * XSEdgeInsetPointer;

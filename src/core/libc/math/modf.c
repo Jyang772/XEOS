@@ -57,8 +57,8 @@ double modf( double x, double * ip )
     
     neg = 0;
     
-    if( x < 0 ) {
-        
+    if( x < 0 )
+    {
         neg = 1;
         x   = -x;
     }
@@ -66,8 +66,8 @@ double modf( double x, double * ip )
     i  = ( long )x;
     x -= i;
     
-    if( neg ) {
-        
+    if( neg )
+    {
         x = -x;
         i = -i;
     }

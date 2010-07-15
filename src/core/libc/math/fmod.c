@@ -54,8 +54,8 @@ double fmod( double x, double y ) {
     
     int imod;
     
-    if( y == 0.0 ) {
-        
+    if( y == 0.0 )
+    {
         return 0.0;
     }
     

@@ -56,12 +56,12 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
     
     mem = ( uint8_t * )entry->structure_table_address;
     
-    switch( type ) {
-        
+    switch( type )
+    {
         case HAL_SMBIOS_STRUCT_BIOS_INFORMATION:
             
-            if( __hal_smbios_infos.bios_infos == NULL ) {
-                
+            if( __hal_smbios_infos.bios_infos == NULL )
+            {
                 __hal_smbios_process_struct_bios_infos( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -69,8 +69,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_SYSTEM_INFORMATION:
             
-            if( __hal_smbios_infos.system_infos == NULL ) {
-                
+            if( __hal_smbios_infos.system_infos == NULL )
+            {
                 __hal_smbios_process_struct_system_infos( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -78,8 +78,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_SYSTEM_ENCLOSURE:
             
-            if( __hal_smbios_infos.system_enclosure == NULL ) {
-                
+            if( __hal_smbios_infos.system_enclosure == NULL )
+            {
                 __hal_smbios_process_struct_system_enclosure( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -87,8 +87,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_PROCESSOR_INFORMATION:
             
-            if( __hal_smbios_infos.processor_infos == NULL ) {
-                
+            if( __hal_smbios_infos.processor_infos == NULL )
+            {
                 __hal_smbios_process_struct_processor_infos( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -96,8 +96,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_CACHE_INFORMATION:
             
-            if( __hal_smbios_infos.cache_infos == NULL ) {
-                
+            if( __hal_smbios_infos.cache_infos == NULL )
+            {
                 __hal_smbios_process_struct_cache_infos( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -105,8 +105,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_SYSTEM_SLOTS:
             
-            if( __hal_smbios_infos.system_slots == NULL ) {
-                
+            if( __hal_smbios_infos.system_slots == NULL )
+            {
                 __hal_smbios_process_struct_system_slots( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -114,8 +114,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_PHYSICAL_MEMORY_ARRAY:
             
-            if( __hal_smbios_infos.physical_memory_array == NULL ) {
-                
+            if( __hal_smbios_infos.physical_memory_array == NULL )
+            {
                 __hal_smbios_process_struct_physical_memory_array( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -123,8 +123,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_MEMORY_DEVICE:
             
-            if( __hal_smbios_infos.memory_device == NULL ) {
-                
+            if( __hal_smbios_infos.memory_device == NULL )
+            {
                 __hal_smbios_process_struct_memory_device( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -132,8 +132,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_MEMORY_ARRAY_MAPPED_ADDRESS:
             
-            if( __hal_smbios_infos.memory_mapped_address == NULL ) {
-                
+            if( __hal_smbios_infos.memory_mapped_address == NULL )
+            {
                 __hal_smbios_process_struct_memory_mapped_address( __hal_smbios_find_struct( entry, type ) );
             }
             
@@ -141,8 +141,8 @@ void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type )
             
         case HAL_SMBIOS_STRUCT_SYSTEM_BOOT_INFORMATION:
             
-            if( __hal_smbios_infos.system_boot_infos == NULL ) {
-                
+            if( __hal_smbios_infos.system_boot_infos == NULL )
+            {
                 __hal_smbios_process_struct_system_boot_infos( __hal_smbios_find_struct( entry, type ) );
             }
             

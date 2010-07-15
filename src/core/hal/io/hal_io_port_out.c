@@ -35,8 +35,8 @@
 
 void hal_io_port_out( unsigned short int port, unsigned char value )
 {
-    __asm__(
-        
+    __asm__
+    (
         "movb   %[value],   %%al;"
         "movw   %[port],    %%dx;"
         "out    %%al,       %%dx;"

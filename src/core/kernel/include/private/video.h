@@ -52,7 +52,6 @@ extern "C" {
 /* BIOS colors */
 typedef enum
 {
-    
     KERNEL_VIDEO_COLOR_BLACK        = 0x00,
     KERNEL_VIDEO_COLOR_BLUE         = 0x01,
     KERNEL_VIDEO_COLOR_GREEN        = 0x02,
@@ -69,8 +68,8 @@ typedef enum
     KERNEL_VIDEO_COLOR_LIGHTMAGENTA = 0x0D,
     KERNEL_VIDEO_COLOR_LIGHTBROWN   = 0x0E,
     KERNEL_VIDEO_COLOR_WHITE        = 0x0F
-    
-} kernel_video_color;
+}
+kernel_video_color;
 
 void kernel_video_clear( void );
 void kernel_video_set_bg( kernel_video_color color );

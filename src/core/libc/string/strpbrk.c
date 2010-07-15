@@ -57,14 +57,14 @@ char * strpbrk( const char * cs, const char * ct )
     
     p1 = cs;
     
-    while( *( p1 ) != '\0') {
-        
+    while( *( p1 ) != '\0')
+    {
         p2 = ct;
         
-        while( *( p2 ) != '\0' ) {
-            
-            if( *( p1 ) == *( p2 ) ) {
-                
+        while( *( p2 ) != '\0' )
+        {
+            if( *( p1 ) == *( p2 ) )
+            {
                 return ( char * )p1;
             }
             

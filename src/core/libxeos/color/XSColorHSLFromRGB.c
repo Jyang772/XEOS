@@ -60,19 +60,19 @@ XSHSLColor XSColorHSLFromRGB( XSRGBColor rgb )
     
     hsl.luminance = max + min / 2;
     
-    if( delta == 0 ) {
-        
+    if( delta == 0 )
+    {
         hsl.hue        = 0;
         hsl.saturation = 0;
-        
-    } else {
-        
-        if( hsl.luminance < 0.5 ) {
-            
+    }
+    else
+    {
+        if( hsl.luminance < 0.5 )
+        {
             hsl.saturation = delta / ( max + min );
-            
-        } else {
-            
+        }
+        else
+        {
             hsl.saturation = delta / ( 2 - max - min );
         }
         
@@ -80,25 +80,25 @@ XSHSLColor XSColorHSLFromRGB( XSRGBColor rgb )
         g = ( ( ( max - g ) / 6 ) + ( delta / 2 ) ) / delta;
         b = ( ( ( max - b ) / 6 ) + ( delta / 2 ) ) / delta;
         
-        if( r == max ) {
-            
+        if( r == max )
+        {
             hsl.hue = b - g;
-            
-        } else if( g == max ) {
-            
+        }
+        else if( g == max )
+        {
             hsl.hue = ( 1 / 3 ) + r - b;
-            
-        } else if( b == max ) {
-            
+        }
+        else if( b == max )
+        {
             hsl.hue = ( 2 / 3 ) + g - r;
         }
         
-        if( hsl.hue < 0 ) {
-            
+        if( hsl.hue < 0 )
+        {
             hsl.hue += 1;
-            
-        } else if( hsl.hue > 1 ) {
-            
+        }
+        else if( hsl.hue > 1 )
+        {
             hsl.hue -= 1;
         }
     }

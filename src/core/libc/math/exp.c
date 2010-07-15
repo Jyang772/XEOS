@@ -60,13 +60,13 @@ double exp( double x )
     term   = x;
     result = x;
     
-    while( 1 ) {
-        
+    while( 1 )
+    {
         work = i;
         term = ( term * x ) / work;
         
-        if( result == ( result + term ) ) {
-            
+        if( result == ( result + term ) )
+        {
             break;
         }
         

@@ -45,8 +45,8 @@ void kernel_video_clear( void )
     memSize = KERNEL_VIDEO_COLS * KERNEL_VIDEO_ROWS;
     i       = 0;
     
-    for( i = 0; i < memSize; i++ ) {
-        
+    for( i = 0; i < memSize; i++ )
+    {
         mem[ 0 ] = 0x20;
         mem[ 1 ] = __kernel_video_attr;
         mem     += 2;

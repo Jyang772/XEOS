@@ -58,14 +58,14 @@ int strcmp( const char * cs, const char * ct )
     p1 = ( const unsigned char * )cs;
     p2 = ( const unsigned char * )ct;
     
-    while( *( p1 ) != '\0' ) {
-        
-        if( *( p1 ) < *( p2 ) ) {
-            
+    while( *( p1 ) != '\0' )
+    {
+        if( *( p1 ) < *( p2 ) )
+        {
             return -1;
-            
-        } else if( *( p1 ) > *( p2 ) ) {
-            
+        }
+        else if( *( p1 ) > *( p2 ) )
+        {
             return 1;
         }
         
@@ -73,8 +73,8 @@ int strcmp( const char * cs, const char * ct )
         p2++;
     }
     
-    if( *( p2 ) == '\0' ) {
-        
+    if( *( p2 ) == '\0' )
+    {
         return 0;
     }
     

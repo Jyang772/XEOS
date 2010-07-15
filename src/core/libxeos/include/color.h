@@ -47,33 +47,30 @@ extern "C" {
  
 typedef struct
 {
-    
     XSFloat red;
     XSFloat green;
     XSFloat blue;
     XSFloat alpha;
-    
-} XSRGBColor;
+}
+XSRGBColor;
 
 typedef struct
 {
-    
     XSFloat hue;
     XSFloat saturation;
     XSFloat value;
     XSFloat alpha;
-    
-} XSHSVColor;
+}
+XSHSVColor;
 
 typedef struct
 {
-    
     XSFloat hue;
     XSFloat saturation;
     XSFloat luminance;
     XSFloat alpha;
-    
-} XSHSLColor;
+}
+XSHSLColor;
 
 /*******************************************************************************
  * Prototypes

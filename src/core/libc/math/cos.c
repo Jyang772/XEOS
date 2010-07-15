@@ -65,13 +65,13 @@ double cos( double x )
     term   = 1;
     result = 1;
     
-    while( 1 ) {
-        
+    while( 1 )
+    {
         work = i;
         term = -( term * x1 * x1 ) / ( work * ( work + 1.0 ) );
         
-        if( result == ( result + term ) ) {
-            
+        if( result == ( result + term ) )
+        {
             break;
         }
         

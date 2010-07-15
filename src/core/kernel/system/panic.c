@@ -40,7 +40,8 @@ void panic( char * s )
     kernel_video_set_bg( KERNEL_VIDEO_COLOR_BLACK );
     kernel_video_clear();
     
-    kernel_video_print(
+    kernel_video_print
+    (
         "\n"
         "    ************************************************************************\n"
         "    *                                                                      *\n"

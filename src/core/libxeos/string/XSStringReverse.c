@@ -42,8 +42,8 @@ void XSStringReverse( XSChar s[] )
     
     j = strlen( s ) - 1;
     
-    for( i = 0; i < j; i++ ) {
-        
+    for( i = 0; i < j; i++ )
+    {
         c      = s[ i ];
         s[ i ] = s[ j ];
         s[ j ] = c;

@@ -44,8 +44,8 @@ bool hal_smbios_verifiy_checksum( hal_smbios_table_entry * entry )
     sum = 0;
     c   = ( char * )entry;
     
-    for( i = 0; i < sizeof( hal_smbios_table_entry ); i++ ) {
-        
+    for( i = 0; i < sizeof( hal_smbios_table_entry ); i++ )
+    {
         sum += c[ i ];
     }
     

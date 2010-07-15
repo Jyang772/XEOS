@@ -37,8 +37,8 @@ extern struct hal_idt_entry __hal_idt[];
 
 void hal_idt_set_descriptor( unsigned int i, hal_irq_handler handler, uint16_t sel, uint8_t flags )
 {
-    if( i >= HAL_IDT_MAX_DESCRIPTORS ) {
-        
+    if( i >= HAL_IDT_MAX_DESCRIPTORS )
+    {
         return;
     }
     

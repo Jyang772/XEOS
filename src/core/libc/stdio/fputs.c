@@ -46,8 +46,8 @@ int fputs( const char * s, FILE * stream )
     len = strlen( s );
     ret = fwrite( s, len, 1, stream );
     
-    if( ret != 1 ) {
-        
+    if( ret != 1 )
+    {
         return EOF;
     }
     

@@ -61,15 +61,15 @@ double log( double x )
     double work;
     double xs;
     
-    if( x <= 0 ) {
-        
+    if( x <= 0 )
+    {
         errno = EDOM;
         
         return HUGE_VAL;
     }
     
-    if( x == 1.0 ) {
-        
+    if( x == 1.0 )
+    {
         return 0.0;
     }
     
@@ -80,13 +80,13 @@ double log( double x )
     term   = xs;
     result = xs;
     
-    while( 1 ) {
-        
+    while( 1 )
+    {
         work = i;
         term = - ( term * xs );
         
-        if( result == ( result + ( term / work ) ) ) {
-            
+        if( result == ( result + ( term / work ) ) )
+        {
             break;
         }
         

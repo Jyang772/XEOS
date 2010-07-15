@@ -59,21 +59,21 @@ char * strstr( const char * cs, const char * ct )
     p1 = cs;
     p3 = ct;
     
-    while( *( p1 ) ) {
-        
-        if( *( p1 ) == *( ct ) ) {
-            
+    while( *( p1 ) )
+    {
+        if( *( p1 ) == *( ct ) )
+        {
             p2 = p1;
             p3 = ct;
             
-            while( ( *( p3 ) != '\0' ) && ( *( p2 ) == *( p3 ) ) ) {
-                
+            while( ( *( p3 ) != '\0' ) && ( *( p2 ) == *( p3 ) ) )
+            {
                 p2++;
                 p3++;
             }
             
-            if( *( p3 ) == '\0' ) {
-                
+            if( *( p3 ) == '\0' )
+            {
                 return ( char * )p1;
             }
         }

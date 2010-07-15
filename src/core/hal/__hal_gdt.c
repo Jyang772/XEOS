@@ -39,8 +39,8 @@ struct hal_gdt_ptr __hal_gdt_ptr;
 void __hal_gdt_load( void );
 void __hal_gdt_load( void )
 {
-    __asm__(
-        
+    __asm__
+    (
         "lgdt (%[ptr])"
         
         : 

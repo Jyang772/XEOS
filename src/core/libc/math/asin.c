@@ -64,20 +64,20 @@ double asin( double x )
     
     y = x;
     
-    if( y < 0.0 ) {
-        
+    if( y < 0.0 )
+    {
         return -asin( -y );
     }
     
-    if( y > 1.0 ) {
-        
+    if( y > 1.0 )
+    {
         errno = EDOM;
         
         return HUGE_VAL;
     }
     
-    if( y > 0.75 ) {
-        
+    if( y > 0.75 )
+    {
         y = sqrt( 1.0 - ( y * y ) );
         
         return ( __libc_math_pi / 2.0 ) - asin( y );
@@ -89,15 +89,15 @@ double asin( double x )
     coef   = 1;
     powy   = y;
     
-    while( 1 ) {
-        
+    while( 1 )
+    {
         work = i;
         coef = ( coef * work ) / ( work + 1 );
         powy = powy * y * y;
         term =  coef * powy / ( work + 2.0 );
         
-        if( result == ( result + term ) ) {
-            
+        if( result == ( result + term ) )
+        {
             break;
         }
         

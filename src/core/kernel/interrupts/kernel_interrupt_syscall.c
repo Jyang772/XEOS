@@ -38,15 +38,15 @@ void kernel_interrupt_syscall( void )
 {
     unsigned char syscall;
     
-    __asm__(
-        
+    __asm__
+    (
         "mov    %%al,   %[n]"
         
         : [ n ] "=m" ( syscall )
     );
     
-    switch( syscall ) {
-        
+    switch( syscall )
+    {
         case SYS_exit:
             
             

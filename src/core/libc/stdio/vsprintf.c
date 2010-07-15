@@ -47,8 +47,8 @@ int vsprintf( char * s, const char * format, va_list arg )
     
     ret = __libc_stdio_printf( format, arg, NULL, s );
     
-    if( ret >= 0 ) {
-        
+    if( ret >= 0 )
+    {
         *( s + ret ) = '\0';
     }
     

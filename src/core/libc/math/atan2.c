@@ -40,24 +40,24 @@ extern const double __libc_math_pi;
  */
 double atan2( double y, double x )
 {
-    if( x > 0 ) {
-        
+    if( x > 0 )
+    {
         return atan( y / x );
-        
-    } else if( y >= 0 && x < 0 ) {
-        
+    }
+    else if( y >= 0 && x < 0 )
+    {
         return __libc_math_pi + atan( y / x );
-        
-    } else if( y < 0 && x < 0 ) {
-        
+    }
+    else if( y < 0 && x < 0 )
+    {
         return -( __libc_math_pi ) + atan( y / x );
-        
-    } else if( y > 0 && x == 0 ) {
-        
+    }
+    else if( y > 0 && x == 0 )
+    {
         return __libc_math_pi / 2;
-        
-    } else if( y < 0 && x == 0 ) {
-        
+    }
+    else if( y < 0 && x == 0 )
+    {
         return -( __libc_math_pi / 2 );
     }
     

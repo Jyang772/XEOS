@@ -51,18 +51,18 @@
  */
 char * strchr( const char * cs, int c )
 {
-    while( *( cs ) != '\0' ) {
-        
-        if( *( cs ) == ( char )c ) {
-            
+    while( *( cs ) != '\0' )
+    {
+        if( *( cs ) == ( char )c )
+        {
             return ( char * )cs;
         }
         
         cs++;
     }
     
-    if( c == '\0' ) {
-        
+    if( c == '\0' )
+    {
         return ( char * )cs;
     }
     

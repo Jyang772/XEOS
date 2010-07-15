@@ -108,7 +108,6 @@ extern "C" {
  */
 typedef struct
 {
-    
     int desc;               /* File descriptor */
     unsigned long pos;      /* Current stream position */
     int eof;                /* End-of-file indicator */
@@ -118,8 +117,8 @@ typedef struct
     int open;               /* Whether the file is open or not */
     int mode;               /* Open mode */
     char modeStr[ 4 ];      /* 2nd parameter to fopen */
-    
-} FILE;
+}
+FILE;
 
 /**
  * File pointer for standard input stream. Automatically opened when program

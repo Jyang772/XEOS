@@ -59,18 +59,18 @@ double atan( double x )
     double work;
     double powx;
     
-    if( x < 0.0 ) {
-        
+    if( x < 0.0 )
+    {
         return -atan( -x );
     }
     
-    if( x > 1.0 ) {
-        
+    if( x > 1.0 )
+    {
         return ( __libc_math_pi / 2 ) - atan( 1.0 / x );
     }
     
-    if( x > ( 2.0 - sqrt( 3.0 ) ) ) {
-        
+    if( x > ( 2.0 - sqrt( 3.0 ) ) )
+    {
         return ( __libc_math_pi / 6.0 ) + atan( ( x * sqrt( 3.0 ) - 1.0 ) / ( x + sqrt( 3.0 ) ) );
     }
     
@@ -79,14 +79,14 @@ double atan( double x )
     term   = x;
     powx   = x;
     
-    while( 1 ) {
-        
+    while( 1 )
+    {
         work = i;
         powx = 0.0 - powx * x * x;
         term = powx / ( work + 2.0 );
         
-        if( result == ( result + term ) ) {
-            
+        if( result == ( result + term ) )
+        {
             break;
         }
         

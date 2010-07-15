@@ -48,11 +48,10 @@ extern "C" {
 typedef XSChar * XSCString;
 typedef enum
 {
-    
     XSASCIIStringEncoding = 0x00,
     XSUTF8StringEncoding  = 0x01
-    
-} XSStringEncoding;
+}
+XSStringEncoding;
 
 void itoa( int n, char s[], int radix );
 void utoa( unsigned int n, char s[], int radix );

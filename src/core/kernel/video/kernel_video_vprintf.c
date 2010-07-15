@@ -46,27 +46,27 @@ void kernel_video_vprintf( char * format, va_list arg )
     uintptr_t    va_uint_ptr;
     char         nbuf[ 32 ] = { 0 };
     
-    if( !format || *( format ) == '\0' ) {
-        
+    if( !format || *( format ) == '\0' )
+    {
         return;
     }
     
-    while( *( format ) != '\0' ) {
-        
-        switch( *( format ) ) {
-            
+    while( *( format ) != '\0' )
+    {
+        switch( *( format ) )
+        {
             case '%':
                 
                 format++;
                 
-                if( *( format ) == '\0' ) {
-                    
+                if( *( format ) == '\0' )
+                {
                     kernel_video_putc( '%', false );
                     break;
                 }
                 
-                switch( *( format ) ) {
-                    
+                switch( *( format ) )
+                {
                     case 'd':
                     case 'i':
                         
@@ -122,12 +122,13 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_char_ptr = va_arg( arg, char * );
                         
-                        if( va_char_ptr == NULL ) {
-                            
+                        if( va_char_ptr == NULL )
+                        {
                             kernel_video_print( "(NULL)" );
                             
-                        } else {
-                            
+                        }
+                        else
+                        {
                             kernel_video_print( va_char_ptr );
                         }
                         

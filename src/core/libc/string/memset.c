@@ -55,8 +55,8 @@ void * memset( void * s, int c, size_t n )
     
     x = 0;
     
-    for( x = 0; x < n; x++ ) {
-        
+    for( x = 0; x < n; x++ )
+    {
         *( ( char * )s + x ) = ( unsigned char )c;
     }
     

@@ -35,8 +35,8 @@
 
 void hal_cpu_sti( void )
 {
-    __asm__(
-        
+    __asm__
+    (
         "sti;"
     );
 }

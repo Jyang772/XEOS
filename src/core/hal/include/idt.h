@@ -105,22 +105,20 @@ extern "C" {
  */
 struct hal_idt_entry
 {
-    
     uint16_t    address_low;
     uint16_t    selector;
     uint8_t     reserved;
     uint8_t     flags;
     uint16_t    address_high;
-    
-} __attribute__( ( packed ) );
+}
+__attribute__( ( packed ) );
 
 struct hal_idt_ptr
 {
-    
     uint16_t    limit;
     uint32_t    base;
-    
-} __attribute__( ( packed ) );
+}
+__attribute__( ( packed ) );
 
 typedef void ( * hal_irq_handler )( void );
 

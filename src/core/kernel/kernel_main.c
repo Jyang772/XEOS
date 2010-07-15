@@ -56,7 +56,8 @@ void kernel_main( void )
     kernel_video_set_bg( KERNEL_VIDEO_COLOR_LIGHTBLUE );
     kernel_video_clear();
     
-    kernel_video_print(
+    kernel_video_print
+    (
         "\n"
         "    ------------------------------------------------------------------------ \n"
         "   |                                                                        |\n"
@@ -78,7 +79,8 @@ void kernel_main( void )
     );
     
     kernel_video_prompt( "Entering the XEOS kernel:\n" KERNEL_HR );
-    kernel_video_print(
+    kernel_video_print
+    (
         "        $Revision$\n"
         "        $Date$\n\n"
     );
@@ -116,15 +118,16 @@ void kernel_main( void )
     kernel_video_print( "\n" );
     kernel_video_prompt( "Locating the SMBIOS entry point:\n" KERNEL_HR );
         
-    if( ( smbios = hal_smbios_find_entry() ) == NULL ) {
-        
+    if( ( smbios = hal_smbios_find_entry() ) == NULL )
+    {
         /* Fatal error */
         
         kernel_video_printf( "        SMBIOS entry point not found!" );
         for( ; ; );
     }
     
-    kernel_video_printf(
+    kernel_video_printf
+    (
         "        Entry point address:   %p\n"
         "        Number of structures:  %u\n"
         "        Start address:         %p\n"
@@ -141,7 +144,8 @@ void kernel_main( void )
     
     infos_bios = ( hal_smbios_bios_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_BIOS_INFORMATION );
     
-    kernel_video_printf(
+    kernel_video_printf
+    (
         "        BIOS vendor:         %s\n"
         "        BIOS version:        %s\n"
         "        BIOS release date:   %s\n",
@@ -150,29 +154,31 @@ void kernel_main( void )
         ( infos_bios->date    == NULL ) ? "Unknown" : infos_bios->date
     );
     
-    if( infos_bios->release_major < 0xFF ) {
-        
-        kernel_video_printf(
+    if( infos_bios->release_major < 0xFF )
+    {
+        kernel_video_printf
+        (
             "        System BIOS version: %i.%i\n",
             infos_bios->release_major,
             infos_bios->release_minor
         );
-        
-    } else {
-        
+    }
+    else
+    {
         kernel_video_print( "        System BIOS version: Unknown\n" );
     }
     
-    if( infos_bios->embedded_controller_firmware_major < 0xFF ) {
-        
-        kernel_video_printf(
+    if( infos_bios->embedded_controller_firmware_major < 0xFF )
+    {
+        kernel_video_printf
+        (
             "        ECF version:         %i.%i\n",
             infos_bios->embedded_controller_firmware_major,
             infos_bios->embedded_controller_firmware_minor
         );
-        
-    } else {
-        
+    }
+    else
+    {
         kernel_video_print( "        ECF version:         Unknown\n" );
     }
     
@@ -181,7 +187,8 @@ void kernel_main( void )
     
     infos_sys = ( hal_smbios_system_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_SYSTEM_INFORMATION );
     
-    kernel_video_printf(
+    kernel_video_printf
+    (
         "        Manufacturer:  %s\n"
         "        Product name:  %s\n"
         "        Version:       %s\n"
@@ -205,7 +212,8 @@ void kernel_main( void )
     
     infos_cpu = ( hal_smbios_processor_infos * )hal_smbios_get_infos( smbios, HAL_SMBIOS_STRUCT_PROCESSOR_INFORMATION );
     
-    kernel_video_printf(
+    kernel_video_printf
+    (
         "        CPU socket:          %s\n"
         "        CPU type:            %s\n"
         "        CPU family:          %s\n"

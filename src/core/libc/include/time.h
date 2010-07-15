@@ -63,7 +63,6 @@ typedef unsigned long time_t;
  */
 struct tm
 {
-    
     int tm_sec;     /* Seconds after the minute */
     int tm_min;     /* minutes after the hour */
     int tm_hour;    /* hours since midnight */
@@ -75,7 +74,6 @@ struct tm
     int tm_isdst;   /* Daylight Saving Time flag : is positive if DST is in
                        effect, zero if not in effect, negative if information
                        not known. */
-    
 };
 
 /**

@@ -365,7 +365,6 @@ extern "C" {
  */
 typedef struct
 {
-    
     uint8_t  anchor[ 4 ];
     uint8_t  checksum;
     uint8_t  length;
@@ -380,8 +379,8 @@ typedef struct
     uint32_t structure_table_address;
     uint16_t structures_count;
     uint8_t  bcd_revision;
-    
-} __attribute__( ( packed ) ) hal_smbios_table_entry;
+}
+__attribute__( ( packed ) ) hal_smbios_table_entry;
 
 typedef struct
 {
@@ -389,12 +388,11 @@ typedef struct
     uint8_t      length;
     uint16_t     handle;
     uintptr_t    address;
-    
-} __attribute__( ( packed ) ) hal_smbios_structure_header;
+}
+__attribute__( ( packed ) ) hal_smbios_structure_header;
 
 typedef struct
 {
-    
     bool characteristics;
     bool isa;
     bool mca;
@@ -432,12 +430,11 @@ typedef struct
     bool boot_atapi_zip_drive;
     bool boot_1394;
     bool smart_battery;
-    
-} __attribute__( ( packed ) ) hal_smbios_bios_characteristics;
+}
+__attribute__( ( packed ) ) hal_smbios_bios_characteristics;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
     char * vendor;
     char * version;
@@ -449,9 +446,8 @@ typedef struct
     hal_smbios_bios_characteristics * characteristics;
     unsigned int embedded_controller_firmware_major;
     unsigned int embedded_controller_firmware_minor;
-    
-    
-} __attribute__( ( packed ) ) hal_smbios_bios_infos;
+}
+__attribute__( ( packed ) ) hal_smbios_bios_infos;
 
 /**
  * A UUID is an identifier that is designed to be unique across both time and
@@ -474,15 +470,14 @@ typedef struct
  */
 typedef struct
 {
-    
     uint32_t time_low;
     uint16_t time_mid;
     uint16_t time_hi_and_version;
     uint8_t clock_seq_hi_and_reserved;
     uint8_t clock_seq_low;
     uint8_t node[ 6 ];
-    
-} __attribute__( ( packed ) ) hal_smbios_uuid;
+}
+__attribute__( ( packed ) ) hal_smbios_uuid;
 
 /**
  * The information in this structure defines attributes of the overall system
@@ -492,7 +487,6 @@ typedef struct
  */
 typedef struct
 {
-    
     hal_smbios_structure_header header;
     char  * manufacturer;
     char  * product_name;
@@ -502,19 +496,17 @@ typedef struct
     uint8_t wake_up_type;
     char  * sku_number;
     char  * family;
-    
-} __attribute__( ( packed ) ) hal_smbios_system_infos;
+}
+__attribute__( ( packed ) ) hal_smbios_system_infos;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
-    
-} __attribute__( ( packed ) ) hal_smbios_system_enclosure;
+}
+__attribute__( ( packed ) ) hal_smbios_system_enclosure;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
     char * socket;
     uint8_t type;
@@ -539,54 +531,47 @@ typedef struct
     uint8_t thread_count;
     uint16_t characteristics;
     uint16_t family2;
-    
-} __attribute__( ( packed ) ) hal_smbios_processor_infos;
+}
+__attribute__( ( packed ) ) hal_smbios_processor_infos;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
-    
-} hal_smbios_cache_infos;
+}
+__attribute__( ( packed ) ) hal_smbios_cache_infos;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
-    
-} __attribute__( ( packed ) ) hal_smbios_system_slots;
+}
+__attribute__( ( packed ) ) hal_smbios_system_slots;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
-    
-} __attribute__( ( packed ) ) hal_smbios_physical_memory_array;
+}
+__attribute__( ( packed ) ) hal_smbios_physical_memory_array;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
-    
-} __attribute__( ( packed ) ) hal_smbios_memory_device;
+}
+__attribute__( ( packed ) ) hal_smbios_memory_device;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
-    
-} __attribute__( ( packed ) ) hal_smbios_memory_mapped_address;
+}
+__attribute__( ( packed ) ) hal_smbios_memory_mapped_address;
 
 typedef struct
 {
-    
     hal_smbios_structure_header header;
-    
-} __attribute__( ( packed ) ) hal_smbios_system_boot_infos;
+}
+__attribute__( ( packed ) ) hal_smbios_system_boot_infos;
 
 typedef struct
 {
-    
     hal_smbios_bios_infos            * bios_infos;
     hal_smbios_system_infos          * system_infos;
     hal_smbios_system_enclosure      * system_enclosure;
@@ -597,8 +582,8 @@ typedef struct
     hal_smbios_memory_device         * memory_device ;
     hal_smbios_memory_mapped_address * memory_mapped_address;
     hal_smbios_system_boot_infos     * system_boot_infos;
-    
-} __attribute__( ( packed ) ) hal_smbios_infos;
+}
+__attribute__( ( packed ) ) hal_smbios_infos;
 
 hal_smbios_table_entry * hal_smbios_find_entry( void );
 bool hal_smbios_verifiy_checksum( hal_smbios_table_entry * entry );

@@ -59,29 +59,29 @@ double sqrt( double x )
     double pow1;
     int i;
     
-    if( x < 0.0 ) {
-        
+    if( x < 0.0 )
+    {
         errno = EDOM;
         
         return 0.0;
     }
     
-    if( x == 0.0 ) {
-        
+    if( x == 0.0 )
+    {
         return 0.0;
     }
     
     xs   = x;
     pow1 = 1;
     
-    while( xs < 1.0 ) {
-        
+    while( xs < 1.0 )
+    {
         xs   = xs * 4.0;
         pow1 = pow1 / 2.0;
     }
     
-    while( xs >= 4.0 ) {
-        
+    while( xs >= 4.0 )
+    {
         xs   = xs / 4.0;
         pow1 = pow1 * 2.0;
     }
@@ -90,25 +90,25 @@ double sqrt( double x )
     yn  = xs / 2.0;
     ynn = 0;
     
-    while( 1 ) {
-        
+    while( 1 )
+    {
         ynn = ( yn + ( xs / yn ) ) * 0.5;
         
-        if( fabs( ynn - yn ) <= 10.0 * DBL_MIN ) {
-            
+        if( fabs( ynn - yn ) <= 10.0 * DBL_MIN )
+        {
             break;
-            
-        } else {
-            
+        }
+        else
+        {
             yn = ynn;
         }
         
-        if ( i > 10  ) {
-            
+        if ( i > 10  )
+        {
             break;
-            
-        } else {
-            
+        }
+        else
+        {
             i++;
         }
     }

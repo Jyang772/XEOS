@@ -58,8 +58,8 @@ double tan( double x )
     
     tmp = cos( x );
     
-    if( tmp == 0.0 ) {
-        
+    if( tmp == 0.0 )
+    {
         errno = EDOM;
         
         return HUGE_VAL;

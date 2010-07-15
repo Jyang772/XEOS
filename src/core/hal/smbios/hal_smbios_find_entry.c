@@ -40,31 +40,23 @@ hal_smbios_table_entry * hal_smbios_find_entry( void )
     uintptr_t                mem;
     hal_smbios_table_entry * entry;
     
-    for( mem = HAL_SMBIOS_MEM_START; mem < HAL_SMBIOS_MEM_END; mem += 16 ) {
-        
-        if( memcmp(
-                ( const void * )mem,
-                HAL_SMBIOS_SIGNATURE,
-                strlen( HAL_SMBIOS_SIGNATURE )
-            ) == 0
-        ) {
-            
+    for( mem = HAL_SMBIOS_MEM_START; mem < HAL_SMBIOS_MEM_END; mem += 16 )
+    {
+        if( memcmp ( ( const void * )mem, HAL_SMBIOS_SIGNATURE, strlen( HAL_SMBIOS_SIGNATURE ) ) == 0 )
+        {
             entry = ( hal_smbios_table_entry * )mem;
             
-            if( memcmp(
-                    ( const void * )entry->intermediate_anchor,
-                    HAL_SMBIOS_DMI_SIGNATURE,
-                    strlen( HAL_SMBIOS_DMI_SIGNATURE )
-                ) != 0
-            ) {
-                
+            if( memcmp( ( const void * )entry->intermediate_anchor, HAL_SMBIOS_DMI_SIGNATURE, strlen( HAL_SMBIOS_DMI_SIGNATURE ) ) != 0 )
+            {
                 continue;
             }
             
-            if(    hal_smbios_verifiy_checksum( entry )              == false
+            if
+            (
+                   hal_smbios_verifiy_checksum( entry )              == false
                 || hal_smbios_verifiy_intermediate_checksum( entry ) == false
-            ) {
-                
+            )
+            {
                 continue;
             }
             

@@ -43,8 +43,8 @@ int puts( const char * s )
     
     ret = fputs( s, stdout );
     
-    if( ret == EOF ) {
-        
+    if( ret == EOF )
+    {
         return EOF;
     }
     

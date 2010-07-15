@@ -59,12 +59,12 @@ char * strncpy( char * s, const char * ct, size_t n )
     p = s;
     x = 0;
     
-    for( x = 0; x < n; x++ ) {
-        
+    for( x = 0; x < n; x++ )
+    {
         *( p ) = *( ct );
         
-        if( *( ct ) == '\0' ) {
-            
+        if( *( ct ) == '\0' )
+        {
             break;
         }
         
@@ -72,8 +72,8 @@ char * strncpy( char * s, const char * ct, size_t n )
         ct++;
     }
     
-    for( ; x < n; x++ ) {
-        
+    for( ; x < n; x++ )
+    {
         *( p )++ = '\0';
     }
     

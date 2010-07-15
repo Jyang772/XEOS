@@ -65,13 +65,13 @@ double sin( double x )
     term   = x1;
     result = x1;
     
-    while( 1 ) {
-        
+    while( 1 )
+    {
         work = i + 1;
         term = -( term * x1 * x1 ) / ( work * ( work + 1.0 ) );
         
-        if( result == ( result + term ) ) {
-            
+        if( result == ( result + term ) )
+        {
             break;
         }
         

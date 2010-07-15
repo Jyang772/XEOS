@@ -57,8 +57,8 @@ size_t strxfrm( char * s, const char * ct, size_t n )
     
     length = strlen( ct );
     
-    if( length < n ) {
-        
+    if( length < n )
+    {
         memcpy( s, ct, length );
         
         s[ length ] = '\0';

@@ -54,15 +54,15 @@ extern const double __libc_math_pi;
  */
 double acos( double x )
 {
-    if( fabs( x ) > 1.0 ) {
-        
+    if( fabs( x ) > 1.0 )
+    {
         errno = EDOM;
         
         return HUGE_VAL;
     }
     
-    if( x < 0.0 ) {
-        
+    if( x < 0.0 )
+    {
         return __libc_math_pi - acos( -x );
     }
     

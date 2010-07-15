@@ -57,13 +57,13 @@ char * strncat( char * s, const char * ct, size_t n )
     p = s;
     x = 0;
     
-    while( *( p ) != '\0' ) {
-        
+    while( *( p ) != '\0' )
+    {
         p++;
     }
     
-    while( ( *( ct ) != '\0' ) && ( x < n ) ) {
-        
+    while( ( *( ct ) != '\0' ) && ( x < n ) )
+    {
         *( p ) = *( ct );
         
         p++;

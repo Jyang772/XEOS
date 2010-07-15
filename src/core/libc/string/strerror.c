@@ -31,19 +31,6 @@
 
 /* $Id$ */
 
-/**
- * Copyright notice:
- * 
- * Most of this code is borrowed from the Public Domain C runtime library
- * (PDPCLib) by Paul Edwards (fight.subjugation@gmail.com), with some
- * modifications to suit the needs of the XEOS project.
- * 
- * PDPCLib can be found at the following address: http://pdos.sourceforge.net/
- * 
- * If you need some parts of this code, please use PDPCLib instead.
- * As it's realeased to the public domain, no license restriction will apply.
- */
-
 #include "string.h"
 
 /**
@@ -52,12 +39,12 @@
  */
 char * strerror( int n )
 {
-    if( n == 0 ) {
-        
+    if( n == 0 )
+    {
         return "No error occured.\n";
-        
-    } else {
-        
+    }
+    else
+    {
         /* Needs implementation */
         
         return "An unknown error occured. No further information can be provided.\n";

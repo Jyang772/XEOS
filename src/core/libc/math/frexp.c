@@ -63,8 +63,8 @@ double frexp( double x, int * exp )
 {
     union __libc_math_frexp_dblhex split;
     
-    if( x == 0.0 ) {
-        
+    if( x == 0.0 )
+    {
         exp = 0;
         
         return 0.0;
@@ -75,8 +75,8 @@ double frexp( double x, int * exp )
     split.s[ 0 ] = split.s[ 0 ] & 0x80FF;
     split.s[ 0 ] = split.s[ 0 ] | 0x4000;
     
-    while( ( fabs( split.d ) < 0.5 ) && ( split.d != 0 ) ) {
-        
+    while( ( fabs( split.d ) < 0.5 ) && ( split.d != 0 ) )
+    {
         split.d  = split.d * 2;
         *( exp ) = *( exp ) - 1;
     }

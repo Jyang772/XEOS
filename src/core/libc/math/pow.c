@@ -61,47 +61,47 @@ double pow( double x, double y )
     neg = 0;
     yy  = j;
     
-    if( yy == y ) {
-        
+    if( yy == y )
+    {
         xx = x;
         
-        if( y < 0 ) {
-            
+        if( y < 0 )
+        {
             neg = 1;
             j   = -j;
         }
         
-        if( y == 0 ) {
-            
+        if( y == 0 )
+        {
             return 1.0;
         }
         
         --j;
         
-        while( j > 0 ) {
-            
+        while( j > 0 )
+        {
             xx = xx * x;
             
             j--;
         }
         
-        if( neg ) {
-            
+        if( neg )
+        {
             xx = 1.0 / xx;
         }
         
         return xx;
     }
     
-    if( x < 0.0 ) {
-        
+    if( x < 0.0 )
+    {
         errno = EDOM;
         
         return 0.0;
     }
     
-    if( y == 0.0 ) {
-        
+    if( y == 0.0 )
+    {
         return 1.0;
     }
     

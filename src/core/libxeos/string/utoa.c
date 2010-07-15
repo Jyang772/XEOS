@@ -41,22 +41,22 @@ void utoa( unsigned int n, char s[], int radix )
 {
     unsigned int i;
     
-    if( radix > 16 ) {
-        
+    if( radix > 16 )
+    {
         radix = 16;
-        
-    } else if( radix < 2 ) {
-        
+    }
+    else if( radix < 2 )
+    {
         radix = 10;
     }
     
     i = 0;
     
-    do {
-        
+    do
+    {
         s[ i++ ] = __libxeos_string_hex_chars[ n % radix ];
-        
-    } while( ( n /= radix ) > 0 );
+    }
+    while( ( n /= radix ) > 0 );
     
     s[ i ] = '\0';
     

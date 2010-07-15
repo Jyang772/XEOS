@@ -44,8 +44,8 @@ bool hal_smbios_verifiy_intermediate_checksum( hal_smbios_table_entry * entry )
     sum = 0;
     c   = ( char * )( entry->intermediate_anchor );
     
-    for( i = 0; i < 0x0F; i++ ) {
-        
+    for( i = 0; i < 0x0F; i++ )
+    {
         sum += c[ i ];
     }
     

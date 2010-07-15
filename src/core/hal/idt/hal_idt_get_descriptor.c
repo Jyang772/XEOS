@@ -37,8 +37,8 @@ extern struct hal_idt_entry __hal_idt[];
 
 struct hal_idt_entry * hal_idt_get_descriptor( unsigned int i )
 {
-    if( i >= HAL_IDT_MAX_DESCRIPTORS ) {
-        
+    if( i >= HAL_IDT_MAX_DESCRIPTORS )
+    {
         return ( struct hal_idt_entry * )0;
     }
     

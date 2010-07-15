@@ -53,17 +53,17 @@ double floor( double x )
 {
     int y;
     
-    if( x < 0.0 ) {
-        
+    if( x < 0.0 )
+    {
         y = ( int )x;
         
-        if( ( double )y != x ) {
-            
+        if( ( double )y != x )
+        {
             y--;
         }
-        
-    } else {
-        
+    }
+    else
+    {
         y = ( int )x;
     }
     

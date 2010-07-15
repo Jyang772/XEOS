@@ -35,8 +35,8 @@
 
 void hal_cpu_cli( void )
 {
-    __asm__(
-        
+    __asm__
+    (
         "cli;"
     );
 }

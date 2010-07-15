@@ -34,8 +34,8 @@
 #include "signal.h"
 #include <stdlib.h>
 
-void ( * __libc_signal_handlers[] )( int ) = {
-    
+void ( * __libc_signal_handlers[] )( int ) =
+{
     __libc_signal_dfl,
     __libc_signal_dfl,
     __libc_signal_dfl,
@@ -45,15 +45,14 @@ void ( * __libc_signal_handlers[] )( int ) = {
     __libc_signal_dfl,
     __libc_signal_dfl,
     __libc_signal_dfl
-    
 };
 
 void __libc_signal_dfl( int sig )
 {
     ( void )sig;
     
-    if( sig == SIGABRT ) {
-        
+    if( sig == SIGABRT )
+    {
         exit( EXIT_FAILURE );
     }
     

@@ -40,8 +40,8 @@ void kernel_video_scroll( unsigned int n )
     unsigned char * mem;
     unsigned int    i;
     
-    if( n >= KERNEL_VIDEO_ROWS ) {
-        
+    if( n >= KERNEL_VIDEO_ROWS )
+    {
         kernel_video_clear();
         
         return;
@@ -49,15 +49,15 @@ void kernel_video_scroll( unsigned int n )
     
     mem = ( unsigned char * )KERNEL_VIDEO_MEM;
     
-    for( i = 0; i < ( KERNEL_VIDEO_COLS * ( KERNEL_VIDEO_ROWS - n ) ) * 2; i++ ) {
-        
+    for( i = 0; i < ( KERNEL_VIDEO_COLS * ( KERNEL_VIDEO_ROWS - n ) ) * 2; i++ )
+    {
         mem[ i ] = mem[ i + ( KERNEL_VIDEO_COLS * 2 * n ) ];
     }
     
     mem += i;
     
-    for( i = 0; i < KERNEL_VIDEO_COLS * 2 * n; i += 2 ) {
-        
+    for( i = 0; i < KERNEL_VIDEO_COLS * 2 * n; i += 2 )
+    {
         mem[ i ]     = ' ';
         mem[ i + 1 ] = __kernel_video_attr;
     }

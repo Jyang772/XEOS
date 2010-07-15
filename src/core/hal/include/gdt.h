@@ -94,27 +94,24 @@ extern "C" {
  */
 struct hal_gdt_entry
 {
-    
     uint16_t    limit;
     uint16_t    address_low;
     uint8_t     address_mid;
     uint16_t    flags;
     uint8_t     address_high;
-    
-} __attribute__( ( packed ) );
+}
+__attribute__( ( packed ) );
 
 struct hal_gdt_ptr
 {
-    
     uint16_t    limit;
     uint32_t    base;
-    
-} __attribute__( ( packed ) );
+}
+__attribute__( ( packed ) );
 
 void hal_gdt_init( void );
 struct hal_gdt_entry * hal_gdt_get_descriptor( unsigned int i );
 void hal_gdt_set_descriptor( unsigned int i );
-
 
 #ifdef __cplusplus
 }

@@ -61,8 +61,8 @@
  *      Hex digit:      Bit 6
  *      
  */
-unsigned char __libc_ctype_ascii[ 256 ] = {
-    
+unsigned char __libc_ctype_ascii[ 256 ] =
+{
     /* ASCII 0 - 31 / Control characters */
     /* Note that ASCII 9 - 13 are also space */
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 
@@ -160,7 +160,6 @@ unsigned char __libc_ctype_ascii[ 256 ] = {
     
     /* ASCII 255 / Unused */
     0x00
-    
 };
 
 /* ASCII properties masks */

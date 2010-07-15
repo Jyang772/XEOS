@@ -74,23 +74,23 @@ uint8_t * __hal_smbios_find_struct( hal_smbios_table_entry * entry, uint8_t type
     
     mem = ( uint8_t * )entry->structure_table_address;
     
-    for( i = 0; i < entry->structures_count; i++ ) {
-        
+    for( i = 0; i < entry->structures_count; i++ )
+    {
         s_type   = ( uint8_t )*( mem );
         s_length = ( uint8_t )*( mem + 1 );
         s_handle = ( uint16_t )*( mem + 2 );
         
-        if( s_type == type ) {
-            
+        if( s_type == type )
+        {
             return mem;
         }
         
         mem += s_length;
         
-        while( 1 ) {
-            
-            if( *( mem ) == '\0' && *( mem + 1 ) == '\0' ) {
-                
+        while( 1 )
+        {
+            if( *( mem ) == '\0' && *( mem + 1 ) == '\0' )
+            {
                 mem += 2;
                 break;
             }
@@ -106,23 +106,23 @@ char * __hal_smbios_get_string( uint8_t * mem, uint8_t str_num )
 {
     uint8_t i;
     
-    if( str_num == 0 ) {
-        
+    if( str_num == 0 )
+    {
         return NULL;
     }
     
-    for( i = 0; i < str_num - 1; i++ ) {
-        
-        while( *( mem ) != '\0' ) {
-            
+    for( i = 0; i < str_num - 1; i++ )
+    {
+        while( *( mem ) != '\0' )
+        {
             mem++;
         }
         
         mem++;
     }
     
-    if( *( mem ) == '\0' ) {
-        
+    if( *( mem ) == '\0' )
+    {
         return NULL;
     }
     
@@ -134,8 +134,8 @@ void __hal_smbios_process_struct_bios_infos( uint8_t * mem )
     uint32_t characteristics;
     uint8_t  characteristics_ext;
     
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -205,8 +205,8 @@ void __hal_smbios_process_struct_system_infos( uint8_t * mem )
 {
     hal_smbios_uuid * uuid;
     
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -260,8 +260,8 @@ void __hal_smbios_process_struct_system_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_enclosure( uint8_t * mem )
 {
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -277,8 +277,8 @@ void __hal_smbios_process_struct_processor_infos( uint8_t * mem )
 {
     uint8_t voltage;
     
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -289,22 +289,22 @@ void __hal_smbios_process_struct_processor_infos( uint8_t * mem )
     
     voltage = ( uint8_t )*( mem + 0x11 );
     
-    if( voltage & 0x80 ) {
-        
-        if( voltage & 0x01 ) {
-            
+    if( voltage & 0x80 )
+    {
+        if( voltage & 0x01 )
+        {
             __hal_smbios_processor_infos.voltage = ( float )5;
-            
-        } else if( voltage & 0x02 ) {
-            
+        }
+        else if( voltage & 0x02 )
+        {
             __hal_smbios_processor_infos.voltage = ( float )3.3;
-            
-        } else if( voltage & 0x04 ) {
-            
+        }
+        else if( voltage & 0x04 )
+        {
             __hal_smbios_processor_infos.voltage = ( float )2.9;
-            
-        } else {
-            
+        }
+        else
+        {
             __hal_smbios_processor_infos.voltage = ( float )0;
         }
         
@@ -326,8 +326,8 @@ void __hal_smbios_process_struct_processor_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_cache_infos( uint8_t * mem )
 {
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -341,8 +341,8 @@ void __hal_smbios_process_struct_cache_infos( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_slots( uint8_t * mem )
 {
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -356,8 +356,8 @@ void __hal_smbios_process_struct_system_slots( uint8_t * mem )
 
 void __hal_smbios_process_struct_physical_memory_array( uint8_t * mem )
 {
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -371,8 +371,8 @@ void __hal_smbios_process_struct_physical_memory_array( uint8_t * mem )
 
 void __hal_smbios_process_struct_memory_device( uint8_t * mem )
 {
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -386,8 +386,8 @@ void __hal_smbios_process_struct_memory_device( uint8_t * mem )
 
 void __hal_smbios_process_struct_memory_mapped_address( uint8_t * mem )
 {
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     
@@ -401,8 +401,8 @@ void __hal_smbios_process_struct_memory_mapped_address( uint8_t * mem )
 
 void __hal_smbios_process_struct_system_boot_infos( uint8_t * mem )
 {
-    if( mem == NULL ) {
-        
+    if( mem == NULL )
+    {
         return;
     }
     

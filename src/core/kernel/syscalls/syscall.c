@@ -35,13 +35,13 @@
 
 void syscall( unsigned char n )
 {
-    if( n == 0 ) {
-        
+    if( n == 0 )
+    {
         return;
     }
     
-    __asm__(
-        
+    __asm__
+    (
         "movb   %[syscall],     %%al;"
         "int    $0x20;"
         

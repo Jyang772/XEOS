@@ -61,13 +61,13 @@ char * strtok( char * s, const char * t )
     
     old = NULL;
     
-    if( s != NULL ) {
-        
+    if( s != NULL )
+    {
         old = s;
     }
     
-    if( old == NULL ) {
-        
+    if( old == NULL )
+    {
         return NULL;
     }
     
@@ -75,8 +75,8 @@ char * strtok( char * s, const char * t )
     length = strspn( p, t );
     remain = strlen( p );
     
-    if( remain <= length ) {
-        
+    if( remain <= length )
+    {
         old = NULL;
         
         return NULL;
@@ -86,8 +86,8 @@ char * strtok( char * s, const char * t )
     length = strcspn( p, t );
     remain = strlen( p );
     
-    if( remain <= length ) {
-        
+    if( remain <= length )
+    {
         old = NULL;
         
         return p;

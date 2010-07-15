@@ -65,11 +65,10 @@ extern "C" {
  */
 typedef struct
 {
-    
     int quot;
     int rem;
-    
-} div_t;
+}
+div_t;
 
 /**
  * Return type of ldiv(). Structure having members:
@@ -79,11 +78,10 @@ typedef struct
  */
 typedef struct
 {
-    
     long quot;
     long rem;
-    
-} ldiv_t;
+}
+ldiv_t;
 
 /**
  * Returns absolute value of n.

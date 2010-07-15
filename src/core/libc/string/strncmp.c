@@ -60,18 +60,18 @@ int strncmp( const char * cs, const char * ct, size_t n )
     p2 = ( const unsigned char * )ct;
     x  = 0;
     
-    while( x < n ) {
-        
-        if( p1[ x ] < p2[ x ] ) {
-            
+    while( x < n )
+    {
+        if( p1[ x ] < p2[ x ] )
+        {
             return -1;
-            
-        } else if( p1[ x ] > p2[ x ] ) {
-            
+        }
+        else if( p1[ x ] > p2[ x ] )
+        {
             return 1;
-            
-        } else if( p1[ x ] == '\0' ) {
-            
+        }
+        else if( p1[ x ] == '\0' )
+        {
             return 0;
         }
         
