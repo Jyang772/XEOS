@@ -453,10 +453,55 @@ typedef struct
     
 } __attribute__( ( packed ) ) hal_smbios_bios_infos;
 
+/**
+ * A UUID is an identifier that is designed to be unique across both time and
+ * space, and requires no central registration process. The UUID is 128 bits
+ * long. Its format is described in RFC 4122, but the actual field contents are
+ * opaque and not significant to the SMBIOS specification, which is only
+ * concerned with the byte order.
+ * 
+ * Although RFC 4122 recommends network byte order for all fields, the PC
+ * industry (including the ACPI, UEFI, and Microsoft specifications) has
+ * consistently used little-endian byte encoding for the first three fields:
+ * time_low, time_mid, time_hi_and_version. The same encoding, also known as
+ * wire format, should also be used for the SMBIOS representation of the UUID.
+ * 
+ * The UUID {00112233-4455-6677-8899-AABBCCDDEEFF} would thus be represented
+ * as 33 22 11 00 55 44 77 66 88 99 AA BB CC DD EE FF.
+ * 
+ * If the value is all FFh, the ID is not currently present in the system, but
+ * can be set. If the value is all 00h, the ID is not present in the system.
+ */
+typedef struct
+{
+    
+    uint32_t time_low;
+    uint16_t time_mid;
+    uint16_t time_hi_and_version;
+    uint8_t clock_seq_hi_and_reserved;
+    uint8_t clock_seq_low;
+    uint8_t node[ 6 ];
+    
+} __attribute__( ( packed ) ) hal_smbios_uuid;
+
+/**
+ * The information in this structure defines attributes of the overall system
+ * and is intended to be associated with the Component ID group of the system's
+ * MIF. An SMBIOS implementation is associated with a single system instance
+ * and contains one and only one System Information (Type 1) structure.
+ */
 typedef struct
 {
     
     hal_smbios_structure_header header;
+    char  * manufacturer;
+    char  * product_name;
+    char  * version;
+    char  * serial_number;
+    hal_smbios_uuid uuid;
+    uint8_t wake_up_type;
+    char  * sku_number;
+    char  * family;
     
 } __attribute__( ( packed ) ) hal_smbios_system_infos;
 
@@ -561,6 +606,7 @@ bool hal_smbios_verifiy_intermediate_checksum( hal_smbios_table_entry * entry );
 void * hal_smbios_get_infos( hal_smbios_table_entry * entry, uint8_t type );
 char * hal_smbios_processor_type_string( uint8_t number );
 char * hal_smbios_processor_family_string( uint8_t number );
+char * hal_smbios_uuid_string( hal_smbios_uuid * uuid );
 
 #ifdef __cplusplus
 }
