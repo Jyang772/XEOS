@@ -42,5 +42,5 @@ XSFloat XSAngleBetweenPoints( XSPoint a, XSPoint b )
     c = b.y - a.y;
     d = a.x - b.x;
     
-    return atan( c / d );
+    return atan2( b.y - a.y, b.x - a.x );
 }
