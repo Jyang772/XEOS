@@ -308,8 +308,9 @@ void __hal_smbios_process_struct_processor_infos( uint8_t * mem )
             __hal_smbios_processor_infos.voltage = ( float )0;
         }
         
-    } else {
-        
+    }
+    else
+    {
         __hal_smbios_processor_infos.voltage = ( float )( ( voltage & 0x7F ) / 10 );
     }
     
