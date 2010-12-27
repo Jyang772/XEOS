@@ -111,7 +111,10 @@ clean:
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_BINUTILS)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_GMP)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_MPFR)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_MPFR).libs
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_MPFR).deps
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_GCC)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_QEMU)*
 	@echo "    *** Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_TMP)*
 
