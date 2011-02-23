@@ -55,6 +55,7 @@ MAKE                = make
 CP                  = cp
 RM                  = rm
 DD                  = dd
+MV   				= mv
 MOUNT               = sudo mount
 UMOUNT              = sudo umount
 HDID                = hdid
@@ -95,9 +96,8 @@ DIR_SW              = ./sw/
 # Resources
 #-------------------------------------------------------------------------------
 
-FLOPPY              = xeos.flp
-FLOPPY_IN           = $(DIR_RES)$(FLOPPY)
-FLOPPY_OUT          = $(DIR_BUILD_REL)$(FLOPPY)
+FLOPPY_NAME			= xeos
+FLOPPY              = $(DIR_BUILD_REL)$(FLOPPY_NAME).flp
 MBR                 = BOOT1.BIN
 
 #-------------------------------------------------------------------------------
@@ -135,13 +135,14 @@ all: boot core _mbr _mount _copy _umount
 # Tests the OS by launching the emulator
 test:
 	@echo "    *** Launching the emulator"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(EMU) $(ARGS_EMU) -fda $(FLOPPY_OUT))
-	@$(EMU) $(ARGS_EMU) -fda $(FLOPPY_OUT)
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(EMU) $(ARGS_EMU) -fda $(FLOPPY))
+	@$(EMU) $(ARGS_EMU) -fda $(FLOPPY)
 
 # Cleans the build files
 clean:
 	@cd $(DIR_SRC_BOOT) && $(MAKE) clean
 	@cd $(DIR_SRC_CORE) && $(MAKE) clean
+	@if [ -f $(FLOPPY) ]; then $(RM) $(FLOPPY); fi;
 
 # Builds the boot files
 boot:
@@ -160,18 +161,21 @@ cross:
 	
 # Copies the MBR to the floppy image
 _mbr:
-	@echo "    *** Copying empty floppy image ($(FLOPPY_IN)) to the build directory ($(DIR_BUILD_MNT))"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT))
-	@$(CP) $(ARGS_CP) $(FLOPPY_IN) $(FLOPPY_OUT)
-	@echo "    *** Copying the bootloader ($(DIR_BUILD_BIN_BOOT)$(MBR)) into the installation floppy MBR ($(FLOPPY_OUT))"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN_BOOT)$(MBR) of=$(FLOPPY_OUT))
-	@$(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN_BOOT)$(MBR) of=$(FLOPPY_OUT)
+	@echo "    *** Creating empty floppy image ($(FLOPPY_NAME)) to the build directory ($(DIR_BUILD_REL))"
+	@if [ -f $(FLOPPY).dmg ]; then $(RM) $(FLOPPY).dmg; fi;
+	@if [ -f $(FLOPPY) ]; then $(RM) $(FLOPPY); fi;
+	$(if $(filter 1,$(DEBUG)), @echo "        --- hdiutil create -size 10m -type UDIF -fs MS-DOS $(FLOPPY))"
+	@hdiutil create -size 10m -type UDIF -fs MS-DOS $(FLOPPY)
+	if [ -f $(FLOPPY).dmg ]; then $(MV) $(FLOPPY).dmg $(FLOPPY); fi;
+	@echo "    *** Copying the bootloader ($(DIR_BUILD_BIN_BOOT)$(MBR)) into the installation floppy MBR ($(FLOPPY))"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN_BOOT)$(MBR) of=$(FLOPPY))
+	@$(DD) $(ARGS_DD) if=$(DIR_BUILD_BIN_BOOT)$(MBR) of=$(FLOPPY)
 
 # Mounts the floppy drive image
 _mount:
 	@echo "    *** Mounting the floppy image"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(MOUNT) $(ARGS_MOUNT) \`$(HDID) $(ARGS_HDID) $(FLOPPY_OUT)\` $(DIR_BUILD_MNT))
-	@$(MOUNT) $(ARGS_MOUNT) `$(HDID) $(ARGS_HDID) $(FLOPPY_OUT)` $(DIR_BUILD_MNT)
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(MOUNT) $(ARGS_MOUNT) \`$(HDID) $(ARGS_HDID) $(FLOPPY)\` $(DIR_BUILD_MNT))
+	@$(MOUNT) $(ARGS_MOUNT) `$(HDID) $(ARGS_HDID) $(FLOPPY)` $(DIR_BUILD_MNT)
 
 # Copy the build files to the floppy drive
 _copy:
