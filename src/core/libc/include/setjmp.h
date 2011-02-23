@@ -56,6 +56,8 @@ typedef struct
 }
 jmp_buf[ 1 ];
 
+/* eax, ebx, ecx, edx, edi, esi, ebp, esp, ss, eflags, eip, cs, de, es, fs, gs */
+
 /**
  * Saves context information in env and returns zero. Subsequent call to
  * longjmp with same env returns non-zero.

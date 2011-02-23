@@ -117,3 +117,4 @@ clean:
 	@cd $(DIR_SRC_LIBXEOS) && $(MAKE) clean
 	@cd $(DIR_SRC_HAL) && $(MAKE) clean
 	@cd $(DIR_SRC_KERNEL) && $(MAKE) clean
+	@if [ -f $(DIR_BUILD_BIN)KERNEL.ELF ]; then $(RM) $(DIR_BUILD_BIN)KERNEL.ELF; fi;
