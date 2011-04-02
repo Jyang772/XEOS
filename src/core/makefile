@@ -101,8 +101,6 @@ vpath
 all:
 	@echo "    *** Building the C standard library"
 	@cd $(DIR_SRC_LIBC) && $(MAKE)
-	@echo "    *** Building the XEOS standard library"
-	@cd $(DIR_SRC_LIBXEOS) && $(MAKE)
 	@echo "    *** Building the harware abstraction layer"
 	@cd $(DIR_SRC_HAL) && $(MAKE)
 	@echo "    *** Building the kernel"
