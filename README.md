@@ -16,7 +16,7 @@ XEOS is be released under the BSD License.
 Installation
 ------------
 
-### Requirements
+### 1. Requirements
 
 In order to be built, XEOS needs a custom version of the GNU compiler (GCC).
 The reason for this is that the compilers available by default on standard systems may only compile executables of a specific format.
@@ -29,7 +29,7 @@ So the first step, in order to compile XEOS, is to compile the compiler that wil
 And of course, a version of GCC needs to be available on your system in order to compile another version of GCC.
 It may seems funny, but don't worry: everything has been prepared for you.
 
-### Building the compiler
+### 2. Building the compiler
 
 A specific version of GCC has been prepared, and is included in the XEOS sources.
 You need to compile and install it, before compiling XEOS.
@@ -49,11 +49,11 @@ The tools that will be installed are:
  - MPFR 2.4.2 - The GNU multiple-precision floating-point computations with correct rounding library
  - GCC 4.4.3 - The GNU compiler collection
  - QEMU 0.12.2 - A generic and open source machine emulator and virtualizer
- 
- The build process may take some time. But once it's done, you are ready to compile and use XEOS.
- 
- ### Compiling
- 
+
+The build process may take some time. But once it's done, you are ready to compile and use XEOS.
+
+### 3. Compiling
+
 Compiling XEOS is a very simple task.
 From the trunk's directory, simple type the following command:
     
