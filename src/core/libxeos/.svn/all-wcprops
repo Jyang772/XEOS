@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/427/trunk/src/core/libxeos
+END
+__libxeos_string.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/427/trunk/src/core/libxeos/__libxeos_string.c
+END
+makefile
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/395/trunk/src/core/libxeos/makefile
+END

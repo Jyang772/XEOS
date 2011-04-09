@@ -29,7 +29,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #-------------------------------------------------------------------------------
 
-# $Id$
+# $Id: makefile 433 2011-02-23 17:59:49Z macmade@eosgarden.com $
 
 #-------------------------------------------------------------------------------
 # Debug options
@@ -101,6 +101,8 @@ vpath
 all:
 	@echo "    *** Building the C standard library"
 	@cd $(DIR_SRC_LIBC) && $(MAKE)
+	@echo "    *** Building the XEOS standard library"
+	@cd $(DIR_SRC_LIBXEOS) && $(MAKE)
 	@echo "    *** Building the harware abstraction layer"
 	@cd $(DIR_SRC_HAL) && $(MAKE)
 	@echo "    *** Building the kernel"
