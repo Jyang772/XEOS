@@ -58,11 +58,12 @@ ARGS_MAKE           =
 # Software versions
 #-------------------------------------------------------------------------------
 
-VERSION_BINUTILS    = 2.20
-VERSION_GMP         = 4.3.2
-VERSION_MPFR        = 2.4.2
-VERSION_GCC         = 4.4.3
-VERSION_QEMU        = 0.12.2
+VERSION_BINUTILS    = 2.21.1
+VERSION_GMP         = 5.0.2
+VERSION_MPFR        = 3.1.0
+VERSION_MPC         = 0.9
+VERSION_GCC         = 4.5.3
+VERSION_QEMU        = 1.0
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -72,12 +73,14 @@ DIR_BUILD           = ./build/
 DIR_BUILD_BINUTILS  = $(DIR_BUILD)binutils/
 DIR_BUILD_GMP       = $(DIR_BUILD)gmp/
 DIR_BUILD_MPFR      = $(DIR_BUILD)mpfr/
+DIR_BUILD_MPC       = $(DIR_BUILD)mpc/
 DIR_BUILD_GCC       = $(DIR_BUILD)gcc/
 DIR_BUILD_QEMU      = $(DIR_BUILD)qemu/
 DIR_SRC             = ./src/
 SRC_BINUTILS        = $(DIR_SRC)binutils-$(VERSION_BINUTILS).tar.bz2
 SRC_GMP             = $(DIR_SRC)gmp-$(VERSION_GMP).tar.bz2
-SRC_MPFR            = $(DIR_SRC)mpfr-$(VERSION_MPFR).tar.gz
+SRC_MPFR            = $(DIR_SRC)mpfr-$(VERSION_MPFR).tar.bz2
+SRC_MPC             = $(DIR_SRC)mpc-$(VERSION_MPC).tar.gz
 SRC_GCC             = $(DIR_SRC)gcc-core-$(VERSION_GCC).tar.bz2
 SRC_QEMU            = $(DIR_SRC)qemu-$(VERSION_QEMU).tar.gz
 DIR_TMP             = ./tmp/
@@ -87,23 +90,23 @@ DIR_TMP             = ./tmp/
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean binutils gmp mpfr gcc
+.PHONY: all clean binutils gmp mpfr mpc gcc
 
 #-------------------------------------------------------------------------------
 # Shell variables
 #-------------------------------------------------------------------------------
 
 PATH                := $(PREFIX)/binutils/bin:$(PATH)
-LD_LIBRARY_PATH     := $(PREFIX)/gmp/lib:$(PREFIX)/mpfr/lib:$(LD_LIBRARY_PATH)
-LPATH               := $(PREFIX)/gmp/lib:$(PREFIX)/mpfr/lib:$(LPATH)
-CPATH               := $(PREFIX)/gmp/include:$(PREFIX)/mpfr/include:$(CPATH)
+LD_LIBRARY_PATH     := $(PREFIX)/gmp/lib:$(PREFIX)/mpfr/lib:$(PREFIX)/mpc/lib:$(LD_LIBRARY_PATH)
+LPATH               := $(PREFIX)/gmp/lib:$(PREFIX)/mpfr/lib:$(PREFIX)/mpc/lib:$(LPATH)
+CPATH               := $(PREFIX)/gmp/include:$(PREFIX)/mpfr/include:$(PREFIX)/mpc/include:$(CPATH)
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: binutils gmp mpfr gcc qemu
+all: binutils gmp mpfr mpc gcc qemu
 
 # Cleans the build files
 clean:
@@ -151,6 +154,17 @@ mpfr:
 	@echo "    *** Installing mpfr ($(VERSION_MPFR))"
 	@cd $(DIR_BUILD_MPFR) && sudo $(MAKE) install
 
+# Builds MPC
+mpc:
+	@echo "    *** Unpacking mpc ($(VERSION_MPC))"
+	@if [ ! -d $(DIR_TMP)mpc-$(VERSION_MPC) ]; then $(TAR) $(ARGS_TAR) $(SRC_MPC) -C $(DIR_TMP); fi
+	@echo "    *** Configuring mpc ($(VERSION_MPC))"
+	@cd $(DIR_BUILD_MPC) && exec ../../$(DIR_TMP)mpc-$(VERSION_MPC)/configure --prefix=$(PREFIX)/mpc
+	@echo "    *** Compiling mpc ($(VERSION_MPC))"
+	@cd $(DIR_BUILD_MPC) && $(MAKE)
+	@echo "    *** Installing mpc ($(VERSION_MPC))"
+	@cd $(DIR_BUILD_MPC) && sudo $(MAKE) install
+
 # Builds GCC & LibGCC
 gcc:
 	@echo "    *** Unpacking gcc ($(VERSION_GCC))"
@@ -171,7 +185,7 @@ qemu:
 	@echo "    *** Unpacking qemu ($(VERSION_QEMU))"
 	@if [ ! -d $(DIR_TMP)qemu-$(VERSION_QEMU) ]; then $(TAR) $(ARGS_TAR) $(SRC_QEMU) -C $(DIR_TMP); fi
 	@echo "    *** Configuring qemu ($(VERSION_QEMU))"
-	@cd $(DIR_BUILD_QEMU) && exec ../../$(DIR_TMP)qemu-$(VERSION_QEMU)/configure --prefix=$(PREFIX)/qemu --enable-system --enable-user --target-list="i386-softmmu x86_64-softmmu arm-softmmu cris-softmmu m68k-softmmu microblaze-softmmu mips-softmmu mipsel-softmmu mips64-softmmu mips64el-softmmu ppc-softmmu ppcemb-softmmu ppc64-softmmu sh4-softmmu sh4eb-softmmu sparc-softmmu sparc64-softmmu"
+	@cd $(DIR_BUILD_QEMU) && exec ../../$(DIR_TMP)qemu-$(VERSION_QEMU)/configure --prefix=$(PREFIX)/qemu --disable-sdl --enable-system --enable-user --target-list="i386-softmmu x86_64-softmmu"
 	@echo "    *** Compiling qemu ($(VERSION_QEMU))"
 	@cd $(DIR_BUILD_QEMU) && $(MAKE)
 	@echo "    *** Installing qemu ($(VERSION_QEMU))"
