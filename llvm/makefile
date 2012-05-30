@@ -45,6 +45,7 @@ RM                  = rm
 TAR                 = tar
 MAKE                = make
 SVN                 = svn
+CD                  = cd
 
 #-------------------------------------------------------------------------------
 # Software arguments
@@ -88,17 +89,19 @@ all: llvm_co clang_co llvm_build
 clean:
 	@echo "    *** Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
+	@$(RM) $(ARGS_RM) $(DIR_LLVM)
 
 # LLVM checkout
 llvm_co:
 	@echo "    *** Checking out LLVM sources"
-	@$(SVN) $(ARGS_SVN_CO) $(REPOS_LLVM) $(DIR_LLVM)
+	@if [ ! -d $(DIR_LLVM) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_LLVM) $(DIR_LLVM); fi
 
 # Clang checkout
 clang_co:
 	@echo "    *** Checking out Clang sources"
-	@$(SVN) $(ARGS_SVN_CO) $(REPOS_CLANG) $(DIR_CLANG)
+	@if [ ! -d $(DIR_CLANG) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CLANG) $(DIR_CLANG); fi
 
 # LLVM build
 llvm_build:
 	@echo "    *** Building LLVM toolchain"
+	@$(CD) $(DIR_BUILD) && ../$(DIR_LLVM)configure --prefix=$(PREFIX)
