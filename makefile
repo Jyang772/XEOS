@@ -91,6 +91,7 @@ DIR_SRC_BOOT_INC    = $(DIR_SRC_BOOT)include/
 DIR_SRC_CORE        = $(DIR_SRC)core/
 DIR_SRC_CORE_INC    = $(DIR_SRC_CORE)include/
 DIR_SW              = ./sw/
+DIR_LLVM            = ./lllvm/
 
 #-------------------------------------------------------------------------------
 # Resources
@@ -123,7 +124,7 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean test boot core cross _mbr _mount _copy _umount
+.PHONY: all clean test boot core cross llvm _mbr _mount _copy _umount
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -158,6 +159,11 @@ core:
 cross:
 	@echo "    *** Building the cross-compiler"
 	@cd $(DIR_SW) && $(MAKE)
+
+# Builds the cross-compiler
+llvm:
+	@echo "    *** Building the cross-compiler"
+	@cd $(DIR_LLVM) && $(MAKE)
 	
 # Copies the MBR to the floppy image
 _mbr:
