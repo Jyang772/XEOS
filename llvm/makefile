@@ -67,8 +67,8 @@ REPOS_CLANG         = http://llvm.org/svn/llvm-project/cfe/trunk
 #-------------------------------------------------------------------------------
 
 DIR_BUILD           = ./build/
-DIR_LLVM            = ./src/
-DIR_CLANG           = ./src/tools/clang
+DIR_LLVM            = ./src/llvm/
+DIR_CLANG           = $(DIR_LLVM)clang
 
 #-------------------------------------------------------------------------------
 # Built-in targets
