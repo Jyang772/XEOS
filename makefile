@@ -91,7 +91,7 @@ DIR_SRC_BOOT_INC    = $(DIR_SRC_BOOT)include/
 DIR_SRC_CORE        = $(DIR_SRC)core/
 DIR_SRC_CORE_INC    = $(DIR_SRC_CORE)include/
 DIR_SW              = ./sw/
-DIR_LLVM            = ./lllvm/
+DIR_LLVM            = ./llvm/
 
 #-------------------------------------------------------------------------------
 # Resources
