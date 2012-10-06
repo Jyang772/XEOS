@@ -15,7 +15,6 @@
 		05AFEDFA1620F27C00740041 /* boot1.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = boot1.s; sourceTree = "<group>"; };
 		05AFEDFB1620F27C00740041 /* boot2.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = boot2.s; sourceTree = "<group>"; };
 		05AFEDFD1620F27C00740041 /* bios.int.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = bios.int.inc.s; sourceTree = "<group>"; };
-		05AFEDFE1620F27C00740041 /* bios.llds.inc.16.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = bios.llds.inc.16.asm; sourceTree = "<group>"; };
 		05AFEDFF1620F27C00740041 /* bios.video.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = bios.video.inc.16.s; sourceTree = "<group>"; };
 		05AFEE001620F27C00740041 /* xeos.a20.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.a20.inc.16.s; sourceTree = "<group>"; };
 		05AFEE011620F27C00740041 /* xeos.ascii.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.ascii.inc.s; sourceTree = "<group>"; };
@@ -120,7 +119,6 @@
 		05AFEE751620F27C00740041 /* kernel_interrupt_simd_floating_point_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_simd_floating_point_exception.c; sourceTree = "<group>"; };
 		05AFEE761620F27C00740041 /* kernel_interrupt_stack_fault_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_stack_fault_exception.c; sourceTree = "<group>"; };
 		05AFEE771620F27C00740041 /* kernel_interrupt_syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_syscall.c; sourceTree = "<group>"; };
-		05AFEE781620F27C00740041 /* kernel_init.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = kernel_init.asm; sourceTree = "<group>"; };
 		05AFEE791620F27C00740041 /* kernel_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_main.c; sourceTree = "<group>"; };
 		05AFEE7A1620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEE7C1620F27C00740041 /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
@@ -260,6 +258,8 @@
 		05AFEF0F1620F27C00740041 /* linker.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linker.ld; sourceTree = "<group>"; };
 		05AFEF101620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
+		05AFEF131620FA0B00740041 /* bios.llds.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = bios.llds.inc.16.s; sourceTree = "<group>"; };
+		05AFEF141620FA2700740041 /* kernel_init.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_init.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -327,7 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				05AFEDFD1620F27C00740041 /* bios.int.inc.s */,
-				05AFEDFE1620F27C00740041 /* bios.llds.inc.16.asm */,
+				05AFEF131620FA0B00740041 /* bios.llds.inc.16.s */,
 				05AFEDFF1620F27C00740041 /* bios.video.inc.16.s */,
 				05AFEE001620F27C00740041 /* xeos.a20.inc.16.s */,
 				05AFEE011620F27C00740041 /* xeos.ascii.inc.s */,
@@ -513,7 +513,7 @@
 				05AFEE5B1620F27C00740041 /* __video.c */,
 				05AFEE5C1620F27C00740041 /* include */,
 				05AFEE621620F27C00740041 /* interrupts */,
-				05AFEE781620F27C00740041 /* kernel_init.asm */,
+				05AFEF141620FA2700740041 /* kernel_init.s */,
 				05AFEE791620F27C00740041 /* kernel_main.c */,
 				05AFEE7A1620F27C00740041 /* Makefile */,
 				05AFEE7B1620F27C00740041 /* syscalls */,
