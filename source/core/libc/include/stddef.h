@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) <YEAR>, <OWNER>
+ * Copyright (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
  * All rights reserved.
  * 
  * XEOS Software License - Version 1.0 - December 21, 2012
