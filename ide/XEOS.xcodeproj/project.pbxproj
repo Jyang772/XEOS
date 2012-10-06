@@ -259,12 +259,14 @@
 		05AFEF0E1620F27C00740041 /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
 		05AFEF0F1620F27C00740041 /* linker.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linker.ld; sourceTree = "<group>"; };
 		05AFEF101620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		05AFEDB01620F26400740041 = {
 			isa = PBXGroup;
 			children = (
+				05AFEF121620F8F700740041 /* LICENSE.txt */,
 				05AFEDD81620F27C00740041 /* Makefile */,
 				05AFEDD91620F27C00740041 /* README.md */,
 				05AFEDDA1620F27C00740041 /* software-deps */,
