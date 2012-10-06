@@ -53,7 +53,6 @@ ARGS_RM             = -rf
 
 DIR_LLVM            = ./llvm/
 DIR_GCC             = ./gcc/
-DIR_QEMU            = ./qemu/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -78,7 +77,7 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean llvm gcc qemu
+.PHONY: all clean llvm gcc
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -102,8 +101,3 @@ llvm:
 gcc:
 	@echo "    *** Building GCC"
 	@cd $(DIR_GCC) && $(MAKE)
-	
-# QEMU
-qemu:
-	@echo "    *** Building QEMU"
-	@cd $(DIR_QEMU) && $(MAKE)

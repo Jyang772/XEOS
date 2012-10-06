@@ -63,6 +63,7 @@ ARGS_SVN_CO         = checkout
 
 REPOS_LLVM          = http://llvm.org/svn/llvm-project/llvm/trunk
 REPOS_CLANG         = http://llvm.org/svn/llvm-project/cfe/trunk
+REPOS_CRT           = http://llvm.org/svn/llvm-project/compiler-rt/trunk
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -70,21 +71,22 @@ REPOS_CLANG         = http://llvm.org/svn/llvm-project/cfe/trunk
 
 DIR_BUILD           = ./build/
 DIR_LLVM            = ./src/llvm/
-DIR_CLANG           = $(DIR_LLVM)clang
+DIR_CLANG           = $(DIR_LLVM)tools/clang/
+DIR_CRT             = $(DIR_LLVM)projects/compiler-rt/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean
+.PHONY: all clean llvm_co clang_co crt_co llvm_build
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: llvm_co clang_co llvm_build
+all: llvm_co clang_co crt_co llvm_build
 
 # Cleans the build files
 clean:
@@ -102,9 +104,15 @@ clang_co:
 	@echo "    *** Checking out Clang sources"
 	@if [ ! -d $(DIR_CLANG) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CLANG) $(DIR_CLANG); fi
 
+# CRT checkout
+crt_co:
+	@echo "    *** Checking out CRT sources"
+	@if [ ! -d $(DIR_CRT) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CRT) $(DIR_CRT); fi
+
 # LLVM build
 llvm_build:
 	@echo "    *** Building LLVM toolchain"
 	@$(CD) $(DIR_BUILD) && ../$(DIR_LLVM)configure --prefix=$(PREFIX)
 	@$(CD) $(DIR_BUILD) && $(MAKE)
 	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) install
+
