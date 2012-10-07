@@ -98,7 +98,7 @@ REPOS_CRT           = http://llvm.org/svn/llvm-project/compiler-rt/trunk
 #-------------------------------------------------------------------------------
 
 DIR_BUILD           = ./build/
-DIR_LLVM            = ./src/llvm/
+DIR_LLVM            = ./source/llvm/
 DIR_CLANG           = $(DIR_LLVM)tools/clang/
 DIR_CRT             = $(DIR_LLVM)projects/compiler-rt/
 
