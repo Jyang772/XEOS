@@ -84,10 +84,7 @@ CP                  = cp
 RM                  = rm
 DD                  = dd
 MV   				= mv
-MOUNT               = sudo mount
-UMOUNT              = sudo umount
 HDID                = hdid
-EMU                 = /usr/local/xeos-build/qemu/bin/qemu
 
 #-------------------------------------------------------------------------------
 # Software arguments
@@ -97,10 +94,7 @@ ARGS_MAKE           =
 ARGS_CP             = 
 ARGS_RM             = -rf
 ARGS_DD             = conv=notrunc
-ARGS_MOUNT          = -t msdos
 ARGS_HDID           = -nobrowse -nomount
-ARGS_EMU            = -boot order=a -M $(MACHINE) -cpu $(CPU) -vga $(VGA) -smp $(SMP) -m $(RAM) -soundhw $(SOUND) $(ARGS_EMU_LOG)
-ARGS_EMU_LOG        = -d out_asm,in_asm,op,op_opt,int,exec,cpu,pcall,cpu_reset
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -110,16 +104,13 @@ DIR_BUILD           = ./build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/
 DIR_BUILD_BIN_BOOT  = $(DIR_BUILD_BIN)boot/
 DIR_BUILD_BIN_CORE  = $(DIR_BUILD_BIN)core/
-DIR_BUILD_MNT       = $(DIR_BUILD)mount/
 DIR_BUILD_REL       = $(DIR_BUILD)release/
-DIR_RES             = ./res/
-DIR_SRC             = ./src/
+DIR_SRC             = ./source/
 DIR_SRC_BOOT        = $(DIR_SRC)boot/
 DIR_SRC_BOOT_INC    = $(DIR_SRC_BOOT)include/
 DIR_SRC_CORE        = $(DIR_SRC)core/
 DIR_SRC_CORE_INC    = $(DIR_SRC_CORE)include/
-DIR_SW              = ./sw/
-DIR_LLVM            = ./llvm/
+DIR_SW              = ./software-deps/
 
 #-------------------------------------------------------------------------------
 # Resources
@@ -152,7 +143,7 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean test boot core cross llvm _mbr _mount _copy _umount
+.PHONY: all clean boot core _mbr _mount _copy _umount
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -160,12 +151,6 @@ vpath
 
 # Build the full project
 all: boot core _mbr _mount _copy _umount
-	
-# Tests the OS by launching the emulator
-test:
-	@echo "    *** Launching the emulator"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(EMU) $(ARGS_EMU) -fda $(FLOPPY))
-	@$(EMU) $(ARGS_EMU) -fda $(FLOPPY)
 
 # Cleans the build files
 clean:
@@ -182,16 +167,6 @@ boot:
 core:
 	@echo "    *** Building the core files"
 	@cd $(DIR_SRC_CORE) && $(MAKE)
-
-# Builds the cross-compiler
-cross:
-	@echo "    *** Building the cross-compiler"
-	@cd $(DIR_SW) && $(MAKE)
-
-# Builds the cross-compiler
-llvm:
-	@echo "    *** Building the cross-compiler"
-	@cd $(DIR_LLVM) && $(MAKE)
 	
 # Copies the MBR to the floppy image
 _mbr:
