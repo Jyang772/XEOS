@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-/* The kernel entry point (from the kernel-init.asm file) */
+/* The kernel entry point (from the kernel-init.s file) */
 ENTRY( XEOS.kernel.init )
 
 /* Setup for the available sections */

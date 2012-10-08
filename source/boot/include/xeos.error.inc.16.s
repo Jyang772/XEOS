@@ -72,10 +72,10 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.constants.inc.asm"       ; General constants
-%include "BIOS.int.inc.asm"             ; BIOS interrupts
-%include "BIOS.video.inc.16.asm"        ; BIOS video services
-%include "XEOS.ascii.inc.asm"           ; ASCII table
+%include "XEOS.constants.inc.s"       ; General constants
+%include "BIOS.int.inc.s"             ; BIOS interrupts
+%include "BIOS.video.inc.16.s"        ; BIOS video services
+%include "XEOS.ascii.inc.s"           ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16

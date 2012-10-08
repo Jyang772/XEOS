@@ -82,8 +82,8 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.macros.inc.asm"          ; General macros
-%include "XEOS.video.inc.32.asm"        ; XEOS video services
+%include "XEOS.macros.inc.s"          ; General macros
+%include "XEOS.video.inc.32.s"        ; XEOS video services
 
 ; We are in 32 bits mode
 BITS    32

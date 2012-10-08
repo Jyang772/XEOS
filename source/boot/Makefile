@@ -84,14 +84,14 @@ ARGS_RM             = -rf
 
 DIR_BUILD           = ../../build/
 DIR_BUILD_BIN       = $(DIR_BUILD)bin/boot/
-DIR_SRC             = ../../src/boot/
+DIR_SRC             = ../../source/boot/
 DIR_SRC_INC         = $(DIR_SRC)include/
 
 #-------------------------------------------------------------------------------
 # File extensions
 #-------------------------------------------------------------------------------
 
-EXT_ASM             = .asm
+EXT_ASM             = .s
 EXT_BIN             = .bin
 
 #-------------------------------------------------------------------------------
@@ -144,6 +144,7 @@ _FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
 
 # Build the full project
 all: $(_FILES_BIN_BUILD)
+	echo $(_FILES_ASM)
 
 # Cleans the build files
 clean:

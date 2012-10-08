@@ -72,9 +72,9 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.macros.inc.asm"          ; General macros
-%include "XEOS.error.inc.16.asm"        ; Error management
-%include "XEOS.ascii.inc.asm"           ; ASCII table
+%include "XEOS.macros.inc.s"          ; General macros
+%include "XEOS.error.inc.16.s"        ; Error management
+%include "XEOS.ascii.inc.s"           ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16

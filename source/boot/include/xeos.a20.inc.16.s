@@ -87,10 +87,10 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.macros.inc.asm"          ; General macros
-%include "BIOS.int.inc.asm"             ; BIOS interrupts
-%include "BIOS.video.inc.16.asm"        ; BIOS video services
-%include "XEOS.error.inc.16.asm"        ; Error management
+%include "XEOS.macros.inc.s"          ; General macros
+%include "BIOS.int.inc.s"             ; BIOS interrupts
+%include "BIOS.video.inc.16.s"        ; BIOS video services
+%include "XEOS.error.inc.16.s"        ; Error management
 
 ; We are in 16 bits mode
 ;BITS    16

@@ -72,12 +72,12 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.constants.inc.asm"       ; General constants
-%include "XEOS.macros.inc.asm"          ; General macros
-%include "BIOS.int.inc.asm"             ; BIOS interrupts
-%include "XEOS.error.inc.16.asm"        ; Error management
-%include "XEOS.ascii.inc.asm"           ; ASCII table
-%include "BIOS.llds.inc.16.asm"         ; BIOS low-level disk services
+%include "XEOS.constants.inc.s"       ; General constants
+%include "XEOS.macros.inc.s"          ; General macros
+%include "BIOS.int.inc.s"             ; BIOS interrupts
+%include "XEOS.error.inc.16.s"        ; Error management
+%include "XEOS.ascii.inc.s"           ; ASCII table
+%include "BIOS.llds.inc.16.s"         ; BIOS low-level disk services
 
 ; We are in 16 bits mode
 BITS    16

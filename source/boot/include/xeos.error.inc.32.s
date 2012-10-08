@@ -73,8 +73,8 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "BIOS.video.inc.16.asm"        ; XEOS video services
-%include "XEOS.ascii.inc.asm"           ; ASCII table
+%include "BIOS.video.inc.16.s"        ; XEOS video services
+%include "XEOS.ascii.inc.s"           ; ASCII table
 
 ; We are in 32 bits mode
 BITS    32

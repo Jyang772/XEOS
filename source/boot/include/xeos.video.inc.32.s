@@ -66,7 +66,7 @@
 ; 
 ; Those procedures and macros are intended to be used only in 32 bits protected
 ; mode. In real mode, please use the macros and procedures from the
-; 'BIOS-VIDEO.ASM' file.
+; 'bios.video.inc.16.s' file.
 ;-------------------------------------------------------------------------------
 
 %ifndef __XEOS_VIDEO_INC_32_ASM__
@@ -75,8 +75,8 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.macros.inc.asm"          ; General macros
-%include "XEOS.crt.controller.inc.asm"  ; CRT microcontroller
+%include "XEOS.macros.inc.s"          ; General macros
+%include "XEOS.crt.controller.inc.s"  ; CRT microcontroller
 
 ; We are in 32 bits mode
 BITS    32

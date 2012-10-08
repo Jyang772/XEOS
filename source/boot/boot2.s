@@ -77,8 +77,8 @@
 ; 
 ; Examples:
 ; 
-;       - nasm -f bin -o [boot.flp] [boot.asm]
-;       - yasm -f bin -o [boot.flp] [boot.asm]
+;       - nasm -f bin -o [boot.flp] [boot.s]
+;       - yasm -f bin -o [boot.flp] [boot.s]
 ;-------------------------------------------------------------------------------
 
 ; We are in 16 bits real mode
@@ -98,16 +98,16 @@ jmp     XEOS.boot.stage2
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.constants.inc.asm"       ; General constants
-%include "XEOS.macros.inc.asm"          ; General macros
-%include "BIOS.int.inc.asm"             ; BIOS interrupts
-%include "BIOS.video.inc.16.asm"        ; BIOS video services
-%include "BIOS.llds.inc.16.asm"         ; BIOS low-level disk services
-%include "XEOS.io.fat12.inc.16.asm"     ; FAT-12 IO procedures
-%include "XEOS.ascii.inc.asm"           ; ASCII table
-%include "XEOS.gdt.inc.asm"             ; GDT - Global Descriptor Table
-%include "XEOS.a20.inc.16.asm"          ; 20th address line enabling
-%include "XEOS.elf.inc.16.asm"          ; ELF support
+%include "XEOS.constants.inc.s"       ; General constants
+%include "XEOS.macros.inc.s"          ; General macros
+%include "BIOS.int.inc.s"             ; BIOS interrupts
+%include "BIOS.video.inc.16.s"        ; BIOS video services
+%include "BIOS.llds.inc.16.s"         ; BIOS low-level disk services
+%include "XEOS.io.fat12.inc.16.s"     ; FAT-12 IO procedures
+%include "XEOS.ascii.inc.s"           ; ASCII table
+%include "XEOS.gdt.inc.s"             ; GDT - Global Descriptor Table
+%include "XEOS.a20.inc.16.s"          ; 20th address line enabling
+%include "XEOS.elf.inc.16.s"          ; ELF support
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros

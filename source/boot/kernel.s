@@ -77,8 +77,8 @@
 ; 
 ; Examples:
 ; 
-;       - nasm -f bin -o [boot.flp] [boot.asm]
-;       - yasm -f bin -o [boot.flp] [boot.asm]
+;       - nasm -f bin -o [boot.flp] [boot.s]
+;       - yasm -f bin -o [boot.flp] [boot.s]
 ;-------------------------------------------------------------------------------
 
 ; Location at which we were loaded by the second stage bootloader (1MB)
@@ -93,11 +93,11 @@ jmp     XEOS.kernel
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.video.inc.32.asm"        ; XEOS video services
-%include "XEOS.ascii.inc.asm"           ; ASCII table
-%include "XEOS.gdt.inc.asm"             ; GDT - Global Descriptor Table
-%include "XEOS.error.inc.32.asm"        ; Error management
-%include "XEOS.smbios.inc.32.asm"       ; SMBIOS
+%include "XEOS.video.inc.32.s"        ; XEOS video services
+%include "XEOS.ascii.inc.s"           ; ASCII table
+%include "XEOS.gdt.inc.s"             ; GDT - Global Descriptor Table
+%include "XEOS.error.inc.32.s"        ; Error management
+%include "XEOS.smbios.inc.32.s"       ; SMBIOS
 
 ; Prints a new line with a message, prefixed by the prompt
 %macro @XEOS.kernel.print 1

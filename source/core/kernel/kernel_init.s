@@ -77,8 +77,8 @@
 ; 
 ; Examples:
 ; 
-;       - nasm -f elf -o [boot.flp] [boot.asm]
-;       - yasm -f elf -o [boot.flp] [boot.asm]
+;       - nasm -f elf -o [boot.flp] [boot.s]
+;       - yasm -f elf -o [boot.flp] [boot.s]
 ;-------------------------------------------------------------------------------
 
 ; We are in 32 bits mode

@@ -80,8 +80,8 @@
 ; 
 ; Examples:
 ; 
-;       - nasm -f bin -o [boot.flp] [boot.asm]
-;       - yasm -f bin -o [boot.flp] [boot.asm]
+;       - nasm -f bin -o [boot.flp] [boot.s]
+;       - yasm -f bin -o [boot.flp] [boot.s]
 ; 
 ; It can then be copied to a floppy disk image (as it contains a valid MBR):
 ; 
@@ -98,7 +98,7 @@ BITS    16
 
 ; Includes the FAT-12 MBR, so the beginning of the binary will be a valid
 ; FAT-12 floppy drive
-%include "XEOS.mbr.fat12.inc.16.asm"
+%include "XEOS.mbr.fat12.inc.16.s"
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
@@ -133,12 +133,12 @@ XEOS.boot.stage1:
     ;
     ; Placed here to avoid problems with the MBR short jump.
     ;---------------------------------------------------------------------------
-    %include "XEOS.macros.inc.asm"      ; General macros
-    %include "XEOS.io.fat12.inc.16.asm" ; FAT-12 IO procedures
-    %include "BIOS.int.inc.asm"         ; BIOS interrupts
-    %include "BIOS.video.inc.16.asm"    ; BIOS video services
-    %include "BIOS.llds.inc.16.asm"     ; BIOS low-level disk services
-    %include "XEOS.ascii.inc.asm"       ; ASCII table
+    %include "XEOS.macros.inc.s"      ; General macros
+    %include "XEOS.io.fat12.inc.16.s" ; FAT-12 IO procedures
+    %include "BIOS.int.inc.s"         ; BIOS interrupts
+    %include "BIOS.video.inc.16.s"    ; BIOS video services
+    %include "BIOS.llds.inc.16.s"     ; BIOS low-level disk services
+    %include "XEOS.ascii.inc.s"       ; ASCII table
     
     ; We are redefining 'XEOS.boot.stage1', as the include files are declaring
     ; global procedures

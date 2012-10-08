@@ -103,7 +103,7 @@ PATH               := /usr/local/xeos-build/gcc/i386-elf/bin:$(PATH)
 # File extensions
 #-------------------------------------------------------------------------------
 
-EXT_ASM             = .asm
+EXT_ASM             = .s
 EXT_C               = .c
 EXT_H               = .h
 EXT_OBJ             = .o
