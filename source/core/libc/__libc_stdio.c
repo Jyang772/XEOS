@@ -223,7 +223,7 @@ int __libc_stdio_printf( const char * format, va_list arg, FILE * stream, char *
             }
             else
             {
-                extra = __libc_stdio_printf_examine( &format, stream, s, &arg, count );
+                extra = __libc_stdio_printf_examine( &format, stream, s, ( va_list * )&arg, count );
                 count += extra;
                 
                 if( s != NULL )
