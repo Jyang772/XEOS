@@ -212,4 +212,4 @@ clean:
 $(DIR_BUILD_OBJ)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	@echo "    *** Compiling C file $< into $@"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $<)
-	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $<
+	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $(abspath $<)

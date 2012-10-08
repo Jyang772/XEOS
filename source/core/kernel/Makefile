@@ -196,10 +196,10 @@ clean:
 $(DIR_BUILD_OBJ)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
 	@echo "    *** Compiling assembly file $< into $@"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ)$(@F) $<)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ)$(@F) $<
+	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ)$(@F) $(abspath $<)
 	
 # Compiles an C file
 $(DIR_BUILD_OBJ)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	@echo "    *** Compiling C file $< into $@"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $<)
-	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $<
+	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $(abspath $<)
