@@ -75,6 +75,7 @@ MAKE                = make
 SVN                 = svn
 CD                  = cd
 SUDO                = sudo
+GCC_TOOLCHAIN       = /usr/local/xeos-build/gcc
 
 #-------------------------------------------------------------------------------
 # Software arguments
@@ -140,7 +141,7 @@ crt_co:
 # LLVM build
 llvm_build:
 	@echo "    *** Building LLVM toolchain"
-	@$(CD) $(DIR_BUILD) && ../$(DIR_LLVM)configure --prefix=$(PREFIX) --with-gcc-toolchain=/usr/local/xeos-build/gcc
+	@$(CD) $(DIR_BUILD) && ../$(DIR_LLVM)configure --prefix=$(PREFIX) --with-gcc-toolchain=$(GCC_TOOLCHAIN)
 	@$(CD) $(DIR_BUILD) && $(MAKE)
 	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) install
 

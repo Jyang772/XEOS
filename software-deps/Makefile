@@ -112,7 +112,7 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: llvm gcc
+all: gcc llvm
 
 # Cleans the build files
 clean:
