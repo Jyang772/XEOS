@@ -150,7 +150,7 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: boot core _mbr _mount _copy _umount
+all: boot core
 
 # Cleans the build files
 clean:
