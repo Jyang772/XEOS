@@ -125,7 +125,7 @@ XEOS.io.fat12.readSectors:
     ; Resets the floppy controller
     call    BIOS.llds.resetFloppyDrive
     
-    @XEOS.reg.save
+    @XEOS.reg.restore
     
     ; Increases the number of read tries
     inc     di

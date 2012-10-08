@@ -214,7 +214,7 @@ XEOS.boot.stage1:
 ; Strings
 XEOS.files.stage2           db  'BOOT2   BIN'
 XEOS.boot.stage1.greet      db  $ASCII.NL,\
-                                'XEOS...',\
+                                'Booting XEOS...',\
                                 $ASCII.NL, $ASCII.NUL
 
 ;-------------------------------------------------------------------------------
