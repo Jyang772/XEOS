@@ -144,7 +144,6 @@ _FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
 
 # Build the full project
 all: $(_FILES_BIN_BUILD)
-	echo $(_FILES_ASM)
 
 # Cleans the build files
 clean:
