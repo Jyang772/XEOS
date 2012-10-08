@@ -69,7 +69,7 @@ DEBUG               = 1
 #-------------------------------------------------------------------------------
 
 AS                  = nasm
-CC                  = /usr/local/xeos-build/gcc/bin/i386-elf-gcc
+CC                  = /usr/local/xeos-build/llvm/bin/clang
 LD                  = /usr/local/xeos-build/binutils/bin/i386-elf-ld
 RM                  = rm
 
@@ -78,7 +78,7 @@ RM                  = rm
 #-------------------------------------------------------------------------------
 
 ARGS_AS             = -f elf -I $(DIR_SRC_INC)
-ARGS_CC             = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -nostdlib -nostartfiles -nodefaultlibs -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
+ARGS_CC             = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=i386 -ccc-host-triple i386-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
 ARGS_LD             = 
 ARGS_RM             = -rf
 
