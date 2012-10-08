@@ -71,9 +71,10 @@ void __hal_idt_load( void )
 {
     __asm__
     (
+        "\n"
         "lidt (%[ptr])"
         
         : 
-        : [ ptr ] "p" ( ( char * )&__hal_idt_ptr )
+        : [ ptr ] "r" ( &__hal_idt_ptr )
     );
 }

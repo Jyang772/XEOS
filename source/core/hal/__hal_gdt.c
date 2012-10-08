@@ -74,6 +74,6 @@ void __hal_gdt_load( void )
         "lgdt (%[ptr])"
         
         : 
-        : [ ptr ] "p" ( ( char * )&__hal_gdt_ptr )
+        : [ ptr ] "r" ( &__hal_gdt_ptr )
     );
 }
