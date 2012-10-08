@@ -61,7 +61,8 @@
 
 /* $Id$ */
 
-#include <xeos/xeos.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include "private/video.h"
 
 void kernel_video_vprintf( char * format, va_list arg )
@@ -102,7 +103,7 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_int = va_arg( arg, int );
                         
-                        itoa( va_int, nbuf, 10 );
+                        kernel_video_itoa( va_int, nbuf, 10 );
                         kernel_video_print( nbuf );
                         break;
                     
@@ -110,7 +111,7 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_double = va_arg( arg, double );
                         
-                        itoa( ( int )va_double, nbuf, 10 );
+                        kernel_video_itoa( ( int )va_double, nbuf, 10 );
                         kernel_video_print( nbuf );
                         break;
                         
@@ -119,7 +120,7 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_uint = va_arg( arg, unsigned int );
                         
-                        utoa( va_uint, nbuf, 16 );
+                        kernel_video_utoa( va_uint, nbuf, 16 );
                         kernel_video_print( "0x" );
                         kernel_video_print( nbuf );
                         break;
@@ -128,7 +129,7 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_uint = va_arg( arg, unsigned int );
                         
-                        utoa( va_uint, nbuf, 8 );
+                        kernel_video_utoa( va_uint, nbuf, 8 );
                         kernel_video_print( "0" );
                         kernel_video_print( nbuf );
                         break;
@@ -137,7 +138,7 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_uint = va_arg( arg, unsigned int );
                         
-                        utoa( va_uint, nbuf, 10 );
+                        kernel_video_utoa( va_uint, nbuf, 10 );
                         kernel_video_print( nbuf );
                         break;
                         
@@ -168,7 +169,7 @@ void kernel_video_vprintf( char * format, va_list arg )
                         
                         va_uint_ptr = va_arg( arg, uintptr_t );
                         
-                        utoa( va_uint_ptr, nbuf, 16 );
+                        kernel_video_utoa( va_uint_ptr, nbuf, 16 );
                         kernel_video_print( "0x" );
                         kernel_video_print( nbuf );
                         break;

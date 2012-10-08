@@ -62,7 +62,6 @@
 /* $Id$ */
 
 #include <hal/hal.h>
-#include <xeos/xeos.h>
 
 #include "private/video.h"
 
@@ -76,8 +75,8 @@ void kernel_video_cursor_move( unsigned int x, unsigned int y )
     __kernel_video_x = x;
     __kernel_video_y = y;
     
-    x          = MIN( x, KERNEL_VIDEO_COLS - 1 );
-    y          = MIN( y, KERNEL_VIDEO_ROWS - 1 );
+    x          = ( x < KERNEL_VIDEO_COLS - 1 ) ? x : KERNEL_VIDEO_COLS - 1;
+    y          = ( y < KERNEL_VIDEO_ROWS - 1 ) ? y : KERNEL_VIDEO_ROWS - 1;
     cursor_pos = x + ( y * KERNEL_VIDEO_COLS );
     
     hal_io_port_out( CRTC_DATA_REGISTER, CRTC_CURSOR_LOCATION_HIGH );

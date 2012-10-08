@@ -114,6 +114,9 @@ void kernel_video_printf( char * format, ... );
 void kernel_video_vprintf( char * format, va_list arg );
 void kernel_video_putc( char c, bool update_cursor );
 void kernel_video_scroll( unsigned int n );
+void kernel_video_str_reverse( char s[] );
+void kernel_video_itoa( int n, char s[], int radix );
+void kernel_video_utoa( unsigned int n, char s[], int radix );
 
 #ifdef __cplusplus
 }

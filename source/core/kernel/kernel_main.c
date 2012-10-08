@@ -31,8 +31,8 @@
 
 /* $Id$ */
 
+#include <stdlib.h>
 #include <hal/hal.h>
-#include <xeos/xeos.h>
 #include "private/video.h"
 #include "private/interrupts.h"
 #include "system.h"

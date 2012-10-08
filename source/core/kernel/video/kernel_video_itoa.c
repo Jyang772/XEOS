@@ -61,16 +61,43 @@
 
 /* $Id$ */
 
-/* Video attribute byte */
-unsigned char __kernel_video_attr = 0x00;
+#include "private/video.h"
 
-/* Cursor position */
-unsigned int __kernel_video_x     = 0x00;
-unsigned int __kernel_video_y     = 0x00;
+extern char __kernel_video_hex_chars[];
 
-/* Hexadecimal characters */
-char __kernel_video_hex_chars[] =
+void kernel_video_itoa( int n, char s[], int radix )
 {
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    'A', 'B', 'C', 'D', 'E', 'F'
-};
+    unsigned int i;
+    int          sign;
+    
+    if( radix > 16 )
+    {
+        radix = 16;
+    }
+    else if( radix < 2 )
+    {
+        radix = 10;
+    }
+    
+    if( ( sign = n ) < 0 )
+    {
+        n = -n;
+    }
+    
+    i = 0;
+    
+    do
+    {
+        s[ i++ ] = __kernel_video_hex_chars[ n % radix ];
+    }
+    while( ( n /= radix ) > 0 );
+    
+    if( sign < 0 )
+    {
+        s[ i++ ] = '-';
+    }
+    
+    s[ i ] = '\0';
+    
+    kernel_video_str_reverse( s );
+}

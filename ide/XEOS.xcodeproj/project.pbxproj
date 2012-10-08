@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		05AFEDE71620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -260,6 +261,8 @@
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05AFEF131620FA0B00740041 /* bios.llds.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = bios.llds.inc.16.s; sourceTree = "<group>"; };
 		05AFEF141620FA2700740041 /* kernel_init.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_init.s; sourceTree = "<group>"; };
+		05DABB30162209D700DA8F66 /* kernel_video_itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_itoa.c; sourceTree = "<group>"; };
+		05DABB31162209E300DA8F66 /* kernel_video_utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_utoa.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -593,6 +596,7 @@
 				05AFEE811620F27C00740041 /* kernel_video_cursor_move.c */,
 				05AFEE821620F27C00740041 /* kernel_video_cursor_x.c */,
 				05AFEE831620F27C00740041 /* kernel_video_cursor_y.c */,
+				05DABB30162209D700DA8F66 /* kernel_video_itoa.c */,
 				05AFEE841620F27C00740041 /* kernel_video_print.c */,
 				05AFEE851620F27C00740041 /* kernel_video_printf.c */,
 				05AFEE861620F27C00740041 /* kernel_video_prompt.c */,
@@ -601,6 +605,8 @@
 				05AFEE891620F27C00740041 /* kernel_video_scroll.c */,
 				05AFEE8A1620F27C00740041 /* kernel_video_set_bg.c */,
 				05AFEE8B1620F27C00740041 /* kernel_video_set_fg.c */,
+				055B2E0016236232001FE307 /* kernel_video_str_reverse.c */,
+				05DABB31162209E300DA8F66 /* kernel_video_utoa.c */,
 				05AFEE8C1620F27C00740041 /* kernel_video_vprintf.c */,
 			);
 			path = video;
@@ -822,6 +828,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../;
 			dependencies = (
 			);
 			name = XEOS;

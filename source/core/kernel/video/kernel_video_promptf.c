@@ -61,7 +61,6 @@
 
 /* $Id$ */
 
-#include <xeos/xeos.h>
 #include "private/video.h"
 
 void kernel_video_promptf( char * format, ... )

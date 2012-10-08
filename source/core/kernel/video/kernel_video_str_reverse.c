@@ -61,16 +61,23 @@
 
 /* $Id$ */
 
-/* Video attribute byte */
-unsigned char __kernel_video_attr = 0x00;
+#include "private/video.h"
+#include <string.h>
 
-/* Cursor position */
-unsigned int __kernel_video_x     = 0x00;
-unsigned int __kernel_video_y     = 0x00;
-
-/* Hexadecimal characters */
-char __kernel_video_hex_chars[] =
+void kernel_video_str_reverse( char s[] )
 {
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    'A', 'B', 'C', 'D', 'E', 'F'
-};
+    int i;
+    int j;
+    char c;
+    
+    j = strlen( s ) - 1;
+    
+    for( i = 0; i < j; i++ )
+    {
+        c      = s[ i ];
+        s[ i ] = s[ j ];
+        s[ j ] = c;
+        
+        j--;
+    }
+}
