@@ -80,7 +80,7 @@ ARGS_RM             = -rf
 #-------------------------------------------------------------------------------
 
 DIR_LLVM            = ./llvm/
-DIR_GCC             = ./gcc/
+DIR_BINUTILS        = ./binutils/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -105,27 +105,26 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean llvm gcc
+.PHONY: all clean binutils llvm
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: gcc llvm
+all: binutils llvm
 
 # Cleans the build files
 clean:
 	@cd $(DIR_LLVM) && $(MAKE) clean
-	@cd $(DIR_GCC) && $(MAKE) clean
-	@cd $(DIR_QEMU) && $(MAKE) clean
+	@cd $(DIR_BINUTILS) && $(MAKE) clean
 	
 # LLVM
 llvm:
-	@echo "    *** Building LLVM"
+	@echo "    *** Building Clang/LLVM"
 	@cd $(DIR_LLVM) && $(MAKE)
 	
 # GCC
-gcc:
-	@echo "    *** Building GCC"
-	@cd $(DIR_GCC) && $(MAKE)
+binutils:
+	@echo "    *** Building GNU BinUtils"
+	@cd $(DIR_BINUTILS) && $(MAKE)
