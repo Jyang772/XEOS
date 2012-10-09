@@ -68,25 +68,32 @@ DEBUG               = 0
 # Software
 #-------------------------------------------------------------------------------
 
-CC                  = /usr/local/xeos-build/llvm/bin/clang
-LD                  = /usr/local/xeos-build/binutils/bin/i386-elf-ld
+CC_32               = /usr/local/xeos-build/llvm/bin/clang
+CC_64               = /usr/local/xeos-build/llvm/bin/clang
+LD_32               = /usr/local/xeos-build/binutils/bin/i386-elf-ld
+LD_64               = /usr/local/xeos-build/binutils/bin/x86_64-elf-ld
 RM                  = rm
 
 #-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_CC             = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=i386 -ccc-host-triple i386-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
-ARGS_LD             = 
+ARGS_CC_32          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=i386 -ccc-host-triple i386-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
+ARGS_CC_64          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=x86-64 -ccc-host-triple x86_64-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
+ARGS_LD_32          = 
+ARGS_LD_64          = 
 ARGS_RM             = -rf
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD           = ../../../build/core/i386/
-DIR_BUILD_BIN       = $(DIR_BUILD)core/
-DIR_BUILD_OBJ       = $(DIR_BUILD)obj/hal/
+DIR_BUILD_32        = ../../../build/core/i386/
+DIR_BUILD_64        = ../../../build/core/x86_64/
+DIR_BUILD_BIN_32    = $(DIR_BUILD_32)core/
+DIR_BUILD_BIN_64    = $(DIR_BUILD_64)core/
+DIR_BUILD_OBJ_32    = $(DIR_BUILD_32)obj/hal/
+DIR_BUILD_OBJ_64    = $(DIR_BUILD_64)obj/hal/
 DIR_SRC             = ./
 DIR_SRC_CPU         = $(DIR_SRC)cpu/
 DIR_SRC_IDT         = $(DIR_SRC)idt/
@@ -95,7 +102,7 @@ DIR_SRC_SMBIOS      = $(DIR_SRC)smbios/
 DIR_SRC_INC         = $(DIR_SRC)include/
 DIR_INC             = $(DIR_SRC)../include/
 PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
-PATH               := /usr/local/xeos-build/gcc/i386-elf/bin:$(PATH)
+PATH               := /usr/local/xeos-build/binutils/x86_64-elf/bin:$(PATH)
 
 #-------------------------------------------------------------------------------
 # File extensions
@@ -158,11 +165,11 @@ _FILES_C_OBJ_IO           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_I
 _FILES_C_OBJ_SMBIOS       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SMBIOS))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD        = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_CPU    = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_CPU))
-_FILES_C_OBJ_BUILD_IDT    = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_IDT))
-_FILES_C_OBJ_BUILD_IO     = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_IO))
-_FILES_C_OBJ_BUILD_SMBIOS = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SMBIOS))
+_FILES_C_OBJ_BUILD        = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_CPU    = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_CPU))
+_FILES_C_OBJ_BUILD_IDT    = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_IDT))
+_FILES_C_OBJ_BUILD_IO     = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_IO))
+_FILES_C_OBJ_BUILD_SMBIOS = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_SMBIOS))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -170,6 +177,9 @@ _FILES_C_OBJ_BUILD_SMBIOS = $(addprefix $(DIR_BUILD_OBJ),$(_FILES_C_OBJ_SMBIOS))
 
 # Declaration for phony targets, to avoid problems with local files
 .PHONY: all clean
+
+# Declaration for precious targets, to avoid cleaning of intermediate files
+.PRECIOUS: $(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -181,11 +191,22 @@ all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CPU) $(_FILES_C_OBJ_BUILD_IDT) $
 # Cleans the build files
 clean:
 	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ)*
-	
-# Compiles an C file
-$(DIR_BUILD_OBJ)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	@echo "    *** Compiling C file $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $<)
-	@$(CC) $(ARGS_CC) -o $(DIR_BUILD_OBJ)$(@F) -c $(abspath $<)
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*)
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*
+    
+# Compiles a C file (64 bits)
+$(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	@echo "    *** Compiling C file (64 bits) $< into $@"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $<)
+	@$(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $(abspath $<)
+
+# Targets with second expansion
+.SECONDEXPANSION:
+
+# Compiles a C file (32 bits)
+$(DIR_BUILD_OBJ_32)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)
+	@echo "    *** Compiling C file (32 bits) $< into $@"
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $<)
+	@$(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $(abspath $<)
