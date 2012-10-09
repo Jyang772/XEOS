@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		05AFEDE71620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDF41620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDF71620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDFA1620F27C00740041 /* boot1.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = boot1.s; sourceTree = "<group>"; };
@@ -266,6 +266,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		0511119016249A0200966E40 /* binutils */ = {
+			isa = PBXGroup;
+			children = (
+				05111DB516249A0500966E40 /* Makefile */,
+			);
+			path = binutils;
+			sourceTree = "<group>";
+		};
 		05AFEDB01620F26400740041 = {
 			isa = PBXGroup;
 			children = (
@@ -280,20 +288,12 @@
 		05AFEDDA1620F27C00740041 /* software-deps */ = {
 			isa = PBXGroup;
 			children = (
-				05AFEDDB1620F27C00740041 /* gcc */,
+				0511119016249A0200966E40 /* binutils */,
 				05AFEDF11620F27C00740041 /* llvm */,
 				05AFEDF71620F27C00740041 /* Makefile */,
 			);
 			name = "software-deps";
 			path = "../software-deps";
-			sourceTree = "<group>";
-		};
-		05AFEDDB1620F27C00740041 /* gcc */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEDE71620F27C00740041 /* Makefile */,
-			);
-			path = gcc;
 			sourceTree = "<group>";
 		};
 		05AFEDF11620F27C00740041 /* llvm */ = {
