@@ -60,78 +60,71 @@
 # $Id$
 
 #-------------------------------------------------------------------------------
+# Build settings
+#-------------------------------------------------------------------------------
+
+PREFIX              = /usr/local/xeos-build
+
+#-------------------------------------------------------------------------------
 # Software
 #-------------------------------------------------------------------------------
 
-MAKE                = make
-CP                  = cp
 RM                  = rm
+TAR                 = tar
+MAKE                = make
 
 #-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_MAKE           = 
-ARGS_CP             = 
 ARGS_RM             = -rf
+ARGS_TAR            = -xf
+ARGS_MAKE           = 
+
+#-------------------------------------------------------------------------------
+# Software versions
+#-------------------------------------------------------------------------------
+
+VERSION_NASM        = 2.10.05
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_NASM            = ./nasm/
-DIR_LLVM            = ./llvm/
-DIR_BINUTILS        = ./binutils/
-
-#-------------------------------------------------------------------------------
-# Search paths
-#-------------------------------------------------------------------------------
-
-# Clear any existing search path
-VPATH =
-vpath
-
-#-------------------------------------------------------------------------------
-# File suffixes
-#-------------------------------------------------------------------------------
-
-# Clears any existing suffix
-.SUFFIXES:
-
-# Adds the suffixes used in this file
-.SUFFIXES:
+DIR_BUILD           = ./build/
+DIR_SRC             = ./source/
+DIR_SRC_NASM        = $(DIR_SRC)nasm-$(VERSION_NASM)
+DIR_DISTRIB         = ./distrib/
+DISTRIB_NASM        = $(DIR_DISTRIB)nasm-$(VERSION_NASM).tar.bz2
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean nasm binutils llvm
+.PHONY: all clean nasm
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: nasm binutils llvm
+all: nasm
 
 # Cleans the build files
 clean:
-	@cd $(DIR_NASM) && $(MAKE) clean
-	@cd $(DIR_LLVM) && $(MAKE) clean
-	@cd $(DIR_BINUTILS) && $(MAKE) clean
-	
-# NASM
+	@echo "    *** Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
+	@echo "    *** Cleaning all temporary files"
+	@$(RM) $(ARGS_RM) $(DIR_SRC)*
+
+# Builds NASM
 nasm:
-	@echo "    *** Building NASM"
-	@cd $(DIR_NASM) && $(MAKE)
-	
-# GNU BinUtils
-binutils:
-	@echo "    *** Building GNU BinUtils"
-	@cd $(DIR_BINUTILS) && $(MAKE)
-	
-# LLVM
-llvm:
-	@echo "    *** Building Clang/LLVM"
-	@cd $(DIR_LLVM) && $(MAKE)
+	@echo "    *** Unpacking NASM ($(VERSION_NASM))"
+	@if [ ! -d $(DIR_SRC_NASM) ]; then $(TAR) $(ARGS_TAR) $(DISTRIB_NASM) -C $(DIR_SRC); fi
+	@echo "    *** Configuring NASM ($(VERSION_NASM))"
+	@cd $(DIR_BUILD) && exec ../$(DIR_SRC_NASM)/configure --prefix=$(PREFIX)/nasm
+	@echo "    *** Compiling NASM ($(VERSION_NASM))"
+	@cd $(DIR_BUILD) && $(MAKE) all
+	@echo "    *** Installing NASM ($(VERSION_NASM))"
+	@cd $(DIR_BUILD) && sudo $(MAKE) install
