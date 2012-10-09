@@ -97,7 +97,7 @@ DIR_BUILD           = ./build/
 DIR_BUILD_32        = $(DIR_BUILD)i386/
 DIR_BUILD_64        = $(DIR_BUILD)x86_64/
 DIR_SRC             = ./source/
-DIR_SRC_BINUTILS    = ./source/binutils-$(VERSION_BINUTILS)
+DIR_SRC_BINUTILS    = $(DIR_SRC)binutils-$(VERSION_BINUTILS)
 DIR_DISTRIB         = ./distrib/
 DISTRIB_BINUTILS    = $(DIR_DISTRIB)binutils-$(VERSION_BINUTILS).tar.bz2
 
