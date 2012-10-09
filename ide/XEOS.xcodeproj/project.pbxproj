@@ -30,7 +30,6 @@
 		05AFEE0A1620F27C00740041 /* xeos.mbr.fat12.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.mbr.fat12.inc.16.s; sourceTree = "<group>"; };
 		05AFEE0B1620F27C00740041 /* xeos.smbios.inc.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.smbios.inc.32.s; sourceTree = "<group>"; };
 		05AFEE0C1620F27C00740041 /* xeos.video.inc.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.video.inc.32.s; sourceTree = "<group>"; };
-		05AFEE0D1620F27C00740041 /* kernel.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel.s; sourceTree = "<group>"; };
 		05AFEE0E1620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEE111620F27C00740041 /* __hal_gdt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __hal_gdt.c; sourceTree = "<group>"; };
 		05AFEE121620F27C00740041 /* __hal_idt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __hal_idt.c; sourceTree = "<group>"; };
@@ -320,7 +319,6 @@
 				05AFEDFA1620F27C00740041 /* boot1.s */,
 				05AFEDFB1620F27C00740041 /* boot2.s */,
 				05AFEDFC1620F27C00740041 /* include */,
-				05AFEE0D1620F27C00740041 /* kernel.s */,
 				05AFEE0E1620F27C00740041 /* Makefile */,
 			);
 			path = boot;

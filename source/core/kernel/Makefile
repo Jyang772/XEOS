@@ -86,9 +86,9 @@ ARGS_RM             = -rf
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD           = ../../../build/
-DIR_BUILD_BIN       = $(DIR_BUILD)bin/core/
-DIR_BUILD_OBJ       = $(DIR_BUILD)obj/core/kernel/
+DIR_BUILD           = ../../../build/core/i386/
+DIR_BUILD_BIN       = $(DIR_BUILD)core/
+DIR_BUILD_OBJ       = $(DIR_BUILD)obj/kernel/
 DIR_SRC             = ./
 DIR_SRC_INTERRUPTS  = $(DIR_SRC)interrupts/
 DIR_SRC_VIDEO       = $(DIR_SRC)video/

@@ -82,9 +82,9 @@ ARGS_LD             = -T linker.ld
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD             = ../../build/
-DIR_BUILD_BIN         = $(DIR_BUILD)bin/core/
-DIR_BUILD_OBJ         = $(DIR_BUILD)obj/core/
+DIR_BUILD             = ../../build/core/i386/
+DIR_BUILD_BIN         = $(DIR_BUILD)bin/
+DIR_BUILD_OBJ         = $(DIR_BUILD)obj/
 DIR_BUILD_OBJ_LIBC    = $(DIR_BUILD_OBJ)libc/
 DIR_BUILD_OBJ_HAL     = $(DIR_BUILD_OBJ)hal/
 DIR_BUILD_OBJ_KERNEL  = $(DIR_BUILD_OBJ)kernel/
@@ -132,7 +132,7 @@ all:
 	@echo "    *** Building the kernel"
 	@cd $(DIR_SRC_KERNEL) && $(MAKE)
 	@echo "    *** Linking the kernel"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.BIN $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_HAL)*)
+	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.ELF $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_HAL)*)
 	@$(LD) $(ARGS_LD) -o $(DIR_BUILD_BIN)KERNEL.ELF $(DIR_BUILD_OBJ_KERNEL)* $(DIR_BUILD_OBJ_LIBC)* $(DIR_BUILD_OBJ_HAL)*
 	
 # Cleans the build files

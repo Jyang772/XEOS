@@ -83,7 +83,7 @@ ARGS_RM             = -rf
 #-------------------------------------------------------------------------------
 
 DIR_BUILD           = ../../build/
-DIR_BUILD_BIN       = $(DIR_BUILD)bin/boot/
+DIR_BUILD_BIN       = $(DIR_BUILD)boot/
 DIR_SRC             = ../../source/boot/
 DIR_SRC_INC         = $(DIR_SRC)include/
 
