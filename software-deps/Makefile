@@ -93,17 +93,17 @@ clean:
 # YASM
 yasm:
 	
-	@echo "    *** Building YASM"
+	@$(PRINT) "    *** Building YASM"
 	@$(CD) $(DIR_YASM) && $(MAKE)
 	
 # GNU BinUtils
 binutils:
 	
-	@echo "    *** Building GNU BinUtils"
+	@$(PRINT) "    *** Building GNU BinUtils"
 	@$(CD) $(DIR_BINUTILS) && $(MAKE)
 	
 # LLVM
 llvm:
 	
-	@echo "    *** Building Clang/LLVM"
+	@$(PRINT) "    *** Building Clang/LLVM"
 	@$(CD) $(DIR_LLVM) && $(MAKE)

@@ -94,24 +94,24 @@ all: yasm
 # Cleans the build files
 clean:
 
-	@echo "    *** Cleaning all build files"
+	@$(PRINT) "    *** Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
 	
-	@echo "    *** Cleaning all temporary files"
+	@$(PRINT) "    *** Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
 
 # Builds YASM
 yasm:
 	
-	@echo "    *** Unpacking YASM ($(VERSION_YASM))"
+	@$(PRINT) "    *** Unpacking YASM ($(VERSION_YASM))"
 	@if [ ! -d $(DIR_SRC_YASM) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_YASM) -C $(DIR_SRC); fi
 
-	@echo "    *** Configuring YASM ($(VERSION_YASM))"
+	@$(PRINT) "    *** Configuring YASM ($(VERSION_YASM))"
 	@$(CD) $(DIR_BUILD) && exec $(DIR_SRC_YASM)/configure --prefix=$(PATH_TOOLCHAIN_YASM)
 
-	@echo "    *** Compiling YASM ($(VERSION_YASM))"
+	@$(PRINT) "    *** Compiling YASM ($(VERSION_YASM))"
 	@$(CD) $(DIR_BUILD) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-	@echo "    *** Installing YASM ($(VERSION_YASM))"
+	@$(PRINT) "    *** Installing YASM ($(VERSION_YASM))"
 	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 	

@@ -84,17 +84,17 @@ clean:
 # Builds the XEOS toolchain
 toolchain:
 	
-	@echo "    *** Building the XEOS toolchain"
+	@$(PRINT) "    *** Building the XEOS toolchain"
 	@$(CD) $(PATH_SW) && $(MAKE)
 
 # Builds the boot files
 boot:
 	
-	@echo "    *** Building the boot files"
+	@$(PRINT) "    *** Building the boot files"
 	@$(CD) $(PATH_SRC_BOOT) && $(MAKE)
 
 # Builds the core files
 core:
 	
-	@echo "    *** Building the core files"
+	@$(PRINT) "    *** Building the core files"
 	@$(CD) $(PATH_SRC_CORE) && $(MAKE)

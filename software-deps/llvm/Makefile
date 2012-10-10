@@ -96,32 +96,32 @@ all: llvm_co clang_co crt_co llvm_build
 # Cleans the build files
 clean:
 
-	@echo "    *** Cleaning all build files"
+	@$(PRINT) "    *** Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
 	@$(RM) $(ARGS_RM) $(DIR_LLVM)
 
 # LLVM checkout
 llvm_co:
 
-	@echo "    *** Checking out LLVM sources"
+	@$(PRINT) "    *** Checking out LLVM sources"
 	@if [ ! -d $(DIR_LLVM) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_LLVM) $(DIR_LLVM); fi
 
 # Clang checkout
 clang_co:
 	
-	@echo "    *** Checking out Clang sources"
+	@$(PRINT) "    *** Checking out Clang sources"
 	@if [ ! -d $(DIR_CLANG) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CLANG) $(DIR_CLANG); fi
 
 # CRT checkout
 crt_co:
 	
-	@echo "    *** Checking out CRT sources"
+	@$(PRINT) "    *** Checking out CRT sources"
 	@if [ ! -d $(DIR_CRT) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CRT) $(DIR_CRT); fi
 
 # LLVM build
 llvm_build:
 	
-	@echo "    *** Building Clang/LLVM"
+	@$(PRINT) "    *** Building Clang/LLVM"
 	@$(CD) $(DIR_BUILD) && $(DIR_LLVM)configure --prefix=$(PATH_TOOLCHAIN_LLVM)
 	@$(CD) $(DIR_BUILD) && $(MAKE)
 	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)

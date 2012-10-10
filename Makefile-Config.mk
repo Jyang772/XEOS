@@ -164,6 +164,7 @@ SVN                         := svn
 DD                          := dd
 HDID                        := hdid
 EXEC                        := exec
+PRINT                       := echo
 
 #-------------------------------------------------------------------------------
 # Software arguments

@@ -96,39 +96,39 @@ all: binutils_32 binutils_64
 # Cleans the build files
 clean:
 	
-	@echo "    *** Cleaning all build files"
+	@$(PRINT) "    *** Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_32)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_64)*
 	
-	@echo "    *** Cleaning all temporary files"
+	@$(PRINT) "    *** Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
 
 # Builds GNU/BinUtils / 32 bits
 binutils_32:
 	
-	@echo "    *** Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
+	@$(PRINT) "    *** Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
 	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
 	
-	@echo "    *** Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
+	@$(PRINT) "    *** Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
 	@$(CD) $(DIR_BUILD_32) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_32)-$(TARGET_ABI) --disable-nls --disable-werror
 	
-	@echo "    *** Compiling GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
+	@$(PRINT) "    *** Compiling GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
 	@$(CD) $(DIR_BUILD_32) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-	@echo "    *** Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
+	@$(PRINT) "    *** Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
 	@$(CD) $(DIR_BUILD_32) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 
 # Builds GNU/BinUtils / 64 bits
 binutils_64:
 	
-	@echo "    *** Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
+	@$(PRINT) "    *** Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
 	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
 	
-	@echo "    *** Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
+	@$(PRINT) "    *** Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
 	@$(CD) $(DIR_BUILD_64) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_64)-$(TARGET_ABI) --disable-nls --disable-werror
 	
-	@echo "    *** Compiling GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
+	@$(PRINT) "    *** Compiling GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
 	@$(CD) $(DIR_BUILD_64) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-	@echo "    *** Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
+	@$(PRINT) "    *** Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
 	@$(CD) $(DIR_BUILD_64) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
