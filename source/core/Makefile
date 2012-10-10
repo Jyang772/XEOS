@@ -57,68 +57,16 @@
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 #-------------------------------------------------------------------------------
 
-# $Id: makefile 433 2011-02-23 17:59:49Z macmade@eosgarden.com $
+# $Id$
 
-#-------------------------------------------------------------------------------
-# Debug options
-#-------------------------------------------------------------------------------
-DEBUG               = 0
-
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-MAKE                = make
-LD_32               = /usr/local/xeos-build/binutils/bin/i386-elf-ld
-LD_64               = /usr/local/xeos-build/binutils/bin/x86_64-elf-ld
+include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_MAKE           = 
-ARGS_LD_32          = -T linker.ld
-ARGS_LD_64          = -T linker.ld
-
-#-------------------------------------------------------------------------------
-# Paths
-#-------------------------------------------------------------------------------
-
-DIR_BUILD_32            = ../../build/core/i386/
-DIR_BUILD_64            = ../../build/core/x86_64/
-DIR_BUILD_BIN_32        = $(DIR_BUILD_32)bin/
-DIR_BUILD_BIN_64        = $(DIR_BUILD_64)bin/
-DIR_BUILD_OBJ_32        = $(DIR_BUILD_32)obj/
-DIR_BUILD_OBJ_64        = $(DIR_BUILD_64)obj/
-DIR_BUILD_OBJ_LIBC_32   = $(DIR_BUILD_OBJ_32)libc/
-DIR_BUILD_OBJ_LIBC_64   = $(DIR_BUILD_OBJ_64)libc/
-DIR_BUILD_OBJ_HAL_32    = $(DIR_BUILD_OBJ_32)hal/
-DIR_BUILD_OBJ_HAL_64    = $(DIR_BUILD_OBJ_64)hal/
-DIR_BUILD_OBJ_KERNEL_32 = $(DIR_BUILD_OBJ_32)kernel/
-DIR_BUILD_OBJ_KERNEL_64 = $(DIR_BUILD_OBJ_64)kernel/
-DIR_SRC                 = ./
-DIR_SRC_INC             = $(DIR_SRC)include/
-DIR_SRC_LIBC            = $(DIR_SRC)libc/
-DIR_SRC_HAL             = $(DIR_SRC)hal/
-DIR_SRC_KERNEL          = $(DIR_SRC)kernel/
-
-#-------------------------------------------------------------------------------
-# Search paths
-#-------------------------------------------------------------------------------
-
-# Clear any existing search path
-VPATH =
-vpath
-
-#-------------------------------------------------------------------------------
-# File suffixes
-#-------------------------------------------------------------------------------
-
-# Clears any existing suffix
-.SUFFIXES:
-
-# Adds the suffixes used in this file
-.SUFFIXES:
+ARGS_LD_32          := -T linker.ld $(ARGS_LD_32)
+ARGS_LD_64          := -T linker.ld $(ARGS_LD_64)
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -133,23 +81,22 @@ vpath
 
 # Build the full project
 all:
-	@echo "    *** Building the C standard library"
-	@cd $(DIR_SRC_LIBC) && $(MAKE)
-	@echo "    *** Building the harware abstraction layer"
-	@cd $(DIR_SRC_HAL) && $(MAKE)
-	@echo "    *** Building the kernel"
-	@cd $(DIR_SRC_KERNEL) && $(MAKE)
-	@echo "    *** Linking the 32 bits kernel"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD_32) $(ARGS_LD_32) -o $(DIR_BUILD_BIN_32)KERNEL32.ELF $(DIR_BUILD_OBJ_KERNEL_32)* $(DIR_BUILD_OBJ_LIBC_32)* $(DIR_BUILD_OBJ_HAL_32)*)
-	@$(LD_32) $(ARGS_LD_32) -o $(DIR_BUILD_BIN_32)KERNEL32.ELF $(DIR_BUILD_OBJ_KERNEL_32)* $(DIR_BUILD_OBJ_LIBC_32)* $(DIR_BUILD_OBJ_HAL_32)*
-	@echo "    *** Linking the 64 bits kernel"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(LD_64) $(ARGS_LD_64) -o $(DIR_BUILD_BIN_64)KERNEL64.ELF $(DIR_BUILD_OBJ_KERNEL_64)* $(DIR_BUILD_OBJ_LIBC_64)* $(DIR_BUILD_OBJ_HAL_64)*)
-	@$(LD_64) $(ARGS_LD_64) -o $(DIR_BUILD_BIN_64)KERNEL64.ELF $(DIR_BUILD_OBJ_KERNEL_64)* $(DIR_BUILD_OBJ_LIBC_64)* $(DIR_BUILD_OBJ_HAL_64)*
+	@$(PRINT) "    *** Building the C standard library"
+	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE)
+	@$(PRINT) "    *** Building the harware abstraction layer"
+	@$(CD) $(PATH_SRC_CORE_HAL) && $(MAKE)
+	@$(PRINT) "    *** Building the kernel"
+	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE)
+	@$(PRINT) "    *** Linking the 32 bits kernel"
+	@$(LD_32) $(ARGS_LD_32) -o $(PATH_BUILD_32_CORE)KERNEL32.ELF $(PATH_BUILD_32_CORE_KERNEL)* $(PATH_BUILD_32_CORE_LIBC)* $(PATH_BUILD_32_CORE_HAL)*
+	@$(PRINT) "    *** Linking the 64 bits kernel"
+	@$(LD_64) $(ARGS_LD_64) -o $(PATH_BUILD_64_CORE)KERNEL64.ELF $(PATH_BUILD_64_CORE_KERNEL)* $(PATH_BUILD_64_CORE_LIBC)* $(PATH_BUILD_64_CORE_HAL)*
 	
 # Cleans the build files
 clean:
-	@cd $(DIR_SRC_LIBC) && $(MAKE) clean
-	@cd $(DIR_SRC_HAL) && $(MAKE) clean
-	@cd $(DIR_SRC_KERNEL) && $(MAKE) clean
-	@if [ -f $(DIR_BUILD_BIN_32)KERNEL32.ELF ]; then $(RM) $(DIR_BUILD_BIN_32)KERNEL_32.ELF; fi;
-	@if [ -f $(DIR_BUILD_BIN_64)KERNEL64.ELF ]; then $(RM) $(DIR_BUILD_BIN_64)KERNEL_64.ELF; fi;
+	
+	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_CORE_HAL) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE) clean
+	@if [ -f $(PATH_BUILD_32_CORE)KERNEL32.ELF ]; then $(RM) $(PATH_BUILD_32_CORE)KERNEL32.ELF; fi;
+	@if [ -f $(PATH_BUILD_64_CORE)KERNEL64.ELF ]; then $(RM) $(PATH_BUILD_64_CORE)KERNEL64.ELF; fi;
