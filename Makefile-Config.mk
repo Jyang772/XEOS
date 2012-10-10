@@ -109,7 +109,7 @@ PATH_BUILD_64_CORE_LIBC     := $(PATH_BUILD_64_CORE)libc/
 
 PATH_SRC_BOOT               := $(PATH_SRC)boot/
 PATH_SRC_CORE               := $(PATH_SRC)core/
-PATH_SRC_CORE_HAL           := $(PATH_SRC_CORE)core/
+PATH_SRC_CORE_HAL           := $(PATH_SRC_CORE)hal/
 PATH_SRC_CORE_KERNEL        := $(PATH_SRC_CORE)kernel/
 PATH_SRC_CORE_LIBC          := $(PATH_SRC_CORE)libc/
 PATH_SRC_CORE_INC           := $(PATH_SRC_CORE)include/
