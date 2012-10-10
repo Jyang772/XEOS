@@ -62,6 +62,12 @@
 include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" BOOT "$(COLOR_NONE)"]>           *** "
+
+#-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
@@ -114,11 +120,11 @@ all: $(_FILES_BIN_BUILD)
 # Cleans the build files
 clean:
 
-	@$(PRINT) "    *** Cleaning all build files"
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_BOOT)*
 	
 # Compiles an assembly file
 $(PATH_BUILD_BOOT)%$(EXT_BIN_RAW): %$(EXT_ASM)
 
-	@$(PRINT) "    *** Compiling assembly file $< into "`echo "$(@F)" | tr '[:lower:]' '[:upper:]'`
+	@$(PRINT) $(PROMPT)"Compiling assembly file: "$(COLOR_YELLOW)"$<"$(COLOR_NONE)" -> "$(COLOR_GRAY)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'``echo $(COLOR_NONE)`
 	@$(AS) -f bin -I $(DIR_SRC_INC) -o $(PATH_BUILD_BOOT)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $(abspath $<)

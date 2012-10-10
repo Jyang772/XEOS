@@ -62,6 +62,12 @@
 include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]>           *** "
+
+#-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
@@ -82,19 +88,19 @@ ARGS_LD_64          := -T linker.ld $(ARGS_LD_64)
 # Build the full project
 all:
 	
-	@$(PRINT) "    *** Building the C standard library"
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C standard library (LibC)"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE)
 	
-	@$(PRINT) "    *** Building the harware abstraction layer"
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS harware abstraction layer (HAL)"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_HAL) && $(MAKE)
 	
-	@$(PRINT) "    *** Building the kernel"
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS kernel"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE)
 	
-	@$(PRINT) "    *** Linking the 32 bits kernel"
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Linking the XEOS kernel"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"KERNEL32.ELF"$(COLOR_NONE)
 	@$(LD_32) $(ARGS_LD_32) -o $(PATH_BUILD_32_CORE)KERNEL32.ELF $(PATH_BUILD_32_CORE_KERNEL)* $(PATH_BUILD_32_CORE_LIBC)* $(PATH_BUILD_32_CORE_HAL)*
 	
-	@$(PRINT) "    *** Linking the 64 bits kernel"
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Linking the XEOS kernel"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"KERNEL64.ELF"$(COLOR_NONE)
 	@$(LD_64) $(ARGS_LD_64) -o $(PATH_BUILD_64_CORE)KERNEL64.ELF $(PATH_BUILD_64_CORE_KERNEL)* $(PATH_BUILD_64_CORE_LIBC)* $(PATH_BUILD_64_CORE_HAL)*
 	
 # Cleans the build files

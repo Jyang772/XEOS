@@ -68,6 +68,12 @@ include ../../Makefile-Config.mk
 VERSION_YASM        := 1.2.0
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" YASM "$(COLOR_NONE)"]>           *** "
+
+#-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
@@ -94,24 +100,24 @@ all: yasm
 # Cleans the build files
 clean:
 
-	@$(PRINT) "    *** Cleaning all build files"
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
 	
-	@$(PRINT) "    *** Cleaning all temporary files"
+	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
 
 # Builds YASM
 yasm:
 	
-	@$(PRINT) "    *** Unpacking YASM ($(VERSION_YASM))"
+	@$(PRINT) $(PROMPT)"Unpacking YASM ($(VERSION_YASM))"
 	@if [ ! -d $(DIR_SRC_YASM) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_YASM) -C $(DIR_SRC); fi
 
-	@$(PRINT) "    *** Configuring YASM ($(VERSION_YASM))"
+	@$(PRINT) $(PROMPT)"Configuring YASM ($(VERSION_YASM))"
 	@$(CD) $(DIR_BUILD) && exec $(DIR_SRC_YASM)/configure --prefix=$(PATH_TOOLCHAIN_YASM)
 
-	@$(PRINT) "    *** Compiling YASM ($(VERSION_YASM))"
+	@$(PRINT) $(PROMPT)"Building YASM ($(VERSION_YASM))"
 	@$(CD) $(DIR_BUILD) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-	@$(PRINT) "    *** Installing YASM ($(VERSION_YASM))"
+	@$(PRINT) $(PROMPT)"Installing YASM ($(VERSION_YASM))"
 	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 	

@@ -62,6 +62,12 @@
 include ../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]>                     *** "
+
+#-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
@@ -93,17 +99,17 @@ clean:
 # YASM
 yasm:
 	
-	@$(PRINT) "    *** Building YASM"
+	@$(PRINT) $(PROMPT)"Building YASM"
 	@$(CD) $(DIR_YASM) && $(MAKE)
 	
 # GNU BinUtils
 binutils:
 	
-	@$(PRINT) "    *** Building GNU BinUtils"
+	@$(PRINT) $(PROMPT)"Building GNU BinUtils"
 	@$(CD) $(DIR_BINUTILS) && $(MAKE)
 	
 # LLVM
 llvm:
 	
-	@$(PRINT) "    *** Building Clang/LLVM"
+	@$(PRINT) $(PROMPT)"Building Clang/LLVM"
 	@$(CD) $(DIR_LLVM) && $(MAKE)

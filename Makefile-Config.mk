@@ -173,7 +173,7 @@ PRINT                       := echo
 
 # C compiler warning flags
 
-ARGS_CC_WARN                := -Weverything -Werror
+#ARGS_CC_WARN                := -Weverything -Werror
 ARGS_CC_STD                 := -std=c89
 ARGS_CC_32                  := -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -ccc-host-triple $(TARGET_32)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 ARGS_CC_64                  := -I $(PATH_SRC_CORE_INC) -march=x86-64 -ccc-host-triple $(TARGET_64)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
@@ -207,3 +207,16 @@ vpath
 
 # Adds the suffixes used in this file
 .SUFFIXES:
+
+#-------------------------------------------------------------------------------
+# DISPLAY
+#-------------------------------------------------------------------------------
+
+COLOR_NONE                  := "\x1b[0m"
+COLOR_GRAY                  := "\x1b[30;01m"
+COLOR_RED                   := "\x1b[31;01m"
+COLOR_GREEN                 := "\x1b[32;01m"
+COLOR_YELLOW                := "\x1b[33;01m"
+COLOR_BLUE                  := "\x1b[34;01m"
+COLOR_PURPLE                := "\x1b[35;01m"
+COLOR_CYAN                  := "\x1b[36;01m"

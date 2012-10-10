@@ -62,6 +62,12 @@
 include ./Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>                               *** "
+
+#-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
@@ -84,17 +90,17 @@ clean:
 # Builds the XEOS toolchain
 toolchain:
 	
-	@$(PRINT) "    *** Building the XEOS toolchain"
+	@$(PRINT) $(PROMPT)"Building the XEOS toolchain"
 	@$(CD) $(PATH_SW) && $(MAKE)
 
 # Builds the boot files
 boot:
 	
-	@$(PRINT) "    *** Building the boot files"
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS boot files"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_BOOT) && $(MAKE)
 
 # Builds the core files
 core:
 	
-	@$(PRINT) "    *** Building the core files"
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS core files"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE) && $(MAKE)

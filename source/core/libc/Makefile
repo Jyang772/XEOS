@@ -62,6 +62,12 @@
 include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LIBC "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
@@ -173,14 +179,14 @@ all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CTYPE) $(_FILES_C_OBJ_BUILD_LOCA
 # Cleans the build files
 clean:
 	
-	@$(PRINT) "    *** Cleaning all build files"
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIBC)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIBC)*
 	
 # Compiles a C file (64 bits)
 $(PATH_BUILD_64_CORE_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	
-	@$(PRINT) "    *** Compiling C file (64 bits) $< into $@"
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_LIBC)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
@@ -189,5 +195,5 @@ $(PATH_BUILD_64_CORE_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 # Compiles a C file (32 bits)
 $(PATH_BUILD_32_CORE_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_LIBC),$(PATH_BUILD_64_CORE_LIBC),$$@)
 	
-	@$(PRINT) "    *** Compiling C file (32 bits) $< into $@"
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_LIBC)$(@F) -c $(abspath $<)

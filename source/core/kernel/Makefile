@@ -62,6 +62,12 @@
 include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" KERN "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
@@ -156,20 +162,20 @@ all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUP
 # Cleans the build files
 clean:
 	
-	@$(PRINT) "    *** Cleaning all build files"
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_KERNEL)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_KERNEL)*
 	
 # Compiles an assembly file (64 bits)
 $(PATH_BUILD_64_CORE_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
 	
-	@$(PRINT) "    *** Compiling assembly file (64 bits) $< into $@"
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_64) $(ARGS_AS_64) -o $(PATH_BUILD_64_CORE_KERNEL)$(@F) $(abspath $<)
 	
 # Compiles a C file (64 bits)
 $(PATH_BUILD_64_CORE_KERNEL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	
-	@$(PRINT) "    *** Compiling C file (64 bits) $< into $@"
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_KERNEL)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
@@ -178,11 +184,11 @@ $(PATH_BUILD_64_CORE_KERNEL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 # Compiles an assembly file (32 bits)
 $(PATH_BUILD_32_CORE_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(PATH_BUILD_32_CORE_KERNEL),$(PATH_BUILD_64_CORE_KERNEL),$$@)
 	
-	@$(PRINT) "    *** Compiling assembly file (32 bits) $< into $@"
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_KERNEL)$(@F) $(abspath $<)
     
 # Compiles a C file (32 bits)
 $(PATH_BUILD_32_CORE_KERNEL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_KERNEL),$(PATH_BUILD_64_CORE_KERNEL),$$@)
 	
-	@$(PRINT) "    *** Compiling C file (32 bits) $< into $@"
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_KERNEL)$(@F) -c $(abspath $<)

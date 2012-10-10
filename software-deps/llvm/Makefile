@@ -62,6 +62,12 @@
 include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
+# Display
+#-------------------------------------------------------------------------------
+
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LLVM "$(COLOR_NONE)"]>           *** "
+
+#-------------------------------------------------------------------------------
 # Source repositories
 #-------------------------------------------------------------------------------
 
@@ -96,32 +102,36 @@ all: llvm_co clang_co crt_co llvm_build
 # Cleans the build files
 clean:
 
-	@$(PRINT) "    *** Cleaning all build files"
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
 	@$(RM) $(ARGS_RM) $(DIR_LLVM)
 
 # LLVM checkout
 llvm_co:
 
-	@$(PRINT) "    *** Checking out LLVM sources"
+	@$(PRINT) $(PROMPT)"Checking out LLVM sources"
 	@if [ ! -d $(DIR_LLVM) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_LLVM) $(DIR_LLVM); fi
 
 # Clang checkout
 clang_co:
 	
-	@$(PRINT) "    *** Checking out Clang sources"
+	@$(PRINT) $(PROMPT)"Checking out Clang sources"
 	@if [ ! -d $(DIR_CLANG) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CLANG) $(DIR_CLANG); fi
 
 # CRT checkout
 crt_co:
 	
-	@$(PRINT) "    *** Checking out CRT sources"
+	@$(PRINT) $(PROMPT)"Checking out CRT sources"
 	@if [ ! -d $(DIR_CRT) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CRT) $(DIR_CRT); fi
 
 # LLVM build
 llvm_build:
 	
-	@$(PRINT) "    *** Building Clang/LLVM"
+	@$(PRINT) $(PROMPT)"Configuring Clang/LLVM"
 	@$(CD) $(DIR_BUILD) && $(DIR_LLVM)configure --prefix=$(PATH_TOOLCHAIN_LLVM)
+
+	@$(PRINT) $(PROMPT)"Bulding Clang/LLVM"
 	@$(CD) $(DIR_BUILD) && $(MAKE)
+	
+	@$(PRINT) $(PROMPT)"Installing Clang/LLVM"
 	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
