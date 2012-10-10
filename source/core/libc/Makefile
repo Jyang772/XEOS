@@ -59,43 +59,13 @@
 
 # $Id$
 
-#-------------------------------------------------------------------------------
-# Debug options
-#-------------------------------------------------------------------------------
-DEBUG               = 0
-
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-CC_32               = /usr/local/xeos-build/llvm/bin/clang
-CC_64               = /usr/local/xeos-build/llvm/bin/clang
-LD_32               = /usr/local/xeos-build/binutils/bin/i386-elf-ld
-LD_64               = /usr/local/xeos-build/binutils/bin/x86_64-elf-ld
-RM                  = rm
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_CC_32          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=i386 -ccc-host-triple i386-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
-ARGS_CC_64          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=x86-64 -ccc-host-triple x86_64-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
-ARGS_LD_32          = 
-ARGS_LD_64          = 
-ARGS_RM             = -rf
+include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD_32        = ../../../build/core/i386/
-DIR_BUILD_64        = ../../../build/core/x86_64/
-DIR_BUILD_BIN_32    = $(DIR_BUILD_32)core/
-DIR_BUILD_BIN_64    = $(DIR_BUILD_64)core/
-DIR_BUILD_OBJ_32    = $(DIR_BUILD_32)obj/libc/
-DIR_BUILD_OBJ_64    = $(DIR_BUILD_64)obj/libc/
-DIR_SRC             = ./
-DIR_SRC_CTYPE       = $(DIR_SRC)ctype/
+DIR_SRC_CTYPE       = $(PATH_SRC_CORE_LIBC)ctype/
 DIR_SRC_LOCALE      = $(DIR_SRC)locale/
 DIR_SRC_MATH        = $(DIR_SRC)math/
 DIR_SRC_SIGNAL      = $(DIR_SRC)signal/
@@ -104,29 +74,20 @@ DIR_SRC_STDLIB      = $(DIR_SRC)stdlib/
 DIR_SRC_STRING      = $(DIR_SRC)string/
 DIR_SRC_TIME        = $(DIR_SRC)time/
 DIR_SRC_INC         = $(DIR_SRC)include/
-DIR_INC             = $(DIR_SRC)../include/
-PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
-PATH               := /usr/local/xeos-build/binutils/x86_64-elf/bin:$(PATH)
 
 #-------------------------------------------------------------------------------
-# File extensions
+# Software arguments
 #-------------------------------------------------------------------------------
 
-EXT_C               = .c
-EXT_H               = .h
-EXT_OBJ             = .o
-EXT_BIN             = .bin
+ARGS_CC_32          := -iquote $(DIR_SRC_INC) $(ARGS_CC_32)
+ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
-# Clear any existing search path
-VPATH =
-vpath
-
 # Define the search paths for source files
-vpath %$(EXT_C) $(DIR_SRC)
+vpath %$(EXT_C) $(PATH_SRC_CORE_LIBC)
 vpath %$(EXT_C) $(DIR_SRC_CTYPE)
 vpath %$(EXT_C) $(DIR_SRC_LOCALE)
 vpath %$(EXT_C) $(DIR_SRC_MATH)
@@ -141,9 +102,6 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 # File suffixes
 #-------------------------------------------------------------------------------
 
-# Clears any existing suffix
-.SUFFIXES:
-
 # Adds the suffixes used in this file
 .SUFFIXES: $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
 
@@ -152,7 +110,7 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 #-------------------------------------------------------------------------------
 
 # Gets every code file in the source directory
-_FILES_C                  = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
+_FILES_C                  = $(foreach dir,$(PATH_SRC_CORE_LIBC),$(wildcard $(PATH_SRC_CORE_LIBC)*$(EXT_C)))
 _FILES_C_CTYPE            = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_CTYPE)*$(EXT_C)))
 _FILES_C_LOCALE           = $(foreach dir,$(DIR_SRC_LOCALE),$(wildcard $(DIR_SRC_LOCALE)*$(EXT_C)))
 _FILES_C_MATH             = $(foreach dir,$(DIR_SRC_MATH),$(wildcard $(DIR_SRC_MATH)*$(EXT_C)))
@@ -185,15 +143,15 @@ _FILES_C_OBJ_STRING       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_S
 _FILES_C_OBJ_TIME         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_TIME))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD        = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_CTYPE  = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_CTYPE))
-_FILES_C_OBJ_BUILD_LOCALE = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_LOCALE))
-_FILES_C_OBJ_BUILD_MATH   = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_MATH))
-_FILES_C_OBJ_BUILD_SIGNAL = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_SIGNAL))
-_FILES_C_OBJ_BUILD_STDIO  = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_STDIO))
-_FILES_C_OBJ_BUILD_STDLIB = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_STDLIB))
-_FILES_C_OBJ_BUILD_STRING = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_STRING))
-_FILES_C_OBJ_BUILD_TIME   = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_TIME))
+_FILES_C_OBJ_BUILD        = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_CTYPE  = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_CTYPE))
+_FILES_C_OBJ_BUILD_LOCALE = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_LOCALE))
+_FILES_C_OBJ_BUILD_MATH   = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_MATH))
+_FILES_C_OBJ_BUILD_SIGNAL = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_SIGNAL))
+_FILES_C_OBJ_BUILD_STDIO  = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_STDIO))
+_FILES_C_OBJ_BUILD_STDLIB = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_STDLIB))
+_FILES_C_OBJ_BUILD_STRING = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_STRING))
+_FILES_C_OBJ_BUILD_TIME   = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_TIME))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -203,7 +161,7 @@ _FILES_C_OBJ_BUILD_TIME   = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_TIME)
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE_LIBC)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -214,23 +172,22 @@ all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CTYPE) $(_FILES_C_OBJ_BUILD_LOCA
 	
 # Cleans the build files
 clean:
-	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*
+	
+	@$(PRINT) "    *** Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIBC)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIBC)*
 	
 # Compiles a C file (64 bits)
-$(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	@echo "    *** Compiling C file (64 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $<)
-	@$(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $(abspath $<)
+$(PATH_BUILD_64_CORE_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	
+	@$(PRINT) "    *** Compiling C file (64 bits) $< into $@"
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_LIBC)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
 .SECONDEXPANSION:
 
 # Compiles a C file (32 bits)
-$(DIR_BUILD_OBJ_32)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)
-	@echo "    *** Compiling C file (32 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $<)
-	@$(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $(abspath $<)
+$(PATH_BUILD_32_CORE_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_LIBC),$(PATH_BUILD_64_CORE_LIBC),$$@)
+	
+	@$(PRINT) "    *** Compiling C file (32 bits) $< into $@"
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_LIBC)$(@F) -c $(abspath $<)
