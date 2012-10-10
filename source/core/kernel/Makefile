@@ -129,12 +129,12 @@ _FILES_C_OBJ_SYSCALLS           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C
 _FILES_C_OBJ_SYSTEM             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSTEM))
 
 # Prefix all binary files with the build directory
-_FILES_ASM_OBJ_BUILD            = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_ASM_OBJ))
-_FILES_C_OBJ_BUILD              = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_INTERRUPTS   = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_INTERRUPTS))
-_FILES_C_OBJ_BUILD_VIDEO        = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_VIDEO))
-_FILES_C_OBJ_BUILD_SYSCALLS     = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_SYSCALLS))
-_FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_SYSTEM))
+_FILES_ASM_OBJ_BUILD            = $(addprefix $(PATH_BUILD_32_CORE_KERNEL),$(_FILES_ASM_OBJ))
+_FILES_C_OBJ_BUILD              = $(addprefix $(PATH_BUILD_32_CORE_KERNEL),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_INTERRUPTS   = $(addprefix $(PATH_BUILD_32_CORE_KERNEL),$(_FILES_C_OBJ_INTERRUPTS))
+_FILES_C_OBJ_BUILD_VIDEO        = $(addprefix $(PATH_BUILD_32_CORE_KERNEL),$(_FILES_C_OBJ_VIDEO))
+_FILES_C_OBJ_BUILD_SYSCALLS     = $(addprefix $(PATH_BUILD_32_CORE_KERNEL),$(_FILES_C_OBJ_SYSCALLS))
+_FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(PATH_BUILD_32_CORE_KERNEL),$(_FILES_C_OBJ_SYSTEM))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -144,7 +144,7 @@ _FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_O
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE)%$(EXT_ASM)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE_KERNEL)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_KERNEL)%$(EXT_ASM)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -161,13 +161,13 @@ clean:
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_KERNEL)*
 	
 # Compiles an assembly file (64 bits)
-$(PATH_BUILD_64_CORE)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
+$(PATH_BUILD_64_CORE_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
 	
 	@$(PRINT) "    *** Compiling assembly file (64 bits) $< into $@"
 	@$(AS_64) $(ARGS_AS_64) -o $(PATH_BUILD_64_CORE_KERNEL)$(@F) $(abspath $<)
 	
 # Compiles a C file (64 bits)
-$(PATH_BUILD_64_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+$(PATH_BUILD_64_CORE_KERNEL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	
 	@$(PRINT) "    *** Compiling C file (64 bits) $< into $@"
 	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_KERNEL)$(@F) -c $(abspath $<)
@@ -176,13 +176,13 @@ $(PATH_BUILD_64_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 .SECONDEXPANSION:
 
 # Compiles an assembly file (32 bits)
-$(PATH_BUILD_32_CORE)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(PATH_BUILD_32_CORE),$(PATH_BUILD_64_CORE),$$@)
+$(PATH_BUILD_32_CORE_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(PATH_BUILD_32_CORE_KERNEL),$(PATH_BUILD_64_CORE_KERNEL),$$@)
 	
 	@$(PRINT) "    *** Compiling assembly file (32 bits) $< into $@"
 	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_KERNEL)$(@F) $(abspath $<)
     
 # Compiles a C file (32 bits)
-$(PATH_BUILD_32_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE),$(PATH_BUILD_64_CORE),$$@)
+$(PATH_BUILD_32_CORE_KERNEL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_KERNEL),$(PATH_BUILD_64_CORE_KERNEL),$$@)
 	
 	@$(PRINT) "    *** Compiling C file (32 bits) $< into $@"
 	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_KERNEL)$(@F) -c $(abspath $<)
