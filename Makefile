@@ -143,7 +143,7 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean boot core _mbr _mount _copy _umount
+.PHONY: all clean boot core _mbr _mount _copy _umount toolchain
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -157,6 +157,11 @@ clean:
 	@cd $(DIR_SRC_BOOT) && $(MAKE) clean
 	@cd $(DIR_SRC_CORE) && $(MAKE) clean
 	@if [ -f $(FLOPPY) ]; then $(RM) $(FLOPPY); fi;
+
+# Builds the XEOS toolchain
+boot:
+	@echo "    *** Building the XEOS toolchain"
+	@cd $(DIR_SW) && $(MAKE)
 
 # Builds the boot files
 boot:

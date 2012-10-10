@@ -106,25 +106,25 @@ vpath
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean nasm binutils llvm
+.PHONY: all clean yasm binutils llvm
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: nasm binutils llvm
+all: yasm binutils llvm
 
 # Cleans the build files
 clean:
-	@cd $(DIR_NASM) && $(MAKE) clean
+	@cd $(DIR_YASM) && $(MAKE) clean
 	@cd $(DIR_LLVM) && $(MAKE) clean
 	@cd $(DIR_BINUTILS) && $(MAKE) clean
 	
-# NASM
-nasm:
-	@echo "    *** Building NASM"
-	@cd $(DIR_NASM) && $(MAKE)
+# YASM
+yasm:
+	@echo "    *** Building YASM"
+	@cd $(DIR_YASM) && $(MAKE)
 	
 # GNU BinUtils
 binutils:

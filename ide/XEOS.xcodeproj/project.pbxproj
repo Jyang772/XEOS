@@ -9,6 +9,7 @@
 /* Begin PBXFileReference section */
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
+		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		05AFEDF41620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -273,6 +274,14 @@
 			path = binutils;
 			sourceTree = "<group>";
 		};
+		05A8F94E1625690B000484EB /* yasm */ = {
+			isa = PBXGroup;
+			children = (
+				05A8F9531625690B000484EB /* Makefile */,
+			);
+			path = yasm;
+			sourceTree = "<group>";
+		};
 		05AFEDB01620F26400740041 = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +298,7 @@
 			children = (
 				0511119016249A0200966E40 /* binutils */,
 				05AFEDF11620F27C00740041 /* llvm */,
+				05A8F94E1625690B000484EB /* yasm */,
 				05AFEDF71620F27C00740041 /* Makefile */,
 			);
 			name = "software-deps";
