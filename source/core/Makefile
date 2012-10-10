@@ -81,14 +81,19 @@ ARGS_LD_64          := -T linker.ld $(ARGS_LD_64)
 
 # Build the full project
 all:
+	
 	@$(PRINT) "    *** Building the C standard library"
 	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE)
+	
 	@$(PRINT) "    *** Building the harware abstraction layer"
 	@$(CD) $(PATH_SRC_CORE_HAL) && $(MAKE)
+	
 	@$(PRINT) "    *** Building the kernel"
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE)
+	
 	@$(PRINT) "    *** Linking the 32 bits kernel"
 	@$(LD_32) $(ARGS_LD_32) -o $(PATH_BUILD_32_CORE)KERNEL32.ELF $(PATH_BUILD_32_CORE_KERNEL)* $(PATH_BUILD_32_CORE_LIBC)* $(PATH_BUILD_32_CORE_HAL)*
+	
 	@$(PRINT) "    *** Linking the 64 bits kernel"
 	@$(LD_64) $(ARGS_LD_64) -o $(PATH_BUILD_64_CORE)KERNEL64.ELF $(PATH_BUILD_64_CORE_KERNEL)* $(PATH_BUILD_64_CORE_LIBC)* $(PATH_BUILD_64_CORE_HAL)*
 	
@@ -98,5 +103,6 @@ clean:
 	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_CORE_HAL) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE) clean
+	
 	@if [ -f $(PATH_BUILD_32_CORE)KERNEL32.ELF ]; then $(RM) $(PATH_BUILD_32_CORE)KERNEL32.ELF; fi;
 	@if [ -f $(PATH_BUILD_64_CORE)KERNEL64.ELF ]; then $(RM) $(PATH_BUILD_64_CORE)KERNEL64.ELF; fi;
