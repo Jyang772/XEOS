@@ -157,20 +157,20 @@ all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUP
 clean:
 	
 	@$(PRINT) "    *** Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_KERNEL)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_KERNEL)*
 	
 # Compiles an assembly file (64 bits)
 $(PATH_BUILD_64_CORE)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
 	
 	@$(PRINT) "    *** Compiling assembly file (64 bits) $< into $@"
-	@$(AS_64) $(ARGS_AS_64) -o $(PATH_BUILD_64_CORE)$(@F) $(abspath $<)
+	@$(AS_64) $(ARGS_AS_64) -o $(PATH_BUILD_64_CORE_KERNEL)$(@F) $(abspath $<)
 	
 # Compiles a C file (64 bits)
 $(PATH_BUILD_64_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	
 	@$(PRINT) "    *** Compiling C file (64 bits) $< into $@"
-	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE)$(@F) -c $(abspath $<)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_KERNEL)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
 .SECONDEXPANSION:
@@ -179,10 +179,10 @@ $(PATH_BUILD_64_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 $(PATH_BUILD_32_CORE)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(PATH_BUILD_32_CORE),$(PATH_BUILD_64_CORE),$$@)
 	
 	@$(PRINT) "    *** Compiling assembly file (32 bits) $< into $@"
-	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE)$(@F) $(abspath $<)
+	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_KERNEL)$(@F) $(abspath $<)
     
 # Compiles a C file (32 bits)
 $(PATH_BUILD_32_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE),$(PATH_BUILD_64_CORE),$$@)
 	
 	@$(PRINT) "    *** Compiling C file (32 bits) $< into $@"
-	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE)$(@F) -c $(abspath $<)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_KERNEL)$(@F) -c $(abspath $<)
