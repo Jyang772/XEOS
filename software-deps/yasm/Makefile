@@ -85,7 +85,7 @@ ARGS_MAKE           =
 # Software versions
 #-------------------------------------------------------------------------------
 
-VERSION_YASM        = 2.22
+VERSION_YASM        = 1.2.0
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -123,7 +123,7 @@ yasm:
 	@echo "    *** Unpacking YASM ($(VERSION_YASM))"
 	@if [ ! -d $(DIR_SRC_YASM) ]; then $(TAR) $(ARGS_TAR) $(DISTRIB_YASM) -C $(DIR_SRC); fi
 	@echo "    *** Configuring YASM ($(VERSION_YASM))"
-	@cd $(DIR_BUILD) && exec ../../$(DIR_SRC_YASM)/configure --prefix=$(PREFIX)/yasm
+	@cd $(DIR_BUILD) && exec ../$(DIR_SRC_YASM)/configure --prefix=$(PREFIX)/yasm
 	@echo "    *** Compiling YASM ($(VERSION_YASM))"
 	@cd $(DIR_BUILD) && $(MAKE) all
 	@echo "    *** Installing YASM ($(VERSION_YASM))"
