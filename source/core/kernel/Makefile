@@ -200,22 +200,22 @@ all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUP
 	
 # Cleans the build files
 clean:
-	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*)
+	@$(PRINT) "    *** Cleaning all build files"
+	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*)
+	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*)
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*
 	
 # Compiles an assembly file (64 bits)
 $(DIR_BUILD_OBJ_64)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
-	@echo "    *** Compiling assembly file (64 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_64)$(@F) $<)
+	@$(PRINT) "    *** Compiling assembly file (64 bits) $< into $@"
+	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_64)$(@F) $<)
 	@$(AS_64) $(ARGS_AS_64) -o $(DIR_BUILD_OBJ_64)$(@F) $(abspath $<)
 	
 # Compiles a C file (64 bits)
 $(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	@echo "    *** Compiling C file (64 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $<)
+	@$(PRINT) "    *** Compiling C file (64 bits) $< into $@"
+	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $<)
 	@$(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
@@ -223,12 +223,12 @@ $(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 
 # Compiles an assembly file (32 bits)
 $(DIR_BUILD_OBJ_32)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)
-	@echo "    *** Compiling assembly file (32 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_32)$(@F) $<)
+	@$(PRINT) "    *** Compiling assembly file (32 bits) $< into $@"
+	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_32)$(@F) $<)
 	@$(AS_32) $(ARGS_AS_32) -o $(DIR_BUILD_OBJ_32)$(@F) $(abspath $<)
     
 # Compiles a C file (32 bits)
 $(DIR_BUILD_OBJ_32)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)
-	@echo "    *** Compiling C file (32 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $<)
+	@$(PRINT) "    *** Compiling C file (32 bits) $< into $@"
+	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $<)
 	@$(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $(abspath $<)
