@@ -14,8 +14,8 @@
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		05AFEDF41620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDF71620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		05AFEDFA1620F27C00740041 /* boot1.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = boot1.s; sourceTree = "<group>"; };
-		05AFEDFB1620F27C00740041 /* boot2.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = boot2.s; sourceTree = "<group>"; };
+		05AFEDFA1620F27C00740041 /* mbr.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = mbr.s; sourceTree = "<group>"; };
+		05AFEDFB1620F27C00740041 /* boot.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = boot.s; sourceTree = "<group>"; };
 		05AFEDFD1620F27C00740041 /* bios.int.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = bios.int.inc.s; sourceTree = "<group>"; };
 		05AFEDFF1620F27C00740041 /* bios.video.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = bios.video.inc.16.s; sourceTree = "<group>"; };
 		05AFEE001620F27C00740041 /* xeos.a20.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.a20.inc.16.s; sourceTree = "<group>"; };
@@ -328,8 +328,8 @@
 		05AFEDF91620F27C00740041 /* boot */ = {
 			isa = PBXGroup;
 			children = (
-				05AFEDFA1620F27C00740041 /* boot1.s */,
-				05AFEDFB1620F27C00740041 /* boot2.s */,
+				05AFEDFA1620F27C00740041 /* mbr.s */,
+				05AFEDFB1620F27C00740041 /* boot.s */,
 				05AFEDFC1620F27C00740041 /* include */,
 				05AFEE0E1620F27C00740041 /* Makefile */,
 			);
