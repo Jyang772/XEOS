@@ -173,7 +173,7 @@ PRINT                       := echo
 
 # C compiler warning flags
 
-ARGS_CC_WARN                := -Weverything
+ARGS_CC_WARN                := -Weverything -Werror
 ARGS_CC_STD                 := -std=c89
 ARGS_CC_32                  := -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -ccc-host-triple $(TARGET_32)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 ARGS_CC_64                  := -I $(PATH_SRC_CORE_INC) -march=x86-64 -ccc-host-triple $(TARGET_64)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
