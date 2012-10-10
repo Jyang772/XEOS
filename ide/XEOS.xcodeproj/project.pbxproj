@@ -261,6 +261,7 @@
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05AFEF131620FA0B00740041 /* bios.llds.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = bios.llds.inc.16.s; sourceTree = "<group>"; };
 		05AFEF141620FA2700740041 /* kernel_init.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_init.s; sourceTree = "<group>"; };
+		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05DABB30162209D700DA8F66 /* kernel_video_itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_itoa.c; sourceTree = "<group>"; };
 		05DABB31162209E300DA8F66 /* kernel_video_utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_utoa.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -287,6 +288,7 @@
 			children = (
 				05AFEF121620F8F700740041 /* LICENSE.txt */,
 				05AFEDD81620F27C00740041 /* Makefile */,
+				05BE237C1625E354002C1185 /* Makefile-Config.mk */,
 				05AFEDD91620F27C00740041 /* README.md */,
 				05AFEDDA1620F27C00740041 /* software-deps */,
 				05AFEDF81620F27C00740041 /* source */,
