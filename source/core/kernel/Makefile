@@ -68,7 +68,8 @@ DEBUG               = 0
 # Software
 #-------------------------------------------------------------------------------
 
-AS                  = nasm
+AS_32               = nasm
+AS_64               = nasm
 CC_32               = /usr/local/xeos-build/llvm/bin/clang
 CC_64               = /usr/local/xeos-build/llvm/bin/clang
 LD_32               = /usr/local/xeos-build/binutils/bin/i386-elf-ld
@@ -79,7 +80,8 @@ RM                  = rm
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_AS             = -f elf -I $(DIR_SRC_INC)
+ARGS_AS_32          = -f elf -I $(DIR_SRC_INC)
+ARGS_AS_64          = -f elf64 -I $(DIR_SRC_INC)
 ARGS_CC_32          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=i386 -ccc-host-triple i386-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
 ARGS_CC_64          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=x86-64 -ccc-host-triple x86_64-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
 ARGS_LD_32          = 
@@ -208,7 +210,7 @@ clean:
 $(DIR_BUILD_OBJ_64)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
 	@echo "    *** Compiling assembly file (64 bits) $< into $@"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_64)$(@F) $<)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_64)$(@F) $(abspath $<)
+	@$(AS_64) $(ARGS_AS_64) -o $(DIR_BUILD_OBJ_64)$(@F) $(abspath $<)
 	
 # Compiles a C file (64 bits)
 $(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
@@ -223,7 +225,7 @@ $(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 $(DIR_BUILD_OBJ_32)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)
 	@echo "    *** Compiling assembly file (32 bits) $< into $@"
 	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_32)$(@F) $<)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_32)$(@F) $(abspath $<)
+	@$(AS_32) $(ARGS_AS_32) -o $(DIR_BUILD_OBJ_32)$(@F) $(abspath $<)
     
 # Compiles a C file (32 bits)
 $(DIR_BUILD_OBJ_32)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)

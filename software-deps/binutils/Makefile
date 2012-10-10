@@ -131,7 +131,7 @@ binutils_32:
 	@cd $(DIR_BUILD_32) && exec ../../$(DIR_SRC_BINUTILS)/configure --prefix=$(PREFIX)/binutils --target=$(TARGET_32) --disable-nls --disable-werror
 	@echo "    *** Compiling GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
 	@cd $(DIR_BUILD_32) && $(MAKE) all
-	@echo "    *** Installing binutils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
+	@echo "    *** Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
 	@cd $(DIR_BUILD_32) && sudo $(MAKE) install
 
 # Builds BinUtils / 64 bits
