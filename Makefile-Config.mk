@@ -75,7 +75,7 @@ TARGET_ABI                  := elf
 
 # Toolchain
 
-PATH_TOOLCHAIN              := /usr/local/xeos-uild/
+PATH_TOOLCHAIN              := /usr/local/xeos-build/
 
 # Toolchain software
 
@@ -93,6 +93,7 @@ PATH_SW                     := $(PATH_PROJECT)software-deps/
 
 # Build directories
 
+PATH_BUILD_BOOT             := $(PATH_BUILD)boot/
 PATH_BUILD_32               := $(PATH_BUILD)$(TARGET_32)/
 PATH_BUILD_64               := $(PATH_BUILD)$(TARGET_64)/
 PATH_BUILD_32_CORE          := $(PATH_BUILD_32)core/
