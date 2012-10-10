@@ -68,8 +68,8 @@ DEBUG               = 0
 # Software
 #-------------------------------------------------------------------------------
 
-AS_32               = nasm
-AS_64               = nasm
+AS_32               = /usr/local/xeos-build/yasm/bin/yasm
+AS_64               = /usr/local/xeos-build/yasm/bin/yasm
 CC_32               = /usr/local/xeos-build/llvm/bin/clang
 CC_64               = /usr/local/xeos-build/llvm/bin/clang
 LD_32               = /usr/local/xeos-build/binutils/bin/i386-elf-ld
