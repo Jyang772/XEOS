@@ -59,77 +59,43 @@
 
 # $Id$
 
-#-------------------------------------------------------------------------------
-# Debug options
-#-------------------------------------------------------------------------------
-DEBUG               = 0
-
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-AS                  = /usr/local/xeos-build/yasm/bin/yasm
-RM                  = rm
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_AS             = -f bin -I $(DIR_SRC_INC)
-ARGS_RM             = -rf
+include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD           = ../../build/
-DIR_BUILD_BIN       = $(DIR_BUILD)boot/
-DIR_SRC             = ../../source/boot/
-DIR_SRC_INC         = $(DIR_SRC)include/
-
-#-------------------------------------------------------------------------------
-# File extensions
-#-------------------------------------------------------------------------------
-
-EXT_ASM             = .s
-EXT_BIN             = .bin
+DIR_SRC_INC         := $(PATH_SRC_BOOT)include/
 
 #-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
-# Clear any existing search path
-VPATH =
-vpath
-
 # Define the search paths for source files
-vpath %$(EXT_ASM) $(DIR_SRC)
+vpath %$(EXT_ASM) $(PATH_SRC_BOOT)
 
 #-------------------------------------------------------------------------------
 # File suffixes
 #-------------------------------------------------------------------------------
 
-# Clears any existing suffix
-.SUFFIXES:
-
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_ASM) $(EXT_BIN)
+.SUFFIXES: $(EXT_ASM) $(EXT_BIN_RAW)
 
 #-------------------------------------------------------------------------------
 # Macros
 #-------------------------------------------------------------------------------
 
 # Gets every assembly file in the source directory
-_FILES_ASM        = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
+_FILES_ASM        = $(foreach dir,$(PATH_SRC_BOOT),$(wildcard $(PATH_SRC_BOOT)*$(EXT_ASM)))
 
 # Gets only the file name of the assembly files
 _FILES_ASM_REL    = $(notdir $(_FILES_ASM))
 
 # Replace the code extension by the binary one
-_FILES_ASM_BIN    = $(subst $(EXT_ASM),$(EXT_BIN),$(_FILES_ASM_REL))
+_FILES_ASM_BIN    = $(subst $(EXT_ASM),$(EXT_BIN_RAW),$(_FILES_ASM_REL))
 
 # Prefix all binary files with the build directory
-_FILES_BIN_BUILD  = $(addprefix $(DIR_BUILD_BIN),$(_FILES_ASM_BIN))
+_FILES_BIN_BUILD  = $(addprefix $(PATH_BUILD_BOOT),$(_FILES_ASM_BIN))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -147,12 +113,12 @@ all: $(_FILES_BIN_BUILD)
 
 # Cleans the build files
 clean:
-	@echo "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_BIN)*
+
+	@$(PRINT) "    *** Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_BOOT)*
 	
 # Compiles an assembly file
-$(DIR_BUILD_BIN)%$(EXT_BIN): %$(EXT_ASM)
-	@echo "    *** Compiling assembly file $< into $@"
-	$(if $(filter 1,$(DEBUG)), @echo "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $<)
-	@$(AS) $(ARGS_AS) -o $(DIR_BUILD_BIN)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $(abspath $<)
+$(PATH_BUILD_BOOT)%$(EXT_BIN_RAW): %$(EXT_ASM)
+
+	@$(PRINT) "    *** Compiling assembly file $< into "`echo "$(@F)" | tr '[:lower:]' '[:upper:]'`
+	@$(AS) -f bin -I $(DIR_SRC_INC) -o $(PATH_BUILD_BOOT)`echo "$(@F)" | tr '[:lower:]' '[:upper:]'` $(abspath $<)
