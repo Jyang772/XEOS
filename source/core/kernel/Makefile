@@ -59,76 +59,34 @@
 
 # $Id$
 
-#-------------------------------------------------------------------------------
-# Debug options
-#-------------------------------------------------------------------------------
-DEBUG               = 0
-
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-AS_32               = /usr/local/xeos-build/yasm/bin/yasm
-AS_64               = /usr/local/xeos-build/yasm/bin/yasm
-CC_32               = /usr/local/xeos-build/llvm/bin/clang
-CC_64               = /usr/local/xeos-build/llvm/bin/clang
-LD_32               = /usr/local/xeos-build/binutils/bin/i386-elf-ld
-LD_64               = /usr/local/xeos-build/binutils/bin/x86_64-elf-ld
-RM                  = rm
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_AS_32          = -f elf -I $(DIR_SRC_INC)
-ARGS_AS_64          = -f elf64 -I $(DIR_SRC_INC)
-ARGS_CC_32          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=i386 -ccc-host-triple i386-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
-ARGS_CC_64          = -iquote $(DIR_SRC_INC) -I $(DIR_INC) -march=x86-64 -ccc-host-triple x86_64-elf-freebsd -nostdlib -fno-builtin -std=c89 -Wall -Wextra  -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement
-ARGS_LD_32          = 
-ARGS_LD_64          = 
-ARGS_RM             = -rf
+include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD_32        = ../../../build/core/i386/
-DIR_BUILD_64        = ../../../build/core/x86_64/
-DIR_BUILD_BIN_32    = $(DIR_BUILD_32)core/
-DIR_BUILD_BIN_64    = $(DIR_BUILD_64)core/
-DIR_BUILD_OBJ_32    = $(DIR_BUILD_32)obj/kernel/
-DIR_BUILD_OBJ_64    = $(DIR_BUILD_64)obj/kernel/
-DIR_SRC             = ./
-DIR_SRC_INTERRUPTS  = $(DIR_SRC)interrupts/
-DIR_SRC_VIDEO       = $(DIR_SRC)video/
-DIR_SRC_SYSCALLS    = $(DIR_SRC)syscalls/
-DIR_SRC_SYSTEM      = $(DIR_SRC)system/
-DIR_SRC_INC         = $(DIR_SRC)include/
-DIR_INC             = $(DIR_SRC)../include/
-PATH               := /usr/local/xeos-build/binutils/i386-elf/bin:$(PATH)
-PATH               := /usr/local/xeos-build/binutils/x86_64-elf/bin:$(PATH)
+DIR_SRC_INTERRUPTS  := $(PATH_SRC_CORE_KERNEL)interrupts/
+DIR_SRC_VIDEO       := $(PATH_SRC_CORE_KERNEL)video/
+DIR_SRC_SYSCALLS    := $(PATH_SRC_CORE_KERNEL)syscalls/
+DIR_SRC_SYSTEM      := $(PATH_SRC_CORE_KERNEL)system/
+DIR_SRC_INC         := $(PATH_SRC_CORE_KERNEL)include/
 
 #-------------------------------------------------------------------------------
-# File extensions
+# Software arguments
 #-------------------------------------------------------------------------------
 
-EXT_ASM             = .s
-EXT_C               = .c
-EXT_H               = .h
-EXT_OBJ             = .o
-EXT_BIN             = .bin
+ARGS_AS_32          := -f $(TARGET_ABI) -I $(PATH_SRC_CORE_INC)
+ARGS_AS_64          := -f $(TARGET_ABI)64 -I $(PATH_SRC_CORE_INC)
+ARGS_CC_32          := -iquote $(DIR_SRC_INC) $(ARGS_CC_32)
+ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
-# Clear any existing search path
-VPATH =
-vpath
-
 # Define the search paths for source files
-vpath %$(EXT_ASM) $(DIR_SRC)
-vpath %$(EXT_C)   $(DIR_SRC)
+vpath %$(EXT_ASM) $(PATH_SRC_CORE_KERNEL)
+vpath %$(EXT_C)   $(PATH_SRC_CORE_KERNEL)
 vpath %$(EXT_C)   $(DIR_SRC_VIDEO)
 vpath %$(EXT_C)   $(DIR_SRC_INTERRUPTS)
 vpath %$(EXT_C)   $(DIR_SRC_SYSCALLS)
@@ -139,9 +97,6 @@ vpath %$(EXT_H)   $(DIR_SRC_INC)
 # File suffixes
 #-------------------------------------------------------------------------------
 
-# Clears any existing suffix
-.SUFFIXES:
-
 # Adds the suffixes used in this file
 .SUFFIXES: $(EXT_ASM) $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
 
@@ -150,8 +105,8 @@ vpath %$(EXT_H)   $(DIR_SRC_INC)
 #-------------------------------------------------------------------------------
 
 # Gets every code file in the source directory
-_FILES_ASM                      = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_ASM)))
-_FILES_C                        = $(foreach dir,$(DIR_SRC),$(wildcard $(DIR_SRC)*$(EXT_C)))
+_FILES_ASM                      = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_ASM)))
+_FILES_C                        = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_C)))
 _FILES_C_INTERRUPTS             = $(foreach dir,$(DIR_SRC_INTERRUPTS),$(wildcard $(DIR_SRC_INTERRUPTS)*$(EXT_C)))
 _FILES_C_VIDEO                  = $(foreach dir,$(DIR_SRC_VIDEO),$(wildcard $(DIR_SRC_VIDEO)*$(EXT_C)))
 _FILES_C_SYSCALLS               = $(foreach dir,$(DIR_SRC_SYSCALLS),$(wildcard $(DIR_SRC_SYSCALLS)*$(EXT_C)))
@@ -174,12 +129,12 @@ _FILES_C_OBJ_SYSCALLS           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C
 _FILES_C_OBJ_SYSTEM             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSTEM))
 
 # Prefix all binary files with the build directory
-_FILES_ASM_OBJ_BUILD            = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_ASM_OBJ))
-_FILES_C_OBJ_BUILD              = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_INTERRUPTS   = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_INTERRUPTS))
-_FILES_C_OBJ_BUILD_VIDEO        = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_VIDEO))
-_FILES_C_OBJ_BUILD_SYSCALLS     = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_SYSCALLS))
-_FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ_SYSTEM))
+_FILES_ASM_OBJ_BUILD            = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_ASM_OBJ))
+_FILES_C_OBJ_BUILD              = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_INTERRUPTS   = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_INTERRUPTS))
+_FILES_C_OBJ_BUILD_VIDEO        = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_VIDEO))
+_FILES_C_OBJ_BUILD_SYSCALLS     = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_SYSCALLS))
+_FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(PATH_BUILD_32_CORE),$(_FILES_C_OBJ_SYSTEM))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -189,7 +144,7 @@ _FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(DIR_BUILD_OBJ_32),$(_FILES_C_OBJ
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ) $(DIR_BUILD_OBJ_64)%$(EXT_ASM)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE)%$(EXT_ASM)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -200,35 +155,34 @@ all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUP
 	
 # Cleans the build files
 clean:
+	
 	@$(PRINT) "    *** Cleaning all build files"
-	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_32)*
-	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*)
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_OBJ_64)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE)*
 	
 # Compiles an assembly file (64 bits)
-$(DIR_BUILD_OBJ_64)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
+$(PATH_BUILD_64_CORE)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
+	
 	@$(PRINT) "    *** Compiling assembly file (64 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_64)$(@F) $<)
-	@$(AS_64) $(ARGS_AS_64) -o $(DIR_BUILD_OBJ_64)$(@F) $(abspath $<)
+	@$(AS_64) $(ARGS_AS_64) -o $(PATH_BUILD_64_CORE)$(@F) $(abspath $<)
 	
 # Compiles a C file (64 bits)
-$(DIR_BUILD_OBJ_64)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+$(PATH_BUILD_64_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	
 	@$(PRINT) "    *** Compiling C file (64 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $<)
-	@$(CC_64) $(ARGS_CC_64) -o $(DIR_BUILD_OBJ_64)$(@F) -c $(abspath $<)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
 .SECONDEXPANSION:
 
 # Compiles an assembly file (32 bits)
-$(DIR_BUILD_OBJ_32)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)
+$(PATH_BUILD_32_CORE)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(PATH_BUILD_32_CORE),$(PATH_BUILD_64_CORE),$$@)
+	
 	@$(PRINT) "    *** Compiling assembly file (32 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(AS) $(ARGS_AS) -o $(DIR_BUILD_OBJ_32)$(@F) $<)
-	@$(AS_32) $(ARGS_AS_32) -o $(DIR_BUILD_OBJ_32)$(@F) $(abspath $<)
+	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE)$(@F) $(abspath $<)
     
 # Compiles a C file (32 bits)
-$(DIR_BUILD_OBJ_32)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(DIR_BUILD_32),$(DIR_BUILD_64),$$@)
+$(PATH_BUILD_32_CORE)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE),$(PATH_BUILD_64_CORE),$$@)
+	
 	@$(PRINT) "    *** Compiling C file (32 bits) $< into $@"
-	$(if $(filter 1,$(DEBUG)), @$(PRINT) "        ---" $(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $<)
-	@$(CC_32) $(ARGS_CC_32) -o $(DIR_BUILD_OBJ_32)$(@F) -c $(abspath $<)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE)$(@F) -c $(abspath $<)
