@@ -63,10 +63,6 @@
 # General
 #-------------------------------------------------------------------------------
 
-# Debug mode
-
-DEBUG                       := 0
-
 # Targets / Architectures
 
 TARGET_32                   := i386
@@ -92,7 +88,8 @@ PATH_TOOLCHAIN_LLVM         := $(PATH_TOOLCHAIN)llvm/
 PATH_PROJECT                := $(realpath $(dir $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))))/
 PATH_BUILD                  := $(PATH_PROJECT)build/
 PATH_RELEASE                := $(PATH_PROJECT)release/
-PATH_SRC                    := $(PATH_PROJECT)software-deps/
+PATH_SRC                    := $(PATH_PROJECT)source/
+PATH_SW                     := $(PATH_PROJECT)software-deps/
 
 # Build directories
 
@@ -166,6 +163,7 @@ SUDO                        := sudo
 SVN                         := svn
 DD                          := dd
 HDID                        := hdid
+EXEC                        := exec
 
 #-------------------------------------------------------------------------------
 # Software arguments
@@ -179,10 +177,14 @@ CC_WARN                     := -Weverything
 
 ARGS_MAKE                   := 
 ARGS_MAKE_CLEAN             := clean
+ARGS_MAKE_BUILD             := all
+ARGS_MAKE_INSTALL           := install
 ARGS_CP                     := 
 ARGS_RM                     := -rf
 ARGS_DD                     := conv=notrunc
 ARGS_HDID                   := -nobrowse -nomount
+ARGS_TAR_EXPAND             := -xf
+ARGS_SVN_CO                 := checkout
 
 #-------------------------------------------------------------------------------
 # Search paths

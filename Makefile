@@ -77,20 +77,24 @@ all: boot core
 
 # Cleans the build files
 clean:
-	@cd $(PATH_SRC_BOOT) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@cd $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	
+	@$(CD) $(PATH_SRC_BOOT) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
 
 # Builds the XEOS toolchain
 toolchain:
+	
 	@echo "    *** Building the XEOS toolchain"
-	@cd $(PATH_SW) && $(MAKE)
+	@$(CD) $(PATH_SW) && $(MAKE)
 
 # Builds the boot files
 boot:
+	
 	@echo "    *** Building the boot files"
-	@cd $(PATH_SRC_BOOT) && $(MAKE)
+	@$(CD) $(PATH_SRC_BOOT) && $(MAKE)
 
 # Builds the core files
 core:
+	
 	@echo "    *** Building the core files"
-	@cd $(PATH_SRC_CORE) && $(MAKE)
+	@$(CD) $(PATH_SRC_CORE) && $(MAKE)

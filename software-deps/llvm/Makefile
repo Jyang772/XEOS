@@ -59,48 +59,25 @@
 
 # $Id$
 
-#-------------------------------------------------------------------------------
-# Build settings
-#-------------------------------------------------------------------------------
-
-PREFIX              = /usr/local/xeos-build/llvm
-
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-RM                  = rm
-TAR                 = tar
-MAKE                = make
-SVN                 = svn
-CD                  = cd
-SUDO                = sudo
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_RM             = -rf
-ARGS_TAR            = -xf
-ARGS_MAKE           = 
-ARGS_SVN_CO         = checkout
+include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Source repositories
 #-------------------------------------------------------------------------------
 
-REPOS_LLVM          = http://llvm.org/svn/llvm-project/llvm/trunk
-REPOS_CLANG         = http://llvm.org/svn/llvm-project/cfe/trunk
-REPOS_CRT           = http://llvm.org/svn/llvm-project/compiler-rt/trunk
+REPOS_LLVM          := http://llvm.org/svn/llvm-project/llvm/trunk
+REPOS_CLANG         := http://llvm.org/svn/llvm-project/cfe/trunk
+REPOS_CRT           := http://llvm.org/svn/llvm-project/compiler-rt/trunk
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD           = ./build/
-DIR_LLVM            = ./source/llvm/
-DIR_CLANG           = $(DIR_LLVM)tools/clang/
-DIR_CRT             = $(DIR_LLVM)projects/compiler-rt/
+DIR_BUILD           := $(realpath ./build/)/
+DIR_SRC             := $(realpath ./source/)/
+DIR_LLVM            := $(DIR_SRC)llvm/
+DIR_CLANG           := $(DIR_LLVM)tools/clang/
+DIR_CRT             := $(DIR_LLVM)projects/compiler-rt/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -118,28 +95,33 @@ all: llvm_co clang_co crt_co llvm_build
 
 # Cleans the build files
 clean:
+
 	@echo "    *** Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
 	@$(RM) $(ARGS_RM) $(DIR_LLVM)
 
 # LLVM checkout
 llvm_co:
+
 	@echo "    *** Checking out LLVM sources"
 	@if [ ! -d $(DIR_LLVM) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_LLVM) $(DIR_LLVM); fi
 
 # Clang checkout
 clang_co:
+	
 	@echo "    *** Checking out Clang sources"
 	@if [ ! -d $(DIR_CLANG) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CLANG) $(DIR_CLANG); fi
 
 # CRT checkout
 crt_co:
+	
 	@echo "    *** Checking out CRT sources"
 	@if [ ! -d $(DIR_CRT) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CRT) $(DIR_CRT); fi
 
 # LLVM build
 llvm_build:
-	@echo "    *** Building Clang/LLVM toolchain"
-	@$(CD) $(DIR_BUILD) && ../$(DIR_LLVM)configure --prefix=$(PREFIX)
+	
+	@echo "    *** Building Clang/LLVM"
+	@$(CD) $(DIR_BUILD) && $(DIR_LLVM)configure --prefix=$(PATH_TOOLCHAIN_LLVM)
 	@$(CD) $(DIR_BUILD) && $(MAKE)
-	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) install
+	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)

@@ -59,47 +59,15 @@
 
 # $Id$
 
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-MAKE                = make
-CP                  = cp
-RM                  = rm
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_MAKE           = 
-ARGS_CP             = 
-ARGS_RM             = -rf
+include ../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_NASM            = ./nasm/
-DIR_LLVM            = ./llvm/
-DIR_BINUTILS        = ./binutils/
-
-#-------------------------------------------------------------------------------
-# Search paths
-#-------------------------------------------------------------------------------
-
-# Clear any existing search path
-VPATH =
-vpath
-
-#-------------------------------------------------------------------------------
-# File suffixes
-#-------------------------------------------------------------------------------
-
-# Clears any existing suffix
-.SUFFIXES:
-
-# Adds the suffixes used in this file
-.SUFFIXES:
+DIR_YASM            := $(PATH_SW)yasm/
+DIR_LLVM            := $(PATH_SW)llvm/
+DIR_BINUTILS        := $(PATH_SW)binutils/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -117,21 +85,25 @@ all: yasm binutils llvm
 
 # Cleans the build files
 clean:
-	@cd $(DIR_YASM) && $(MAKE) clean
-	@cd $(DIR_LLVM) && $(MAKE) clean
-	@cd $(DIR_BINUTILS) && $(MAKE) clean
+	
+	@$(CD) $(DIR_YASM) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(DIR_LLVM) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(DIR_BINUTILS) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	
 # YASM
 yasm:
+	
 	@echo "    *** Building YASM"
-	@cd $(DIR_YASM) && $(MAKE)
+	@$(CD) $(DIR_YASM) && $(MAKE)
 	
 # GNU BinUtils
 binutils:
+	
 	@echo "    *** Building GNU BinUtils"
-	@cd $(DIR_BINUTILS) && $(MAKE)
+	@$(CD) $(DIR_BINUTILS) && $(MAKE)
 	
 # LLVM
 llvm:
+	
 	@echo "    *** Building Clang/LLVM"
-	@cd $(DIR_LLVM) && $(MAKE)
+	@$(CD) $(DIR_LLVM) && $(MAKE)

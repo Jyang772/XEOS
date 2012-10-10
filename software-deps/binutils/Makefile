@@ -59,47 +59,25 @@
 
 # $Id$
 
-#-------------------------------------------------------------------------------
-# Build settings
-#-------------------------------------------------------------------------------
-
-TARGET_32           = i386-elf
-TARGET_64           = x86_64-elf
-PREFIX              = /usr/local/xeos-build
-
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-RM                  = rm
-TAR                 = tar
-MAKE                = make
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_RM             = -rf
-ARGS_TAR            = -xf
-ARGS_MAKE           = 
+include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Software versions
 #-------------------------------------------------------------------------------
 
-VERSION_BINUTILS    = 2.22
+VERSION_BINUTILS    := 2.22
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD           = ./build/
-DIR_BUILD_32        = $(DIR_BUILD)i386/
-DIR_BUILD_64        = $(DIR_BUILD)x86_64/
-DIR_SRC             = ./source/
-DIR_SRC_BINUTILS    = $(DIR_SRC)binutils-$(VERSION_BINUTILS)
-DIR_DISTRIB         = ./distrib/
-DISTRIB_BINUTILS    = $(DIR_DISTRIB)binutils-$(VERSION_BINUTILS).tar.bz2
+DIR_BUILD           := $(realpath ./build/)/
+DIR_BUILD_32        := $(DIR_BUILD)$(TARGET_32)/
+DIR_BUILD_64        := $(DIR_BUILD)$(TARGET_64)/
+DIR_SRC             := $(realpath ./source/)/
+DIR_SRC_BINUTILS    := $(DIR_SRC)binutils-$(VERSION_BINUTILS)
+DIR_DISTRIB         := $(realpath ./distrib/)/
+DISTRIB_BINUTILS    := $(DIR_DISTRIB)binutils-$(VERSION_BINUTILS).tar.bz2
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -117,30 +95,40 @@ all: binutils_32 binutils_64
 
 # Cleans the build files
 clean:
+	
 	@echo "    *** Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_32)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_64)*
+	
 	@echo "    *** Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
 
-# Builds BinUtils / 32 bits
+# Builds GNU/BinUtils / 32 bits
 binutils_32:
+	
 	@echo "    *** Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
-	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
+	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
+	
 	@echo "    *** Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
-	@cd $(DIR_BUILD_32) && exec ../../$(DIR_SRC_BINUTILS)/configure --prefix=$(PREFIX)/binutils --target=$(TARGET_32) --disable-nls --disable-werror
+	@$(CD) $(DIR_BUILD_32) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_32)-$(TARGET_ABI) --disable-nls --disable-werror
+	
 	@echo "    *** Compiling GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
-	@cd $(DIR_BUILD_32) && $(MAKE) all
+	@$(CD) $(DIR_BUILD_32) && $(MAKE) $(ARGS_MAKE_BUILD)
+	
 	@echo "    *** Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
-	@cd $(DIR_BUILD_32) && sudo $(MAKE) install
+	@$(CD) $(DIR_BUILD_32) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 
-# Builds BinUtils / 64 bits
+# Builds GNU/BinUtils / 64 bits
 binutils_64:
+	
 	@echo "    *** Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
-	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
-	@echo "    *** Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
-	@cd $(DIR_BUILD_64) && exec ../../$(DIR_SRC_BINUTILS)/configure --prefix=$(PREFIX)/binutils --target=$(TARGET_64) --disable-nls --disable-werror
+	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
+	
+	@echo "    *** Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
+	@$(CD) $(DIR_BUILD_64) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_64)-$(TARGET_ABI) --disable-nls --disable-werror
+	
 	@echo "    *** Compiling GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
-	@cd $(DIR_BUILD_64) && $(MAKE) all
+	@$(CD) $(DIR_BUILD_64) && $(MAKE) $(ARGS_MAKE_BUILD)
+	
 	@echo "    *** Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
-	@cd $(DIR_BUILD_64) && sudo $(MAKE) install
+	@$(CD) $(DIR_BUILD_64) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)

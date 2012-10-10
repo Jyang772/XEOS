@@ -59,43 +59,23 @@
 
 # $Id$
 
-#-------------------------------------------------------------------------------
-# Build settings
-#-------------------------------------------------------------------------------
-
-PREFIX              = /usr/local/xeos-build
-
-#-------------------------------------------------------------------------------
-# Software
-#-------------------------------------------------------------------------------
-
-RM                  = rm
-TAR                 = tar
-MAKE                = make
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_RM             = -rf
-ARGS_TAR            = -xf
-ARGS_MAKE           = 
+include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Software versions
 #-------------------------------------------------------------------------------
 
-VERSION_YASM        = 1.2.0
+VERSION_YASM        := 1.2.0
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_BUILD           = ./build/
-DIR_SRC             = ./source/
-DIR_SRC_YASM        = $(DIR_SRC)yasm-$(VERSION_YASM)
-DIR_DISTRIB         = ./distrib/
-DISTRIB_YASM        = $(DIR_DISTRIB)yasm-$(VERSION_YASM).tar.gz
+DIR_BUILD           := $(realpath ./build/)/
+DIR_SRC             := $(realpath ./source/)/
+DIR_SRC_YASM        := $(DIR_SRC)yasm-$(VERSION_YASM)
+DIR_DISTRIB         := $(realpath ./distrib/)/
+DISTRIB_YASM        := $(DIR_DISTRIB)yasm-$(VERSION_YASM).tar.gz
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -113,19 +93,25 @@ all: yasm
 
 # Cleans the build files
 clean:
+
 	@echo "    *** Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
+	
 	@echo "    *** Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
 
 # Builds YASM
 yasm:
+	
 	@echo "    *** Unpacking YASM ($(VERSION_YASM))"
-	@if [ ! -d $(DIR_SRC_YASM) ]; then $(TAR) $(ARGS_TAR) $(DISTRIB_YASM) -C $(DIR_SRC); fi
+	@if [ ! -d $(DIR_SRC_YASM) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_YASM) -C $(DIR_SRC); fi
+
 	@echo "    *** Configuring YASM ($(VERSION_YASM))"
-	@cd $(DIR_BUILD) && exec ../$(DIR_SRC_YASM)/configure --prefix=$(PREFIX)/yasm
+	@$(CD) $(DIR_BUILD) && exec $(DIR_SRC_YASM)/configure --prefix=$(PATH_TOOLCHAIN_YASM)
+
 	@echo "    *** Compiling YASM ($(VERSION_YASM))"
-	@cd $(DIR_BUILD) && $(MAKE) all
+	@$(CD) $(DIR_BUILD) && $(MAKE) $(ARGS_MAKE_BUILD)
+	
 	@echo "    *** Installing YASM ($(VERSION_YASM))"
-	@cd $(DIR_BUILD) && sudo $(MAKE) install
+	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 	
