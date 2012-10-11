@@ -149,15 +149,15 @@ _FILES_C_OBJ_STRING       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_S
 _FILES_C_OBJ_TIME         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_TIME))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD        = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_CTYPE  = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_CTYPE))
-_FILES_C_OBJ_BUILD_LOCALE = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_LOCALE))
-_FILES_C_OBJ_BUILD_MATH   = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_MATH))
-_FILES_C_OBJ_BUILD_SIGNAL = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_SIGNAL))
-_FILES_C_OBJ_BUILD_STDIO  = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_STDIO))
-_FILES_C_OBJ_BUILD_STDLIB = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_STDLIB))
-_FILES_C_OBJ_BUILD_STRING = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_STRING))
-_FILES_C_OBJ_BUILD_TIME   = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OBJ_TIME))
+_FILES_C_OBJ_BUILD        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_CTYPE  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_CTYPE))
+_FILES_C_OBJ_BUILD_LOCALE = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_LOCALE))
+_FILES_C_OBJ_BUILD_MATH   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_MATH))
+_FILES_C_OBJ_BUILD_SIGNAL = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_SIGNAL))
+_FILES_C_OBJ_BUILD_STDIO  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STDIO))
+_FILES_C_OBJ_BUILD_STDLIB = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STDLIB))
+_FILES_C_OBJ_BUILD_STRING = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STRING))
+_FILES_C_OBJ_BUILD_TIME   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_TIME))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -167,7 +167,7 @@ _FILES_C_OBJ_BUILD_TIME   = $(addprefix $(PATH_BUILD_32_CORE_LIBC),$(_FILES_C_OB
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE_LIBC)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_LIBC)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -180,20 +180,20 @@ all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CTYPE) $(_FILES_C_OBJ_BUILD_LOCA
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIBC)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIBC)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_LIBC)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_LIBC)*
 	
 # Compiles a C file (64 bits)
-$(PATH_BUILD_64_CORE_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+$(PATH_BUILD_64_CORE_OBJ_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	
 	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_LIBC)$(@F) -c $(abspath $<)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_LIBC)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
 .SECONDEXPANSION:
 
 # Compiles a C file (32 bits)
-$(PATH_BUILD_32_CORE_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_LIBC),$(PATH_BUILD_64_CORE_LIBC),$$@)
+$(PATH_BUILD_32_CORE_OBJ_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_LIBC),$(PATH_BUILD_64_CORE_OBJ_LIBC),$$@)
 	
 	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_LIBC)$(@F) -c $(abspath $<)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_LIBC)$(@F) -c $(abspath $<)

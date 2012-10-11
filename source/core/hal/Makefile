@@ -129,11 +129,11 @@ _FILES_C_OBJ_IO           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_I
 _FILES_C_OBJ_SMBIOS       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SMBIOS))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD        = $(addprefix $(PATH_BUILD_32_CORE_HAL),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_CPU    = $(addprefix $(PATH_BUILD_32_CORE_HAL),$(_FILES_C_OBJ_CPU))
-_FILES_C_OBJ_BUILD_IDT    = $(addprefix $(PATH_BUILD_32_CORE_HAL),$(_FILES_C_OBJ_IDT))
-_FILES_C_OBJ_BUILD_IO     = $(addprefix $(PATH_BUILD_32_CORE_HAL),$(_FILES_C_OBJ_IO))
-_FILES_C_OBJ_BUILD_SMBIOS = $(addprefix $(PATH_BUILD_32_CORE_HAL),$(_FILES_C_OBJ_SMBIOS))
+_FILES_C_OBJ_BUILD        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_HAL),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_CPU    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_HAL),$(_FILES_C_OBJ_CPU))
+_FILES_C_OBJ_BUILD_IDT    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_HAL),$(_FILES_C_OBJ_IDT))
+_FILES_C_OBJ_BUILD_IO     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_HAL),$(_FILES_C_OBJ_IO))
+_FILES_C_OBJ_BUILD_SMBIOS = $(addprefix $(PATH_BUILD_32_CORE_OBJ_HAL),$(_FILES_C_OBJ_SMBIOS))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -143,7 +143,7 @@ _FILES_C_OBJ_BUILD_SMBIOS = $(addprefix $(PATH_BUILD_32_CORE_HAL),$(_FILES_C_OBJ
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE_HAL)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_HAL)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -156,20 +156,20 @@ all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CPU) $(_FILES_C_OBJ_BUILD_IDT) $
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_HAL)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_HAL)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_HAL)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_HAL)*
     
 # Compiles a C file (64 bits)
-$(PATH_BUILD_64_CORE_HAL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+$(PATH_BUILD_64_CORE_OBJ_HAL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 
 	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_HAL)$(@F) -c $(abspath $<)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_HAL)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
 .SECONDEXPANSION:
 
 # Compiles a C file (32 bits)
-$(PATH_BUILD_32_CORE_HAL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_HAL),$(PATH_BUILD_64_CORE_HAL),$$@)
+$(PATH_BUILD_32_CORE_OBJ_HAL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_HAL),$(PATH_BUILD_64_CORE_OBJ_HAL),$$@)
 
 	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_HAL)$(@F) -c $(abspath $<)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_HAL)$(@F) -c $(abspath $<)

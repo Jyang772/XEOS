@@ -65,9 +65,9 @@
 
 # Targets / Architectures
 
-TARGET_32                   := i386
-TARGET_64                   := x86_64
-TARGET_ABI                  := elf
+TARGET_32                       := i386
+TARGET_64                       := x86_64
+TARGET_ABI                      := elf
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -75,60 +75,64 @@ TARGET_ABI                  := elf
 
 # Toolchain
 
-PATH_TOOLCHAIN              := /usr/local/xeos-build/
+PATH_TOOLCHAIN                  := /usr/local/xeos-build/
 
 # Toolchain software
 
-PATH_TOOLCHAIN_YASM         := $(PATH_TOOLCHAIN)yasm/
-PATH_TOOLCHAIN_BINUTILS     := $(PATH_TOOLCHAIN)binutils/
-PATH_TOOLCHAIN_LLVM         := $(PATH_TOOLCHAIN)llvm/
+PATH_TOOLCHAIN_YASM             := $(PATH_TOOLCHAIN)yasm/
+PATH_TOOLCHAIN_BINUTILS         := $(PATH_TOOLCHAIN)binutils/
+PATH_TOOLCHAIN_LLVM             := $(PATH_TOOLCHAIN)llvm/
 
 # Project root directories
 
-PATH_PROJECT                := $(realpath $(dir $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))))/
-PATH_BUILD                  := $(PATH_PROJECT)build/
-PATH_RELEASE                := $(PATH_PROJECT)release/
-PATH_SRC                    := $(PATH_PROJECT)source/
-PATH_SW                     := $(PATH_PROJECT)software-deps/
+PATH_PROJECT                    := $(realpath $(dir $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))))/
+PATH_BUILD                      := $(PATH_PROJECT)build/
+PATH_RELEASE                    := $(PATH_PROJECT)release/
+PATH_SRC                        := $(PATH_PROJECT)source/
+PATH_SW                         := $(PATH_PROJECT)software-deps/
 
 # Build directories
 
-PATH_BUILD_BOOT             := $(PATH_BUILD)boot/
-PATH_BUILD_32               := $(PATH_BUILD)$(TARGET_32)/
-PATH_BUILD_64               := $(PATH_BUILD)$(TARGET_64)/
-PATH_BUILD_32_CORE          := $(PATH_BUILD_32)core/
-PATH_BUILD_64_CORE          := $(PATH_BUILD_64)core/
-PATH_BUILD_32_CORE_HAL      := $(PATH_BUILD_32_CORE)hal/
-PATH_BUILD_64_CORE_HAL      := $(PATH_BUILD_64_CORE)hal/
-PATH_BUILD_32_CORE_KERNEL   := $(PATH_BUILD_32_CORE)kernel/
-PATH_BUILD_64_CORE_KERNEL   := $(PATH_BUILD_64_CORE)kernel/
-PATH_BUILD_32_CORE_LIBC     := $(PATH_BUILD_32_CORE)libc/
-PATH_BUILD_64_CORE_LIBC     := $(PATH_BUILD_64_CORE)libc/
+PATH_BUILD_BOOT                 := $(PATH_BUILD)boot/
+PATH_BUILD_32                   := $(PATH_BUILD)$(TARGET_32)/
+PATH_BUILD_64                   := $(PATH_BUILD)$(TARGET_64)/
+PATH_BUILD_32_CORE              := $(PATH_BUILD_32)core/
+PATH_BUILD_64_CORE              := $(PATH_BUILD_64)core/
+PATH_BUILD_32_CORE_BIN          := $(PATH_BUILD_32_CORE)bin/
+PATH_BUILD_64_CORE_BIN          := $(PATH_BUILD_64_CORE)bin/
+PATH_BUILD_32_CORE_OBJ          := $(PATH_BUILD_32_CORE)obj/
+PATH_BUILD_64_CORE_OBJ          := $(PATH_BUILD_64_CORE)obj/
+PATH_BUILD_32_CORE_OBJ_HAL      := $(PATH_BUILD_32_CORE_OBJ)hal/
+PATH_BUILD_64_CORE_OBJ_HAL      := $(PATH_BUILD_64_CORE_OBJ)hal/
+PATH_BUILD_32_CORE_OBJ_KERNEL   := $(PATH_BUILD_32_CORE_OBJ)kernel/
+PATH_BUILD_64_CORE_OBJ_KERNEL   := $(PATH_BUILD_64_CORE_OBJ)kernel/
+PATH_BUILD_32_CORE_OBJ_LIBC     := $(PATH_BUILD_32_CORE_OBJ)libc/
+PATH_BUILD_64_CORE_OBJ_LIBC     := $(PATH_BUILD_64_CORE_OBJ)libc/
 
 # Source directories
 
-PATH_SRC_BOOT               := $(PATH_SRC)boot/
-PATH_SRC_CORE               := $(PATH_SRC)core/
-PATH_SRC_CORE_HAL           := $(PATH_SRC_CORE)hal/
-PATH_SRC_CORE_KERNEL        := $(PATH_SRC_CORE)kernel/
-PATH_SRC_CORE_LIBC          := $(PATH_SRC_CORE)libc/
-PATH_SRC_CORE_INC           := $(PATH_SRC_CORE)include/
+PATH_SRC_BOOT                   := $(PATH_SRC)boot/
+PATH_SRC_CORE                   := $(PATH_SRC)core/
+PATH_SRC_CORE_HAL               := $(PATH_SRC_CORE)hal/
+PATH_SRC_CORE_KERNEL            := $(PATH_SRC_CORE)kernel/
+PATH_SRC_CORE_LIBC              := $(PATH_SRC_CORE)libc/
+PATH_SRC_CORE_INC               := $(PATH_SRC_CORE)include/
 
 # Release directories
 
-PATH_RELEASE_CDROM          := $(PATH_BUILD)cdrom/
-PATH_RELEASE_FLOPPY         := $(PATH_BUILD)floppy/
+PATH_RELEASE_CDROM              := $(PATH_BUILD)cdrom/
+PATH_RELEASE_FLOPPY             := $(PATH_BUILD)floppy/
 
 #-------------------------------------------------------------------------------
 # File extensions
 #-------------------------------------------------------------------------------
 
-EXT_ASM                     := .s
-EXT_C                       := .c
-EXT_H                       := .h
-EXT_OBJ                     := .o
-EXT_BIN_RAW                 := .BIN
-EXT_BIN                     := .$(TARGET_ABI)
+EXT_ASM                         := .s
+EXT_C                           := .c
+EXT_H                           := .h
+EXT_OBJ                         := .o
+EXT_BIN_RAW                     := .BIN
+EXT_BIN                         := .$(TARGET_ABI)
 
 #-------------------------------------------------------------------------------
 # Software
@@ -136,36 +140,36 @@ EXT_BIN                     := .$(TARGET_ABI)
 
 # Assembler
 
-AS                          := $(PATH_TOOLCHAIN_YASM)bin/yasm
-AS_32                       := $(AS)
-AS_64                       := $(AS)
+AS                              := $(PATH_TOOLCHAIN_YASM)bin/yasm
+AS_32                           := $(AS)
+AS_64                           := $(AS)
 
 # Linker
 
-LD                          := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32)-$(TARGET_ABI)/bin/ld
-LD_32                       := $(LD)
-LD_64                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64)-$(TARGET_ABI)/bin/ld
+LD                              := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32)-$(TARGET_ABI)/bin/ld
+LD_32                           := $(LD)
+LD_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64)-$(TARGET_ABI)/bin/ld
 
 # C compiler
 
-CC                          := $(PATH_TOOLCHAIN_LLVM)bin/clang
-CC_32                       := $(CC)
-CC_64                       := $(CC)
+CC                              := $(PATH_TOOLCHAIN_LLVM)bin/clang
+CC_32                           := $(CC)
+CC_64                           := $(CC)
 
 # Utilities
 
-MAKE                        := make
-CD                          := cd
-MV                          := mv
-CP                          := cp
-RM                          := rm
-TAR                         := tar
-SUDO                        := sudo
-SVN                         := svn
-DD                          := dd
-HDID                        := hdid
-EXEC                        := exec
-PRINT                       := echo
+MAKE                            := make
+CD                              := cd
+MV                              := mv
+CP                              := cp
+RM                              := rm
+TAR                             := tar
+SUDO                            := sudo
+SVN                             := svn
+DD                              := dd
+HDID                            := hdid
+EXEC                            := exec
+PRINT                           := echo
 
 #-------------------------------------------------------------------------------
 # Software arguments
@@ -173,22 +177,22 @@ PRINT                       := echo
 
 # C compiler warning flags
 
-#ARGS_CC_WARN                := -Weverything -Werror
-ARGS_CC_STD                 := -std=c89
-ARGS_CC_32                  := -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -ccc-host-triple $(TARGET_32)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
-ARGS_CC_64                  := -I $(PATH_SRC_CORE_INC) -march=x86-64 -ccc-host-triple $(TARGET_64)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+#ARGS_CC_WARN                    := -Weverything -Werror
+ARGS_CC_STD                     := -std=c89
+ARGS_CC_32                      := -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -ccc-host-triple $(TARGET_32)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_64                      := -I $(PATH_SRC_CORE_INC) -march=x86-64 -ccc-host-triple $(TARGET_64)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 
 # Utilities
 
-ARGS_MAKE_CLEAN             := clean
-ARGS_MAKE_BUILD             := all
-ARGS_MAKE_INSTALL           := install
-ARGS_CP                     := 
-ARGS_RM                     := -rf
-ARGS_DD                     := conv=notrunc
-ARGS_HDID                   := -nobrowse -nomount
-ARGS_TAR_EXPAND             := -xf
-ARGS_SVN_CO                 := checkout
+ARGS_MAKE_CLEAN                 := clean
+ARGS_MAKE_BUILD                 := all
+ARGS_MAKE_INSTALL               := install
+ARGS_CP                         := 
+ARGS_RM                         := -rf
+ARGS_DD                         := conv=notrunc
+ARGS_HDID                       := -nobrowse -nomount
+ARGS_TAR_EXPAND                 := -xf
+ARGS_SVN_CO                     := checkout
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -212,11 +216,11 @@ vpath
 # DISPLAY
 #-------------------------------------------------------------------------------
 
-COLOR_NONE                  := "\x1b[0m"
-COLOR_GRAY                  := "\x1b[30;01m"
-COLOR_RED                   := "\x1b[31;01m"
-COLOR_GREEN                 := "\x1b[32;01m"
-COLOR_YELLOW                := "\x1b[33;01m"
-COLOR_BLUE                  := "\x1b[34;01m"
-COLOR_PURPLE                := "\x1b[35;01m"
-COLOR_CYAN                  := "\x1b[36;01m"
+COLOR_NONE                      := "\x1b[0m"
+COLOR_GRAY                      := "\x1b[30;01m"
+COLOR_RED                       := "\x1b[31;01m"
+COLOR_GREEN                     := "\x1b[32;01m"
+COLOR_YELLOW                    := "\x1b[33;01m"
+COLOR_BLUE                      := "\x1b[34;01m"
+COLOR_PURPLE                    := "\x1b[35;01m"
+COLOR_CYAN                      := "\x1b[36;01m"
