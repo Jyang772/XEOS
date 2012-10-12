@@ -159,6 +159,8 @@ _FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$
 # Build the full project
 all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUPTS) $(_FILES_C_OBJ_BUILD_VIDEO) $(_FILES_C_OBJ_BUILD_SYSCALLS) $(_FILES_C_OBJ_BUILD_SYSTEM)
 	
+	@:
+
 # Cleans the build files
 clean:
 	
