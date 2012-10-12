@@ -59,55 +59,31 @@
 
 # $Id$
 
-include ./Makefile-Config.mk
+include ../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>                               *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" DIST "$(COLOR_NONE)"]>                     *** "
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean boot core toolchain
+.PHONY: all clean
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: boot core release
+all:
 	
+	@:	
+
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_BOOT) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_RELEASE) && $(MAKE) $(ARGS_MAKE_CLEAN)
-
-# Builds the XEOS toolchain
-toolchain:
-	
-	@$(PRINT) $(PROMPT)"Building the XEOS toolchain"
-	@$(CD) $(PATH_SW) && $(MAKE)
-
-# Builds the boot files
-boot:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS boot files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_BOOT) && $(MAKE)
-
-# Builds the core files
-core:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS core files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE) && $(MAKE)
-
-# Builds the release files
-release:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS core files"$(COLOR_NONE)
-	@$(CD) $(PATH_RELEASE) && $(MAKE)
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
