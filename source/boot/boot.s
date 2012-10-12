@@ -126,7 +126,7 @@ jmp     XEOS.boot.stage2
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.files.kernel               db  'KERNEL  ELF'
+XEOS.files.kernel               db  'XEOS32  ELF'
 XEOS.boot.stage2.nl             db   $ASCII.NL,  $ASCII.NUL
 XEOS.boot.stage2.hr             db  '         --------------------------------------------------------------------', $ASCII.NL, $ASCII.NUL
 XEOS.boot.stage2.prompt         db  '<BOOT2>: ', $ASCII.NUL
