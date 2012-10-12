@@ -117,6 +117,8 @@ _FILES_BIN_BUILD  = $(addprefix $(PATH_BUILD_BOOT),$(_FILES_ASM_BIN))
 # Build the full project
 all: $(_FILES_BIN_BUILD)
 
+	@:
+
 # Cleans the build files
 clean:
 
