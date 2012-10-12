@@ -107,7 +107,6 @@ jmp     XEOS.boot.stage2
 %include "XEOS.ascii.inc.s"           ; ASCII table
 %include "XEOS.gdt.inc.s"             ; GDT - Global Descriptor Table
 %include "XEOS.a20.inc.16.s"          ; 20th address line enabling
-%include "XEOS.elf.inc.16.s"          ; ELF support
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -126,16 +125,20 @@ jmp     XEOS.boot.stage2
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.files.kernel               db  'XEOS32  ELF'
-XEOS.boot.stage2.nl             db   $ASCII.NL,  $ASCII.NUL
-XEOS.boot.stage2.hr             db  '         --------------------------------------------------------------------', $ASCII.NL, $ASCII.NUL
-XEOS.boot.stage2.prompt         db  '<XEOS-BOOT>: ', $ASCII.NUL
-XEOS.boot.stage2.greet          db  'Entering the XEOS second stage bootloader...', $ASCII.NUL
-XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
-XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
-XEOS.boot.stage2.loadKernel     db  'Loading the XEOS kernel into memory...', $ASCII.NUL
-XEOS.boot.stage2.pMode          db  'Switching the CPU to 32 bits protected mode...', $ASCII.NUL
-XEOS.boot.stage2.execKernel     db  'Moving and executing the XEOS kernel...', $ASCII.NUL
+XEOS.files.kernel                       db  'XEOS32  ELF'
+XEOS.boot.stage2.nl                     db   $ASCII.NL,  $ASCII.NUL
+XEOS.boot.stage2.hr                     db  '         --------------------------------------------------------------------', $ASCII.NL, $ASCII.NUL
+XEOS.boot.stage2.prompt                 db  '<XEOS-BOOT>: ', $ASCII.NUL
+XEOS.boot.stage2.greet                  db  'Entering the XEOS second stage bootloader...', $ASCII.NUL
+XEOS.boot.stage2.gdt                    db  'Installing the global descriptor table - GDT...', $ASCII.NUL
+XEOS.boot.stage2.a20                    db  'Enabling the A-20 address line...', $ASCII.NUL
+XEOS.boot.stage2.loadKernel             db  'Loading the XEOS kernel into memory...', $ASCII.NUL
+XEOS.boot.stage2.pMode                  db  'Switching the CPU to 32 bits protected mode...', $ASCII.NUL
+XEOS.boot.stage2.execKernel             db  'Moving and executing the XEOS kernel...', $ASCII.NUL
+XEOS.boot.stage2.error.kernel.signature db  'Error: invalid kernel ELF signature', $ASCII.NUL
+XEOS.boot.stage2.error.kernel.class     db  'Error: invalid kernel ELF class', $ASCII.NUL
+XEOS.boot.stage2.error.kernel.encoding  db  'Error: invalid kernel ELF encoding', $ASCII.NUL
+XEOS.boot.stage2.kernel.signature       db  0x7F, 0x45, 0x4C, 0x46
 
 ;-------------------------------------------------------------------------------
 ; Second stage bootloader
@@ -176,7 +179,7 @@ XEOS.boot.stage2:
     mov     bx,             0x1000
     
     ; Loads the kernel file
-    call    XEOS.elf.load
+    call    XEOS.boot.stage2.kernel.load
     
     ; Prints status message
     @XEOS.boot.stage2.print XEOS.boot.stage2.gdt
@@ -215,7 +218,148 @@ XEOS.boot.stage2:
     ; We are doing a far jump using our code descriptor
     ; 
     ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-    jmp	    $XEOS.gdt.descriptors.code.kernel:.kernelSetup
+    jmp	    $XEOS.gdt.descriptors.code.kernel:.kernel.setup
+
+;-------------------------------------------------------------------------------
+; Checks the ELF header to ensure it's a valid ELF binary file
+; 
+; The ELF header has the following structure:
+;       
+;       - BYTE  e_ident[ 16 ]   File identification
+;       - WORD  e_type          Object file type
+;       - WORD  e_machine       Required architecture
+;       - DWORD e_version       Object file version
+;       - DWORD e_entry         Entry point address
+;       - DWORD e_phoff         Program header table's file offset
+;       - DWORD e_shoff         Section header table's file offset
+;       - DWORD e_flags         Processor-specific flags
+;       - WORD  e_ehsize        ELF header's size
+;       - WORD  e_phentsize     Size of an entry in the program header table
+;                               (all entries are the same size)
+;       - WORD  e_phnum         Number of entries in the program header table
+;       - WORD  e_shentsize     Section header's size
+;       - WORD  e_shnum         Number of entries in the section header table
+;       - WORD  e_shstrndx      Section header table index of the entry
+;                               associated with the section name string table
+; 
+; Necessary register values:
+;       
+;       - ax:       The memory address at which the file is loaded
+;-------------------------------------------------------------------------------
+XEOS.boot.stage2.kernel.checkHeader:
+    
+    @XEOS.reg.save
+    
+    mov     es,         ax
+    xor     ax,         ax
+    mov     di,         ax
+    
+    mov     si,         XEOS.boot.stage2.kernel.signature
+    mov     cx,         4
+    
+    rep     cmpsb
+    
+    je      .validSignature
+    
+    @XEOS.boot.stage2.print XEOS.boot.stage2.error.kernel.signature
+    call    XEOS.error.fatal
+    
+    .validSignature:
+        
+        push    ds
+        push    si
+        
+        mov     ax,         es
+        mov     ds,         ax
+        mov     ax,         di
+        mov     si,         ax
+        
+        lodsb
+        
+        cmp     al,         0x01
+        
+        je      .validClass
+        
+        pop     si
+        pop     ds
+        
+        @XEOS.boot.stage2.print XEOS.boot.stage2.error.kernel.class
+        call    XEOS.error.fatal
+        
+    .validClass:
+        
+        lodsb
+        
+        cmp     al,         0x00
+        
+        jg      .validEncoding
+        
+        pop     si
+        pop     ds
+        
+        @XEOS.boot.stage2.print XEOS.boot.stage2.error.kernel.encoding
+        call    XEOS.error.fatal
+        
+    .validEncoding:
+        
+        pop     si
+        pop     ds
+    
+    @XEOS.reg.restore
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; Loads an ELF file into memory
+; 
+; Necessary register values:
+;       
+;       - si:       The name of the file to load
+;       - ax:       The memory address at which the file will be loaded
+;       - bx:       The memory address at which the buffer will be created
+;                   (the buffer is used to load the FAT root directory and
+;                   the file allocation table, so be sure to have enough
+;                   memory available)
+;-------------------------------------------------------------------------------
+XEOS.boot.stage2.kernel.load:
+    
+    @XEOS.reg.save
+    
+    ; Saves some registers
+    push    ax
+    push    bx
+    
+    ; Loads the root directory into memory
+    call    XEOS.io.fat12.loadRootDirectory
+    
+    ; Location of the data we read into memory
+    pop     bx
+    push    bx
+    
+    ; Tries to find the kernel file in the root directory
+    call    XEOS.io.fat12.findFile
+    
+    ; Restores the needed memory registers
+    pop     bx
+    pop     ax
+    
+    ; Saves AX again
+    push    ax
+    
+    ; Loads the kernel into memory
+    call    XEOS.io.fat12.loadFile
+    
+    ; Checks the ELF header
+    pop     ax
+    push    ax
+    call    XEOS.boot.stage2.kernel.checkHeader
+    
+    ; Restores AX
+    pop    ax
+    
+    @XEOS.reg.restore
+    
+    ret
 
 ; We are now in 32 bits mode
 BITS    32
@@ -224,7 +368,7 @@ BITS    32
 ; Moves the kernel to an absolute memory location, as we are now in 32 bits
 ; protected mode, and executes it
 ;-------------------------------------------------------------------------------
-XEOS.boot.stage2.kernelSetup:
+XEOS.boot.stage2.kernel.setup:
     
     ; Sets the data segments to the GDT data descriptor
     mov     ax,         $XEOS.gdt.descriptors.data.kernel

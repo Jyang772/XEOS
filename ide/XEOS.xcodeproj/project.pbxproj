@@ -25,7 +25,6 @@
 		05AFEE011620F27C00740041 /* xeos.ascii.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.ascii.inc.s; sourceTree = "<group>"; };
 		05AFEE021620F27C00740041 /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		05AFEE031620F27C00740041 /* xeos.crt.controller.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.crt.controller.inc.s; sourceTree = "<group>"; };
-		05AFEE041620F27C00740041 /* xeos.elf.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.elf.inc.16.s; sourceTree = "<group>"; };
 		05AFEE051620F27C00740041 /* xeos.error.inc.16.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.error.inc.16.s; sourceTree = "<group>"; };
 		05AFEE061620F27C00740041 /* xeos.error.inc.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.error.inc.32.s; sourceTree = "<group>"; };
 		05AFEE071620F27C00740041 /* xeos.gdt.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.gdt.inc.s; sourceTree = "<group>"; };
@@ -342,7 +341,6 @@
 				05AFEE011620F27C00740041 /* xeos.ascii.inc.s */,
 				05AFEE021620F27C00740041 /* xeos.constants.inc.s */,
 				05AFEE031620F27C00740041 /* xeos.crt.controller.inc.s */,
-				05AFEE041620F27C00740041 /* xeos.elf.inc.16.s */,
 				05AFEE051620F27C00740041 /* xeos.error.inc.16.s */,
 				05AFEE061620F27C00740041 /* xeos.error.inc.32.s */,
 				05AFEE071620F27C00740041 /* xeos.gdt.inc.s */,
