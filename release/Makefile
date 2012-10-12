@@ -77,26 +77,27 @@ KERNEL32            := $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF
 KERNEL64            := $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF
 FLOPPY_DMG          := $(PATH_BUILD_TMP)boot.dmg
 FLOPPY_IMG          := $(PATH_RELEASE_CDROM)boot/boot.img
+CD_IMG              := $(PATH_RELEASE)XEOS.iso
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean boot_floppy_image boot_floppy
+.PHONY: all clean boot_floppy_image boot_floppy cdrom
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: boot_floppy
+all: boot_floppy cdrom
 	
 	@:	
 
 boot_floppy_image:
 	
-	@$(PRINT) $(PROMPT)"Creating a fresh floppy image"
+	@$(PRINT) $(PROMPT)"Creating a fresh floppy image (UDIF FAT12)"
 	@hdiutil create -ov -type UDIF -sectors 2880 -fs "MS-DOS FAT12" -volname "XEOS" $(FLOPPY_DMG) > /dev/null
 	@$(PRINT) $(PROMPT)"Installing the XEOS Master Boot Record (MBR)"
 	@dd conv=notrunc if=$(MBR) of=$(FLOPPY_DMG) > /dev/null 2>&1
@@ -110,7 +111,7 @@ boot_floppy:
 	@$(CP) $(KERNEL32) $(PATH_RELEASE_FLOPPY)
 	@$(CP) $(KERNEL64) $(PATH_RELEASE_FLOPPY)
 	
-	@$(PRINT) $(PROMPT)"Attaching the boot floppy image to "$(COLOR_GRAY)$(_BOOT_FLOPPY_DEVICE)$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)"Attaching the boot floppy image to $(_BOOT_FLOPPY_DEVICE)"
 	
 	@$(PRINT) $(PROMPT)"Mounting the boot floppy image"
 	@mount -t msdos $(_BOOT_FLOPPY_DEVICE) $(PATH_BUILD_MOUNT)
@@ -122,8 +123,13 @@ boot_floppy:
 	@umount $(_BOOT_FLOPPY_DEVICE) > /dev/null
 	@hdiutil detach $(_BOOT_FLOPPY_DEVICE) > /dev/null
 	
-	@$(PRINT) $(PROMPT)"Converting the boot floppy image"
+	@$(PRINT) $(PROMPT)"Converting and copying the boot floppy image into the /boot/ directory"
 	@hdiutil convert -ov $(FLOPPY_DMG) -format Rdxx -o $(FLOPPY_IMG) > /dev/null
+
+cdrom:
+	
+	@$(PRINT) $(PROMPT)"Creating the XEOS UDF CD-Rom image"
+	@hdiutil makehybrid -ov -udf -eltorito-boot $(FLOPPY_IMG) -default-volume-name XEOS -publisher eosgarden -preparer eosgarden -application XEOS -o $(CD_IMG) $(PATH_RELEASE_CDROM) > /dev/null
 
 # Cleans the release files
 clean:
