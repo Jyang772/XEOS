@@ -10,6 +10,7 @@
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		056A29231628ACF4003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -285,6 +286,22 @@
 			path = ../release;
 			sourceTree = "<group>";
 		};
+		056A29211628ACF4003FBE80 /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+				056A29221628ACF4003FBE80 /* include */,
+				056A29231628ACF4003FBE80 /* Makefile */,
+			);
+			path = pthread;
+			sourceTree = "<group>";
+		};
+		056A29221628ACF4003FBE80 /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		05A8F94E1625690B000484EB /* yasm */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +394,7 @@
 				05AFEE321620F27C00740041 /* include */,
 				05AFEE5A1620F27C00740041 /* kernel */,
 				05AFEE8D1620F27C00740041 /* libc */,
+				056A29211628ACF4003FBE80 /* pthread */,
 				05AFEF0F1620F27C00740041 /* linker.ld */,
 				05AFEF101620F27C00740041 /* Makefile */,
 			);
