@@ -98,7 +98,7 @@ boot_floppy_image:
 	
 	@$(PRINT) $(PROMPT)"Creating a fresh floppy image"
 	@hdiutil create -ov -type UDIF -sectors 2880 -fs "MS-DOS FAT12" -volname "XEOS" $(FLOPPY_DMG) > /dev/null
-	@$(PRINT) $(PROMPT)"Installing the XEOS Master Boot Record (MBR): "$(COLOR_YELLOW)$(notdir $(MBR))$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)"Installing the XEOS Master Boot Record (MBR)"
 	@dd conv=notrunc if=$(MBR) of=$(FLOPPY_DMG) > /dev/null 2>&1
 
 boot_floppy: boot_floppy_image
@@ -110,7 +110,7 @@ boot_floppy:
 	@$(CP) $(KERNEL32) $(PATH_RELEASE_FLOPPY)
 	@$(CP) $(KERNEL64) $(PATH_RELEASE_FLOPPY)
 	
-	@$(PRINT) $(PROMPT)"Attaching the boot floppy image: "$(COLOR_GRAY)$(_BOOT_FLOPPY_DEVICE)$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)"Attaching the boot floppy image to "$(COLOR_GRAY)$(_BOOT_FLOPPY_DEVICE)$(COLOR_NONE)
 	
 	@$(PRINT) $(PROMPT)"Mounting the boot floppy image"
 	@mount -t msdos $(_BOOT_FLOPPY_DEVICE) $(PATH_BUILD_MOUNT)
