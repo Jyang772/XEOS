@@ -83,7 +83,7 @@ all:
 	
 	@:	
 
-# Cleans the build files
+# Cleans the release files
 clean:
 	
-	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(PRINT) $(PROMPT)"Cleaning all release files"

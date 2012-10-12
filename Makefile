@@ -72,7 +72,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>            
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean boot core toolchain
+.PHONY: all clean boot core release toolchain
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -109,5 +109,5 @@ core:
 # Builds the release files
 release:
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS core files"$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS release files"$(COLOR_NONE)
 	@$(CD) $(PATH_RELEASE) && $(MAKE)
