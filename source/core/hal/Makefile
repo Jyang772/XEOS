@@ -152,6 +152,8 @@ _FILES_C_OBJ_BUILD_SMBIOS = $(addprefix $(PATH_BUILD_32_CORE_OBJ_HAL),$(_FILES_C
 # Build the full project
 all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CPU) $(_FILES_C_OBJ_BUILD_IDT) $(_FILES_C_OBJ_BUILD_IO) $(_FILES_C_OBJ_BUILD_SMBIOS)
 	
+	@:
+
 # Cleans the build files
 clean:
 	
