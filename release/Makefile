@@ -92,8 +92,6 @@ CD_IMG              := $(PATH_RELEASE)XEOS.iso
 
 # Build the full project
 all: boot_floppy cdrom
-	
-	@:	
 
 boot_floppy_image:
 	
