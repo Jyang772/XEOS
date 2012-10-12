@@ -172,7 +172,6 @@ TAR                             := tar
 SUDO                            := sudo
 SVN                             := svn
 DD                              := dd
-HDID                            := hdid
 EXEC                            := exec
 PRINT                           := echo
 
