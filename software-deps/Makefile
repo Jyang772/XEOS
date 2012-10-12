@@ -89,6 +89,8 @@ DIR_BINUTILS        := $(PATH_SW)binutils/
 # Build the full project
 all: yasm binutils llvm
 
+	@:
+
 # Cleans the build files
 clean:
 	

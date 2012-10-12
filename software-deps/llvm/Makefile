@@ -99,6 +99,8 @@ DIR_CRT             := $(DIR_LLVM)projects/compiler-rt/
 # Build the full project
 all: llvm_co clang_co crt_co llvm_build
 
+	@:
+
 # Cleans the build files
 clean:
 

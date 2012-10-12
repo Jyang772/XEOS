@@ -97,6 +97,8 @@ DISTRIB_YASM        := $(DIR_DISTRIB)yasm-$(VERSION_YASM).tar.gz
 # Build the full project
 all: yasm
 
+	@:
+
 # Cleans the build files
 clean:
 

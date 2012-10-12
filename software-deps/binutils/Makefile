@@ -99,6 +99,8 @@ DISTRIB_BINUTILS    := $(DIR_DISTRIB)binutils-$(VERSION_BINUTILS).tar.bz2
 # Build the full project
 all: binutils_32 binutils_64
 
+	@:
+
 # Cleans the build files
 clean:
 	
