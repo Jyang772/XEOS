@@ -94,6 +94,8 @@ PATH_SW                         := $(PATH_PROJECT)software-deps/
 # Build directories
 
 PATH_BUILD_BOOT                 := $(PATH_BUILD)boot/
+PATH_BUILD_TMP                  := $(PATH_BUILD)tmp/
+PATH_BUILD_MOUNT                := $(PATH_BUILD)mount/
 PATH_BUILD_32                   := $(PATH_BUILD)$(TARGET_32)/
 PATH_BUILD_64                   := $(PATH_BUILD)$(TARGET_64)/
 PATH_BUILD_32_CORE              := $(PATH_BUILD_32)core/
@@ -108,6 +110,8 @@ PATH_BUILD_32_CORE_OBJ_KERNEL   := $(PATH_BUILD_32_CORE_OBJ)kernel/
 PATH_BUILD_64_CORE_OBJ_KERNEL   := $(PATH_BUILD_64_CORE_OBJ)kernel/
 PATH_BUILD_32_CORE_OBJ_LIBC     := $(PATH_BUILD_32_CORE_OBJ)libc/
 PATH_BUILD_64_CORE_OBJ_LIBC     := $(PATH_BUILD_64_CORE_OBJ)libc/
+PATH_BUILD_32_CORE_OBJ_PTHREAD  := $(PATH_BUILD_32_CORE_OBJ)pthread/
+PATH_BUILD_64_CORE_OBJ_PTHREAD  := $(PATH_BUILD_64_CORE_OBJ)pthread/
 
 # Source directories
 
@@ -116,12 +120,13 @@ PATH_SRC_CORE                   := $(PATH_SRC)core/
 PATH_SRC_CORE_HAL               := $(PATH_SRC_CORE)hal/
 PATH_SRC_CORE_KERNEL            := $(PATH_SRC_CORE)kernel/
 PATH_SRC_CORE_LIBC              := $(PATH_SRC_CORE)libc/
+PATH_SRC_CORE_PTHREAD           := $(PATH_SRC_CORE)pthread/
 PATH_SRC_CORE_INC               := $(PATH_SRC_CORE)include/
 
 # Release directories
 
-PATH_RELEASE_CDROM              := $(PATH_BUILD)cdrom/
-PATH_RELEASE_FLOPPY             := $(PATH_BUILD)floppy/
+PATH_RELEASE_CDROM              := $(PATH_RELEASE)cdrom/
+PATH_RELEASE_FLOPPY             := $(PATH_RELEASE)floppy/
 
 #-------------------------------------------------------------------------------
 # File extensions
@@ -178,7 +183,7 @@ PRINT                           := echo
 # C compiler warning flags
 
 #ARGS_CC_WARN                    := -Weverything -Werror
-ARGS_CC_STD                     := -std=c89
+ARGS_CC_STD                     := -std=c99
 ARGS_CC_32                      := -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -ccc-host-triple $(TARGET_32)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 ARGS_CC_64                      := -I $(PATH_SRC_CORE_INC) -march=x86-64 -ccc-host-triple $(TARGET_64)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 
