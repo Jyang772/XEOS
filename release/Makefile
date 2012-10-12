@@ -68,22 +68,67 @@ include ../Makefile-Config.mk
 PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" DIST "$(COLOR_NONE)"]>                     *** "
 
 #-------------------------------------------------------------------------------
+# Paths
+#-------------------------------------------------------------------------------
+
+MBR                 := $(PATH_BUILD_BOOT)MBR.BIN
+BOOTLOADER          := $(PATH_BUILD_BOOT)BOOT.BIN
+KERNEL32            := $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF
+KERNEL64            := $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF
+FLOPPY_DMG          := $(PATH_BUILD_TMP)boot.dmg
+FLOPPY_IMG          := $(PATH_RELEASE_CDROM)boot/boot.img
+
+#-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean
+.PHONY: all clean boot_floppy_image boot_floppy
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:
+all: boot_floppy
 	
 	@:	
+
+boot_floppy_image:
+	
+	@$(PRINT) $(PROMPT)"Creating a fresh floppy image"
+	@hdiutil create -ov -type UDIF -sectors 2880 -fs "MS-DOS FAT12" -volname "XEOS" $(FLOPPY_DMG) > /dev/null
+	@$(PRINT) $(PROMPT)"Installing the XEOS Master Boot Record (MBR): "$(COLOR_YELLOW)$(notdir $(MBR))$(COLOR_NONE)
+	@dd conv=notrunc if=$(MBR) of=$(FLOPPY_DMG) > /dev/null 2>&1
+
+boot_floppy: boot_floppy_image
+boot_floppy: _BOOT_FLOPPY_DEVICE = $(shell hdid -nobrowse -nomount $(FLOPPY_DMG))
+boot_floppy:
+	
+	@$(PRINT) $(PROMPT)"Copying the XEOS boot files"
+	@$(CP) $(BOOTLOADER) $(PATH_RELEASE_FLOPPY)
+	@$(CP) $(KERNEL32) $(PATH_RELEASE_FLOPPY)
+	@$(CP) $(KERNEL64) $(PATH_RELEASE_FLOPPY)
+	
+	@$(PRINT) $(PROMPT)"Attaching the boot floppy image: "$(COLOR_GRAY)$(_BOOT_FLOPPY_DEVICE)$(COLOR_NONE)
+	
+	@$(PRINT) $(PROMPT)"Mounting the boot floppy image"
+	@mount -t msdos $(_BOOT_FLOPPY_DEVICE) $(PATH_BUILD_MOUNT)
+	
+	@$(PRINT) $(PROMPT)"Copying the XEOS boot files to the boot floppy"
+	@cp $(PATH_RELEASE_FLOPPY)* $(PATH_BUILD_MOUNT)
+	
+	@$(PRINT) $(PROMPT)"Unmounting the boot floppy image"
+	@umount $(_BOOT_FLOPPY_DEVICE) > /dev/null
+	@hdiutil detach $(_BOOT_FLOPPY_DEVICE) > /dev/null
+	
+	@$(PRINT) $(PROMPT)"Converting the boot floppy image"
+	@hdiutil convert -ov $(FLOPPY_DMG) -format Rdxx -o $(FLOPPY_IMG) > /dev/null
 
 # Cleans the release files
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all release files"
+	@$(RM) $(ARGS_RM) $(FLOPPY_DMG)
+	@$(RM) $(ARGS_RM) $(FLOPPY_IMG)
+	@$(RM) $(ARGS_RM) $(PATH_RELEASE_FLOPPY)*
