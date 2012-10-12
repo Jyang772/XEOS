@@ -129,10 +129,8 @@ jmp     XEOS.boot.stage2
 XEOS.files.kernel               db  'XEOS32  ELF'
 XEOS.boot.stage2.nl             db   $ASCII.NL,  $ASCII.NUL
 XEOS.boot.stage2.hr             db  '         --------------------------------------------------------------------', $ASCII.NL, $ASCII.NUL
-XEOS.boot.stage2.prompt         db  '<BOOT2>: ', $ASCII.NUL
-XEOS.boot.stage2.revision       db  '         $Revision$', $ASCII.NL, $ASCII.NUL
-XEOS.boot.stage2.date           db  '         $Date$', $ASCII.NL, $ASCII.NUL
-XEOS.boot.stage2.greet          db  'Entering the second stage bootloader...', $ASCII.NUL
+XEOS.boot.stage2.prompt         db  '<XEOS-BOOT>: ', $ASCII.NUL
+XEOS.boot.stage2.greet          db  'Entering the XEOS second stage bootloader...', $ASCII.NUL
 XEOS.boot.stage2.gdt            db  'Installing the global descriptor table - GDT...', $ASCII.NUL
 XEOS.boot.stage2.a20            db  'Enabling the A-20 address line...', $ASCII.NUL
 XEOS.boot.stage2.loadKernel     db  'Loading the XEOS kernel into memory...', $ASCII.NUL
@@ -166,10 +164,6 @@ XEOS.boot.stage2:
     ; Prints status messages
     @BIOS.video.print       XEOS.boot.stage2.nl
     @XEOS.boot.stage2.print XEOS.boot.stage2.greet
-    @BIOS.video.print       XEOS.boot.stage2.hr
-    @BIOS.video.print       XEOS.boot.stage2.revision
-    @BIOS.video.print       XEOS.boot.stage2.date
-    @BIOS.video.print       XEOS.boot.stage2.nl
     @XEOS.boot.stage2.print XEOS.boot.stage2.loadKernel
     
     ; Name of the kernel file
