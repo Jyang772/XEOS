@@ -97,9 +97,12 @@ start: jmp main
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-$XEOS.boot.stage2.nl                     db   @ASCII.NL,  @ASCII.NUL
-$XEOS.boot.stage2.prompt                 db  '[ XEOS ]> ', @ASCII.NUL
-$XEOS.boot.stage2.greet                  db  'Entering the XEOS second stage bootloader...', @ASCII.NUL
+$XEOS.boot.stage2.nl                    db  @ASCII.NL,  @ASCII.NUL
+$XEOS.boot.stage2.prompt                db  '[ XEOS ]> ', @ASCII.NUL
+$XEOS.boot.stage2.greet                 db  'Entering the XEOS second stage bootloader', @ASCII.NUL
+$XEOS.boot.stage2.fat12.loadRoot        db  'Loading the FAT-12 root directory from the boot floppy', @ASCII.NUL
+$XEOS.boot.stage2.fat12.findFile        db  'Locating the XEOS kernel', @ASCII.NUL
+$XEOS.boot.stage2.fat12.loadFile        db  'Loading the XEOS kernel into memory', @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; XEOS second stage bootloader
@@ -142,7 +145,7 @@ main:
     sti
     
     ; Prints the welcome message
-    @XEOS.boot.stage2.print XEOS.boot.stage2.greet 
+    @XEOS.boot.stage2.print $XEOS.boot.stage2.greet
     
     ; Halts the system
     cli
