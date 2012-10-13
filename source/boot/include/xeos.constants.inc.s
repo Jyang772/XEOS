@@ -69,28 +69,27 @@
 %define __XEOS_CONSTANTS_INC_ASM__
 
 ; Standard PC boot signature
-%define $BIOS.boot.signature            0xAA55
+%define @BIOS.boot.signature                    0xAA55
 
 ; Master boot record values
-%define $XEOS.mbr.jump                  XEOS.boot.stage1
-%define $XEOS.mbr.oemName               "XEOS-0.1"
-%define $XEOS.mbr.bytesPerSector        512
-%define $XEOS.mbr.sectorsPerCluster     1
-%define $XEOS.mbr.reservedSectors       1
-%define $XEOS.mbr.numberOfFat           2
-%define $XEOS.mbr.maxRootDirEntries     224
-%define $XEOS.mbr.totalSectors          2880
-%define $XEOS.mbr.mediaDescriptor       0xF8
-%define $XEOS.mbr.sectorsPerFat         9
-%define $XEOS.mbr.sectorsPerTrack       18
-%define $XEOS.mbr.headsPerCylinder      2
-%define $XEOS.mbr.hiddenSectors         0
-%define $XEOS.mbr.lbaSectors            0
-%define $XEOS.mbr.driveNumber           0
-%define $XEOS.mbr.reserved              0
-%define $XEOS.mbr.bootSignature         41
-%define $XEOS.mbr.volumeId              0
-%define $XEOS.mbr.volumeLabel           "XEOS-0.1", 32, 32, 32
-%define $XEOS.mbr.filesystem            "FAT12", 32, 32, 32
+%define @XEOS.fat12.mbr.oemName                 "XEOS", 32, 32, 32, 32
+%define @XEOS.fat12.mbr.bytesPerSector          512
+%define @XEOS.fat12.mbr.sectorsPerCluster       1
+%define @XEOS.fat12.mbr.reservedSectors         1
+%define @XEOS.fat12.mbr.numberOfFATs            2
+%define @XEOS.fat12.mbr.maxRootDirEntries       224
+%define @XEOS.fat12.mbr.totalSectors            2880
+%define @XEOS.fat12.mbr.mediaDescriptor         0xF0
+%define @XEOS.fat12.mbr.sectorsPerFAT           9
+%define @XEOS.fat12.mbr.sectorsPerTrack         18
+%define @XEOS.fat12.mbr.headsPerCylinder        2
+%define @XEOS.fat12.mbr.hiddenSectors           0
+%define @XEOS.fat12.mbr.lbaSectors              0
+%define @XEOS.fat12.mbr.driveNumber             0
+%define @XEOS.fat12.mbr.reserved                0
+%define @XEOS.fat12.mbr.bootSignature           41
+%define @XEOS.fat12.mbr.volumeID                0
+%define @XEOS.fat12.mbr.volumeLabel             "XEOS", 32, 32, 32, 32, 32, 32, 32
+%define @XEOS.fat12.mbr.fileSystem              "FAT12", 32, 32, 32
 
 %endif
