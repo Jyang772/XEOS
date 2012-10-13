@@ -84,26 +84,26 @@ BITS    16
 ;-------------------------------------------------------------------------------
 
 ; BIOS screen dimensions
-%define $BIOS.video.screen.cols             80
-%define $BIOS.video.screen.rows             25
+%define @BIOS.video.screen.cols             80
+%define @BIOS.video.screen.rows             25
 
 ; BIOS colors
-%define $BIOS.video.colors.black            0x00
-%define $BIOS.video.colors.blue             0x01
-%define $BIOS.video.colors.green            0x02
-%define $BIOS.video.colors.cyan             0x03
-%define $BIOS.video.colors.red              0x04
-%define $BIOS.video.colors.magenta          0x05
-%define $BIOS.video.colors.brown            0x06
-%define $BIOS.video.colors.lightGray        0x07
-%define $BIOS.video.colors.darkGray         0x08
-%define $BIOS.video.colors.lightBlue        0x09
-%define $BIOS.video.colors.lightGreen       0x0A
-%define $BIOS.video.colors.lightCyan        0x0B
-%define $BIOS.video.colors.lightRed         0x0C
-%define $BIOS.video.colors.lightMagenta     0x0D
-%define $BIOS.video.colors.lightBrown       0x0E
-%define $BIOS.video.colors.white            0x0F
+%define @BIOS.video.colors.black            0x00
+%define @BIOS.video.colors.blue             0x01
+%define @BIOS.video.colors.green            0x02
+%define @BIOS.video.colors.cyan             0x03
+%define @BIOS.video.colors.red              0x04
+%define @BIOS.video.colors.magenta          0x05
+%define @BIOS.video.colors.brown            0x06
+%define @BIOS.video.colors.lightGray        0x07
+%define @BIOS.video.colors.gray             0x08
+%define @BIOS.video.colors.lightBlue        0x09
+%define @BIOS.video.colors.lightGreen       0x0A
+%define @BIOS.video.colors.lightCyan        0x0B
+%define @BIOS.video.colors.lightRed         0x0C
+%define @BIOS.video.colors.lightMagenta     0x0D
+%define @BIOS.video.colors.lightBrown       0x0E
+%define @BIOS.video.colors.white            0x0F
 
 ;-------------------------------------------------------------------------------
 ; Computes the value of a BIOS screen color into a register
@@ -144,7 +144,7 @@ BITS    16
     mov     dl,     %2
     
     ; Calls the BIOS video services
-    $BIOS.int.video
+    @BIOS.int.video
     
     @XEOS.reg.restore
     
@@ -177,7 +177,7 @@ BITS    16
     mov     dh,     $BIOS.video.screen.rows - 1
     
     ; Calls the BIOS video services
-    $BIOS.int.video
+    @BIOS.int.video
     
     ; Repositions the cursor to the top-left corner
     @BIOS.video.setCursor 0, 0
@@ -203,7 +203,7 @@ BITS    16
 ; 
 ; Necessary register values:
 ;       
-;       - si:       The address of the string to print
+;       - si:       The address of the string to print (DS:SI)
 ;-------------------------------------------------------------------------------
 BIOS.video.print:
     
@@ -223,7 +223,7 @@ BIOS.video.print:
         je      .done
         
         ; Calls the BIOS video services
-        $BIOS.int.video
+        @BIOS.int.video
         
         ; Process the next byte from the string
         jmp     .repeat
