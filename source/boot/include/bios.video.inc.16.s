@@ -201,11 +201,22 @@ BITS    16
 ;-------------------------------------------------------------------------------
 ; Prints a string
 ; 
-; Necessary register values:
+; Input registers:
+; 
+;       - SI:       The address of the string to print (DS:SI)
+; 
+; Return registers:
 ;       
-;       - si:       The address of the string to print (DS:SI)
+;       None
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 BIOS.video.print:
+    
+    ; Save registers
+    push ax
     
     ; Outputs a single character (BIOS video services function)
     mov     ah,         0x0E
@@ -230,6 +241,9 @@ BIOS.video.print:
             
     ; End of the string
     .done:
+        
+        ; Restore registers
+        pop ax
         
         ret
 
