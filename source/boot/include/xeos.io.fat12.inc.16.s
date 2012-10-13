@@ -299,6 +299,7 @@ XEOS.io.fat12.loadFile:
     
     ; Restore registers
     pop     dx
+    pop     dx
     pop     cx
     
     ; Error
