@@ -347,8 +347,8 @@ XEOS.io.fat12.loadFile:
             je      .success
             
             ; Restore registers
-            push cx
-            push dx
+            pop     cx
+            pop     dx
             
             ; Error
             ret
@@ -357,7 +357,6 @@ XEOS.io.fat12.loadFile:
                 
                 ; Save registers
                 push    bx
-                push    dx
                 
                 ; Stores current cluster
                 mov     ax, WORD [ $XEOS.io.fat12._currentCluster ]
@@ -369,7 +368,7 @@ XEOS.io.fat12.loadFile:
                 add     cx,         dx
                 
                 ; Offset for the FAT
-                pop     bx
+                mov     bx,         0x200
                 
                 ; Index of FAT from memory
                 add     bx,         cx
@@ -409,7 +408,7 @@ XEOS.io.fat12.loadFile:
     pop cx
     
     ; Success - Stores result code in AX
-    xor ax, ax
+    xor     ax,         ax
 
     ret
 
