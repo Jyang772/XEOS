@@ -75,419 +75,541 @@
 %include "XEOS.constants.inc.s"       ; General constants
 %include "XEOS.macros.inc.s"          ; General macros
 %include "BIOS.int.inc.s"             ; BIOS interrupts
-%include "XEOS.error.inc.16.s"        ; Error management
 %include "XEOS.ascii.inc.s"           ; ASCII table
-%include "BIOS.llds.inc.16.s"         ; BIOS low-level disk services
 
 ; We are in 16 bits mode
 BITS    16
 
 ;-------------------------------------------------------------------------------
+; Loads the FAT-12 root directory into memory
 ; 
+; Description:
+;       
+;       The structure of the FAT-12 root directory is:
+;           
+;           - 0x00 - 0x07:  File name
+;           - 0x08 - 0x0A:  File extension
+;           - 0x0B - 0x0B:  File attributes
+;           - 0x0C - 0x0C:  Reserved
+;           - 0x0D - 0x0D:  Create time - fine resolution
+;           - 0x0E - 0x0F:  Create time - hours, minutes and seconds
+;           - 0x10 - 0x11:  Create date
+;           - 0x12 - 0x13:  Last access date
+;           - 0x14 - 0x15:  EA-Index (used by OS/2 and NT)
+;           - 0x16 - 0x17:  Last modified time
+;           - 0x18 - 0x19:  Last modified date
+;           - 0x1A - 0x1B:  First cluster of the file
+;           - 0x1C - 0x20:  File size in bytes
+;
+;       After calling this procedure, the start of the root directory can be
+;       accessed in $XEOS.io.fat12.rootDirectoryStart (WORD).
+; 
+; Input registers:
+;       
+;       - BX:       The offset at which the root directory will be loaded
+;                   (ES:BX)
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12.readSectors:
+XEOS.io.fat12.loadRootDirectory:
     
-    ; Resets DI, so we can count the number of read tries
-    xor     di,         di
+    ; Saves registers
+    push bx
+    push cx
+    push dx
     
-    .start:
+    ; Resets registers
+    xor     cx,         cx
+    xor     dx,         dx
     
-    @XEOS.reg.save
+    ; An entry of the root directory is 32 bits
+    mov     ax,         0x20
     
-    ; Converts the logical block address to cluster, head and cylinder
-    ; (needed for int 0x13)
-    call    XEOS.io.fat12.lbaToChs
+    ; Number of root directory entries
+    mov     bx,         @XEOS.fat12.mbr.maxRootDirEntries
+    mul     bx
     
-    ; Read sectors (BIOS low level disk services function)
-    mov     ah,         2
+    ; Number of sectors used by the root directory
+    mov     bx,         @XEOS.fat12.mbr.bytesPerSector
+    div     bx
     
-    ; Number of sectors to read
-    mov     al,         1
+    ; Stores the size of the root directory in CX
+    xchg    ax,         cx
     
-    ; Track number
-    mov     ch,         BYTE [ XEOS.io.fat12.absoluteTrack ]
+    ; Number of file allocation tables
+    mov     al,         @XEOS.fat12.mbr.numberOfFATs
     
-    ; Sector number
-    mov     cl,         BYTE [ XEOS.io.fat12.absoluteSector ]
+    ; Multiplies by the number of sectors that a FAT uses
+    mov     bx,         @XEOS.fat12.mbr.sectorsPerFAT
+    mul     bx
     
-    ; Head number
-    mov     dh,         BYTE [ XEOS.io.fat12.absoluteHead ]
+    ; Adds the number of reserved sectors, so we now have the starting
+    ; sector of the root directory
+    add     ax,         @XEOS.fat12.mbr.reservedSectors
     
-    ; Drive number
-    mov     dl,         $XEOS.mbr.driveNumber
+    ; Now we can guess and store the starting sector for the data
+    mov     WORD [ $XEOS.io.fat12.rootDirectoryStart ], ax
+    add     WORD [ $XEOS.io.fat12.rootDirectoryStart ], cx
     
-    ; Calls the BIOS low level disk services
-    $BIOS.int.llds
+    ; Restores registers
+    pop dx
+    pop cx
+    pop bx
     
-    ; Checks if an error occued
-    jnc     .succes
-    
-    ; Resets the floppy controller
-    call    BIOS.llds.resetFloppyDrive
-    
-    @XEOS.reg.restore
-    
-    ; Increases the number of read tries
-    inc     di
-    
-    ; 5 possible retries, in case of error
-    cmp     di,         5
-    
-    ; Tries to reset again
-    jb     .start
-    
-    ; 5 retries - Fatal error
-    call    XEOS.error.fatal
-    
-    .succes:
-    
-    @XEOS.reg.restore
-    
-    ; Memory area in which the next sector will be read
-    add     bx,         WORD $XEOS.mbr.bytesPerSector
-    
-    ; We are now reading the next sector
-    inc     ax
-    loop    XEOS.io.fat12.readSectors
+    ; Reads the root directory into memory (ES:BX)
+    call    XEOS.io.fat12.readSectors
     
     ret
    
 ;-------------------------------------------------------------------------------
-; Converts LBA (Logical Block Addressing) to CHS (Cylinder Head Sector)
+; Finds a file name in the FAT-12 root directory
 ; 
-; The result values will be placed in XEOS.io.fat12.absoluteSector,
-; XEOS.io.fat12.absoluteHead and XEOS.io.fat12.absoluteTrack.
+; Note that the root directory must be loaded in memory before calling this
+; procedure (see XEOS.io.fat12.loadRootDirectory).
 ; 
-; Formulas:
-;   
-;   absolute sector = (logical sector / sectors per track) + 1
-;   absolute head   = (logical sector / sectors per track) % number of heads
-;   absolute track  = logical sector / (sectors per track * number of heads)
+; Input registers:
 ; 
-; Necessary register values:
+;       - BX:       The location of the root directory in memory (ES:BX)
+;       - SI:       The address of the filename to find
+; 
+; Return registers:
 ;       
-;       - ax:       The LBA address to convert
+;       - AX:       The result code (0 if no error)
+;       - DI:       The first cluster of the file
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12.lbaToChs:
+XEOS.io.fat12.findFile:
+    
+    ; Saves registers
+    push cx
+    
+    ; Maximum number of files in the FAT-12 root directory
+    mov     cx,         @XEOS.fat12.mbr.maxRootDirEntries
+    
+    ; First directory entry
+    mov     di,         bx
+    
+    .loop:
+        
+        ; Saves registers
+        push    cx
+        push    di
+        
+        ; A FAT-12 file name is eleven characters
+        mov     cx,         0x000B
+        
+        ; Compares the name with the input string (SI)
+        rep     cmpsb
+        
+        ; Restore registers
+        pop     di
+        
+        ; File name match
+        je      .success
+        
+        ; Restore registers
+        pop     cx
+        
+        ; Next directory entry
+        add     di,         0x0020
+        
+        ; Process next file name
+        loop    .loop
+        
+    .failure:
+        
+        ; Error - Stores result code in AX
+        mov     ax,         1
+        
+        ret
+    
+    .success:
+        
+        ; Start cluster from the root directory entry (byte 26)
+        add     di,         0x1A
+        
+        ; Restore registers
+        pop     cx
+        pop     cx
+        
+        ; Success - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
+
+;-------------------------------------------------------------------------------
+; Loads a file from a FAT-12 drive
+; 
+; Input registers:
+; 
+;       - AX:       The segment where the file will be loaded (AX:00)
+;       - BX:       The offset of where to load the FAT (ES:BX)
+;       - DI:       The first cluster of the file
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.io.fat12.loadFile:
+
+    ; Saves registers
+    push    cx
+    push    dx
+    push    ax
+    
+    ; Saves the start cluster of the file to load
+    mov     dx,                                         [ di ]
+    mov     WORD [ $XEOS.io.fat12._currentCluster ],    dx
+    
+    ; Resets AX
+    xor     ax,         ax
+    
+    ; Number of FATs
+    mov     al,         BYTE [ $XEOS.fat12.mbr.numberOfFATs ]
+    
+    ; Multiplies by the number of sector used by each FAT
+    mul     WORD        [ $XEOS.fat12.mbr.sectorsPerFAT ]
+    
+    ; Number of sectors to read for the FAT
+    mov     cx,         ax
+    
+    ; FAT starting sector (after the reserved sectors)
+    mov     ax,         WORD [ $XEOS.fat12.mbr.reservedSectors ]
+    
+    ; Read FAT sectors into memory (ES:BX)
+    call    XEOS.io.fat12.readSectors
+    
+    ; Checks for an error code
+    cmp     ax,         0
+    je      .fatLoaded
+    
+    ; Restore registers
+    pop     dx
+    pop     cx
+    
+    ; Error
+    ret
+    
+    .fatLoaded:
+        
+        ; Restore registers
+        pop     ax
+        
+        ; Stores the FAT offset in DX
+        mov     dx,         bx
+        
+        ; File will be read at AX:00
+        mov     es,         ax
+        xor     bx,         bx
+        
+        ; Save registers
+        push    bx
+        
+        .load:
+            
+            ; Cluster to read
+            mov     ax,         WORD [$XEOS.io.fat12._currentCluster ]
+            
+            ; Start of the FAT-12 root directory
+            mov     bx,         WORD [ $XEOS.io.fat12.rootDirectoryStart ]
+            
+            ; Converts cluster number to LBA
+            call    XEOS.io.fat12._clusterToLba
+            
+            ; Buffer for the file
+            pop     bx
+            
+            ; Resets CX
+            xor     cx,         cx
+            
+            ; Number of clusters to read
+            mov     cl, BYTE [ $XEOS.fat12.mbr.sectorsPerCluster ]
+            
+            ; Read sectors
+            call    XEOS.io.fat12.readSectors
+            
+            ; Checks for an error code
+            cmp     ax,         0
+            je      .success
+            
+            ; Restore registers
+            push cx
+            push dx
+            
+            ; Error
+            ret
+            
+            .success:
+                
+                ; Save registers
+                push    bx
+                push    dx
+                
+                ; Stores current cluster
+                mov     ax, WORD [ $XEOS.io.fat12._currentCluster ]
+                mov     cx,         ax
+                mov     dx,         ax
+                
+                ; Divides by two (so we can find if it's even or odd)
+                shr     dx,         0x0001
+                add     cx,         dx
+                
+                ; Offset for the FAT
+                pop     bx
+                
+                ; Index of FAT from memory
+                add     bx,         cx
+                
+                ; Get two bytes from the FAT
+                mov     dx,         WORD [ bx ]
+                
+                ; Checks if we are reading an odd or even cluster
+                test    ax,         0x0001
+                jnz     .odd
+            
+                .even:
+                    
+                    ; Keep low twelve bytes
+                    and     dx,         0000111111111111b
+                    jmp     .end
+                
+                .odd:
+                    
+                    ; Keep high twelve bytes
+                    shr     dx,         0x04
+                
+                .end:
+                    
+                    ; Stores the start of the new cluster
+                    mov     WORD [ $XEOS.io.fat12._currentCluster ],    dx
+                    
+                    ; Test for EOF
+                    cmp     dx,         0x0FF0
+                    
+                    ; Continues reading
+                    jb      .load
+    
+    ; Restore registers
+    pop bx
+    pop dx
+    pop cx
+    
+    ; Success - Stores result code in AX
+    xor ax, ax
+
+    ret
+
+;-------------------------------------------------------------------------------
+; Reads sectors from a drive
+; 
+; Input registers:
+;       
+;       - AX:       The starting sector
+;       - BX:       The read buffer location (ES:BX)
+;       - CX:       The number of sectors to read
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.io.fat12.readSectors:
     
     @XEOS.reg.save
+    
+    .start
+        
+        ; Allows five read attempts before returning an error, as we may need
+        ; to reset the floppy disk before successfully reading
+        mov     di,         5
+    
+    .loop
+        
+        @XEOS.reg.save
+        
+        ; Converts the logical block address to cluster, head and cylinder
+        ; (needed for int 0x13)
+        call    XEOS.io.fat12._lbaToCHS
+        
+        ; Number of sectors to read
+        mov     al,         0x01
+        
+        ; BIOS read sector function (for int 0x13)
+        mov     ah,         0x02
+        
+        ; Track, sector and head parameters
+        mov     ch,         BYTE [ $XEOS.io.fat12._absoluteTrack ]
+        mov     cl,         BYTE [ $XEOS.io.fat12._absoluteSector ]
+        mov     dh,         BYTE [ $XEOS.io.fat12._absoluteHead ]
+        
+        ; Drive number parameter
+        mov     dl, BYTE [$XEOS.fat12.mbr.driveNumber]
+        
+        ; Calls the BIOS LLDS
+        @BIOS.int.llds
+        
+        ; Checks the return value
+        jnc     .success
+        
+    .error:
+    
+        ; Resets the floppy disk
+        xor     ax,         ax
+        @BIOS.int.llds
+        
+        ; Decrements the error counter
+        dec     di
+        
+        @XEOS.reg.restore
+        
+        ; Attempts to read again
+        jnz     .loop
+        
+        ; Error - Stores result code in AX
+        mov     ax,         1
+        
+        ret
+
+    .success
+        
+        @XEOS.reg.restore
+        
+        ; Memory area in which the next sector will be read
+        add     bx,         WORD [ $XEOS.fat12.mbr.bytesPerSector ]
+        
+        ; Reads the next sector
+        inc     ax
+        loop    .start
+        
+        @XEOS.reg.restore
+        
+        ; Success - Stores result code in AX
+        xor     ax, ax
+        
+        ret
+        
+;-------------------------------------------------------------------------------
+; Converts a cluster number to LBA (Logical Block Addressing)
+; 
+; Description:
+;   
+;       Formula is: LBA = (cluster - 2 ) * sectors per cluster
+; 
+; Input registers:
+;       
+;       - AX:       The cluster number to convert
+;       - BX:       The start of the FAT-12 root directory
+; 
+; Return registers:
+;       
+;       - AX:       The LBA value
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.io.fat12._clusterToLba:
+    
+    ; Saves registers
+    push cx
+    
+    ; Substracts 2 to the cluster number
+    sub     ax,         2
+    
+    ; Resets CX
+    xor     cx,         cx
+    
+    ; Multiplies by the number of sectors per cluster
+    mov     cl,         BYTE $XEOS.fat12.mbr.sectorsPerCluster
+    mul     cx
+    
+    ; Adds result value to the start of the FAT-12 root directory
+    add     ax,         bx
+    
+    ; Restores registers
+    pop     cx
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; Converts LBA (Logical Block Addressing) to CHS (Cylinder Head Sector)
+; 
+; Description:
+; 
+;       The result values will be placed in XEOS.io.fat12.absoluteSector,
+;       XEOS.io.fat12.absoluteHead and XEOS.io.fat12.absoluteTrack.
+;       
+;       absolute sector = (logical sector / sectors per track) + 1
+;       absolute head   = (logical sector / sectors per track) % number of heads
+;       absolute track  = logical sector / (sectors per track * number of heads)
+;       
+;       After calling this procedure, converted values can be accessed in:
+;           
+;           - $XEOS.io.fat12._absoluteSector
+;           - $XEOS.io.fat12._absoluteTrack
+;           - $XEOS.io.fat12._absoluteHead
+; 
+; Inpur registers:
+;       
+;       - AX:       The LBA address to convert
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.io.fat12._lbaToCHS:
+    
+    ; Saves registers
+    push    dx
+    push    bx
     
     ; Clears DX
     xor     dx,         dx
     
     ; Divides by the number of sectors per track
-    mov     bx,         $XEOS.mbr.sectorsPerTrack
+    mov     bx,         @XEOS.fat12.mbr.sectorsPerTrack
     div     bx
     
     ; Adds one
     inc     dl
     
     ; Stores the absolute sector
-    mov     BYTE [ XEOS.io.fat12.absoluteSector ],    dl
+    mov     BYTE [ XEOS.io.fat12._absoluteSector ],    dl
     
     ; Clears DX
     xor     dx,         dx
     
     ; Mod by the number of heads
-    mov     bx,         $XEOS.mbr.headsPerCylinder
+    mov     bx,         @XEOS.fat12.mbr.headsPerCylinder
     div     bx
     
     ; Stores the absolute head and absolute track
-    mov     BYTE [ XEOS.io.fat12.absoluteHead ],  dl
-    mov     BYTE [ XEOS.io.fat12.absoluteTrack ], al
+    mov     BYTE [ XEOS.io.fat12._absoluteHead ],  dl
+    mov     BYTE [ XEOS.io.fat12._absoluteTrack ], al
     
-    @XEOS.reg.restore
-    
-    ret
-
-;-------------------------------------------------------------------------------
-; Converts a cluster number to LBA (Logical Block Addressing)
-; 
-; The result values will be placed in AX.
-; 
-; Formula:
-;   
-;   LBA	= (cluster - 2 ) * sectors per cluster
-; 
-; Necessary register values:
-;       
-;       - ax:       The cluster number to convert
-;-------------------------------------------------------------------------------
-XEOS.io.fat12.clusterToLba:
-    
-    ; Saves the vaue of CX as we are going to use it
-    push    cx
-    
-    ; Substracts 2 to the cluster number
-    sub     ax,         2
-    
-    ; Resets CS
-    xor     cx,         cx
-    
-    ; Multiplies by the number of sectors per cluster
-    mov     cl,         BYTE $XEOS.mbr.sectorsPerCluster
-    mul     cx
-    
-    ; Restores CX
-    pop     cx
-    
-    ret
-
-;-------------------------------------------------------------------------------
-; Loads the FAT-12 root directory into memory
-; 
-; The structure of the FAT-12 root directory is:
-; 
-;       - 0x00 - 0x07:  File name
-;       - 0x08 - 0x0A:  File extension
-;       - 0x0B - 0x0B:  File attributes
-;       - 0x0C - 0x0C:  Reserved
-;       - 0x0D - 0x0D:  Create time - fine resolution
-;       - 0x0E - 0x0F:  Create time - hours, minutes and seconds
-;       - 0x10 - 0x11:  Create date
-;       - 0x12 - 0x13:  Last access date
-;       - 0x14 - 0x15:  EA-Index (used by OS/2 and NT)
-;       - 0x16 - 0x17:  Last modified time
-;       - 0x18 - 0x19:  Last modified date
-;       - 0x1A - 0x1B:  First cluster of the file
-;       - 0x1C - 0x20:  File size in bytes
-; 
-; Necessary register values:
-;       
-;       - bx:       The offset at which the root directory will be loaded
-;                   (will be ES:BX)
-;-------------------------------------------------------------------------------
-XEOS.io.fat12.loadRootDirectory:
-    
-    @XEOS.reg.save
-    
-    ; Saves BX as we are going to alter it
-    push    bx
-    
-    ; An entry of the root directory is 32 bits
-    mov     ax,         0x20
-    
-    ; Number of root directory entries
-    mov     bx,         $XEOS.mbr.maxRootDirEntries
-    mul     WORD bx
-    
-    ; Number of sectors used by the root directory
-    mov     bx,         $XEOS.mbr.bytesPerSector
-    div     bx
-    
-    ; Stores the size of the root directory in CX
-    xchg    cx,         ax
-    
-    ; Number of file allocation tables
-    mov     al,         $XEOS.mbr.numberOfFat
-    
-    ; Multiplies by the number of sectors that a FAT uses
-    mov     bx,         $XEOS.mbr.sectorsPerFat
-    mul     bx
-    
-    ; Adds the number of reserved sectors, so we now have the starting
-    ; sector of the root directory
-    add     ax,         $XEOS.mbr.reservedSectors
-    
-    ; Now we can guess and store the starting sector for the data
-    mov     [ XEOS.io.fat12.rootDirectoryStart ], ax
-    add     [ XEOS.io.fat12.rootDirectoryStart ], cx
-    
-    ; Restores BX
+    ; Restores registers
     pop     bx
-    
-    ; Reads the necessary sectors to load the root directory into memory
-    call    XEOS.io.fat12.readSectors
-    
-    @XEOS.reg.restore
-    
-    ret
-
-;-------------------------------------------------------------------------------
-; Finds a file name in the FAT-12 root directory
-; 
-; Note that the root directory must be loaded in memory before calling this
-; procedure (see XEOS.io.fat12.loadRootDirectory).
-; If the file name is found, its starting cluster will be saved in
-; XEOS.io.fat12.firstDataCluster. Otherwise, a fatal error will occure.
-; 
-; Necessary register values:
-; 
-;       - DI:       The offset at which the root directory is loaded
-;       - SI:       The address of the filename to find
-;-------------------------------------------------------------------------------
-XEOS.io.fat12.findFile:
-    
-    @XEOS.reg.save
-    
-    ; Number of entries to read
-    mov     cx,         WORD $XEOS.mbr.maxRootDirEntries
-    
-    ; We are going to loop through the root directory entries to find the name
-    ; of the file
-    .readRootDirectoryLoop:
-    
-    ; Saves the loop counter
-    push    cx
-    
-    ; FAT12 filenames are limited to 11 characters
-    mov     cx,         0x0B
-    
-    ; Saves the memory address containing the file name
-    push    si
-    
-    ; Saves the memory address in which the root directory was loaded
-    push    di
-    
-    ; Tries to find the name of the file
-    rep     cmpsb
-    
-    ; Restores the address of the data we are reading
-    pop     di
-    
-    ; Restores the address of the file name
-    pop     si
-    
-    ; Restores the loop counter
-    pop     cx
-    
-    ; The file was found - We are going to load it
-    je      .found
-    
-    ; Address of the next entry
-    add     di,         0x20
-    
-    ; Reads the next entry
-    loop    .readRootDirectoryLoop
-    
-    ; The file was not found - Issues a fatal error
-    call    XEOS.error.fatal
-    
-    .found
-    
-    ; Saves the first cluster of the file (first cluster is located at location
-    ; 0x1A of a root directory entry)
-    mov     ax,         WORD [ di + 0x1A ]
-    mov     WORD [ XEOS.io.fat12.firstDataCluster ],    ax 
-    
-    @XEOS.reg.restore
-    
-    ret
-
-;-------------------------------------------------------------------------------
-; Loads a file into memory
-; 
-; Note that the address of first cluster of the file must be present in
-; XEOS.io.fat12.firstDataCluster. See XEOS.io.fat12.findFile to know how to
-; find a file.
-; 
-; Necessary register values:
-; 
-;       - AX:       The memory address from which to load the file (will be
-;                   placed in ES, so the real address will be AX:0)
-;       - BX:       The offset at which to load the file allocation table
-;                   (will be ES:BX)
-;-------------------------------------------------------------------------------
-XEOS.io.fat12.loadFile:
-    
-    @XEOS.reg.save
-    
-    ; Saves the values of AX and BX (addresses for the read operations)
-    push    ax
-    push    bx
-    
-    ; Resets AX
-    xor     ax,         ax
-    
-    ; Number of file allocation tables
-    mov     al,         BYTE $XEOS.mbr.numberOfFat
-    
-    ; Multiplies by the number of sectors that a FAT uses
-    mov     cx,         $XEOS.mbr.sectorsPerFat
-    mul     cx
-    
-    ; Stores the size of the FAT in CX
-    mov     cx,         ax
-    
-    ; Location of the FAT
-    mov     ax, WORD $XEOS.mbr.reservedSectors
-    
-    pop     bx
-    
-    ; Reads the necessary sectors to load the FAT into memory
-    call    XEOS.io.fat12.readSectors
-    
-    ; Memory location at which to load the file
-    pop     ax
-    mov     es,         ax
-    xor     bx,         bx
-    
-    ; Saves the value of BX
-    push    bx
-    
-    mov     [ XEOS.io.fat12.fileSectors ],  WORD 0
-    
-    .read:
-    
-    ; We are going to read from the first cluster of the file
-    mov     ax,         WORD [ XEOS.io.fat12.firstDataCluster ]
-    
-    ; Restores the offset of the read operation
-    pop     bx
-    
-    ; Converts the cluster number to a logical block address
-    call    XEOS.io.fat12.clusterToLba
-    add     ax, WORD [ XEOS.io.fat12.rootDirectoryStart ]
-    
-    ; Number of sectors to read
-    xor     cx,         cx
-    mov     cl, BYTE $XEOS.mbr.sectorsPerCluster
-    
-    ; Reads the necessary sectors to load the file into memory
-    call    XEOS.io.fat12.readSectors
-    
-    inc     WORD [ XEOS.io.fat12.fileSectors ]
-    
-    ; Saves the offset of the read operation
-    push    bx
-    
-    mov     ax,         WORD [ XEOS.io.fat12.firstDataCluster ]
-    mov     cx,         ax
-    mov     dx,         ax
-    shr     dx,         1
-    add     cx,         dx
-    mov     bx,         0x1000
-    add     bx,         cx
-    mov     dx,         WORD [ bx ]
-    test    ax,         1
-    
-    jnz     .clusterOdd
-    
-    .clusterEven:
-    
-    ; Low twelve bits
-    and     dx,         0000111111111111b
-    jmp     .nextCluster
-    
-    .clusterOdd:
-    
-    ; Hight twelve bits
-    shr     dx,         4
-    
-    .nextCluster:
-    
-    mov     WORD [ XEOS.io.fat12.firstDataCluster ],    dx
-    
-    ; Checks for the end of the file
-    cmp     dx,         0x0FF0
-    
-    ; Continues loading the file, as there is still data to read
-    jb      .read
-    
-    ; The value of BX is still on the stack, but we don't need it anymore
-    pop     bx
-    
-    @XEOS.reg.restore
+    pop     dx
     
     ret
 
@@ -495,18 +617,10 @@ XEOS.io.fat12.loadFile:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-; Storage for the XEOS.io.fat12.lbaToChs procedure
-XEOS.io.fat12.absoluteSector        db  0
-XEOS.io.fat12.absoluteHead          db  0
-XEOS.io.fat12.absoluteTrack         db  0
-
-; Storage for the XEOS.io.fat12.loadRootDirectory procedure
-XEOS.io.fat12.rootDirectoryStart    dw  0
-
-; Storage for the XEOS.io.fat12.findFile procedure
-XEOS.io.fat12.firstDataCluster      dw  0
-
-; Storage for the XEOS.io.fat12.loadFile procedure
-XEOS.io.fat12.fileSectors           dw  0
+$XEOS.io.fat12.rootDirectoryStart       dw  0
+$XEOS.io.fat12._absoluteSector          db  0
+$XEOS.io.fat12._absoluteHead            db  0
+$XEOS.io.fat12._absoluteTrack           db  0
+$XEOS.io.fat12._currentCluster          dw  0
 
 %endif
