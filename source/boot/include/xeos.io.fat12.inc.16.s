@@ -278,16 +278,17 @@ XEOS.io.fat12.loadFile:
     xor     ax,         ax
     
     ; Number of FATs
-    mov     al,         BYTE [ $XEOS.fat12.mbr.numberOfFATs ]
+    mov     al,         @XEOS.fat12.mbr.numberOfFATs
     
     ; Multiplies by the number of sector used by each FAT
-    mul     WORD        [ $XEOS.fat12.mbr.sectorsPerFAT ]
+    mov     cx,         @XEOS.fat12.mbr.sectorsPerFAT
+    mul     cx
     
     ; Number of sectors to read for the FAT
     mov     cx,         ax
     
     ; FAT starting sector (after the reserved sectors)
-    mov     ax,         WORD [ $XEOS.fat12.mbr.reservedSectors ]
+    mov     ax,         @XEOS.fat12.mbr.reservedSectors
     
     ; Read FAT sectors into memory (ES:BX)
     call    XEOS.io.fat12.readSectors
@@ -336,7 +337,7 @@ XEOS.io.fat12.loadFile:
             xor     cx,         cx
             
             ; Number of clusters to read
-            mov     cl, BYTE [ $XEOS.fat12.mbr.sectorsPerCluster ]
+            mov     cl,         @XEOS.fat12.mbr.sectorsPerCluster
             
             ; Read sectors
             call    XEOS.io.fat12.readSectors
@@ -459,7 +460,7 @@ XEOS.io.fat12.readSectors:
         mov     dh,         BYTE [ $XEOS.io.fat12._absoluteHead ]
         
         ; Drive number parameter
-        mov     dl, BYTE [$XEOS.fat12.mbr.driveNumber]
+        mov     dl,         @XEOS.fat12.mbr.driveNumber
         
         ; Calls the BIOS LLDS
         @BIOS.int.llds
@@ -491,7 +492,7 @@ XEOS.io.fat12.readSectors:
         @XEOS.reg.restore
         
         ; Memory area in which the next sector will be read
-        add     bx,         WORD [ $XEOS.fat12.mbr.bytesPerSector ]
+        add     bx,         @XEOS.fat12.mbr.bytesPerSector
         
         ; Reads the next sector
         inc     ax
@@ -536,7 +537,7 @@ XEOS.io.fat12._clusterToLba:
     xor     cx,         cx
     
     ; Multiplies by the number of sectors per cluster
-    mov     cl,         BYTE $XEOS.fat12.mbr.sectorsPerCluster
+    mov     cl,         @XEOS.fat12.mbr.sectorsPerCluster
     mul     cx
     
     ; Adds result value to the start of the FAT-12 root directory
