@@ -91,14 +91,32 @@
 ; We are in 16 bits mode
 BITS    16
 
-; We are in 16 bits real mode
-%ifndef $XEOS.cpu.realMode    
-%define $XEOS.cpu.realMode 1
-%endif
+; Segment registers will be set manually
+ORG     0
+
+; Jumps to the bootloader's entry point
+start: jmp main
 
 ; Includes the FAT-12 MBR, so the beginning of the binary will be a valid
 ; FAT-12 floppy drive
-%include "XEOS.mbr.fat12.inc.16.s"
+%include "xeos.io.fat12.mbr.inc.16.s"
+
+;---------------------------------------------------------------------------
+; Includes
+;---------------------------------------------------------------------------
+%include "XEOS.constants.inc.s"     ; General constants
+%include "XEOS.macros.inc.s"        ; General macros
+%include "XEOS.ascii.inc.s"         ; ASCII table
+%include "BIOS.video.inc.16.s"      ; BIOS video services
+%include "XEOS.io.fat12.inc.16.s"   ; FAT-12 IO procedures
+
+;-------------------------------------------------------------------------------
+; Variables definition
+;-------------------------------------------------------------------------------
+
+$XEOS.boot.stage1.greet     db  "[ XEOS ]> Booting...", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.error     db  "Fatal error!", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.files.stage2          db  'BOOT    BIN'
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
@@ -122,27 +140,7 @@ BITS    16
 ; 
 ; So 0x07C0 is 0x07C0:0 which is 0x07C00.
 ;-------------------------------------------------------------------------------
-
-XEOS.boot.stage1:
-    
-    ; Jumps to the effective code (bypasses the includes)
-    jmp     .start
-    
-    ;---------------------------------------------------------------------------
-    ; Includes
-    ;
-    ; Placed here to avoid problems with the MBR short jump.
-    ;---------------------------------------------------------------------------
-    %include "XEOS.macros.inc.s"      ; General macros
-    %include "XEOS.io.fat12.inc.16.s" ; FAT-12 IO procedures
-    %include "BIOS.int.inc.s"         ; BIOS interrupts
-    %include "BIOS.video.inc.16.s"    ; BIOS video services
-    %include "BIOS.llds.inc.16.s"     ; BIOS low-level disk services
-    %include "XEOS.ascii.inc.s"       ; ASCII table
-    
-    ; We are redefining 'XEOS.boot.stage1', as the include files are declaring
-    ; global procedures
-    XEOS.boot.stage1.start:
+main:
     
     ; Clears the interrupts as we are setting-up the segments and stack space
     cli
@@ -152,6 +150,8 @@ XEOS.boot.stage1:
     mov     ax,         0x07C0
     mov     ds,         ax
     mov     es,         ax
+    mov     fs,         ax
+    mov     gs,         ax
     
     ; Sets up the of stack space
     xor     ax,         ax
@@ -160,70 +160,69 @@ XEOS.boot.stage1:
     
     ; Restores the interrupts
     sti
-    
+
     ; Prints the greeting
-    @BIOS.video.print   XEOS.boot.stage1.greet
+    @BIOS.video.print   $XEOS.boot.stage1.greet
     
-    ; The first bootloader is limited to 512 bytes, we we need to load a
-    ; second stage bootloader to efficienttly load the kernel
-    .findSecondStage:
+    ; Loads the FAT-12 root directory at ES:0x200
+    mov     bx,         0x0200
+    call XEOS.io.fat12.loadRootDirectory
     
-    ; Loads the root directory into memory
-    ; 
-    ; Sectors will be read after the stack space (ES:BX = 0x07C0:0x1000).
-    mov     bx,         0x1000
-    call    XEOS.io.fat12.loadRootDirectory
+    ; Checks for an error code
+    cmp     ax,         0
+    jne      .failure
     
-    ; Location of the data we read into memory
-    mov     di,         0x1000
+    ; Name of the second stage bootloader
+    mov     si,         $XEOS.files.stage2
     
-    ; Name of the second stage bootloader file
-    mov     si,         XEOS.files.stage2
+    ; Finds the second stage bootloader
+    call XEOS.io.fat12.findFile
     
-    ; Tries to find the second stage bootloader file in the root directory
-    call    XEOS.io.fat12.findFile
+    ; Checks for an error code
+    cmp     ax,         0
+    jne      .failure
     
-    ; We are going to load the second stage bootloader at the top of the free
-    ; memory (0x50:0 => 0x0500)
-    mov     ax,         0x50
+    ; Loads the file at 0x50:00
+    mov     ax,         0x0050
     
-    ; FAT sectors will be read after the stack space (ES:BX = 0x07C0:0x1000)
-    mov     bx,         0x1000
+    ; Loads the FAT at ES:0x200
+    mov     bx,         0x0200
     
     ; Loads the second stage bootloader into memory
-    call    XEOS.io.fat12.loadFile
+    call XEOS.io.fat12.loadFile
     
-    ; End of file detected, so the second stage bootloader file has been
-    ; completely loaded into memory
-    .executeSecondStage:
+    ; Checks for an error code
+    cmp     ax,         0
+    jne      .failure
     
-    ; Pushes the instruction pointer (IP) and code segment (CS) on the stack
+    ; Executes the second-stage bootloader
     push    WORD 0x0050
     push    WORD 0x0000
-    
-    ; Executes the second stage bootloader
     retf
-    
-    ; Infinite loop
-    jmp     $
-    
-;-------------------------------------------------------------------------------
-; Variables definition
-;-------------------------------------------------------------------------------
 
-; Strings
-XEOS.files.stage2           db  'BOOT    BIN'
-XEOS.boot.stage1.greet      db  $ASCII.NL,\
-                                'Booting XEOS...',\
-                                $ASCII.NL, $ASCII.NUL
-
+    .failure:
+        
+        ; Prints the error message
+        @BIOS.video.print $XEOS.boot.stage1.error
+        
+        ; Waits for a key press
+        xor     ax,         ax
+        @BIOS.int.keyboard
+        
+        ; Reboot the computer
+        @BIOS.int.reboot
+        
+    ; Halts the system
+    cli
+    hlt
+    
 ;-------------------------------------------------------------------------------
 ; Ends of the boot sector
 ;-------------------------------------------------------------------------------
 
 ; Pads the remainder of the boot sector with '0', so we'll be able to write the
 ; boot signature
-times   510 - ( $ - $$ ) db  $ASCII.NUL
+times   510 - ( $ - $$ ) db  @ASCII.NUL
 
 ; 0x1FE (2) - Boot sector signature
-dw      $BIOS.boot.signature
+dw      @BIOS.boot.signature 
