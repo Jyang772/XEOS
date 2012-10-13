@@ -68,7 +68,7 @@
 %define __XEOS_MACROS_INC_ASM__
 
 ;-------------------------------------------------------------------------------
-; Saves the values of the AX, BX, CX and DX registers in the stack
+; Saves general purpose registers values from the stack
 ;-------------------------------------------------------------------------------
 %macro @XEOS.reg.save 0
     
@@ -78,9 +78,9 @@
         ; Manually stores the registers to the stack, as the 'pusha' instruction
         ; is only available on 80286 processors and later
         push    ax
+        push    bx
         push    cx
         push    dx
-        push    bx
         push    sp
         push    bp
         push    si
@@ -96,7 +96,7 @@
 %endmacro
 
 ;-------------------------------------------------------------------------------
-; Restores the values of the AX, BX, CX and DX registers from the stack
+; Restores general purpose registers values from the stack
 ;-------------------------------------------------------------------------------
 %macro @XEOS.reg.restore 0
     
@@ -109,9 +109,9 @@
         pop     si
         pop     bp
         pop     sp
-        pop     bx
         pop     dx
         pop     cx
+        pop     bx
         pop     ax
         
     %else
