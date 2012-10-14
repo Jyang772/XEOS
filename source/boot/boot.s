@@ -62,12 +62,12 @@
 ; $Id$
 
 ; Location at which we were loaded by the first stage bootloader (0x50:0)
-ORG     0x500
+ORG     0
 
 ; We are in 16 bits mode
 BITS    16
 
-; Jumps to the bootloader's entry point
+; Jumps to the entry point
 start: jmp main
 
 ;-------------------------------------------------------------------------------
@@ -97,12 +97,12 @@ start: jmp main
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
+$XEOS.boot.stage2.dataSector            dw  0
 $XEOS.boot.stage2.nl                    db  @ASCII.NL,  @ASCII.NUL
 $XEOS.boot.stage2.prompt                db  '[ XEOS ]> ', @ASCII.NUL
-$XEOS.boot.stage2.greet                 db  'Entering the XEOS second stage bootloader', @ASCII.NUL
-$XEOS.boot.stage2.fat12.loadRoot        db  'Loading the FAT-12 root directory from the boot floppy', @ASCII.NUL
-$XEOS.boot.stage2.fat12.findFile        db  'Locating the XEOS kernel', @ASCII.NUL
-$XEOS.boot.stage2.fat12.loadFile        db  'Loading the XEOS kernel into memory', @ASCII.NUL
+$XEOS.boot.stage2.greet                 db  'Entering the second stage bootloader', @ASCII.NUL
+$XEOS.files.test                        db  'TEST    BIN'
+$XEOS.boot.stage2.error                 db  "Fatal error! Press any key to reboot...", @ASCII.CR, @ASCII.LF, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; XEOS second stage bootloader
@@ -129,8 +129,8 @@ main:
     cli
     
     ; Sets the data and extra segments to where we were loaded by the first
-    ; stage bootloader (0x50), so we don't have to add 0x07C0 to all our data
-    xor     ax,         ax
+    ; stage bootloader (0x50), so we don't have to add 0x50 to all our data
+    mov     ax,         0x50
     mov     ds,         ax
     mov     es,         ax
     mov     fs,         ax
@@ -147,6 +147,76 @@ main:
     ; Prints the welcome message
     @XEOS.boot.stage2.print $XEOS.boot.stage2.greet
     
+    ; Testing - Loads the boot test file
+    call XEOS.boot.stage2.bootTest
+    
     ; Halts the system
     cli
     hlt
+
+;-------------------------------------------------------------------------------
+; esting - Loads the boot test file
+;-------------------------------------------------------------------------------
+XEOS.boot.stage2.bootTest:
+    
+    ; Loads the FAT-12 root directory at ES:0x200
+    ; (0x07CE - just after this bootloader)
+    mov     di,         0x1000
+    call XEOS.io.fat12.loadRootDirectory
+    
+    ; Checks for an error code
+    cmp     ax,         0
+    jne      .failure
+    
+    ; Stores the location of the first data sector
+    mov     WORD [ $XEOS.boot.stage2.dataSector ],  dx
+    
+    ; Name of the second stage bootloader
+    mov     si,         $XEOS.files.test
+    
+    ; Finds the second stage bootloader
+    ; We have not altered DI, so it still contains the location of the FAT-12
+    ; root directory
+    call XEOS.io.fat12.findFile
+    
+    ; Checks for an error code
+    cmp     ax,         0
+    jne      .failure
+    
+    ; Loads the file at 0x1500:00 (first area of free/unused memory)
+    mov     ax,         0x1500
+    
+    ; Loads the FAT at ES:0x200
+    mov     bx,         0x1000
+    
+    ; Data sector location
+    mov     cx,         WORD [ $XEOS.boot.stage2.dataSector ]
+    
+    ; Loads the second stage bootloader into memory
+    call XEOS.io.fat12.loadFile
+    
+    ; Checks for an error code
+    cmp     ax,         0
+    jne      .failure
+    
+    ; Pass control to the second stage bootloader
+    push    WORD 0x1500
+    push    WORD 0x0000
+    retf
+    
+    .failure:
+        
+        ; Prints the error message
+        @BIOS.video.print $XEOS.boot.stage2.error
+        
+        ; Waits for a key press
+        xor     ax,         ax
+        @BIOS.int.keyboard
+        
+        ; Reboot the computer
+        @BIOS.int.reboot
+        
+        ; Halts the system
+        cli
+        hlt
+    
