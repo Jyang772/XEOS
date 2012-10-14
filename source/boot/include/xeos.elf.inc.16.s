@@ -73,16 +73,15 @@
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "XEOS.macros.inc.s"          ; General macros
-%include "XEOS.error.inc.16.s"        ; Error management
 %include "XEOS.ascii.inc.s"           ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16
 
 ;-------------------------------------------------------------------------------
-; Checks the ELF header to ensure it's a valid ELF binary file
+; Checks the ELF-32 header to ensure it's a valid ELF-32 binary file
 ; 
-; The ELF header has the following structure:
+; The ELF-32 header has the following structure:
 ;       
 ;       - BYTE  e_ident[ 16 ]   File identification
 ;       - WORD  e_type          Object file type
@@ -101,26 +100,30 @@ BITS    16
 ;       - WORD  e_shstrndx      Section header table index of the entry
 ;                               associated with the section name string table
 ; 
-; Necessary register values:
+; Input registers:
 ;       
-;       - ax:       The memory address at which the file is loaded
+;       - SI:       The memory address at which the file is loaded
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None   
 ;-------------------------------------------------------------------------------
-XEOS.elf.checkHeader:
-    
-    @XEOS.reg.save
+XEOS.elf.32.checkHeader:
     
     mov     es,         ax
     xor     ax,         ax
     mov     di,         ax
     
-    mov     si,         XEOS.elf.signature
+    mov     si,         $XEOS.elf.signature
     mov     cx,         4
     
     rep     cmpsb
     
     je      .validSignature
-    
-    call    XEOS.error.fatal
     
     .validSignature:
         
@@ -141,8 +144,6 @@ XEOS.elf.checkHeader:
         pop     si
         pop     ds
         
-        call    XEOS.error.fatal
-        
     .validClass:
         
         lodsb
@@ -154,87 +155,10 @@ XEOS.elf.checkHeader:
         pop     si
         pop     ds
         
-        call    XEOS.error.fatal
-        
     .validEncoding:
         
         pop     si
         pop     ds
-    
-    @XEOS.reg.restore
-    
-    ret
-
-;-------------------------------------------------------------------------------
-; Gets the entry point address of an ELF file, loaded in memory
-; 
-; 
-; Necessary register values:
-;       
-;       - ax:       The memory address at which the file is loaded
-;-------------------------------------------------------------------------------
-XEOS.elf.getEntryPointAddress:
-    
-    @XEOS.reg.save
-    
-    
-    
-    @XEOS.reg.restore
-    
-    ret
-    
-;-------------------------------------------------------------------------------
-; Loads an ELF file into memory
-; 
-; Necessary register values:
-;       
-;       - si:       The name of the file to load
-;       - ax:       The memory address at which the file will be loaded
-;       - bx:       The memory address at which the buffer will be created
-;                   (the buffer is used to load the FAT root directory and
-;                   the file allocation table, so be sure to have enough
-;                   memory available)
-;-------------------------------------------------------------------------------
-XEOS.elf.load:
-    
-    @XEOS.reg.save
-    
-    ; Saves some registers
-    push    ax
-    push    bx
-    
-    ; Loads the root directory into memory
-    call    XEOS.io.fat12.loadRootDirectory
-    
-    ; Location of the data we read into memory
-    pop     bx
-    push    bx
-    
-    ; Tries to find the kernel file in the root directory
-    call    XEOS.io.fat12.findFile
-    
-    ; Restores the needed memory registers
-    pop     bx
-    pop     ax
-    
-    ; Saves AX again
-    push    ax
-    
-    ; Loads the kernel into memory
-    call    XEOS.io.fat12.loadFile
-    
-    ; Checks the ELF header
-    pop     ax
-    push    ax
-    call    XEOS.elf.checkHeader
-    
-    ; Restores AX
-    pop    ax
-    
-    ; Gets the address of the entry point
-    call    XEOS.elf.getEntryPointAddress
-    
-    @XEOS.reg.restore
     
     ret
 
@@ -242,7 +166,6 @@ XEOS.elf.load:
 ; Variables
 ;-------------------------------------------------------------------------------
 
-XEOS.elf.signature      db  0x7F, 0x45, 0x4C, 0x46
-XEOS.elf.entryPoint     dd  0
+$XEOS.elf.signature      db  0x7F, 0x45, 0x4C, 0x46
 
 %endif

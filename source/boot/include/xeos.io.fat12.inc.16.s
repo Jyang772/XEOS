@@ -628,7 +628,7 @@ XEOS.io.fat12._clusterToLBA:
 ;           - $XEOS.io.fat12._absoluteTrack
 ;           - $XEOS.io.fat12._absoluteHead
 ; 
-; Inpur registers:
+; Input registers:
 ;       
 ;       - AX:       The LBA address to convert
 ; 

@@ -71,7 +71,7 @@
 ;-------------------------------------------------------------------------------
 ; Installation of the GDT
 ; 
-; Inpur registers:
+; Input registers:
 ;       
 ;       None
 ; 

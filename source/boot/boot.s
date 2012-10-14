@@ -102,6 +102,7 @@ start: jmp main
 %include "XEOS.cpu.inc.16.s"          ; CPU informations
 %include "XEOS.gdt.inc.s"             ; GDT - Global Descriptor Table
 %include "XEOS.a20.inc.16.s"          ; 20th address line enabling
+%include "XEOS.elf.inc.16.s"          ; ELF binary format support
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -395,7 +396,7 @@ main:
 ;-------------------------------------------------------------------------------
 ; Loads the XEOS kernel file into memory
 ; 
-; Inpur registers:
+; Input registers:
 ;       
 ;       - SI:       The name of the kernel file to load
 ; 
