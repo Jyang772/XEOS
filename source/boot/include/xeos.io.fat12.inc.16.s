@@ -450,7 +450,7 @@ XEOS.io.fat12.loadFile:
             jb      .loadFile
         
     ; Success - Stores result code in AX
-    xor ax,             ax
+    xor     ax,             ax
     
     ; Restore registers
     pop bx
