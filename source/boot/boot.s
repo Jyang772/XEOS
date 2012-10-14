@@ -140,9 +140,9 @@ $XEOS.boot.stage2.msg.xeos                  db  " XEOS - x86 Experimental Operat
 $XEOS.boot.stage2.msg.copyright.1           db  " Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.2           db  " All Rights Reserved", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu                   db  "Getting CPU informations:", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.vendor            db  "            - CPU vendor:          ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.type              db  "            - CPU type:            ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.instructions      db  "            - CPU instruction set: ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.vendor            db  "          - CPU vendor:          ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.type              db  "          - CPU type:            ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.instructions      db  "          - CPU instruction set: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type.32           db  "i386", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type.64           db  "x86_64", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.instructions.32   db  "32 bits", @ASCII.NUL
