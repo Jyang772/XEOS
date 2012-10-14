@@ -199,23 +199,23 @@ main:
     
     .i386:
         
-        ; 32 bits kernel is going to be loaded
-        mov     si,         $XEOS.files.kernel.32
-        
         @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.32
         @BIOS.video.print   $XEOS.boot.stage2.nl
+        
+        ; 32 bits kernel is going to be loaded
+        mov     si,         $XEOS.files.kernel.32
         
         jmp     .load
         
     .x86_64:
         
-        ; 64 bits kernel is going to be loaded
-        mov     si,         $XEOS.files.kernel.64
-        
         @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.64
         @BIOS.video.print   $XEOS.boot.stage2.nl
         
-    .load
+        ; 64 bits kernel is going to be loaded
+        mov     si,         $XEOS.files.kernel.64
+        
+    .load:
         
         ; Loads the XEOS kernel into memory
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
