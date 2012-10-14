@@ -73,7 +73,6 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 
 MBR                 := $(PATH_BUILD_BOOT)MBR.BIN
 BOOTLOADER          := $(PATH_BUILD_BOOT)BOOT.BIN
-BOOT_TEST           := $(PATH_BUILD_BOOT)TEST.BIN
 KERNEL32            := $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF
 KERNEL64            := $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF
 FLOPPY_DMG          := $(PATH_BUILD_TMP)boot.dmg
@@ -107,7 +106,6 @@ boot_floppy:
 	
 	@$(PRINT) $(PROMPT)"Copying the XEOS boot files"
 	@$(CP) $(BOOTLOADER) $(PATH_RELEASE_FLOPPY)
-	@$(CP) $(BOOT_TEST) $(PATH_RELEASE_FLOPPY)
 	@$(CP) $(KERNEL32) $(PATH_RELEASE_FLOPPY)
 	@$(CP) $(KERNEL64) $(PATH_RELEASE_FLOPPY)
 	
