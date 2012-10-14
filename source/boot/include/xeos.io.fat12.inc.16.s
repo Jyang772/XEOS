@@ -140,7 +140,7 @@ XEOS.io.fat12.loadRootDirectory:
     %else
         
         ; Multiplies by the maximum number of entries to get the root directory size
-        mul     WORD [ $XEOS.fat12.mbr.maxRootDirEntries ]
+        mul     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.maxRootDirEntries ]
         
     %endif
     
@@ -154,7 +154,7 @@ XEOS.io.fat12.loadRootDirectory:
     %else
         
         ; Number of sectors used by the root directory
-        div     WORD [ $XEOS.fat12.mbr.bytesPerSector ]
+        div     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.bytesPerSector ]
         
     %endif
     
@@ -174,7 +174,7 @@ XEOS.io.fat12.loadRootDirectory:
     %else
         
         ; Multiplies by the maximum number of entries to get the root directory size
-        mul     WORD [ $XEOS.fat12.mbr.sectorsPerFAT ]
+        mul     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerFAT ]
         
     %endif
     
@@ -342,7 +342,7 @@ XEOS.io.fat12.loadFile:
         %else
             
             ; Multiplies by the number of sectors per FAT
-            mul     WORD [ $XEOS.fat12.mbr.sectorsPerFAT ]
+            mul     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerFAT ]
             
         %endif
         
@@ -598,7 +598,7 @@ XEOS.io.fat12._clusterToLBA:
     %else
         
         ; Multiplies by the number of sectors per cluster
-        mul     BYTE [ $XEOS.fat12.mbr.sectorsPerCluster ]
+        mul     BYTE [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerCluster ]
         
     %endif
     
@@ -659,7 +659,7 @@ XEOS.io.fat12._lbaToCHS:
     %else
         
         ; Divides by the number of sectors per track
-        div     WORD [ $XEOS.fat12.mbr.sectorsPerTrack ]
+        div     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerTrack ]
         
     %endif
     
@@ -682,7 +682,7 @@ XEOS.io.fat12._lbaToCHS:
     %else
         
         ; Divides by the number of sectors per track
-        div     WORD [ $XEOS.fat12.mbr.headsPerCylinder ]
+        div     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.headsPerCylinder ]
         
     %endif
     

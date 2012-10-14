@@ -155,24 +155,54 @@ BITS    16
 ;       some utilities
 ;       use it in this way.
 ;-------------------------------------------------------------------------------
-$XEOS.fat12.mbr.oemName:                db @XEOS.fat12.mbr.oemName
-$XEOS.fat12.mbr.bytesPerSector:         dw @XEOS.fat12.mbr.bytesPerSector
-$XEOS.fat12.mbr.sectorsPerCluster:      db @XEOS.fat12.mbr.sectorsPerCluster
-$XEOS.fat12.mbr.reservedSectors:        dw @XEOS.fat12.mbr.reservedSectors
-$XEOS.fat12.mbr.numberOfFATs:           db @XEOS.fat12.mbr.numberOfFATs
-$XEOS.fat12.mbr.maxRootDirEntries:      dw @XEOS.fat12.mbr.maxRootDirEntries
-$XEOS.fat12.mbr.totalSectors:           dw @XEOS.fat12.mbr.totalSectors
-$XEOS.fat12.mbr.mediaDescriptor:        db @XEOS.fat12.mbr.mediaDescriptor
-$XEOS.fat12.mbr.sectorsPerFAT:          dw @XEOS.fat12.mbr.sectorsPerFAT
-$XEOS.fat12.mbr.sectorsPerTrack:        dw @XEOS.fat12.mbr.sectorsPerTrack
-$XEOS.fat12.mbr.headsPerCylinder:       dw @XEOS.fat12.mbr.headsPerCylinder
-$XEOS.fat12.mbr.hiddenSectors:          dd @XEOS.fat12.mbr.hiddenSectors
-$XEOS.fat12.mbr.lbaSectors:             dd @XEOS.fat12.mbr.lbaSectors
-$XEOS.fat12.mbr.driveNumber:            db @XEOS.fat12.mbr.driveNumber
-$XEOS.fat12.mbr.reserved:               db @XEOS.fat12.mbr.reserved
-$XEOS.fat12.mbr.bootSignature:          db @XEOS.fat12.mbr.bootSignature
-$XEOS.fat12.mbr.volumeID:               dd @XEOS.fat12.mbr.volumeID
-$XEOS.fat12.mbr.volumeLabel:            db @XEOS.fat12.mbr.volumeLabel
-$XEOS.fat12.mbr.fileSystem:             db @XEOS.fat12.mbr.fileSystem
+struc XEOS.fat12.mbr_t
+
+    .oemName:               resb    8
+    .bytesPerSector:        resw    1
+    .sectorsPerCluster:     resb    1
+    .reservedSectors:       resw    1
+    .numberOfFATs:          resb    1
+    .maxRootDirEntries:     resw    1
+    .totalSectors:          resw    1
+    .mediaDescriptor:       resb    1
+    .sectorsPerFAT:         resw    1
+    .sectorsPerTrack:       resw    1
+    .headsPerCylinder:      resw    1
+    .hiddenSectors:         resd    1
+    .lbaSectors:            resd    1
+    .driveNumber:           resb    1
+    .reserved:              resb    1
+    .bootSignature:         resb    1
+    .volumeID:              resd    1
+    .volumeLabel:           resb    11
+    .fileSystem:            resb    8
+
+endstruc
+
+$XEOS.fat12.mbr:
+    
+    istruc XEOS.fat12.mbr_t
+
+        db @XEOS.fat12.mbr.oemName
+        dw @XEOS.fat12.mbr.bytesPerSector
+        db @XEOS.fat12.mbr.sectorsPerCluster
+        dw @XEOS.fat12.mbr.reservedSectors
+        db @XEOS.fat12.mbr.numberOfFATs
+        dw @XEOS.fat12.mbr.maxRootDirEntries
+        dw @XEOS.fat12.mbr.totalSectors
+        db @XEOS.fat12.mbr.mediaDescriptor
+        dw @XEOS.fat12.mbr.sectorsPerFAT
+        dw @XEOS.fat12.mbr.sectorsPerTrack
+        dw @XEOS.fat12.mbr.headsPerCylinder
+        dd @XEOS.fat12.mbr.hiddenSectors
+        dd @XEOS.fat12.mbr.lbaSectors
+        db @XEOS.fat12.mbr.driveNumber
+        db @XEOS.fat12.mbr.reserved
+        db @XEOS.fat12.mbr.bootSignature
+        dd @XEOS.fat12.mbr.volumeID
+        db @XEOS.fat12.mbr.volumeLabel
+        db @XEOS.fat12.mbr.fileSystem
+
+    iend
 
 %endif
