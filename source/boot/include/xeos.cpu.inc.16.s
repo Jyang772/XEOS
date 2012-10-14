@@ -69,6 +69,7 @@
 ; the help of the "Operand Size Override Prefix" (0x66), handled by
 ; the assembler.
 ;-------------------------------------------------------------------------------
+
 %ifndef __XEOS_CPU_INC_16_ASM__
 %define __XEOS_CPU_INC_16_ASM__
 
