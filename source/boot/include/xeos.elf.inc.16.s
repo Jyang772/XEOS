@@ -66,6 +66,7 @@
 ; 
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
+
 %ifndef __XEOS_ELF_INC_16_ASM__
 %define __XEOS_ELF_INC_16_ASM__
 
@@ -118,7 +119,7 @@ XEOS.elf.32.checkHeader:
     xor     ax,         ax
     mov     di,         ax
     
-    mov     si,         $XEOS.elf.signature
+    mov     si,         $XEOS.elf.32.signature
     mov     cx,         4
     
     rep     cmpsb
@@ -161,11 +162,30 @@ XEOS.elf.32.checkHeader:
         pop     ds
     
     ret
+    
+;-------------------------------------------------------------------------------
+; Checks the ELF-64 header to ensure it's a valid ELF-64 binary file
+; 
+; Input registers:
+;       
+;       - SI:       The memory address at which the file is loaded
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None   
+;-------------------------------------------------------------------------------
+XEOS.elf.64.checkHeader:
+    
+    ret
 
 ;-------------------------------------------------------------------------------
 ; Variables
 ;-------------------------------------------------------------------------------
 
-$XEOS.elf.signature      db  0x7F, 0x45, 0x4C, 0x46
+$XEOS.elf.32.signature      db  0x7F, 0x45, 0x4C, 0x46
 
 %endif
