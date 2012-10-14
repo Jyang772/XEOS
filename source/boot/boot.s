@@ -100,6 +100,7 @@ start: jmp main
 %include "XEOS.io.fat12.inc.16.s"     ; FAT-12 IO procedures
 %include "XEOS.ascii.inc.s"           ; ASCII table
 %include "XEOS.cpu.inc.16.s"          ; CPU informations
+%include "XEOS.gdt.inc.s"             ; GDT - Global Descriptor Table
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -236,7 +237,7 @@ main:
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.32
         
         ; 32 bits kernel is going to be loaded
-        mov     si,         $XEOS.files.kernel.32
+        mov     si,             $XEOS.files.kernel.32
         
         jmp     .load
         
@@ -247,13 +248,13 @@ main:
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.64
         
         ; 64 bits kernel is going to be loaded
-        mov     si,         $XEOS.files.kernel.64
+        mov     si,             $XEOS.files.kernel.64
     
     .load:
         
         ; Loads the XEOS kernel into memory
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
-        call    XEOS.boot.stage2.kernel.load
+        call                    XEOS.boot.stage2.kernel.load
         
         cmp     ax,         1
         je      .error.fat12.dir
@@ -269,6 +270,7 @@ main:
         .gdt:
             
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
+            call                    XEOS.gdt.install
             
         .a20:
             
@@ -277,23 +279,25 @@ main:
         .switch32:
             
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
-        
-    jmp     .end
+    
+    ; Halts the system
+    cli
+    hlt
     
     .error.fat12.dir:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.error.fat12.dir
-        jmp     .error
+        jmp                     .error
     
     .error.fat12.find:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.error.fat12.find
-        jmp     .error
+        jmp                     .error
     
     .error.fat12.load:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.error.fat12.load
-        jmp     .error
+        jmp                     .error
     
     .error:
         
@@ -306,8 +310,6 @@ main:
         
         ; Reboot the computer
         @BIOS.int.reboot
-        
-    .end:
         
         ; Halts the system
         cli

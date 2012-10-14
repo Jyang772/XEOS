@@ -61,6 +61,47 @@
 
 ; $Id$
 
+%ifndef __XEOS_GDT_INC_ASM__
+%define __XEOS_GDT_INC_ASM__
+
+;-------------------------------------------------------------------------------
+; Installation of the GDT
+; 
+; Inpur registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.gdt.install:
+    
+    ; Clears the interrupts
+    cli
+    
+    lgdt    [ $XEOS.gdt._pointer ]
+    
+    ; Restores the interrupts
+    sti
+    
+    ret
+
+%endif
+
+;-------------------------------------------------------------------------------
+; Addresses of the descriptors
+;-------------------------------------------------------------------------------
+%define @XEOS.gdt.descriptors.null          0x00
+%define @XEOS.gdt.descriptors.code.kernel   0x08
+%define @XEOS.gdt.descriptors.data.kernel   0x10
+%define @XEOS.gdt.descriptors.code.user     0x18
+%define @XEOS.gdt.descriptors.data.user     0x20
+
 ;-------------------------------------------------------------------------------
 ; GDT - Global Descriptor Table
 ; 
@@ -75,7 +116,8 @@
 ; Each descriptor is 8 bytes long, and has the following structure:
 ;       
 ;       - Bits  0 - 15: Segment limit (0-15)
-;       - Bits 16 - 30: Base address (0-23)
+;       - Bits 16 - 31: Base address (0-15)
+;       - Bits 31 - 39: Base address (16-23)
 ;       - Bit  40:      Access bit (only for virtual memory)
 ;       - Bits 41 - 43: Descriptor type
 ;                           Bit 41: Readable and writeable
@@ -105,190 +147,107 @@
 ;       - Bits 56 - 63: Base address (24-31)
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_GDT_INC_ASM__
-%define __XEOS_GDT_INC_ASM__
+struc XEOS.gdt.descriptor_t
 
-;-------------------------------------------------------------------------------
-; Includes
-;-------------------------------------------------------------------------------
-%include "XEOS.macros.inc.s"      ; General macros
+    .segment1       resw    1
+    .base1          resw    1
+    .base2          resb    1
+    .info           resb    1
+    .segment        resb    1
+    .base3          resb    1
 
-;-------------------------------------------------------------------------------
-; Addresses of the descriptors
-;-------------------------------------------------------------------------------
-%define @XEOS.gdt.descriptors.null          0x00
-%define @XEOS.gdt.descriptors.code.kernel   0x08
-%define @XEOS.gdt.descriptors.data.kernel   0x10
-%define @XEOS.gdt.descriptors.code.user     0x18
-%define @XEOS.gdt.descriptors.data.user     0x20
+endstruc
 
-; GDT start address
-XEOS.gdt.start:
+struc XEOS.gdt_t
 
-;-------------------------------------------------------------------------------
-; Null descriptor
-;-------------------------------------------------------------------------------
+    .null           resb    XEOS.gdt.descriptor_t_size
+    .code           resb    XEOS.gdt.descriptor_t_size
+    .data           resb    XEOS.gdt.descriptor_t_size
 
-; 8 bytes of zeros
-dd  0
-dd  0
+endstruc
 
-;-------------------------------------------------------------------------------
-; Kernel space code descriptor
-;-------------------------------------------------------------------------------
-
-; Segment limit (0-15)
-dw  0xFFFF
-
-; Base address (0-15)
-dw  0
-
-; Base address (16-23)
-db  0
-
-; Access:                   0       - Not using virtual memory
-; Descriptor type:          1       - Read and execute
-;                           0       - ???
-;                           1       - Code descriptor
-; Descriptor bit:           1       - Code/Data descriptor
-; Privilege level:          00      - Ring 0 (kernel level)
-; In memory:                1       - ???
-db  10011010b
-
-; Segment limit (16-19):    1111    - High bits for the segment limit
-; OS reserved:              0       - Nothing
-; Reserved:                 0       - Nothing
-; Segment type:             1       - 32 bits
-; Granularity:              1       - Segments bounded by 4K
-db  11001111b
-
-; Base address (24-31)
-db  0
-
-;-------------------------------------------------------------------------------
-; Kernel space data descriptor
-;-------------------------------------------------------------------------------
-
-; Segment limit (0-15)
-dw  0xFFFF
-
-; Base address (0-15)
-dw  0
-
-; Base address (16-23)
-db  0
-
-; Access:                   0       - Not using virtual memory
-; Descriptor type:          1       - Read and write
-;                           0       - ???
-;                           0       - Data descriptor
-; Descriptor bit:           1       - Code/Data descriptor
-; Privilege level:          00      - Ring 0 (kernel level)
-; In memory:                1       - ???
-db  10010010b
-
-; Segment limit (16-19):    1111    - High bits for the segment limit
-; OS reserved:              0       - Nothing
-; Reserved:                 0       - Nothing
-; Segment type:             1       - 32 bits
-; Granularity:              1       - Segments bounded by 4K
-db  11001111b
-
-; Base address (24-31)
-db  0
-
-;-------------------------------------------------------------------------------
-; User space code descriptor
-;-------------------------------------------------------------------------------
-
-; Segment limit (0-15)
-dw  0xFFFF
-
-; Base address (0-15)
-dw  0
-
-; Base address (16-23)
-db  0
-
-; Access:                   0       - Not using virtual memory
-; Descriptor type:          1       - Read and execute
-;                           0       - ???
-;                           1       - Code descriptor
-; Descriptor bit:           1       - Code/Data descriptor
-; Privilege level:          11      - Ring 3 (user level)
-; In memory:                1       - ???
-db  11111010b
-
-; Segment limit (16-19):    1111    - High bits for the segment limit
-; OS reserved:              0       - Nothing
-; Reserved:                 0       - Nothing
-; Segment type:             1       - 32 bits
-; Granularity:              1       - Segments bounded by 4K
-db  11001111b
-
-; Base address (24-31)
-db  0
-
-;-------------------------------------------------------------------------------
-; User space data descriptor
-;-------------------------------------------------------------------------------
-
-; Segment limit (0-15)
-dw  0xFFFF
-
-; Base address (0-15)
-dw  0
-
-; Base address (16-23)
-db  0
-
-; Access:                   0       - Not using virtual memory
-; Descriptor type:          1       - Read and write
-;                           0       - ???
-;                           0       - Data descriptor
-; Descriptor bit:           1       - Code/Data descriptor
-; Privilege level:          11      - Ring 3 (user level)
-; In memory:                1       - ???
-db  11110010b
-
-; Segment limit (16-19):    1111    - High bits for the segment limit
-; OS reserved:              0       - Nothing
-; Reserved:                 0       - Nothing
-; Segment type:             1       - 32 bits
-; Granularity:              1       - Segments bounded by 4K
-db  11001111b
-
-; Base address (24-31)
-db  0
-
-; GDT end address
-XEOS.gdt.end:
+$XEOS.gdt
+    
+    istruc XEOS.gdt_t
+        
+        ;-------------------------------------------------------------------------------
+        ; Null descriptor
+        ;-------------------------------------------------------------------------------
+        
+        ; 8 bytes of zeros
+        dd  0
+        dd  0
+        
+        ;-------------------------------------------------------------------------------
+        ; Kernel space code descriptor
+        ;-------------------------------------------------------------------------------
+        
+        ; Segment limit (0-15)
+        dw  0xFFFF
+        
+        ; Base address (0-15)
+        dw  0
+        
+        ; Base address (16-23)
+        db  0
+        
+        ; Access:                   0       - Not using virtual memory
+        ; Descriptor type:          1       - Read and execute
+        ;                           0       - ???
+        ;                           1       - Code descriptor
+        ; Descriptor bit:           1       - Code/Data descriptor
+        ; Privilege level:          00      - Ring 0 (kernel level)
+        ; In memory:                1       - ???
+        db  10011010b
+        
+        ; Segment limit (16-19):    1111    - High bits for the segment limit
+        ; OS reserved:              0       - Nothing
+        ; Reserved:                 0       - Nothing
+        ; Segment type:             1       - 32 bits
+        ; Granularity:              1       - Segments bounded by 4K
+        db  11001111b
+        
+        ; Base address (24-31)
+        db  0
+        
+        ;-------------------------------------------------------------------------------
+        ; Kernel space data descriptor
+        ;-------------------------------------------------------------------------------
+        
+        ; Segment limit (0-15)
+        dw  0xFFFF
+        
+        ; Base address (0-15)
+        dw  0
+        
+        ; Base address (16-23)
+        db  0
+        
+        ; Access:                   0       - Not using virtual memory
+        ; Descriptor type:          1       - Read and write
+        ;                           0       - ???
+        ;                           0       - Data descriptor
+        ; Descriptor bit:           1       - Code/Data descriptor
+        ; Privilege level:          00      - Ring 0 (kernel level)
+        ; In memory:                1       - ???
+        db  10010010b
+        
+        ; Segment limit (16-19):    1111    - High bits for the segment limit
+        ; OS reserved:              0       - Nothing
+        ; Reserved:                 0       - Nothing
+        ; Segment type:             1       - 32 bits
+        ; Granularity:              1       - Segments bounded by 4K
+        db  11001111b
+        
+        ; Base address (24-31)
+        db  0
+        
+    iend
 
 ;-------------------------------------------------------------------------------
 ; Pointer for the GDT
 ;-------------------------------------------------------------------------------
-XEOS.gdt.pointer:
+$XEOS.gdt._pointer:
     
-    dw  XEOS.gdt.end - XEOS.gdt.start - 1
-    dd  XEOS.gdt.start
-
-;-------------------------------------------------------------------------------
-; Installation of the GDT
-;-------------------------------------------------------------------------------
-XEOS.gdt.install:
-    
-    @XEOS.reg.save
-    
-    ; Clears the interrupts
-    cli
-    
-    lgdt    [ XEOS.gdt.pointer ]
-    
-    ; Restores the interrupts
-    sti
-    
-    @XEOS.reg.restore
-    
-    ret
-
-%endif
+    dw  XEOS.gdt_t_size - 1
+    dd  XEOS.gdt
