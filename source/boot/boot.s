@@ -126,6 +126,7 @@ $XEOS.boot.stage2.nl                        db  @ASCII.NL,  @ASCII.NUL
 $XEOS.files.kernel.32                       db  "XEOS32  BIN", @ASCII.NUL
 $XEOS.files.kernel.64                       db  "XEOS64  BIN", @ASCII.NUL
 $XEOS.boot.stage2.cpu.vendor                db  "            ", @ASCII.NUL
+$XEOS.boot.stage2.longMonde                 db  0
 
 ;-------------------------------------------------------------------------------
 ; Strings
@@ -150,6 +151,7 @@ $XEOS.boot.stage2.msg.fat12.load            db  "Loading the XEOS kernel into me
 $XEOS.boot.stage2.msg.gdt                   db  "Installing the GDT", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20                   db  "Enabling the A20 address line", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch32              db  "Switching the CPU to 32 bits mode", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch64              db  "Switching the CPU to 64 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                 db  "Press any key to reboot", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir       db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find      db  "Error: file not found", @ASCII.NUL
@@ -239,6 +241,9 @@ main:
         ; 32 bits kernel is going to be loaded
         mov     si,             $XEOS.files.kernel.32
         
+        ; We won't switch to 64 bits long mode
+        mov     BYTE [ $XEOS.boot.stage2.longMonde ],   0
+        
         jmp     .load
         
     .x86_64:
@@ -249,7 +254,10 @@ main:
         
         ; 64 bits kernel is going to be loaded
         mov     si,             $XEOS.files.kernel.64
-    
+        
+        ; We'll need to switch to 64 bits long mode
+        mov     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+        
     .load:
         
         ; Loads the XEOS kernel into memory
@@ -264,25 +272,57 @@ main:
         
         cmp     ax,         3
         je      .error.fat12.load
-        
-    .pmode:
-        
-        .gdt:
-            
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
-            call                    XEOS.gdt.install
-            
-        .a20:
-            
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20
-            
-        .switch32:
-            
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
     
-    ; Halts the system
-    cli
-    hlt
+    .gdt:
+        
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
+        call                    XEOS.gdt.install
+        
+    .a20:
+        
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20
+    
+    ; Checks if we must switch the CPU to 64 bits long mode
+    cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+    je      .switch64
+        
+    .switch32:
+            
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
+        
+        ; Not ready yet...
+        jmp     .end
+        
+        ; Clears the interrupts
+        cli
+        
+        ; Gets the value of the primary control register
+        mov     eax,        cr0
+        
+        ; Sets the lowest bit, indicating the system must run in protected mode
+        or      eax,        1
+        
+        ; Sets the new value - We are now in 32bits protected mode
+        mov     cr0,        eax
+            
+    .switch64:
+        
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
+        
+        ; Not ready yet...
+        jmp     .end
+        
+        ; Clears the interrupts
+        cli
+        
+        ; Gets the value of the primary control register
+        mov     eax,        cr0
+        
+        ; Sets the lowest bit, indicating the system must run in protected mode
+        or      eax,        1
+        
+        ; Sets the new value - We are now in 32bits protected mode
+        mov     cr0,        eax
     
     .error.fat12.dir:
         
@@ -310,6 +350,8 @@ main:
         
         ; Reboot the computer
         @BIOS.int.reboot
+    
+    .end:
         
         ; Halts the system
         cli
