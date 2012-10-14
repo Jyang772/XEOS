@@ -148,6 +148,7 @@ $XEOS.boot.stage2.msg.kernel.load           db  "Preparing to load the XEOS kern
 $XEOS.boot.stage2.msg.fat12.root            db  "Loading the FAT-12 root directory into memory", @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.find            db  "Locating the XEOS kernel file: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.load            db  "Loading the XEOS kernel into memory: 0x1000:0000", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.verify         db  "Verifiying the XEOS kernel image", @ASCII.NUL
 $XEOS.boot.stage2.msg.gdt                   db  "Installing the GDT", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20                   db  "Enabling the A20 address line", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch32              db  "Switching the CPU to 32 bits mode", @ASCII.NUL
@@ -272,6 +273,8 @@ main:
         
         cmp     ax,         3
         je      .error.fat12.load
+        
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify
     
     .gdt:
         
