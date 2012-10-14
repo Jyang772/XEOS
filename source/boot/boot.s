@@ -132,7 +132,7 @@ $XEOS.boot.stage2.msg.cpu.64                db  'x86_64', @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.load           db  'Preparing to load the XEOS kernel', @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.root            db  'Loading the FAT-12 root directory into memory', @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.find            db  'Locating the XEOS kernel file: ', @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.load            db  'Loading the XEOS kernel into memory: 0x1000:00', @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.load            db  'Loading the XEOS kernel into memory: 0x1000:0000', @ASCII.NUL
 $XEOS.boot.stage2.msg.error                 db  "Press any key to reboot", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir       db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find      db  "Error: file not found", @ASCII.NUL
