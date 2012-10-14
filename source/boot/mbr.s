@@ -114,10 +114,15 @@ start: jmp main
 ;-------------------------------------------------------------------------------
 
 $XEOS.boot.stage1.dataSector    dw  0
-$XEOS.files.stage2              db  'BOOT    BIN'
+$XEOS.files.stage2              db  "BOOT    BIN"
+
+;-------------------------------------------------------------------------------
+; Strings
+;-------------------------------------------------------------------------------
+
 $XEOS.boot.stage1.msg.prompt    db  "[ XEOS ]> ", @ASCII.NUL
 $XEOS.boot.stage1.msg.success   db  "Boot", @ASCII.CR, @ASCII.LF, @ASCII.NUL
-$XEOS.boot.stage1.msg.error db  "Error", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.msg.error     db  "Error", @ASCII.CR, @ASCII.LF, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
