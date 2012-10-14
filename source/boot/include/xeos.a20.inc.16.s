@@ -94,6 +94,44 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
+; Enables A20 through a BIOS call
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.a20.enable.bios:
+    
+    ; A20 enabling function ( BIOS miscellaneous services function)
+    mov     ax,         0x2401
+    
+    ; Calls the BIOS miscellaneous services
+    @BIOS.int.misc
+    
+    ; Checks for an error
+    jnc     .success
+     
+    ; Error - Stores result code in AX
+    mov     ax,         1
+    
+    ret
+    
+    .success:
+        
+        ; Success - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
+
+;-------------------------------------------------------------------------------
 ; Enables A20 through the system control port
 ; 
 ; Input registers:

@@ -101,20 +101,20 @@ BITS    16
 ;-------------------------------------------------------------------------------
 struc XEOS.elf.32.header_t
 
-    e_ident:        resb    16
-    e_type:         resw    1
-    e_machine:      resw    1
-    e_version:      resd    1
-    e_entry:        resd    1
-    e_phoff:        resd    1
-    e_shoff:        resd    1
-    e_flags:        resd    1
-    e_ehsize:       resw    1
-    e_phentsize:    resw    1
-    e_phnum:        resw    1
-    e_shentsize:    resw    1
-    e_shnum:        resw    1
-    e_shstrndx:     resw    1
+    .e_ident:       resb    16
+    .e_type:        resw    1
+    .e_machine:     resw    1
+    .e_version:     resd    1
+    .e_entry:       resd    1
+    .e_phoff:       resd    1
+    .e_shoff:       resd    1
+    .e_flags:       resd    1
+    .e_ehsize:      resw    1
+    .e_phentsize:   resw    1
+    .e_phnum:       resw    1
+    .e_shentsize:   resw    1
+    .e_shnum:       resw    1
+    .e_shstrndx:    resw    1
 
 endstruc
 

@@ -152,7 +152,7 @@ $XEOS.boot.stage2.msg.cpu.instructions.64   db  "64 bits", @ASCII.NUL
 $XEOS.boot.stage2.msg.32                    db  "The kernel will run in 32 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.64                    db  "The kernel will run in 64 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.load           db  "Loading the kernel image:", @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.root            db  "            - Loading the FAT-12 root directory into memory: 0x0050:1000", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.root            db  "            - Loading the FAT-12 root directory into memory: 0x0050:4000", @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.find            db  "            - Locating the kernel file: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.load            db  "            - Loading the kernel into memory: 0x1000:0000", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.verify.32      db  "Verifiying the kernel ELF image", @ASCII.NUL
@@ -419,8 +419,8 @@ XEOS.boot.stage2.kernel.load:
         @BIOS.video.print   $XEOS.boot.stage2.msg.fat12.root
         @BIOS.video.print   $XEOS.boot.stage2.nl
         
-        ; Loads the FAT-12 root directory at ES:0x1000
-        mov     di,         0x1000
+        ; Loads the FAT-12 root directory at ES:0x4000
+        mov     di,         0x4000
         call    XEOS.io.fat12.loadRootDirectory
         
         ; Checks for an error code
@@ -480,8 +480,8 @@ XEOS.boot.stage2.kernel.load:
         ; Loads the file at 0x1000:00
         mov     ax,         0x1000
         
-        ; Loads the FAT at ES:0x1000
-        mov     bx,         0x1000
+        ; Loads the FAT at ES:0x4000
+        mov     bx,         0x4000
         
         ; Data sector location
         mov     cx,         WORD [ $XEOS.boot.stage2.dataSector ]
