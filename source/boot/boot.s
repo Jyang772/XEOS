@@ -134,11 +134,11 @@ $XEOS.boot.stage2.longMonde                 db  0
 
 $XEOS.boot.stage2.msg.prompt                db  "[ XEOS ]> ", @ASCII.NUL
 $XEOS.boot.stage2.msg.quote                 db  '"', @ASCII.NUL
-$XEOS.boot.stage2.msg.greet                 db  "Entering the second stage bootloader:", @ASCII.NUL
-$XEOS.boot.stage2.msg.hr                    db  "          ---------------------------------------------------------------------", @ASCII.NL, @ASCII.NUL
-$XEOS.boot.stage2.msg.xeos                  db  "          XEOS - x86 Experimental Operating System", @ASCII.NL, @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.1           db  "          Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>", @ASCII.NL, @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.2           db  "          All Rights Reserved", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.greet                 db  "Entering the second stage bootloader", @ASCII.NUL
+$XEOS.boot.stage2.msg.hr                    db  "-------------------------------------------------------------------------------", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.xeos                  db  " XEOS - x86 Experimental Operating System", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.1           db  " Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.2           db  " All Rights Reserved", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu                   db  "Getting CPU informations:", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.vendor            db  "              - CPU vendor:            ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type              db  "              - CPU type:              ", @ASCII.NUL
