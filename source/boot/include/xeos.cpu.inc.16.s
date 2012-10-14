@@ -76,6 +76,41 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
+; Gets the CPU vendor
+; 
+; Input registers:
+;       
+;       - DI:       The location of a buffer for the vendor string.
+;                   Needs to be at least 12 characters long.
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.cpu.vendor:
+    
+    ; Saves registers
+    pusha
+    
+    ; Get CPU vendor strings (EBX, EDX, ECX - 4 chars each)
+    mov     eax,        0
+    cpuid
+    
+    ; Copies the strings to DI
+    mov     [ di + 0 ], ebx
+    mov     [ di + 4 ], edx
+    mov     [ di + 8 ], ecx
+    
+    ; Restore registers
+    popa
+    
+    ret
+
+;-------------------------------------------------------------------------------
 ; Checks if the CPU is 64 bits capable
 ; 
 ; Input registers:
@@ -95,10 +130,8 @@ XEOS.cpu.64:
     ; Saves registers
     pusha
     
-    ; CPUID extended infos
-    mov     eax,        0x80000000
-    
     ; Indentifies CPU
+    mov     eax,        0x80000000
     cpuid
     
     ; Checks for 64 bits capabilities
