@@ -115,9 +115,9 @@ start: jmp main
 
 $XEOS.boot.stage1.dataSector    dw  0
 $XEOS.files.stage2              db  'BOOT    BIN'
-$XEOS.boot.stage1.prompt        db  "[ XEOS ]> ", @ASCII.NUL
-$XEOS.boot.stage1.success       db  "Boot", @ASCII.CR, @ASCII.LF, @ASCII.NUL
-$XEOS.boot.stage1.error         db  "Error", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.msg.prompt    db  "[ XEOS ]> ", @ASCII.NUL
+$XEOS.boot.stage1.msg.success   db  "Boot", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.msg.error db  "Error", @ASCII.CR, @ASCII.LF, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
@@ -163,7 +163,7 @@ main:
     sti
 
     ; Prints the greeting
-    @BIOS.video.print   $XEOS.boot.stage1.prompt
+    @BIOS.video.print   $XEOS.boot.stage1.msg.prompt
     
     ; Loads the FAT-12 root directory at ES:0x200
     ; (0x07CE - just after this bootloader)
@@ -205,7 +205,7 @@ main:
     cmp     ax,         0
     jne      .failure
     
-    @BIOS.video.print   $XEOS.boot.stage1.success
+    @BIOS.video.print   $XEOS.boot.stage1.msg.success
     
     ; Pass control to the second stage bootloader
     push    WORD 0x0050
@@ -215,7 +215,7 @@ main:
     .failure:
         
         ; Prints the error message
-        @BIOS.video.print $XEOS.boot.stage1.error
+        @BIOS.video.print $XEOS.boot.stage1.msg.error
         
         ; Waits for a key press
         xor     ax,         ax
