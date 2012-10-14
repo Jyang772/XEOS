@@ -181,7 +181,8 @@ main:
     
     ; Loads the 32 bits kernel into memory
     @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
-    call XEOS.boot.stage2.kernel.load
+    mov     si,         $XEOS.files.kernel.32
+    call    XEOS.boot.stage2.kernel.load
     
     cmp     ax,         1
     je      .error.fat12.dir
@@ -197,17 +198,17 @@ main:
     .error.fat12.dir:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.error.fat12.dir
-        jmp .error
+        jmp     .error
     
     .error.fat12.find:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.error.fat12.find
-        jmp .error
+        jmp     .error
     
     .error.fat12.load:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.error.fat12.load
-        jmp .error
+        jmp     .error
     
     .error:
         
@@ -228,11 +229,11 @@ main:
         hlt
 
 ;-------------------------------------------------------------------------------
-; Loads the 32 bits kernel file into memory
+; Loads the XEOS kernel file into memory
 ; 
 ; Inpur registers:
 ;       
-;       None
+;       - SI:       The name of the kernel file to load
 ; 
 ; Return registers:
 ;       
@@ -248,9 +249,12 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.root
         
+        ; Saves registers
+        push    di
+        
         ; Loads the FAT-12 root directory at ES:0x0700
         mov     di,         0x0700
-        call XEOS.io.fat12.loadRootDirectory
+        call    XEOS.io.fat12.loadRootDirectory
         
         ; Checks for an error code
         cmp     ax,         0
@@ -258,6 +262,9 @@ XEOS.boot.stage2.kernel.load:
         
         ; Error - Stores result code in AX
         mov     ax,         1
+        
+        ; Restore registers
+        pop     di
         
         ret
     
@@ -268,13 +275,13 @@ XEOS.boot.stage2.kernel.load:
         ; Stores the location of the first data sector
         mov     WORD [ $XEOS.boot.stage2.dataSector ],  dx
         
-        ; Name of the second stage bootloader
-        mov     si,         $XEOS.files.kernel.32
-        
         ; Finds the second stage bootloader
         ; We have not altered DI, so it still contains the location of the FAT-12
         ; root directory
-        call XEOS.io.fat12.findFile
+        call    XEOS.io.fat12.findFile
+        
+        ; Restore registers
+        pop    di
         
         ; Checks for an error code
         cmp     ax,         0
@@ -289,6 +296,10 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.load
         
+        ; Saves registers
+        push    bx
+        push    cx
+        
         ; Loads the file at 0x1000:00
         mov     ax,         0x1000
         
@@ -299,7 +310,11 @@ XEOS.boot.stage2.kernel.load:
         mov     cx,         WORD [ $XEOS.boot.stage2.dataSector ]
         
         ; Loads the second stage bootloader into memory
-        call XEOS.io.fat12.loadFile
+        call    XEOS.io.fat12.loadFile
+        
+        ; Restore registers
+        pop    cx
+        pop    bx
         
         ; Checks for an error code
         cmp     ax,         0
