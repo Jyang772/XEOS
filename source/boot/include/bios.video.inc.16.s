@@ -211,12 +211,10 @@ BITS    16
 ; 
 ; Killed registers:
 ;       
-;       None
+;       - AX
+;       - SI
 ;-------------------------------------------------------------------------------
 BIOS.video.print:
-    
-    ; Save registers
-    push ax
     
     ; Outputs a single character (BIOS video services function)
     mov     ah,         0x0E
@@ -241,9 +239,6 @@ BIOS.video.print:
             
     ; End of the string
     .done:
-        
-        ; Restore registers
-        pop ax
         
         ret
 
