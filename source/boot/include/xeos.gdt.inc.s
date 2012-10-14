@@ -116,11 +116,11 @@
 ;-------------------------------------------------------------------------------
 ; Addresses of the descriptors
 ;-------------------------------------------------------------------------------
-%define $XEOS.gdt.descriptors.null          0x00
-%define $XEOS.gdt.descriptors.code.kernel   0x08
-%define $XEOS.gdt.descriptors.data.kernel   0x10
-%define $XEOS.gdt.descriptors.code.user     0x18
-%define $XEOS.gdt.descriptors.data.user     0x20
+%define @XEOS.gdt.descriptors.null          0x00
+%define @XEOS.gdt.descriptors.code.kernel   0x08
+%define @XEOS.gdt.descriptors.data.kernel   0x10
+%define @XEOS.gdt.descriptors.code.user     0x18
+%define @XEOS.gdt.descriptors.data.user     0x20
 
 ; GDT start address
 XEOS.gdt.start:

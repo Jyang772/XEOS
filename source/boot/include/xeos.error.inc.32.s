@@ -115,16 +115,16 @@ XEOS.error.fatal:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-XEOS.error.prompt   db  $ASCII.NL,\
-                        '    ************************************************************************   ', $ASCII.NL,\
-                        '    *                                                                      *   ', $ASCII.NL,\
-                        '    *                         XEOS - FATAL ERROR                           *   ', $ASCII.NL,\
-                        '    *                                                                      *   ', $ASCII.NL,\
-                        '    ************************************************************************   ', $ASCII.NL,\
-                        $ASCII.NL,\
+XEOS.error.prompt   db  @ASCII.NL,\
+                        '    ************************************************************************   ', @ASCII.NL,\
+                        '    *                                                                      *   ', @ASCII.NL,\
+                        '    *                         XEOS - FATAL ERROR                           *   ', @ASCII.NL,\
+                        '    *                                                                      *   ', @ASCII.NL,\
+                        '    ************************************************************************   ', @ASCII.NL,\
+                        @ASCII.NL,\
                         '<XEOS>: A fatal error occured: ',\
-                        $ASCII.NL, $ASCII.NL, $ASCII.NUL
-XEOS.error.reboot   db  $ASCII.NL, $ASCII.NL,\
-                        '<XEOS>: Press any key to reboot the system: ', $ASCII.NUL
+                        @ASCII.NL, @ASCII.NL, @ASCII.NUL
+XEOS.error.reboot   db  @ASCII.NL, @ASCII.NL,\
+                        '<XEOS>: Press any key to reboot the system: ', @ASCII.NUL
 
 %endif

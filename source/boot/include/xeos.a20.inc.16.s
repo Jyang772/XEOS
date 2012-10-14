@@ -123,7 +123,7 @@ XEOS.a20.enable.bios:
     mov     ax,         0x2401
     
     ; Calls the BIOS miscellaneous services
-    $BIOS.int.misc
+    @BIOS.int.misc
     
     ; Checks for an error
     jnc     .success
@@ -138,7 +138,7 @@ XEOS.a20.enable.bios:
     xor     ax,         ax
     
     ; Calls the BIOS keyboard services
-    $BIOS.int.keyboard
+    @BIOS.int.keyboard
     
     ; Checks if the pressed key was '1'
     cmp     al,         0x31
@@ -176,7 +176,7 @@ XEOS.a20.enable.bios:
     ; User feedback - Displays a '1' on the screen
     mov     al,         0x31
     mov     ah,         0x0E
-    $BIOS.int.video
+    @BIOS.int.video
     
     ; Prints the confirmation message
     @BIOS.video.print   XEOS.a20.enable.bios.fallback.keyboardOut
@@ -191,7 +191,7 @@ XEOS.a20.enable.bios:
     ; User feedback - Displays a '2' on the screen
     mov     al,         0x32
     mov     ah,         0x0E
-    $BIOS.int.video
+    @BIOS.int.video
     
     ; Prints the confirmation message
     @BIOS.video.print   XEOS.a20.enable.bios.fallback.keyboardControl
@@ -206,7 +206,7 @@ XEOS.a20.enable.bios:
     ; User feedback - Displays a '3' on the screen
     mov     al,         0x33
     mov     ah,         0x0E
-    $BIOS.int.video
+    @BIOS.int.video
     
     ; Prints the confirmation message
     @BIOS.video.print   XEOS.a20.enable.bios.fallback.systemControl
@@ -221,13 +221,13 @@ XEOS.a20.enable.bios:
     ; User feedback - Displays a '4' on the screen
     mov     al,         0x34
     mov     ah,         0x0E
-    $BIOS.int.video
+    @BIOS.int.video
     
     ; Prints the reboot message
     @BIOS.video.print   XEOS.a20.enable.bios.fallback.reboot
     
     ; Reboots the system
-    $BIOS.int.reboot
+    @BIOS.int.reboot
     
     .success
     
@@ -346,37 +346,37 @@ XEOS.a20.enable.keyboard.out.wait.out:
 ;-------------------------------------------------------------------------------
 
 ; Strings
-XEOS.a20.enable.bios.error                      db  $ASCII.NL,\
+XEOS.a20.enable.bios.error                      db  @ASCII.NL,\
                                                     '         ERROR: A-20 cannot be enabled with the BIOS!',\
-                                                    $ASCII.NL,\
+                                                    @ASCII.NL,\
                                                     '         Choose an alternate solution form the list below:',\
-                                                    $ASCII.NL, $ASCII.NL,\
+                                                    @ASCII.NL, @ASCII.NL,\
                                                     '             1 - Enable A-20 through the keyboard output port (recommended)',\
-                                                    $ASCII.NL,\
+                                                    @ASCII.NL,\
                                                     '             2 - Enable A-20 through the keyboard control port',\
-                                                    $ASCII.NL,\
+                                                    @ASCII.NL,\
                                                     '             3 - Enable A-20 through the system control port',\
-                                                    $ASCII.NL,\
+                                                    @ASCII.NL,\
                                                     '             4 - Reboot the system',\
-                                                    $ASCII.NL, $ASCII.NL,\
+                                                    @ASCII.NL, @ASCII.NL,\
                                                     '         Please enter your choice: ',\
-                                                    $ASCII.NUL
-XEOS.a20.enable.bios.fallback.keyboardOut       db  $ASCII.NL, $ASCII.NL,\
+                                                    @ASCII.NUL
+XEOS.a20.enable.bios.fallback.keyboardOut       db  @ASCII.NL, @ASCII.NL,\
                                                     '         Enabling A-20 through the keyboard output port...',\
-                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
-XEOS.a20.enable.bios.fallback.keyboardControl   db  $ASCII.NL, $ASCII.NL,\
+                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
+XEOS.a20.enable.bios.fallback.keyboardControl   db  @ASCII.NL, @ASCII.NL,\
                                                     '         Enabling A-20 through the keyboard control port...',\
-                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
-XEOS.a20.enable.bios.fallback.systemControl     db  $ASCII.NL, $ASCII.NL,\
+                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
+XEOS.a20.enable.bios.fallback.systemControl     db  @ASCII.NL, @ASCII.NL,\
                                                     '         Enabling A-20 through the system control port...',\
-                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
-XEOS.a20.enable.bios.fallback.reboot            db  $ASCII.NL, $ASCII.NL,\
+                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
+XEOS.a20.enable.bios.fallback.reboot            db  @ASCII.NL, @ASCII.NL,\
                                                     '         Rebooting the system...',\
-                                                    $ASCII.NL, $ASCII.NL, $ASCII.NUL
-XEOS.a20.enable.bios.fallback.unknown           db  $ASCII.NL, $ASCII.NL,\
+                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
+XEOS.a20.enable.bios.fallback.unknown           db  @ASCII.NL, @ASCII.NL,\
                                                     '         Invalid choice. A-20 still needs to be enabled...',\
-                                                    $ASCII.NL,\
+                                                    @ASCII.NL,\
                                                     '         Press ', 39, '1', 39, ' if you don', 39, 't know what this is about: ',\
-                                                    $ASCII.NUL
+                                                    @ASCII.NUL
 
 %endif
