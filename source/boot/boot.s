@@ -317,7 +317,6 @@ main:
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.bios
         call                    XEOS.a20.enable.keyboard.control
         
-    
     ; Checks if we must switch the CPU to 64 bits long mode
     cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
     je      .switch64
