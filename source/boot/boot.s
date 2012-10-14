@@ -122,27 +122,37 @@ start: jmp main
 
 $XEOS.boot.stage2.dataSector                dw  0
 $XEOS.boot.stage2.nl                        db  @ASCII.NL,  @ASCII.NUL
-$XEOS.files.kernel.32                       db  'XEOS32  BIN', @ASCII.NUL
-$XEOS.files.kernel.64                       db  'XEOS64  BIN', @ASCII.NUL
-$XEOS.boot.stage2.cpu.vendor                db "            ", @ASCII.NUL
-$XEOS.boot.stage2.msg.prompt                db  '[ XEOS ]> ', @ASCII.NUL
+$XEOS.files.kernel.32                       db  "XEOS32  BIN", @ASCII.NUL
+$XEOS.files.kernel.64                       db  "XEOS64  BIN", @ASCII.NUL
+$XEOS.boot.stage2.cpu.vendor                db  "            ", @ASCII.NUL
+
+;-------------------------------------------------------------------------------
+; Strings
+;-------------------------------------------------------------------------------
+
+$XEOS.boot.stage2.msg.prompt                db  "[ XEOS ]> ", @ASCII.NUL
+$XEOS.boot.stage2.msg.greet                 db  "Entering the second stage bootloader:", @ASCII.NUL
+$XEOS.boot.stage2.msg.hr                    db  "          --------------------------------------------------------------------", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.xeos                  db  "          XEOS - x86 Experimental Operating System", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.1           db  "          Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.2           db  "          All Rights Reserved", @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.vendor            db  "CPU vendor: ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu                   db  "CPU type: ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.32                db  "i386", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.64                db  "x86_64", @ASCII.NUL
+$XEOS.boot.stage2.msg.32                    db  "XEOS will run in 32 bits mode", @ASCII.NUL
+$XEOS.boot.stage2.msg.64                    db  "XEOS will run in 64 bits mode", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.load           db  "Preparing to load the XEOS kernel", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.root            db  "Loading the FAT-12 root directory into memory", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.find            db  "Locating the XEOS kernel file: ", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.load            db  "Loading the XEOS kernel into memory: 0x1000:0000", @ASCII.NUL
+$XEOS.boot.stage2.msg.gdt                   db  "Installing the GDT", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20                   db  "Enabling the A20 address line", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch32              db  "Switching the CPU to 32 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                 db  "Press any key to reboot", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir       db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find      db  "Error: file not found", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.load      db  "Error: cannot load the requested file", @ASCII.NUL
-$XEOS.boot.stage2.msg.greet                 db  'Entering the second stage bootloader', @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu                   db  'CPU type: ', @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.32                db  'i386', @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.64                db  'x86_64', @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.vendor            db  'CPU vendor ID: ', @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.load           db  'Preparing to load the XEOS kernel', @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.root            db  'Loading the FAT-12 root directory into memory', @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.find            db  'Locating the XEOS kernel file: ', @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.load            db  'Loading the XEOS kernel into memory: 0x1000:0000', @ASCII.NUL
-$XEOS.boot.stage2.msg.xeos                  db  "          XEOS - x86 Experimental Operating System", @ASCII.NL, @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.1           db  "          Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>", @ASCII.NL, @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.2           db  "          All Rights Reserved", @ASCII.NL, @ASCII.NUL
-$XEOS.boot.stage2.msg.hr                    db  '          --------------------------------------------------------------------', @ASCII.NL, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Second stage bootloader
@@ -199,13 +209,15 @@ main:
         @BIOS.video.print       $XEOS.boot.stage2.msg.hr
         
         ; Gets the CPU vendor ID
-        mov di, $XEOS.boot.stage2.cpu.vendor 
-        call XEOS.cpu.vendor
+        push    di
+        mov     di,     $XEOS.boot.stage2.cpu.vendor 
+        call    XEOS.cpu.vendor
         
         @BIOS.video.print   $XEOS.boot.stage2.msg.prompt
         @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.vendor
         @BIOS.video.print   di
         @BIOS.video.print   $XEOS.boot.stage2.nl
+        pop                 di
         
     .cpu:
         
@@ -219,8 +231,9 @@ main:
     
     .i386:
         
-        @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.32
-        @BIOS.video.print   $XEOS.boot.stage2.nl
+        @BIOS.video.print       $XEOS.boot.stage2.msg.cpu.32
+        @BIOS.video.print       $XEOS.boot.stage2.nl
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.32
         
         ; 32 bits kernel is going to be loaded
         mov     si,         $XEOS.files.kernel.32
@@ -229,12 +242,13 @@ main:
         
     .x86_64:
         
-        @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.64
-        @BIOS.video.print   $XEOS.boot.stage2.nl
+        @BIOS.video.print       $XEOS.boot.stage2.msg.cpu.64
+        @BIOS.video.print       $XEOS.boot.stage2.nl
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.64
         
         ; 64 bits kernel is going to be loaded
         mov     si,         $XEOS.files.kernel.64
-        
+    
     .load:
         
         ; Loads the XEOS kernel into memory
@@ -250,7 +264,21 @@ main:
         cmp     ax,         3
         je      .error.fat12.load
         
-        jmp     .end
+    .pmode:
+        
+        .gdt:
+            
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
+            
+        .a20:
+            
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20
+            
+        .switch32:
+            
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
+        
+    jmp     .end
     
     .error.fat12.dir:
         
@@ -310,8 +338,8 @@ XEOS.boot.stage2.kernel.load:
         push    di
         push    si
         
-        ; Loads the FAT-12 root directory at ES:0x0700
-        mov     di,         0x0700
+        ; Loads the FAT-12 root directory at ES:0x1000
+        mov     di,         0x1000
         call    XEOS.io.fat12.loadRootDirectory
         
         ; Checks for an error code
@@ -369,8 +397,8 @@ XEOS.boot.stage2.kernel.load:
         ; Loads the file at 0x1000:00
         mov     ax,         0x1000
         
-        ; Loads the FAT at ES:0x0700
-        mov     bx,         0x0700
+        ; Loads the FAT at ES:0x1000
+        mov     bx,         0x1000
         
         ; Data sector location
         mov     cx,         WORD [ $XEOS.boot.stage2.dataSector ]
