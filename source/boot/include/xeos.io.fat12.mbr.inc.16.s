@@ -62,6 +62,14 @@
 ; $Id$
 
 ;-------------------------------------------------------------------------------
+; MBR - Master Boot Record
+; 
+; This section is used to create a valid floppy disk MBR (FAT-12)
+;-------------------------------------------------------------------------------
+%ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+%define __XEOS_IO_FAT12_MBR_INC_16_ASM__
+
+;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
 %include "XEOS.constants.inc.s"        ; General constants
@@ -70,97 +78,101 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
-; MBR - Master Boot Record
+; MBR Structure:
 ; 
-; This section is used to create a valid floppy disk MBR (FAT-12)
-;-------------------------------------------------------------------------------
-
 ; 0x03 (8) - OEM name
+;       This value determines in which system disk was formatted
 ; 
-; This value determines in which system disk was formatted
-$XEOS.fat12.mbr.oemName:                db @XEOS.fat12.mbr.oemName
-
 ; 0x0B (2) - Bytes per sector
-$XEOS.fat12.mbr.bytesPerSector:         dw @XEOS.fat12.mbr.bytesPerSector
-
-; 0x0D (1) - Sectors per cluster
-$XEOS.fat12.mbr.sectorsPerCluster:      db @XEOS.fat12.mbr.sectorsPerCluster
-
-; 0x0E (2) - Reserved sector count
 ; 
-; The number of sectors before the first FAT in the file system image.
-; Should be 1 for FAT12/FAT16. Usually 32 for FAT32.
-$XEOS.fat12.mbr.reservedSectors:        dw @XEOS.fat12.mbr.reservedSectors
-
+; 0x0D (1) - Sectors per cluster
+; 
+; 0x0E (2) - Reserved sector count
+;       The number of sectors before the first FAT in the file system image.
+;       Should be 1 for FAT12/FAT16. Usually 32 for FAT32.
+; 
 ; 0x10 (1) - Number of file allocation tables
 ; Almost always 2
-$XEOS.fat12.mbr.numberOfFATs:           db @XEOS.fat12.mbr.numberOfFATs
-
+; 
 ; 0x11 (2) - Maximum number of root directory entries
+;       Only used on FAT12 and FAT16, where the root directory is handled
+;       specially.
+;       Should be 0 for FAT32. This value should always be such that the root
+;       directory ends on a sector boundary (i.e. such that its size becomes a
+;       multiple of the sector size).
+;       224 is typical for floppy disks
 ; 
-; Only used on FAT12 and FAT16, where the root directory is handled specially.
-; Should be 0 for FAT32. This value should always be such that the root
-; directory ends on a sector boundary (i.e. such that its size becomes a
-; multiple of the sector size).
-; 224 is typical for floppy disks
-$XEOS.fat12.mbr.maxRootDirEntries:      dw @XEOS.fat12.mbr.maxRootDirEntries
-
 ; 0x13 (2) - Total sectors
-$XEOS.fat12.mbr.totalSectors:           dw @XEOS.fat12.mbr.totalSectors
-
+; 
 ; 0x15 (1) - Media descriptor
+;       Possible values are:
 ; 
-; Possible values are:
+;           - 0xF0	3.5" Double Sided, 80 tracks per side, 18 or 36 sectors per
+;                   track (1.44MB or 2.88MB)
+;                   5.25" Double Sided, 15 sectors per track (1.2MB)
+;           - 0xF8	Fixed disk (i.e. Hard disk)
+;           - 0xF9	3.5" Double sided, 80 tracks per side, 9 sectors per track
+;                   (720K)
+;                   5.25" Double sided, 40 tracks per side, 15 sectors per track
+;                   (1.2MB)
+;           - 0xFA	5.25" Single sided, 80 tracks per side, 8 sectors per track
+;                   (320K)
+;           - 0xFB	3.5" Double sided, 80 tracks per side, 8 sectors per track
+;                   (640K)
+;           - 0xFC	5.25" Single sided, 40 tracks per side, 9 sectors per track
+;                   (180K)
+;           - 0xFD	5.25" Double sided, 40 tracks per side, 9 sectors per track
+;                   (360K)
+;           - 0xFE	5.25" Single sided, 40 tracks per side, 8 sectors per track
+;                   (160K)
+;           - 0xFF	5.25" Double sided, 40 tracks per side, 8 sectors per track
+;                   (320K)
 ; 
-;   - 0xF0	3.5" Double Sided, 80 tracks per side, 18 or 36 sectors per track
-;           (1.44MB or 2.88MB)
-;           5.25" Double Sided, 15 sectors per track (1.2MB)
-;   - 0xF8	Fixed disk (i.e. Hard disk)
-;   - 0xF9	3.5" Double sided, 80 tracks per side, 9 sectors per track (720K)
-;           5.25" Double sided, 40 tracks per side, 15 sectors per track (1.2MB)
-;   - 0xFA	5.25" Single sided, 80 tracks per side, 8 sectors per track (320K)
-;   - 0xFB	3.5" Double sided, 80 tracks per side, 8 sectors per track (640K)
-;   - 0xFC	5.25" Single sided, 40 tracks per side, 9 sectors per track (180K)
-;   - 0xFD	5.25" Double sided, 40 tracks per side, 9 sectors per track (360K)
-;   - 0xFE	5.25" Single sided, 40 tracks per side, 8 sectors per track (160K)
-;   - 0xFF	5.25" Double sided, 40 tracks per side, 8 sectors per track (320K)
-$XEOS.fat12.mbr.mediaDescriptor:        db @XEOS.fat12.mbr.mediaDescriptor
-
 ; 0x16 (2) - Sectors per File Allocation Table for FAT12/FAT16
-$XEOS.fat12.mbr.sectorsPerFAT:          dw @XEOS.fat12.mbr.sectorsPerFAT
-
+; 
 ; 0x18 (2) - Sectors per track
-$XEOS.fat12.mbr.sectorsPerTrack:        dw @XEOS.fat12.mbr.sectorsPerTrack
-
+; 
 ; 0x1A (2) - Number of heads per cylinder
-$XEOS.fat12.mbr.headsPerCylinder:       dw @XEOS.fat12.mbr.headsPerCylinder
-
+; 
 ; 0x1C (4) -  Hidden sectors
-$XEOS.fat12.mbr.hiddenSectors:          dd @XEOS.fat12.mbr.hiddenSectors
-
+; 
 ; 0x20 (4) - Number of LBA sectors
-$XEOS.fat12.mbr.lbaSectors:             dd @XEOS.fat12.mbr.lbaSectors
-
+; 
 ; 0x24 (1) - Physical drive number
-$XEOS.fat12.mbr.driveNumber:            db @XEOS.fat12.mbr.driveNumber
-
+; 
 ; 0x25 (1) - Reserved ("current head")
+;       In Windows NT bit 0 is a dirty flag to request chkdsk at boot time
+;       Bit 1 requests surface scan too.
 ; 
-; In Windows NT bit 0 is a dirty flag to request chkdsk at boot time
-; Bit 1 requests surface scan too.
-$XEOS.fat12.mbr.reserved:               db @XEOS.fat12.mbr.reserved
-
 ; 0x26 (1) - Extended boot signature
-$XEOS.fat12.mbr.bootSignature:          db @XEOS.fat12.mbr.bootSignature
-
-; 0x27 (4) - Volume ID (serial number)
-$XEOS.fat12.mbr.volumeID:               dd @XEOS.fat12.mbr.volumeID
-
-; 0x2B (11) - Volume label
-$XEOS.fat12.mbr.volumeLabel:            db @XEOS.fat12.mbr.volumeLabel
-
-; 0x36 - (8) - FAT file system type
 ; 
-; This is not meant to be used to determine drive type, however, some utilities
-; use it in this way.
+; 0x27 (4) - Volume ID (serial number)
+; 
+; 0x2B (11) - Volume label
+; 
+; 0x36 - (8) - FAT file system type
+;       This is not meant to be used to determine drive type, however,
+;       some utilities
+;       use it in this way.
+;-------------------------------------------------------------------------------
+$XEOS.fat12.mbr.oemName:                db @XEOS.fat12.mbr.oemName
+$XEOS.fat12.mbr.bytesPerSector:         dw @XEOS.fat12.mbr.bytesPerSector
+$XEOS.fat12.mbr.sectorsPerCluster:      db @XEOS.fat12.mbr.sectorsPerCluster
+$XEOS.fat12.mbr.reservedSectors:        dw @XEOS.fat12.mbr.reservedSectors
+$XEOS.fat12.mbr.numberOfFATs:           db @XEOS.fat12.mbr.numberOfFATs
+$XEOS.fat12.mbr.maxRootDirEntries:      dw @XEOS.fat12.mbr.maxRootDirEntries
+$XEOS.fat12.mbr.totalSectors:           dw @XEOS.fat12.mbr.totalSectors
+$XEOS.fat12.mbr.mediaDescriptor:        db @XEOS.fat12.mbr.mediaDescriptor
+$XEOS.fat12.mbr.sectorsPerFAT:          dw @XEOS.fat12.mbr.sectorsPerFAT
+$XEOS.fat12.mbr.sectorsPerTrack:        dw @XEOS.fat12.mbr.sectorsPerTrack
+$XEOS.fat12.mbr.headsPerCylinder:       dw @XEOS.fat12.mbr.headsPerCylinder
+$XEOS.fat12.mbr.hiddenSectors:          dd @XEOS.fat12.mbr.hiddenSectors
+$XEOS.fat12.mbr.lbaSectors:             dd @XEOS.fat12.mbr.lbaSectors
+$XEOS.fat12.mbr.driveNumber:            db @XEOS.fat12.mbr.driveNumber
+$XEOS.fat12.mbr.reserved:               db @XEOS.fat12.mbr.reserved
+$XEOS.fat12.mbr.bootSignature:          db @XEOS.fat12.mbr.bootSignature
+$XEOS.fat12.mbr.volumeID:               dd @XEOS.fat12.mbr.volumeID
+$XEOS.fat12.mbr.volumeLabel:            db @XEOS.fat12.mbr.volumeLabel
 $XEOS.fat12.mbr.fileSystem:             db @XEOS.fat12.mbr.fileSystem
+
+%endif
