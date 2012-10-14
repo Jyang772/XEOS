@@ -325,7 +325,6 @@ XEOS.a20.enable.bios:
      
     ; Error - Stores result code in AX
     mov     ax,         1
-    jmp     .end
     
     ; Restore registers
     popa
