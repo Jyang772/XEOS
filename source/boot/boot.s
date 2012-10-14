@@ -289,8 +289,8 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.load
         
-        ; Loads the file at 0x1500:00
-        mov     ax,         0x1500
+        ; Loads the file at 0x1000:00
+        mov     ax,         0x1000
         
         ; Loads the FAT at ES:0x0700
         mov     bx,         0x0700
