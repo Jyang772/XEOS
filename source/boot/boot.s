@@ -107,9 +107,11 @@ start: jmp main
 ; Prints a new line with a message, prefixed by the prompt
 %macro @XEOS.boot.stage2.print 1
     
-    @BIOS.video.print    $XEOS.boot.stage2.msg.prompt
-    @BIOS.video.print    %1
-    @BIOS.video.print    $XEOS.boot.stage2.nl
+    push                si
+    @BIOS.video.print   $XEOS.boot.stage2.msg.prompt
+    @BIOS.video.print   %1
+    @BIOS.video.print   $XEOS.boot.stage2.nl
+    pop                 si
     
 %endmacro
 
@@ -119,14 +121,14 @@ start: jmp main
 
 $XEOS.boot.stage2.dataSector                dw  0
 $XEOS.boot.stage2.nl                        db  @ASCII.NL,  @ASCII.NUL
-$XEOS.files.kernel.32                       db  'XEOS32  BIN'
-$XEOS.files.kernel.64                       db  'XEOS64  BIN'
+$XEOS.files.kernel.32                       db  'XEOS32  BIN', @ASCII.NUL
+$XEOS.files.kernel.64                       db  'XEOS64  BIN', @ASCII.NUL
 $XEOS.boot.stage2.msg.prompt                db  '[ XEOS ]> ', @ASCII.NUL
 $XEOS.boot.stage2.msg.greet                 db  'Entering the second stage bootloader', @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.load           db  'Preparing to load the XEOS kernel', @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.root            db  'Loading the FAT-12 root directory into memory', @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.find            db  'Locating the XEOS kernel file', @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.load            db  'Loading the XEOS kernel into memory', @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.find            db  'Locating the XEOS kernel file: ', @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.load            db  'Loading the XEOS kernel into memory: 0x1000:00', @ASCII.NUL
 $XEOS.boot.stage2.msg.error                 db  "Press any key to reboot", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir       db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find      db  "Error: file not found", @ASCII.NUL
@@ -179,9 +181,11 @@ main:
     ; Prints the welcome message
     @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.greet
     
-    ; Loads the 32 bits kernel into memory
-    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
+    ; 32 bits kernel is going to be loaded
     mov     si,         $XEOS.files.kernel.32
+    
+    ; Loads the XEOS kernel into memory
+    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
     call    XEOS.boot.stage2.kernel.load
     
     cmp     ax,         1
@@ -251,6 +255,7 @@ XEOS.boot.stage2.kernel.load:
         
         ; Saves registers
         push    di
+        push    si
         
         ; Loads the FAT-12 root directory at ES:0x0700
         mov     di,         0x0700
@@ -264,13 +269,21 @@ XEOS.boot.stage2.kernel.load:
         mov     ax,         1
         
         ; Restore registers
+        pop     si
         pop     di
         
         ret
     
     .findFile:
-    
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.find
+        
+        ; Prints the name of the kernel file
+        @BIOS.video.print       $XEOS.boot.stage2.msg.prompt
+        @BIOS.video.print       $XEOS.boot.stage2.msg.fat12.find
+        pop                     si
+        push                    si
+        call                    BIOS.video.print
+        @BIOS.video.print       $XEOS.boot.stage2.nl
+        pop                     si
         
         ; Stores the location of the first data sector
         mov     WORD [ $XEOS.boot.stage2.dataSector ],  dx
