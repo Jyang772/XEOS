@@ -321,7 +321,7 @@ XEOS.a20.enable.bios:
     @BIOS.int.misc
     
     ; Checks for an error
-    jnc     .success
+    jnc     .enabled
      
     ; Error - Stores result code in AX
     mov     ax,         1
@@ -331,7 +331,7 @@ XEOS.a20.enable.bios:
     
     ret
     
-    .success:
+    .enabled:
         
         ; Success - Stores result code in AX
         xor     ax,         ax
