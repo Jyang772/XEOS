@@ -67,60 +67,6 @@
 %ifndef __XEOS_MACROS_INC_ASM__
 %define __XEOS_MACROS_INC_ASM__
 
-;-------------------------------------------------------------------------------
-; Saves general purpose registers values from the stack
-;-------------------------------------------------------------------------------
-%macro @XEOS.reg.save 0
-    
-    ; Checks if we are compiling for an old 8086 CPU
-    %ifdef CPU_8086
-        
-        ; Manually stores the registers to the stack, as the 'pusha' instruction
-        ; is only available on 80286 processors and later
-        push    ax
-        push    bx
-        push    cx
-        push    dx
-        push    sp
-        push    bp
-        push    si
-        push    di
-        
-    %else
-        
-        ; 80286 or later processor - 'pusha' is available
-        pusha
-        
-    %endif
-    
-%endmacro
 
-;-------------------------------------------------------------------------------
-; Restores general purpose registers values from the stack
-;-------------------------------------------------------------------------------
-%macro @XEOS.reg.restore 0
-    
-    ; Checks if we are compiling for an old 8086 CPU
-    %ifdef CPU_8086
-        
-        ; Manually restores the registers to the stack, as the 'popa'
-        ; instruction is only available on 80286 processors and later
-        pop     di
-        pop     si
-        pop     bp
-        pop     sp
-        pop     dx
-        pop     cx
-        pop     bx
-        pop     ax
-        
-    %else
-        
-        ; 80286 or later processor - 'popa' is available
-        popa
-        
-    %endif
-    
-%endmacro
 
 %endif
