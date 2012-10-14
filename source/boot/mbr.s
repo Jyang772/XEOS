@@ -168,7 +168,7 @@ main:
     ; Loads the FAT-12 root directory at ES:0x200
     ; (0x07CE - just after this bootloader)
     mov     di,         0x0200
-    call XEOS.io.fat12.loadRootDirectory
+    call    XEOS.io.fat12.loadRootDirectory
     
     ; Checks for an error code
     cmp     ax,         0
@@ -183,11 +183,11 @@ main:
     ; Finds the second stage bootloader
     ; We have not altered DI, so it still contains the location of the FAT-12
     ; root directory
-    call XEOS.io.fat12.findFile
+    call    XEOS.io.fat12.findFile
     
     ; Checks for an error code
     cmp     ax,         0
-    jne      .failure
+    jne     .failure
     
     ; Loads the file at 0x50:00 (first area of free/unused memory)
     mov     ax,         0x0050
@@ -199,11 +199,11 @@ main:
     mov     cx,         WORD [ $XEOS.boot.stage1.dataSector ]
     
     ; Loads the second stage bootloader into memory
-    call XEOS.io.fat12.loadFile
+    call    XEOS.io.fat12.loadFile
     
     ; Checks for an error code
     cmp     ax,         0
-    jne      .failure
+    jne     .failure
     
     @BIOS.video.print   $XEOS.boot.stage1.msg.success
     
