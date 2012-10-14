@@ -101,6 +101,7 @@ start: jmp main
 %include "XEOS.ascii.inc.s"           ; ASCII table
 %include "XEOS.cpu.inc.16.s"          ; CPU informations
 %include "XEOS.gdt.inc.s"             ; GDT - Global Descriptor Table
+%include "XEOS.a20.inc.16.s"          ; 20th address line enabling
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -156,7 +157,8 @@ $XEOS.boot.stage2.msg.fat12.load            db  "            - Loading the kerne
 $XEOS.boot.stage2.msg.kernel.verify.32      db  "Verifiying the kernel ELF image", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.verify.64      db  "Verifiying the kernel ELF-64 image", @ASCII.NUL
 $XEOS.boot.stage2.msg.gdt                   db  "Installing the GDT", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20                   db  "Enabling the A-20 address line", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.bios              db  "Enabling the A-20 address line", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.keyboard          db  "Enabling the A-20 address line", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch32              db  "Switching the CPU to 32 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch64              db  "Switching the CPU to 64 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                 db  "Press any key to reboot", @ASCII.NUL
@@ -312,7 +314,9 @@ main:
         
     .a20:
         
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.bios
+        call                    XEOS.a20.enable.keyboard.control
+        
     
     ; Checks if we must switch the CPU to 64 bits long mode
     cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
@@ -408,12 +412,12 @@ XEOS.boot.stage2.kernel.load:
     
     .start:
         
-        @BIOS.video.print   $XEOS.boot.stage2.msg.fat12.root
-        @BIOS.video.print   $XEOS.boot.stage2.nl
-        
         ; Saves registers
         push    di
         push    si
+        
+        @BIOS.video.print   $XEOS.boot.stage2.msg.fat12.root
+        @BIOS.video.print   $XEOS.boot.stage2.nl
         
         ; Loads the FAT-12 root directory at ES:0x1000
         mov     di,         0x1000
