@@ -89,18 +89,29 @@
 ;-------------------------------------------------------------------------------
 %include "XEOS.macros.inc.s"          ; General macros
 %include "BIOS.int.inc.s"             ; BIOS interrupts
-%include "BIOS.video.inc.16.s"        ; BIOS video services
-%include "XEOS.error.inc.16.s"        ; Error management
 
 ; We are in 16 bits mode
-;BITS    16
+BITS    16
 
 ;-------------------------------------------------------------------------------
 ; Enables A20 through the system control port
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.systemControl:
     
-    @XEOS.reg.save
+    ; Saves registers
+    pusha
     
     ; Bits 2 enables A20
     mov     al,         2
@@ -108,139 +119,30 @@ XEOS.a20.enable.systemControl:
     ; Writes to the system control port
     out     0x92,       al
     
-    @XEOS.reg.restore
-    
-    ret
-
-;-------------------------------------------------------------------------------
-; Enables A20 through a BIOS call
-;-------------------------------------------------------------------------------
-XEOS.a20.enable.bios:
-    
-    @XEOS.reg.save
-    
-    ; A20 enabling function ( BIOS miscellaneous services function)
-    mov     ax,         0x2401
-    
-    ; Calls the BIOS miscellaneous services
-    @BIOS.int.misc
-    
-    ; Checks for an error
-    jnc     .success
-    
-    ; Prints the error message
-    @BIOS.video.print   XEOS.a20.enable.bios.error
-    
-    ; Asks the user for a choice
-    .ask
-    
-    ; Waits for a key (BIOS keyboard services function)
-    xor     ax,         ax
-    
-    ; Calls the BIOS keyboard services
-    @BIOS.int.keyboard
-    
-    ; Checks if the pressed key was '1'
-    cmp     al,         0x31
-    
-    ; Yes - Enables A20 through the keyboard controller
-    je      .keyboardOut
-    
-    ; Checks if the pressed key was '2'
-    cmp     al,         0x32
-    
-    ; Yes - Enables A20 through the keyboard controller
-    je     .keyboardController
-    
-    ; Checks if the pressed key was '3'
-    cmp     al,         0x33
-    
-    ; Yes - Enables A20 through the keyboard controller
-    je     .systemController
-    
-    ; Checks if the pressed key was '4'
-    cmp     al,         0x34
-    
-    ; Yes - Enables A20 through the keyboard controller
-    je     .reboot
-    
-    ; Unknown choice
-    @BIOS.video.print   XEOS.a20.enable.bios.fallback.unknown
-    
-    ; Asks again
-    je      .ask
-    
-    ; Fallback - A-20 will be enabled through the keyboard out port
-    .keyboardOut:
-    
-    ; User feedback - Displays a '1' on the screen
-    mov     al,         0x31
-    mov     ah,         0x0E
-    @BIOS.int.video
-    
-    ; Prints the confirmation message
-    @BIOS.video.print   XEOS.a20.enable.bios.fallback.keyboardOut
-    
-    ; Enables A20 through the keyboard out port
-    call    XEOS.a20.enable.keyboard.out
-    je      .success
-    
-    ; Fallback - A-20 will be enabled through the keyboard control port
-    .keyboardController:
-    
-    ; User feedback - Displays a '2' on the screen
-    mov     al,         0x32
-    mov     ah,         0x0E
-    @BIOS.int.video
-    
-    ; Prints the confirmation message
-    @BIOS.video.print   XEOS.a20.enable.bios.fallback.keyboardControl
-    
-    ; Enables A20 through the keyboard controller
-    call    XEOS.a20.enable.keyboard.control
-    je      .success
-    
-    ; Fallback - A-20 will be enabled through the system control port
-    .systemController:
-    
-    ; User feedback - Displays a '3' on the screen
-    mov     al,         0x33
-    mov     ah,         0x0E
-    @BIOS.int.video
-    
-    ; Prints the confirmation message
-    @BIOS.video.print   XEOS.a20.enable.bios.fallback.systemControl
-    
-    ; Enables A20 through the keyboard controller
-    call    XEOS.a20.enable.keyboard.control
-    je      .success
-    
-    ; Fallback - Reboot the system
-    .reboot:
-    
-    ; User feedback - Displays a '4' on the screen
-    mov     al,         0x34
-    mov     ah,         0x0E
-    @BIOS.int.video
-    
-    ; Prints the reboot message
-    @BIOS.video.print   XEOS.a20.enable.bios.fallback.reboot
-    
-    ; Reboots the system
-    @BIOS.int.reboot
-    
-    .success
-    
-    @XEOS.reg.restore
+    ; Restore registers
+    popa
     
     ret
 
 ;-------------------------------------------------------------------------------
 ; Enables A20 through the keyboard control port
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.control:
     
-    @XEOS.reg.save
+    ; Saves registers
+    pusha
     
     ; A20 enabling command
     mov	    al,         0xDD
@@ -248,16 +150,88 @@ XEOS.a20.enable.keyboard.control:
     ; Sends the command to the keyboard control port
     out     0x64,       al
     
-    @XEOS.reg.restore
+    ; Restore registers
+    popa
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; Waits for the input buffer of the keyboard controller to be empty
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.a20.enable.keyboard.out.wait.in:
+    
+    ; Saves registers
+    pusha
+    
+    in      al,         0x64
+    test    al,         2
+    jnz     XEOS.a20.enable.keyboard.out.wait.in
+    
+    ; Restore registers
+    popa
+    
+    ret
+
+;-------------------------------------------------------------------------------
+; Waits for the output buffer of the keyboard controller to be empty
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.a20.enable.keyboard.out.wait.out:
+    
+    ; Saves registers
+    pusha
+    
+    in      al,         0x64
+    test    al,         1
+    jz      XEOS.a20.enable.keyboard.out.wait.out
+    
+    ; Restore registers
+    popa
     
     ret
 
 ;-------------------------------------------------------------------------------
 ; Enables A20 through the keyboard out port
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.out:
     
-    @XEOS.reg.save
+    ; Saves registers
+    pusha
     
     ; Clears the interrupts
     cli
@@ -315,68 +289,57 @@ XEOS.a20.enable.keyboard.out:
     ; Restores the interrupts
     sti
     
-    @XEOS.reg.restore
-    
-    ret
-    
-;-------------------------------------------------------------------------------
-; Waits for the input buffer of the keyboard controller to be empty
-;-------------------------------------------------------------------------------
-XEOS.a20.enable.keyboard.out.wait.in:
-    
-    in      al,         0x64
-    test    al,         2
-    jnz     XEOS.a20.enable.keyboard.out.wait.in
+    ; Restore registers
+    popa
     
     ret
 
 ;-------------------------------------------------------------------------------
-; Waits for the output buffer of the keyboard controller to be empty
+; Enables A20 through a BIOS call
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enable.keyboard.out.wait.out:
+XEOS.a20.enable.bios:
+
+    ; Saves registers
+    pusha
     
-    in      al,         0x64
-    test    al,         1
-    jz      XEOS.a20.enable.keyboard.out.wait.out
+    ; A20 enabling function ( BIOS miscellaneous services function)
+    mov     ax,         0x2401
+    
+    ; Calls the BIOS miscellaneous services
+    @BIOS.int.misc
+    
+    ; Checks for an error
+    jnc     .success
+     
+    ; Error - Stores result code in AX
+    mov     ax,         1
+    jmp     .end
+    
+    ; Restore registers
+    popa
     
     ret
-
-;-------------------------------------------------------------------------------
-; Variables definition
-;-------------------------------------------------------------------------------
-
-; Strings
-XEOS.a20.enable.bios.error                      db  @ASCII.NL,\
-                                                    '         ERROR: A-20 cannot be enabled with the BIOS!',\
-                                                    @ASCII.NL,\
-                                                    '         Choose an alternate solution form the list below:',\
-                                                    @ASCII.NL, @ASCII.NL,\
-                                                    '             1 - Enable A-20 through the keyboard output port (recommended)',\
-                                                    @ASCII.NL,\
-                                                    '             2 - Enable A-20 through the keyboard control port',\
-                                                    @ASCII.NL,\
-                                                    '             3 - Enable A-20 through the system control port',\
-                                                    @ASCII.NL,\
-                                                    '             4 - Reboot the system',\
-                                                    @ASCII.NL, @ASCII.NL,\
-                                                    '         Please enter your choice: ',\
-                                                    @ASCII.NUL
-XEOS.a20.enable.bios.fallback.keyboardOut       db  @ASCII.NL, @ASCII.NL,\
-                                                    '         Enabling A-20 through the keyboard output port...',\
-                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
-XEOS.a20.enable.bios.fallback.keyboardControl   db  @ASCII.NL, @ASCII.NL,\
-                                                    '         Enabling A-20 through the keyboard control port...',\
-                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
-XEOS.a20.enable.bios.fallback.systemControl     db  @ASCII.NL, @ASCII.NL,\
-                                                    '         Enabling A-20 through the system control port...',\
-                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
-XEOS.a20.enable.bios.fallback.reboot            db  @ASCII.NL, @ASCII.NL,\
-                                                    '         Rebooting the system...',\
-                                                    @ASCII.NL, @ASCII.NL, @ASCII.NUL
-XEOS.a20.enable.bios.fallback.unknown           db  @ASCII.NL, @ASCII.NL,\
-                                                    '         Invalid choice. A-20 still needs to be enabled...',\
-                                                    @ASCII.NL,\
-                                                    '         Press ', 39, '1', 39, ' if you don', 39, 't know what this is about: ',\
-                                                    @ASCII.NUL
+    
+    .success:
+        
+        ; Success - Stores result code in AX
+        xor     ax,         ax
+        
+        ; Restore registers
+        popa
+        
+        ret
 
 %endif
