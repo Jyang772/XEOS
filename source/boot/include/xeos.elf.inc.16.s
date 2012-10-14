@@ -80,8 +80,6 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
-; Checks the ELF-32 header to ensure it's a valid ELF-32 binary file
-; 
 ; The ELF-32 header has the following structure:
 ;       
 ;       - BYTE  e_ident[ 16 ]   File identification
@@ -100,6 +98,28 @@ BITS    16
 ;       - WORD  e_shnum         Number of entries in the section header table
 ;       - WORD  e_shstrndx      Section header table index of the entry
 ;                               associated with the section name string table
+;-------------------------------------------------------------------------------
+struc XEOS.elf.32.header_t
+
+    e_ident:        resb    16
+    e_type:         resw    1
+    e_machine:      resw    1
+    e_version:      resd    1
+    e_entry:        resd    1
+    e_phoff:        resd    1
+    e_shoff:        resd    1
+    e_flags:        resd    1
+    e_ehsize:       resw    1
+    e_phentsize:    resw    1
+    e_phnum:        resw    1
+    e_shentsize:    resw    1
+    e_shnum:        resw    1
+    e_shstrndx:     resw    1
+
+endstruc
+
+;-------------------------------------------------------------------------------
+; Checks the ELF-32 header to ensure it's a valid ELF-32 binary file
 ; 
 ; Input registers:
 ;       
@@ -114,52 +134,6 @@ BITS    16
 ;       None   
 ;-------------------------------------------------------------------------------
 XEOS.elf.32.checkHeader:
-    
-    mov     es,         ax
-    xor     ax,         ax
-    mov     di,         ax
-    
-    mov     si,         $XEOS.elf.32.signature
-    mov     cx,         4
-    
-    rep     cmpsb
-    
-    je      .validSignature
-    
-    .validSignature:
-        
-        push    ds
-        push    si
-        
-        mov     ax,         es
-        mov     ds,         ax
-        mov     ax,         di
-        mov     si,         ax
-        
-        lodsb
-        
-        cmp     al,         0x01
-        
-        je      .validClass
-        
-        pop     si
-        pop     ds
-        
-    .validClass:
-        
-        lodsb
-        
-        cmp     al,         0x00
-        
-        jg      .validEncoding
-        
-        pop     si
-        pop     ds
-        
-    .validEncoding:
-        
-        pop     si
-        pop     ds
     
     ret
     
