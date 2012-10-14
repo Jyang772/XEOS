@@ -99,6 +99,7 @@ start: jmp main
 %include "BIOS.video.inc.16.s"        ; BIOS video services
 %include "XEOS.io.fat12.inc.16.s"     ; FAT-12 IO procedures
 %include "XEOS.ascii.inc.s"           ; ASCII table
+%include "XEOS.cpu.inc.16.s"          ; CPU informations
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -125,6 +126,9 @@ $XEOS.files.kernel.32                       db  'XEOS32  BIN', @ASCII.NUL
 $XEOS.files.kernel.64                       db  'XEOS64  BIN', @ASCII.NUL
 $XEOS.boot.stage2.msg.prompt                db  '[ XEOS ]> ', @ASCII.NUL
 $XEOS.boot.stage2.msg.greet                 db  'Entering the second stage bootloader', @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu                   db  'Checking CPU type: ', @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.32                db  'i386 (32 bits)', @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.64                db  'x86_64 (64 bits)', @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.load           db  'Preparing to load the XEOS kernel', @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.root            db  'Loading the FAT-12 root directory into memory', @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.find            db  'Locating the XEOS kernel file: ', @ASCII.NUL
@@ -159,45 +163,74 @@ $XEOS.boot.stage2.msg.error.fat12.load      db  "Error: cannot load the requeste
 ;-------------------------------------------------------------------------------
 main:
     
-    ; Clears the interrupts as we are setting-up the segments and stack space
-    cli
+    .start:
+        
+        ; Clears the interrupts as we are setting-up the segments and stack space
+        cli
+        
+        ; Sets the data and extra segments to where we were loaded by the first
+        ; stage bootloader (0x50), so we don't have to add 0x50 to all our data
+        mov     ax,         0x50
+        mov     ds,         ax
+        mov     es,         ax
+        mov     fs,         ax
+        mov     gs,         ax
+        
+        ; Sets up the of stack space
+        xor     ax,         ax
+        mov     ss,         ax
+        mov     sp,         0xFFFF
+        
+        ; Restores the interrupts
+        sti
+        
+        ; Prints the welcome message
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.greet
+        
+    .cpu:
+        
+        @BIOS.video.print   $XEOS.boot.stage2.msg.prompt
+        @BIOS.video.print   $XEOS.boot.stage2.msg.cpu
+        
+        ; Checks if the CPU has 64 bits capabilities
+        call    XEOS.cpu.64
+        cmp     ax,         1
+        je      .x86_64
     
-    ; Sets the data and extra segments to where we were loaded by the first
-    ; stage bootloader (0x50), so we don't have to add 0x50 to all our data
-    mov     ax,         0x50
-    mov     ds,         ax
-    mov     es,         ax
-    mov     fs,         ax
-    mov     gs,         ax
-    
-    ; Sets up the of stack space
-    xor     ax,         ax
-    mov     ss,         ax
-    mov     sp,         0xFFFF
-    
-    ; Restores the interrupts
-    sti
-    
-    ; Prints the welcome message
-    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.greet
-    
-    ; 32 bits kernel is going to be loaded
-    mov     si,         $XEOS.files.kernel.32
-    
-    ; Loads the XEOS kernel into memory
-    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
-    call    XEOS.boot.stage2.kernel.load
-    
-    cmp     ax,         1
-    je      .error.fat12.dir
-    
-    cmp     ax,         2
-    je      .error.fat12.find
-    
-    cmp     ax,         3
-    je      .error.fat12.load
-    
-    jmp     .end
+    .i386:
+        
+        ; 32 bits kernel is going to be loaded
+        mov     si,         $XEOS.files.kernel.32
+        
+        @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.32
+        @BIOS.video.print   $XEOS.boot.stage2.nl
+        
+        jmp     .load
+        
+    .x86_64:
+        
+        ; 64 bits kernel is going to be loaded
+        mov     si,         $XEOS.files.kernel.64
+        
+        @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.64
+        @BIOS.video.print   $XEOS.boot.stage2.nl
+        
+    .load
+        
+        ; Loads the XEOS kernel into memory
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
+        call    XEOS.boot.stage2.kernel.load
+        
+        cmp     ax,         1
+        je      .error.fat12.dir
+        
+        cmp     ax,         2
+        je      .error.fat12.find
+        
+        cmp     ax,         3
+        je      .error.fat12.load
+        
+        jmp     .end
     
     .error.fat12.dir:
         
@@ -277,13 +310,13 @@ XEOS.boot.stage2.kernel.load:
     .findFile:
         
         ; Prints the name of the kernel file
-        @BIOS.video.print       $XEOS.boot.stage2.msg.prompt
-        @BIOS.video.print       $XEOS.boot.stage2.msg.fat12.find
-        pop                     si
-        push                    si
-        call                    BIOS.video.print
-        @BIOS.video.print       $XEOS.boot.stage2.nl
-        pop                     si
+        @BIOS.video.print   $XEOS.boot.stage2.msg.prompt
+        @BIOS.video.print   $XEOS.boot.stage2.msg.fat12.find
+        pop                 si
+        push                si
+        call                BIOS.video.print
+        @BIOS.video.print   $XEOS.boot.stage2.nl
+        pop                 si
         
         ; Stores the location of the first data sector
         mov     WORD [ $XEOS.boot.stage2.dataSector ],  dx
