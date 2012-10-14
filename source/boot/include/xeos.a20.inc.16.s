@@ -94,6 +94,64 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
+; Enables A20 through a BIOS call
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       - AX:       The result code (0 if no error)
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.a20.enable.bios:
+    
+    ; Saves registers
+    pusha
+    
+    ; Clears the interrupts
+    cli
+    
+    ; A20 enabling function ( BIOS miscellaneous services function)
+    mov     ax,         0x2401
+    
+    ; Calls the BIOS miscellaneous services
+    int 0x16
+    
+    ; Checks for an error
+    jnc     .success
+    
+    .error:
+        
+        ; Restore the interrupts
+        sti
+        
+        ; Restore registers
+        popa
+        
+        ; Error - Stores result code in AX
+        mov     ax,         ax
+        
+        ret
+        
+    .success:
+        
+        ; Restore the interrupts
+        sti
+        
+        ; Restore registers
+        popa
+        
+        ; Success - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
+
+;-------------------------------------------------------------------------------
 ; Enables A20 through the system control port
 ; 
 ; Input registers:
@@ -293,52 +351,5 @@ XEOS.a20.enable.keyboard.out:
     popa
     
     ret
-
-;-------------------------------------------------------------------------------
-; Enables A20 through a BIOS call
-; 
-; Input registers:
-;       
-;       None
-; 
-; Return registers:
-;       
-;       - AX:       The result code (0 if no error)
-; 
-; Killed registers:
-;       
-;       None
-;-------------------------------------------------------------------------------
-XEOS.a20.enable.bios:
-
-    ; Saves registers
-    pusha
-    
-    ; A20 enabling function ( BIOS miscellaneous services function)
-    mov     ax,         0x2401
-    
-    ; Calls the BIOS miscellaneous services
-    @BIOS.int.misc
-    
-    ; Checks for an error
-    jnc     .enabled
-     
-    ; Error - Stores result code in AX
-    mov     ax,         1
-    
-    ; Restore registers
-    popa
-    
-    ret
-    
-    .enabled:
-        
-        ; Success - Stores result code in AX
-        xor     ax,         ax
-        
-        ; Restore registers
-        popa
-        
-        ret
 
 %endif
