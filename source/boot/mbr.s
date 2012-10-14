@@ -94,7 +94,7 @@ BITS    16
 ; Segment registers will be set manually
 ORG     0
 
-; Jumps to the bootloader's entry point
+; Jumps to the entry point
 start: jmp main
 
 ; Includes the FAT-12 MBR, so the beginning of the binary will be a valid
@@ -105,7 +105,6 @@ start: jmp main
 ; Includes
 ;---------------------------------------------------------------------------
 %include "XEOS.constants.inc.s"     ; General constants
-%include "XEOS.macros.inc.s"        ; General macros
 %include "XEOS.ascii.inc.s"         ; ASCII table
 %include "BIOS.video.inc.16.s"      ; BIOS video services
 %include "XEOS.io.fat12.inc.16.s"   ; FAT-12 IO procedures
@@ -114,9 +113,11 @@ start: jmp main
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-$XEOS.boot.stage1.greet     db  "[ XEOS ]> Booting...", @ASCII.CR, @ASCII.LF, @ASCII.NUL
-$XEOS.boot.stage1.error     db  "Fatal error!", @ASCII.CR, @ASCII.LF, @ASCII.NUL
-$XEOS.files.stage2          db  'BOOT    BIN'
+$XEOS.boot.stage1.dataSector    dw  0
+$XEOS.files.stage2              db  'BOOT    BIN'
+$XEOS.boot.stage1.prompt        db  "[ XEOS ]> ", @ASCII.NUL
+$XEOS.boot.stage1.success       db  "Boot", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.error         db  "Error", @ASCII.CR, @ASCII.LF, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
@@ -136,7 +137,7 @@ $XEOS.files.stage2          db  'BOOT    BIN'
 ; 
 ; Note that those addresses uses the segment:offset addressing mode:
 ; 
-;   base address = base address * segment size (16) + offset
+;       base address = base address * segment size (16) + offset
 ; 
 ; So 0x07C0 is 0x07C0:0 which is 0x07C00.
 ;-------------------------------------------------------------------------------
@@ -147,11 +148,11 @@ main:
     
     ; Sets the data and extra segments to where we were loaded by the BIOS
     ; (0x07C0), so we don't have to add 0x07C0 to all our data
+    ; We are not setting FS and GS, as we won't use it, and is it will save
+    ; a few bytes of code
     mov     ax,         0x07C0
     mov     ds,         ax
     mov     es,         ax
-    mov     fs,         ax
-    mov     gs,         ax
     
     ; Sets up the of stack space
     xor     ax,         ax
@@ -162,31 +163,40 @@ main:
     sti
 
     ; Prints the greeting
-    @BIOS.video.print   $XEOS.boot.stage1.greet
+    @BIOS.video.print   $XEOS.boot.stage1.prompt
     
     ; Loads the FAT-12 root directory at ES:0x200
-    mov     bx,         0x0200
+    ; (0x07CE - just after this bootloader)
+    mov     di,         0x0200
     call XEOS.io.fat12.loadRootDirectory
     
     ; Checks for an error code
     cmp     ax,         0
     jne      .failure
     
+    ; Stores the location of the first data sector
+    mov     WORD [ $XEOS.boot.stage1.dataSector ],  dx
+    
     ; Name of the second stage bootloader
     mov     si,         $XEOS.files.stage2
     
     ; Finds the second stage bootloader
+    ; We have not altered DI, so it still contains the location of the FAT-12
+    ; root directory
     call XEOS.io.fat12.findFile
     
     ; Checks for an error code
     cmp     ax,         0
     jne      .failure
     
-    ; Loads the file at 0x50:00
+    ; Loads the file at 0x50:00 (first area of free/unused memory)
     mov     ax,         0x0050
     
     ; Loads the FAT at ES:0x200
     mov     bx,         0x0200
+    
+    ; Data sector location
+    mov     cx,         WORD [ $XEOS.boot.stage1.dataSector ]
     
     ; Loads the second stage bootloader into memory
     call XEOS.io.fat12.loadFile
@@ -195,11 +205,13 @@ main:
     cmp     ax,         0
     jne      .failure
     
-    ; Executes the second-stage bootloader
+    @BIOS.video.print   $XEOS.boot.stage1.success
+    
+    ; Pass control to the second stage bootloader
     push    WORD 0x0050
     push    WORD 0x0000
     retf
-
+    
     .failure:
         
         ; Prints the error message
@@ -211,10 +223,10 @@ main:
         
         ; Reboot the computer
         @BIOS.int.reboot
-        
-    ; Halts the system
-    cli
-    hlt
+    
+        ; Halts the system
+        cli
+        hlt
     
 ;-------------------------------------------------------------------------------
 ; Ends of the boot sector
