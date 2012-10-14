@@ -127,8 +127,8 @@ $XEOS.files.kernel.64                       db  'XEOS64  BIN', @ASCII.NUL
 $XEOS.boot.stage2.msg.prompt                db  '[ XEOS ]> ', @ASCII.NUL
 $XEOS.boot.stage2.msg.greet                 db  'Entering the second stage bootloader', @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu                   db  'Checking CPU type: ', @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.32                db  'i386 (32 bits)', @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.64                db  'x86_64 (64 bits)', @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.32                db  'i386', @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.64                db  'x86_64', @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.load           db  'Preparing to load the XEOS kernel', @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.root            db  'Loading the FAT-12 root directory into memory', @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.find            db  'Locating the XEOS kernel file: ', @ASCII.NUL
