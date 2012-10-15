@@ -331,6 +331,7 @@ XEOS.a20.enable.keyboard.out:
     popa
     
     ret
+    
 ;-------------------------------------------------------------------------------
 ; Checks if A20 is enabled
 ; 
