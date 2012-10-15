@@ -136,39 +136,38 @@ $XEOS.boot.stage2.longMonde                 db  0
 
 $XEOS.boot.stage2.msg.prompt                    db  "[ XEOS ]> ", @ASCII.NUL
 $XEOS.boot.stage2.msg.quote                     db  '"', @ASCII.NUL
-$XEOS.boot.stage2.msg.yes                       db  "[ YES ]", @ASCII.NUL
-$XEOS.boot.stage2.msg.no                        db  "[ NO ]", @ASCII.NUL
-$XEOS.boot.stage2.msg.success                   db  "[ SUCCESS ]", @ASCII.NUL
-$XEOS.boot.stage2.msg.failure                   db  "[ FAILED ]", @ASCII.NUL
-$XEOS.boot.stage2.msg.greet                     db  "Entering the second stage bootloader", @ASCII.NUL
+$XEOS.boot.stage2.msg.yes                       db  "Yes", @ASCII.NUL
+$XEOS.boot.stage2.msg.no                        db  "No", @ASCII.NUL
+$XEOS.boot.stage2.msg.success                   db  "Success", @ASCII.NUL
+$XEOS.boot.stage2.msg.failure                   db  "Failed", @ASCII.NUL
+$XEOS.boot.stage2.msg.greet                     db  "Entering the second stage bootloader:               XSBoot-x86/0.2.0", @ASCII.NUL
 $XEOS.boot.stage2.msg.hr                        db  "-------------------------------------------------------------------------------", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.xeos                      db  " XEOS - x86 Experimental Operating System", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.1               db  " Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.2               db  " All Rights Reserved", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu                       db  "Getting CPU informations:", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.vendor                db  "            - CPU vendor: ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.type                  db  "            - CPU type:   ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.instructions          db  "            - CPU ISA:    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.vendor                db  "            - CPU vendor:                                        ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.type                  db  "            - CPU type:                                          ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.instructions          db  "            - CPU ISA:                                           ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type.32               db  "i386", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type.64               db  "x86_64", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.instructions.32       db  "32 bits", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.instructions.64       db  "64 bits", @ASCII.NUL
-$XEOS.boot.stage2.msg.32                        db  "The kernel will run in 32 bits mode", @ASCII.NUL
-$XEOS.boot.stage2.msg.64                        db  "The kernel will run in 64 bits mode", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.load               db  "Loading the kernel image:", @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.root                db  "            - Loading the FAT-12 directory into memory: [ 0x0050:0x7900 ]", @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.find                db  "            - Locating the kernel file: ", @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.load                db  "            - Loading the kernel into memory: [ 0x1000:0000 ]", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.verify.32          db  "Verifiying the kernel image: ELF-32", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.verify.64          db  "Verifiying the kernel image: ELF-64", @ASCII.NUL
-$XEOS.boot.stage2.msg.gdt                       db  "Installing the GDT", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.check                 db  "Checking if the A-20 address line is enabled:             ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.bios                  db  "Enabling the A-20 address line (BIOS):                    ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.keyboardControl       db  "Enabling the A-20 address line (keyboard controller):     ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.keyboardOut           db  "Enabling the A-20 address line (keyboard out port):       ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.systemControl         db  "Enabling the A-20 address line (system controller):       ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.load               db  "Loading the kernel image:                              ", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.root                db  "            - Loading the FAT-12 directory into memory:          0x0050:7900", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.find                db  "            - Locating the kernel file:                          ", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.load                db  "            - Loading the kernel into memory:                    0x1000:0000", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.verify.32          db  "Verifiying the kernel image (ELF-32):                  ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.verify.64          db  "Verifiying the kernel image (ELF-64):                  ", @ASCII.NUL
+$XEOS.boot.stage2.msg.gdt                       db  "Installing the GDT:                                    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.check                 db  "Checking if the A-20 address line is enabled:          ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.bios                  db  "Enabling the A-20 address line (BIOS):                 ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.keyboardControl       db  "Enabling the A-20 address line (keyboard controller):  ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.keyboardOut           db  "Enabling the A-20 address line (keyboard out port):    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.systemControl         db  "Enabling the A-20 address line (system controller):    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch32                  db  "Switching the CPU to 32 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch64                  db  "Switching the CPU to 64 bits mode", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.run                db  "Moving and executing the kernel", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                     db  "Press any key to reboot: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir           db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find          db  "Error: file not found", @ASCII.NUL
@@ -240,7 +239,9 @@ main:
         call    XEOS.cpu.vendor
         
         @BIOS.video.print   $XEOS.boot.stage2.msg.cpu.vendor
+        @BIOS.video.print   $XEOS.boot.stage2.msg.quote
         @BIOS.video.print   di
+        @BIOS.video.print   $XEOS.boot.stage2.msg.quote
         @BIOS.video.print   $XEOS.boot.stage2.nl
         pop                 di
         
@@ -257,7 +258,6 @@ main:
         @BIOS.video.print       $XEOS.boot.stage2.msg.cpu.instructions
         @BIOS.video.print       $XEOS.boot.stage2.msg.cpu.instructions.32
         @BIOS.video.print       $XEOS.boot.stage2.nl
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.32
         
         ; 32 bits kernel is going to be loaded
         mov     si,             $XEOS.files.kernel.32
@@ -275,7 +275,6 @@ main:
         @BIOS.video.print       $XEOS.boot.stage2.msg.cpu.instructions
         @BIOS.video.print       $XEOS.boot.stage2.msg.cpu.instructions.64
         @BIOS.video.print       $XEOS.boot.stage2.nl
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.64
         
         ; 64 bits kernel is going to be loaded
         mov     si,             $XEOS.files.kernel.64
@@ -286,7 +285,16 @@ main:
     .load:
         
         ; Loads the XEOS kernel into memory
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.load
+        push                    si
+        @BIOS.video.print       $XEOS.boot.stage2.msg.prompt
+        @BIOS.video.print       $XEOS.boot.stage2.msg.kernel.load
+        @BIOS.video.print       $XEOS.boot.stage2.msg.quote
+        pop                     si
+        push                    si
+        call                    BIOS.video.print
+        @BIOS.video.print       $XEOS.boot.stage2.msg.quote
+        @BIOS.video.print       $XEOS.boot.stage2.nl
+        pop                     si
         call                    XEOS.boot.stage2.kernel.load
         
         cmp     ax,         1
@@ -304,13 +312,19 @@ main:
         
         .verify32:
             
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.32
+            @BIOS.video.print       $XEOS.boot.stage2.msg.prompt
+            @BIOS.video.print       $XEOS.boot.stage2.msg.kernel.verify.32
+            @BIOS.video.print       $XEOS.boot.stage2.msg.success
+            @BIOS.video.print       $XEOS.boot.stage2.nl
             
             jmp     .loaded
             
         .verify64:
             
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.64
+            @BIOS.video.print       $XEOS.boot.stage2.msg.prompt
+            @BIOS.video.print       $XEOS.boot.stage2.msg.kernel.verify.64
+            @BIOS.video.print       $XEOS.boot.stage2.msg.success
+            @BIOS.video.print       $XEOS.boot.stage2.nl
             
             jmp     .loaded
             
@@ -318,8 +332,11 @@ main:
         
     .gdt:
         
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
-        call                    XEOS.gdt.install
+            @BIOS.video.print       $XEOS.boot.stage2.msg.prompt
+            @BIOS.video.print       $XEOS.boot.stage2.msg.gdt
+            call                    XEOS.gdt.install
+            @BIOS.video.print       $XEOS.boot.stage2.msg.success
+            @BIOS.video.print       $XEOS.boot.stage2.nl
         
     .a20:
         
@@ -409,6 +426,7 @@ main:
     .switch32:
             
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.run
         
         ; Not ready yet...
         jmp     .end
@@ -428,6 +446,7 @@ main:
     .switch64:
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.run
         
         ; Not ready yet...
         jmp     .end
@@ -530,13 +549,9 @@ XEOS.boot.stage2.kernel.load:
         
         ; Prints the name of the kernel file
         @BIOS.video.print   $XEOS.boot.stage2.msg.fat12.find
-        @BIOS.video.print   $XEOS.boot.stage2.msg.quote
-        pop                 si
-        push                si
-        call                BIOS.video.print
-        @BIOS.video.print   $XEOS.boot.stage2.msg.quote
-        @BIOS.video.print   $XEOS.boot.stage2.nl
-        pop                 si
+        
+        ; Restore registers
+        pop     si
         
         ; Stores the location of the first data sector
         mov     WORD [ $XEOS.boot.stage2.dataSector ],  dx
@@ -553,12 +568,18 @@ XEOS.boot.stage2.kernel.load:
         cmp     ax,         0
         je      .loadFile
         
+        @BIOS.video.print   $XEOS.boot.stage2.msg.failure
+        @BIOS.video.print   $XEOS.boot.stage2.nl
+        
         ; Error - Stores result code in AX
         mov     ax,         2
         
         ret
     
     .loadFile:
+        
+        @BIOS.video.print   $XEOS.boot.stage2.msg.success
+        @BIOS.video.print   $XEOS.boot.stage2.nl
         
         @BIOS.video.print   $XEOS.boot.stage2.msg.fat12.load
         @BIOS.video.print   $XEOS.boot.stage2.nl
