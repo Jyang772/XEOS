@@ -501,17 +501,7 @@ XEOS.io.fat12.readSectors:
         ; AX = 0000 0010 0000 0001 = 0x201
         mov     ax,         0x201
         
-        ; !!! WARNING !!!
-        ; If __XEOS_IO_FAT12_MBR_INC_16_ASM__ is defined, it means we are
-        ; in the XEOS first stage bootloader.
-        ; The CX argument passed to int 0x13 is not computed accurately.
-        ; While this might/should be OK for the first stage bootloader, as
-        ; the second stage bootloaded is copied first to the floppy disk, this
-        ; is not the correct formula.
-        ; The correct one is used if we are not inside the first stage
-        ; bootloader. Unfortunalety, we cannot use the correct formula for the
-        ; first stage bootloader as it will just take too much bytes of code,
-        ; and as we are limited to 512 bytes.
+        ; Checks if we are inside the first stage bootloader or not 
         %ifdef __XEOS_IO_FAT12_MBR_INC_16_ASM__
             
             ; Cylinder and sector arguments for int 0x13
