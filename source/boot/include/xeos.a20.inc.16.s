@@ -331,5 +331,87 @@ XEOS.a20.enable.keyboard.out:
     popa
     
     ret
+;-------------------------------------------------------------------------------
+; Checks if A20 is enabled
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       - AX:       1 if enabled, otherwise 0
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.a20.enabled:
+    
+    .start:
+        
+        ; Saves registers
+        push    bx
+        push    cx
+        push    dx
+        push    si
+        push    di
+        push    ds
+        push    es
+        
+        ; Clears the interrupts
+        cli
+        
+        ; Sets ES to 0x0000
+        xor     ax,     ax
+        mov     es,     ax
+        
+        ; Sets DS to 0xFFFF
+        mov     ax,     0xFFFF
+        mov     ds,     ax
+        
+        mov     di,     0x0500
+        mov     si,     0x0510
+        
+        mov     al,     BYTE [ es:di ]
+        push    ax
+        
+        mov     al,     BYTE [ ds:si ]
+        push    ax
+        
+        mov     BYTE [ es:di ], 0x00
+        mov     BYTE [ ds:si ], 0xFF
+        
+        cmp     BYTE [ es:di ], 0xFF
+        
+        pop     ax
+        
+        mov     BYTE [ ds:si ], al
+        
+        pop     ax
+        
+        mov     BYTE [ es:di ], al
+        
+        mov     ax,     0
+        
+        je      .end
+        
+        mov     ax,     1
+        
+    .end:
+        
+        ; Restores the interrupts
+        sti
+        
+        ; Restore registers
+        pop     es
+        pop     ds
+        pop     di
+        pop     si
+        pop     dx
+        pop     cx
+        pop     bx
+        
+        ret
 
 %endif
