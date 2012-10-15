@@ -162,7 +162,7 @@ $XEOS.boot.stage2.msg.a20.bios              db  "Enabling the A-20 address line"
 $XEOS.boot.stage2.msg.a20.keyboard          db  "Enabling the A-20 address line", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch32              db  "Switching the CPU to 32 bits mode", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch64              db  "Switching the CPU to 64 bits mode", @ASCII.NUL
-$XEOS.boot.stage2.msg.error                 db  "Press any key to reboot", @ASCII.NUL
+$XEOS.boot.stage2.msg.error                 db  "Press any key to reboot: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir       db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find      db  "Error: file not found", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.load      db  "Error: cannot load the requested file", @ASCII.NUL
@@ -378,7 +378,8 @@ main:
     .error:
         
         ; Prints the error message
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.error
+        @BIOS.video.print $XEOS.boot.stage2.msg.prompt
+        @BIOS.video.print $XEOS.boot.stage2.msg.error
         
         ; Waits for a key press
         xor     ax,         ax

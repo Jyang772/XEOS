@@ -77,6 +77,8 @@
 %include "BIOS.int.inc.s"             ; BIOS interrupts
 %include "XEOS.ascii.inc.s"           ; ASCII table
 
+%include "BIOS.video.inc.16.s"
+
 ; We are in 16 bits mode
 BITS    16
 
@@ -247,9 +249,7 @@ XEOS.io.fat12.findFile:
     .loop:
         
         ; Saves registers
-        push    cx
-        push    di
-        push    si
+        pusha
         
         ; A FAT-12 filename is eleven characters long
         mov     cx,         4
@@ -258,9 +258,7 @@ XEOS.io.fat12.findFile:
         rep     cmpsb
         
         ; Restore registers
-        pop     si
-        pop     di
-        pop     cx
+        popa
         
         ; Checks for a match
         je      .success
@@ -406,7 +404,7 @@ XEOS.io.fat12.loadFile:
         push    bx
         
         ; Stores current cluster
-        mov     ax, WORD [ $XEOS.io.fat12._currentCluster ]
+        mov     ax,         WORD [ $XEOS.io.fat12._currentCluster ]
         mov     cx,         ax
         mov     dx,         ax
         
@@ -421,7 +419,7 @@ XEOS.io.fat12.loadFile:
         add     bx,         cx
         
         ; Get two bytes from the FAT
-          mov     dx,       WORD [ bx ]
+        mov     dx,       WORD [ bx ]
           
         ; Checks if we are reading an odd or even cluster
         test    ax,         1
@@ -497,16 +495,51 @@ XEOS.io.fat12.readSectors:
         ; (needed for int 0x13)
         call    XEOS.io.fat12._lbaToCHS
         
-        ; Number of sectors to read
-        mov     al,         1
+        ; AX argument for int 0x13
+        ; AL = 1
+        ; AH = 2
+        ; AX = 0000 0010 0000 0001 = 0x201
+        mov     ax,         0x201
         
-        ; BIOS read sector function (for int 0x13)
-        mov     ah,         2
+        ; !!! WARNING !!!
+        ; If __XEOS_IO_FAT12_MBR_INC_16_ASM__ is defined, it means we are
+        ; in the XEOS first stage bootloader.
+        ; The CX argument passed to int 0x13 is not computed accurately.
+        ; While this might/should be OK for the first stage bootloader, as
+        ; the second stage bootloaded is copied first to the floppy disk, this
+        ; is not the correct formula.
+        ; The correct one is used if we are not inside the first stage
+        ; bootloader. Unfortunalety, we cannot use the correct formula for the
+        ; first stage bootloader as it will just take too much bytes of code,
+        ; and as we are limited to 512 bytes.
+        %ifdef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+            
+            ; Cylinder and sector arguments for int 0x13
+            ; Wrong formula, but this should work for the first stage bootloader
+            mov     ch,         BYTE [ $XEOS.io.fat12._cylinder ]
+            mov     cl,         BYTE [ $XEOS.io.fat12._sector ]
+        
+        %else
+            
+            ; Cylinder and sector arguments for int 0x13
+            ; CX = ( ( cylinder and 255 ) shl 8 ) or ( ( cylinder and 768 ) shr 2 ) or sector;
+            xor     cx,         cx
+            mov     cl,         BYTE [ $XEOS.io.fat12._cylinder ]
+            and     cx,         255
+            shl     cx,         8
+            xor     dx,         dx
+            mov     dl,         BYTE [ $XEOS.io.fat12._cylinder ]
+            and     dx,         768
+            shr     dx,         2
+            and     cx,         dx
+            xor     dx,         dx
+            mov     dl,         BYTE [ $XEOS.io.fat12._sector ]
+            or      cx,         dx
+            
+        %endif
         
         ; Track, sector and head parameters
-        mov     ch,         BYTE [ $XEOS.io.fat12._absoluteTrack ]
-        mov     cl,         BYTE [ $XEOS.io.fat12._absoluteSector ]
-        mov     dh,         BYTE [ $XEOS.io.fat12._absoluteHead ]
+        mov     dh,         BYTE [ $XEOS.io.fat12._head ]
         
         ; Drive number parameter
         mov     dl,         @XEOS.fat12.mbr.driveNumber
@@ -523,20 +556,22 @@ XEOS.io.fat12.readSectors:
         xor     ax,         ax
         @BIOS.int.llds
         
-        ; Decrements the error counter
-        dec     di
-        
         ; Restores registers
         popa
         
+        ; Decrements the error counter
+        dec     di
+
         ; Attempts to read again
         jnz     .loop
         
         ; Restores registers
-        pop di
+        pop     di
         
         ; Error - Stores result code in AX
         mov     ax,         1
+        
+        ret
         
     .success
         
@@ -615,18 +650,15 @@ XEOS.io.fat12._clusterToLBA:
 ; 
 ; Description:
 ; 
-;       The result values will be placed in XEOS.io.fat12.absoluteSector,
-;       XEOS.io.fat12.absoluteHead and XEOS.io.fat12.absoluteTrack.
-;       
-;       absolute sector = (logical sector / sectors per track) + 1
-;       absolute head   = (logical sector / sectors per track) % number of heads
-;       absolute track  = logical sector / (sectors per track * number of heads)
+;       Sector      = ( logical sector / sectors per track ) + 1
+;       Head        = ( logical sector / sectors per track ) % number of heads
+;       Cylinder    =   logical sector / ( sectors per track * number of heads )
 ;       
 ;       After calling this procedure, converted values can be accessed in:
 ;           
-;           - $XEOS.io.fat12._absoluteSector
-;           - $XEOS.io.fat12._absoluteTrack
-;           - $XEOS.io.fat12._absoluteHead
+;           - $XEOS.io.fat12._cylinder
+;           - $XEOS.io.fat12._head
+;           - $XEOS.io.fat12._sector
 ; 
 ; Input registers:
 ;       
@@ -640,11 +672,9 @@ XEOS.io.fat12._clusterToLBA:
 ;       
 ;       - AX
 ;       - CX
+;       - DX
 ;-------------------------------------------------------------------------------
 XEOS.io.fat12._lbaToCHS:
-    
-    ; Saves registers
-    push    dx
     
     ; Clears DX
     xor     dx,         dx
@@ -666,8 +696,8 @@ XEOS.io.fat12._lbaToCHS:
     ; Adds one
     inc     dl
     
-    ; Stores the absolute sector
-    mov     BYTE [ $XEOS.io.fat12._absoluteSector ],    dl
+    ; Stores the sector
+    mov     BYTE [ $XEOS.io.fat12._sector ],    dl
     
     ; Clears DX
     xor     dx,         dx
@@ -686,12 +716,9 @@ XEOS.io.fat12._lbaToCHS:
         
     %endif
     
-    ; Stores the absolute head and absolute track
-    mov     BYTE [ $XEOS.io.fat12._absoluteHead ],  dl
-    mov     BYTE [ $XEOS.io.fat12._absoluteTrack ], al
-    
-    ; Restores registers
-    pop     dx
+    ; Stores the head and cylinder
+    mov     BYTE [ $XEOS.io.fat12._head ],  dl
+    mov     BYTE [ $XEOS.io.fat12._cylinder ], al
     
     ret
 
@@ -700,9 +727,9 @@ XEOS.io.fat12._lbaToCHS:
 ;-------------------------------------------------------------------------------
 
 $XEOS.io.fat12._dataSector              dw  0
-$XEOS.io.fat12._absoluteSector          db  0
-$XEOS.io.fat12._absoluteHead            db  0
-$XEOS.io.fat12._absoluteTrack           db  0
+$XEOS.io.fat12._cylinder                db  0
+$XEOS.io.fat12._head                    db  0
+$XEOS.io.fat12._sector                  db  0
 $XEOS.io.fat12._currentCluster          dw  0
 $XEOS.io.fat12._fatOffset               dw  0
 

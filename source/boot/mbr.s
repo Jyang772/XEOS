@@ -198,6 +198,7 @@ main:
     mov     ax,         0x0050
     
     ; Loads the FAT at ES:0x200
+    ; (0x07CE - just after this bootloader)
     mov     bx,         0x0200
     
     ; Data sector location
@@ -215,20 +216,16 @@ main:
     ; Pass control to the second stage bootloader
     push    WORD 0x0050
     push    WORD 0x0000
+    
     retf
     
     .failure:
         
         ; Prints the error message
+        ; No "press any key to reboot" message nor feature, as this would
+        ; take too much bytes of code...
         @BIOS.video.print $XEOS.boot.stage1.msg.error
         
-        ; Waits for a key press
-        xor     ax,         ax
-        @BIOS.int.keyboard
-        
-        ; Reboot the computer
-        @BIOS.int.reboot
-    
         ; Halts the system
         cli
         hlt
