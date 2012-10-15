@@ -222,9 +222,14 @@ main:
     .failure:
         
         ; Prints the error message
-        ; No "press any key to reboot" message nor feature, as this would
-        ; take too much bytes of code...
         @BIOS.video.print $XEOS.boot.stage1.msg.error
+        
+        ; Waits for a key press
+        xor     ax,         ax
+        @BIOS.int.keyboard
+        
+        ; Reboot the computer
+        @BIOS.int.reboot
         
         ; Halts the system
         cli
