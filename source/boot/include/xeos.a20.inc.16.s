@@ -110,7 +110,7 @@ BITS    16
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.bios:
     
-    ; A20 enabling function ( BIOS miscellaneous services function)
+    ; A20 enabling function (BIOS miscellaneous services function)
     mov     ax,         0x2401
     
     ; Calls the BIOS miscellaneous services
