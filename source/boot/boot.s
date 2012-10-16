@@ -442,6 +442,11 @@ main:
         
         ; Sets the new value - We are now in 32bits protected mode
         mov     cr0,        eax
+        
+        ; Setup the 32 bits kernel
+        ; We are doing a far jump using our code descriptor
+        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+        jmp	    @XEOS.gdt.descriptors.code.kernel:XEOS.boot.stage2.kernel.setup.32
             
     .switch64:
         
@@ -462,6 +467,11 @@ main:
         
         ; Sets the new value - We are now in 32bits protected mode
         mov     cr0,        eax
+        
+        ; Setup the 32 bits kernel
+        ; We are doing a far jump using our code descriptor
+        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+        jmp	    @XEOS.gdt.descriptors.code.kernel:XEOS.boot.stage2.kernel.setup.64
     
     .error.fat12.dir:
         
@@ -619,4 +629,32 @@ XEOS.boot.stage2.kernel.load:
         xor     ax,         ax
         
         ret
+
+; We are in 32 bits mode
+BITS    32
+
+XEOS.boot.stage2.kernel.setup.32:
     
+    ; Sets the data segments to the GDT data descriptor
+    mov     ax,         @XEOS.gdt.descriptors.data.kernel
+    mov     ds,         ax
+    mov     ss,         ax
+    mov     es,         ax
+    mov     esp,        0x90000
+    
+    ; Halts the system
+    cli
+    hlt
+
+XEOS.boot.stage2.kernel.setup.64:
+    
+    ; Sets the data segments to the GDT data descriptor
+    mov     ax,         @XEOS.gdt.descriptors.data.kernel
+    mov     ds,         ax
+    mov     ss,         ax
+    mov     es,         ax
+    mov     esp,        0x90000
+    
+    ; Halts the system
+    cli
+    hlt
