@@ -131,7 +131,8 @@ BITS    16
 ;-------------------------------------------------------------------------------
 %macro @BIOS.video.setCursor 2
     
-    @XEOS.reg.save
+    ; Saves registers
+    pusha
     
     ; Position cursor (BIOS video services function)
     mov     ah,     2
@@ -146,7 +147,8 @@ BITS    16
     ; Calls the BIOS video services
     @BIOS.int.video
     
-    @XEOS.reg.restore
+    ; Restore registers
+    popa
     
 %endmacro
 
@@ -158,7 +160,8 @@ BITS    16
 ;-------------------------------------------------------------------------------
 %macro @BIOS.video.clearScreen 2
     
-    @XEOS.reg.save
+    ; Saves registers
+    pusha
     
     ; Clear or scroll up (BIOS video services function)
     mov     ah,     6
@@ -173,8 +176,8 @@ BITS    16
     xor     cx,     cx
     
     ; Width and height
-    mov     dl,     $BIOS.video.screen.cols - 1
-    mov     dh,     $BIOS.video.screen.rows - 1
+    mov     dl,     @BIOS.video.screen.cols - 1
+    mov     dh,     @BIOS.video.screen.rows - 1
     
     ; Calls the BIOS video services
     @BIOS.int.video
@@ -182,7 +185,8 @@ BITS    16
     ; Repositions the cursor to the top-left corner
     @BIOS.video.setCursor 0, 0
     
-    @XEOS.reg.restore
+    ; Restore registers
+    popa
     
 %endmacro
 
