@@ -140,7 +140,7 @@ $XEOS.boot.stage2.msg.yes                       db  "Yes", @ASCII.NUL
 $XEOS.boot.stage2.msg.no                        db  "No", @ASCII.NUL
 $XEOS.boot.stage2.msg.success                   db  "Success", @ASCII.NUL
 $XEOS.boot.stage2.msg.failure                   db  "Failed", @ASCII.NUL
-$XEOS.boot.stage2.msg.greet                     db  "Entering the second stage bootloader:               XSBoot-x86/0.2.0", @ASCII.NUL
+$XEOS.boot.stage2.msg.greet                     db  "Entering the second stage bootloader:                XSBoot-x86/0.2.0", @ASCII.NUL
 $XEOS.boot.stage2.msg.hr                        db  "-------------------------------------------------------------------------------", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.xeos                      db  " XEOS - x86 Experimental Operating System", @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.1               db  " Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>", @ASCII.NL, @ASCII.NUL
