@@ -121,8 +121,8 @@ $XEOS.files.stage2              db  "BOOT    BIN"
 ;-------------------------------------------------------------------------------
 
 $XEOS.boot.stage1.msg.boot      db  "XEOS: ", @ASCII.NUL
-$XEOS.boot.stage1.msg.error     db  "Error", @ASCII.CR, @ASCII.LF, @ASCII.NUL
-$XEOS.boot.stage1.msg.ok        db  "Boot", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.msg.error     db  "FAIL", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.msg.ok        db  "BOOT", @ASCII.CR, @ASCII.LF, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
