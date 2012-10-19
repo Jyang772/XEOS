@@ -77,6 +77,33 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
+; Checks if the processor supports the CPUID instruction
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       - AX:       The result code (1 if CPUID is supportd, otherwise 0)
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.cpu.hasCPUID:
+    
+    ; Gets EFLAGS into EAX
+    pushfd
+    pop     eax
+    
+    ; Gets the ID flag
+    shr     eax,        21
+    and     eax,        0x0000000000000001
+    
+    ret
+
+;-------------------------------------------------------------------------------
 ; Gets the CPU vendor
 ; 
 ; Input registers:
