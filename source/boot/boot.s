@@ -116,8 +116,8 @@ start: jmp main
 $XEOS.boot.stage2.dataSector                    dw  0
 $XEOS.boot.stage2.kernelSectors                 dw  0
 $XEOS.boot.stage2.nl                            db  @ASCII.NL,  @ASCII.NUL
-$XEOS.files.kernel.32                           db  "XEOS32  BIN", @ASCII.NUL
-$XEOS.files.kernel.64                           db  "XEOS64  BIN", @ASCII.NUL
+$XEOS.files.kernel.32                           db  "XEOS32  ELF", @ASCII.NUL
+$XEOS.files.kernel.64                           db  "XEOS64  ELF", @ASCII.NUL
 $XEOS.boot.stage2.cpu.vendor                    db  "            ", @ASCII.NUL
 $XEOS.boot.stage2.str                           db  "                              ", @ASCII.NUL
 $XEOS.boot.stage2.longMonde                     db  0
@@ -185,6 +185,8 @@ $XEOS.boot.stage2.msg.error.fat12.find          db  "Error: file not found", @AS
 $XEOS.boot.stage2.msg.error.fat12.load          db  "Error: cannot load the requested file", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.a20                 db  "Error: cannot enable the A-20 address line", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.cpuid               db  "Error: processor does not support CPUID", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify32            db  "Error: invalid kernel ELF-32 image", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-64 image", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -503,10 +505,17 @@ main:
             
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.32
-            @XEOS.boot.stage2.print.success
+            
+            ; Verifies the kernel file header
+            mov     si,     @XEOS.boot.stage2.kernel.segment
+            call    XEOS.elf.32.checkHeader
+            cmp     ax,     0
+            je      .verified
+            
+            @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
-            jmp     .loaded
+            jmp     .error.verify32
             
         ;-----------------------------------------------------------------------
         ; Verifies the kernel image (64 bits ELF)
@@ -515,12 +524,22 @@ main:
             
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.64
-            @XEOS.boot.stage2.print.success
+            
+            ; Verifies the kernel file header
+            mov     si,     @XEOS.boot.stage2.kernel.segment
+            call    XEOS.elf.64.checkHeader
+            cmp     ax,     0
+            je      .verified
+            
+            @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
-            jmp     .loaded
+            jmp     .error.verify64
             
-    .loaded:
+        .verified
+            
+            @XEOS.boot.stage2.print.success
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
         
     ;---------------------------------------------------------------------------
     ; Installs the GDT (Global Descriptor Table)
@@ -666,7 +685,7 @@ main:
       
     ;---------------------------------------------------------------------------
     ; Switches the CPU to 64 bits mode
-    ;---------------------------------------------------------------------------      
+    ;---------------------------------------------------------------------------
     .switch64:
         
         @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.switch64
@@ -691,7 +710,10 @@ main:
         ; We are doing a far jump using our code descriptor
         ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
         jmp	    @XEOS.gdt.descriptors.code.kernel:XEOS.boot.stage2.kernel.setup.64
-    
+        
+    ;---------------------------------------------------------------------------
+    ; Error management
+    ;---------------------------------------------------------------------------
     .error.fat12.dir:
         
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.fat12.dir
@@ -715,6 +737,16 @@ main:
     .error.cpuid:
         
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.cpuid
+        jmp                                 .error
+    
+    .error.verify32:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify32
+        jmp                                 .error
+    
+    .error.verify64:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify64
         jmp                                 .error
     
     .error:
@@ -766,10 +798,10 @@ XEOS.boot.stage2.kernel.load:
         push    di
         push    si
         
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.fat12.root
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.root
         
         ; Offset the FAT-12 root directory location
-        mov     di,         @XEOS.boot.stage2.fat.offset
+        mov     di,             @XEOS.boot.stage2.fat.offset
         call    XEOS.io.fat12.loadRootDirectory
         
         ; Checks for an error code
@@ -825,9 +857,10 @@ XEOS.boot.stage2.kernel.load:
         ; Stores the location of the first data sector
         mov     WORD [ $XEOS.boot.stage2.dataSector ],  dx
         
+        ; location of the FAT-12 root directory
+        mov     di,         @XEOS.boot.stage2.fat.offset
+        
         ; Finds the second stage bootloader
-        ; We have not altered DI, so it still contains the location of the FAT-12
-        ; root directory
         call    XEOS.io.fat12.findFile
         
         ; Restore registers
