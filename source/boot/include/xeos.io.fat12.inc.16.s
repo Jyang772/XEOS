@@ -250,7 +250,7 @@ XEOS.io.fat12.findFile:
         pusha
         
         ; A FAT-12 filename is eleven characters long
-        mov     cx,         4
+        mov     cx,         11
         
         ; Compare the strings
         rep     cmpsb
@@ -307,6 +307,9 @@ XEOS.io.fat12.loadFile:
     
     .loadFAT:
         
+        ; Saves register
+        push    es
+        
         ; Saves the location of the first data cluster
         mov     WORD [ $XEOS.io.fat12._fatOffset ],     bx
         
@@ -356,6 +359,9 @@ XEOS.io.fat12.loadFile:
         cmp     ax,         0
         je      .fatLoaded
         
+        ; Restore registers
+        pop     es
+        
         ret
     
     .fatLoaded
@@ -397,6 +403,9 @@ XEOS.io.fat12.loadFile:
         ; Checks for an error code
         cmp     ax,         0
         je      .success
+        
+        ; Restore registers
+        pop     es
         
         ret
         
@@ -462,6 +471,7 @@ XEOS.io.fat12.loadFile:
     ; Restore registers
     pop bx
     pop cx
+    pop es
     
     ret
         
