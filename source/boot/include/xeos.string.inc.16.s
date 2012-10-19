@@ -80,6 +80,54 @@
 BITS    16
 
 ;-------------------------------------------------------------------------------
+; Checks if a character is printable
+; 
+; Input registers:
+;       
+;       - AX:       The character code
+; 
+; Return registers:
+;       
+;       - AX:       The result code (1 if character is printable, otherwise 0)
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.string.isPrint:
+    
+    ; Saves registers
+    pusha
+    
+    ; ASCII control characters
+    cmp     ax,     32
+    jb      .notPrintable
+    
+    ; Non-ASCII
+    cmp     ax,     127
+    jg      .notPrintable
+    
+    .printable:
+        
+        ; Restore registers
+        popa
+        
+        ; Printable - Stores result code in AX
+        mov     ax,         1
+        
+        ret
+    
+    .notPrintable:
+        
+        ; Restore registers
+        popa
+        
+        ; Not printable - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
+    
+;-------------------------------------------------------------------------------
 ; Converts an unsigned binary bumber into a string representation
 ; 
 ; Input registers:
