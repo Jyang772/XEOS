@@ -156,7 +156,7 @@ $XEOS.boot.stage2.msg.copyright.1.right         db  4 ,"                 ", @ASC
 $XEOS.boot.stage2.msg.copyright.2               db  "                                                                             ", @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.3               db  "      Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>      ", @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.4               db  "                             All Rights Reserved                             ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu                       db  "Getting CPU informations:", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu                       db  "Getting CPU informations:                        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.vendor                db  "            ", 26, " CPU vendor:                                  ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type                  db  "            ", 26, " CPU type:                                    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.instructions          db  "            ", 26, " CPU ISA:                                     ", @ASCII.NUL
@@ -184,6 +184,7 @@ $XEOS.boot.stage2.msg.error.fat12.dir           db  "Error: cannot load the FAT-
 $XEOS.boot.stage2.msg.error.fat12.find          db  "Error: file not found", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.load          db  "Error: cannot load the requested file", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.a20                 db  "Error: cannot enable the A-20 address line", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.cpuid               db  "Error: processor does not support CPUID", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -389,7 +390,24 @@ main:
     ;---------------------------------------------------------------------------
     .cpu:
         
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.cpu
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.cpu
+        
+        ; Checks if we can use CPUID
+        call    XEOS.cpu.hasCPUID
+        cmp     ax,         1
+        je      .cpuid.ok
+        
+    .cpuid.fail:
+        
+        @XEOS.boot.stage2.print.failure
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+        jmp     .error.cpuid
+        
+    .cpuid.ok:
+        
+        @XEOS.boot.stage2.print.success
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
         
         ; Gets the CPU vendor ID
         push    di
@@ -692,6 +710,11 @@ main:
     .error.a20:
         
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.a20
+        jmp                                 .error
+    
+    .error.cpuid:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.cpuid
         jmp                                 .error
     
     .error:
