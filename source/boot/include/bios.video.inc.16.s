@@ -95,14 +95,14 @@ BITS    16
 %define @BIOS.video.colors.red              0x04
 %define @BIOS.video.colors.magenta          0x05
 %define @BIOS.video.colors.brown            0x06
-%define @BIOS.video.colors.lightGray        0x07
+%define @BIOS.video.colors.gray.light       0x07
 %define @BIOS.video.colors.gray             0x08
-%define @BIOS.video.colors.lightBlue        0x09
-%define @BIOS.video.colors.lightGreen       0x0A
-%define @BIOS.video.colors.lightCyan        0x0B
-%define @BIOS.video.colors.lightRed         0x0C
-%define @BIOS.video.colors.lightMagenta     0x0D
-%define @BIOS.video.colors.lightBrown       0x0E
+%define @BIOS.video.colors.blue.light       0x09
+%define @BIOS.video.colors.green.light      0x0A
+%define @BIOS.video.colors.cyan.light       0x0B
+%define @BIOS.video.colors.red.light        0x0C
+%define @BIOS.video.colors.magenta.light    0x0D
+%define @BIOS.video.colors.brown.light      0x0E
 %define @BIOS.video.colors.white            0x0F
 
 ;-------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ BITS    16
     shl %1, 4
     
     ; Stores the foreground color
-    add %1, %2
+    or %1, %2
     
 %endmacro
 
