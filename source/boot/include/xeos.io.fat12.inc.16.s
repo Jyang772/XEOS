@@ -77,8 +77,6 @@
 %include "BIOS.int.inc.s"             ; BIOS interrupts
 %include "XEOS.ascii.inc.s"           ; ASCII table
 
-%include "BIOS.video.inc.16.s"
-
 ; We are in 16 bits mode
 BITS    16
 
@@ -297,12 +295,12 @@ XEOS.io.fat12.findFile:
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
+;       - CX:       The number of sectors read
 ; 
 ; Killed registers:
 ;       
 ;       - AX
 ;       - BX
-;       - CX
 ;       - DX
 ;-------------------------------------------------------------------------------
 XEOS.io.fat12.loadFile:
@@ -366,7 +364,11 @@ XEOS.io.fat12.loadFile:
         pop     es
         xor     bx,         bx
         
+        ; Resets CX (sector count)
+        xor     cx,         cx
+        
         ; Saves registers
+        push    cx
         push    bx
         
     .loadFile:
@@ -401,6 +403,13 @@ XEOS.io.fat12.loadFile:
     .success:
         
         ; Restore registers
+        pop     cx
+        
+        ; Increments CX (sector count)
+        inc     cx
+        
+        ; Restore registers
+        push    cx
         push    bx
         
         ; Stores current cluster
@@ -452,6 +461,7 @@ XEOS.io.fat12.loadFile:
     
     ; Restore registers
     pop bx
+    pop cx
     
     ret
         
