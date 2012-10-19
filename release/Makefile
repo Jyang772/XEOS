@@ -127,7 +127,7 @@ boot_floppy:
 cdrom:
 	
 	@$(PRINT) $(PROMPT)"Creating the XEOS UDF CD-Rom image"
-#	@hdiutil makehybrid -ov -udf -eltorito-boot $(FLOPPY_IMG) -default-volume-name XEOS -publisher eosgarden -preparer eosgarden -application XEOS -o $(CD_IMG) $(PATH_RELEASE_CDROM) > /dev/null
+	@hdiutil makehybrid -ov -udf -eltorito-boot $(FLOPPY_IMG) -default-volume-name XEOS -publisher eosgarden -preparer eosgarden -application XEOS -o $(CD_IMG) $(PATH_RELEASE_CDROM) > /dev/null
 
 # Cleans the release files
 clean:
