@@ -100,6 +100,7 @@ $XEOS.debug.register.fs                         dw  0
 $XEOS.debug.register.gs                         dw  0
 $XEOS.debug.register.ss                         dw  0
 $XEOS.debug.register.eflags                     dd  0
+$XEOS.debug.char                                db  " ", @ASCII.NUL
 $XEOS.debug.str                                 db  "                              ", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
@@ -107,38 +108,40 @@ $XEOS.debug.str                                 db  "                           
 ;-------------------------------------------------------------------------------
 
 $XEOS.debug.nl                              db  @ASCII.NL, @ASCII.NUL
+$XEOS.debug.space                           db  32, @ASCII.NUL
+$XEOS.debug.separator                       db  ":", @ASCII.NUL
 $XEOS.debug.pipe                            db  32,  179, 32, @ASCII.NUL
 $XEOS.debug.pipe.start                      db  179, 32, @ASCII.NUL
-$XEOS.debug.hr.top                          db  218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.top                db  218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191, 32, @ASCII.NUL
-$XEOS.debug.hr.middle.top                   db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.middle.top         db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 194, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 194, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 194, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 194, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
-$XEOS.debug.hr.middle                       db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.middle             db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 197, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 197, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 197, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 197, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
-$XEOS.debug.hr.middle.short                 db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.middle.short       db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 197, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 197, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 197, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 180, 32, @ASCII.NUL
-$XEOS.debug.hr.middle.bottom                db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.middle.bottom      db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 193, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 180, 32, @ASCII.NUL
-$XEOS.debug.hr.bottom                       db  192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.bottom             db  192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217, 32, @ASCII.NUL
-$XEOS.debug.hr.segment                      db  32,  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
-$XEOS.debug.hr.flags.top                    db  195, 196, 196, 196, 196, 196, 196, 196, 196, 194, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.segment            db  32,  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
+$XEOS.debug.hr.registers.flags.top          db  195, 196, 196, 196, 196, 196, 196, 196, 196, 194, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 197, 196, 196, 196, 196, 196, 196, 196, 196, 194, 196, 196, 196, 193, 196, 196, 196, \
                                                 196, 194, 196, 196, 196, 196, 196, 193, 196, 196, 194, 196, 196, 196, 196, 196, 196, 196, \
                                                 193, 194, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
-$XEOS.debug.hr.flags.bottom                 db  195, 196, 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, 196, 196, 196, 196, \
+$XEOS.debug.hr.registers.flags.bottom       db  195, 196, 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 193, 196, 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 193, 196, 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, 196, 196, 196, 196, \
                                                 196, 193, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
@@ -194,9 +197,29 @@ $XEOS.debug.str.register.flags.ac           db  " AC: ", @ASCII.NUL
 $XEOS.debug.str.register.flags.vif          db  "VIF: ", @ASCII.NUL
 $XEOS.debug.str.register.flags.vip          db  "VIP: ", @ASCII.NUL
 $XEOS.debug.str.register.flags.id           db  " ID: ", @ASCII.NUL
-$XEOS.debug.str.pad.16                      db  177, 177, 177, 177, 177, 177, 177, 177, 177, 177, @ASCII.NUL
-$XEOS.debug.str.pad.8                       db  177, 177, 177, 177, 177, 177, 177, 177, @ASCII.NUL
-$XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 177, 177, 177, @ASCII.NUL
+$XEOS.debug.str.registers.pad.16            db  177, 177, 177, 177, 177, 177, 177, 177, 177, 177, @ASCII.NUL
+$XEOS.debug.str.registers.pad.8             db  177, 177, 177, 177, 177, 177, 177, 177, @ASCII.NUL
+$XEOS.debug.str.registers.pad.flags         db  177, 177, 177, 177, 177, 177, 177, 177, 177, @ASCII.NUL
+$XEOS.debug.hr.memory.top                   db  218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191, 32, @ASCII.NUL
+$XEOS.debug.hr.memory.middle.top            db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 194, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 194, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 194, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 194, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
+$XEOS.debug.hr.memory.middle.bottom         db  195, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 193, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 193, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 193, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 180, 32, @ASCII.NUL
+$XEOS.debug.hr.memory.bottom                db  192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, \
+                                                196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217, 32, @ASCII.NUL
+$XEOS.debug.str.memory.dump.header.left     db  "                     ", 4, @ASCII.NUL
+$XEOS.debug.str.memory.dump.header          db  " DEBUG - Memory dump ", @ASCII.NUL
+$XEOS.debug.str.memory.dump.header.right    db  4, "                      ", @ASCII.NUL
+$XEOS.debug.str.memory.dump.footer          db  "           Press <c> to continue - Any other key to quit          ", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -205,10 +228,14 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
 ; Prints text in color
 %macro @XEOS.debug.print.color 3
     
+    pusha
+    
     @BIOS.video.createScreenColor bl, %2, %3
     
     mov     si,         %1
     call    XEOS.debug.print.color
+    
+    popa
     
 %endmacro
 
@@ -232,7 +259,7 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
     call                    XEOS.string.utoa
     @XEOS.debug.print       $XEOS.debug.str
     
-    @XEOS.debug.print   $XEOS.debug.pipe
+    @XEOS.debug.print       $XEOS.debug.pipe
     
     @XEOS.debug.print.color $XEOS.debug.str.register.%1x, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1x ]
@@ -244,7 +271,7 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
     call                    XEOS.string.utoa
     @XEOS.debug.print       $XEOS.debug.str
     
-    @XEOS.debug.print   $XEOS.debug.pipe
+    @XEOS.debug.print       $XEOS.debug.pipe
     
     @XEOS.debug.print.color $XEOS.debug.str.register.%1h, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1x ]
@@ -257,7 +284,7 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
     call                    XEOS.string.utoa
     @XEOS.debug.print       $XEOS.debug.str
     
-    @XEOS.debug.print   $XEOS.debug.pipe
+    @XEOS.debug.print       $XEOS.debug.pipe
     
     @XEOS.debug.print.color $XEOS.debug.str.register.%1l, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1x ]
@@ -269,7 +296,7 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
     call                    XEOS.string.utoa
     @XEOS.debug.print       $XEOS.debug.str
     
-    @XEOS.debug.print   $XEOS.debug.pipe
+    @XEOS.debug.print       $XEOS.debug.pipe
     
 %endmacro
 
@@ -286,7 +313,7 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
     call                    XEOS.string.utoa
     @XEOS.debug.print       $XEOS.debug.str
     
-    @XEOS.debug.print   $XEOS.debug.pipe
+    @XEOS.debug.print       $XEOS.debug.pipe
     
     @XEOS.debug.print.color $XEOS.debug.str.register.%1, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1 ]
@@ -312,7 +339,7 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
     call                    XEOS.string.utoa
     @XEOS.debug.print       $XEOS.debug.str
     
-    @XEOS.debug.print   $XEOS.debug.pipe
+    @XEOS.debug.print       $XEOS.debug.pipe
     
 %endmacro
 
@@ -329,10 +356,25 @@ $XEOS.debug.str.pad.flags                   db  177, 177, 177, 177, 177, 177, 17
     call                    XEOS.string.utoa
     @XEOS.debug.print       $XEOS.debug.str
     
-    @XEOS.debug.print   $XEOS.debug.pipe
+    @XEOS.debug.print       $XEOS.debug.pipe
     
 %endmacro
 
+;-------------------------------------------------------------------------------
+; Prints all the x86 registers
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None   
+;-------------------------------------------------------------------------------
 XEOS.debug.registers.dump:
     
     pusha
@@ -356,7 +398,7 @@ XEOS.debug.registers.dump:
     pop     eax
     mov     DWORD [ $XEOS.debug.register.eflags ],  eax
     
-    @XEOS.debug.print       $XEOS.debug.hr.top
+    @XEOS.debug.print       $XEOS.debug.hr.registers.top
     @BIOS.video.print       $XEOS.debug.nl
     @XEOS.debug.print       $XEOS.debug.pipe.start
     @XEOS.debug.print       $XEOS.debug.str.registers.dump.header.left
@@ -364,7 +406,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print       $XEOS.debug.str.registers.dump.header.right
     @XEOS.debug.print       $XEOS.debug.pipe
     @BIOS.video.print       $XEOS.debug.nl
-    @XEOS.debug.print       $XEOS.debug.hr.middle.top
+    @XEOS.debug.print       $XEOS.debug.hr.registers.middle.top
     @BIOS.video.print       $XEOS.debug.nl
     
     @XEOS.debug.print.register.gp8      a
@@ -380,46 +422,46 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.register.segment  f
     @BIOS.video.print                   $XEOS.debug.nl
     
-    @XEOS.debug.print                   $XEOS.debug.hr.middle.short
+    @XEOS.debug.print                   $XEOS.debug.hr.registers.middle.short
     @XEOS.debug.print.register.segment  g
     @BIOS.video.print                   $XEOS.debug.nl
     
     @XEOS.debug.print.register.gp16     si
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.register.segment  s
     @BIOS.video.print                   $XEOS.debug.nl
     
     @XEOS.debug.print.register.gp16     di
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
-    @XEOS.debug.print                   $XEOS.debug.hr.segment
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print                   $XEOS.debug.hr.registers.segment
     @BIOS.video.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp16     sp
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.16, @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp16     bp
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.16, @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     
-    @XEOS.debug.print                   $XEOS.debug.hr.flags.top
+    @XEOS.debug.print                   $XEOS.debug.hr.registers.flags.top
     @BIOS.video.print                   $XEOS.debug.nl
     
     @XEOS.debug.print                   $XEOS.debug.pipe.start
@@ -430,7 +472,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.register.flag     sf, 7
     @XEOS.debug.print.register.flag     zf, 8
     
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     
@@ -442,7 +484,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.register.flag     pl, 13
     @XEOS.debug.print.register.flag     nt, 14
     
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     
@@ -454,16 +496,16 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.register.flag     vip, 20
     @XEOS.debug.print.register.flag     id,  21
     
-    @XEOS.debug.print.color             $XEOS.debug.str.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
-    @XEOS.debug.print                   $XEOS.debug.hr.flags.bottom
+    @XEOS.debug.print                   $XEOS.debug.hr.registers.flags.bottom
     @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print                   $XEOS.debug.pipe.start
     @XEOS.debug.print.color             $XEOS.debug.str.registers.dump.footer,  @BIOS.video.colors.gray.light,  @BIOS.video.colors.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print                   $XEOS.debug.nl
-    @XEOS.debug.print                   $XEOS.debug.hr.bottom
+    @XEOS.debug.print                   $XEOS.debug.hr.registers.bottom
     @XEOS.debug.print                   $XEOS.debug.nl
     
     xor     ax,         ax
@@ -472,7 +514,292 @@ XEOS.debug.registers.dump:
     popa
     
     ret
+
+;-------------------------------------------------------------------------------
+; Prints memory
+; 
+; Input registers:
+;       
+;       - SI:       The memory address to print
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.debug.memory.dump:
     
+    ; Saves registers
+    pusha
+    
+    ; Resets BX (offset counter)
+    xor     bx,         bx
+    
+    ; Prints 15 lines
+    jmp     .continue
+    
+    .line:
+        
+        ; Prints a line of memory dump
+        call                XEOS.debug.memory.dump._line
+        @XEOS.debug.print   $XEOS.debug.nl
+        
+        ; Sets the new offset, as we dumped 12 bytes
+        add     bx,         12
+        
+        ; Continues printing
+        loop    .line
+        
+        push    bx
+        push    si
+        
+        @XEOS.debug.print       $XEOS.debug.hr.memory.middle.bottom
+        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.pipe.start
+        @XEOS.debug.print       $XEOS.debug.str.memory.dump.footer
+        @XEOS.debug.print       $XEOS.debug.pipe
+        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.hr.memory.bottom
+        @BIOS.video.print       $XEOS.debug.nl
+        
+        pop     si
+        pop     bx
+        
+    ; Waits for a key press
+    xor     ax,         ax
+    @BIOS.int.keyboard
+    
+    ; Checks if another dump must be printed ('c' key pressed)
+    cmp     al,         0x63
+    jne     .quit
+    
+    .continue:
+        
+        push bx
+        push si
+        
+        @XEOS.debug.print       $XEOS.debug.hr.memory.top
+        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.pipe.start
+        @XEOS.debug.print       $XEOS.debug.str.memory.dump.header.left
+        @XEOS.debug.print.color $XEOS.debug.str.memory.dump.header,  @BIOS.video.colors.brown.light, @BIOS.video.colors.black
+        @XEOS.debug.print       $XEOS.debug.str.memory.dump.header.right
+        @XEOS.debug.print       $XEOS.debug.pipe
+        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.hr.memory.middle.top
+        @BIOS.video.print       $XEOS.debug.nl
+        
+        pop si
+        pop bx
+        
+        ; Prints 15 next lines
+        mov     cx,         15
+        jmp     .line
+    
+    .quit:
+        
+        ; Restore registers
+        popa
+        
+        ret
+
+;-------------------------------------------------------------------------------
+; Prints memory (single line)
+; 
+; Internal procedure used by XEOS.debug.memory.dump.
+; 
+; Input registers:
+;       
+;       - SI:       The memory address to print
+;       - BX:       The offset to print
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+
+XEOS.debug.memory.dump._line:
+    
+    ; Saves registers
+    pusha
+    
+    @XEOS.debug.print   $XEOS.debug.pipe.start
+    
+    ; Saves registers
+    push    bx
+    
+    ; Prints the address segment
+    mov     ax,             si
+    mov     bx,             16
+    mov     cx,             4
+    mov     dx,             0
+    mov     di,             $XEOS.debug.str
+    call                    XEOS.string.utoa
+    @XEOS.debug.print.color $XEOS.debug.str, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    
+    @XEOS.debug.print       $XEOS.debug.separator
+    
+    ; Restore registers
+    pop     bx
+    
+    ; Saves registers
+    push    bx
+    
+    ; Prints the address offset
+    mov     ax,             bx
+    mov     bx,             16
+    mov     cx,             4
+    mov     dx,             0
+    mov     di,             $XEOS.debug.str
+    call                    XEOS.string.utoa
+    @XEOS.debug.print.color $XEOS.debug.str, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    
+    @XEOS.debug.print       $XEOS.debug.pipe
+    
+    ; Restore registers
+    pop     bx
+    
+    ; We are going to print 3 groups of 4 bytes
+    mov     cx,         3
+    
+    .group:
+        
+        ; Saves registers
+        push    cx
+        
+        ; We are going to print 4 bytes
+        mov     cx,         4
+        
+        .word:
+            
+            ; Saves registers
+            push    bx
+            push    cx
+            push    si
+            push    ds
+            
+            ; Gets the byte from the memory location
+            mov     ax,         si
+            mov     ds,         si
+            xor     ax,         ax
+            mov     si,         ax
+            add     si,         bx
+            mov     al,         BYTE [ si ]
+            
+            ; Restore registers
+            pop     ds
+            
+            ; Prints the byte
+            mov     bx,         16
+            mov     cx,         2
+            mov     dx,         0
+            mov     di,         $XEOS.debug.str
+            call                XEOS.string.utoa
+            
+            @XEOS.debug.print   $XEOS.debug.str
+            @XEOS.debug.print   $XEOS.debug.space
+            
+            ; Restore registers
+            pop     si
+            pop     cx
+            pop     bx
+            
+            ; Prints next byte
+            inc     bx
+            loop    .word
+        
+        @XEOS.debug.print   $XEOS.debug.pipe.start
+        
+        ; Restore registers
+        pop     cx
+        
+        ; Prints next group of bytes
+        loop    .group
+    
+    ; Restore registers
+    popa
+    
+    .ascii:
+        
+        ; Saves registers
+        pusha
+        
+        ; We are going to print 12 characters
+        mov     cx,         12
+        
+        .char:
+            
+            ; Saves registers
+            push    cx
+            push    bx
+            push    si
+            push    ds
+            
+            ; Gets the byte from the memory location
+            mov     ax,         si
+            mov     ds,         si
+            xor     ax,         ax
+            mov     si,         ax
+            add     si,         bx
+            mov     al,         BYTE [ si ]
+            
+            ; Restore registers
+            pop     ds
+            pop     si
+            
+            ; Saves registers
+            push    ax
+            
+            ; Checks if the character is printable
+            call    XEOS.string.isPrint
+            cmp     ax,         1
+            jne     .notPrintable
+            
+            .printable:
+                
+                ; Restore registers
+                pop     ax
+                
+                ; Prints character
+                mov                     BYTE [ $XEOS.debug.char ],  al
+                @XEOS.debug.print.color $XEOS.debug.char, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+                
+                jmp     .nextChar
+                
+            .notPrintable:
+                
+                ; Restore registers
+                pop     ax
+                
+                ; Prints a dot
+                mov                     BYTE [ $XEOS.debug.char ],  0x2E
+                @XEOS.debug.print.color $XEOS.debug.char, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+                
+            .nextChar:
+                
+                ; Restore registers
+                pop     bx
+                pop     cx
+                
+                ; Prints next character 
+                inc     bx
+                loop    .char
+        
+        @XEOS.debug.print   $XEOS.debug.space
+        @XEOS.debug.print   $XEOS.debug.pipe.start
+        
+    ; Restore registers
+    popa
+    
+    ret
+
 ;-------------------------------------------------------------------------------
 ; Prints text in color
 ; 
