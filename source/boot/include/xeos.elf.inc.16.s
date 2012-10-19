@@ -128,14 +128,27 @@ endstruc
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
+;       - DI:       The entry point address
 ; 
 ; Killed registers:
 ;       
 ;       None   
 ;-------------------------------------------------------------------------------
+
 XEOS.elf.32.checkHeader:
     
-    ret
+    ; Saves register
+    pusha
+    
+    .success
+        
+        ; Restore registers
+        popa
+        
+        ; Success - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
     
 ;-------------------------------------------------------------------------------
 ; Checks the ELF-64 header to ensure it's a valid ELF-64 binary file
@@ -147,6 +160,7 @@ XEOS.elf.32.checkHeader:
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
+;       - DI:       The entry point address
 ; 
 ; Killed registers:
 ;       
@@ -154,7 +168,18 @@ XEOS.elf.32.checkHeader:
 ;-------------------------------------------------------------------------------
 XEOS.elf.64.checkHeader:
     
-    ret
+    ; Saves register
+    pusha
+    
+    .success
+        
+        ; Restore registers
+        popa
+        
+        ; Success - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; Variables
