@@ -93,13 +93,38 @@ BITS    16
 ;-------------------------------------------------------------------------------
 XEOS.cpu.hasCPUID:
     
+    ; Saves registers
+    push    ecx
+    
     ; Gets EFLAGS into EAX
     pushfd
     pop     eax
     
-    ; Gets the ID flag
+    ; Saves EFLAGS into ECX
+    mov     ecx,        eax 
+    
+    ; Sets EFLAGS
+    xor     eax,        0x200000
+    push    eax
+    popfd
+    
+    ; Gets EFLAGS into EAX
+    pushfd
+    pop     eax
+    
+    ; Masks changed bits
+    xor     eax,        ecx
+    
+    ; Test ID flag
     shr     eax,        21
     and     eax,        0x0000000000000001
+    
+    ; Restore flags
+    push    ecx
+    popfd
+    
+    ; Restore registers
+    pop ecx
     
     ret
 
