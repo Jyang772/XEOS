@@ -541,7 +541,7 @@ XEOS.io.fat12.readSectors:
             mov     dl,         BYTE [ $XEOS.io.fat12._cylinder ]
             and     dx,         768
             shr     dx,         2
-            and     cx,         dx
+            or      cx,         dx
             xor     dx,         dx
             mov     dl,         BYTE [ $XEOS.io.fat12._sector ]
             or      cx,         dx
