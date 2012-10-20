@@ -704,6 +704,12 @@ XEOS.debug.memory.dump._line:
     
     @XEOS.debug.print   $XEOS.debug.pipe.start
     
+    ; Resets registers
+    xor     eax,        eax
+    xor     ebx,        ebx
+    xor     ecx,        ecx
+    xor     edx,        edx
+    
     ; Prints the address segment
     @XEOS.string.numberToString @XEOS.proc.var.1, 16, 4, 0, XEOS.debug.str
     @XEOS.debug.print.color     $XEOS.debug.str, @BIOS.video.color.gray.light, @BIOS.video.color.black
@@ -717,14 +723,14 @@ XEOS.debug.memory.dump._line:
     ; We are going to print 3 groups of 4 bytes
     mov     cx,         3
     
-    ; Restores registers
-    mov     si,         WORD @XEOS.proc.var.1
-    mov     bx,         WORD @XEOS.proc.var.2
-    
     ;---------------------------------------------------------------------------
     ; Hexadecimal representation
     ;---------------------------------------------------------------------------
     .group:
+        
+        ; Restores registers
+        mov     si,         WORD @XEOS.proc.var.1
+        mov     bx,         WORD @XEOS.proc.var.2
         
         ; Saves registers
         push    cx

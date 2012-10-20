@@ -105,12 +105,6 @@ BITS    16
     ; Saves registrers
     pusha
     
-    xor     eax,        eax
-    xor     ebx,        ecx
-    xor     ecx,        ebx
-    xor     edx,        edx
-    xor     edi,        edi
-    
     mov     ax,         %1
     mov     bx,         %2
     mov     cx,         %3
