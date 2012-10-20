@@ -562,7 +562,7 @@ main:
             ; We won't switch to 64 bits long mode
             mov     BYTE [ $XEOS.boot.stage2.longMonde ],   0
             
-            jmp     .load
+            jmp     .gdt
           
         ;-----------------------------------------------------------------------
         ; x86_c64 CPU
@@ -581,77 +581,7 @@ main:
             
             ; We'll need to switch to 64 bits long mode
             mov     BYTE [ $XEOS.boot.stage2.longMonde ],   1
-        
-    ;---------------------------------------------------------------------------
-    ; Loads the kernel file
-    ;---------------------------------------------------------------------------
-    .load:
-        
-        ; Loads the XEOS kernel into memory
-        push                            si
-        @XEOS.boot.stage2.print.prompt
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.kernel.load
-        pop                             si
-        @XEOS.boot.stage2.print.bracket.green   si
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
-        call                            XEOS.boot.stage2.kernel.load
-        
-        cmp     ax,         1
-        je      .error.fat12.dir
-        
-        cmp     ax,         2
-        je      .error.fat12.find
-        
-        cmp     ax,         3
-        je      .error.fat12.load
-        
-        ; Checks if we must check for an ELF-64 or ELF-32 image
-        cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
-        je      .load.verify.64
-        
-        ;-----------------------------------------------------------------------
-        ; Verifies the kernel image (32 bits ELF)
-        ;-----------------------------------------------------------------------
-        .load.verify.32:
-            
-            @XEOS.boot.stage2.print.prompt
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.32
-            
-            ; Verifies the kernel file header
-            mov     si,     @XEOS.boot.stage2.kernel.segment
-            call    XEOS.elf.32.checkHeader
-            cmp     ax,     0
-            je      .load.verified
-            
-            @XEOS.boot.stage2.print.failure
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
-            
-            jmp     .error.verify32
-            
-        ;-----------------------------------------------------------------------
-        ; Verifies the kernel image (64 bits ELF)
-        ;-----------------------------------------------------------------------
-        .load.verify.64:
-            
-            @XEOS.boot.stage2.print.prompt
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.64
-            
-            ; Verifies the kernel file header
-            mov     si,     @XEOS.boot.stage2.kernel.segment
-            call    XEOS.elf.64.checkHeader
-            cmp     ax,     0
-            je      .load.verified
-            
-            @XEOS.boot.stage2.print.failure
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
-            
-            jmp     .error.verify64
-            
-        .load.verified
-            
-            @XEOS.boot.stage2.print.success
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
-        
+    
     ;---------------------------------------------------------------------------
     ; Installs the GDT (Global Descriptor Table)
     ;---------------------------------------------------------------------------
@@ -683,7 +613,7 @@ main:
             @XEOS.boot.stage2.print.yes
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
-            jmp     .a20.enabled
+            jmp     .load
             
         .a20.enable:
             
@@ -759,13 +689,81 @@ main:
             
             @XEOS.boot.stage2.print.success
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+       
+    ;---------------------------------------------------------------------------
+    ; Loads the kernel file
+    ;---------------------------------------------------------------------------
+    .load:
         
-    .a20.enabled:
+        ; Loads the XEOS kernel into memory
+        push                            si
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.kernel.load
+        pop                             si
+        @XEOS.boot.stage2.print.bracket.green   si
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
+        call                            XEOS.boot.stage2.kernel.load
         
-        ; Checks if we must switch the CPU to 64 bits long mode
+        cmp     ax,         1
+        je      .error.fat12.dir
+        
+        cmp     ax,         2
+        je      .error.fat12.find
+        
+        cmp     ax,         3
+        je      .error.fat12.load
+        
+        ; Checks if we must check for an ELF-64 or ELF-32 image
         cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
-        je      .switch64
-      
+        je      .load.verify.64
+        
+        ;-----------------------------------------------------------------------
+        ; Verifies the kernel image (32 bits ELF)
+        ;-----------------------------------------------------------------------
+        .load.verify.32:
+            
+            @XEOS.boot.stage2.print.prompt
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.32
+            
+            ; Verifies the kernel file header
+            mov     si,     @XEOS.boot.stage2.kernel.segment
+            call    XEOS.elf.32.checkHeader
+            cmp     ax,     0
+            je      .load.verified
+            
+            @XEOS.boot.stage2.print.failure
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+            
+            jmp     .error.verify32
+            
+        ;-----------------------------------------------------------------------
+        ; Verifies the kernel image (64 bits ELF)
+        ;-----------------------------------------------------------------------
+        .load.verify.64:
+            
+            @XEOS.boot.stage2.print.prompt
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.64
+            
+            ; Verifies the kernel file header
+            mov     si,     @XEOS.boot.stage2.kernel.segment
+            call    XEOS.elf.64.checkHeader
+            cmp     ax,     0
+            je      .load.verified
+            
+            @XEOS.boot.stage2.print.failure
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+            
+            jmp     .error.verify64
+            
+        .load.verified
+            
+            @XEOS.boot.stage2.print.success
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+            
+            ; Checks if we must switch the CPU to 64 bits long mode
+            cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+            je      .switch64
+    
     ;---------------------------------------------------------------------------
     ; Switches the CPU to 32 bits mode
     ;---------------------------------------------------------------------------
