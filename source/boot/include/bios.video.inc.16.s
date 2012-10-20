@@ -159,7 +159,7 @@ BITS    16
     ; Calls the BIOS video services
     @BIOS.int.video
     
-    ; Restore registers
+    ; Restores registers
     popa
     
 %endmacro
@@ -203,7 +203,7 @@ BITS    16
     ; Repositions the cursor to the top-left corner
     @BIOS.video.setCursor 0, 0
     
-    ; Restore registers
+    ; Restores registers
     popa
     
 %endmacro

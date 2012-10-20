@@ -255,7 +255,7 @@ XEOS.io.fat12.findFile:
         ; Compare the strings
         rep     cmpsb
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ; Checks for a match
@@ -359,7 +359,7 @@ XEOS.io.fat12.loadFile:
         cmp     ax,         0
         je      .fatLoaded
         
-        ; Restore registers
+        ; Restores registers
         pop     es
         
         ret
@@ -404,20 +404,20 @@ XEOS.io.fat12.loadFile:
         cmp     ax,         0
         je      .success
         
-        ; Restore registers
+        ; Restores registers
         pop     es
         
         ret
         
     .success:
         
-        ; Restore registers
+        ; Restores registers
         pop     cx
         
         ; Increments CX (sector count)
         inc     cx
         
-        ; Restore registers
+        ; Restores registers
         push    cx
         push    bx
         
@@ -468,7 +468,7 @@ XEOS.io.fat12.loadFile:
     ; Success - Stores result code in AX
     xor     ax,             ax
     
-    ; Restore registers
+    ; Restores registers
     pop bx
     pop cx
     pop es

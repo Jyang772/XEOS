@@ -157,7 +157,7 @@ XEOS.a20.enable.systemControl:
     ; Writes to the system control port
     out     0x92,       al
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
@@ -188,7 +188,7 @@ XEOS.a20.enable.keyboard.control:
     ; Sends the command to the keyboard control port
     out     0x64,       al
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
@@ -217,7 +217,7 @@ XEOS.a20.enable.keyboard.out.wait.in:
     test    al,         2
     jnz     XEOS.a20.enable.keyboard.out.wait.in
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
@@ -246,7 +246,7 @@ XEOS.a20.enable.keyboard.out.wait.out:
     test    al,         1
     jz      XEOS.a20.enable.keyboard.out.wait.out
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
@@ -327,7 +327,7 @@ XEOS.a20.enable.keyboard.out:
     ; Restores the interrupts
     sti
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
@@ -404,7 +404,7 @@ XEOS.a20.enabled:
         ; Restores the interrupts
         sti
         
-        ; Restore registers
+        ; Restores registers
         pop     es
         pop     ds
         pop     di

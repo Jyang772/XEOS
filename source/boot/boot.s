@@ -327,7 +327,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 ; 
 ;       base address = base address * segment size (16) + offset
 ; 
-; So 0x07C0 is 0x07C0:0 which is 0x07C00.
+; So 0x0050 is 0x0050:0000 which is 0x00500.
 ;-------------------------------------------------------------------------------
 main:
     
@@ -814,7 +814,7 @@ XEOS.boot.stage2.kernel.load:
         ; Error - Stores result code in AX
         mov     ax,         1
         
-        ; Restore registers
+        ; Restores registers
         pop     si
         pop     di
         
@@ -851,7 +851,7 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.fat12.find
         
-        ; Restore registers
+        ; Restores registers
         pop     si
         
         ; Stores the location of the first data sector
@@ -863,7 +863,7 @@ XEOS.boot.stage2.kernel.load:
         ; Finds the second stage bootloader
         call    XEOS.io.fat12.findFile
         
-        ; Restore registers
+        ; Restores registers
         pop    di
         
         ; Checks for an error code
@@ -907,7 +907,7 @@ XEOS.boot.stage2.kernel.load:
         ; Number of sectors read
         mov     WORD[ $XEOS.boot.stage2.kernelSectors ], cx
         
-        ; Restore registers
+        ; Restores registers
         pop    cx
         pop    bx
         

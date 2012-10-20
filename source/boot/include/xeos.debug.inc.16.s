@@ -601,7 +601,7 @@ XEOS.debug.memory.dump:
     
     .quit:
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ret
@@ -646,7 +646,7 @@ XEOS.debug.memory.dump._line:
     
     @XEOS.debug.print       $XEOS.debug.separator
     
-    ; Restore registers
+    ; Restores registers
     pop     bx
     
     ; Saves registers
@@ -663,7 +663,7 @@ XEOS.debug.memory.dump._line:
     
     @XEOS.debug.print       $XEOS.debug.pipe
     
-    ; Restore registers
+    ; Restores registers
     pop     bx
     
     ; We are going to print 3 groups of 4 bytes
@@ -693,7 +693,7 @@ XEOS.debug.memory.dump._line:
             add     si,         bx
             mov     al,         BYTE [ si ]
             
-            ; Restore registers
+            ; Restores registers
             pop     ds
             
             ; Prints the byte
@@ -706,7 +706,7 @@ XEOS.debug.memory.dump._line:
             @XEOS.debug.print   $XEOS.debug.str
             @XEOS.debug.print   $XEOS.debug.space
             
-            ; Restore registers
+            ; Restores registers
             pop     si
             pop     cx
             pop     bx
@@ -717,13 +717,13 @@ XEOS.debug.memory.dump._line:
         
         @XEOS.debug.print   $XEOS.debug.pipe.start
         
-        ; Restore registers
+        ; Restores registers
         pop     cx
         
         ; Prints next group of bytes
         loop    .group
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     .ascii:
@@ -750,21 +750,24 @@ XEOS.debug.memory.dump._line:
             add     si,         bx
             mov     al,         BYTE [ si ]
             
-            ; Restore registers
+            ; Restores registers
             pop     ds
             pop     si
             
             ; Saves registers
             push    ax
+            push    dx
             
             ; Checks if the character is printable
+            mov     dx,         ax
             call    XEOS.string.isPrint
             cmp     ax,         1
             jne     .notPrintable
             
             .printable:
                 
-                ; Restore registers
+                ; Restores registers
+                pop     dx
                 pop     ax
                 
                 ; Prints character
@@ -775,7 +778,8 @@ XEOS.debug.memory.dump._line:
                 
             .notPrintable:
                 
-                ; Restore registers
+                ; Restores registers
+                pop     dx
                 pop     ax
                 
                 ; Prints a dot
@@ -784,7 +788,7 @@ XEOS.debug.memory.dump._line:
                 
             .nextChar:
                 
-                ; Restore registers
+                ; Restores registers
                 pop     bx
                 pop     cx
                 
@@ -795,7 +799,7 @@ XEOS.debug.memory.dump._line:
         @XEOS.debug.print   $XEOS.debug.space
         @XEOS.debug.print   $XEOS.debug.pipe.start
         
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
