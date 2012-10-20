@@ -108,9 +108,15 @@ BITS    16
 ;-------------------------------------------------------------------------------
 ; Computes the value of a BIOS screen color into a register
 ; 
-; Parameter 1:  The register in which to place the color value
-; Parameter 2:  The foreground color
-; Parameter 3:  The background color
+; Parameters:
+; 
+;       1:          The register in which to place the color value
+;       2:          The foreground color
+;       3:          The background color
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @BIOS.video.createScreenColor 3
     
@@ -126,8 +132,14 @@ BITS    16
 ;-------------------------------------------------------------------------------
 ; BIOS - Moves the cursor
 ; 
-; Parameter 1:  The X position
-; Parameter 2:  The Y position
+; Parameters:
+; 
+;       1:          The X position
+;       2:          The Y position
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @BIOS.video.setCursor 2
     
@@ -155,8 +167,14 @@ BITS    16
 ;-------------------------------------------------------------------------------
 ; BIOS - Clears the screen
 ; 
-; Parameter 1:  The foreground color
-; Parameter 2:  The background color
+; Parameters:
+; 
+;       1:          The foreground color
+;       2:          The background color
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @BIOS.video.clearScreen 2
     
@@ -193,12 +211,20 @@ BITS    16
 ;-------------------------------------------------------------------------------
 ; Prints a string
 ; 
-; Parameter 1:  The address of the string to print
+; Parameters:
+; 
+;       1:          The address of the string to print
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @BIOS.video.print  1
     
+    pusha
     mov     si,     %1
     call    BIOS.video.print
+    popa
     
 %endmacro
 
