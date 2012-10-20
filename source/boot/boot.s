@@ -212,10 +212,14 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 ;-------------------------------------------------------------------------------
 %macro @XEOS.boot.stage2.print.color 3
     
+    pusha
+    
     @BIOS.video.createScreenColor bl, %2, %3
     
     mov     si,         %1
     call    XEOS.boot.stage2.print.color
+    
+    popa
     
 %endmacro
 
@@ -232,6 +236,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 ;-------------------------------------------------------------------------------
 %macro @XEOS.boot.stage2.print.bracket.green 1
     
+    pusha
     push                            si
     @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
@@ -241,6 +246,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
     pop                             si
+    popa
     
 %endmacro
 
@@ -257,6 +263,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 ;-------------------------------------------------------------------------------
 %macro @XEOS.boot.stage2.print.bracket.red 1
     
+    pusha
     push                            si
     @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
@@ -266,6 +273,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
     pop                             si
+    popa
     
 %endmacro
 
@@ -282,6 +290,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 ;-------------------------------------------------------------------------------
 %macro @XEOS.boot.stage2.print.prompt 0
     
+    pusha
     push                            si
     @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
@@ -291,6 +300,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
     @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.gt,               @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
+    popa
     
 %endmacro
 
@@ -556,9 +566,6 @@ main:
             @XEOS.boot.stage2.print.bracket.green   $XEOS.boot.stage2.msg.cpu.instructions.32
             @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
             
-            ; 32 bits kernel is going to be loaded
-            mov     si,             $XEOS.files.kernel.32
-            
             ; We won't switch to 64 bits long mode
             mov     BYTE [ $XEOS.boot.stage2.longMonde ],   0
             
@@ -575,9 +582,6 @@ main:
             @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.cpu.instructions
             @XEOS.boot.stage2.print.bracket.green   $XEOS.boot.stage2.msg.cpu.instructions.64
             @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
-            
-            ; 64 bits kernel is going to be loaded
-            mov     si,             $XEOS.files.kernel.64
             
             ; We'll need to switch to 64 bits long mode
             mov     BYTE [ $XEOS.boot.stage2.longMonde ],   1
@@ -696,26 +700,42 @@ main:
     .load:
         
         ; Loads the XEOS kernel into memory
-        push                            si
         @XEOS.boot.stage2.print.prompt
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.kernel.load
-        pop                             si
-        @XEOS.boot.stage2.print.bracket.green   si
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
-        call                            XEOS.boot.stage2.kernel.load
         
-        cmp     ax,         1
-        je      .error.fat12.dir
-        
-        cmp     ax,         2
-        je      .error.fat12.find
-        
-        cmp     ax,         3
-        je      .error.fat12.load
-        
-        ; Checks if we must check for an ELF-64 or ELF-32 image
+        ; Checks if we must load the 32 or 64 bits kernel
         cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
-        je      .load.verify.64
+        je      .load.64
+        
+        .load.32:
+            
+            ; 32 bits kernel is going to be loaded
+            mov     si,             $XEOS.files.kernel.32
+            jmp     .load.start
+            
+        .load.64:
+            
+            ; 64 bits kernel is going to be loaded
+            mov     si,             $XEOS.files.kernel.64
+        
+        .load.start:
+            
+            @XEOS.boot.stage2.print.bracket.green   si
+            @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
+            call                                    XEOS.boot.stage2.kernel.load
+            
+            cmp     ax,         1
+            je      .error.fat12.dir
+            
+            cmp     ax,         2
+            je      .error.fat12.find
+            
+            cmp     ax,         3
+            je      .error.fat12.load
+            
+            ; Checks if we must check for an ELF-64 or ELF-32 image
+            cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+            je      .load.verify.64
         
         ;-----------------------------------------------------------------------
         ; Verifies the kernel image (32 bits ELF)
@@ -898,13 +918,14 @@ main:
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.kernel.load:
     
+    @XEOS.proc.start 0
+    
     ;---------------------------------------------------------------------------
     ; Loads the FAT-12 root directory
     ;---------------------------------------------------------------------------
     .start:
         
         ; Saves registers
-        push    di
         push    si
         
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.root
@@ -925,7 +946,8 @@ XEOS.boot.stage2.kernel.load:
         
         ; Restores registers
         pop     si
-        pop     di
+        
+        @XEOS.proc.end
         
         ret
     
@@ -958,9 +980,6 @@ XEOS.boot.stage2.kernel.load:
         ; Finds the second stage bootloader
         call    XEOS.io.fat12.findFile
         
-        ; Restores registers
-        pop    di
-        
         ; Checks for an error code
         cmp     ax,         0
         je      .loadFile
@@ -968,24 +987,25 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.boot.stage2.print.failure
         @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
         
+        @XEOS.proc.end
+        
         ; Error - Stores result code in AX
         mov     ax,         2
         
         ret
-    
+        
     ;---------------------------------------------------------------------------
     ; Loads the requested file
     ;---------------------------------------------------------------------------
     .loadFile:
         
-        @XEOS.boot.stage2.print.success
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
-        
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.fat12.load
-        
         ; Saves registers
         push    bx
         push    cx
+        
+        @XEOS.boot.stage2.print.success
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.load
         
         ; Kernel location
         mov     ax,         @XEOS.boot.stage2.kernel.segment
@@ -1013,6 +1033,8 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.boot.stage2.print.failure
         @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
         
+        @XEOS.proc.end
+        
         ; Error - Stores result code in AX
         mov     ax,         3
         
@@ -1033,6 +1055,8 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
+        
+        @XEOS.proc.end
         
         ; Success - Stores result code in AX
         xor     ax,         ax
