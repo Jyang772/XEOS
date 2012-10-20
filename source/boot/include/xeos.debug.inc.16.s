@@ -698,9 +698,10 @@ XEOS.debug.memory.dump:
 
 XEOS.debug.memory.dump._line:
     
-    @XEOS.proc.start    2
+    @XEOS.proc.start    3
     @XEOS.proc.var.set  1, si
     @XEOS.proc.var.set  2, bx
+    @XEOS.proc.var.set  3, bx
     
     @XEOS.debug.print   $XEOS.debug.pipe.start
     
@@ -730,7 +731,7 @@ XEOS.debug.memory.dump._line:
         
         ; Restores registers
         mov     si,         WORD @XEOS.proc.var.1
-        mov     bx,         WORD @XEOS.proc.var.2
+        mov     bx,         WORD @XEOS.proc.var.3
         
         ; Saves registers
         push    cx
@@ -758,7 +759,6 @@ XEOS.debug.memory.dump._line:
             pop     ds
             
             ; Prints the byte
-            
             @XEOS.string.numberToString ax, 16, 2, 0, XEOS.debug.str
             @XEOS.debug.print           $XEOS.debug.str
             @XEOS.debug.print           $XEOS.debug.space
@@ -778,6 +778,7 @@ XEOS.debug.memory.dump._line:
         pop     cx
         
         ; Prints next group of bytes
+        add     @XEOS.proc.var.3,   DWORD 4
         loop    .group
     
     ; Restores registers
