@@ -408,7 +408,7 @@ XEOS.io.fat12.loadFile:
             ; Note: this is done only for the second stage bootloader, as the
             ; first one has a 512 bytes of code limit.
             ; This shouldn't be a problem, unless the second stage bootloader
-            ; is greater than 65'535 bytes.
+            ; is greater than 65'535 bytes - the offset at which it is loaded.
             shr     bx,         8
             mov     cx,         es
             add     cx,         bx
