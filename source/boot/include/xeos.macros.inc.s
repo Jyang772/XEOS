@@ -68,6 +68,87 @@
 %ifndef __XEOS_MACROS_INC_ASM__
 %define __XEOS_MACROS_INC_ASM__
 
+;-------------------------------------------------------------------------------
+; Start of a standard procedure
+; 
+; Parameters:
+; 
+;       1:          The number of stack (local) variables 
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.proc.start 1
+    
+    ; Saves registers and flags
+    pushf
+    pusha
+    
+    ; Creates the stack frame
+    push    ebp
+    mov     ebp,        esp
+    
+    ; Space for local variables
+    sub     esp,        %1 * 4
+    
+    ; Aligns the stack on a 16 byte boundary
+    and     esp,        0xFFFFFFF0
+    
+%endmacro
 
+;-------------------------------------------------------------------------------
+; End of a standard procedure
+; 
+; Parameters:
+; 
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.proc.end 0
+    
+    ; Resets the previous stack frame
+    mov     esp,        ebp
+    pop     ebp
+    
+    ; Restores registers and flags
+    popa
+    popf
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
+; Sets a stack (local) variable
+; 
+; Parameters:
+; 
+;       1:          The index of the stack (local) variables
+;       2:          The value to set
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.proc.var.set 2
+    
+    mov @XEOS.proc.var.%1,  DWORD 0
+    mov @XEOS.proc.var.%1, %2
+    
+%endmacro
+
+; Shortcuts for stack (local) variables
+%define @XEOS.proc.var.1    [ ebp -  4 ]
+%define @XEOS.proc.var.2    [ ebp -  8 ]
+%define @XEOS.proc.var.3    [ ebp - 12 ]
+%define @XEOS.proc.var.4    [ ebp - 16 ]
+%define @XEOS.proc.var.5    [ ebp - 20 ]
+%define @XEOS.proc.var.6    [ ebp - 24 ]
+%define @XEOS.proc.var.7    [ ebp - 28 ]
+%define @XEOS.proc.var.8    [ ebp - 32 ]
+%define @XEOS.proc.var.9    [ ebp - 36 ]
+%define @XEOS.proc.var.10   [ ebp - 40 ]
 
 %endif
