@@ -71,6 +71,21 @@
 ;-------------------------------------------------------------------------------
 ; Start of a standard procedure
 ; 
+; Note that the following registers are automatically saved on the stack, and
+; restored in @XEOS.proc.end:
+;       
+;       - EAX
+;       - EBX
+;       - ECX
+;       - EDX
+;       - ESI
+;       - EDI
+;       - EFLAGS
+;       - DS
+;       - ES
+;       - FS
+;       - GS
+; 
 ; Parameters:
 ; 
 ;       1:          The number of stack (local) variables 
@@ -82,8 +97,12 @@
 %macro @XEOS.proc.start 1
     
     ; Saves registers and flags
-    pushf
-    pusha
+    pushfd
+    pushad
+    push    ds
+    push    es
+    push    fs
+    push    gs
     
     ; Creates the stack frame
     push    ebp
@@ -115,8 +134,12 @@
     pop     ebp
     
     ; Restores registers and flags
-    popa
-    popf
+    pop     gs
+    pop     fs
+    pop     es
+    pop     ds
+    popad
+    popfd
     
 %endmacro
 
