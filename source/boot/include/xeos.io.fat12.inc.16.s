@@ -400,6 +400,23 @@ XEOS.io.fat12.loadFile:
         ; Read sectors
         call    XEOS.io.fat12.readSectors
         
+        ; Checks if we are inside the first stage bootloader or not
+        %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+            
+            ; Adjusts ES, as the buffer location is limited to 65'535 bytes,
+            ; including the original offset, as it uses a 16 bits register.
+            ; Note: this is done only for the second stage bootloader, as the
+            ; first one has a 512 bytes of code limit.
+            ; This shouldn't be a problem, unless the second stage bootloader
+            ; is greater than 65'535 bytes.
+            shr     bx,         8
+            mov     cx,         es
+            add     cx,         bx
+            mov     es,         cx
+            xor     bx,         bx
+        
+        %endif
+        
         ; Checks for an error code
         cmp     ax,         0
         je      .success
@@ -414,8 +431,8 @@ XEOS.io.fat12.loadFile:
         ; Restores registers
         pop     cx
         
-        ; Increments CX (sector count)
-        inc     cx
+        ; Number of sectors read
+        add     cx,         @XEOS.fat12.mbr.sectorsPerCluster
         
         ; Restores registers
         push    cx
@@ -587,7 +604,7 @@ XEOS.io.fat12.readSectors:
         
         ; Restores registers
         popa
-    
+        
         ; Memory area in which the next sector will be read
         add     bx,         @XEOS.fat12.mbr.bytesPerSector
         
