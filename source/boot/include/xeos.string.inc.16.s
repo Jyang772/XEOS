@@ -142,19 +142,7 @@ XEOS.string.isPrintable:
     
     ; Non-ASCII
     cmp     dx,     0x7F
-    jg      .notPrintable
-    
-    ;---------------------------------------------------------------------------
-    ; Character is printable
-    ;---------------------------------------------------------------------------
-    .printable:
-        
-        @XEOS.proc.end
-        
-        ; Printable - Stores result code in AX
-        mov     ax,         0x01
-        
-        ret
+    jb      .printable
     
     ;---------------------------------------------------------------------------
     ; Character is not printable
@@ -165,6 +153,18 @@ XEOS.string.isPrintable:
         
         ; Not printable - Stores result code in AX
         xor     ax,         ax
+        
+        ret
+    
+    ;---------------------------------------------------------------------------
+    ; Character is printable
+    ;---------------------------------------------------------------------------
+    .printable:
+        
+        @XEOS.proc.end
+        
+        ; Printable - Stores result code in AX
+        mov     ax,         0x01
         
         ret
     
