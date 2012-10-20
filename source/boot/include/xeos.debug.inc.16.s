@@ -840,8 +840,8 @@ XEOS.debug.memory.dump._line:
                 pop     dx
                 pop     ax
                 
-                ; Prints a dot
-                mov                     BYTE [ $XEOS.debug.char ],  0x2E
+                ; Prints a gray pattern
+                mov                     BYTE [ $XEOS.debug.char ],  0xB1
                 @XEOS.debug.print.color $XEOS.debug.char, @BIOS.video.color.gray.light, @BIOS.video.color.black
                 
             .nextChar:
