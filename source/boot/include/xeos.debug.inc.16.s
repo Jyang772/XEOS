@@ -483,32 +483,32 @@ XEOS.debug.registers.dump:
     mov     DWORD [ $XEOS.debug.register.eflags ],  eax
     
     @XEOS.debug.print       $XEOS.debug.hr.registers.top
-    @BIOS.video.print       $XEOS.debug.nl
+    @XEOS.debug.print       $XEOS.debug.nl
     @XEOS.debug.print       $XEOS.debug.pipe.start
     @XEOS.debug.print       $XEOS.debug.str.registers.dump.header.left
     @XEOS.debug.print.color $XEOS.debug.str.registers.dump.header,  @BIOS.video.color.brown.light, @BIOS.video.color.black
     @XEOS.debug.print       $XEOS.debug.str.registers.dump.header.right
     @XEOS.debug.print       $XEOS.debug.pipe
-    @BIOS.video.print       $XEOS.debug.nl
+    @XEOS.debug.print       $XEOS.debug.nl
     @XEOS.debug.print       $XEOS.debug.hr.registers.middle.top
-    @BIOS.video.print       $XEOS.debug.nl
+    @XEOS.debug.print       $XEOS.debug.nl
     
     @XEOS.debug.print.register.gp8      a
     @XEOS.debug.print.register.segment  c
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp8      b
     @XEOS.debug.print.register.segment  d
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp8      c
     @XEOS.debug.print.register.segment  e
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp8      d
     @XEOS.debug.print.register.segment  f
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     
     @XEOS.debug.print                   $XEOS.debug.hr.registers.middle.short
     @XEOS.debug.print.register.segment  g
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     
     @XEOS.debug.print.register.gp16     si
     @XEOS.debug.print                   $XEOS.debug.pipe
@@ -517,7 +517,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.register.segment  s
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     
     @XEOS.debug.print.register.gp16     di
     @XEOS.debug.print                   $XEOS.debug.pipe
@@ -525,7 +525,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.hr.registers.segment
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp16     sp
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
@@ -534,7 +534,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp16     bp
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
@@ -543,10 +543,10 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     
     @XEOS.debug.print                   $XEOS.debug.hr.registers.flags.top
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     
     @XEOS.debug.print                   $XEOS.debug.pipe.start
     @XEOS.debug.print.register.flag     cf, 0
@@ -558,7 +558,7 @@ XEOS.debug.registers.dump:
     
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     
     @XEOS.debug.print                   $XEOS.debug.pipe.start
     @XEOS.debug.print.register.flag     if, 9
@@ -570,7 +570,7 @@ XEOS.debug.registers.dump:
     
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     
     @XEOS.debug.print                   $XEOS.debug.pipe.start
     @XEOS.debug.print.register.flag     rf,  16
@@ -582,7 +582,7 @@ XEOS.debug.registers.dump:
     
     @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @BIOS.video.print                   $XEOS.debug.nl
+    @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print                   $XEOS.debug.hr.registers.flags.bottom
     @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print                   $XEOS.debug.pipe.start
@@ -638,13 +638,13 @@ XEOS.debug.memory.dump:
         loop    .line
         
         @XEOS.debug.print       $XEOS.debug.hr.memory.middle.bottom
-        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.nl
         @XEOS.debug.print       $XEOS.debug.pipe.start
         @XEOS.debug.print       $XEOS.debug.str.memory.dump.footer
         @XEOS.debug.print       $XEOS.debug.pipe
-        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.nl
         @XEOS.debug.print       $XEOS.debug.hr.memory.bottom
-        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.nl
         
     ; Waits for a key press
     xor     ax,         ax
@@ -657,15 +657,15 @@ XEOS.debug.memory.dump:
     .continue:
         
         @XEOS.debug.print       $XEOS.debug.hr.memory.top
-        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.nl
         @XEOS.debug.print       $XEOS.debug.pipe.start
         @XEOS.debug.print       $XEOS.debug.str.memory.dump.header.left
         @XEOS.debug.print.color $XEOS.debug.str.memory.dump.header,  @BIOS.video.color.brown.light, @BIOS.video.color.black
         @XEOS.debug.print       $XEOS.debug.str.memory.dump.header.right
         @XEOS.debug.print       $XEOS.debug.pipe
-        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.nl
         @XEOS.debug.print       $XEOS.debug.hr.memory.middle.top
-        @BIOS.video.print       $XEOS.debug.nl
+        @XEOS.debug.print       $XEOS.debug.nl
         
         ; Prints 15 next lines
         mov     cx,         15
