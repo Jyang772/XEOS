@@ -150,5 +150,14 @@
 %define @XEOS.proc.var.8    [ ebp - 32 ]
 %define @XEOS.proc.var.9    [ ebp - 36 ]
 %define @XEOS.proc.var.10   [ ebp - 40 ]
+%define @XEOS.proc.var.11   [ ebp - 44 ]
+%define @XEOS.proc.var.12   [ ebp - 48 ]
+%define @XEOS.proc.var.13   [ ebp - 52 ]
+%define @XEOS.proc.var.14   [ ebp - 56 ]
+%define @XEOS.proc.var.15   [ ebp - 60 ]
+%define @XEOS.proc.var.16   [ ebp - 64 ]
+%define @XEOS.proc.var.18   [ ebp - 68 ]
+%define @XEOS.proc.var.19   [ ebp - 72 ]
+%define @XEOS.proc.var.20   [ ebp - 76 ]
 
 %endif

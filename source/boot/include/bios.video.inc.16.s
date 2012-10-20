@@ -221,9 +221,14 @@ BITS    16
 ;-------------------------------------------------------------------------------
 %macro @BIOS.video.print  1
     
+    ; Saves registers
     pusha
+    
+    ; Prints the string
     mov     si,     %1
     call    BIOS.video.print
+    
+    ; Restores registers
     popa
     
 %endmacro

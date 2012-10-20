@@ -85,6 +85,8 @@
 ;-------------------------------------------------------------------------------
 XEOS.gdt.install:
     
+    @XEOS.proc.start 0
+    
     ; Clears the interrupts
     cli
     
@@ -92,6 +94,8 @@ XEOS.gdt.install:
     
     ; Restores the interrupts
     sti
+    
+    @XEOS.proc.end
     
     ret
 

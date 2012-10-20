@@ -144,13 +144,11 @@ endstruc
 ;-------------------------------------------------------------------------------
 XEOS.elf.32.checkHeader:
     
-    ; Saves register
-    pusha
+    @XEOS.proc.start 0
     
     .success
         
-        ; Restores registers
-        popa
+        @XEOS.proc.end
         
         ; Success - Stores result code in AX
         xor     ax,         ax
@@ -175,13 +173,11 @@ XEOS.elf.32.checkHeader:
 ;-------------------------------------------------------------------------------
 XEOS.elf.64.checkHeader:
     
-    ; Saves register
-    pusha
+    @XEOS.proc.start 0
     
     .success
         
-        ; Restores registers
-        popa
+        @XEOS.proc.end
         
         ; Success - Stores result code in AX
         xor     ax,         ax

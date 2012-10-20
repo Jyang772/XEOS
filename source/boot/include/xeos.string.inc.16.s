@@ -134,8 +134,7 @@ BITS    16
 ;-------------------------------------------------------------------------------
 XEOS.string.isPrintable:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     ; ASCII control characters
     cmp     dx,     0x20
@@ -150,8 +149,7 @@ XEOS.string.isPrintable:
     ;---------------------------------------------------------------------------
     .printable:
         
-        ; Restores registers
-        popa
+        @XEOS.proc.end
         
         ; Printable - Stores result code in AX
         mov     ax,         0x01
@@ -163,8 +161,7 @@ XEOS.string.isPrintable:
     ;---------------------------------------------------------------------------
     .notPrintable:
         
-        ; Restores registers
-        popa
+        @XEOS.proc.end
         
         ; Not printable - Stores result code in AX
         xor     ax,         ax
@@ -191,9 +188,8 @@ XEOS.string.isPrintable:
 ;       None
 ;-------------------------------------------------------------------------------
 XEOS.string.numberToString:
-
-    ; Saves registers
-    pusha
+    
+    @XEOS.proc.start 0
     
     ; Checks if we are going to print in hexadecimal
     cmp     ebx,        0x10
@@ -211,8 +207,7 @@ XEOS.string.numberToString:
     cmp     ebx,        0x02
     je      .start
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
     
@@ -248,13 +243,16 @@ XEOS.string.numberToString:
         inc     ecx
         
         ; Continues dividing till we reach 0
-        cmp     eax,         0
+        cmp     eax,         0x00
         jg      .divide
         
         ; Checks if we are going to print in hexadecimal
-        cmp     ebx,        16
+        cmp     ebx,        0x10
         jne     .dec
     
+    ;---------------------------------------------------------------------------
+    ; Hexadecimal
+    ;---------------------------------------------------------------------------
     .hex:
         
         ; Pushes the counter
@@ -288,7 +286,7 @@ XEOS.string.numberToString:
             pop     eax
             
             ; Checks if we must print a digit or a letter
-            cmp    eax,         0x09
+            cmp     eax,        0x09
             jg      .hex.letter
             
             .hex.number:
@@ -312,7 +310,10 @@ XEOS.string.numberToString:
             ; Continue till we have digits to print
             loop    .hex.char
             jmp     .end
-            
+        
+    ;---------------------------------------------------------------------------
+    ; Decimal
+    ;---------------------------------------------------------------------------    
     .dec:
         
         ; Restores the reminder
@@ -327,14 +328,16 @@ XEOS.string.numberToString:
         
         ; Continue till we have digits to print
         loop    .dec
-        
+    
+    ;---------------------------------------------------------------------------
+    ; End
+    ;---------------------------------------------------------------------------
     .end:
         
         ; Adds the terminating character (ASCII 0)
         mov     [ di ],     BYTE 0x00
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
     

@@ -94,8 +94,7 @@ BITS    16
 ;-------------------------------------------------------------------------------
 XEOS.cpu.hasCPUID:
     
-    ; Saves registers
-    push    ecx
+    @XEOS.proc.start 1
     
     ; Gets EFLAGS into EAX
     pushfd
@@ -120,14 +119,34 @@ XEOS.cpu.hasCPUID:
     shr     eax,        0x15
     and     eax,        0x0000000000000001
     
-    ; Restore flags
-    push    ecx
-    popfd
+    cmp     eax,        0x01
+    jmp     .cpuid.available
     
-    ; Restores registers
-    pop ecx
-    
-    ret
+    .cpuid.unavailable:
+        
+        ; Restore flags
+        push    ecx
+        popfd
+        
+        @XEOS.proc.end
+        
+        ; Error - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
+        
+    .cpuid.available:
+        
+        ; Restore flags
+        push    ecx
+        popfd
+        
+        @XEOS.proc.end
+        
+        ; Success - Stores result code in AX
+        mov     ax,         0x01
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; Gets the CPU vendor
@@ -147,8 +166,7 @@ XEOS.cpu.hasCPUID:
 ;-------------------------------------------------------------------------------
 XEOS.cpu.vendor:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     ; Get CPU vendor strings (EBX, EDX, ECX - 4 chars each)
     mov     eax,        0x00
@@ -159,8 +177,7 @@ XEOS.cpu.vendor:
     mov     [ di + 4 ], edx
     mov     [ di + 8 ], ecx
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
 
@@ -181,8 +198,7 @@ XEOS.cpu.vendor:
 ;-------------------------------------------------------------------------------
 XEOS.cpu.64:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     ; Indentifies CPU
     mov     eax,        0x80000000
@@ -194,8 +210,7 @@ XEOS.cpu.64:
         
     .success
         
-        ; Restores registers
-        popa
+        @XEOS.proc.end
         
         ; Success - Stores result code in AX
         mov     ax,         0x01
@@ -204,8 +219,7 @@ XEOS.cpu.64:
         
     .error:
         
-        ; Restores registers
-        popa
+        @XEOS.proc.end
         
         ; Error - Stores result code in AX
         xor     ax,         ax

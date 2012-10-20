@@ -111,6 +111,8 @@ BITS    16
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.bios:
     
+    @XEOS.proc.start 0
+    
     ; A20 enabling function (BIOS miscellaneous services function)
     mov     ax,         0x2401
     
@@ -119,6 +121,8 @@ XEOS.a20.enable.bios:
     
     ; Checks for an error
     jnc     .success
+    
+    @XEOS.proc.end
      
     ; Error - Stores result code in AX
     mov     ax,         0x01
@@ -126,6 +130,8 @@ XEOS.a20.enable.bios:
     ret
     
     .success:
+        
+        @XEOS.proc.end
         
         ; Success - Stores result code in AX
         xor     ax,         ax
@@ -149,8 +155,7 @@ XEOS.a20.enable.bios:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.systemControl:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     ; Bits 2 enables A20
     mov     al,         0x02
@@ -158,8 +163,7 @@ XEOS.a20.enable.systemControl:
     ; Writes to the system control port
     out     0x92,       al
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
 
@@ -180,8 +184,7 @@ XEOS.a20.enable.systemControl:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.control:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     ; A20 enabling command
     mov	    al,         0xDD
@@ -189,8 +192,7 @@ XEOS.a20.enable.keyboard.control:
     ; Sends the command to the keyboard control port
     out     0x64,       al
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
 
@@ -211,15 +213,13 @@ XEOS.a20.enable.keyboard.control:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.out.wait.in:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     in      al,         0x64
     test    al,         0x02
     jnz     XEOS.a20.enable.keyboard.out.wait.in
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
 
@@ -240,15 +240,13 @@ XEOS.a20.enable.keyboard.out.wait.in:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.out.wait.out:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     in      al,         0x64
     test    al,         0x01
     jz      XEOS.a20.enable.keyboard.out.wait.out
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
 
@@ -269,8 +267,7 @@ XEOS.a20.enable.keyboard.out.wait.out:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enable.keyboard.out:
     
-    ; Saves registers
-    pusha
+    @XEOS.proc.start 0
     
     ; Clears the interrupts
     cli
@@ -328,8 +325,7 @@ XEOS.a20.enable.keyboard.out:
     ; Restores the interrupts
     sti
     
-    ; Restores registers
-    popa
+    @XEOS.proc.end
     
     ret
     
@@ -349,6 +345,8 @@ XEOS.a20.enable.keyboard.out:
 ;       None
 ;-------------------------------------------------------------------------------
 XEOS.a20.enabled:
+    
+    @XEOS.proc.start 0
     
     .start:
         
@@ -413,6 +411,8 @@ XEOS.a20.enabled:
         pop     dx
         pop     cx
         pop     bx
+        
+        @XEOS.proc.end
         
         ret
 
