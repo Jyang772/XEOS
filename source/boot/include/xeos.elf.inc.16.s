@@ -84,8 +84,9 @@ BITS    16
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-; ELF-32 file signature
+; ELF file signatures
 $XEOS.elf.32.signature      db  0x7F, 0x45, 0x4C, 0x46
+$XEOS.elf.64.signature      db  0x7F, 0x45, 0x4C, 0x46
 
 ;-------------------------------------------------------------------------------
 ; The ELF-32 header has the following structure:
@@ -127,6 +128,45 @@ struc XEOS.elf.32.header_t
 endstruc
 
 ;-------------------------------------------------------------------------------
+; The ELF-64 header has the following structure:
+;       
+;       - BYTE  e_ident[ 16 ]   File identification
+;       - WORD  e_type          Object file type
+;       - WORD  e_machine       Required architecture
+;       - DWORD e_version       Object file version
+;       - DWORD e_entry         Entry point address
+;       - DWORD e_phoff         Program header table's file offset
+;       - DWORD e_shoff         Section header table's file offset
+;       - DWORD e_flags         Processor-specific flags
+;       - WORD  e_ehsize        ELF header's size
+;       - WORD  e_phentsize     Size of an entry in the program header table
+;                               (all entries are the same size)
+;       - WORD  e_phnum         Number of entries in the program header table
+;       - WORD  e_shentsize     Section header's size
+;       - WORD  e_shnum         Number of entries in the section header table
+;       - WORD  e_shstrndx      Section header table index of the entry
+;                               associated with the section name string table
+;-------------------------------------------------------------------------------
+struc XEOS.elf.64.header_t
+
+    .e_ident:       resb    16
+    .e_type:        resw    1
+    .e_machine:     resw    1
+    .e_version:     resd    1
+    .e_entry:       resd    1
+    .e_phoff:       resd    1
+    .e_shoff:       resd    1
+    .e_flags:       resd    1
+    .e_ehsize:      resw    1
+    .e_phentsize:   resw    1
+    .e_phnum:       resw    1
+    .e_shentsize:   resw    1
+    .e_shnum:       resw    1
+    .e_shstrndx:    resw    1
+
+endstruc
+
+;-------------------------------------------------------------------------------
 ; Checks the ELF-32 header to ensure it's a valid ELF-32 binary file
 ; 
 ; Input registers:
@@ -136,7 +176,7 @@ endstruc
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
-;       - DI:       The entry point address
+;       - EDI:      The entry point address
 ; 
 ; Killed registers:
 ;       
@@ -146,9 +186,143 @@ XEOS.elf.32.checkHeader:
     
     @XEOS.proc.start 0
     
-    .success
+    ; Sets DS:SI to the ELF file location
+    mov     ax,         si
+    mov     ds,         si
+    xor     ax,         ax
+    mov     si,         ax
+    
+    ;---------------------------------------------------------------------------
+    ; Checks e_ident
+    ;---------------------------------------------------------------------------
+    .e_ident:
+        
+        .e_ident.magic:
+            
+            ; Compares with the ELF-32 signature
+            mov     di,         $XEOS.elf.32.signature
+            mov     cx,         0x04
+            rep     cmpsb
+            je      .e_ident.class
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x01
+            
+            ret
+            
+        .e_ident.class:
+            
+            ; Resets SI
+            xor     si,         si
+            
+            ; Checks the ELF class (0x01 for 32 bits)
+            xor     eax,        eax
+            mov     al,         BYTE [ si + 4 ]
+            cmp     al,         0x01
+            je      .e_ident.encoding
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x02
+            
+            ret
+            
+        .e_ident.encoding:
+            
+            ; Checks the ELF encoding (0x01 for LSB)
+            xor     eax,        eax
+            mov     al,         BYTE [ si + 5 ]
+            cmp     al,         0x01
+            je      .e_ident.version
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x03
+            
+            ret
+            
+        .e_ident.version:
+            
+            ; Checks the ELF version (0x01)
+            xor     eax,        eax
+            mov     al,         BYTE [ si + 5 ]
+            cmp     al,         0x01
+            je      .e_type
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x04
+            
+            ret
+            
+    ;---------------------------------------------------------------------------
+    ; Checks e_type
+    ;---------------------------------------------------------------------------
+    .e_type:
+        
+        ; Checks the ELF version (0x02 for executables)
+        xor     eax,        eax
+        mov     ax,         WORD [ si + XEOS.elf.32.header_t.e_type ]
+        cmp     ax,         0x02
+        je      .e_machine
         
         @XEOS.proc.end
+        
+        ; Error - Stores result code in AX
+        mov     ax,         0x05
+        
+        ret
+        
+    ;---------------------------------------------------------------------------
+    ; Checks e_machine
+    ;---------------------------------------------------------------------------
+    .e_machine:
+        
+        ; Checks the ELF version (0x03 for Intel 80386)
+        xor     eax,        eax
+        mov     ax,         WORD [ si + XEOS.elf.32.header_t.e_machine ]
+        cmp     ax,         0x03
+        je      .e_version
+        
+        @XEOS.proc.end
+        
+        ; Error - Stores result code in AX
+        mov     ax,         0x06
+        
+        ret
+        
+    ;---------------------------------------------------------------------------
+    ; Checks e_machine
+    ;---------------------------------------------------------------------------
+    .e_version:
+        
+        ; Checks the ELF version (0x01)
+        xor     eax,        eax
+        mov     ax,         WORD [ si + XEOS.elf.32.header_t.e_version ]
+        cmp     ax,         0x01
+        je      .success
+        
+        @XEOS.proc.end
+        
+        ; Error - Stores result code in AX
+        mov     ax,         0x07
+        
+        ret
+        
+    ;---------------------------------------------------------------------------
+    ; Valid ELF file
+    ;---------------------------------------------------------------------------
+    .success:
+        
+        @XEOS.proc.end
+        
+        ; Stores the entry point address in EDI
+        mov     edi,        DWORD [ si + XEOS.elf.32.header_t.e_entry ]
         
         ; Success - Stores result code in AX
         xor     ax,         ax
@@ -165,7 +339,7 @@ XEOS.elf.32.checkHeader:
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
-;       - DI:       The entry point address
+;       - EDI:      The entry point address
 ; 
 ; Killed registers:
 ;       
@@ -175,9 +349,143 @@ XEOS.elf.64.checkHeader:
     
     @XEOS.proc.start 0
     
-    .success
+    ; Sets DS:SI to the ELF file location
+    mov     ax,         si
+    mov     ds,         si
+    xor     ax,         ax
+    mov     si,         ax
+    
+    ;---------------------------------------------------------------------------
+    ; Checks e_ident
+    ;---------------------------------------------------------------------------
+    .e_ident:
+        
+        .e_ident.magic:
+            
+            ; Compares with the ELF-64 signature
+            mov     di,         $XEOS.elf.64.signature
+            mov     cx,         0x04
+            rep     cmpsb
+            je      .e_ident.class
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x01
+            
+            ret
+            
+        .e_ident.class:
+            
+            ; Resets SI
+            xor     si,         si
+            
+            ; Checks the ELF class (0x02 for 64 bits)
+            xor     eax,        eax
+            mov     al,         BYTE [ si + 4 ]
+            cmp     al,         0x02
+            je      .e_ident.encoding
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x02
+            
+            ret
+            
+        .e_ident.encoding:
+            
+            ; Checks the ELF encoding (0x01 for LSB)
+            xor     eax,        eax
+            mov     al,         BYTE [ si + 5 ]
+            cmp     al,         0x01
+            je      .e_ident.version
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x03
+            
+            ret
+            
+        .e_ident.version:
+            
+            ; Checks the ELF version (0x01)
+            xor     eax,        eax
+            mov     al,         BYTE [ si + 5 ]
+            cmp     al,         0x01
+            je      .e_type
+            
+            @XEOS.proc.end
+            
+            ; Error - Stores result code in AX
+            mov     ax,         0x04
+            
+            ret
+            
+    ;---------------------------------------------------------------------------
+    ; Checks e_type
+    ;---------------------------------------------------------------------------
+    .e_type:
+        
+        ; Checks the ELF version (0x02 for executables)
+        xor     eax,        eax
+        mov     ax,         WORD [ si + XEOS.elf.64.header_t.e_type ]
+        cmp     ax,         0x02
+        je      .e_machine
         
         @XEOS.proc.end
+        
+        ; Error - Stores result code in AX
+        mov     ax,         0x05
+        
+        ret
+        
+    ;---------------------------------------------------------------------------
+    ; Checks e_machine
+    ;---------------------------------------------------------------------------
+    .e_machine:
+        
+        ; Checks the ELF version (0x03 for Intel 80386)
+        xor     eax,        eax
+        mov     ax,         WORD [ si + XEOS.elf.64.header_t.e_machine ]
+        cmp     ax,         0x03
+        je      .e_version
+        
+        @XEOS.proc.end
+        
+        ; Error - Stores result code in AX
+        mov     ax,         0x06
+        
+        ret
+        
+    ;---------------------------------------------------------------------------
+    ; Checks e_machine
+    ;---------------------------------------------------------------------------
+    .e_version:
+        
+        ; Checks the ELF version (0x01)
+        xor     eax,        eax
+        mov     ax,         WORD [ si + XEOS.elf.64.header_t.e_version ]
+        cmp     ax,         0x01
+        je      .success
+        
+        @XEOS.proc.end
+        
+        ; Error - Stores result code in AX
+        mov     ax,         0x07
+        
+        ret
+        
+    ;---------------------------------------------------------------------------
+    ; Valid ELF file
+    ;---------------------------------------------------------------------------
+    .success:
+        
+        @XEOS.proc.end
+        
+        ; Stores the entry point address in EDI
+        mov     edi,        DWORD [ si + XEOS.elf.64.header_t.e_entry ]
         
         ; Success - Stores result code in AX
         xor     ax,         ax

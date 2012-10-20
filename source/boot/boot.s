@@ -116,6 +116,7 @@ start: jmp main
 
 $XEOS.boot.stage2.dataSector                    dw  0
 $XEOS.boot.stage2.kernelSectors                 dw  0
+$XEOS.boot.stage2.entryPoint                    dd  0
 $XEOS.boot.stage2.nl                            db  @ASCII.NL,  @ASCII.NUL
 $XEOS.files.kernel.32                           db  "XEOS32  ELF", @ASCII.NUL
 $XEOS.files.kernel.64                           db  "XEOS64  ELF", @ASCII.NUL
@@ -127,67 +128,81 @@ $XEOS.boot.stage2.longMonde                     db  0
 ; Strings
 ;-------------------------------------------------------------------------------
 
-$XEOS.boot.stage2.msg.prompt                    db  "XEOS", @ASCII.NUL
-$XEOS.boot.stage2.msg.pipe                      db  186, @ASCII.NUL
-$XEOS.boot.stage2.msg.gt                        db  ">", @ASCII.NUL
-$XEOS.boot.stage2.msg.lt                        db  "<", @ASCII.NUL
-$XEOS.boot.stage2.msg.space                     db  " ", @ASCII.NUL
-$XEOS.boot.stage2.msg.bracket.left              db  "[", @ASCII.NUL
-$XEOS.boot.stage2.msg.bracket.right             db  "]", @ASCII.NUL
-$XEOS.boot.stage2.msg.separator                 db  ":", @ASCII.NUL
-$XEOS.boot.stage2.msg.yes                       db  "YES", @ASCII.NUL
-$XEOS.boot.stage2.msg.no                        db  "NO", @ASCII.NUL
-$XEOS.boot.stage2.msg.success                   db  "OK", @ASCII.NUL
-$XEOS.boot.stage2.msg.failure                   db  "FAIL", @ASCII.NUL
-$XEOS.boot.stage2.msg.greet                     db  "Entering the second stage bootloader:            ", @ASCII.NUL
-$XEOS.boot.stage2.msg.version                   db  "XSBoot-x86/0.2.0", @ASCII.NUL
-$XEOS.boot.stage2.msg.hr.top                    db  201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, @ASCII.NUL
-$XEOS.boot.stage2.msg.hr.bottom                 db  200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
-                                                    205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.1.left          db  "                ", 4, @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.1               db  " XEOS - x86 Experimental Operating System ", @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.1.right         db  4 ,"                 ", @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.2               db  "                                                                             ", @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.3               db  "      Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>      ", @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.4               db  "                             All Rights Reserved                             ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu                       db  "Getting CPU informations:                        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.vendor                db  "            ", 26, " CPU vendor:                                  ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.type                  db  "            ", 26, " CPU type:                                    ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.instructions          db  "            ", 26, " CPU ISA:                                     ", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.type.32               db  "i386", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.type.64               db  "x86_64", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.instructions.32       db  "32-bits", @ASCII.NUL
-$XEOS.boot.stage2.msg.cpu.instructions.64       db  "64-bits", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.load               db  "Loading the kernel image:                        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.root                db  "            ", 26, " Loading the FAT-12 directory into memory:    ", @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.find                db  "            ", 26, " Locating the kernel image:                   ", @ASCII.NUL
-$XEOS.boot.stage2.msg.fat12.load                db  "            ", 26, " Loading the kernel image into memory:        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.verify.32          db  "Verifiying the kernel image (ELF-32):            ", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.verify.64          db  "Verifiying the kernel image (ELF-64):            ", @ASCII.NUL
-$XEOS.boot.stage2.msg.gdt                       db  "Installing the GDT:                              ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.check                 db  "Checking if the A-20 address line is enabled:    ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.bios                  db  "Enabling the A-20 address line (BIOS):           ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.keyboardControl       db  "Enabling the A-20 address line (KBDCTRL):        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.keyboardOut           db  "Enabling the A-20 address line (KBDOUT):         ", @ASCII.NUL
-$XEOS.boot.stage2.msg.a20.systemControl         db  "Enabling the A-20 address line (SYSCTRL):        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.switch32                  db  "Switching the CPU to 32 bits mode", @ASCII.NUL
-$XEOS.boot.stage2.msg.switch64                  db  "Switching the CPU to 64 bits mode", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.run                db  "Moving and executing the kernel", @ASCII.NUL
-$XEOS.boot.stage2.msg.error                     db  "Press any key to reboot: ", @ASCII.NUL
-$XEOS.boot.stage2.msg.error.fat12.dir           db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
-$XEOS.boot.stage2.msg.error.fat12.find          db  "Error: file not found", @ASCII.NUL
-$XEOS.boot.stage2.msg.error.fat12.load          db  "Error: cannot load the requested file", @ASCII.NUL
-$XEOS.boot.stage2.msg.error.a20                 db  "Error: cannot enable the A-20 address line", @ASCII.NUL
-$XEOS.boot.stage2.msg.error.cpuid               db  "Error: processor does not support CPUID", @ASCII.NUL
-$XEOS.boot.stage2.msg.error.verify32            db  "Error: invalid kernel ELF-32 image", @ASCII.NUL
-$XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-64 image", @ASCII.NUL
+$XEOS.boot.stage2.msg.prompt                            db  "XEOS", @ASCII.NUL
+$XEOS.boot.stage2.msg.pipe                              db  186, @ASCII.NUL
+$XEOS.boot.stage2.msg.gt                                db  ">", @ASCII.NUL
+$XEOS.boot.stage2.msg.lt                                db  "<", @ASCII.NUL
+$XEOS.boot.stage2.msg.space                             db  " ", @ASCII.NUL
+$XEOS.boot.stage2.msg.bracket.left                      db  "[", @ASCII.NUL
+$XEOS.boot.stage2.msg.bracket.right                     db  "]", @ASCII.NUL
+$XEOS.boot.stage2.msg.separator                         db  ":", @ASCII.NUL
+$XEOS.boot.stage2.msg.yes                               db  "YES", @ASCII.NUL
+$XEOS.boot.stage2.msg.no                                db  "NO", @ASCII.NUL
+$XEOS.boot.stage2.msg.success                           db  "OK", @ASCII.NUL
+$XEOS.boot.stage2.msg.failure                           db  "FAIL", @ASCII.NUL
+$XEOS.boot.stage2.msg.greet                             db  "Entering the second stage bootloader:            ", @ASCII.NUL
+$XEOS.boot.stage2.msg.version                           db  "XSBoot-x86/0.2.0", @ASCII.NUL
+$XEOS.boot.stage2.msg.hr.top                            db  201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, @ASCII.NUL
+$XEOS.boot.stage2.msg.hr.bottom                         db  200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
+                                                            205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.1.left                  db  "                ", 4, @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.1                       db  " XEOS - x86 Experimental Operating System ", @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.1.right                 db  4 ,"                 ", @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.2                       db  "                                                                             ", @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.3                       db  "      Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>      ", @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.4                       db  "                             All Rights Reserved                             ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu                               db  "Getting CPU informations:                        ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.vendor                        db  "            ", 26, " CPU vendor:                                  ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.type                          db  "            ", 26, " CPU type:                                    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.instructions                  db  "            ", 26, " CPU ISA:                                     ", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.type.32                       db  "i386", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.type.64                       db  "x86_64", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.instructions.32               db  "32-bits", @ASCII.NUL
+$XEOS.boot.stage2.msg.cpu.instructions.64               db  "64-bits", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.load                       db  "Loading the kernel image:                        ", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.root                        db  "            ", 26, " Loading the FAT-12 directory into memory:    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.find                        db  "            ", 26, " Locating the kernel image:                   ", @ASCII.NUL
+$XEOS.boot.stage2.msg.fat12.load                        db  "            ", 26, " Loading the kernel image into memory:        ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.verify.32                  db  "Verifiying the kernel image (ELF-32):            ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.verify.64                  db  "Verifiying the kernel image (ELF-64):            ", @ASCII.NUL
+$XEOS.boot.stage2.msg.gdt                               db  "Installing the GDT:                              ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.check                         db  "Checking if the A-20 address line is enabled:    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.bios                          db  "Enabling the A-20 address line (BIOS):           ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.keyboardControl               db  "Enabling the A-20 address line (KBDCTRL):        ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.keyboardOut                   db  "Enabling the A-20 address line (KBDOUT):         ", @ASCII.NUL
+$XEOS.boot.stage2.msg.a20.systemControl                 db  "Enabling the A-20 address line (SYSCTRL):        ", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits mode", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits mode", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.run                        db  "Moving and executing the kernel", @ASCII.NUL
+$XEOS.boot.stage2.msg.error                             db  "Press any key to reboot: ", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.fat12.dir                   db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
+$XEOS.boot.stage2.msg.error.fat12.find                  db  "Error: file not found", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.fat12.load                  db  "Error: cannot load the requested file", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.a20                         db  "Error: cannot enable the A-20 address line", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.cpuid                       db  "Error: processor does not support CPUID", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32                   db  "Error: invalid ELF-32 image", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_ident.magic     db  "Error: invalid ELF-32 signature", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_ident.class     db  "Error: invalid ELF-32 class", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_ident.encoding  db  "Error: invalid ELF-32 encoding", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_ident.version   db  "Error: invalid ELF-32 version", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_type            db  "Error: invalid ELF-32 type", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_machine         db  "Error: invalid ELF-32 machine type", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_version         db  "Error: invalid ELF-32 version", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64                   db  "Error: invalid ELF-64 image", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_ident.magic     db  "Error: invalid ELF-64 signature", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_ident.class     db  "Error: invalid ELF-64 class", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_ident.encoding  db  "Error: invalid ELF-64 encoding", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_ident.version   db  "Error: invalid ELF-64 version", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_type            db  "Error: invalid ELF-64 type", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_machine         db  "Error: invalid ELF-64 machine type", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-64 version", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -745,16 +760,33 @@ main:
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.32
             
-            ; Verifies the kernel file header
+            ; Verifies the kernel file header, and stores the entry point
+            ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
             call    XEOS.elf.32.checkHeader
+            mov     DWORD [ $XEOS.boot.stage2.entryPoint ], edi
             cmp     ax,     0
             je      .load.verified
             
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
-            jmp     .error.verify32
+            ; Checks the error code
+            cmp     ax,     0x01
+            je      .error.verify.32.e_ident.magic
+            cmp     ax,     0x02
+            je      .error.verify.32.e_ident.class
+            cmp     ax,     0x03
+            je      .error.verify.32.e_ident.encoding
+            cmp     ax,     0x04
+            je      .error.verify.32.e_ident.version
+            cmp     ax,     0x05
+            je      .error.verify.32.e_type
+            cmp     ax,     0x06
+            je      .error.verify.32.e_machine
+            cmp     ax,     0x07
+            je      .error.verify.32.e_version
+            jmp     .error.verify.32
             
         ;-----------------------------------------------------------------------
         ; Verifies the kernel image (64 bits ELF)
@@ -764,16 +796,33 @@ main:
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.kernel.verify.64
             
-            ; Verifies the kernel file header
+            ; Verifies the kernel file header, and stores the entry point
+            ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
             call    XEOS.elf.64.checkHeader
+            mov     DWORD [ $XEOS.boot.stage2.entryPoint ], edi
             cmp     ax,     0
             je      .load.verified
             
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
-            jmp     .error.verify64
+            ; Checks the error code
+            cmp     ax,     0x01
+            je      .error.verify.64.e_ident.magic
+            cmp     ax,     0x02
+            je      .error.verify.64.e_ident.class
+            cmp     ax,     0x03
+            je      .error.verify.64.e_ident.encoding
+            cmp     ax,     0x04
+            je      .error.verify.64.e_ident.version
+            cmp     ax,     0x05
+            je      .error.verify.64.e_type
+            cmp     ax,     0x06
+            je      .error.verify.64.e_machine
+            cmp     ax,     0x07
+            je      .error.verify.64.e_version
+            jmp     .error.verify.64
             
         .load.verified
             
@@ -868,14 +917,84 @@ main:
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.cpuid
         jmp                                 .error
     
-    .error.verify32:
+    .error.verify.32.e_ident.magic:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.32.e_ident.class:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.32.e_ident.encoding:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.32.e_ident.version:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.32.e_type:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.32.e_machine:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.32.e_version:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.32:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
         jmp                                 .error
     
-    .error.verify64:
+    .error.verify.64.e_ident.magic:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify64
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        jmp                                 .error
+        
+    .error.verify.64.e_ident.class:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        jmp                                 .error
+        
+    .error.verify.64.e_ident.encoding:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        jmp                                 .error
+        
+    .error.verify.64.e_ident.version:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        jmp                                 .error
+        
+    .error.verify.64.e_type:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        jmp                                 .error
+        
+    .error.verify.64.e_machine:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        jmp                                 .error
+        
+    .error.verify.64.e_version:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        jmp                                 .error
+    
+    .error.verify.64:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
         jmp                                 .error
     
     .error:
