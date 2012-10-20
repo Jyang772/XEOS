@@ -168,7 +168,9 @@ main:
     sti
     
     ; Prints the welcme message
-    @BIOS.video.print   $XEOS.boot.stage1.msg.boot
+    ; Prints the sucess message
+    mov     si,         $XEOS.boot.stage1.msg.boot
+    call    BIOS.video.print
     
     ; Loads the FAT-12 root directory at ES:0x200
     ; (0x07CE - just after this bootloader)
@@ -211,7 +213,9 @@ main:
     cmp     ax,         0
     jne     .failure
     
-    @BIOS.video.print   $XEOS.boot.stage1.msg.ok
+    ; Prints the sucess message
+    mov     si,         $XEOS.boot.stage1.msg.ok
+    call    BIOS.video.print
     
     ; Pass control to the second stage bootloader
     push    WORD 0x0050
@@ -222,7 +226,8 @@ main:
     .failure:
         
         ; Prints the error message
-        @BIOS.video.print $XEOS.boot.stage1.msg.error
+        mov     si,         $XEOS.boot.stage1.msg.error
+        call    BIOS.video.print
         
         ; Waits for a key press
         xor     ax,         ax
