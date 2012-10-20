@@ -87,6 +87,7 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
+
 %include "XEOS.macros.inc.s"          ; General macros
 %include "BIOS.int.inc.s"             ; BIOS interrupts
 
@@ -120,7 +121,7 @@ XEOS.a20.enable.bios:
     jnc     .success
      
     ; Error - Stores result code in AX
-    mov     ax,         1
+    mov     ax,         0x01
     
     ret
     
@@ -152,7 +153,7 @@ XEOS.a20.enable.systemControl:
     pusha
     
     ; Bits 2 enables A20
-    mov     al,         2
+    mov     al,         0x02
     
     ; Writes to the system control port
     out     0x92,       al
@@ -214,7 +215,7 @@ XEOS.a20.enable.keyboard.out.wait.in:
     pusha
     
     in      al,         0x64
-    test    al,         2
+    test    al,         0x02
     jnz     XEOS.a20.enable.keyboard.out.wait.in
     
     ; Restores registers
@@ -243,7 +244,7 @@ XEOS.a20.enable.keyboard.out.wait.out:
     pusha
     
     in      al,         0x64
-    test    al,         1
+    test    al,         0x01
     jz      XEOS.a20.enable.keyboard.out.wait.out
     
     ; Restores registers
@@ -309,7 +310,7 @@ XEOS.a20.enable.keyboard.out:
     pop     eax
     
     ; Bit 1 enables A20
-    or      al,         2
+    or      al,         0x02
     
     ; Writes the data to the output port
     out     0x60,       al
@@ -393,11 +394,11 @@ XEOS.a20.enabled:
         
         mov     BYTE [ es:di ], al
         
-        mov     ax,     0
+        mov     ax,     0x00
         
         je      .end
         
-        mov     ax,     1
+        mov     ax,     0x01
         
     .end:
         

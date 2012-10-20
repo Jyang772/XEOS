@@ -106,6 +106,6 @@
 %define @ASCII.SPC      0x20
 
 ; New line character (CRLF)
-%define @ASCII.NL   @ASCII.CR, @ASCII.LF
+%define @ASCII.NL       @ASCII.CR, @ASCII.LF
 
 %endif

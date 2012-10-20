@@ -62,7 +62,7 @@
 ; $Id$
 
 ;-------------------------------------------------------------------------------
-; Procedures for the GDT (Global Descriptor Table)
+; Procedures and definitions for the GDT (Global Descriptor Table)
 ;-------------------------------------------------------------------------------
 
 %ifndef __XEOS_GDT_INC_ASM__
@@ -98,22 +98,15 @@ XEOS.gdt.install:
 ;-------------------------------------------------------------------------------
 ; Addresses of the descriptors
 ;-------------------------------------------------------------------------------
+
 %define @XEOS.gdt.descriptors.null          0x00
 %define @XEOS.gdt.descriptors.code.kernel   0x08
 %define @XEOS.gdt.descriptors.data.kernel   0x10
 
 ;-------------------------------------------------------------------------------
-; GDT - Global Descriptor Table
+; GDT Descriptor
 ; 
-; Definition of the global memory map for the 32bits protected mode.
-; 
-; The GDT is composed of three descriptors:
-;       
-;       - Null descriptor - All zeros
-;       - Code descriptor - Memory area that can be executed
-;       - Data descriptor - Memory area that contains data
-; 
-; Each descriptor is 8 bytes long, and has the following structure:
+; A descriptor is 8 bytes long, and has the following structure:
 ;       
 ;       - Bits  0 - 15: Segment limit (0-15)
 ;       - Bits 16 - 31: Base address (0-15)
@@ -146,7 +139,6 @@ XEOS.gdt.install:
 ;                           1:      Limit is multiplied by 4K
 ;       - Bits 56 - 63: Base address (24-31)
 ;-------------------------------------------------------------------------------
-
 struc XEOS.gdt.descriptor_t
 
     .segment1       resw    1
@@ -158,6 +150,17 @@ struc XEOS.gdt.descriptor_t
 
 endstruc
 
+;-------------------------------------------------------------------------------
+; GDT - Global Descriptor Table
+; 
+; Definition of the global memory map for the 32bits protected mode.
+; 
+; The GDT is composed of three descriptors:
+;       
+;       - Null descriptor - All zeros
+;       - Code descriptor - Memory area that can be executed
+;       - Data descriptor - Memory area that contains data
+;-------------------------------------------------------------------------------
 struc XEOS.gdt_t
 
     .null           resb    XEOS.gdt.descriptor_t_size
@@ -166,21 +169,24 @@ struc XEOS.gdt_t
 
 endstruc
 
+;-------------------------------------------------------------------------------
+; XEOS GDT
+;-------------------------------------------------------------------------------
 $XEOS.gdt
     
     istruc XEOS.gdt_t
         
-        ;-------------------------------------------------------------------------------
+        ;-----------------------------------------------------------------------
         ; Null descriptor
-        ;-------------------------------------------------------------------------------
+        ;-----------------------------------------------------------------------
         
         ; 8 bytes of zeros
         dd  0
         dd  0
         
-        ;-------------------------------------------------------------------------------
+        ;-----------------------------------------------------------------------
         ; Kernel space code descriptor
-        ;-------------------------------------------------------------------------------
+        ;-----------------------------------------------------------------------
         
         ; Segment limit (0-15)
         dw  0xFFFF
@@ -210,9 +216,9 @@ $XEOS.gdt
         ; Base address (24-31)
         db  0
         
-        ;-------------------------------------------------------------------------------
+        ;-----------------------------------------------------------------------
         ; Kernel space data descriptor
-        ;-------------------------------------------------------------------------------
+        ;-----------------------------------------------------------------------
         
         ; Segment limit (0-15)
         dw  0xFFFF
@@ -250,7 +256,7 @@ $XEOS.gdt
 $XEOS.gdt._pointer:
     
     dw  XEOS.gdt_t_size - 1
-    dd  XEOS.gdt
+    dd  $XEOS.gdt
     
 %endif
 

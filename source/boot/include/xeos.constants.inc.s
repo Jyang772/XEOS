@@ -72,7 +72,9 @@
 %define @BIOS.boot.signature                    0xAA55
 
 ; Master boot record values
-%define @XEOS.fat12.mbr.oemName                 "XEOS", 32, 32, 32, 32
+%define @XEOS.fat12.mbr.oemName                 "XEOS",  0x20, 0x20, 0x20, 0x20
+%define @XEOS.fat12.mbr.volumeLabel             "XEOS",  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20
+%define @XEOS.fat12.mbr.fileSystem              "FAT12", 0x20, 0x20, 0x20
 %define @XEOS.fat12.mbr.bytesPerSector          512
 %define @XEOS.fat12.mbr.sectorsPerCluster       1
 %define @XEOS.fat12.mbr.reservedSectors         1
@@ -89,7 +91,5 @@
 %define @XEOS.fat12.mbr.reserved                0
 %define @XEOS.fat12.mbr.bootSignature           41
 %define @XEOS.fat12.mbr.volumeID                0
-%define @XEOS.fat12.mbr.volumeLabel             "XEOS", 32, 32, 32, 32, 32, 32, 32
-%define @XEOS.fat12.mbr.fileSystem              "FAT12", 32, 32, 32
 
 %endif

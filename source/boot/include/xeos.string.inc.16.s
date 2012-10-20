@@ -66,25 +66,63 @@
 ; 
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
+
 %ifndef __XEOS_STRING_INC_16_ASM__
 %define __XEOS_STRING_INC_16_ASM__
 
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.constants.inc.s"       ; General constants
-%include "XEOS.macros.inc.s"          ; General macros
-%include "XEOS.ascii.inc.s"           ; ASCII table
+
+%include "xeos.constants.inc.s"       ; General constants
+%include "xeos.macros.inc.s"          ; General macros
+%include "xeos.ascii.inc.s"           ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16
+
+;-------------------------------------------------------------------------------
+; Definitions & Macros
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
+; Converts an unsigned binary bumber into a string representation
+; 
+; Parameters:
+; 
+;       1:          The unsigned binary number
+;       2:          The base in which to convert the number
+;       3:          Only for base 16: zero padding
+;       4:          Only for base 16: if 1, prefix with 0x, otherwise don't
+;       5:          The destination byte buffer for the string   
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.string.numberToString 5
+    
+    ; Saves registrers
+    pusha
+    
+    mov     ax,         %1
+    mov     bx,         %2
+    mov     cx,         %3
+    mov     dx,         %4
+    mov     di,         %5
+    call                XEOS.string.numberToString
+    
+    ; Restores registers
+    popa
+    
+%endmacro
 
 ;-------------------------------------------------------------------------------
 ; Checks if a character is printable
 ; 
 ; Input registers:
 ;       
-;       - AX:       The character code
+;       - DX:       The character code
 ; 
 ; Return registers:
 ;       
@@ -94,32 +132,38 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.string.isPrint:
+XEOS.string.isPrintable:
     
     ; Saves registers
     pusha
     
     ; ASCII control characters
-    cmp     ax,     32
+    cmp     dx,     0x20
     jb      .notPrintable
     
     ; Non-ASCII
-    cmp     ax,     127
+    cmp     dx,     0x7F
     jg      .notPrintable
     
+    ;---------------------------------------------------------------------------
+    ; Character is printable
+    ;---------------------------------------------------------------------------
     .printable:
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ; Printable - Stores result code in AX
-        mov     ax,         1
+        mov     ax,         0x01
         
         ret
     
+    ;---------------------------------------------------------------------------
+    ; Character is not printable
+    ;---------------------------------------------------------------------------
     .notPrintable:
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ; Not printable - Stores result code in AX
@@ -146,46 +190,45 @@ XEOS.string.isPrint:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.string.utoa:
+XEOS.string.numberToString:
 
     ; Saves registers
     pusha
     
     ; Checks if we are going to print in hexadecimal
-    cmp     ebx,        16
-    je      .hexPrefix
+    cmp     ebx,        0x10
+    je      .prefix.hex
     
     ; Checks if we are going to print in decimal
-    cmp     ebx,        10
+    cmp     ebx,        0x0A
     je      .start
     
     ; Checks if we are going to print in octal
-    cmp     ebx,        8
-    je      .start
+    cmp     ebx,        0x08
     je      .start
     
     ; Checks if we are going to print in binary
-    cmp     ebx,        2
+    cmp     ebx,        0x02
     je      .start
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
     
-    .hexPrefix:
+    .prefix.hex:
         
         ; Stores the padding
         mov     si,         cx
         
-        ; Chekcs if we need to prefix with 0x
-        cmp     dx,         1
+        ; Checkkcs if we need to prefix with 0x
+        cmp     dx,         0x01
         jne     .start
         
-        ; Adds the 0x prefix for the hexadecimal
+        ; Adds the 0x prefix
         mov     [ di ],     BYTE 0x30
         mov     [ di + 1 ], BYTE 0x78
-        add     di,         2
+        add     di,         0x02
     
     .start:
         
@@ -194,19 +237,17 @@ XEOS.string.utoa:
         
     .divide:
         
-        ; Resets EDX
-        xor     edx,        edx
-        
         ; Divides by the base
+        xor     edx,        edx
         div     ebx
         
-        ; Saves reminder
+        ; Saves the reminder
         push    edx
         
         ; Increments ECX (digit counter)
         inc     ecx
         
-        ; Loop till we reach 0
+        ; Continues dividing till we reach 0
         cmp     eax,         0
         jg      .divide
         
@@ -219,58 +260,57 @@ XEOS.string.utoa:
         ; Pushes the counter
         push    cx
         
-        ; Padding
+        ; Checks if we need to pad with 0
         cmp     si,         cx
-        jle     .padDone
+        jle     .hex.pad.done
         
         ; Number of zeros for padding
         sub     si,     cx
         mov     cx,     si
         
-        .pad:
+        .hex.pad:
             
             ; Adds a 0 for padding
             mov     [ di ],     BYTE 0x30
             inc     di
             
             ; Continues padding
-            loop    .pad
+            loop    .hex.pad
             
-        .padDone:
+        .hex.pad.done:
             
             ; Restores the counter
             pop     cx
             
-        .hexChar:
+        .hex.char:
             
             ; Restores the reminder
             pop     eax
             
             ; Checks if we must print a digit or a letter
-            cmp    eax,         9
-            jg      .letter
+            cmp    eax,         0x09
+            jg      .hex.letter
             
-        .number:
-            
-            ; Number - Adds 48 (ASCII for '0')
-            add     al,         0x30
-            jmp     .store
-            
-        .letter:
-            
-            ; Letter - Adds 65 (ASCII for 'A')
-            sub     al,         10
-            add     al,         0x41
-            
-        .store:
-            
-            ; Stores the character
-            mov     [ di ],     BYTE al
-            inc     di
+            .hex.number:
+                
+                ; Number - Adds 48 (ASCII for '0')
+                add     al,         0x30
+                jmp     .hex.store
+                
+            .hex.letter:
+                
+                ; Letter - Adds 65 (ASCII for 'A')
+                sub     al,         0x0A
+                add     al,         0x41
+                
+            .hex.store:
+                
+                ; Stores the character
+                mov     [ di ],     BYTE al
+                inc     di
             
             ; Continue till we have digits to print
-            loop    .hexChar
-            
+            loop    .hex.char
             jmp     .end
             
     .dec:
@@ -291,9 +331,9 @@ XEOS.string.utoa:
     .end:
         
         ; Adds the terminating character (ASCII 0)
-        mov     [ di ],     BYTE 0
+        mov     [ di ],     BYTE 0x00
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret

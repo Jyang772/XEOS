@@ -64,7 +64,7 @@
 ;-------------------------------------------------------------------------------
 ; XEOS first stage bootloader
 ; 
-; The binary form of this file must no be larger than 512 bytes (one sector).
+; The binary form of this file must not be larger than 512 bytes (one sector).
 ; The last two bytes have to be the standard PC boot signature (0xAA55).
 ; 
 ; Note about compiling:
@@ -104,16 +104,20 @@ start: jmp main
 ;---------------------------------------------------------------------------
 ; Includes
 ;---------------------------------------------------------------------------
-%include "XEOS.constants.inc.s"     ; General constants
-%include "XEOS.ascii.inc.s"         ; ASCII table
-%include "BIOS.video.inc.16.s"      ; BIOS video services
-%include "XEOS.io.fat12.inc.16.s"   ; FAT-12 IO procedures
+
+%include "xeos.constants.inc.s"     ; General constants
+%include "xeos.ascii.inc.s"         ; ASCII table
+%include "bios.video.inc.16.s"      ; BIOS video services
+%include "xeos.io.fat12.inc.16.s"   ; FAT-12 IO procedures
 
 ;-------------------------------------------------------------------------------
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
+; Start of the data sector
 $XEOS.boot.stage1.dataSector    dw  0
+
+; Name of the second stage bootloader (FAT-12 format)
 $XEOS.files.stage2              db  "BOOT    BIN"
 
 ;-------------------------------------------------------------------------------
@@ -121,15 +125,16 @@ $XEOS.files.stage2              db  "BOOT    BIN"
 ;-------------------------------------------------------------------------------
 
 $XEOS.boot.stage1.msg.boot      db  "XEOS: ", @ASCII.NUL
-$XEOS.boot.stage1.msg.error     db  "FAIL", @ASCII.CR, @ASCII.LF, @ASCII.NUL
-$XEOS.boot.stage1.msg.ok        db  "BOOT", @ASCII.CR, @ASCII.LF, @ASCII.NUL
+$XEOS.boot.stage1.msg.error     db  "FAIL",   @ASCII.NL, @ASCII.NUL
+$XEOS.boot.stage1.msg.ok        db  "BOOT",   @ASCII.NL, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; First stage bootloader
 ; 
 ; This section is the bootloader's code that will be runned by the BIOS.
+; The BIOS will load this file at 7C00:0000.
 ; 
-; At this time, the memory layout is the following:
+; At that time, the memory layout should be the following:
 ; 
 ;       - 0x0000 - 0x003F:  ISR vectors addresses (Interrupt Service Routine)
 ;       - 0x0040 - 0x004F:  BIOS data
@@ -144,7 +149,7 @@ $XEOS.boot.stage1.msg.ok        db  "BOOT", @ASCII.CR, @ASCII.LF, @ASCII.NUL
 ; 
 ;       base address = base address * segment size (16) + offset
 ; 
-; So 0x07C0 is 0x07C0:0 which is 0x07C00.
+; So 0x07C0 is 07C0:0000 which is 0x07C00.
 ;-------------------------------------------------------------------------------
 main:
     
@@ -152,8 +157,8 @@ main:
     cli
     
     ; Sets the data and extra segments to where we were loaded by the BIOS
-    ; (0x07C0), so we don't have to add 0x07C0 to all our data
-    ; We are not setting FS and GS, as we won't use it, and is it will save
+    ; (0x07C0), so we don't have to add 0x07C0 to all our data.
+    ; We are not setting FS and GS, as we won't use them, and is it will save
     ; a few bytes of code
     mov     ax,         0x07C0
     mov     ds,         ax
@@ -167,18 +172,17 @@ main:
     ; Restores the interrupts
     sti
     
-    ; Prints the welcme message
-    ; Prints the sucess message
+    ; Prints the welcome message
     mov     si,         $XEOS.boot.stage1.msg.boot
     call    BIOS.video.print
     
-    ; Loads the FAT-12 root directory at ES:0x200
-    ; (0x07CE - just after this bootloader)
+    ; Loads the FAT-12 root directory at ES:0200
+    ; (07CE:0000 -> just after this bootloader)
     mov     di,         0x0200
     call    XEOS.io.fat12.loadRootDirectory
     
     ; Checks for an error code
-    cmp     ax,         0
+    cmp     ax,         0x00
     jne      .failure
     
     ; Stores the location of the first data sector
@@ -193,14 +197,14 @@ main:
     call    XEOS.io.fat12.findFile
     
     ; Checks for an error code
-    cmp     ax,         0
+    cmp     ax,         0x00
     jne     .failure
     
-    ; Loads the file at 0x50:00 (first area of free/unused memory)
+    ; Loads the file at 0050:0000 (first area of free/unused memory)
     mov     ax,         0x0050
     
-    ; Loads the FAT at ES:0x200
-    ; (0x07CE - just after this bootloader)
+    ; Loads the FAT at ES:0200
+    ; (07CE:0000 -> just after this bootloader)
     mov     bx,         0x0200
     
     ; Data sector location
@@ -210,19 +214,27 @@ main:
     call    XEOS.io.fat12.loadFile
     
     ; Checks for an error code
-    cmp     ax,         0
+    cmp     ax,         0x00
     jne     .failure
     
-    ; Prints the sucess message
-    mov     si,         $XEOS.boot.stage1.msg.ok
-    call    BIOS.video.print
-    
-    ; Pass control to the second stage bootloader
-    push    WORD 0x0050
-    push    WORD 0x0000
-    
-    retf
-    
+    ;---------------------------------------------------------------------------
+    ; Boot successfull
+    ;---------------------------------------------------------------------------
+    .success:
+        
+        ; Prints the sucess message
+        mov     si,         $XEOS.boot.stage1.msg.ok
+        call    BIOS.video.print
+        
+        ; Pass control to the second stage bootloader, now loacated at 0050:0000
+        push    WORD 0x0050
+        push    WORD 0x0000
+        
+        retf
+        
+    ;---------------------------------------------------------------------------
+    ; Boot failed
+    ;---------------------------------------------------------------------------
     .failure:
         
         ; Prints the error message
@@ -246,7 +258,7 @@ main:
 
 ; Pads the remainder of the boot sector with '0', so we'll be able to write the
 ; boot signature
-times   510 - ( $ - $$ ) db  @ASCII.NUL
+times   0x1FE - ( $ - $$ ) db  @ASCII.NUL
 
 ; 0x1FE (2) - Boot sector signature
 dw      @BIOS.boot.signature 

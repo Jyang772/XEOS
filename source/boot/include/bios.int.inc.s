@@ -68,7 +68,7 @@
 %ifndef __BIOS_INT_INC_ASM__
 %define __BIOS_INT_INC_ASM__
 
-; BIOS services
+; BIOS ISRs (Interrupt Service Routines)
 %define @BIOS.int.printScreen   int 0x05
 %define @BIOS.int.video         int 0x10
 %define @BIOS.int.equipment     int 0x11

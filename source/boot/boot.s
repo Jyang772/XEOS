@@ -210,13 +210,13 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 %macro @XEOS.boot.stage2.print.bracket.green 1
     
     push                            si
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.colors.white,       @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
     push                            si
-    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.colors.green.light, @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.color.green.light,  @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.colors.white,       @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
     pop                             si
     
 %endmacro
@@ -225,13 +225,13 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 %macro @XEOS.boot.stage2.print.bracket.red 1
     
     push                            si
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.colors.white,       @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
     push                            si
-    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.colors.red.light,   @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.color.red.light,    @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.colors.white,       @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
     pop                             si
     
 %endmacro
@@ -240,12 +240,12 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 %macro @XEOS.boot.stage2.print.prompt 0
     
     push                            si
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.colors.white,       @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.prompt,           @BIOS.video.colors.gray.light,  @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.prompt,           @BIOS.video.color.gray.light,   @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.colors.white,       @BIOS.video.colors.black
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.gt,               @BIOS.video.colors.white,       @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.gt,               @BIOS.video.color.white,        @BIOS.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
     
@@ -283,7 +283,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 %macro @XEOS.boot.stage2.print.line 1
     
     @XEOS.boot.stage2.print.prompt
-    @XEOS.boot.stage2.print.color   %1, @BIOS.video.colors.white, @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   %1, @BIOS.video.color.white, @BIOS.video.color.black
     @BIOS.video.print               $XEOS.boot.stage2.nl
     
 %endmacro
@@ -292,7 +292,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 %macro @XEOS.boot.stage2.print.line.error 1
     
     @XEOS.boot.stage2.print.prompt
-    @XEOS.boot.stage2.print.color   %1, @BIOS.video.colors.red.light, @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   %1, @BIOS.video.color.red.light, @BIOS.video.color.black
     @BIOS.video.print               $XEOS.boot.stage2.nl
     
 %endmacro
@@ -301,7 +301,7 @@ $XEOS.boot.stage2.msg.error.verify64            db  "Error: invalid kernel ELF-6
 %macro @XEOS.boot.stage2.print      1
     
     push                            si
-    @XEOS.boot.stage2.print.color   %1, @BIOS.video.colors.white, @BIOS.video.colors.black
+    @XEOS.boot.stage2.print.color   %1, @BIOS.video.color.white, @BIOS.video.color.black
     pop                             si
     
 %endmacro
@@ -356,27 +356,27 @@ main:
         sti
         
         ; Prints the copyright note
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.top,               @BIOS.video.colors.white,       @BIOS.video.colors.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.top,               @BIOS.video.color.white,        @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.left,     @BIOS.video.colors.white,       @BIOS.video.colors.black
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1,          @BIOS.video.colors.brown.light, @BIOS.video.colors.black
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.right,    @BIOS.video.colors.white,       @BIOS.video.colors.black
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.2,          @BIOS.video.colors.white,       @BIOS.video.colors.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.left,     @BIOS.video.color.white,        @BIOS.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1,          @BIOS.video.color.brown.light,  @BIOS.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.right,    @BIOS.video.color.white,        @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.3,          @BIOS.video.colors.gray.light,  @BIOS.video.colors.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.2,          @BIOS.video.color.white,        @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.4,          @BIOS.video.colors.gray.light,  @BIOS.video.colors.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.3,          @BIOS.video.color.gray.light,   @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.bottom,            @BIOS.video.colors.white,       @BIOS.video.colors.black
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.4,          @BIOS.video.color.gray.light,   @BIOS.video.color.black
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.bottom,            @BIOS.video.color.white,        @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         
         ; Prints the welcome message
@@ -827,25 +827,11 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.left
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-        
-        mov     eax,        es
-        mov     bx,         16
-        mov     cx,         4
-        xor     dx,         dx
-        mov     di,         $XEOS.boot.stage2.str
-        call    XEOS.string.utoa
-        
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.colors.green.light, @BIOS.video.colors.black
+        @XEOS.string.numberToString     es, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.separator
-        
-        mov     eax,        @XEOS.boot.stage2.fat.offset
-        mov     bx,         16
-        mov     cx,         4
-        xor     dx,         dx
-        mov     di,         $XEOS.boot.stage2.str
-        call    XEOS.string.utoa
-        
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.colors.green.light, @BIOS.video.colors.black
+        @XEOS.string.numberToString     @XEOS.boot.stage2.fat.offset, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
@@ -930,25 +916,11 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.left
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-        
-        mov     eax,        @XEOS.boot.stage2.kernel.segment
-        mov     bx,         16
-        mov     cx,         4
-        xor     dx,         dx
-        mov     di,         $XEOS.boot.stage2.str
-        call    XEOS.string.utoa
-        
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.colors.green.light, @BIOS.video.colors.black
+        @XEOS.string.numberToString     @XEOS.boot.stage2.kernel.segment, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.separator
-        
-        xor     eax,        eax
-        mov     bx,         16
-        mov     cx,         4
-        xor     dx,         dx
-        mov     di,         $XEOS.boot.stage2.str
-        call    XEOS.string.utoa
-        
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.colors.green.light, @BIOS.video.colors.black
+        @XEOS.string.numberToString     ax, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl

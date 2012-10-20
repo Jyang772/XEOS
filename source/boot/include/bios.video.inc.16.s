@@ -88,22 +88,22 @@ BITS    16
 %define @BIOS.video.screen.rows             25
 
 ; BIOS colors
-%define @BIOS.video.colors.black            0x00
-%define @BIOS.video.colors.blue             0x01
-%define @BIOS.video.colors.green            0x02
-%define @BIOS.video.colors.cyan             0x03
-%define @BIOS.video.colors.red              0x04
-%define @BIOS.video.colors.magenta          0x05
-%define @BIOS.video.colors.brown            0x06
-%define @BIOS.video.colors.gray.light       0x07
-%define @BIOS.video.colors.gray             0x08
-%define @BIOS.video.colors.blue.light       0x09
-%define @BIOS.video.colors.green.light      0x0A
-%define @BIOS.video.colors.cyan.light       0x0B
-%define @BIOS.video.colors.red.light        0x0C
-%define @BIOS.video.colors.magenta.light    0x0D
-%define @BIOS.video.colors.brown.light      0x0E
-%define @BIOS.video.colors.white            0x0F
+%define @BIOS.video.color.black             0x00
+%define @BIOS.video.color.blue              0x01
+%define @BIOS.video.color.green             0x02
+%define @BIOS.video.color.cyan              0x03
+%define @BIOS.video.color.red               0x04
+%define @BIOS.video.color.magenta           0x05
+%define @BIOS.video.color.brown             0x06
+%define @BIOS.video.color.gray.light        0x07
+%define @BIOS.video.color.gray              0x08
+%define @BIOS.video.color.blue.light        0x09
+%define @BIOS.video.color.green.light       0x0A
+%define @BIOS.video.color.cyan.light        0x0B
+%define @BIOS.video.color.red.light         0x0C
+%define @BIOS.video.color.magenta.light     0x0D
+%define @BIOS.video.color.brown.light       0x0E
+%define @BIOS.video.color.white             0x0F
 
 ;-------------------------------------------------------------------------------
 ; Computes the value of a BIOS screen color into a register

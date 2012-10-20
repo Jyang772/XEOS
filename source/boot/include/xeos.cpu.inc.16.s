@@ -65,6 +65,7 @@
 ; CPU information procedures
 ; 
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
+; 
 ; Extended registers are used for CPUID, but this is allowed in real mode, with
 ; the help of the "Operand Size Override Prefix" (0x66), handled by
 ; the assembler.
@@ -116,14 +117,14 @@ XEOS.cpu.hasCPUID:
     xor     eax,        ecx
     
     ; Test ID flag
-    shr     eax,        21
+    shr     eax,        0x15
     and     eax,        0x0000000000000001
     
     ; Restore flags
     push    ecx
     popfd
     
-    ; Restore registers
+    ; Restores registers
     pop ecx
     
     ret
@@ -150,7 +151,7 @@ XEOS.cpu.vendor:
     pusha
     
     ; Get CPU vendor strings (EBX, EDX, ECX - 4 chars each)
-    mov     eax,        0
+    mov     eax,        0x00
     cpuid
     
     ; Copies the strings to DI
@@ -158,7 +159,7 @@ XEOS.cpu.vendor:
     mov     [ di + 4 ], edx
     mov     [ di + 8 ], ecx
     
-    ; Restore registers
+    ; Restores registers
     popa
     
     ret
@@ -193,17 +194,17 @@ XEOS.cpu.64:
         
     .success
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ; Success - Stores result code in AX
-        mov     ax,         1
+        mov     ax,         0x01
         
         ret
         
     .error:
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ; Error - Stores result code in AX

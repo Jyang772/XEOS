@@ -73,11 +73,19 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.macros.inc.s"          ; General macros
-%include "XEOS.ascii.inc.s"           ; ASCII table
+
+%include "xeos.macros.inc.s"          ; General macros
+%include "xeos.ascii.inc.s"           ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16
+
+;-------------------------------------------------------------------------------
+; Variables definition
+;-------------------------------------------------------------------------------
+
+; ELF-32 file signature
+$XEOS.elf.32.signature      db  0x7F, 0x45, 0x4C, 0x46
 
 ;-------------------------------------------------------------------------------
 ; The ELF-32 header has the following structure:
@@ -141,7 +149,7 @@ XEOS.elf.32.checkHeader:
     
     .success
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ; Success - Stores result code in AX
@@ -172,18 +180,12 @@ XEOS.elf.64.checkHeader:
     
     .success
         
-        ; Restore registers
+        ; Restores registers
         popa
         
         ; Success - Stores result code in AX
         xor     ax,         ax
         
         ret
-
-;-------------------------------------------------------------------------------
-; Variables
-;-------------------------------------------------------------------------------
-
-$XEOS.elf.32.signature      db  0x7F, 0x45, 0x4C, 0x46
 
 %endif

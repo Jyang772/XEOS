@@ -242,7 +242,7 @@ $XEOS.debug.str.memory.dump.footer          db  "           Press <c> to continu
 ; Prints text
 %macro @XEOS.debug.print 1
     
-     @XEOS.debug.print.color %1, @BIOS.video.colors.white, @BIOS.video.colors.black
+     @XEOS.debug.print.color %1, @BIOS.video.color.white, @BIOS.video.color.black
     
 %endmacro
 
@@ -250,30 +250,30 @@ $XEOS.debug.str.memory.dump.footer          db  "           Press <c> to continu
     
     @XEOS.debug.print   $XEOS.debug.pipe.start
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.e%1x, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.e%1x, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1x ]
     mov                     bx,     16
     mov                     cx,     8
     mov                     dx,     1
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
     @XEOS.debug.print       $XEOS.debug.pipe
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.%1x, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.%1x, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1x ]
     and                     eax,    0x0000FFFF
     mov                     bx,     16
     mov                     cx,     4
     mov                     dx,     1
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
     @XEOS.debug.print       $XEOS.debug.pipe
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.%1h, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.%1h, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1x ]
     and                     eax,    0x0000FFFF
     shr                     eax,    8
@@ -281,19 +281,19 @@ $XEOS.debug.str.memory.dump.footer          db  "           Press <c> to continu
     mov                     cx,     2
     mov                     dx,     1
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
     @XEOS.debug.print       $XEOS.debug.pipe
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.%1l, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.%1l, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1x ]
     and                     eax,    0x000000FF
     mov                     bx,     16
     mov                     cx,     2
     mov                     dx,     1
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
     @XEOS.debug.print       $XEOS.debug.pipe
@@ -304,39 +304,39 @@ $XEOS.debug.str.memory.dump.footer          db  "           Press <c> to continu
     
     @XEOS.debug.print   $XEOS.debug.pipe.start
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.e%1, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.e%1, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1 ]
     mov                     bx,     16
     mov                     cx,     8
     mov                     dx,     1
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
     @XEOS.debug.print       $XEOS.debug.pipe
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.%1, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.%1, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.e%1 ]
     and                     eax,    0x0000FFFF
     mov                     bx,     16
     mov                     cx,     4
     mov                     dx,     1
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
 %endmacro
 
 %macro @XEOS.debug.print.register.segment 1
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.%1s, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.%1s, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.%1s ]
     and                     eax,    0x0000FFFF
     mov                     bx,     16
     mov                     cx,     4
     mov                     dx,     1
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
     @XEOS.debug.print       $XEOS.debug.pipe
@@ -345,7 +345,7 @@ $XEOS.debug.str.memory.dump.footer          db  "           Press <c> to continu
 
 %macro @XEOS.debug.print.register.flag 2
     
-    @XEOS.debug.print.color $XEOS.debug.str.register.flags.%1, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.register.flags.%1, @BIOS.video.color.gray.light, @BIOS.video.color.black
     mov                     eax,    DWORD [ $XEOS.debug.register.eflags ]
     shr                     eax,    %2
     and                     eax,    0x00000001
@@ -353,7 +353,7 @@ $XEOS.debug.str.memory.dump.footer          db  "           Press <c> to continu
     xor                     cx,     cx
     xor                     dx,     dx
     mov                     di,     $XEOS.debug.str
-    call                    XEOS.string.utoa
+    call                    XEOS.string.numberToString
     @XEOS.debug.print       $XEOS.debug.str
     
     @XEOS.debug.print       $XEOS.debug.pipe
@@ -402,7 +402,7 @@ XEOS.debug.registers.dump:
     @BIOS.video.print       $XEOS.debug.nl
     @XEOS.debug.print       $XEOS.debug.pipe.start
     @XEOS.debug.print       $XEOS.debug.str.registers.dump.header.left
-    @XEOS.debug.print.color $XEOS.debug.str.registers.dump.header,  @BIOS.video.colors.brown.light, @BIOS.video.colors.black
+    @XEOS.debug.print.color $XEOS.debug.str.registers.dump.header,  @BIOS.video.color.brown.light, @BIOS.video.color.black
     @XEOS.debug.print       $XEOS.debug.str.registers.dump.header.right
     @XEOS.debug.print       $XEOS.debug.pipe
     @BIOS.video.print       $XEOS.debug.nl
@@ -428,36 +428,36 @@ XEOS.debug.registers.dump:
     
     @XEOS.debug.print.register.gp16     si
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print.register.segment  s
     @BIOS.video.print                   $XEOS.debug.nl
     
     @XEOS.debug.print.register.gp16     di
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.hr.registers.segment
     @BIOS.video.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp16     sp
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     @XEOS.debug.print.register.gp16     bp
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.8,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.16, @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     
@@ -472,7 +472,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.register.flag     sf, 7
     @XEOS.debug.print.register.flag     zf, 8
     
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     
@@ -484,7 +484,7 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.register.flag     pl, 13
     @XEOS.debug.print.register.flag     nt, 14
     
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     
@@ -496,13 +496,13 @@ XEOS.debug.registers.dump:
     @XEOS.debug.print.register.flag     vip, 20
     @XEOS.debug.print.register.flag     id,  21
     
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.colors.gray, @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.pad.flags,  @BIOS.video.color.gray, @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @BIOS.video.print                   $XEOS.debug.nl
     @XEOS.debug.print                   $XEOS.debug.hr.registers.flags.bottom
     @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print                   $XEOS.debug.pipe.start
-    @XEOS.debug.print.color             $XEOS.debug.str.registers.dump.footer,  @BIOS.video.colors.gray.light,  @BIOS.video.colors.black
+    @XEOS.debug.print.color             $XEOS.debug.str.registers.dump.footer,  @BIOS.video.color.gray.light,  @BIOS.video.color.black
     @XEOS.debug.print                   $XEOS.debug.pipe
     @XEOS.debug.print                   $XEOS.debug.nl
     @XEOS.debug.print                   $XEOS.debug.hr.registers.bottom
@@ -585,7 +585,7 @@ XEOS.debug.memory.dump:
         @BIOS.video.print       $XEOS.debug.nl
         @XEOS.debug.print       $XEOS.debug.pipe.start
         @XEOS.debug.print       $XEOS.debug.str.memory.dump.header.left
-        @XEOS.debug.print.color $XEOS.debug.str.memory.dump.header,  @BIOS.video.colors.brown.light, @BIOS.video.colors.black
+        @XEOS.debug.print.color $XEOS.debug.str.memory.dump.header,  @BIOS.video.color.brown.light, @BIOS.video.color.black
         @XEOS.debug.print       $XEOS.debug.str.memory.dump.header.right
         @XEOS.debug.print       $XEOS.debug.pipe
         @BIOS.video.print       $XEOS.debug.nl
@@ -636,15 +636,9 @@ XEOS.debug.memory.dump._line:
     push    bx
     
     ; Prints the address segment
-    mov     ax,             si
-    mov     bx,             16
-    mov     cx,             4
-    mov     dx,             0
-    mov     di,             $XEOS.debug.str
-    call                    XEOS.string.utoa
-    @XEOS.debug.print.color $XEOS.debug.str, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
-    
-    @XEOS.debug.print       $XEOS.debug.separator
+    @XEOS.string.numberToString si, 16, 4, 0, XEOS.debug.str
+    @XEOS.debug.print.color     $XEOS.debug.str, @BIOS.video.color.gray.light, @BIOS.video.color.black
+    @XEOS.debug.print           $XEOS.debug.separator
     
     ; Restores registers
     pop     bx
@@ -653,15 +647,9 @@ XEOS.debug.memory.dump._line:
     push    bx
     
     ; Prints the address offset
-    mov     ax,             bx
-    mov     bx,             16
-    mov     cx,             4
-    mov     dx,             0
-    mov     di,             $XEOS.debug.str
-    call                    XEOS.string.utoa
-    @XEOS.debug.print.color $XEOS.debug.str, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
-    
-    @XEOS.debug.print       $XEOS.debug.pipe
+    @XEOS.string.numberToString bx, 16, 4, 0, XEOS.debug.str
+    @XEOS.debug.print.color     $XEOS.debug.str, @BIOS.video.color.gray.light, @BIOS.video.color.black
+    @XEOS.debug.print           $XEOS.debug.pipe
     
     ; Restores registers
     pop     bx
@@ -697,14 +685,10 @@ XEOS.debug.memory.dump._line:
             pop     ds
             
             ; Prints the byte
-            mov     bx,         16
-            mov     cx,         2
-            mov     dx,         0
-            mov     di,         $XEOS.debug.str
-            call                XEOS.string.utoa
             
-            @XEOS.debug.print   $XEOS.debug.str
-            @XEOS.debug.print   $XEOS.debug.space
+            @XEOS.string.numberToString ax, 16, 2, 0, XEOS.debug.str
+            @XEOS.debug.print           $XEOS.debug.str
+            @XEOS.debug.print           $XEOS.debug.space
             
             ; Restores registers
             pop     si
@@ -760,7 +744,7 @@ XEOS.debug.memory.dump._line:
             
             ; Checks if the character is printable
             mov     dx,         ax
-            call    XEOS.string.isPrint
+            call    XEOS.string.isPrintable
             cmp     ax,         1
             jne     .notPrintable
             
@@ -772,7 +756,7 @@ XEOS.debug.memory.dump._line:
                 
                 ; Prints character
                 mov                     BYTE [ $XEOS.debug.char ],  al
-                @XEOS.debug.print.color $XEOS.debug.char, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+                @XEOS.debug.print.color $XEOS.debug.char, @BIOS.video.color.gray.light, @BIOS.video.color.black
                 
                 jmp     .nextChar
                 
@@ -784,7 +768,7 @@ XEOS.debug.memory.dump._line:
                 
                 ; Prints a dot
                 mov                     BYTE [ $XEOS.debug.char ],  0x2E
-                @XEOS.debug.print.color $XEOS.debug.char, @BIOS.video.colors.gray.light, @BIOS.video.colors.black
+                @XEOS.debug.print.color $XEOS.debug.char, @BIOS.video.color.gray.light, @BIOS.video.color.black
                 
             .nextChar:
                 
