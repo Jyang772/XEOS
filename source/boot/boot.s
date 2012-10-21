@@ -1,3 +1,4 @@
+
 ;-------------------------------------------------------------------------------
 ; XEOS - X86 Experimental Operating System
 ; 
@@ -81,8 +82,8 @@
 ;       - yasm -f bin -o [boot.flp] [boot.s]
 ;-------------------------------------------------------------------------------
 
-; Location at which we were loaded by the first stage bootloader (0x50:0)
-ORG     0
+; Location at which we were loaded by the first stage bootloader (0x0050:0000)
+ORG     0x500
 
 ; We are in 16 bits mode
 BITS    16
@@ -481,7 +482,7 @@ main:
         
         ; Sets the data and extra segments to where we were loaded by the first
         ; stage bootloader (0x50), so we don't have to add 0x50 to all our data
-        mov     ax,         0x50
+        xor     ax,         ax
         mov     ds,         ax
         mov     es,         ax
         mov     fs,         ax
@@ -1293,6 +1294,12 @@ XEOS.boot.stage2.64:
     
 ; We are in 32 bits mode
 BITS    32
+
+;-------------------------------------------------------------------------------
+; Includes
+;-------------------------------------------------------------------------------
+
+%include "xeos.video.inc.32.s"
 
 ;-------------------------------------------------------------------------------
 ; Setups and executes the 64 bits kernel
