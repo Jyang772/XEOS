@@ -350,8 +350,6 @@ XEOS.a20.enable.keyboard.out:
 ;-------------------------------------------------------------------------------
 XEOS.a20.enabled:
     
-    @XEOS.proc.start 0
-    
     .start:
         
         ; Saves registers
@@ -415,8 +413,6 @@ XEOS.a20.enabled:
         pop     dx
         pop     cx
         pop     bx
-        
-        @XEOS.proc.end
         
         ret
 
