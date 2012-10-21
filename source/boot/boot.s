@@ -89,7 +89,10 @@ ORG     0x500
 BITS    16
 
 ; DEBUG - Forces the 32 bits mode
-%define XEOS32
+;%define XEOS32
+
+; DEBUG - Uses the test ASM kernel
+;%define KERNEL_ASM
 
 ; Jumps to the entry point
 start: jmp main
@@ -121,6 +124,7 @@ $XEOS.boot.stage2.entryPoint                    dd  0
 $XEOS.boot.stage2.nl                            db  @ASCII.NL,  @ASCII.NUL
 $XEOS.files.kernel.32                           db  "XEOS32  ELF", @ASCII.NUL
 $XEOS.files.kernel.64                           db  "XEOS64  ELF", @ASCII.NUL
+$XEOS.files.kernel.asm                          db  "KERNEL  BIN", @ASCII.NUL
 $XEOS.boot.stage2.cpu.vendor                    db  "            ", @ASCII.NUL
 $XEOS.boot.stage2.str                           db  "                              ", @ASCII.NUL
 $XEOS.boot.stage2.longMonde                     db  0
@@ -784,14 +788,33 @@ main:
         
         .load.32:
             
-            ; 32 bits kernel is going to be loaded
-            mov     si,             $XEOS.files.kernel.32
-            jmp     .load.start
+            %ifdef KERNEL_ASM
+            
+                ; Test ASM kernel is going to be loaded
+                mov     si,             $XEOS.files.kernel.asm
+                jmp     .load.start
+                
+            %else
+                
+                ; 32 bits kernel is going to be loaded
+                mov     si,             $XEOS.files.kernel.32
+                jmp     .load.start
+                
+            %endif
             
         .load.64:
             
-            ; 64 bits kernel is going to be loaded
-            mov     si,             $XEOS.files.kernel.64
+            %ifdef KERNEL_ASM
+            
+                ; Test ASM kernel is going to be loaded
+                mov     si,             $XEOS.files.kernel.asm
+                
+            %else
+                
+                ; 64 bits kernel is going to be loaded
+                mov     si,             $XEOS.files.kernel.32
+                
+            %endif
         
         .load.start:
             
@@ -828,6 +851,12 @@ main:
             cmp     ax,     0
             je      .load.verified
             
+            %ifdef KERNEL_ASM
+                
+                jmp     .load.verified
+                
+            %endif
+            
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
@@ -863,6 +892,12 @@ main:
             mov     DWORD [ $XEOS.boot.stage2.entryPoint ], edi
             cmp     ax,     0
             je      .load.verified
+            
+            %ifdef KERNEL_ASM
+                
+                jmp     .load.verified
+                
+            %endif
             
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -1439,8 +1474,12 @@ XEOS.boot.stage2.32.run:
         mul     ebx
         mov     esi,        eax
         
-        ; The .text section is located at offset 0x1000
-        add     esi,        0x1000
+        %ifndef KERNEL_ASM
+            
+            ; The .text section is located at offset 0x1000
+            add     esi,        0x1000
+                
+        %endif
 
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
@@ -1528,6 +1567,7 @@ XEOS.boot.stage2.32.run:
             @XEOS.video.print               $XEOS.boot.stage2.msg.space
             @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
             @XEOS.video.print               $XEOS.boot.stage2.nl
+            
     .run:
         
         @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
@@ -1608,8 +1648,12 @@ XEOS.boot.stage2.64.run:
         mul     ebx
         mov     esi,        eax
         
-        ; The .text section is located at offset 0x1000
-        add     esi,        0x1000
+        %ifndef KERNEL_ASM 
+            
+            ; The .text section is located at offset 0x1000
+            add     esi,        0x1000
+                
+        %endif
 
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
@@ -1697,6 +1741,7 @@ XEOS.boot.stage2.64.run:
             @XEOS.video.print               $XEOS.boot.stage2.msg.space
             @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
             @XEOS.video.print               $XEOS.boot.stage2.nl
+            
     .run:
         
         @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
