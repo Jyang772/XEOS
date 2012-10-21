@@ -453,7 +453,7 @@ XEOS.elf.64.checkHeader:
     ;---------------------------------------------------------------------------
     .e_machine:
         
-        ; Checks the ELF version (0x3E for x86_64)
+        ; Checks the ELF version (0x3E for AMD64)
         xor     eax,        eax
         mov     ax,         WORD [ si + XEOS.elf.64.header_t.e_machine ]
         cmp     ax,         0x3E
