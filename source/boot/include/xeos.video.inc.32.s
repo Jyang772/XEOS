@@ -394,6 +394,10 @@ XEOS.video.scroll:
 ;-------------------------------------------------------------------------------
 XEOS.video.cursor.move:
     
+    ; Stores the new cursor position
+    mov     [ $XEOS.video.cursor.x ],   bh
+    mov     [ $XEOS.video.cursor.y ],   bl
+    
     ; First, we need to compute the new cursor location:
     ; 
     ;       cursor location = x + ( y * screen width )
