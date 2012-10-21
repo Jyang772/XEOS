@@ -173,8 +173,8 @@ $XEOS.boot.stage2.msg.kernel.load                       db  "Loading the kernel 
 $XEOS.boot.stage2.msg.fat12.root                        db  "            ", 26, " Loading the FAT-12 directory into memory:    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.find                        db  "            ", 26, " Locating the kernel image:                   ", @ASCII.NUL
 $XEOS.boot.stage2.msg.fat12.load                        db  "            ", 26, " Loading the kernel image into memory:        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.verify.32                  db  "Verifiying the kernel image (ELF-32):            ", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.verify.64                  db  "Verifiying the kernel image (ELF-64):            ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.verify.32                  db  "Verifying the kernel image (ELF-32):             ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.verify.64                  db  "Verifying the kernel image (ELF-64):             ", @ASCII.NUL
 $XEOS.boot.stage2.msg.gdt                               db  "Installing the GDT:                              ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.check                         db  "Checking if the A-20 address line is enabled:    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.bios                          db  "Enabling the A-20 address line (BIOS):           ", @ASCII.NUL
