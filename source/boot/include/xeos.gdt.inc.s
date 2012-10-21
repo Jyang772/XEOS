@@ -103,9 +103,9 @@ XEOS.gdt.install:
 ; Addresses of the descriptors
 ;-------------------------------------------------------------------------------
 
-%define @XEOS.gdt.descriptors.null          0x00
-%define @XEOS.gdt.descriptors.code.kernel   0x08
-%define @XEOS.gdt.descriptors.data.kernel   0x10
+%define @XEOS.gdt.descriptors.null      0x00
+%define @XEOS.gdt.descriptors.code      0x08
+%define @XEOS.gdt.descriptors.data      0x10
 
 ;-------------------------------------------------------------------------------
 ; GDT Descriptor

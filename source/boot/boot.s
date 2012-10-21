@@ -845,57 +845,15 @@ main:
     ; Switches the CPU to 32 bits mode
     ;---------------------------------------------------------------------------
     .switch32:
-            
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.switch32
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.kernel.run
         
-        ; Not ready yet...
-        jmp     .end
-        
-        ; Clears the interrupts
-        cli
-        
-        ; Gets the value of the primary control register
-        mov     eax,        cr0
-        
-        ; Sets the lowest bit, indicating the system must run in protected mode
-        or      eax,        1
-        
-        ; Sets the new value - We are now in 32bits protected mode
-        mov     cr0,        eax
-        
-        ; Setup the 32 bits kernel
-        ; We are doing a far jump using our code descriptor
-        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-        jmp	    @XEOS.gdt.descriptors.code.kernel:XEOS.boot.stage2.kernel.setup.32
+        call    XEOS.boot.stage2.32
       
     ;---------------------------------------------------------------------------
     ; Switches the CPU to 64 bits mode
     ;---------------------------------------------------------------------------
     .switch64:
         
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.switch64
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.kernel.run
-        
-        ; Not ready yet...
-        jmp     .end
-        
-        ; Clears the interrupts
-        cli
-        
-        ; Gets the value of the primary control register
-        mov     eax,        cr0
-        
-        ; Sets the lowest bit, indicating the system must run in protected mode
-        or      eax,        1
-        
-        ; Sets the new value - We are now in 32bits protected mode
-        mov     cr0,        eax
-        
-        ; Setup the 32 bits kernel
-        ; We are doing a far jump using our code descriptor
-        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-        jmp	    @XEOS.gdt.descriptors.code.kernel:XEOS.boot.stage2.kernel.setup.64
+        call    XEOS.boot.stage2.64
         
     ;---------------------------------------------------------------------------
     ; Error management
@@ -1253,6 +1211,88 @@ XEOS.boot.stage2.print.color:
     
     ret
 
+;-------------------------------------------------------------------------------
+; Switches the CPU to 32 bits protected mode
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       N/A (This procudure does not return)
+; 
+; Killed registers:
+;       
+;       N/A (This procudure does not return)
+;-------------------------------------------------------------------------------
+XEOS.boot.stage2.32:
+
+        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.switch32
+        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.kernel.run
+        
+        ; Clears the interrupts
+        cli
+        
+        ; Gets the value of the primary control register
+        mov     eax,        cr0
+        
+        ; Sets the lowest bit, indicating the system must run in protected mode
+        or      eax,        1
+        
+        ; Sets the new value - We are now in 32bits protected mode
+        mov     cr0,        eax
+        
+        ; Setup the 32 bits kernel
+        ; We are doing a far jump using our code descriptor
+        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+        jmp	    @XEOS.gdt.descriptors.code:.run
+        
+        ; Halts the system
+        cli
+        hlt
+
+;-------------------------------------------------------------------------------
+; Switches the CPU to 64 bits long mode
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       N/A (This procudure does not return)
+; 
+; Killed registers:
+;       
+;       N/A (This procudure does not return)
+;-------------------------------------------------------------------------------
+XEOS.boot.stage2.64:
+
+        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.switch64
+        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.kernel.run
+        
+        ; Clears the interrupts
+        cli
+        
+        ; Gets the value of the primary control register
+        mov     eax,        cr0
+        
+        ; Sets the lowest bit, indicating the system must run in protected mode
+        or      eax,        1
+        
+        ; Sets the new value - We are now in 32bits protected mode
+        mov     cr0,        eax
+        
+        ; Setup the 64 bits kernel
+        ; We are doing a far jump using our code descriptor
+        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+        jmp	    @XEOS.gdt.descriptors.code:.run
+        
+        ; Halts the system
+        cli
+        hlt
+    
 ; We are in 32 bits mode
 BITS    32
 
@@ -1277,48 +1317,14 @@ BITS    32
 ;       
 ;       N/A (This procudure does not return)
 ;-------------------------------------------------------------------------------
-XEOS.boot.stage2.kernel.setup.32:
+XEOS.boot.stage2.32.run:
     
     ; Sets the data segments to the GDT data descriptor
-    mov     ax,         @XEOS.gdt.descriptors.data.kernel
+    mov     ax,         @XEOS.gdt.descriptors.data
     mov     ds,         ax
     mov     ss,         ax
     mov     es,         ax
     mov     esp,        0x90000
-    
-    ; We are going to move the kernel at 1Mb in memory
-    .moveKernel:
-        
-        ; Number of sectors that were read to load the kernel at its current
-        ; memory location (by the XEOS.io.fat12.loadFile procedure)
-        mov     eax,        DWORD [ $XEOS.boot.stage2.kernelSectors ]
-        
-        ; Number of bytes per sector
-        mov     ebx,        DWORD @XEOS.fat12.mbr.bytesPerSector
-        
-        ; Gets the number of bytes to read
-        mul     ebx
-        
-        ; We are going to read doubles, so divides the bytes by 4
-        mov     ebx,        4
-        div     ebx
-        
-        ; Actual memory location for the kernel code
-        ; 
-        ; We loaded it at 0x1000:0000 in real mode, so the protected mode
-        ; address is 0x10000 (0x1000 * 16 + 0).
-        mov     esi,        0x10000
-        add     esi,        0x1000
-        
-        ; Final destination for the kernel code (1MB)
-        mov     edi,        0x100000
-        
-        ; Copies the kernel code
-        mov     ecx,        eax
-        rep     movsd
-    
-    ; We can now jump to the kernel code
-    jmp     @XEOS.gdt.descriptors.code.kernel:0x100000
     
     ; Halts the system
     cli
@@ -1339,10 +1345,10 @@ XEOS.boot.stage2.kernel.setup.32:
 ;       
 ;       N/A (This procudure does not return)
 ;-------------------------------------------------------------------------------
-XEOS.boot.stage2.kernel.setup.64:
+XEOS.boot.stage2.64.run:
     
     ; Sets the data segments to the GDT data descriptor
-    mov     ax,         @XEOS.gdt.descriptors.data.kernel
+    mov     ax,         @XEOS.gdt.descriptors.data
     mov     ds,         ax
     mov     ss,         ax
     mov     es,         ax
