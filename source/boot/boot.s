@@ -1354,20 +1354,6 @@ XEOS.boot.stage2.64:
         ; Clears the interrupts
         cli
         
-        ; Gets the value of the primary control register
-        mov     eax,        cr0
-        
-        ; Sets the lowest bit, indicating the system must run in protected mode
-        or      eax,        1
-        
-        ; Sets the new value - We are now in 64 bits protected mode
-        mov     cr0,        eax
-        
-        ; Setup the 64 bits kernel
-        ; We are doing a far jump using our code descriptor
-        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-        jmp	    @XEOS.gdt.descriptors.code:.run
-        
         ; Halts the system
         hlt
     
@@ -1475,7 +1461,7 @@ XEOS.boot.stage2.32.run:
             .copy.bytes.symbol:
                 
                 ; Saves registers
-                pusha
+                pushad
                 
                 ; We've got 4 different symbols, so divide the counter
                 ; by 4 and checks the reminder
@@ -1519,7 +1505,7 @@ XEOS.boot.stage2.32.run:
                 .copy.bytes.symbol.done:
                     
                     ; Restores registers
-                    popa
+                    popad
             
             ; Continues to move bytes
             loop    .copy.bytes
@@ -1556,6 +1542,9 @@ XEOS.boot.stage2.32.run:
         
     ; Halts the system
     hlt
+    
+; We are in 64 bits mode
+BITS    64
 
 ;-------------------------------------------------------------------------------
 ; Setups and executes the 64 bits kernel
@@ -1574,162 +1563,6 @@ XEOS.boot.stage2.32.run:
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.64.run:
     
-    ; Sets the data segments to the GDT data descriptor
-    mov     ax,         @XEOS.gdt.descriptors.data
-    mov     ds,         ax
-    mov     ss,         ax
-    mov     es,         ax
-    mov     esp,        0x90000
-    
-    ; Restores the cursor position
-    @XEOS.video.cursor.move dl, dh
-    
-    ; Sets color attributes
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.setBackgroundColor  @XEOS.video.color.black
-    
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
-    @XEOS.video.print               $XEOS.boot.stage2.msg.success
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.video.print               $XEOS.boot.stage2.nl
-    
-    .copy:
-        
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-        @XEOS.video.setForegroundColor  @XEOS.video.color.white
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
-        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-        
-        ; Location of the kernel in memory (multiplies the segment address by 16)
-        mov     eax,        @XEOS.boot.stage2.kernel.segment
-        mov     ebx,        0x10
-        mul     ebx
-        mov     esi,        eax
-        
-        ; The .text section is located at offset 0x1000
-        add     esi,        0x1000
-        
-        ; Destination for the kernel
-        mov     edi,        @XEOS.boot.stage2.kernel.address
-        
-        ; Resets registers
-        xor     eax,        eax
-        xor     ebx,        ebx
-        
-        ; Number of sectors loaded for the kernel
-        mov     ax,         [ $XEOS.boot.stage2.kernelSectors ]
-        
-        ; Multiplies by the number of bytes per sector
-        mov     bx,         @XEOS.fat12.mbr.bytesPerSector
-        mul     ebx
-        
-        ; We are going to read doubles, so divides the bytes by 4
-        mov     ebx,        0x04
-        div     ebx
-        
-        ; Clears the direction flag
-        cld
-        
-        ; Counter
-        mov     ecx,        eax
-        
-        .copy.bytes:
-            
-            ; Moves bytes
-            movsd
-            
-            .copy.bytes.symbol:
-                
-                ; Saves registers
-                pusha
-                
-                ; We've got 4 different symbols, so divide the counter
-                ; by 4 and checks the reminder
-                mov     eax,        ecx
-                xor     edx,        edx
-                mov     ebx,        0x04
-                div     ebx
-                cmp     edx,        0x00
-                je      .copy.bytes.symbol.char.1
-                cmp     edx,        0x01
-                je      .copy.bytes.symbol.char.2
-                cmp     edx,        0x02
-                je      .copy.bytes.symbol.char.3
-                cmp     edx,        0x03
-                je      .copy.bytes.symbol.char.4
-                
-                .copy.bytes.symbol.char.1:
-                    
-                    ; Prints '|'
-                    @XEOS.video.putc    0x7C
-                    jmp                 .copy.bytes.symbol.done
-                    
-                .copy.bytes.symbol.char.2:
-                    
-                    ; Prints '/'
-                    @XEOS.video.putc    0x2F
-                    jmp                 .copy.bytes.symbol.done
-                    
-                .copy.bytes.symbol.char.3:
-                    
-                    ; Prints '-'
-                    @XEOS.video.putc    0x2D
-                    jmp                 .copy.bytes.symbol.done
-                    
-                .copy.bytes.symbol.char.4:
-                    
-                    ; Prints '\'      
-                    @XEOS.video.putc    0x5C
-                    jmp                 .copy.bytes.symbol.done
-                    
-                .copy.bytes.symbol.done:
-                    
-                    ; Restores registers
-                    popa
-            
-            ; Continues to move bytes
-            loop    .copy.bytes
-            
-            @XEOS.video.setForegroundColor  @XEOS.video.color.white
-            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-            @XEOS.video.print               $XEOS.boot.stage2.msg.space
-            @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
-            @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.address
-            @XEOS.video.setForegroundColor  @XEOS.video.color.white
-            @XEOS.video.print               $XEOS.boot.stage2.msg.space
-            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-            @XEOS.video.print               $XEOS.boot.stage2.nl
-            
-    .run:
-        
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-        @XEOS.video.setForegroundColor  @XEOS.video.color.white
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
-        @XEOS.video.print               $XEOS.boot.stage2.nl
-        
-        ; DEBUG - Do not executes the kernel
-        ; hlt
-        
-        ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address
-        
     ; Halts the system
     hlt
+    
