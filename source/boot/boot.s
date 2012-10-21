@@ -1426,6 +1426,17 @@ XEOS.boot.stage2.32.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
         @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
         
+        ; Location of the kernel in memory (multiplies the segment address by 16)
+        mov     eax,        @XEOS.boot.stage2.kernel.segment
+        mov     ebx,        0x10
+        mul     ebx
+        
+        ; The .text section is located at offset 0x1000
+        add     esi,        0x1000
+
+        ; Destination for the kernel
+        mov     edi,        @XEOS.boot.stage2.kernel.address
+        
         ; Number of sectors loaded for the kernel
         mov     eax,        [ $XEOS.boot.stage2.kernelSectors ]
         
@@ -1436,12 +1447,6 @@ XEOS.boot.stage2.32.run:
         ; We are going to read doubles, so divides the bytes by 4
         mov     ebx,        0x04
         div     ebx
-        
-        ; Location of the kernel in memory
-        mov     esi,        @XEOS.boot.stage2.kernel.segment
-
-        ; Destination for the kernel
-        mov     edi,        @XEOS.boot.stage2.kernel.address
         
         ; Clears the direction flag
         cld
@@ -1529,8 +1534,8 @@ XEOS.boot.stage2.32.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        ; Jumps to the kernel code (.text is located at offset 0x1000)
-        jmp	@XEOS.gdt.descriptors.code:( @XEOS.boot.stage2.kernel.address + 0x1000 );
+        ; Jumps to the kernel code
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
         
     ; Halts the system
     hlt
@@ -1589,6 +1594,17 @@ XEOS.boot.stage2.64.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
         @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
         
+        ; Location of the kernel in memory (multiplies the segment address by 16)
+        mov     eax,        @XEOS.boot.stage2.kernel.segment
+        mov     ebx,        0x10
+        mul     ebx
+        
+        ; The .text section is located at offset 0x1000
+        add     esi,        0x1000
+
+        ; Destination for the kernel
+        mov     edi,        @XEOS.boot.stage2.kernel.address
+        
         ; Number of sectors loaded for the kernel
         mov     eax,        [ $XEOS.boot.stage2.kernelSectors ]
         
@@ -1599,12 +1615,6 @@ XEOS.boot.stage2.64.run:
         ; We are going to read doubles, so divides the bytes by 4
         mov     ebx,        0x04
         div     ebx
-        
-        ; Location of the kernel in memory
-        mov     esi,        @XEOS.boot.stage2.kernel.segment
-
-        ; Destination for the kernel
-        mov     edi,        @XEOS.boot.stage2.kernel.address
         
         ; Clears the direction flag
         cld
@@ -1692,8 +1702,8 @@ XEOS.boot.stage2.64.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        ; Jumps to the kernel code (.text is located at offset 0x1000)
-        jmp	@XEOS.gdt.descriptors.code:( @XEOS.boot.stage2.kernel.address + 0x1000 );
+        ; Jumps to the kernel code
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
         
     ; Halts the system
     hlt
