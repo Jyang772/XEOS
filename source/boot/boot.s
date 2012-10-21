@@ -1195,7 +1195,7 @@ XEOS.boot.stage2.kernel.load:
         call    XEOS.io.fat12.loadFile
         
         ; Number of sectors read
-        mov     WORD[ $XEOS.boot.stage2.kernelSectors ], cx
+        mov     WORD [ $XEOS.boot.stage2.kernelSectors ], cx
         
         ; Restores registers
         pop    cx
