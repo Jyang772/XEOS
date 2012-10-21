@@ -1478,11 +1478,16 @@ XEOS.boot.stage2.32.run:
             
             ; The .text section is located at offset 0x1000
             add     esi,        0x1000
-                
+            
+            ; Destination for the kernel
+            mov     edi,        @XEOS.boot.stage2.kernel.address
+            
+        %else
+            
+            ; Destination for the kernel
+            mov     edi,        0x100000
+            
         %endif
-
-        ; Destination for the kernel
-        mov     edi,        @XEOS.boot.stage2.kernel.address
         
         ; Number of sectors loaded for the kernel
         mov     eax,        [ $XEOS.boot.stage2.kernelSectors ]
@@ -1582,8 +1587,17 @@ XEOS.boot.stage2.32.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        %ifndef KERNEL_ASM
+            
+            ; Jumps to the kernel code
+            jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+            
+        %else
+            
+            ; Jumps to the kernel code
+            jmp	@XEOS.gdt.descriptors.code:0x100000;
+            
+        %endif
         
     ; Halts the system
     hlt
@@ -1648,11 +1662,19 @@ XEOS.boot.stage2.64.run:
         mul     ebx
         mov     esi,        eax
         
-        %ifndef KERNEL_ASM 
+        %ifndef KERNEL_ASM
             
             ; The .text section is located at offset 0x1000
             add     esi,        0x1000
-                
+            
+            ; Destination for the kernel
+            mov     edi,        @XEOS.boot.stage2.kernel.address
+            
+        %else
+            
+            ; Destination for the kernel
+            mov     edi,        0x100000
+            
         %endif
 
         ; Destination for the kernel
@@ -1756,8 +1778,17 @@ XEOS.boot.stage2.64.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        %ifndef KERNEL_ASM
+            
+            ; Jumps to the kernel code
+            jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+            
+        %else
+            
+            ; Jumps to the kernel code
+            jmp	@XEOS.gdt.descriptors.code:0x100000;
+            
+        %endif
         
     ; Halts the system
     hlt
