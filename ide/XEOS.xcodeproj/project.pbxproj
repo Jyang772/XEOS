@@ -16,6 +16,7 @@
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056A29231628ACF4003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056A29241628AD3D003FBE80 /* pthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
+		05A393C416338FF0001F6C24 /* xeos.video.inc.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.video.inc.32.s; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -347,6 +348,7 @@
 				05AFEE0A1620F27C00740041 /* xeos.io.fat12.mbr.inc.16.s */,
 				05AFEE091620F27C00740041 /* xeos.macros.inc.s */,
 				055C3D12162E1844009A4FFC /* xeos.string.inc.16.s */,
+				05A393C416338FF0001F6C24 /* xeos.video.inc.32.s */,
 			);
 			path = include;
 			sourceTree = "<group>";
