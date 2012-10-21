@@ -67,8 +67,13 @@ ENTRY( XEOS.kernel.init )
 /* Setup for the available sections */
 SECTIONS
 {
-    /* The kernel is loaded in memory at 1MB */
-    . = 0x00100000;
+    /*
+     * Address of the kernel in memory.
+     * 
+     * Aligned on 4Kb, so the ELF header can fit. This will
+     * drastically reduce the binary size.
+     */
+    . = 0x00201000;
     
     /* Machine code */
     .text :
