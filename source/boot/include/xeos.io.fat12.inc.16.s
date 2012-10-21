@@ -407,16 +407,26 @@ XEOS.io.fat12.loadFile:
         ; Checks if we are inside the first stage bootloader or not
         %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
             
+            ; Saves registers
+            pusha
+            
             ; Adjusts ES, as the buffer location is limited to 65'535 bytes,
             ; including the original offset, as it uses a 16 bits register.
             ; Note: this is done only for the second stage bootloader, as the
             ; first one has a 512 bytes of code limit.
             ; This shouldn't be a problem, unless the second stage bootloader
             ; is greater than 65'535 bytes - the offset at which it is loaded.
-            shr     bx,         8
+            mov     ax,         bx
+            mov     bx,         0x10
+            div     bx
             mov     cx,         es
-            add     cx,         bx
+            add     cx,         ax
             mov     es,         cx
+            
+            ; Restores registers
+            popa
+            
+            ; New offset
             xor     bx,         bx
         
         %endif
