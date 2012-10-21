@@ -91,9 +91,6 @@ BITS    16
 ; DEBUG - Forces the 32 bits mode
 %define XEOS32
 
-; DEBUG - Uses the test ASM kernel
-%define KERNEL_ASM
-
 ; Jumps to the entry point
 start: jmp main
 
@@ -788,34 +785,15 @@ main:
         
         .load.32:
             
-            %ifdef KERNEL_ASM
-            
-                ; Test ASM kernel is going to be loaded
-                mov     si,             $XEOS.files.kernel.asm
-                jmp     .load.start
-                
-            %else
-                
-                ; 32 bits kernel is going to be loaded
-                mov     si,             $XEOS.files.kernel.32
-                jmp     .load.start
-                
-            %endif
+            ; 32 bits kernel is going to be loaded
+            mov     si,             $XEOS.files.kernel.32
+            jmp     .load.start
             
         .load.64:
             
-            %ifdef KERNEL_ASM
+            ; 64 bits kernel is going to be loaded
+            mov     si,             $XEOS.files.kernel.64
             
-                ; Test ASM kernel is going to be loaded
-                mov     si,             $XEOS.files.kernel.asm
-                
-            %else
-                
-                ; 64 bits kernel is going to be loaded
-                mov     si,             $XEOS.files.kernel.64
-                
-            %endif
-        
         .load.start:
             
             @XEOS.boot.stage2.print.bracket.green   si
@@ -850,12 +828,6 @@ main:
             mov     DWORD [ $XEOS.boot.stage2.entryPoint ], edi
             cmp     ax,     0
             je      .load.verified
-            
-            %ifdef KERNEL_ASM
-                
-                jmp     .load.verified
-                
-            %endif
             
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -892,12 +864,6 @@ main:
             mov     DWORD [ $XEOS.boot.stage2.entryPoint ], edi
             cmp     ax,     0
             je      .load.verified
-            
-            %ifdef KERNEL_ASM
-                
-                jmp     .load.verified
-                
-            %endif
             
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -1474,12 +1440,8 @@ XEOS.boot.stage2.32.run:
         mul     ebx
         mov     esi,        eax
         
-        %ifndef KERNEL_ASM
-            
-            ; The .text section is located at offset 0x1000
-            add     esi,        0x1000
-            
-        %endif
+        ; The .text section is located at offset 0x1000
+        add     esi,        0x1000
         
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
@@ -1652,12 +1614,8 @@ XEOS.boot.stage2.64.run:
         mul     ebx
         mov     esi,        eax
         
-        %ifndef KERNEL_ASM
-            
-            ; The .text section is located at offset 0x1000
-            add     esi,        0x1000
-            
-        %endif
+        ; The .text section is located at offset 0x1000
+        add     esi,        0x1000
         
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
