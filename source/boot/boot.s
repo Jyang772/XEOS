@@ -181,9 +181,8 @@ $XEOS.boot.stage2.msg.a20.bios                          db  "Enabling the A-20 a
 $XEOS.boot.stage2.msg.a20.keyboardControl               db  "Enabling the A-20 address line (KBDCTRL):        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.keyboardOut                   db  "Enabling the A-20 address line (KBDOUT):         ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.systemControl                 db  "Enabling the A-20 address line (SYSCTRL):        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits mode", @ASCII.NUL
-$XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits mode", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.run                        db  "Moving and executing the kernel", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits (protected) mode    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits (long) mode         ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                             db  "Press any key to reboot: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir                   db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find                  db  "Error: file not found", @ASCII.NUL
@@ -1229,8 +1228,18 @@ XEOS.boot.stage2.print.color:
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.32:
 
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.switch32
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.kernel.run
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
+        
+        ; Resets registers
+        xor     ax,         ax
+        xor     bx,         bx
+        xor     cx,         cx
+        xor     dx,         dx
+        
+        ; Gets the cursor position, so it can be restored in 32 bits mode
+        mov     ah,         0x03
+        @BIOS.int.video
         
         ; Clears the interrupts
         cli
@@ -1268,9 +1277,9 @@ XEOS.boot.stage2.32:
 ;       N/A (This procudure does not return)
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.64:
-
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.switch64
-        @XEOS.boot.stage2.print.line $XEOS.boot.stage2.msg.kernel.run
+        
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
         
         ; Clears the interrupts
         cli
@@ -1299,14 +1308,14 @@ BITS    32
 ; Includes
 ;-------------------------------------------------------------------------------
 
-%include "xeos.video.inc.32.s"
+%include "xeos.video.inc.32.s"      ; XEOS video services
 
 ;-------------------------------------------------------------------------------
-; Setups and executes the 64 bits kernel
+; Setups and executes the 32 bits kernel
 ; 
 ; Input registers:
 ;       
-;       None
+;       - DX:       The current cursor position
 ; 
 ; Return registers:
 ;       
@@ -1325,6 +1334,9 @@ XEOS.boot.stage2.32.run:
     mov     es,         ax
     mov     esp,        0x90000
     
+    ; Restores the cursor position
+    @XEOS.video.cursor.move dl, dh
+    
     ; Halts the system
     hlt
 
@@ -1333,7 +1345,7 @@ XEOS.boot.stage2.32.run:
 ; 
 ; Input registers:
 ;       
-;       None
+;       - DX:       The current cursor position
 ; 
 ; Return registers:
 ;       
@@ -1351,6 +1363,9 @@ XEOS.boot.stage2.64.run:
     mov     ss,         ax
     mov     es,         ax
     mov     esp,        0x90000
+    
+    ; Restores the cursor position
+    @XEOS.video.cursor.move dl, dh
     
     ; Halts the system
     hlt
