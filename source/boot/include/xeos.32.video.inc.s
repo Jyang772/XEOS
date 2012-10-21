@@ -69,8 +69,8 @@
 ; 'xeos.16.video.inc.s' file.
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_VIDEO_INC_32_ASM__
-%define __XEOS_VIDEO_INC_32_ASM__
+%ifndef __XEOS_32_VIDEO_INC_S__
+%define __XEOS_32_VIDEO_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Includes

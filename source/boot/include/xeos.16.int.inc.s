@@ -65,8 +65,8 @@
 ; BIOS interrupts
 ;-------------------------------------------------------------------------------
 
-%ifndef __BIOS_INT_INC_ASM__
-%define __BIOS_INT_INC_ASM__
+%ifndef __XEOS_16_INT_INC_S__
+%define __XEOS_16_INT_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros

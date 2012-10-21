@@ -67,8 +67,8 @@
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
 
-%ifndef __BIOS_VIDEO_INC_16_ASM__
-%define __BIOS_VIDEO_INC_16_ASM__
+%ifndef __XEOS_16_VIDEO_INC_S__
+%define __XEOS_16_VIDEO_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Includes

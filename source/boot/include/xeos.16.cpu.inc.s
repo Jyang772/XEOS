@@ -71,8 +71,8 @@
 ; the assembler.
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_CPU_INC_16_ASM__
-%define __XEOS_CPU_INC_16_ASM__
+%ifndef __XEOS_16_CPU_INC_S__
+%define __XEOS_16_CPU_INC_S__
 
 ; We are in 16 bits mode
 BITS    16

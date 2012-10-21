@@ -66,8 +66,8 @@
 ; 
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
-%ifndef __XEOS_IO_FAT12_INC_16_ASM__
-%define __XEOS_IO_FAT12_INC_16_ASM__
+%ifndef __XEOS_16_IO_FAT12_INC_S__
+%define __XEOS_16_IO_FAT12_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Includes
@@ -135,7 +135,7 @@ XEOS.16.io.fat12.loadRootDirectory:
     mov     ax,         32
     
     ; Saves a few bytes of code if we can access the MBR variables directly
-    %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+    %ifndef __XEOS_IO_FAT12_MBR_INC_S__
         
         ; Multiplies by the maximum number of entries to get the root directory size
         mov     bx,         @XEOS.io.fat12.mbr.maxRootDirEntries
@@ -149,7 +149,7 @@ XEOS.16.io.fat12.loadRootDirectory:
     %endif
     
     ; Saves a few bytes of code if we can access the MBR variables directly
-    %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+    %ifndef __XEOS_IO_FAT12_MBR_INC_S__
         
         ; Number of sectors used by the root directory
         mov     bx,         @XEOS.io.fat12.mbr.bytesPerSector
@@ -169,7 +169,7 @@ XEOS.16.io.fat12.loadRootDirectory:
     mov     al,         @XEOS.io.fat12.mbr.numberOfFATs
     
     ; Saves a few bytes of code if we can access the MBR variables directly
-    %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+    %ifndef __XEOS_IO_FAT12_MBR_INC_S__
         
         ; Multiplies by the number of sectors that a FAT uses
         mov     bx,         @XEOS.io.fat12.mbr.sectorsPerFAT
@@ -336,7 +336,7 @@ XEOS.16.io.fat12.loadFile:
         mov     al,         @XEOS.io.fat12.mbr.numberOfFATs
         
         ; Saves a few bytes of code if we can access the MBR variables directly
-        %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+        %ifndef __XEOS_IO_FAT12_MBR_INC_S__
             
             ; Multiplies by the number of sectors per FAT
             mov     bx,         @XEOS.io.fat12.mbr.sectorsPerFAT
@@ -405,7 +405,7 @@ XEOS.16.io.fat12.loadFile:
         call    XEOS.16.io.fat12.readSectors
         
         ; Checks if we are inside the first stage bootloader or not
-        %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+        %ifndef __XEOS_IO_FAT12_MBR_INC_S__
             
             ; Saves registers
             pusha
@@ -538,7 +538,7 @@ XEOS.16.io.fat12.readSectors:
         mov     di,         5
         
         ; Checks if we are inside the first stage bootloader or not
-        %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+        %ifndef __XEOS_IO_FAT12_MBR_INC_S__
             
             ; Prints the loading symbol
             ; External procedure, as we are using short jumps here, so
@@ -563,7 +563,7 @@ XEOS.16.io.fat12.readSectors:
         mov     ax,         0x201
         
         ; Checks if we are inside the first stage bootloader or not
-        %ifdef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+        %ifdef __XEOS_IO_FAT12_MBR_INC_S__
             
             ; Cylinder and sector arguments for int 0x13
             ; Wrong formula, but this should work for the first stage bootloader
@@ -675,7 +675,7 @@ XEOS.16.io.fat12._clusterToLBA:
     sub     ax,         2
     
     ; Saves a few bytes of code if we can access the MBR variables directly
-    %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+    %ifndef __XEOS_IO_FAT12_MBR_INC_S__
         
         ; Multiplies by the number of sectors per cluster
         mov     cx,         @XEOS.io.fat12.mbr.sectorsPerCluster
@@ -731,7 +731,7 @@ XEOS.16.io.fat12._lbaToCHS:
     xor     dx,         dx
     
     ; Saves a few bytes of code if we can access the MBR variables directly
-    %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+    %ifndef __XEOS_IO_FAT12_MBR_INC_S__
         
         ; Divides by the number of sectors per track
         mov     cx,         @XEOS.io.fat12.mbr.sectorsPerTrack
@@ -754,7 +754,7 @@ XEOS.16.io.fat12._lbaToCHS:
     xor     dx,         dx
     
     ; Saves a few bytes of code if we can access the MBR variables directly
-    %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+    %ifndef __XEOS_IO_FAT12_MBR_INC_S__
         
         ; Mod by the number of heads
         mov     cx,         @XEOS.io.fat12.mbr.headsPerCylinder
@@ -777,7 +777,7 @@ XEOS.16.io.fat12._lbaToCHS:
 ;-------------------------------------------------------------------------------
 ; Specific procedures for the second stage bootloader
 ;-------------------------------------------------------------------------------
-%ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+%ifndef __XEOS_IO_FAT12_MBR_INC_S__
 
 ; Specific includes
 %include "xeos.16.video.inc.s"
@@ -875,7 +875,7 @@ $XEOS.16.io.fat12._sector               db  0
 $XEOS.16.io.fat12._currentCluster       dw  0
 $XEOS.16.io.fat12._fatOffset            dw  0
 
-%ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+%ifndef __XEOS_IO_FAT12_MBR_INC_S__
     
     $XEOS.16.io.fat12._loadCount        dd  0
     

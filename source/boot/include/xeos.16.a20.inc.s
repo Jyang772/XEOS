@@ -81,8 +81,8 @@
 ; Those procedures and macros are intended to be used only in 16 bits real mode.
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_A20_INC_16_ASM__
-%define __XEOS_A20_INC_16_ASM__
+%ifndef __XEOS_16_A20_INC_S__
+%define __XEOS_16_A20_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Includes

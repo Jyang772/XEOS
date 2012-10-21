@@ -65,8 +65,8 @@
 ; Constants
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_CONSTANTS_INC_ASM__
-%define __XEOS_CONSTANTS_INC_ASM__
+%ifndef __XEOS_CONSTANTS_INC_S__
+%define __XEOS_CONSTANTS_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros

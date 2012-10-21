@@ -67,8 +67,8 @@
 ; This section is used to create a valid floppy disk MBR (FAT-12)
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
-%define __XEOS_IO_FAT12_MBR_INC_16_ASM__
+%ifndef __XEOS_IO_FAT12_MBR_INC_S__
+%define __XEOS_IO_FAT12_MBR_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Includes

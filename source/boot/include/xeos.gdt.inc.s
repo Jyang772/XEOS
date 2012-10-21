@@ -65,8 +65,8 @@
 ; Procedures and definitions for the GDT (Global Descriptor Table)
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_GDT_INC_ASM__
-%define __XEOS_GDT_INC_ASM__
+%ifndef __XEOS_GDT_INC_S__
+%define __XEOS_GDT_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Procedures
