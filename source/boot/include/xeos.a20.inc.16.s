@@ -121,7 +121,7 @@ XEOS.16.a20.enable.bios:
     mov     ax,         0x2401
     
     ; Calls the BIOS miscellaneous services
-    @BIOS.int.misc
+    @XEOS.16.int.misc
     
     ; Checks for an error
     jnc     .success

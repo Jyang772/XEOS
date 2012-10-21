@@ -598,7 +598,7 @@ XEOS.debug.registers.dump:
     
     ; Waits for a key press
     xor     ax,         ax
-    @BIOS.int.keyboard
+    @XEOS.16.int.keyboard
     
     @XEOS.16.proc.end
     
@@ -652,7 +652,7 @@ XEOS.debug.memory.dump:
         
     ; Waits for a key press
     xor     ax,         ax
-    @BIOS.int.keyboard
+    @XEOS.16.int.keyboard
     
     ; Checks if another dump must be printed ('c' key pressed)
     cmp     al,         0x63
@@ -917,7 +917,7 @@ XEOS.debug.print.color:
         mov     ah,         0x09
         mov     al,         32
         mov     bh,         0
-        @BIOS.int.video
+        @XEOS.16.int.video
         
         ; Restores registers
         pop     si

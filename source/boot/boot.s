@@ -1024,16 +1024,16 @@ main:
         
         ; Waits for a key press
         xor     ax,         ax
-        @BIOS.int.keyboard
+        @XEOS.16.int.keyboard
         
         ; Reboot the computer
-        @BIOS.int.reboot
+        @XEOS.16.int.reboot
     
     .end:
         
         ; Waits for a key press
         xor     ax,         ax
-        @BIOS.int.keyboard
+        @XEOS.16.int.keyboard
         
         ; Halts the system
         cli
@@ -1256,7 +1256,7 @@ XEOS.boot.stage2.print.color:
         mov     ah,         0x09
         mov     al,         32
         mov     bh,         0
-        @BIOS.int.video
+        @XEOS.16.int.video
         
         ; Restores registers
         pop     si
@@ -1296,7 +1296,7 @@ XEOS.boot.stage2.32:
         
         ; Gets the cursor position, so it can be restored in 32 bits mode
         mov     ah,         0x03
-        @BIOS.int.video
+        @XEOS.16.int.video
         
         ; Clears the interrupts
         cli
@@ -1346,7 +1346,7 @@ XEOS.boot.stage2.64:
         
         ; Gets the cursor position, so it can be restored in 64 bits mode
         mov     ah,         0x03
-        @BIOS.int.video
+        @XEOS.16.int.video
         
         ; Clears the interrupts
         cli

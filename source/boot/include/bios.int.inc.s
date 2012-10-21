@@ -73,17 +73,17 @@
 ;-------------------------------------------------------------------------------
 
 ; BIOS ISRs (Interrupt Service Routines)
-%define @BIOS.int.printScreen   int 0x05
-%define @BIOS.int.video         int 0x10
-%define @BIOS.int.equipment     int 0x11
-%define @BIOS.int.memorySize    int 0x12
-%define @BIOS.int.llds          int 0x13
-%define @BIOS.int.serialIO      int 0x14
-%define @BIOS.int.misc          int 0x15
-%define @BIOS.int.keyboard      int 0x16
-%define @BIOS.int.printer       int 0x17
-%define @BIOS.int.bootFailure   int 0x18
-%define @BIOS.int.reboot        int 0x19
-%define @BIOS.int.clock         int 0x1A
+%define @XEOS.16.int.printScreen    int 0x05
+%define @XEOS.16.int.video          int 0x10
+%define @XEOS.16.int.equipment      int 0x11
+%define @XEOS.16.int.memorySize     int 0x12
+%define @XEOS.16.int.llds           int 0x13
+%define @XEOS.16.int.serialIO       int 0x14
+%define @XEOS.16.int.misc           int 0x15
+%define @XEOS.16.int.keyboard       int 0x16
+%define @XEOS.16.int.printer        int 0x17
+%define @XEOS.16.int.bootFailure    int 0x18
+%define @XEOS.16.int.reboot         int 0x19
+%define @XEOS.16.int.clock          int 0x1A
 
 %endif

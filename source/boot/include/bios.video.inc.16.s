@@ -157,7 +157,7 @@ BITS    16
     mov     dl,     %2
     
     ; Calls the BIOS video services
-    @BIOS.int.video
+    @XEOS.16.int.video
     
     ; Restores registers
     popa
@@ -198,7 +198,7 @@ BITS    16
     mov     dh,     @XEOS.16.video.screen.rows - 1
     
     ; Calls the BIOS video services
-    @BIOS.int.video
+    @XEOS.16.int.video
     
     ; Repositions the cursor to the top-left corner
     @XEOS.16.video.setCursor 0, 0
@@ -271,7 +271,7 @@ XEOS.16.video.print:
         je      .done
         
         ; Calls the BIOS video services
-        @BIOS.int.video
+        @XEOS.16.int.video
         
         ; Process the next byte from the string
         jmp     .repeat

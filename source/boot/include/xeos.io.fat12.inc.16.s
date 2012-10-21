@@ -596,7 +596,7 @@ XEOS.16.io.fat12.readSectors:
         mov     dl,         @XEOS.io.fat12.mbr.driveNumber
         
         ; Calls the BIOS LLDS
-        @BIOS.int.llds
+        @XEOS.16.int.llds
         
         ; Checks the return value
         jnc     .success
@@ -605,7 +605,7 @@ XEOS.16.io.fat12.readSectors:
     
         ; Resets the floppy disk
         xor     ax,         ax
-        @BIOS.int.llds
+        @XEOS.16.int.llds
         
         ; Restores registers
         popa
@@ -851,7 +851,7 @@ XEOS.16.io.fat12._printLoadSymbol:
         mov     cx,         1
         
         ; Calls the BIOS video services
-        @BIOS.int.video
+        @XEOS.16.int.video
     
     ; Increments the counter
     mov eax,    DWORD [ $XEOS.16.io.fat12._loadCount ]

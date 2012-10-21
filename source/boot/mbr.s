@@ -247,10 +247,10 @@ main:
         
         ; Waits for a key press
         xor     ax,         ax
-        @BIOS.int.keyboard
+        @XEOS.16.int.keyboard
         
         ; Reboot the computer
-        @BIOS.int.reboot
+        @XEOS.16.int.reboot
         
         ; Halts the system
         cli
@@ -265,4 +265,4 @@ main:
 times   0x1FE - ( $ - $$ ) db  @ASCII.NUL
 
 ; 0x1FE (2) - Boot sector signature
-dw      @BIOS.boot.signature 
+dw      @XEOS.io.boot.signature 

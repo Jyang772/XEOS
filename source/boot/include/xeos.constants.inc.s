@@ -73,7 +73,7 @@
 ;-------------------------------------------------------------------------------
 
 ; Standard PC boot signature
-%define @BIOS.boot.signature                    0xAA55
+%define @XEOS.io.boot.signature                 0xAA55
 
 ; Master boot record values
 %define @XEOS.io.fat12.mbr.oemName              "XEOS",  0x20, 0x20, 0x20, 0x20
