@@ -796,9 +796,9 @@ XEOS.io.fat12._printLoadSymbol:
     
     ; We've got 4 different symbols, so divide the counter
     ; by 4 and checks the reminder
-    mov     eax,         DWORD [ $XEOS.io.fat12._loadCount ]
-    xor     edx,         edx
-    mov     ebx,         0x04
+    mov     eax,        DWORD [ $XEOS.io.fat12._loadCount ]
+    xor     edx,        edx
+    mov     ebx,        0x04
     div     ebx
     cmp     edx,        0x00
     je      .char.1
