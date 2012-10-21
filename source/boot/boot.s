@@ -1438,7 +1438,7 @@ XEOS.boot.stage2.32.run:
         div     ebx
         
         ; Location of the kernel in memory
-        mov    esi,         @XEOS.boot.stage2.kernel.segment
+        mov     esi,        @XEOS.boot.stage2.kernel.segment
 
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
@@ -1601,7 +1601,7 @@ XEOS.boot.stage2.64.run:
         div     ebx
         
         ; Location of the kernel in memory
-        mov    esi,         @XEOS.boot.stage2.kernel.segment
+        mov     esi,        @XEOS.boot.stage2.kernel.segment
 
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
