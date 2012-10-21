@@ -327,6 +327,31 @@ BITS    32
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Prints a single character, without updating the cursor position
+; 
+; Parameters:
+; 
+;       1:          The character to print
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.video.putc 1
+    
+    ; Saves registers
+    push    ax
+    
+    ; Prints the character
+    mov     al,         %1
+    call    XEOS.video.putc
+    
+    ; Restores registers
+    pop     ax
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
 ; Prints a string
 ; 
 ; Parameters:
@@ -590,7 +615,39 @@ XEOS.video.cursor.update:
     @XEOS.proc.end
     
     ret
+   
+;-------------------------------------------------------------------------------
+; Prints a single character, without updating the cursor position
+; 
+; Input registers:
+; 
+;       - AL:       The character to print
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.video.putc:
     
+    @XEOS.proc.start 0
+    
+    ; Gets the current cursor position
+    @XEOS.video._currentPosition
+    
+    ; Current character attribute
+    mov     ah,         [ $XEOS.video.attribute ]
+    
+    ; Prints the character
+    mov	    [ edi ],    WORD ax
+    
+    @XEOS.proc.end
+    
+    ret
+
 ;-------------------------------------------------------------------------------
 ; Prints a string
 ; 
