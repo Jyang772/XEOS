@@ -136,12 +136,14 @@ $XEOS.boot.stage2.msg.space                             db  " ", @ASCII.NUL
 $XEOS.boot.stage2.msg.bracket.left                      db  "[", @ASCII.NUL
 $XEOS.boot.stage2.msg.bracket.right                     db  "]", @ASCII.NUL
 $XEOS.boot.stage2.msg.separator                         db  ":", @ASCII.NUL
+$XEOS.boot.stage2.msg.slash                             db  "/", @ASCII.NUL
 $XEOS.boot.stage2.msg.yes                               db  "YES", @ASCII.NUL
 $XEOS.boot.stage2.msg.no                                db  "NO", @ASCII.NUL
 $XEOS.boot.stage2.msg.success                           db  "OK", @ASCII.NUL
 $XEOS.boot.stage2.msg.failure                           db  "FAIL", @ASCII.NUL
 $XEOS.boot.stage2.msg.greet                             db  "Entering the second stage bootloader:            ", @ASCII.NUL
-$XEOS.boot.stage2.msg.version                           db  "XSBoot-x86/0.2.0", @ASCII.NUL
+$XEOS.boot.stage2.msg.version.name                      db  "XSBoot-x86", @ASCII.NUL
+$XEOS.boot.stage2.msg.version.number                    db  "0.2.0", @ASCII.NUL
 $XEOS.boot.stage2.msg.hr.top                            db  201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
                                                             205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
                                                             205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, \
@@ -520,7 +522,13 @@ main:
         ; Prints the welcome message
         @XEOS.boot.stage2.print.prompt
         @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.greet
-        @XEOS.boot.stage2.print.bracket.green   $XEOS.boot.stage2.msg.version
+        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.space
+        @XEOS.boot.stage2.print.color           $XEOS.boot.stage2.msg.version.name,     @BIOS.video.color.green.light,  @BIOS.video.color.black
+        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.slash
+        @XEOS.boot.stage2.print.color           $XEOS.boot.stage2.msg.version.number,   @BIOS.video.color.green.light,  @BIOS.video.color.black
+        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.space
+        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.bracket.right
         @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
         
     ;---------------------------------------------------------------------------
