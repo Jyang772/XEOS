@@ -483,8 +483,8 @@ main:
         ; Clears the interrupts as we are setting-up the segments and stack space
         cli
         
-        ; Sets the data and extra segments to where we were loaded by the first
-        ; stage bootloader (0x50), so we don't have to add 0x50 to all our data
+        ; Sets the data and extra segments. We use the ORG instruction, so we
+        ; simply need to set them to 0.
         xor     ax,         ax
         mov     ds,         ax
         mov     es,         ax
