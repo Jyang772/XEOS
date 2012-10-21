@@ -812,7 +812,7 @@ main:
             %else
                 
                 ; 64 bits kernel is going to be loaded
-                mov     si,             $XEOS.files.kernel.32
+                mov     si,             $XEOS.files.kernel.64
                 
             %endif
         
