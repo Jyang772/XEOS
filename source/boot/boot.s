@@ -1430,6 +1430,7 @@ XEOS.boot.stage2.32.run:
         mov     eax,        @XEOS.boot.stage2.kernel.segment
         mov     ebx,        0x10
         mul     ebx
+        mov     esi,        eax
         
         ; The .text section is located at offset 0x1000
         add     esi,        0x1000
@@ -1598,6 +1599,7 @@ XEOS.boot.stage2.64.run:
         mov     eax,        @XEOS.boot.stage2.kernel.segment
         mov     ebx,        0x10
         mul     ebx
+        mov     esi,        eax
         
         ; The .text section is located at offset 0x1000
         add     esi,        0x1000
