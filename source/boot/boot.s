@@ -1529,8 +1529,8 @@ XEOS.boot.stage2.32.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        ; Jumps to the kernel code (.text is located at offset 0x1000)
+        jmp	@XEOS.gdt.descriptors.code:( @XEOS.boot.stage2.kernel.address + 0x1000 );
         
     ; Halts the system
     hlt
@@ -1692,8 +1692,8 @@ XEOS.boot.stage2.64.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        ; Jumps to the kernel code (.text is located at offset 0x1000)
+        jmp	@XEOS.gdt.descriptors.code:( @XEOS.boot.stage2.kernel.address + 0x1000 );
         
     ; Halts the system
     hlt
