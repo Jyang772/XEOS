@@ -1587,7 +1587,7 @@ XEOS.boot.stage2.32.run:
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
         ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address
         
     ; Halts the system
     hlt
@@ -1765,7 +1765,7 @@ XEOS.boot.stage2.64.run:
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
         ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address
         
     ; Halts the system
     hlt
