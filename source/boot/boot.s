@@ -1530,9 +1530,6 @@ XEOS.boot.stage2.32.run:
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.run
         @XEOS.32.video.print                $XEOS.boot.stage2.nl
         
-        ; DEBUG - Do not executes the kernel
-        ; hlt
-        
         ; Jumps to the kernel code
         jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address
         
