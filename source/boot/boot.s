@@ -1195,6 +1195,10 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.proc.end
         
+        ; DEBUG - Dumps the kernel data
+        ; mov     si,         @XEOS.boot.stage2.kernel.segment
+        ; call    XEOS.debug.memory.dump
+        
         ; Success - Stores result code in AX
         xor     ax,         ax
         
