@@ -518,10 +518,20 @@ XEOS.io.fat12.readSectors:
     push di
     
     .start:
-    
+        
         ; Allows five read attempts before returning an error, as we may need
         ; to reset the floppy disk before successfully reading
         mov     di,         5
+        
+        ; Checks if we are inside the first stage bootloader or not
+        %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+            
+            ; Prints the loading symbol
+            ; External procedure, as we are using short jumps here, so
+            ; the amount of code is limited
+            call    XEOS.io.fat12._printLoadSymbol
+            
+        %endif
         
     .loop
         
@@ -538,7 +548,7 @@ XEOS.io.fat12.readSectors:
         ; AX = 0000 0010 0000 0001 = 0x201
         mov     ax,         0x201
         
-        ; Checks if we are inside the first stage bootloader or not 
+        ; Checks if we are inside the first stage bootloader or not
         %ifdef __XEOS_IO_FAT12_MBR_INC_16_ASM__
             
             ; Cylinder and sector arguments for int 0x13
@@ -615,7 +625,7 @@ XEOS.io.fat12.readSectors:
     .end:
     
         ; Restores registers
-        pop di
+        pop     di
         
         ; Success - Stores result code in AX
         xor     eax,        eax
@@ -749,6 +759,97 @@ XEOS.io.fat12._lbaToCHS:
     
     ret
 
+
+;-------------------------------------------------------------------------------
+; Specific procedures for the second stage bootloader
+;-------------------------------------------------------------------------------
+%ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+
+; Specific includes
+%include "bios.video.inc.16.s"
+
+;-------------------------------------------------------------------------------
+; Prints the loading symbol at the cursor position
+; 
+; Note that this procedure is not available when on the first stage bootloader,
+; as the code size is limited.
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.io.fat12._printLoadSymbol:
+    
+    @XEOS.proc.start 0
+    
+    ; We've got 4 different symbols, so divide the counter
+    ; by 4 and checks the reminder
+    mov     eax,         DWORD [ $XEOS.io.fat12._loadCount ]
+    xor     edx,         edx
+    mov     ebx,         0x04
+    div     ebx
+    cmp     edx,        0x00
+    je      .char.1
+    cmp     edx,        0x01
+    je      .char.2
+    cmp     edx,        0x02
+    je      .char.3
+    cmp     edx,        0x03
+    je      .char.4
+    
+    .char.1:
+        
+        ; Prints '|'
+        mov     al,         0x7C
+        jmp     .print
+        
+    .char.2:
+        
+        ; Prints '/'
+        mov     al,         0x2F
+        jmp     .print
+        
+    .char.3:
+        
+        ; Prints '-'
+        mov     al,         0x2D
+        jmp     .print
+        
+    .char.4:
+        
+        ; Prints '\'
+        mov     al,         0x5C
+        
+    .print:
+        
+        ; Outputs a single character (BIOS video services function)
+        mov     ah,         0x0A
+        
+        ; Number of characters to print
+        mov     cx,         1
+        
+        ; Calls the BIOS video services
+        @BIOS.int.video
+    
+    ; Increments the counter
+    mov eax,    DWORD [ $XEOS.io.fat12._loadCount ]
+    inc eax
+    mov DWORD [ $XEOS.io.fat12._loadCount ], eax
+    
+    @XEOS.proc.end
+    
+    ret
+
+%endif
+
 ;-------------------------------------------------------------------------------
 ; Variables definition
 ;-------------------------------------------------------------------------------
@@ -759,5 +860,11 @@ $XEOS.io.fat12._head                    db  0
 $XEOS.io.fat12._sector                  db  0
 $XEOS.io.fat12._currentCluster          dw  0
 $XEOS.io.fat12._fatOffset               dw  0
+
+%ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
+    
+    $XEOS.io.fat12._loadCount           dd  0
+    
+%endif
 
 %endif
