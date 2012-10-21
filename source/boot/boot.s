@@ -89,10 +89,10 @@ ORG     0x500
 BITS    16
 
 ; DEBUG - Forces the 32 bits mode
-;%define XEOS32
+%define XEOS32
 
 ; DEBUG - Uses the test ASM kernel
-;%define KERNEL_ASM
+%define KERNEL_ASM
 
 ; Jumps to the entry point
 start: jmp main
@@ -1479,21 +1479,20 @@ XEOS.boot.stage2.32.run:
             ; The .text section is located at offset 0x1000
             add     esi,        0x1000
             
-            ; Destination for the kernel
-            mov     edi,        @XEOS.boot.stage2.kernel.address
-            
-        %else
-            
-            ; Destination for the kernel
-            mov     edi,        0x100000
-            
         %endif
         
+        ; Destination for the kernel
+        mov     edi,        @XEOS.boot.stage2.kernel.address
+        
+        ; Resets registers
+        xor     eax,        eax
+        xor     ebx,        ebx
+        
         ; Number of sectors loaded for the kernel
-        mov     eax,        [ $XEOS.boot.stage2.kernelSectors ]
+        mov     ax,        WORD [ $XEOS.boot.stage2.kernelSectors ]
         
         ; Multiplies by the number of bytes per sector
-        mov     ebx,        @XEOS.fat12.mbr.bytesPerSector
+        mov     bx,        @XEOS.fat12.mbr.bytesPerSector
         mul     ebx
         
         ; We are going to read doubles, so divides the bytes by 4
@@ -1587,17 +1586,8 @@ XEOS.boot.stage2.32.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        %ifndef KERNEL_ASM
-            
-            ; Jumps to the kernel code
-            jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
-            
-        %else
-            
-            ; Jumps to the kernel code
-            jmp	@XEOS.gdt.descriptors.code:0x100000;
-            
-        %endif
+        ; Jumps to the kernel code
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
         
     ; Halts the system
     hlt
@@ -1667,24 +1657,20 @@ XEOS.boot.stage2.64.run:
             ; The .text section is located at offset 0x1000
             add     esi,        0x1000
             
-            ; Destination for the kernel
-            mov     edi,        @XEOS.boot.stage2.kernel.address
-            
-        %else
-            
-            ; Destination for the kernel
-            mov     edi,        0x100000
-            
         %endif
-
+        
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
         
+        ; Resets registers
+        xor     eax,        eax
+        xor     ebx,        ebx
+        
         ; Number of sectors loaded for the kernel
-        mov     eax,        [ $XEOS.boot.stage2.kernelSectors ]
+        mov     ax,         [ $XEOS.boot.stage2.kernelSectors ]
         
         ; Multiplies by the number of bytes per sector
-        mov     ebx,        @XEOS.fat12.mbr.bytesPerSector
+        mov     bx,         @XEOS.fat12.mbr.bytesPerSector
         mul     ebx
         
         ; We are going to read doubles, so divides the bytes by 4
@@ -1778,17 +1764,8 @@ XEOS.boot.stage2.64.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
-        %ifndef KERNEL_ASM
-            
-            ; Jumps to the kernel code
-            jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
-            
-        %else
-            
-            ; Jumps to the kernel code
-            jmp	@XEOS.gdt.descriptors.code:0x100000;
-            
-        %endif
+        ; Jumps to the kernel code
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
         
     ; Halts the system
     hlt

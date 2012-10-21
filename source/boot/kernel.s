@@ -83,7 +83,7 @@
 ;-------------------------------------------------------------------------------
 
 ; Location at which we were loaded by the second stage bootloader
-ORG     0x100000
+ORG     0x00201000
 
 ; We are in 32 bits mode
 BITS    32
