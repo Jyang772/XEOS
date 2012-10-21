@@ -447,6 +447,10 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Procedures
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; Second stage bootloader
 ; 
 ; This section is the bootloader's code that will be runned by first stage

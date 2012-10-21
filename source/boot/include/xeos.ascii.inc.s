@@ -68,6 +68,10 @@
 %ifndef __XEOS_ASCII_INC_ASM__
 %define __XEOS_ASCII_INC_ASM__
 
+;-------------------------------------------------------------------------------
+; Definitions & Macros
+;-------------------------------------------------------------------------------
+
 ; Control characters
 %define @ASCII.NUL      0x00
 %define @ASCII.SOH      0x01

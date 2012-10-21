@@ -68,6 +68,10 @@
 %ifndef __BIOS_INT_INC_ASM__
 %define __BIOS_INT_INC_ASM__
 
+;-------------------------------------------------------------------------------
+; Definitions & Macros
+;-------------------------------------------------------------------------------
+
 ; BIOS ISRs (Interrupt Service Routines)
 %define @BIOS.int.printScreen   int 0x05
 %define @BIOS.int.video         int 0x10

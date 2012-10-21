@@ -69,6 +69,10 @@
 %define __XEOS_MACROS_INC_ASM__
 
 ;-------------------------------------------------------------------------------
+; Definitions & Macros
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; Start of a standard procedure
 ; 
 ; Note that the following registers are automatically saved on the stack, and

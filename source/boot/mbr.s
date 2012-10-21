@@ -129,6 +129,10 @@ $XEOS.boot.stage1.msg.error     db  "FAIL",   @ASCII.NL, @ASCII.NUL
 $XEOS.boot.stage1.msg.ok        db  "BOOT",   @ASCII.NL, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
+; Procedures
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; First stage bootloader
 ; 
 ; This section is the bootloader's code that will be runned by the BIOS.

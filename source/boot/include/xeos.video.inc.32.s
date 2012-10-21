@@ -83,7 +83,7 @@
 BITS    32
 
 ;-------------------------------------------------------------------------------
-; Definitions
+; Definitions & Macros
 ;-------------------------------------------------------------------------------
 
 ; Location of the video memory
@@ -101,14 +101,14 @@ BITS    32
 %define @XEOS.video.colors.red              0x04
 %define @XEOS.video.colors.magenta          0x05
 %define @XEOS.video.colors.brown            0x06
-%define @XEOS.video.colors.lightGray        0x07
-%define @XEOS.video.colors.darkGray         0x08
-%define @XEOS.video.colors.lightBlue        0x09
-%define @XEOS.video.colors.lightGreen       0x0A
-%define @XEOS.video.colors.lightCyan        0x0B
-%define @XEOS.video.colors.lightRed         0x0C
-%define @XEOS.video.colors.lightMagenta     0x0D
-%define @XEOS.video.colors.lightBrown       0x0E
+%define @XEOS.video.colors.gray.light       0x07
+%define @XEOS.video.colors.gray             0x08
+%define @XEOS.video.colors.blue.light       0x09
+%define @XEOS.video.colors.green.light      0x0A
+%define @XEOS.video.colors.cyan.light       0x0B
+%define @XEOS.video.colors.red.light        0x0C
+%define @XEOS.video.colors.magenta.light    0x0D
+%define @XEOS.video.colors.brown.light      0x0E
 %define @XEOS.video.colors.white            0x0F
 
 ;-------------------------------------------------------------------------------
@@ -124,8 +124,20 @@ BITS    32
 ; 
 ; Also note that a displayed character takes two bytes of memory. One for the
 ; character itself, an the other one for the display attributes (color, etc).
+; 
+; Parameters:
+; 
+;       None
+; 
+; Killed registers:
+;       
+;       - EDI
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video._private.currentPosition 0
+%macro @XEOS.video._currentPosition 0
+    
+    ; Saves registers
+    push    eax
+    push    ecx
     
     ; Pointer to the start of the video memory
     mov     edi,        @XEOS.video.memory
@@ -162,14 +174,24 @@ BITS    32
     ; current cursor position
     add     edi,        eax
     
+    ; Restores registers
+    pop     ecx
+    pop     eax
+    
 %endmacro
 
 ;-------------------------------------------------------------------------------
 ; Computes the value of a BIOS screen color into a register
 ; 
-; Parameter 1:  The register in which to place the color value
-; Parameter 2:  The foreground color
-; Parameter 3:  The background color
+; Parameters:
+; 
+;       1:          The register in which to place the color value
+;       2:          The foreground color
+;       3:          The background color
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.createScreenColor 3
     
@@ -183,7 +205,15 @@ BITS    32
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Sets the background color attribute
 ; 
+; Parameters:
+; 
+;       1:          The background color
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.setBackgroundColor 1
     
@@ -211,7 +241,15 @@ BITS    32
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Sets the foreground color attribute
 ; 
+; Parameters:
+; 
+;       1:          The foreground color
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.setForegroundColor 1
     
@@ -239,7 +277,16 @@ BITS    32
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Clears the screen
 ; 
+; Parameters:
+; 
+;       1:          The foreground color
+;       2:          The background color
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.clear 2
     
@@ -251,7 +298,16 @@ BITS    32
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Moves the cursor
 ; 
+; Parameters:
+; 
+;       1:          The X position
+;       2:          The Y position
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.cursor.move 2
     
@@ -273,18 +329,31 @@ BITS    32
 ;-------------------------------------------------------------------------------
 ; Prints a string
 ; 
-; Parameter 1:  The address of the string to print
+; Parameters:
+; 
+;       1:          The address of the string to print
+; 
+; Killed registers:
+;       
+;       None
 ;-------------------------------------------------------------------------------
 %macro @XEOS.video.print  1
     
+    ; Saves registers
     push    esi
     
+    ; Prints the string
     mov     esi,    %1
     call    XEOS.video.print
     
+    ; Restores registers
     pop     esi
     
 %endmacro
+
+;-------------------------------------------------------------------------------
+; Procedures
+;-------------------------------------------------------------------------------
 
 ;-------------------------------------------------------------------------------
 ; Clears the screen using the current character attribute
@@ -491,7 +560,7 @@ XEOS.video.print:
         .rowAvailable:
         
         ; Gets the current cursor position
-        @XEOS.video._private.currentPosition
+        @XEOS.video._currentPosition
         
         ; Current character attribute
         mov     ah,         [ $XEOS.video.attribute ]
@@ -548,7 +617,7 @@ XEOS.video.print:
 $XEOS.video.cursor.x     db  0
 $XEOS.video.cursor.y     db  0
 
-; Current character attribute (default is white on light blue)
-$XEOS.video.attribute    db  0x9F
+; Current character attribute (default is white on black)
+$XEOS.video.attribute    db  0x0F
 
 %endif
