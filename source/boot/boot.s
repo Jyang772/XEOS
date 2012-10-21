@@ -161,7 +161,7 @@ $XEOS.boot.stage2.msg.copyright.1                       db  " XEOS - x86 Experim
 $XEOS.boot.stage2.msg.copyright.1.right                 db  4 ,"                 ", @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.2                       db  "                                                                             ", @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.3                       db  "      Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>      ", @ASCII.NUL
-$XEOS.boot.stage2.msg.copyright.4                       db  "                             All Rights Reserved                             ", @ASCII.NUL
+$XEOS.boot.stage2.msg.copyright.4                       db  "                       All rights (& wrongs) reserved                        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu                               db  "Getting CPU informations:                        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.vendor                        db  "            ", 26, " CPU vendor:                                  ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type                          db  "            ", 26, " CPU type:                                    ", @ASCII.NUL
@@ -1548,6 +1548,9 @@ XEOS.boot.stage2.32.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
         
+        ; DEBUG - Do not executes the kernel
+        ; hlt
+        
         ; Jumps to the kernel code
         jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address
         
@@ -1721,6 +1724,9 @@ XEOS.boot.stage2.64.run:
         @XEOS.video.print               $XEOS.boot.stage2.msg.space
         @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
         @XEOS.video.print               $XEOS.boot.stage2.nl
+        
+        ; DEBUG - Do not executes the kernel
+        ; hlt
         
         ; Jumps to the kernel code
         jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address
