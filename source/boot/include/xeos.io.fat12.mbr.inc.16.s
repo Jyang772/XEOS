@@ -74,7 +74,7 @@
 ; Includes
 ;-------------------------------------------------------------------------------
 
-%include "XEOS.constants.inc.s"        ; General constants
+%include "xeos.constants.inc.s"        ; General constants
 
 ; We are in 16 bits mode
 BITS    16

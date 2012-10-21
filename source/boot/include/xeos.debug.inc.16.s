@@ -72,11 +72,11 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.constants.inc.s"     ; General constants
-%include "XEOS.macros.inc.s"        ; General macros
-%include "XEOS.ascii.inc.s"         ; ASCII table
-%include "BIOS.video.inc.16.s"      ; BIOS video services
-%include "XEOS.string.inc.16.s"     ; String utilities
+%include "xeos.constants.inc.s"     ; General constants
+%include "xeos.macros.inc.s"        ; General macros
+%include "xeos.ascii.inc.s"         ; ASCII table
+%include "bios.video.inc.16.s"      ; BIOS video services
+%include "xeos.string.inc.16.s"     ; String utilities
 
 ; We are in 16 bits mode
 BITS    16

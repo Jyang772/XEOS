@@ -72,10 +72,10 @@
 ;-------------------------------------------------------------------------------
 ; Includes
 ;-------------------------------------------------------------------------------
-%include "XEOS.constants.inc.s"       ; General constants
-%include "XEOS.macros.inc.s"          ; General macros
-%include "BIOS.int.inc.s"             ; BIOS interrupts
-%include "XEOS.ascii.inc.s"           ; ASCII table
+%include "xeos.constants.inc.s"       ; General constants
+%include "xeos.macros.inc.s"          ; General macros
+%include "bios.int.inc.s"             ; BIOS interrupts
+%include "xeos.ascii.inc.s"           ; ASCII table
 
 ; We are in 16 bits mode
 BITS    16

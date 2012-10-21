@@ -76,8 +76,8 @@
 ; Includes
 ;-------------------------------------------------------------------------------
 
-%include "XEOS.macros.inc.s"          ; General macros
-%include "XEOS.crt.controller.inc.s"  ; CRT microcontroller
+%include "xeos.macros.inc.s"          ; General macros
+%include "xeos.crt.controller.inc.s"  ; CRT microcontroller
 
 ; We are in 32 bits mode
 BITS    32
