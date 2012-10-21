@@ -89,7 +89,7 @@ ORG     0x500
 BITS    16
 
 ; DEBUG - Forces the 32 bits mode
-%define XEOS32
+; %define XEOS32
 
 ; Jumps to the entry point
 start: jmp main
@@ -184,6 +184,7 @@ $XEOS.boot.stage2.msg.a20.systemControl                 db  "Enabling the A-20 a
 $XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits (protected) mode    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits (long) mode         ", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.move                       db  "Moving the kernel image to its final location    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.address                    db  "0x00201000", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.run                        db  "Passing control to the kernel...                 ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                             db  "Press any key to reboot: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir                   db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
@@ -212,9 +213,10 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 ; Definitions & Macros
 ;-------------------------------------------------------------------------------
 
-; Segments and offsets
+; Addresses
 %define @XEOS.boot.stage2.fat.offset        0x7900
 %define @XEOS.boot.stage2.kernel.segment    0x1000
+%define @XEOS.boot.stage2.kernel.address    0x00201000
 
 ;-------------------------------------------------------------------------------
 ; Prints text in color
@@ -1300,7 +1302,7 @@ XEOS.boot.stage2.32:
         ; Sets the lowest bit, indicating the system must run in protected mode
         or      eax,        1
         
-        ; Sets the new value - We are now in 32bits protected mode
+        ; Sets the new value - We are now in 32 bits protected mode
         mov     cr0,        eax
         
         ; Setup the 32 bits kernel
@@ -1327,9 +1329,19 @@ XEOS.boot.stage2.32:
 ;       N/A (This procudure does not return)
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.64:
-        
+
         @XEOS.boot.stage2.print.prompt
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
+        
+        ; Resets registers
+        xor     ax,         ax
+        xor     bx,         bx
+        xor     cx,         cx
+        xor     dx,         dx
+        
+        ; Gets the cursor position, so it can be restored in 64 bits mode
+        mov     ah,         0x03
+        @BIOS.int.video
         
         ; Clears the interrupts
         cli
@@ -1340,7 +1352,7 @@ XEOS.boot.stage2.64:
         ; Sets the lowest bit, indicating the system must run in protected mode
         or      eax,        1
         
-        ; Sets the new value - We are now in 32bits protected mode
+        ; Sets the new value - We are now in 64 bits protected mode
         mov     cr0,        eax
         
         ; Setup the 64 bits kernel
@@ -1400,30 +1412,126 @@ XEOS.boot.stage2.32.run:
     @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
     @XEOS.video.print               $XEOS.boot.stage2.nl
     
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
-    @XEOS.video.print               $XEOS.boot.stage2.nl
-    
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
-    @XEOS.video.print               $XEOS.boot.stage2.nl
-    
+    .copy:
+        
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+        @XEOS.video.setForegroundColor  @XEOS.video.color.white
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
+        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+        
+        ; Number of sectors loaded for the kernel
+        mov     eax,        [ $XEOS.boot.stage2.kernelSectors ]
+        
+        ; Multiplies by the number of bytes per sector
+        mov     ebx,        @XEOS.fat12.mbr.bytesPerSector
+        mul     ebx
+        
+        ; We are going to read doubles, so divides the bytes by 4
+        mov     ebx,        0x04
+        div     ebx
+        
+        ; Location of the kernel in memory
+        mov    esi,         @XEOS.boot.stage2.kernel.segment
+
+        ; Destination for the kernel
+        mov     edi,        @XEOS.boot.stage2.kernel.address
+        
+        ; Clears the direction flag
+        cld
+        
+        ; Counter
+        mov     ecx,        eax
+        
+        .copy.bytes:
+            
+            ; Moves bytes
+            movsd
+            
+            .copy.bytes.symbol:
+                
+                ; Saves registers
+                pusha
+                
+                ; We've got 4 different symbols, so divide the counter
+                ; by 4 and checks the reminder
+                mov     eax,        ecx
+                xor     edx,        edx
+                mov     ebx,        0x04
+                div     ebx
+                cmp     edx,        0x00
+                je      .copy.bytes.symbol.char.1
+                cmp     edx,        0x01
+                je      .copy.bytes.symbol.char.2
+                cmp     edx,        0x02
+                je      .copy.bytes.symbol.char.3
+                cmp     edx,        0x03
+                je      .copy.bytes.symbol.char.4
+                
+                .copy.bytes.symbol.char.1:
+                    
+                    ; Prints '|'
+                    @XEOS.video.putc    0x7C
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.2:
+                    
+                    ; Prints '/'
+                    @XEOS.video.putc    0x2F
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.3:
+                    
+                    ; Prints '-'
+                    @XEOS.video.putc    0x2D
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.4:
+                    
+                    ; Prints '\'      
+                    @XEOS.video.putc    0x5C
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.done:
+                    
+                    ; Restores registers
+                    popa
+            
+            ; Continues to move bytes
+            loop    .copy.bytes
+            
+            @XEOS.video.setForegroundColor  @XEOS.video.color.white
+            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+            @XEOS.video.print               $XEOS.boot.stage2.msg.space
+            @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
+            @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.address
+            @XEOS.video.setForegroundColor  @XEOS.video.color.white
+            @XEOS.video.print               $XEOS.boot.stage2.msg.space
+            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+            @XEOS.video.print               $XEOS.boot.stage2.nl
+    .run:
+        
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+        @XEOS.video.setForegroundColor  @XEOS.video.color.white
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
+        @XEOS.video.print               $XEOS.boot.stage2.nl
+        
+        ; Jumps to the kernel code
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        
     ; Halts the system
     hlt
 
@@ -1467,29 +1575,125 @@ XEOS.boot.stage2.64.run:
     @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
     @XEOS.video.print               $XEOS.boot.stage2.nl
     
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
-    @XEOS.video.print               $XEOS.boot.stage2.nl
-    
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
-    @XEOS.video.print               $XEOS.boot.stage2.nl
-    
+    .copy:
+        
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+        @XEOS.video.setForegroundColor  @XEOS.video.color.white
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
+        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+        
+        ; Number of sectors loaded for the kernel
+        mov     eax,        [ $XEOS.boot.stage2.kernelSectors ]
+        
+        ; Multiplies by the number of bytes per sector
+        mov     ebx,        @XEOS.fat12.mbr.bytesPerSector
+        mul     ebx
+        
+        ; We are going to read doubles, so divides the bytes by 4
+        mov     ebx,        0x04
+        div     ebx
+        
+        ; Location of the kernel in memory
+        mov    esi,         @XEOS.boot.stage2.kernel.segment
+
+        ; Destination for the kernel
+        mov     edi,        @XEOS.boot.stage2.kernel.address
+        
+        ; Clears the direction flag
+        cld
+        
+        ; Counter
+        mov     ecx,        eax
+        
+        .copy.bytes:
+            
+            ; Moves bytes
+            movsd
+            
+            .copy.bytes.symbol:
+                
+                ; Saves registers
+                pusha
+                
+                ; We've got 4 different symbols, so divide the counter
+                ; by 4 and checks the reminder
+                mov     eax,        ecx
+                xor     edx,        edx
+                mov     ebx,        0x04
+                div     ebx
+                cmp     edx,        0x00
+                je      .copy.bytes.symbol.char.1
+                cmp     edx,        0x01
+                je      .copy.bytes.symbol.char.2
+                cmp     edx,        0x02
+                je      .copy.bytes.symbol.char.3
+                cmp     edx,        0x03
+                je      .copy.bytes.symbol.char.4
+                
+                .copy.bytes.symbol.char.1:
+                    
+                    ; Prints '|'
+                    @XEOS.video.putc    0x7C
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.2:
+                    
+                    ; Prints '/'
+                    @XEOS.video.putc    0x2F
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.3:
+                    
+                    ; Prints '-'
+                    @XEOS.video.putc    0x2D
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.4:
+                    
+                    ; Prints '\'      
+                    @XEOS.video.putc    0x5C
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.done:
+                    
+                    ; Restores registers
+                    popa
+            
+            ; Continues to move bytes
+            loop    .copy.bytes
+            
+            @XEOS.video.setForegroundColor  @XEOS.video.color.white
+            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+            @XEOS.video.print               $XEOS.boot.stage2.msg.space
+            @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
+            @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.address
+            @XEOS.video.setForegroundColor  @XEOS.video.color.white
+            @XEOS.video.print               $XEOS.boot.stage2.msg.space
+            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+            @XEOS.video.print               $XEOS.boot.stage2.nl
+    .run:
+        
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+        @XEOS.video.setForegroundColor  @XEOS.video.color.white
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+        @XEOS.video.print               $XEOS.boot.stage2.msg.space
+        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
+        @XEOS.video.print               $XEOS.boot.stage2.nl
+        
+        ; Jumps to the kernel code
+        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address;
+        
     ; Halts the system
     hlt
