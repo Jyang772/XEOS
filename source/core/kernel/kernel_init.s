@@ -107,5 +107,6 @@ start:
     ; Calls the XEOS kernel
     call    kernel_main
     
-    ; Infinite loop
-    jmp     $
+    ; Halts the system
+    cli
+    hlt
