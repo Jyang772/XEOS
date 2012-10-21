@@ -183,6 +183,8 @@ $XEOS.boot.stage2.msg.a20.keyboardOut                   db  "Enabling the A-20 a
 $XEOS.boot.stage2.msg.a20.systemControl                 db  "Enabling the A-20 address line (SYSCTRL):        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits (protected) mode    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits (long) mode         ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.move                       db  "Moving the kernel image to its final location    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.run                        db  "Passing control to the kernel...                 ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                             db  "Press any key to reboot: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir                   db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find                  db  "Error: file not found", @ASCII.NUL
@@ -295,6 +297,33 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Prints a strings with brackets (orange text)
+; 
+; Parameters:
+; 
+;       1:          The text to print
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.boot.stage2.print.bracket.gray 1
+    
+    pusha
+    push                            si
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
+    pop                             si
+    push                            si
+    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.color.gray.light,   @BIOS.video.color.black
+    @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
+    pop                             si
+    popa
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
 ; Prints the prompt
 ; 
 ; Parameters:
@@ -386,6 +415,23 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 %macro @XEOS.boot.stage2.print.no 0
 
     @XEOS.boot.stage2.print.bracket.red $XEOS.boot.stage2.msg.no
+
+%endmacro
+
+;-------------------------------------------------------------------------------
+; Prints the 'no' message (orange text)
+; 
+; Parameters:
+; 
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.boot.stage2.print.no.gray 0
+
+    @XEOS.boot.stage2.print.bracket.gray $XEOS.boot.stage2.msg.no
 
 %endmacro
 
@@ -648,7 +694,7 @@ main:
             
         .a20.enable:
             
-            @XEOS.boot.stage2.print.no
+            @XEOS.boot.stage2.print.no.gray
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
         ;-----------------------------------------------------------------------
@@ -1341,6 +1387,43 @@ XEOS.boot.stage2.32.run:
     ; Restores the cursor position
     @XEOS.video.cursor.move dl, dh
     
+    ; Sets color attributes
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.setBackgroundColor  @XEOS.video.color.black
+    
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
+    @XEOS.video.print               $XEOS.boot.stage2.msg.success
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.video.print               $XEOS.boot.stage2.nl
+    
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
+    @XEOS.video.print               $XEOS.boot.stage2.nl
+    
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
+    @XEOS.video.print               $XEOS.boot.stage2.nl
+    
     ; Halts the system
     hlt
 
@@ -1370,6 +1453,43 @@ XEOS.boot.stage2.64.run:
     
     ; Restores the cursor position
     @XEOS.video.cursor.move dl, dh
+    
+    ; Sets color attributes
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.setBackgroundColor  @XEOS.video.color.black
+    
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
+    @XEOS.video.print               $XEOS.boot.stage2.msg.success
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.video.print               $XEOS.boot.stage2.nl
+    
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
+    @XEOS.video.print               $XEOS.boot.stage2.nl
+    
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+    @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
+    @XEOS.video.setForegroundColor  @XEOS.video.color.white
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.video.print               $XEOS.boot.stage2.msg.gt
+    @XEOS.video.print               $XEOS.boot.stage2.msg.space
+    @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
+    @XEOS.video.print               $XEOS.boot.stage2.nl
     
     ; Halts the system
     hlt

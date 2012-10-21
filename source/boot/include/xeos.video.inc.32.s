@@ -94,22 +94,22 @@ BITS    32
 %define @XEOS.video.screen.rows             25
 
 ; BIOS colors
-%define @XEOS.video.colors.black            0x00
-%define @XEOS.video.colors.blue             0x01
-%define @XEOS.video.colors.green            0x02
-%define @XEOS.video.colors.cyan             0x03
-%define @XEOS.video.colors.red              0x04
-%define @XEOS.video.colors.magenta          0x05
-%define @XEOS.video.colors.brown            0x06
-%define @XEOS.video.colors.gray.light       0x07
-%define @XEOS.video.colors.gray             0x08
-%define @XEOS.video.colors.blue.light       0x09
-%define @XEOS.video.colors.green.light      0x0A
-%define @XEOS.video.colors.cyan.light       0x0B
-%define @XEOS.video.colors.red.light        0x0C
-%define @XEOS.video.colors.magenta.light    0x0D
-%define @XEOS.video.colors.brown.light      0x0E
-%define @XEOS.video.colors.white            0x0F
+%define @XEOS.video.color.black             0x00
+%define @XEOS.video.color.blue              0x01
+%define @XEOS.video.color.green             0x02
+%define @XEOS.video.color.cyan              0x03
+%define @XEOS.video.color.red               0x04
+%define @XEOS.video.color.magenta           0x05
+%define @XEOS.video.color.brown             0x06
+%define @XEOS.video.color.gray.light        0x07
+%define @XEOS.video.color.gray              0x08
+%define @XEOS.video.color.blue.light        0x09
+%define @XEOS.video.color.green.light       0x0A
+%define @XEOS.video.color.cyan.light        0x0B
+%define @XEOS.video.color.red.light         0x0C
+%define @XEOS.video.color.magenta.light     0x0D
+%define @XEOS.video.color.brown.light       0x0E
+%define @XEOS.video.color.white             0x0F
 
 ;-------------------------------------------------------------------------------
 ; Sets EDI to the memory address for the current cursor position
