@@ -85,7 +85,7 @@
 BITS    32
 
 ; Makes the entry point visible to the linker
-global  XEOS.kernel.init
+global  start
 
 ; XEOS kernel is written in C, and is linked with the file
 extern  kernel_main
@@ -93,7 +93,7 @@ extern  kernel_main
 ;-------------------------------------------------------------------------------
 ; XEOS kernel entry point
 ;-------------------------------------------------------------------------------
-XEOS.kernel.init:
+start:
     
     ; Sets the data segments
     mov     ax,         0x10
