@@ -1249,7 +1249,6 @@ XEOS.boot.stage2.32:
         jmp	    @XEOS.gdt.descriptors.code:.run
         
         ; Halts the system
-        cli
         hlt
 
 ;-------------------------------------------------------------------------------
@@ -1290,7 +1289,6 @@ XEOS.boot.stage2.64:
         jmp	    @XEOS.gdt.descriptors.code:.run
         
         ; Halts the system
-        cli
         hlt
     
 ; We are in 32 bits mode
@@ -1327,7 +1325,6 @@ XEOS.boot.stage2.32.run:
     mov     esp,        0x90000
     
     ; Halts the system
-    cli
     hlt
 
 ;-------------------------------------------------------------------------------
@@ -1355,5 +1352,4 @@ XEOS.boot.stage2.64.run:
     mov     esp,        0x90000
     
     ; Halts the system
-    cli
     hlt
