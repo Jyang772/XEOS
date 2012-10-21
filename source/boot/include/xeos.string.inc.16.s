@@ -100,7 +100,7 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.string.numberToString 5
+%macro @XEOS.16.string.numberToString 5
     
     ; Saves registrers
     pusha
@@ -110,7 +110,7 @@ BITS    16
     mov     cx,         %3
     mov     dx,         %4
     mov     di,         %5
-    call                XEOS.string.numberToString
+    call                XEOS.16.string.numberToString
     
     ; Restores registers
     popa
@@ -136,9 +136,9 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.string.isPrintable:
+XEOS.16.string.isPrintable:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; ASCII control characters
     cmp     dx,     0x20
@@ -153,7 +153,7 @@ XEOS.string.isPrintable:
     ;---------------------------------------------------------------------------
     .notPrintable:
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Not printable - Stores result code in AX
         xor     ax,         ax
@@ -165,7 +165,7 @@ XEOS.string.isPrintable:
     ;---------------------------------------------------------------------------
     .printable:
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Printable - Stores result code in AX
         mov     ax,         0x01
@@ -191,9 +191,9 @@ XEOS.string.isPrintable:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.string.numberToString:
+XEOS.16.string.numberToString:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Checks if we are going to print in hexadecimal
     cmp     ebx,        0x10
@@ -211,7 +211,7 @@ XEOS.string.numberToString:
     cmp     ebx,        0x02
     je      .start
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
     
@@ -341,7 +341,7 @@ XEOS.string.numberToString:
         ; Adds the terminating character (ASCII 0)
         mov     [ di ],     BYTE 0x00
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
     

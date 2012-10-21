@@ -235,7 +235,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
     
     pusha
     
-    @BIOS.video.createScreenColor bl, %2, %3
+    @XEOS.16.video.createScreenColor bl, %2, %3
     
     mov     si,         %1
     call    XEOS.boot.stage2.print.color
@@ -259,13 +259,13 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
     
     pusha
     push                            si
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
     push                            si
-    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.color.green.light,  @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   %1,                                     @XEOS.16.video.color.green.light,   @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     pop                             si
     popa
     
@@ -286,13 +286,13 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
     
     pusha
     push                            si
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
     push                            si
-    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.color.red.light,    @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   %1,                                     @XEOS.16.video.color.red.light,     @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     pop                             si
     popa
     
@@ -313,13 +313,13 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
     
     pusha
     push                            si
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
     push                            si
-    @XEOS.boot.stage2.print.color   %1,                                     @BIOS.video.color.gray.light,   @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   %1,                                     @XEOS.16.video.color.gray.light,    @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     pop                             si
     popa
     
@@ -340,12 +340,12 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
     
     pusha
     push                            si
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.left,     @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.prompt,           @BIOS.video.color.gray.light,   @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.prompt,           @XEOS.16.video.color.gray.light,    @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @BIOS.video.color.white,        @BIOS.video.color.black
-    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.gt,               @BIOS.video.color.white,        @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.bracket.right,    @XEOS.16.video.color.white,         @XEOS.16.video.color.black
+    @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.gt,               @XEOS.16.video.color.white,         @XEOS.16.video.color.black
     @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
     pop                             si
     popa
@@ -451,7 +451,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 %macro @XEOS.boot.stage2.print.line 1
     
     @XEOS.boot.stage2.print.prompt
-    @XEOS.boot.stage2.print.color   %1, @BIOS.video.color.white, @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   %1, @XEOS.16.video.color.white, @XEOS.16.video.color.black
     @XEOS.boot.stage2.print             $XEOS.boot.stage2.nl
     
 %endmacro
@@ -470,7 +470,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 %macro @XEOS.boot.stage2.print.line.error 1
     
     @XEOS.boot.stage2.print.prompt
-    @XEOS.boot.stage2.print.color   %1, @BIOS.video.color.red.light, @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   %1, @XEOS.16.video.color.red.light, @XEOS.16.video.color.black
     @XEOS.boot.stage2.print             $XEOS.boot.stage2.nl
     
 %endmacro
@@ -489,7 +489,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 %macro @XEOS.boot.stage2.print      1
     
     push                            si
-    @XEOS.boot.stage2.print.color   %1, @BIOS.video.color.white, @BIOS.video.color.black
+    @XEOS.boot.stage2.print.color   %1, @XEOS.16.video.color.white, @XEOS.16.video.color.black
     pop                             si
     
 %endmacro
@@ -548,40 +548,40 @@ main:
         sti
         
         ; Prints the copyright note
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.top,               @BIOS.video.color.white,        @BIOS.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.top,               @XEOS.16.video.color.white,         @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.left,     @BIOS.video.color.white,        @BIOS.video.color.black
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1,          @BIOS.video.color.brown.light,  @BIOS.video.color.black
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.right,    @BIOS.video.color.white,        @BIOS.video.color.black
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
-        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.2,          @BIOS.video.color.white,        @BIOS.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.left,     @XEOS.16.video.color.white,         @XEOS.16.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1,          @XEOS.16.video.color.brown.light,   @XEOS.16.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.1.right,    @XEOS.16.video.color.white,         @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.3,          @BIOS.video.color.gray.light,   @BIOS.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.2,          @XEOS.16.video.color.white,         @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.4,          @BIOS.video.color.gray.light,   @BIOS.video.color.black
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.3,          @XEOS.16.video.color.gray.light,    @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.bottom,            @BIOS.video.color.white,        @BIOS.video.color.black
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.copyright.4,          @XEOS.16.video.color.gray.light,    @XEOS.16.video.color.black
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.pipe
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.hr.bottom,            @XEOS.16.video.color.white,         @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         
         ; Prints the welcome message
         @XEOS.boot.stage2.print.prompt
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.greet
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.space
-        @XEOS.boot.stage2.print.color           $XEOS.boot.stage2.msg.version.name,     @BIOS.video.color.green.light,  @BIOS.video.color.black
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.slash
-        @XEOS.boot.stage2.print.color           $XEOS.boot.stage2.msg.version.number,   @BIOS.video.color.green.light,  @BIOS.video.color.black
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.space
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.greet
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.version.name,         @XEOS.16.video.color.green.light,   @XEOS.16.video.color.black
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.slash
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.msg.version.number,       @XEOS.16.video.color.green.light,   @XEOS.16.video.color.black
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
+        @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         
     ;---------------------------------------------------------------------------
     ; CPU check
@@ -592,7 +592,7 @@ main:
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.cpu
         
         ; Checks if we can use CPUID
-        call    XEOS.cpu.hasCPUID
+        call    XEOS.16.cpu.hasCPUID
         cmp     ax,         1
         je      .cpuid.ok
         
@@ -610,7 +610,7 @@ main:
             ; Gets the CPU vendor ID
             push    di
             mov     di,     $XEOS.boot.stage2.cpu.vendor 
-            call    XEOS.cpu.vendor
+            call    XEOS.16.cpu.vendor
             
             @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.cpu.vendor
             @XEOS.boot.stage2.print.bracket.green   di
@@ -618,7 +618,7 @@ main:
             pop                             di
             
             ; Checks if the CPU has 64 bits capabilities
-            call    XEOS.cpu.64
+            call    XEOS.16.cpu.64
             
             ; DEBUG - Forces the 32 bits mode
             %ifdef XEOS32
@@ -684,7 +684,7 @@ main:
             
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.check
-            call                    XEOS.a20.enabled
+            call                    XEOS.16.a20.enabled
             
             cmp     ax,             0
             je      .a20.enable
@@ -706,7 +706,7 @@ main:
             
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.bios
-            call                    XEOS.a20.enable.bios
+            call                    XEOS.16.a20.enable.bios
             
             cmp     ax,             0
             je      .a20.enable.success
@@ -721,8 +721,8 @@ main:
             
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.systemControl
-            call                    XEOS.a20.enable.systemControl
-            call                    XEOS.a20.enabled
+            call                    XEOS.16.a20.enable.systemControl
+            call                    XEOS.16.a20.enabled
             
             cmp     ax,             1
             je      .a20.enable.success
@@ -737,8 +737,8 @@ main:
             
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.keyboardOut
-            call                    XEOS.a20.enable.keyboard.out
-            call                    XEOS.a20.enabled
+            call                    XEOS.16.a20.enable.keyboard.out
+            call                    XEOS.16.a20.enabled
             
             cmp     ax,             1
             je      .a20.enable.success
@@ -753,8 +753,8 @@ main:
             
             @XEOS.boot.stage2.print.prompt
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.keyboardControl
-            call                    XEOS.a20.enable.keyboard.control
-            call                    XEOS.a20.enabled
+            call                    XEOS.16.a20.enable.keyboard.control
+            call                    XEOS.16.a20.enabled
             
             cmp     ax,             1
             je      .a20.enable.success
@@ -823,7 +823,7 @@ main:
             ; Verifies the kernel file header, and stores the entry point
             ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
-            call    XEOS.elf.32.checkHeader
+            call    XEOS.16.elf.32.checkHeader
             cmp     ax,     0
             je      .load.verified
             
@@ -858,7 +858,7 @@ main:
             ; Verifies the kernel file header, and stores the entry point
             ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
-            call    XEOS.elf.64.checkHeader
+            call    XEOS.16.elf.64.checkHeader
             cmp     ax,     0
             je      .load.verified
             
@@ -1056,7 +1056,7 @@ main:
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.kernel.load:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ;---------------------------------------------------------------------------
     ; Loads the FAT-12 root directory
@@ -1070,7 +1070,7 @@ XEOS.boot.stage2.kernel.load:
         
         ; Offset the FAT-12 root directory location
         mov     di,             @XEOS.boot.stage2.fat.offset
-        call    XEOS.io.fat12.loadRootDirectory
+        call    XEOS.16.io.fat12.loadRootDirectory
         
         ; Checks for an error code
         cmp     ax,         0
@@ -1085,7 +1085,7 @@ XEOS.boot.stage2.kernel.load:
         ; Restores registers
         pop     si
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ret
     
@@ -1096,11 +1096,11 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.left
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-        @XEOS.string.numberToString     es, 16, 4, dx, $XEOS.boot.stage2.str
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
+        @XEOS.16.string.numberToString  es, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.separator
-        @XEOS.string.numberToString     @XEOS.boot.stage2.fat.offset, 16, 4, dx, $XEOS.boot.stage2.str
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
+        @XEOS.16.string.numberToString  @XEOS.boot.stage2.fat.offset, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
@@ -1116,7 +1116,7 @@ XEOS.boot.stage2.kernel.load:
         mov     di,         @XEOS.boot.stage2.fat.offset
         
         ; Finds the second stage bootloader
-        call    XEOS.io.fat12.findFile
+        call    XEOS.16.io.fat12.findFile
         
         ; Checks for an error code
         cmp     ax,         0
@@ -1125,7 +1125,7 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.boot.stage2.print.failure
         @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         2
@@ -1155,7 +1155,7 @@ XEOS.boot.stage2.kernel.load:
         mov     cx,         WORD [ $XEOS.boot.stage2.dataSector ]
         
         ; Loads the second stage bootloader into memory
-        call    XEOS.io.fat12.loadFile
+        call    XEOS.16.io.fat12.loadFile
         
         ; Number of sectors read
         mov     WORD [ $XEOS.boot.stage2.kernelSectors ], cx
@@ -1171,7 +1171,7 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.boot.stage2.print.failure
         @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         3
@@ -1185,16 +1185,16 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.left
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-        @XEOS.string.numberToString     @XEOS.boot.stage2.kernel.segment, 16, 4, dx, $XEOS.boot.stage2.str
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
+        @XEOS.16.string.numberToString  @XEOS.boot.stage2.kernel.segment, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.separator
-        @XEOS.string.numberToString     ax, 16, 4, dx, $XEOS.boot.stage2.str
-        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @BIOS.video.color.green.light, @BIOS.video.color.black
+        @XEOS.16.string.numberToString  ax, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; DEBUG - Dumps the kernel data
         ; mov     si,         @XEOS.boot.stage2.kernel.segment
@@ -1223,7 +1223,7 @@ XEOS.boot.stage2.kernel.load:
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.print.color:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Saves registers
     push    si
@@ -1262,9 +1262,9 @@ XEOS.boot.stage2.print.color:
         pop     si
         
         ; Prints the string
-        call BIOS.video.print
+        call XEOS.16.video.print
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -1388,34 +1388,34 @@ XEOS.boot.stage2.32.run:
     mov     esp,        0x90000
     
     ; Restores the cursor position
-    @XEOS.video.cursor.move dl, dh
+    @XEOS.32.video.cursor.move dl, dh
     
     ; Sets color attributes
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.setBackgroundColor  @XEOS.video.color.black
+    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+    @XEOS.32.video.setBackgroundColor   @XEOS.32.video.color.black
     
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
-    @XEOS.video.print               $XEOS.boot.stage2.msg.success
-    @XEOS.video.setForegroundColor  @XEOS.video.color.white
-    @XEOS.video.print               $XEOS.boot.stage2.msg.space
-    @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.video.print               $XEOS.boot.stage2.nl
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.success
+    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.32.video.print                $XEOS.boot.stage2.nl
     
     .copy:
         
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-        @XEOS.video.setForegroundColor  @XEOS.video.color.white
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.move
-        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.gray.light
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.prompt
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.gt
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.move
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.gray.light
         
         ; Location of the kernel in memory (multiplies the segment address by 16)
         mov     eax,        @XEOS.boot.stage2.kernel.segment
@@ -1437,7 +1437,7 @@ XEOS.boot.stage2.32.run:
         mov     ax,        WORD [ $XEOS.boot.stage2.kernelSectors ]
         
         ; Multiplies by the number of bytes per sector
-        mov     bx,        @XEOS.fat12.mbr.bytesPerSector
+        mov     bx,        @XEOS.io.fat12.mbr.bytesPerSector
         mul     ebx
         
         ; We are going to read doubles, so divides the bytes by 4
@@ -1478,25 +1478,25 @@ XEOS.boot.stage2.32.run:
                 .copy.bytes.symbol.char.1:
                     
                     ; Prints '|'
-                    @XEOS.video.putc    0x7C
+                    @XEOS.32.video.putc 0x7C
                     jmp                 .copy.bytes.symbol.done
                     
                 .copy.bytes.symbol.char.2:
                     
                     ; Prints '/'
-                    @XEOS.video.putc    0x2F
+                    @XEOS.32.video.putc 0x2F
                     jmp                 .copy.bytes.symbol.done
                     
                 .copy.bytes.symbol.char.3:
                     
                     ; Prints '-'
-                    @XEOS.video.putc    0x2D
+                    @XEOS.32.video.putc 0x2D
                     jmp                 .copy.bytes.symbol.done
                     
                 .copy.bytes.symbol.char.4:
                     
                     ; Prints '\'      
-                    @XEOS.video.putc    0x5C
+                    @XEOS.32.video.putc 0x5C
                     jmp                 .copy.bytes.symbol.done
                     
                 .copy.bytes.symbol.done:
@@ -1507,29 +1507,29 @@ XEOS.boot.stage2.32.run:
             ; Continues to move bytes
             loop    .copy.bytes
             
-            @XEOS.video.setForegroundColor  @XEOS.video.color.white
-            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-            @XEOS.video.print               $XEOS.boot.stage2.msg.space
-            @XEOS.video.setForegroundColor  @XEOS.video.color.green.light
-            @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.address
-            @XEOS.video.setForegroundColor  @XEOS.video.color.white
-            @XEOS.video.print               $XEOS.boot.stage2.msg.space
-            @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-            @XEOS.video.print               $XEOS.boot.stage2.nl
+            @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+            @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.address
+            @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
+            @XEOS.32.video.print                $XEOS.boot.stage2.nl
             
     .run:
         
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.setForegroundColor  @XEOS.video.color.gray.light
-        @XEOS.video.print               $XEOS.boot.stage2.msg.prompt
-        @XEOS.video.setForegroundColor  @XEOS.video.color.white
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.video.print               $XEOS.boot.stage2.msg.gt
-        @XEOS.video.print               $XEOS.boot.stage2.msg.space
-        @XEOS.video.print               $XEOS.boot.stage2.msg.kernel.run
-        @XEOS.video.print               $XEOS.boot.stage2.nl
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.gray.light
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.prompt
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.gt
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.run
+        @XEOS.32.video.print                $XEOS.boot.stage2.nl
         
         ; DEBUG - Do not executes the kernel
         ; hlt

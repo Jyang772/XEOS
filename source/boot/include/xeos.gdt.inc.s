@@ -89,7 +89,7 @@
 ;-------------------------------------------------------------------------------
 XEOS.gdt.install:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Clears the interrupts
     cli
@@ -99,7 +99,7 @@ XEOS.gdt.install:
     ; Restores the interrupts
     sti
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 

@@ -161,7 +161,7 @@ BITS    16
 ;       some utilities
 ;       use it in this way.
 ;-------------------------------------------------------------------------------
-struc XEOS.fat12.mbr_t
+struc XEOS.io.fat12.mbr_t
 
     .oemName:               resb    8
     .bytesPerSector:        resw    1
@@ -190,29 +190,29 @@ endstruc
 ;-------------------------------------------------------------------------------
 
 ; XEOS MBR
-$XEOS.fat12.mbr:
+$XEOS.io.fat12.mbr:
     
-    istruc XEOS.fat12.mbr_t
+    istruc XEOS.io.fat12.mbr_t
 
-        db @XEOS.fat12.mbr.oemName
-        dw @XEOS.fat12.mbr.bytesPerSector
-        db @XEOS.fat12.mbr.sectorsPerCluster
-        dw @XEOS.fat12.mbr.reservedSectors
-        db @XEOS.fat12.mbr.numberOfFATs
-        dw @XEOS.fat12.mbr.maxRootDirEntries
-        dw @XEOS.fat12.mbr.totalSectors
-        db @XEOS.fat12.mbr.mediaDescriptor
-        dw @XEOS.fat12.mbr.sectorsPerFAT
-        dw @XEOS.fat12.mbr.sectorsPerTrack
-        dw @XEOS.fat12.mbr.headsPerCylinder
-        dd @XEOS.fat12.mbr.hiddenSectors
-        dd @XEOS.fat12.mbr.lbaSectors
-        db @XEOS.fat12.mbr.driveNumber
-        db @XEOS.fat12.mbr.reserved
-        db @XEOS.fat12.mbr.bootSignature
-        dd @XEOS.fat12.mbr.volumeID
-        db @XEOS.fat12.mbr.volumeLabel
-        db @XEOS.fat12.mbr.fileSystem
+        db @XEOS.io.fat12.mbr.oemName
+        dw @XEOS.io.fat12.mbr.bytesPerSector
+        db @XEOS.io.fat12.mbr.sectorsPerCluster
+        dw @XEOS.io.fat12.mbr.reservedSectors
+        db @XEOS.io.fat12.mbr.numberOfFATs
+        dw @XEOS.io.fat12.mbr.maxRootDirEntries
+        dw @XEOS.io.fat12.mbr.totalSectors
+        db @XEOS.io.fat12.mbr.mediaDescriptor
+        dw @XEOS.io.fat12.mbr.sectorsPerFAT
+        dw @XEOS.io.fat12.mbr.sectorsPerTrack
+        dw @XEOS.io.fat12.mbr.headsPerCylinder
+        dd @XEOS.io.fat12.mbr.hiddenSectors
+        dd @XEOS.io.fat12.mbr.lbaSectors
+        db @XEOS.io.fat12.mbr.driveNumber
+        db @XEOS.io.fat12.mbr.reserved
+        db @XEOS.io.fat12.mbr.bootSignature
+        dd @XEOS.io.fat12.mbr.volumeID
+        db @XEOS.io.fat12.mbr.volumeLabel
+        db @XEOS.io.fat12.mbr.fileSystem
 
     iend
 

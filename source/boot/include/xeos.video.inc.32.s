@@ -87,29 +87,29 @@ BITS    32
 ;-------------------------------------------------------------------------------
 
 ; Location of the video memory
-%define @XEOS.video.memory                  0xB8000
+%define @XEOS.32.video.memory                  0xB8000
 
 ; BIOS screen dimensions
-%define @XEOS.video.screen.cols             80
-%define @XEOS.video.screen.rows             25
+%define @XEOS.32.video.screen.cols             80
+%define @XEOS.32.video.screen.rows             25
 
 ; BIOS colors
-%define @XEOS.video.color.black             0x00
-%define @XEOS.video.color.blue              0x01
-%define @XEOS.video.color.green             0x02
-%define @XEOS.video.color.cyan              0x03
-%define @XEOS.video.color.red               0x04
-%define @XEOS.video.color.magenta           0x05
-%define @XEOS.video.color.brown             0x06
-%define @XEOS.video.color.gray.light        0x07
-%define @XEOS.video.color.gray              0x08
-%define @XEOS.video.color.blue.light        0x09
-%define @XEOS.video.color.green.light       0x0A
-%define @XEOS.video.color.cyan.light        0x0B
-%define @XEOS.video.color.red.light         0x0C
-%define @XEOS.video.color.magenta.light     0x0D
-%define @XEOS.video.color.brown.light       0x0E
-%define @XEOS.video.color.white             0x0F
+%define @XEOS.32.video.color.black             0x00
+%define @XEOS.32.video.color.blue              0x01
+%define @XEOS.32.video.color.green             0x02
+%define @XEOS.32.video.color.cyan              0x03
+%define @XEOS.32.video.color.red               0x04
+%define @XEOS.32.video.color.magenta           0x05
+%define @XEOS.32.video.color.brown             0x06
+%define @XEOS.32.video.color.gray.light        0x07
+%define @XEOS.32.video.color.gray              0x08
+%define @XEOS.32.video.color.blue.light        0x09
+%define @XEOS.32.video.color.green.light       0x0A
+%define @XEOS.32.video.color.cyan.light        0x0B
+%define @XEOS.32.video.color.red.light         0x0C
+%define @XEOS.32.video.color.magenta.light     0x0D
+%define @XEOS.32.video.color.brown.light       0x0E
+%define @XEOS.32.video.color.white             0x0F
 
 ;-------------------------------------------------------------------------------
 ; Sets EDI to the memory address for the current cursor position
@@ -133,23 +133,23 @@ BITS    32
 ;       
 ;       - EDI
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video._currentPosition 0
+%macro @XEOS.32.video._currentPosition 0
     
     ; Saves registers
     push    eax
     push    ecx
     
     ; Pointer to the start of the video memory
-    mov     edi,        @XEOS.video.memory
+    mov     edi,        @XEOS.32.video.memory
     
     ; Resets EAX
     xor     eax,        eax
     
     ; Two bytes per character displayed
-    mov     ecx,        @XEOS.video.screen.cols * 2
+    mov     ecx,        @XEOS.32.video.screen.cols * 2
     
     ; Current Y position
-    mov     al,         BYTE [ $XEOS.video.cursor.y ]
+    mov     al,         BYTE [ $XEOS.32.video.cursor.y ]
     
     ; Y poition multiplied by the screen width
     mul     ecx
@@ -158,7 +158,7 @@ BITS    32
     push    eax
     
     ; Current X position
-    mov     al,         BYTE [ $XEOS.video.cursor.x ]
+    mov     al,         BYTE [ $XEOS.32.video.cursor.x ]
     
     ; Again, two bytes per character displayed
     mov     cl,         0x02
@@ -193,7 +193,7 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video.createScreenColor 3
+%macro @XEOS.32.video.createScreenColor 3
     
     ; Stores the background color
     mov     %1,         %3
@@ -215,7 +215,7 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video.setBackgroundColor 1
+%macro @XEOS.32.video.setBackgroundColor 1
     
     ; Saves AX as we are going to alter it
     push    ax
@@ -230,10 +230,10 @@ BITS    32
     shl     al,         0x04
     
     ; Clears the existing background color
-    and     [ $XEOS.video.attribute ],   BYTE 00001111b
+    and     [ $XEOS.32.video.attribute ],   BYTE 00001111b
     
     ; Sets the new background color
-    or      [ $XEOS.video.attribute ],   al
+    or      [ $XEOS.32.video.attribute ],   al
     
     ; Restores AX
     pop     ax
@@ -251,7 +251,7 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video.setForegroundColor 1
+%macro @XEOS.32.video.setForegroundColor 1
     
     ; Saves AX as we are going to alter it
     push    ax
@@ -266,10 +266,10 @@ BITS    32
     and     al,         00001111b
     
     ; Clears the existing foreground color
-    and     [ $XEOS.video.attribute ],   BYTE 11110000b
+    and     [ $XEOS.32.video.attribute ],   BYTE 11110000b
     
     ; Sets the new foreground color
-    or      [ $XEOS.video.attribute ],   al
+    or      [ $XEOS.32.video.attribute ],   al
     
     ; Restores AX
     pop     ax
@@ -288,12 +288,12 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video.clear 2
+%macro @XEOS.32.video.clear 2
     
-    @XEOS.video.setForegroundColor %1
-    @XEOS.video.setBackgroundColor %2
+    @XEOS.32.video.setForegroundColor %1
+    @XEOS.32.video.setBackgroundColor %2
     
-    call    XEOS.video.clear
+    call    XEOS.32.video.clear
     
 %endmacro
 
@@ -309,7 +309,7 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video.cursor.move 2
+%macro @XEOS.32.video.cursor.move 2
     
     ; Saves BX as we are going to alter it
     push    bx
@@ -319,7 +319,7 @@ BITS    32
     mov     bl,         %2
     
     ; Moves the cursor position
-    call    XEOS.video.cursor.move
+    call    XEOS.32.video.cursor.move
     
     ; Restores BX
     pop     bx
@@ -337,14 +337,14 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video.putc 1
+%macro @XEOS.32.video.putc 1
     
     ; Saves registers
     push    ax
     
     ; Prints the character
     mov     al,         %1
-    call    XEOS.video.putc
+    call    XEOS.32.video.putc
     
     ; Restores registers
     pop     ax
@@ -362,14 +362,14 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.video.print  1
+%macro @XEOS.32.video.print  1
     
     ; Saves registers
     push    esi
     
     ; Prints the string
     mov     esi,    %1
-    call    XEOS.video.print
+    call    XEOS.32.video.print
     
     ; Restores registers
     pop     esi
@@ -395,20 +395,20 @@ BITS    32
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.video.clear:
+XEOS.32.video.clear:
     
-    @XEOS.proc.start 0
+    @XEOS.32.proc.start 0
     
     ; Computes the number of characters to write to clear the screen
-    mov     ax,         @XEOS.video.screen.rows
-    mov     ecx,        @XEOS.video.screen.cols
+    mov     ax,         @XEOS.32.video.screen.rows
+    mov     ecx,        @XEOS.32.video.screen.cols
     mul     ecx
     
     ; Stores the result in ECX, so we can loop
     mov     ecx,        eax
     
     ; Start of the video memory
-    mov     edi,        @XEOS.video.memory
+    mov     edi,        @XEOS.32.video.memory
     
     ; Clears a character on the screen
     .clear:
@@ -417,7 +417,7 @@ XEOS.video.clear:
         mov     al,         BYTE 0x20
         
         ; Current character attribute
-        mov     ah,         BYTE [ $XEOS.video.attribute ]
+        mov     ah,         BYTE [ $XEOS.32.video.attribute ]
         
         ; Clears the current character by writing a space
         mov     [ edi ],    WORD ax
@@ -429,13 +429,13 @@ XEOS.video.clear:
         loop    .clear
     
     ; Update the cursor position
-    mov     [ $XEOS.video.cursor.x ],    BYTE 0x00
-    mov     [ $XEOS.video.cursor.y ],    BYTE 0x00
+    mov     [ $XEOS.32.video.cursor.x ],    BYTE 0x00
+    mov     [ $XEOS.32.video.cursor.y ],    BYTE 0x00
     
     ; Updates the hardware cursor
-    call    XEOS.video.cursor.update
+    call    XEOS.32.video.cursor.update
     
-    @XEOS.proc.end
+    @XEOS.32.proc.end
     
     ret
 
@@ -454,17 +454,17 @@ XEOS.video.clear:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.video.scroll:
+XEOS.32.video.scroll:
     
-    @XEOS.proc.start 0
+    @XEOS.32.proc.start 0
     
     ; Start of the video memory
-    mov     edi,        @XEOS.video.memory
+    mov     edi,        @XEOS.32.video.memory
     
     ; Computes the number of characters that will need to be rewritten
     ; (we won't rewrite the last line, as it will be cleared)
-    mov     eax,        @XEOS.video.screen.rows - 1
-    mov     ecx,        @XEOS.video.screen.cols
+    mov     eax,        @XEOS.32.video.screen.rows - 1
+    mov     ecx,        @XEOS.32.video.screen.cols
     mul     ecx
     
     ; Stores the result in ECX, so we can loop
@@ -475,7 +475,7 @@ XEOS.video.scroll:
         
         ; Writes the character on the next line (same X position) to the current
         ; position
-        mov     ax,         WORD [ edi + ( @XEOS.video.screen.cols * 2 ) ]
+        mov     ax,         WORD [ edi + ( @XEOS.32.video.screen.cols * 2 ) ]
         mov     [ edi ],    WORD ax
         
         ; Next character can now be processed
@@ -485,7 +485,7 @@ XEOS.video.scroll:
         loop    .scroll
     
     ; Now we have to clear the last line
-    mov     ecx,        @XEOS.video.screen.cols
+    mov     ecx,        @XEOS.32.video.screen.cols
     
     ; Clears a character on the screen
     .clear:
@@ -494,7 +494,7 @@ XEOS.video.scroll:
         mov     al,         0x20
         
         ; Current character attribute
-        mov     ah,         BYTE [ $XEOS.video.attribute ]
+        mov     ah,         BYTE [ $XEOS.32.video.attribute ]
         
         ; Clears the current character by writing a space
         mov     [ edi ],    WORD ax
@@ -506,12 +506,12 @@ XEOS.video.scroll:
         loop    .clear
     
     ; Updates the cursor position, as we now have an available line
-    dec     BYTE [ $XEOS.video.cursor.y ]
+    dec     BYTE [ $XEOS.32.video.cursor.y ]
     
     ; Updates the hardware cursor
-    call    XEOS.video.cursor.update
+    call    XEOS.32.video.cursor.update
     
-    @XEOS.proc.end
+    @XEOS.32.proc.end
     
     ret
 
@@ -530,13 +530,13 @@ XEOS.video.scroll:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.video.cursor.move:
+XEOS.32.video.cursor.move:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Stores the new cursor position
-    mov     [ $XEOS.video.cursor.x ],   bh
-    mov     [ $XEOS.video.cursor.y ],   bl
+    mov     [ $XEOS.32.video.cursor.x ],   bh
+    mov     [ $XEOS.32.video.cursor.y ],   bl
     
     ; First, we need to compute the new cursor location:
     ; cursor location = x + ( y * screen width )
@@ -546,7 +546,7 @@ XEOS.video.cursor.move:
         xor     eax,        eax
         
         ; Number of available columns
-        mov     ecx,        @XEOS.video.screen.cols
+        mov     ecx,        @XEOS.32.video.screen.cols
         
         ; New Y posotion
         mov     al,         bl
@@ -582,7 +582,7 @@ XEOS.video.cursor.move:
         mov     dx,         @XEOS.crt.controller.registers.index
         out     dx,         al
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
     
@@ -601,18 +601,18 @@ XEOS.video.cursor.move:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.video.cursor.update:
+XEOS.32.video.cursor.update:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Current cursor position
-    mov     bh,         [ $XEOS.video.cursor.x ]
-    mov     bl,         [ $XEOS.video.cursor.y ]
+    mov     bh,         [ $XEOS.32.video.cursor.x ]
+    mov     bl,         [ $XEOS.32.video.cursor.y ]
     
     ; Moves the cursor to the current position
-    call    XEOS.video.cursor.move
+    call    XEOS.32.video.cursor.move
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
    
@@ -631,20 +631,20 @@ XEOS.video.cursor.update:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.video.putc:
+XEOS.32.video.putc:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Gets the current cursor position
-    @XEOS.video._currentPosition
+    @XEOS.32.video._currentPosition
     
     ; Current character attribute
-    mov     ah,         [ $XEOS.video.attribute ]
+    mov     ah,         [ $XEOS.32.video.attribute ]
     
     ; Prints the character
     mov	    [ edi ],    WORD ax
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -663,41 +663,41 @@ XEOS.video.putc:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.video.print:
+XEOS.32.video.print:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Process a byte from the string
     .repeat:
         
         ; Checks if we have reached the maximum width
-        cmp     [ $XEOS.video.cursor.x ], BYTE @XEOS.video.screen.cols
+        cmp     [ $XEOS.32.video.cursor.x ], BYTE @XEOS.32.video.screen.cols
         
         ; No - we can print a character
         jne     .colAvailable
         
         ; Increases the Y position and resets X
-        inc     BYTE [ $XEOS.video.cursor.y ]
-        mov     [ $XEOS.video.cursor.x ],    BYTE 0
+        inc     BYTE [ $XEOS.32.video.cursor.y ]
+        mov     [ $XEOS.32.video.cursor.x ],    BYTE 0
         
     .colAvailable:
         
         ; Checks if we have reached the maximum height
-        cmp     [ $XEOS.video.cursor.y ], BYTE @XEOS.video.screen.rows
+        cmp     [ $XEOS.32.video.cursor.y ],    BYTE @XEOS.32.video.screen.rows
         
         ; No - We can print a character
         jne     .rowAvailable
         
         ; Scrolls the screen
-        call    XEOS.video.scroll
+        call    XEOS.32.video.scroll
     
     .rowAvailable:
     
         ; Gets the current cursor position
-        @XEOS.video._currentPosition
+        @XEOS.32.video._currentPosition
         
         ; Current character attribute
-        mov     ah,         [ $XEOS.video.attribute ]
+        mov     ah,         [ $XEOS.32.video.attribute ]
         
         ; Gets a byte from the string placed in SI (will be placed in AL)
         lodsb
@@ -716,7 +716,7 @@ XEOS.video.print:
         mov	    [ edi ],        WORD ax
         
         ; Moves the cursor
-        inc BYTE [ $XEOS.video.cursor.x ]
+        inc BYTE [ $XEOS.32.video.cursor.x ]
         
         ; Process the next byte from the string
         jmp     .repeat
@@ -725,23 +725,23 @@ XEOS.video.print:
     .lineFeed:
         
         ; Updates the cursor position
-        inc BYTE [ XEOS.video.cursor.y ]
+        inc BYTE [ XEOS.32.video.cursor.y ]
         jmp     .repeat
         
     ; ASCII 13 - CR
     .carriageReturn:
         
         ; Updates the cursor position
-        mov     [ $XEOS.video.cursor.x ], BYTE 0
+        mov     [ $XEOS.32.video.cursor.x ], BYTE 0
         jmp     .repeat
     
     ; End of the string
     .done:
     
         ; Updates the hardware cursor
-        call    XEOS.video.cursor.update
+        call    XEOS.32.video.cursor.update
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -750,10 +750,10 @@ XEOS.video.print:
 ;-------------------------------------------------------------------------------
 
 ; Current position of the cursor
-$XEOS.video.cursor.x     db  0x00
-$XEOS.video.cursor.y     db  0x00
+$XEOS.32.video.cursor.x     db  0x00
+$XEOS.32.video.cursor.y     db  0x00
 
 ; Current character attribute (default is white on black)
-$XEOS.video.attribute    db  0x0F
+$XEOS.32.video.attribute    db  0x0F
 
 %endif

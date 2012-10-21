@@ -84,26 +84,26 @@ BITS    16
 ;-------------------------------------------------------------------------------
 
 ; BIOS screen dimensions
-%define @BIOS.video.screen.cols             80
-%define @BIOS.video.screen.rows             25
+%define @XEOS.16.video.screen.cols          80
+%define @XEOS.16.video.screen.rows          25
 
 ; BIOS colors
-%define @BIOS.video.color.black             0x00
-%define @BIOS.video.color.blue              0x01
-%define @BIOS.video.color.green             0x02
-%define @BIOS.video.color.cyan              0x03
-%define @BIOS.video.color.red               0x04
-%define @BIOS.video.color.magenta           0x05
-%define @BIOS.video.color.brown             0x06
-%define @BIOS.video.color.gray.light        0x07
-%define @BIOS.video.color.gray              0x08
-%define @BIOS.video.color.blue.light        0x09
-%define @BIOS.video.color.green.light       0x0A
-%define @BIOS.video.color.cyan.light        0x0B
-%define @BIOS.video.color.red.light         0x0C
-%define @BIOS.video.color.magenta.light     0x0D
-%define @BIOS.video.color.brown.light       0x0E
-%define @BIOS.video.color.white             0x0F
+%define @XEOS.16.video.color.black          0x00
+%define @XEOS.16.video.color.blue           0x01
+%define @XEOS.16.video.color.green          0x02
+%define @XEOS.16.video.color.cyan           0x03
+%define @XEOS.16.video.color.red            0x04
+%define @XEOS.16.video.color.magenta        0x05
+%define @XEOS.16.video.color.brown          0x06
+%define @XEOS.16.video.color.gray.light     0x07
+%define @XEOS.16.video.color.gray           0x08
+%define @XEOS.16.video.color.blue.light     0x09
+%define @XEOS.16.video.color.green.light    0x0A
+%define @XEOS.16.video.color.cyan.light     0x0B
+%define @XEOS.16.video.color.red.light      0x0C
+%define @XEOS.16.video.color.magenta.light  0x0D
+%define @XEOS.16.video.color.brown.light    0x0E
+%define @XEOS.16.video.color.white          0x0F
 
 ;-------------------------------------------------------------------------------
 ; Computes the value of a BIOS screen color into a register
@@ -118,7 +118,7 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @BIOS.video.createScreenColor 3
+%macro @XEOS.16.video.createScreenColor 3
     
     ; Stores the background color
     mov %1, %3
@@ -141,7 +141,7 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @BIOS.video.setCursor 2
+%macro @XEOS.16.video.setCursor 2
     
     ; Saves registers
     pusha
@@ -176,7 +176,7 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @BIOS.video.clearScreen 2
+%macro @XEOS.16.video.clearScreen 2
     
     ; Saves registers
     pusha
@@ -188,20 +188,20 @@ BITS    16
     xor     al,     al
     
     ; Sets the screen color
-    @BIOS.video.createScreenColor bh, %1, %2
+    @XEOS.16.video.createScreenColor bh, %1, %2
     
     ; XY coordinates
     xor     cx,     cx
     
     ; Width and height
-    mov     dl,     @BIOS.video.screen.cols - 1
-    mov     dh,     @BIOS.video.screen.rows - 1
+    mov     dl,     @XEOS.16.video.screen.cols - 1
+    mov     dh,     @XEOS.16.video.screen.rows - 1
     
     ; Calls the BIOS video services
     @BIOS.int.video
     
     ; Repositions the cursor to the top-left corner
-    @BIOS.video.setCursor 0, 0
+    @XEOS.16.video.setCursor 0, 0
     
     ; Restores registers
     popa
@@ -219,14 +219,14 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @BIOS.video.print  1
+%macro @XEOS.16.video.print  1
     
     ; Saves registers
     pusha
     
     ; Prints the string
     mov     si,     %1
-    call    BIOS.video.print
+    call    XEOS.16.video.print
     
     ; Restores registers
     popa
@@ -253,7 +253,7 @@ BITS    16
 ;       - AX
 ;       - SI
 ;-------------------------------------------------------------------------------
-BIOS.video.print:
+XEOS.16.video.print:
     
     ; Outputs a single character (BIOS video services function)
     mov     ah,         0x0E

@@ -106,7 +106,7 @@ BITS    16
 ;           - 0x1C - 0x20:  File size in bytes
 ;
 ;       After calling this procedure, the start of the root directory can be
-;       accessed in $XEOS.io.fat12.rootDirectoryStart (WORD).
+;       accessed in $XEOS.16.io.fat12.rootDirectoryStart (WORD).
 ; 
 ; Input registers:
 ;       
@@ -122,7 +122,7 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12.loadRootDirectory:    
+XEOS.16.io.fat12.loadRootDirectory:    
     
     ; Saves registers
     pusha
@@ -138,13 +138,13 @@ XEOS.io.fat12.loadRootDirectory:
     %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
         
         ; Multiplies by the maximum number of entries to get the root directory size
-        mov     bx,         @XEOS.fat12.mbr.maxRootDirEntries
+        mov     bx,         @XEOS.io.fat12.mbr.maxRootDirEntries
         mul     bx
         
     %else
         
         ; Multiplies by the maximum number of entries to get the root directory size
-        mul     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.maxRootDirEntries ]
+        mul     WORD [ $XEOS.io.fat12.mbr + XEOS.io.fat12.mbr_t.maxRootDirEntries ]
         
     %endif
     
@@ -152,13 +152,13 @@ XEOS.io.fat12.loadRootDirectory:
     %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
         
         ; Number of sectors used by the root directory
-        mov     bx,         @XEOS.fat12.mbr.bytesPerSector
+        mov     bx,         @XEOS.io.fat12.mbr.bytesPerSector
         div     bx
         
     %else
         
         ; Number of sectors used by the root directory
-        div     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.bytesPerSector ]
+        div     WORD [ $XEOS.io.fat12.mbr + XEOS.io.fat12.mbr_t.bytesPerSector ]
         
     %endif
     
@@ -166,33 +166,33 @@ XEOS.io.fat12.loadRootDirectory:
     xchg    ax,         cx
     
     ; Number of file allocation tables
-    mov     al,         @XEOS.fat12.mbr.numberOfFATs
+    mov     al,         @XEOS.io.fat12.mbr.numberOfFATs
     
     ; Saves a few bytes of code if we can access the MBR variables directly
     %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
         
         ; Multiplies by the number of sectors that a FAT uses
-        mov     bx,         @XEOS.fat12.mbr.sectorsPerFAT
+        mov     bx,         @XEOS.io.fat12.mbr.sectorsPerFAT
         mul     bx
         
     %else
         
         ; Multiplies by the maximum number of entries to get the root directory size
-        mul     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerFAT ]
+        mul     WORD [ $XEOS.io.fat12.mbr + XEOS.io.fat12.mbr_t.sectorsPerFAT ]
         
     %endif
     
     ; Adds the number of reserved sectors, so we now have the starting
     ; sector of the root directory
-    add     ax,         @XEOS.fat12.mbr.reservedSectors
+    add     ax,         @XEOS.io.fat12.mbr.reservedSectors
     
     ; Now we can guess and store the starting sector for the data
-    mov     WORD [ $XEOS.io.fat12._dataSector ], ax
-    add     WORD [ $XEOS.io.fat12._dataSector ], cx
+    mov     WORD [ $XEOS.16.io.fat12._dataSector ], ax
+    add     WORD [ $XEOS.16.io.fat12._dataSector ], cx
     
     ; Read sectors at ES:DI
     mov     bx,         di
-    call    XEOS.io.fat12.readSectors
+    call    XEOS.16.io.fat12.readSectors
     
     ; Checks for an error code
     cmp     ax,         0
@@ -217,7 +217,7 @@ XEOS.io.fat12.loadRootDirectory:
         xor     ax,         ax
         
         ; Stores data sector in DX
-        mov     dx,         WORD [ $XEOS.io.fat12._dataSector ]
+        mov     dx,         WORD [ $XEOS.16.io.fat12._dataSector ]
         
         ret
 
@@ -225,7 +225,7 @@ XEOS.io.fat12.loadRootDirectory:
 ; Finds a file name in the FAT-12 root directory
 ; 
 ; Note that the root directory must be loaded in memory before calling this
-; procedure (see XEOS.io.fat12.loadRootDirectory).
+; procedure (see XEOS.16.io.fat12.loadRootDirectory).
 ; 
 ; Input registers:
 ; 
@@ -241,12 +241,12 @@ XEOS.io.fat12.loadRootDirectory:
 ;       
 ;       - CX
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12.findFile:
+XEOS.16.io.fat12.findFile:
     
     .start
         
         ; Process each entry of the FAT-12 root directory
-        mov     cx,         @XEOS.fat12.mbr.maxRootDirEntries
+        mov     cx,         @XEOS.io.fat12.mbr.maxRootDirEntries
     
     .loop:
         
@@ -307,7 +307,7 @@ XEOS.io.fat12.findFile:
 ;       - BX
 ;       - DX
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12.loadFile:
+XEOS.16.io.fat12.loadFile:
     
     .loadFAT:
         
@@ -315,11 +315,11 @@ XEOS.io.fat12.loadFile:
         push    es
         
         ; Saves the location of the first data cluster
-        mov     WORD [ $XEOS.io.fat12._fatOffset ],     bx
+        mov     WORD [ $XEOS.16.io.fat12._fatOffset ],      bx
         
         
         ; Saves the location of the first data cluster
-        mov     cx,         WORD [ $XEOS.io.fat12._dataSector ]
+        mov     cx,         WORD [ $XEOS.16.io.fat12._dataSector ]
         
         ; Saves registers
         push    ax
@@ -327,25 +327,25 @@ XEOS.io.fat12.loadFile:
         
         ; Saves the start cluster of the file
         mov     dx,                                         WORD [ di ]
-        mov     WORD [ $XEOS.io.fat12._currentCluster ],    dx
+        mov     WORD [ $XEOS.16.io.fat12._currentCluster ], dx
         
         ; Resets AX
         xor     ax,         ax
         
         ; Number of FATs
-        mov     al,         @XEOS.fat12.mbr.numberOfFATs
+        mov     al,         @XEOS.io.fat12.mbr.numberOfFATs
         
         ; Saves a few bytes of code if we can access the MBR variables directly
         %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
             
             ; Multiplies by the number of sectors per FAT
-            mov     bx,         @XEOS.fat12.mbr.sectorsPerFAT
+            mov     bx,         @XEOS.io.fat12.mbr.sectorsPerFAT
             mul     bx
             
         %else
             
             ; Multiplies by the number of sectors per FAT
-            mul     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerFAT ]
+            mul     WORD [ $XEOS.io.fat12.mbr + XEOS.io.fat12.mbr_t.sectorsPerFAT ]
             
         %endif
         
@@ -353,11 +353,11 @@ XEOS.io.fat12.loadFile:
         mov     cx,         ax
         
         ; Starting sector (bypass the reserved sectors)
-        mov     ax,         @XEOS.fat12.mbr.reservedSectors
+        mov     ax,         @XEOS.io.fat12.mbr.reservedSectors
         
         ; Loads the FAT at ES:BX
         pop     bx
-        call    XEOS.io.fat12.readSectors
+        call    XEOS.16.io.fat12.readSectors
         
         ; Checks for an error code
         cmp     ax,         0
@@ -384,13 +384,13 @@ XEOS.io.fat12.loadFile:
     .loadFile:
         
         ; Current cluster
-        mov     ax,         WORD [ $XEOS.io.fat12._currentCluster ]
+        mov     ax,         WORD [ $XEOS.16.io.fat12._currentCluster ]
         
         ; Data sector location
-        mov     bx,         WORD [ $XEOS.io.fat12._dataSector ]
+        mov     bx,         WORD [ $XEOS.16.io.fat12._dataSector ]
         
         ; Converts cluster to LBA
-        call    XEOS.io.fat12._clusterToLBA
+        call    XEOS.16.io.fat12._clusterToLBA
         
         ; Read buffer
         pop     bx
@@ -399,10 +399,10 @@ XEOS.io.fat12.loadFile:
         xor     cx,         cx
         
         ; Number of sectors to read
-        mov     cl, @XEOS.fat12.mbr.sectorsPerCluster
+        mov     cl, @XEOS.io.fat12.mbr.sectorsPerCluster
         
         ; Read sectors
-        call    XEOS.io.fat12.readSectors
+        call    XEOS.16.io.fat12.readSectors
         
         ; Checks if we are inside the first stage bootloader or not
         %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
@@ -446,14 +446,14 @@ XEOS.io.fat12.loadFile:
         pop     cx
         
         ; Number of sectors read
-        add     cx,         @XEOS.fat12.mbr.sectorsPerCluster
+        add     cx,         @XEOS.io.fat12.mbr.sectorsPerCluster
         
         ; Restores registers
         push    cx
         push    bx
         
         ; Stores current cluster
-        mov     ax,         WORD [ $XEOS.io.fat12._currentCluster ]
+        mov     ax,         WORD [ $XEOS.16.io.fat12._currentCluster ]
         mov     cx,         ax
         mov     dx,         ax
         
@@ -462,7 +462,7 @@ XEOS.io.fat12.loadFile:
         add     cx,         dx
         
         ; Location of FAT in memory
-        mov     bx,         WORD [ $XEOS.io.fat12._fatOffset ]
+        mov     bx,         WORD [ $XEOS.16.io.fat12._fatOffset ]
         
         ; Index in FAT
         add     bx,         cx
@@ -488,7 +488,7 @@ XEOS.io.fat12.loadFile:
         .end:
             
             ; Stores the start of the new cluster
-            mov     WORD [ $XEOS.io.fat12._currentCluster ],    dx
+            mov     WORD [ $XEOS.16.io.fat12._currentCluster ],    dx
             
             ; Test for EOF
             cmp     dx,         0x0FF0
@@ -526,7 +526,7 @@ XEOS.io.fat12.loadFile:
 ;       - CX
 ;       - DX
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12.readSectors:
+XEOS.16.io.fat12.readSectors:
     
     ; Saves registers
     push di
@@ -543,7 +543,7 @@ XEOS.io.fat12.readSectors:
             ; Prints the loading symbol
             ; External procedure, as we are using short jumps here, so
             ; the amount of code is limited
-            call    XEOS.io.fat12._printLoadSymbol
+            call    XEOS.16.io.fat12._printLoadSymbol
             
         %endif
         
@@ -554,7 +554,7 @@ XEOS.io.fat12.readSectors:
         
         ; Converts the logical block address to cluster, head and cylinder
         ; (needed for int 0x13)
-        call    XEOS.io.fat12._lbaToCHS
+        call    XEOS.16.io.fat12._lbaToCHS
         
         ; AX argument for int 0x13
         ; AL = 1
@@ -567,33 +567,33 @@ XEOS.io.fat12.readSectors:
             
             ; Cylinder and sector arguments for int 0x13
             ; Wrong formula, but this should work for the first stage bootloader
-            mov     ch,         BYTE [ $XEOS.io.fat12._cylinder ]
-            mov     cl,         BYTE [ $XEOS.io.fat12._sector ]
+            mov     ch,         BYTE [ $XEOS.16.io.fat12._cylinder ]
+            mov     cl,         BYTE [ $XEOS.16.io.fat12._sector ]
         
         %else
             
             ; Cylinder and sector arguments for int 0x13
             ; CX = ( ( cylinder and 255 ) shl 8 ) or ( ( cylinder and 768 ) shr 2 ) or sector;
             xor     cx,         cx
-            mov     cl,         BYTE [ $XEOS.io.fat12._cylinder ]
+            mov     cl,         BYTE [ $XEOS.16.io.fat12._cylinder ]
             and     cx,         255
             shl     cx,         8
             xor     dx,         dx
-            mov     dl,         BYTE [ $XEOS.io.fat12._cylinder ]
+            mov     dl,         BYTE [ $XEOS.16.io.fat12._cylinder ]
             and     dx,         768
             shr     dx,         2
             or      cx,         dx
             xor     dx,         dx
-            mov     dl,         BYTE [ $XEOS.io.fat12._sector ]
+            mov     dl,         BYTE [ $XEOS.16.io.fat12._sector ]
             or      cx,         dx
             
         %endif
         
         ; Track, sector and head parameters
-        mov     dh,         BYTE [ $XEOS.io.fat12._head ]
+        mov     dh,         BYTE [ $XEOS.16.io.fat12._head ]
         
         ; Drive number parameter
-        mov     dl,         @XEOS.fat12.mbr.driveNumber
+        mov     dl,         @XEOS.io.fat12.mbr.driveNumber
         
         ; Calls the BIOS LLDS
         @BIOS.int.llds
@@ -630,7 +630,7 @@ XEOS.io.fat12.readSectors:
         popa
         
         ; Memory area in which the next sector will be read
-        add     bx,         @XEOS.fat12.mbr.bytesPerSector
+        add     bx,         @XEOS.io.fat12.mbr.bytesPerSector
         
         ; Reads the next sector
         inc     ax
@@ -666,7 +666,7 @@ XEOS.io.fat12.readSectors:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12._clusterToLBA:
+XEOS.16.io.fat12._clusterToLBA:
     
     ; Saves registers
     push cx
@@ -678,13 +678,13 @@ XEOS.io.fat12._clusterToLBA:
     %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
         
         ; Multiplies by the number of sectors per cluster
-        mov     cx,         @XEOS.fat12.mbr.sectorsPerCluster
+        mov     cx,         @XEOS.io.fat12.mbr.sectorsPerCluster
         mul     cx
         
     %else
         
         ; Multiplies by the number of sectors per cluster
-        mul     BYTE [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerCluster ]
+        mul     BYTE [ $XEOS.io.fat12.mbr + XEOS.io.fat12.mbr_t.sectorsPerCluster ]
         
     %endif
     
@@ -707,9 +707,9 @@ XEOS.io.fat12._clusterToLBA:
 ;       
 ;       After calling this procedure, converted values can be accessed in:
 ;           
-;           - $XEOS.io.fat12._cylinder
-;           - $XEOS.io.fat12._head
-;           - $XEOS.io.fat12._sector
+;           - $XEOS.16.io.fat12._cylinder
+;           - $XEOS.16.io.fat12._head
+;           - $XEOS.16.io.fat12._sector
 ; 
 ; Input registers:
 ;       
@@ -725,7 +725,7 @@ XEOS.io.fat12._clusterToLBA:
 ;       - CX
 ;       - DX
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12._lbaToCHS:
+XEOS.16.io.fat12._lbaToCHS:
     
     ; Clears DX
     xor     dx,         dx
@@ -734,13 +734,13 @@ XEOS.io.fat12._lbaToCHS:
     %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
         
         ; Divides by the number of sectors per track
-        mov     cx,         @XEOS.fat12.mbr.sectorsPerTrack
+        mov     cx,         @XEOS.io.fat12.mbr.sectorsPerTrack
         div     cx
         
     %else
         
         ; Divides by the number of sectors per track
-        div     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.sectorsPerTrack ]
+        div     WORD [ $XEOS.io.fat12.mbr + XEOS.io.fat12.mbr_t.sectorsPerTrack ]
         
     %endif
     
@@ -748,7 +748,7 @@ XEOS.io.fat12._lbaToCHS:
     inc     dl
     
     ; Stores the sector
-    mov     BYTE [ $XEOS.io.fat12._sector ],    dl
+    mov     BYTE [ $XEOS.16.io.fat12._sector ],    dl
     
     ; Clears DX
     xor     dx,         dx
@@ -757,19 +757,19 @@ XEOS.io.fat12._lbaToCHS:
     %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
         
         ; Mod by the number of heads
-        mov     cx,         @XEOS.fat12.mbr.headsPerCylinder
+        mov     cx,         @XEOS.io.fat12.mbr.headsPerCylinder
         div     cx
         
     %else
         
         ; Divides by the number of sectors per track
-        div     WORD [ $XEOS.fat12.mbr + XEOS.fat12.mbr_t.headsPerCylinder ]
+        div     WORD [ $XEOS.io.fat12.mbr + XEOS.io.fat12.mbr_t.headsPerCylinder ]
         
     %endif
     
     ; Stores the head and cylinder
-    mov     BYTE [ $XEOS.io.fat12._head ],  dl
-    mov     BYTE [ $XEOS.io.fat12._cylinder ], al
+    mov     BYTE [ $XEOS.16.io.fat12._head ],       dl
+    mov     BYTE [ $XEOS.16.io.fat12._cylinder ],   al
     
     ret
 
@@ -800,13 +800,13 @@ XEOS.io.fat12._lbaToCHS:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.io.fat12._printLoadSymbol:
+XEOS.16.io.fat12._printLoadSymbol:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; We've got 4 different symbols, so divide the counter
     ; by 4 and checks the reminder
-    mov     eax,        DWORD [ $XEOS.io.fat12._loadCount ]
+    mov     eax,        DWORD [ $XEOS.16.io.fat12._loadCount ]
     xor     edx,        edx
     mov     ebx,        0x04
     div     ebx
@@ -854,11 +854,11 @@ XEOS.io.fat12._printLoadSymbol:
         @BIOS.int.video
     
     ; Increments the counter
-    mov eax,    DWORD [ $XEOS.io.fat12._loadCount ]
+    mov eax,    DWORD [ $XEOS.16.io.fat12._loadCount ]
     inc eax
-    mov DWORD [ $XEOS.io.fat12._loadCount ], eax
+    mov DWORD [ $XEOS.16.io.fat12._loadCount ], eax
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -868,16 +868,16 @@ XEOS.io.fat12._printLoadSymbol:
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-$XEOS.io.fat12._dataSector              dw  0
-$XEOS.io.fat12._cylinder                db  0
-$XEOS.io.fat12._head                    db  0
-$XEOS.io.fat12._sector                  db  0
-$XEOS.io.fat12._currentCluster          dw  0
-$XEOS.io.fat12._fatOffset               dw  0
+$XEOS.16.io.fat12._dataSector           dw  0
+$XEOS.16.io.fat12._cylinder             db  0
+$XEOS.16.io.fat12._head                 db  0
+$XEOS.16.io.fat12._sector               db  0
+$XEOS.16.io.fat12._currentCluster       dw  0
+$XEOS.16.io.fat12._fatOffset            dw  0
 
 %ifndef __XEOS_IO_FAT12_MBR_INC_16_ASM__
     
-    $XEOS.io.fat12._loadCount           dd  0
+    $XEOS.16.io.fat12._loadCount        dd  0
     
 %endif
 

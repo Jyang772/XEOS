@@ -178,12 +178,12 @@ main:
     
     ; Prints the welcome message
     mov     si,         $XEOS.boot.stage1.msg.boot
-    call    BIOS.video.print
+    call    XEOS.16.video.print
     
     ; Loads the FAT-12 root directory at ES:0200
     ; (07CE:0000 -> just after this bootloader)
     mov     di,         0x0200
-    call    XEOS.io.fat12.loadRootDirectory
+    call    XEOS.16.io.fat12.loadRootDirectory
     
     ; Checks for an error code
     cmp     ax,         0x00
@@ -198,7 +198,7 @@ main:
     ; Finds the second stage bootloader
     ; We have not altered DI, so it still contains the location of the FAT-12
     ; root directory
-    call    XEOS.io.fat12.findFile
+    call    XEOS.16.io.fat12.findFile
     
     ; Checks for an error code
     cmp     ax,         0x00
@@ -215,7 +215,7 @@ main:
     mov     cx,         WORD [ $XEOS.boot.stage1.dataSector ]
     
     ; Loads the second stage bootloader into memory
-    call    XEOS.io.fat12.loadFile
+    call    XEOS.16.io.fat12.loadFile
     
     ; Checks for an error code
     cmp     ax,         0x00
@@ -228,7 +228,7 @@ main:
         
         ; Prints the sucess message
         mov     si,         $XEOS.boot.stage1.msg.ok
-        call    BIOS.video.print
+        call    XEOS.16.video.print
         
         ; Pass control to the second stage bootloader, now loacated at 0050:0000
         push    WORD 0x0050
@@ -243,7 +243,7 @@ main:
         
         ; Prints the error message
         mov     si,         $XEOS.boot.stage1.msg.error
-        call    BIOS.video.print
+        call    XEOS.16.video.print
         
         ; Waits for a key press
         xor     ax,         ax

@@ -85,8 +85,8 @@ BITS    16
 ;-------------------------------------------------------------------------------
 
 ; ELF file signatures
-$XEOS.elf.32.signature      db  0x7F, 0x45, 0x4C, 0x46
-$XEOS.elf.64.signature      db  0x7F, 0x45, 0x4C, 0x46
+$XEOS.16.elf.32.signature   db  0x7F, 0x45, 0x4C, 0x46
+$XEOS.16.elf.64.signature   db  0x7F, 0x45, 0x4C, 0x46
 
 ;-------------------------------------------------------------------------------
 ; Type definitions
@@ -112,7 +112,7 @@ $XEOS.elf.64.signature      db  0x7F, 0x45, 0x4C, 0x46
 ;       - WORD  e_shstrndx      Section header table index of the entry
 ;                               associated with the section name string table
 ;-------------------------------------------------------------------------------
-struc XEOS.elf.32.header_t
+struc XEOS.16.elf.32.header_t
 
     .e_ident:       resb    16
     .e_type:        resw    1
@@ -151,7 +151,7 @@ endstruc
 ;       - WORD  e_shstrndx      Section header table index of the entry
 ;                               associated with the section name string table
 ;-------------------------------------------------------------------------------
-struc XEOS.elf.64.header_t
+struc XEOS.16.elf.64.header_t
 
     .e_ident:       resb    16
     .e_type:        resw    1
@@ -189,9 +189,9 @@ endstruc
 ;       
 ;       None   
 ;-------------------------------------------------------------------------------
-XEOS.elf.32.checkHeader:
+XEOS.16.elf.32.checkHeader:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Sets DS:SI to the ELF file location
     mov     ax,         si
@@ -207,12 +207,12 @@ XEOS.elf.32.checkHeader:
         .e_ident.magic:
             
             ; Compares with the ELF-32 signature
-            mov     di,         $XEOS.elf.32.signature
+            mov     di,         $XEOS.16.elf.32.signature
             mov     cx,         0x04
             rep     cmpsb
             je      .e_ident.class
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x01
@@ -230,7 +230,7 @@ XEOS.elf.32.checkHeader:
             cmp     al,         0x01
             je      .e_ident.encoding
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x02
@@ -245,7 +245,7 @@ XEOS.elf.32.checkHeader:
             cmp     al,         0x01
             je      .e_ident.version
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x03
@@ -260,7 +260,7 @@ XEOS.elf.32.checkHeader:
             cmp     al,         0x01
             je      .e_type
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x04
@@ -274,11 +274,11 @@ XEOS.elf.32.checkHeader:
         
         ; Checks the ELF version (0x02 for executables)
         xor     eax,        eax
-        mov     ax,         WORD [ si + XEOS.elf.32.header_t.e_type ]
+        mov     ax,         WORD [ si + XEOS.16.elf.32.header_t.e_type ]
         cmp     ax,         0x02
         je      .e_machine
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         0x05
@@ -292,11 +292,11 @@ XEOS.elf.32.checkHeader:
         
         ; Checks the ELF version (0x03 for Intel 80386)
         xor     eax,        eax
-        mov     ax,         WORD [ si + XEOS.elf.32.header_t.e_machine ]
+        mov     ax,         WORD [ si + XEOS.16.elf.32.header_t.e_machine ]
         cmp     ax,         0x03
         je      .e_version
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         0x06
@@ -310,11 +310,11 @@ XEOS.elf.32.checkHeader:
         
         ; Checks the ELF version (0x01)
         xor     eax,        eax
-        mov     ax,         WORD [ si + XEOS.elf.32.header_t.e_version ]
+        mov     ax,         WORD [ si + XEOS.16.elf.32.header_t.e_version ]
         cmp     ax,         0x01
         je      .success
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         0x07
@@ -326,7 +326,7 @@ XEOS.elf.32.checkHeader:
     ;---------------------------------------------------------------------------
     .success:
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Success - Stores result code in AX
         xor     ax,         ax
@@ -348,9 +348,9 @@ XEOS.elf.32.checkHeader:
 ;       
 ;       None   
 ;-------------------------------------------------------------------------------
-XEOS.elf.64.checkHeader:
+XEOS.16.elf.64.checkHeader:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Sets DS:SI to the ELF file location
     mov     ax,         si
@@ -366,12 +366,12 @@ XEOS.elf.64.checkHeader:
         .e_ident.magic:
             
             ; Compares with the ELF-64 signature
-            mov     di,         $XEOS.elf.64.signature
+            mov     di,         $XEOS.16.elf.64.signature
             mov     cx,         0x04
             rep     cmpsb
             je      .e_ident.class
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x01
@@ -389,7 +389,7 @@ XEOS.elf.64.checkHeader:
             cmp     al,         0x02
             je      .e_ident.encoding
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x02
@@ -404,7 +404,7 @@ XEOS.elf.64.checkHeader:
             cmp     al,         0x01
             je      .e_ident.version
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x03
@@ -419,7 +419,7 @@ XEOS.elf.64.checkHeader:
             cmp     al,         0x01
             je      .e_type
             
-            @XEOS.proc.end
+            @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
             mov     ax,         0x04
@@ -433,11 +433,11 @@ XEOS.elf.64.checkHeader:
         
         ; Checks the ELF version (0x02 for executables)
         xor     eax,        eax
-        mov     ax,         WORD [ si + XEOS.elf.64.header_t.e_type ]
+        mov     ax,         WORD [ si + XEOS.16.elf.64.header_t.e_type ]
         cmp     ax,         0x02
         je      .e_machine
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         0x05
@@ -451,12 +451,12 @@ XEOS.elf.64.checkHeader:
         
         ; Checks the ELF version (0x3E for AMD64)
         xor     eax,        eax
-        mov     ax,         WORD [ si + XEOS.elf.64.header_t.e_machine ]
+        mov     ax,         WORD [ si + XEOS.16.elf.64.header_t.e_machine ]
         cmp     ax,         0x3E
         
         je      .e_version
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         0x06
@@ -470,11 +470,11 @@ XEOS.elf.64.checkHeader:
         
         ; Checks the ELF version (0x01)
         xor     eax,        eax
-        mov     ax,         WORD [ si + XEOS.elf.64.header_t.e_version ]
+        mov     ax,         WORD [ si + XEOS.16.elf.64.header_t.e_version ]
         cmp     ax,         0x01
         je      .success
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         mov     ax,         0x07
@@ -486,7 +486,7 @@ XEOS.elf.64.checkHeader:
     ;---------------------------------------------------------------------------
     .success:
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Success - Stores result code in AX
         xor     ax,         ax

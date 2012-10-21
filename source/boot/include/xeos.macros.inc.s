@@ -73,10 +73,10 @@
 ;-------------------------------------------------------------------------------
 
 ;-------------------------------------------------------------------------------
-; Start of a standard procedure
+; Start of a standard 32 bits procedure
 ; 
 ; Note that the following registers are automatically saved on the stack, and
-; restored in @XEOS.proc.end:
+; restored in @XEOS.16.proc.end:
 ;       
 ;       - EAX
 ;       - EBX
@@ -98,7 +98,7 @@
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.proc.start 1
+%macro @XEOS.32.proc.start 1
     
     ; Saves registers and flags
     pushfd
@@ -121,7 +121,39 @@
 %endmacro
 
 ;-------------------------------------------------------------------------------
-; End of a standard procedure
+; Start of a standard 16 bits procedure
+; 
+; Note that the following registers are automatically saved on the stack, and
+; restored in @XEOS.16.proc.end:
+;       
+;       - EAX
+;       - EBX
+;       - ECX
+;       - EDX
+;       - ESI
+;       - EDI
+;       - EFLAGS
+;       - DS
+;       - ES
+;       - FS
+;       - GS
+; 
+; Parameters:
+; 
+;       1:          The number of stack (local) variables 
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.16.proc.start 1
+    
+    @XEOS.32.proc.start %1
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
+; End of a standard 32 bits procedure
 ; 
 ; Parameters:
 ; 
@@ -131,7 +163,7 @@
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.proc.end 0
+%macro @XEOS.32.proc.end 0
     
     ; Resets the previous stack frame
     mov     esp,        ebp
@@ -148,7 +180,24 @@
 %endmacro
 
 ;-------------------------------------------------------------------------------
-; Sets a stack (local) variable
+; End of a standard 16 bits procedure
+; 
+; Parameters:
+; 
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.16.proc.end 0
+    
+    @XEOS.32.proc.end
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
+; Sets a stack (local) variable (32 bits procedure)
 ; 
 ; Parameters:
 ; 
@@ -159,32 +208,73 @@
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-%macro @XEOS.proc.var.set 2
+%macro @XEOS.32.proc.var.set 2
     
-    mov @XEOS.proc.var.%1,  DWORD 0
-    mov @XEOS.proc.var.%1, %2
+    mov @XEOS.32.proc.var.%1,   DWORD 0
+    mov @XEOS.32.proc.var.%1,   %2
     
 %endmacro
 
-; Shortcuts for stack (local) variables
-%define @XEOS.proc.var.1    [ ebp -  4 ]
-%define @XEOS.proc.var.2    [ ebp -  8 ]
-%define @XEOS.proc.var.3    [ ebp - 12 ]
-%define @XEOS.proc.var.4    [ ebp - 16 ]
-%define @XEOS.proc.var.5    [ ebp - 20 ]
-%define @XEOS.proc.var.6    [ ebp - 24 ]
-%define @XEOS.proc.var.7    [ ebp - 28 ]
-%define @XEOS.proc.var.8    [ ebp - 32 ]
-%define @XEOS.proc.var.9    [ ebp - 36 ]
-%define @XEOS.proc.var.10   [ ebp - 40 ]
-%define @XEOS.proc.var.11   [ ebp - 44 ]
-%define @XEOS.proc.var.12   [ ebp - 48 ]
-%define @XEOS.proc.var.13   [ ebp - 52 ]
-%define @XEOS.proc.var.14   [ ebp - 56 ]
-%define @XEOS.proc.var.15   [ ebp - 60 ]
-%define @XEOS.proc.var.16   [ ebp - 64 ]
-%define @XEOS.proc.var.18   [ ebp - 68 ]
-%define @XEOS.proc.var.19   [ ebp - 72 ]
-%define @XEOS.proc.var.20   [ ebp - 76 ]
+;-------------------------------------------------------------------------------
+; Sets a stack (local) variable (16 bits procedure)
+; 
+; Parameters:
+; 
+;       1:          The index of the stack (local) variables
+;       2:          The value to set
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.16.proc.var.set 2
+    
+    mov @XEOS.16.proc.var.%1,   DWORD 0
+    mov @XEOS.16.proc.var.%1,   %2
+    
+%endmacro
+
+; Shortcuts for stack (local) variables (32 bits procedure)
+%define @XEOS.32.proc.var.1     [ ebp -  4 ]
+%define @XEOS.32.proc.var.2     [ ebp -  8 ]
+%define @XEOS.32.proc.var.3     [ ebp - 12 ]
+%define @XEOS.32.proc.var.4     [ ebp - 16 ]
+%define @XEOS.32.proc.var.5     [ ebp - 20 ]
+%define @XEOS.32.proc.var.6     [ ebp - 24 ]
+%define @XEOS.32.proc.var.7     [ ebp - 28 ]
+%define @XEOS.32.proc.var.8     [ ebp - 32 ]
+%define @XEOS.32.proc.var.9     [ ebp - 36 ]
+%define @XEOS.32.proc.var.10    [ ebp - 40 ]
+%define @XEOS.32.proc.var.11    [ ebp - 44 ]
+%define @XEOS.32.proc.var.12    [ ebp - 48 ]
+%define @XEOS.32.proc.var.13    [ ebp - 52 ]
+%define @XEOS.32.proc.var.14    [ ebp - 56 ]
+%define @XEOS.32.proc.var.15    [ ebp - 60 ]
+%define @XEOS.32.proc.var.16    [ ebp - 64 ]
+%define @XEOS.32.proc.var.18    [ ebp - 68 ]
+%define @XEOS.32.proc.var.19    [ ebp - 72 ]
+%define @XEOS.32.proc.var.20    [ ebp - 76 ]
+
+; Shortcuts for stack (local) variables (32 bits procedure)
+%define @XEOS.16.proc.var.1     @XEOS.32.proc.var.1
+%define @XEOS.16.proc.var.2     @XEOS.32.proc.var.2
+%define @XEOS.16.proc.var.3     @XEOS.32.proc.var.3
+%define @XEOS.16.proc.var.4     @XEOS.32.proc.var.4
+%define @XEOS.16.proc.var.5     @XEOS.32.proc.var.5
+%define @XEOS.16.proc.var.6     @XEOS.32.proc.var.6
+%define @XEOS.16.proc.var.7     @XEOS.32.proc.var.7
+%define @XEOS.16.proc.var.8     @XEOS.32.proc.var.8
+%define @XEOS.16.proc.var.9     @XEOS.32.proc.var.9
+%define @XEOS.16.proc.var.10    @XEOS.32.proc.var.10
+%define @XEOS.16.proc.var.11    @XEOS.32.proc.var.11
+%define @XEOS.16.proc.var.12    @XEOS.32.proc.var.12
+%define @XEOS.16.proc.var.13    @XEOS.32.proc.var.13
+%define @XEOS.16.proc.var.14    @XEOS.32.proc.var.14
+%define @XEOS.16.proc.var.15    @XEOS.32.proc.var.15
+%define @XEOS.16.proc.var.16    @XEOS.32.proc.var.16
+%define @XEOS.16.proc.var.17    @XEOS.32.proc.var.17
+%define @XEOS.16.proc.var.18    @XEOS.32.proc.var.18
+%define @XEOS.16.proc.var.19    @XEOS.32.proc.var.19
+%define @XEOS.16.proc.var.20    @XEOS.32.proc.var.20
 
 %endif

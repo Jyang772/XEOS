@@ -113,9 +113,9 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enable.bios:
+XEOS.16.a20.enable.bios:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; A20 enabling function (BIOS miscellaneous services function)
     mov     ax,         0x2401
@@ -126,7 +126,7 @@ XEOS.a20.enable.bios:
     ; Checks for an error
     jnc     .success
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
      
     ; Error - Stores result code in AX
     mov     ax,         0x01
@@ -135,7 +135,7 @@ XEOS.a20.enable.bios:
     
     .success:
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Success - Stores result code in AX
         xor     ax,         ax
@@ -157,9 +157,9 @@ XEOS.a20.enable.bios:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enable.systemControl:
+XEOS.16.a20.enable.systemControl:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Bits 2 enables A20
     mov     al,         0x02
@@ -167,7 +167,7 @@ XEOS.a20.enable.systemControl:
     ; Writes to the system control port
     out     0x92,       al
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -186,9 +186,9 @@ XEOS.a20.enable.systemControl:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enable.keyboard.control:
+XEOS.16.a20.enable.keyboard.control:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; A20 enabling command
     mov	    al,         0xDD
@@ -196,7 +196,7 @@ XEOS.a20.enable.keyboard.control:
     ; Sends the command to the keyboard control port
     out     0x64,       al
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -215,15 +215,15 @@ XEOS.a20.enable.keyboard.control:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enable.keyboard.out.wait.in:
+XEOS.16.a20.enable.keyboard.out.wait.in:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     in      al,         0x64
     test    al,         0x02
-    jnz     XEOS.a20.enable.keyboard.out.wait.in
+    jnz     XEOS.16.a20.enable.keyboard.out.wait.in
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -242,15 +242,15 @@ XEOS.a20.enable.keyboard.out.wait.in:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enable.keyboard.out.wait.out:
+XEOS.16.a20.enable.keyboard.out.wait.out:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     in      al,         0x64
     test    al,         0x01
-    jz      XEOS.a20.enable.keyboard.out.wait.out
+    jz      XEOS.16.a20.enable.keyboard.out.wait.out
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -269,43 +269,43 @@ XEOS.a20.enable.keyboard.out.wait.out:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enable.keyboard.out:
+XEOS.16.a20.enable.keyboard.out:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Clears the interrupts
     cli
     
     ; Waits for the input buffer to be empty
-    call    XEOS.a20.enable.keyboard.out.wait.in
+    call    XEOS.16.a20.enable.keyboard.out.wait.in
     
     ; Disables the keyboard
     mov     al,         0xAD
     out     0x64,       al
     
     ; Waits for the input buffer to be empty
-    call    XEOS.a20.enable.keyboard.out.wait.in
+    call    XEOS.16.a20.enable.keyboard.out.wait.in
     
     ; Tells the keyboard controller to read the output port
     mov     al,         0xD0
     out     0x64,       al
     
     ; Waits for the output buffer to be empty
-    call    XEOS.a20.enable.keyboard.out.wait.out
+    call    XEOS.16.a20.enable.keyboard.out.wait.out
     
     ; Stores the data of the output port in the stack
     in      al,         0x60
     push    eax
     
     ; Waits for the input buffer to be empty
-    call    XEOS.a20.enable.keyboard.out.wait.in
+    call    XEOS.16.a20.enable.keyboard.out.wait.in
     
     ; Writes the output port
     mov     al,         0xD1
     out     0x64,       al
     
     ; Waits for the input buffer to be empty
-    call    XEOS.a20.enable.keyboard.out.wait.in
+    call    XEOS.16.a20.enable.keyboard.out.wait.in
     
     ; Restores data from the output port
     pop     eax
@@ -317,19 +317,19 @@ XEOS.a20.enable.keyboard.out:
     out     0x60,       al
     
     ; Waits for the input buffer to be empty
-    call    XEOS.a20.enable.keyboard.out.wait.in
+    call    XEOS.16.a20.enable.keyboard.out.wait.in
     
     ; Re-enables the keyboard
     mov     al,         0xAE
     out     0x64,       al
     
     ; Waits for the input buffer to be empty
-    call    XEOS.a20.enable.keyboard.out.wait.in
+    call    XEOS.16.a20.enable.keyboard.out.wait.in
     
     ; Restores the interrupts
     sti
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
     
@@ -348,7 +348,7 @@ XEOS.a20.enable.keyboard.out:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.a20.enabled:
+XEOS.16.a20.enabled:
     
     .start:
         

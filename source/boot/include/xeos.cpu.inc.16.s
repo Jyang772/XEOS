@@ -96,9 +96,9 @@ BITS    16
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.cpu.hasCPUID:
+XEOS.16.cpu.hasCPUID:
     
-    @XEOS.proc.start 1
+    @XEOS.16.proc.start 1
     
     ; Gets EFLAGS into EAX
     pushfd
@@ -132,7 +132,7 @@ XEOS.cpu.hasCPUID:
         push    ecx
         popfd
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         xor     ax,         ax
@@ -145,7 +145,7 @@ XEOS.cpu.hasCPUID:
         push    ecx
         popfd
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Success - Stores result code in AX
         mov     ax,         0x01
@@ -168,9 +168,9 @@ XEOS.cpu.hasCPUID:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.cpu.vendor:
+XEOS.16.cpu.vendor:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Get CPU vendor strings (EBX, EDX, ECX - 4 chars each)
     mov     eax,        0x00
@@ -181,7 +181,7 @@ XEOS.cpu.vendor:
     mov     [ di + 4 ], edx
     mov     [ di + 8 ], ecx
     
-    @XEOS.proc.end
+    @XEOS.16.proc.end
     
     ret
 
@@ -200,9 +200,9 @@ XEOS.cpu.vendor:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.cpu.64:
+XEOS.16.cpu.64:
     
-    @XEOS.proc.start 0
+    @XEOS.16.proc.start 0
     
     ; Indentifies CPU
     mov     eax,        0x80000000
@@ -214,7 +214,7 @@ XEOS.cpu.64:
         
     .success
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Success - Stores result code in AX
         mov     ax,         0x01
@@ -223,7 +223,7 @@ XEOS.cpu.64:
         
     .error:
         
-        @XEOS.proc.end
+        @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
         xor     ax,         ax
