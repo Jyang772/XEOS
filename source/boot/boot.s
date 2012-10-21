@@ -100,16 +100,16 @@ start: jmp main
 
 %include "xeos.constants.inc.s"     ; General constants
 %include "xeos.macros.inc.s"        ; General macros
-%include "bios.int.inc.s"           ; BIOS interrupts
-%include "bios.video.inc.16.s"      ; BIOS video services
-%include "xeos.io.fat12.inc.16.s"   ; FAT-12 IO procedures
+%include "xeos.16.int.inc.s"        ; BIOS interrupts
+%include "xeos.16.video.inc.s"      ; BIOS video services
+%include "xeos.16.io.fat12.inc.s"   ; FAT-12 IO procedures
 %include "xeos.ascii.inc.s"         ; ASCII table
-%include "xeos.cpu.inc.16.s"        ; CPU informations
+%include "xeos.16.cpu.inc.s"        ; CPU informations
 %include "xeos.gdt.inc.s"           ; GDT - Global Descriptor Table
-%include "xeos.a20.inc.16.s"        ; 20th address line enabling
-%include "xeos.elf.inc.16.s"        ; ELF binary format support
-%include "xeos.string.inc.16.s"     ; String utilities
-%include "xeos.debug.inc.16.s"      ; Debugging
+%include "xeos.16.a20.inc.s"        ; 20th address line enabling
+%include "xeos.16.elf.inc.s"        ; ELF binary format support
+%include "xeos.16.string.inc.s"     ; String utilities
+%include "xeos.16.debug.inc.s"      ; Debugging
 
 ;-------------------------------------------------------------------------------
 ; Variables definition
@@ -1361,7 +1361,7 @@ BITS    32
 ; Includes
 ;-------------------------------------------------------------------------------
 
-%include "xeos.video.inc.32.s"      ; XEOS video services
+%include "xeos.32.video.inc.s"      ; XEOS video services
 
 ;-------------------------------------------------------------------------------
 ; Setups and executes the 32 bits kernel

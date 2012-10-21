@@ -99,7 +99,7 @@ start: jmp main
 
 ; Includes the FAT-12 MBR, so the beginning of the binary will be a valid
 ; FAT-12 floppy drive
-%include "xeos.io.fat12.mbr.inc.16.s"
+%include "xeos.io.fat12.mbr.inc.s"
 
 ;---------------------------------------------------------------------------
 ; Includes
@@ -107,8 +107,8 @@ start: jmp main
 
 %include "xeos.constants.inc.s"     ; General constants
 %include "xeos.ascii.inc.s"         ; ASCII table
-%include "bios.video.inc.16.s"      ; BIOS video services
-%include "xeos.io.fat12.inc.16.s"   ; FAT-12 IO procedures
+%include "xeos.16.video.inc.s"      ; BIOS video services
+%include "xeos.16.io.fat12.inc.s"   ; FAT-12 IO procedures
 
 ;-------------------------------------------------------------------------------
 ; Variables definition
