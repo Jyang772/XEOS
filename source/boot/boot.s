@@ -181,7 +181,7 @@ $XEOS.boot.stage2.msg.a20.bios                          db  "Enabling the A-20 a
 $XEOS.boot.stage2.msg.a20.keyboardControl               db  "Enabling the A-20 address line (KBDCTRL):        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.keyboardOut                   db  "Enabling the A-20 address line (KBDOUT):         ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.systemControl                 db  "Enabling the A-20 address line (SYSCTRL):        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits (protected) mode:C   ", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits (protected) mode:   ", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits (long) mode:        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.move                       db  "Moving the kernel image to its final location:   ", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.address                    db  "0x00201000", @ASCII.NUL
