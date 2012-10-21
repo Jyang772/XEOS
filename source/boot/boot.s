@@ -927,37 +927,37 @@ main:
     
     .error.verify.32.e_ident.magic:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_ident.magic
         jmp                                 .error
         
     .error.verify.32.e_ident.class:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_ident.class
         jmp                                 .error
         
     .error.verify.32.e_ident.encoding:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_ident.encoding
         jmp                                 .error
         
     .error.verify.32.e_ident.version:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_ident.version
         jmp                                 .error
         
     .error.verify.32.e_type:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_type
         jmp                                 .error
         
     .error.verify.32.e_machine:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_machine
         jmp                                 .error
         
     .error.verify.32.e_version:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_version
         jmp                                 .error
         
     .error.verify.32:
@@ -967,37 +967,37 @@ main:
     
     .error.verify.64.e_ident.magic:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_ident.magic
         jmp                                 .error
         
     .error.verify.64.e_ident.class:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_ident.class
         jmp                                 .error
         
     .error.verify.64.e_ident.encoding:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_ident.encoding
         jmp                                 .error
         
     .error.verify.64.e_ident.version:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_ident.version
         jmp                                 .error
         
     .error.verify.64.e_type:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_type
         jmp                                 .error
         
     .error.verify.64.e_machine:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_machine
         jmp                                 .error
         
     .error.verify.64.e_version:
         
-        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_version
         jmp                                 .error
     
     .error.verify.64:
