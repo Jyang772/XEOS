@@ -87,8 +87,6 @@ BITS    16
 ; ELF file signatures
 $XEOS.elf.32.signature      db  0x7F, 0x45, 0x4C, 0x46
 $XEOS.elf.64.signature      db  0x7F, 0x45, 0x4C, 0x46
-$XEOS.elf.32.e_entry        dd  0
-$XEOS.elf.64.e_entry        dd  0
 
 ;-------------------------------------------------------------------------------
 ; Type definitions
@@ -186,7 +184,6 @@ endstruc
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
-;       - EDI:      The entry point address
 ; 
 ; Killed registers:
 ;       
@@ -329,15 +326,7 @@ XEOS.elf.32.checkHeader:
     ;---------------------------------------------------------------------------
     .success:
         
-        ; Stores the entry point address, so we can put it in EDI after the
-        ; registers have been restored
-        mov     eax,                            DWORD [ si + XEOS.elf.32.header_t.e_entry ]
-        mov     DWORD [ $XEOS.elf.32.e_entry ], eax
-        
         @XEOS.proc.end
-        
-        ; Stores the entry point address in EDI
-        mov     edi,        DWORD [ $XEOS.elf.32.e_entry ]
         
         ; Success - Stores result code in AX
         xor     ax,         ax
@@ -354,7 +343,6 @@ XEOS.elf.32.checkHeader:
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
-;       - EDI:      The entry point address
 ; 
 ; Killed registers:
 ;       
@@ -498,15 +486,7 @@ XEOS.elf.64.checkHeader:
     ;---------------------------------------------------------------------------
     .success:
         
-        ; Stores the entry point address, so we can put it in EDI after the
-        ; registers have been restored
-        mov     eax,                            DWORD [ si + XEOS.elf.64.header_t.e_entry ]
-        mov     DWORD [ $XEOS.elf.64.e_entry ], eax
-        
         @XEOS.proc.end
-        
-        ; Stores the entry point address in EDI
-        mov     edi,        DWORD [ $XEOS.elf.64.e_entry ]
         
         ; Success - Stores result code in AX
         xor     ax,         ax

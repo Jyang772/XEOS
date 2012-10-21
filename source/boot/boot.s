@@ -117,7 +117,6 @@ start: jmp main
 
 $XEOS.boot.stage2.dataSector                    dw  0
 $XEOS.boot.stage2.kernelSectors                 dw  0
-$XEOS.boot.stage2.entryPoint                    dd  0
 $XEOS.boot.stage2.nl                            db  @ASCII.NL,  @ASCII.NUL
 $XEOS.files.kernel.32                           db  "XEOS32  ELF", @ASCII.NUL
 $XEOS.files.kernel.64                           db  "XEOS64  ELF", @ASCII.NUL
@@ -825,7 +824,6 @@ main:
             ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
             call    XEOS.elf.32.checkHeader
-            mov     DWORD [ $XEOS.boot.stage2.entryPoint ], edi
             cmp     ax,     0
             je      .load.verified
             
@@ -861,7 +859,6 @@ main:
             ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
             call    XEOS.elf.64.checkHeader
-            mov     DWORD [ $XEOS.boot.stage2.entryPoint ], edi
             cmp     ax,     0
             je      .load.verified
             
