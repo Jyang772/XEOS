@@ -886,6 +886,9 @@ main:
             
         .load.verified
             
+            ; DEBUG - Dumps registers
+            ; call    XEOS.debug.registers.dump
+            
             @XEOS.boot.stage2.print.success
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
