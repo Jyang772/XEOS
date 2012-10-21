@@ -666,12 +666,12 @@ main:
     ;---------------------------------------------------------------------------
     .gdt:
         
-            @XEOS.boot.stage2.print.prompt
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
-            call                    XEOS.gdt.install
-            @XEOS.boot.stage2.print.success
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
-       
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
+        call                    XEOS.gdt.install
+        @XEOS.boot.stage2.print.success
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+        
     ;---------------------------------------------------------------------------
     ; A-20 address line
     ;--------------------------------------------------------------------------- 
