@@ -153,6 +153,67 @@
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; Start of a standard 64 bits procedure
+; 
+; Note that the following registers are automatically saved on the stack, and
+; restored in @XEOS.16.proc.end:
+;       
+;       - RAX
+;       - RBX
+;       - RCX
+;       - RDX
+;       - RSI
+;       - RDI
+;       - R8
+;       - R9
+;       - R10
+;       - R11
+;       - R12
+;       - R13
+;       - R14
+;       - R15
+;       - RFLAGS
+; 
+; Parameters:
+; 
+;       1:          The number of stack (local) variables 
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.64.proc.start 1
+    
+    ; Saves registers and flags
+    pushfq
+    push    rax
+    push    rbx
+    push    rcx
+    push    rdx
+    push    rsi
+    push    rdi
+    push    r8
+    push    r9
+    push    r10
+    push    r11
+    push    r12
+    push    r13
+    push    r14
+    push    r15
+    
+    ; Creates the stack frame
+    push    rbp
+    mov     rbp,        rsp
+    
+    ; Space for local variables
+    sub     rsp,        %1 * 8
+    
+    ; Aligns the stack on a 16 byte boundary
+    and     rsp,        0xFFFFFFFFFFFFFFF0
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
 ; End of a standard 32 bits procedure
 ; 
 ; Parameters:
@@ -197,6 +258,42 @@
 %endmacro
 
 ;-------------------------------------------------------------------------------
+; End of a standard 64 bits procedure
+; 
+; Parameters:
+; 
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.64.proc.end 0
+    
+    ; Resets the previous stack frame
+    mov     rsp,        rbp
+    pop     rbp
+    
+    ; Restores registers and flags
+    pop     r15
+    pop     r14
+    pop     r13
+    pop     r12
+    pop     r11
+    pop     r10
+    pop     r9
+    pop     r8
+    pop     rdi
+    pop     rsi
+    pop     rdx
+    pop     rcx
+    pop     rbx
+    pop     rax
+    popfq
+    
+%endmacro
+
+;-------------------------------------------------------------------------------
 ; Sets a stack (local) variable (32 bits procedure)
 ; 
 ; Parameters:
@@ -234,6 +331,25 @@
     
 %endmacro
 
+;-------------------------------------------------------------------------------
+; Sets a stack (local) variable (64 bits procedure)
+; 
+; Parameters:
+; 
+;       1:          The index of the stack (local) variables
+;       2:          The value to set
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+%macro @XEOS.64.proc.var.set 2
+    
+    mov @XEOS.64.proc.var.%1,   QWORD 0
+    mov @XEOS.64.proc.var.%1,   %2
+    
+%endmacro
+
 ; Shortcuts for stack (local) variables (32 bits procedure)
 %define @XEOS.32.proc.var.1     [ ebp -  4 ]
 %define @XEOS.32.proc.var.2     [ ebp -  8 ]
@@ -255,7 +371,7 @@
 %define @XEOS.32.proc.var.19    [ ebp - 72 ]
 %define @XEOS.32.proc.var.20    [ ebp - 76 ]
 
-; Shortcuts for stack (local) variables (32 bits procedure)
+; Shortcuts for stack (local) variables (16 bits procedure)
 %define @XEOS.16.proc.var.1     @XEOS.32.proc.var.1
 %define @XEOS.16.proc.var.2     @XEOS.32.proc.var.2
 %define @XEOS.16.proc.var.3     @XEOS.32.proc.var.3
@@ -276,5 +392,27 @@
 %define @XEOS.16.proc.var.18    @XEOS.32.proc.var.18
 %define @XEOS.16.proc.var.19    @XEOS.32.proc.var.19
 %define @XEOS.16.proc.var.20    @XEOS.32.proc.var.20
+
+; Shortcuts for stack (local) variables (64 bits procedure)
+%define @XEOS.64.proc.var.1     [ rbp -    8 ]
+%define @XEOS.64.proc.var.2     [ rbp -   16 ]
+%define @XEOS.64.proc.var.3     [ rbp -   24 ]
+%define @XEOS.64.proc.var.4     [ rbp -   32 ]
+%define @XEOS.64.proc.var.5     [ rbp -   40 ]
+%define @XEOS.64.proc.var.6     [ rbp -   48 ]
+%define @XEOS.64.proc.var.7     [ rbp -   56 ]
+%define @XEOS.64.proc.var.8     [ rbp -   64 ]
+%define @XEOS.64.proc.var.9     [ rbp -   72 ]
+%define @XEOS.64.proc.var.10    [ rbp -   80 ]
+%define @XEOS.64.proc.var.11    [ rbp -   88 ]
+%define @XEOS.64.proc.var.12    [ rbp -   96 ]
+%define @XEOS.64.proc.var.13    [ rbp -  104 ]
+%define @XEOS.64.proc.var.14    [ rbp -  112 ]
+%define @XEOS.64.proc.var.15    [ rbp -  120 ]
+%define @XEOS.64.proc.var.16    [ rbp -  128 ]
+%define @XEOS.64.proc.var.17    [ rbp -  136 ]
+%define @XEOS.64.proc.var.18    [ rbp -  144 ]
+%define @XEOS.64.proc.var.19    [ rbp -  152 ]
+%define @XEOS.64.proc.var.20    [ rbp -  160 ]
 
 %endif
