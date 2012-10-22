@@ -909,7 +909,7 @@ main:
         .load.verified
             
             ; DEBUG - Dumps registers
-            ; call    XEOS.debug.registers.dump
+            ; call    XEOS.16.debug.registers.dump
             
             @XEOS.boot.stage2.print.success
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -1222,7 +1222,7 @@ XEOS.boot.stage2.kernel.load:
         
         ; DEBUG - Dumps the kernel data
         ; mov     si,         @XEOS.boot.stage2.kernel.segment
-        ; call    XEOS.debug.memory.dump
+        ; call    XEOS.16.debug.memory.dump
         
         ; Success - Stores result code in AX
         xor     ax,         ax
