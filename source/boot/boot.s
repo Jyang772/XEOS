@@ -1569,7 +1569,7 @@ XEOS.boot.stage2.32.run:
         mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
         
         ; Jumps to the kernel code
-        ;jmp     @XEOS.gdt.descriptors.32.code:eax
+        jmp     @XEOS.gdt.descriptors.32.code:eax
         
     ; Halts the system
     hlt
