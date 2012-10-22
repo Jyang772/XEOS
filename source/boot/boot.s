@@ -186,8 +186,7 @@ $XEOS.boot.stage2.msg.a20.systemControl                 db  "Enabling the A-20 a
 $XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits (protected) mode:   ", @ASCII.NUL
 $XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits (long) mode:        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.move                       db  "Moving the kernel image to its final location:   ", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.address                    db  "0x00201000", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.run                        db  "Passing control to the kernel...                 ", @ASCII.NUL
+$XEOS.boot.stage2.msg.kernel.run                        db  "Passing control to the kernel:                   ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                             db  "Press any key to reboot: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir                   db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find                  db  "Error: file not found", @ASCII.NUL
@@ -1536,7 +1535,8 @@ XEOS.boot.stage2.32.run:
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-            @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.address
+            @XEOS.32.string.numberToString      @XEOS.boot.stage2.kernel.address, 16, 4, 1, $XEOS.boot.stage2.str
+            @XEOS.32.video.print                $XEOS.boot.stage2.str
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
@@ -1554,13 +1554,22 @@ XEOS.boot.stage2.32.run:
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.gt
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.run
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
+        @XEOS.32.string.numberToString      DWORD [ $XEOS.boot.stage2.kernel.32.entry ], 16, 4, 1, $XEOS.boot.stage2.str
+        @XEOS.32.video.print                $XEOS.boot.stage2.str
+        @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
         @XEOS.32.video.print                $XEOS.boot.stage2.nl
         
         ; Kernel entry point
         mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
         
         ; Jumps to the kernel code
-        ;jmp     @XEOS.gdt.descriptors.32.code:eax
+        jmp     @XEOS.gdt.descriptors.32.code:eax
         
     ; Halts the system
     hlt
