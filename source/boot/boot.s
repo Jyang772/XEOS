@@ -114,6 +114,8 @@ start: jmp main
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
+$XEOS.boot.stage2.kernel.32.entry               dd 0
+$XEOS.boot.stage2.kernel.64.entry               dd 0
 $XEOS.boot.stage2.dataSector                    dw  0
 $XEOS.boot.stage2.kernelSectors                 dw  0
 $XEOS.boot.stage2.nl                            db  @ASCII.NL,  @ASCII.NUL
@@ -844,6 +846,7 @@ main:
             ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
             call    XEOS.16.elf.32.checkHeader
+            mov     DWORD [ $XEOS.boot.stage2.kernel.32.entry ],    edi
             cmp     ax,     0
             je      .load.verified
             
@@ -879,6 +882,7 @@ main:
             ; address
             mov     si,     @XEOS.boot.stage2.kernel.segment
             call    XEOS.16.elf.64.checkHeader
+            mov     DWORD [ $XEOS.boot.stage2.kernel.64.entry ],    edi
             cmp     ax,     0
             je      .load.verified
             
@@ -1551,8 +1555,11 @@ XEOS.boot.stage2.32.run:
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.run
         @XEOS.32.video.print                $XEOS.boot.stage2.nl
         
+        ; Kernel entry point
+        mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
+        
         ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.32.code:@XEOS.boot.stage2.kernel.address
+        jmp     @XEOS.gdt.descriptors.32.code:eax
         
     ; Halts the system
     hlt

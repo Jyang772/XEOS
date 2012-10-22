@@ -88,6 +88,10 @@ BITS    16
 $XEOS.16.elf.32.signature   db  0x7F, 0x45, 0x4C, 0x46
 $XEOS.16.elf.64.signature   db  0x7F, 0x45, 0x4C, 0x46
 
+; Entry points
+$XEOS.16.elf.32.entry       dd  0
+$XEOS.16.elf.64.entry       dd  0
+
 ;-------------------------------------------------------------------------------
 ; Type definitions
 ;-------------------------------------------------------------------------------
@@ -184,14 +188,19 @@ endstruc
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
+;       - EDI:      The ELF entry point address
 ; 
 ; Killed registers:
 ;       
 ;       None   
 ;-------------------------------------------------------------------------------
+%include "xeos.16.debug.inc.s"
 XEOS.16.elf.32.checkHeader:
     
     @XEOS.16.proc.start 0
+    
+    ; Saves registers
+    push    ds
     
     ; Sets DS:SI to the ELF file location
     mov     ax,         si
@@ -212,6 +221,9 @@ XEOS.16.elf.32.checkHeader:
             rep     cmpsb
             je      .e_ident.class
             
+            ; Restores registers
+            pop     ds
+            
             @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
@@ -230,6 +242,9 @@ XEOS.16.elf.32.checkHeader:
             cmp     al,         0x01
             je      .e_ident.encoding
             
+            ; Restores registers
+            pop     ds
+            
             @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
@@ -245,6 +260,9 @@ XEOS.16.elf.32.checkHeader:
             cmp     al,         0x01
             je      .e_ident.version
             
+            ; Restores registers
+            pop     ds
+            
             @XEOS.16.proc.end
             
             ; Error - Stores result code in AX
@@ -259,6 +277,9 @@ XEOS.16.elf.32.checkHeader:
             mov     al,         BYTE [ si + 5 ]
             cmp     al,         0x01
             je      .e_type
+            
+            ; Restores registers
+            pop     ds
             
             @XEOS.16.proc.end
             
@@ -278,6 +299,9 @@ XEOS.16.elf.32.checkHeader:
         cmp     ax,         0x02
         je      .e_machine
         
+        ; Restores registers
+        pop     ds
+        
         @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
@@ -295,6 +319,9 @@ XEOS.16.elf.32.checkHeader:
         mov     ax,         WORD [ si + XEOS.16.elf.32.header_t.e_machine ]
         cmp     ax,         0x03
         je      .e_version
+        
+        ; Restores registers
+        pop     ds
         
         @XEOS.16.proc.end
         
@@ -314,6 +341,9 @@ XEOS.16.elf.32.checkHeader:
         cmp     ax,         0x01
         je      .success
         
+        ; Restores registers
+        pop     ds
+        
         @XEOS.16.proc.end
         
         ; Error - Stores result code in AX
@@ -326,7 +356,19 @@ XEOS.16.elf.32.checkHeader:
     ;---------------------------------------------------------------------------
     .success:
         
+        ; Gets the entry point address
+        mov     eax,        DWORD [ si + XEOS.16.elf.32.header_t.e_entry ]
+        
+        ; Restores registers
+        pop     ds
+        
+        ; Stores the entry point address
+        mov     DWORD [ $XEOS.16.elf.32.entry ],    eax
+        
         @XEOS.16.proc.end
+        
+        ; Stores the entry point address in EDI
+        mov     edi,        DWORD [ $XEOS.16.elf.32.entry ]
         
         ; Success - Stores result code in AX
         xor     ax,         ax
@@ -343,6 +385,7 @@ XEOS.16.elf.32.checkHeader:
 ; Return registers:
 ;       
 ;       - AX:       The result code (0 if no error)
+;       - EDI:      The ELF entry point address
 ; 
 ; Killed registers:
 ;       
@@ -486,7 +529,19 @@ XEOS.16.elf.64.checkHeader:
     ;---------------------------------------------------------------------------
     .success:
         
+        ; Gets the entry point address
+        mov     eax,        DWORD [ si + XEOS.16.elf.64.header_t.e_entry ]
+        
+        ; Restores registers
+        pop     ds
+        
+        ; Stores the entry point address
+        mov     DWORD [ $XEOS.16.elf.64.entry ],    eax
+        
         @XEOS.16.proc.end
+        
+        ; Stores the entry point address in EDI
+        mov     edi,        DWORD [ $XEOS.16.elf.64.entry ]
         
         ; Success - Stores result code in AX
         xor     ax,         ax
