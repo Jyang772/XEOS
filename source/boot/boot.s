@@ -1119,7 +1119,7 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.left
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-        @XEOS.16.string.numberToString  es, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.16.string.numberToString  cs, 16, 4, 0, $XEOS.boot.stage2.str
         @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.separator
         @XEOS.16.string.numberToString  @XEOS.boot.stage2.fat.offset, 16, 4, dx, $XEOS.boot.stage2.str
@@ -1208,10 +1208,10 @@ XEOS.boot.stage2.kernel.load:
         
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.left
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
-        @XEOS.16.string.numberToString  @XEOS.boot.stage2.kernel.segment, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.16.string.numberToString  @XEOS.boot.stage2.kernel.segment, 16, 4, 0, $XEOS.boot.stage2.str
         @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.separator
-        @XEOS.16.string.numberToString  ax, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.16.string.numberToString  0, 16, 4, 0, $XEOS.boot.stage2.str
         @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
@@ -1569,7 +1569,7 @@ XEOS.boot.stage2.32.run:
         mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
         
         ; Jumps to the kernel code
-        jmp     @XEOS.gdt.descriptors.32.code:eax
+        ;jmp     @XEOS.gdt.descriptors.32.code:eax
         
     ; Halts the system
     hlt
