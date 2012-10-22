@@ -8,6 +8,8 @@
 
 /* Begin PBXFileReference section */
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		051A31021635C08600AD4FC9 /* kernel_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.32.s; sourceTree = "<group>"; };
+		051A31031635C08600AD4FC9 /* kernel_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.64.s; sourceTree = "<group>"; };
 		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
@@ -227,7 +229,6 @@
 		05AFEF0F1620F27C00740041 /* linker.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linker.ld; sourceTree = "<group>"; };
 		05AFEF101620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
-		05AFEF141620FA2700740041 /* kernel_init.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_init.s; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05DABB30162209D700DA8F66 /* kernel_video_itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_itoa.c; sourceTree = "<group>"; };
 		05DABB31162209E300DA8F66 /* kernel_video_utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_utoa.c; sourceTree = "<group>"; };
@@ -447,8 +448,9 @@
 				05AFEE5B1620F27C00740041 /* __video.c */,
 				05AFEE5C1620F27C00740041 /* include */,
 				05AFEE621620F27C00740041 /* interrupts */,
-				05AFEF141620FA2700740041 /* kernel_init.s */,
 				05AFEE791620F27C00740041 /* kernel_main.c */,
+				051A31021635C08600AD4FC9 /* kernel_stub.32.s */,
+				051A31031635C08600AD4FC9 /* kernel_stub.64.s */,
 				05AFEE7A1620F27C00740041 /* Makefile */,
 				05AFEE7B1620F27C00740041 /* syscalls */,
 				05AFEE7D1620F27C00740041 /* system */,
@@ -497,9 +499,9 @@
 				05AFEE721620F27C00740041 /* kernel_interrupt_overflow_exception.c */,
 				05AFEE731620F27C00740041 /* kernel_interrupt_page_fault_exception.c */,
 				05AFEE741620F27C00740041 /* kernel_interrupt_segment_not_present.c */,
-				05AFEE751620F27C00740041 /* kernel_interrupt_simd_floating_point_exception.c */,
 				05AFEE761620F27C00740041 /* kernel_interrupt_stack_fault_exception.c */,
 				05AFEE771620F27C00740041 /* kernel_interrupt_syscall.c */,
+				05AFEE751620F27C00740041 /* kernel_interrupt_simd_floating_point_exception.c */,
 			);
 			path = interrupts;
 			sourceTree = "<group>";
