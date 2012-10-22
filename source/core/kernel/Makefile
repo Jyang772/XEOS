@@ -87,24 +87,33 @@ ARGS_CC_32          := -iquote $(DIR_SRC_INC) $(ARGS_CC_32)
 ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
+# File extensions
+#-------------------------------------------------------------------------------
+
+EXT_ASM_32           = 32.s
+EXT_ASM_64           = 64.s
+
+#-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
 # Define the search paths for source files
-vpath %$(EXT_ASM) $(PATH_SRC_CORE_KERNEL)
-vpath %$(EXT_C)   $(PATH_SRC_CORE_KERNEL)
-vpath %$(EXT_C)   $(DIR_SRC_VIDEO)
-vpath %$(EXT_C)   $(DIR_SRC_INTERRUPTS)
-vpath %$(EXT_C)   $(DIR_SRC_SYSCALLS)
-vpath %$(EXT_C)   $(DIR_SRC_SYSTEM)
-vpath %$(EXT_H)   $(DIR_SRC_INC)
+vpath %$(EXT_ASM)       $(PATH_SRC_CORE_KERNEL)
+vpath %$(EXT_ASM_32)    $(PATH_SRC_CORE_KERNEL)
+vpath %$(EXT_ASM_64)    $(PATH_SRC_CORE_KERNEL)
+vpath %$(EXT_C)         $(PATH_SRC_CORE_KERNEL)
+vpath %$(EXT_C)         $(DIR_SRC_VIDEO)
+vpath %$(EXT_C)         $(DIR_SRC_INTERRUPTS)
+vpath %$(EXT_C)         $(DIR_SRC_SYSCALLS)
+vpath %$(EXT_C)         $(DIR_SRC_SYSTEM)
+vpath %$(EXT_H)         $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
 # File suffixes
 #-------------------------------------------------------------------------------
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_ASM) $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+.SUFFIXES: $(EXT_ASM) $(EXT_ASM_32) $(EXT_ASM_64) $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Macros
@@ -112,6 +121,8 @@ vpath %$(EXT_H)   $(DIR_SRC_INC)
 
 # Gets every code file in the source directory
 _FILES_ASM                      = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_ASM)))
+_FILES_ASM_32                   = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_ASM_32)))
+_FILES_ASM_64                   = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_ASM_64)))
 _FILES_C                        = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_C)))
 _FILES_C_INTERRUPTS             = $(foreach dir,$(DIR_SRC_INTERRUPTS),$(wildcard $(DIR_SRC_INTERRUPTS)*$(EXT_C)))
 _FILES_C_VIDEO                  = $(foreach dir,$(DIR_SRC_VIDEO),$(wildcard $(DIR_SRC_VIDEO)*$(EXT_C)))
@@ -119,7 +130,8 @@ _FILES_C_SYSCALLS               = $(foreach dir,$(DIR_SRC_SYSCALLS),$(wildcard $
 _FILES_C_SYSTEM                 = $(foreach dir,$(DIR_SRC_SYSTEM),$(wildcard $(DIR_SRC_SYSTEM)*$(EXT_C)))
 
 # Gets only the file name of the code files
-_FILES_ASM_REL                  = $(notdir $(_FILES_ASM))
+_FILES_ASM_REL_32               = $(notdir $(_FILES_ASM_32))
+_FILES_ASM_REL_64               = $(notdir $(_FILES_ASM_64))
 _FILES_C_REL                    = $(notdir $(_FILES_C))
 _FILES_C_REL_INTERRUPTS         = $(notdir $(_FILES_C_INTERRUPTS))
 _FILES_C_REL_VIDEO              = $(notdir $(_FILES_C_VIDEO))
@@ -127,7 +139,8 @@ _FILES_C_REL_SYSCALLS           = $(notdir $(_FILES_C_SYSCALLS))
 _FILES_C_REL_SYSTEM             = $(notdir $(_FILES_C_SYSTEM))
 
 # Replace the code extension by the object one
-_FILES_ASM_OBJ                  = $(subst $(EXT_ASM),$(EXT_ASM)$(EXT_OBJ),$(_FILES_ASM_REL))
+_FILES_ASM_OBJ_32               = $(subst $(EXT_ASM_32),$(EXT_ASM_32)$(EXT_OBJ),$(_FILES_ASM_REL_32))
+_FILES_ASM_OBJ_64               = $(subst $(EXT_ASM_64),$(EXT_ASM_64)$(EXT_OBJ),$(_FILES_ASM_REL_64))
 _FILES_C_OBJ                    = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
 _FILES_C_OBJ_INTERRUPTS         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_INTERRUPTS))
 _FILES_C_OBJ_VIDEO              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_VIDEO))
@@ -135,7 +148,8 @@ _FILES_C_OBJ_SYSCALLS           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C
 _FILES_C_OBJ_SYSTEM             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSTEM))
 
 # Prefix all binary files with the build directory
-_FILES_ASM_OBJ_BUILD            = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$(_FILES_ASM_OBJ))
+_FILES_ASM_OBJ_BUILD_32         = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$(_FILES_ASM_OBJ_32))
+_FILES_ASM_OBJ_BUILD_64         = $(addprefix $(PATH_BUILD_64_CORE_OBJ_KERNEL),$(_FILES_ASM_OBJ_64))
 _FILES_C_OBJ_BUILD              = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$(_FILES_C_OBJ))
 _FILES_C_OBJ_BUILD_INTERRUPTS   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$(_FILES_C_OBJ_INTERRUPTS))
 _FILES_C_OBJ_BUILD_VIDEO        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$(_FILES_C_OBJ_VIDEO))
@@ -157,7 +171,7 @@ _FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_ASM_OBJ_BUILD) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUPTS) $(_FILES_C_OBJ_BUILD_VIDEO) $(_FILES_C_OBJ_BUILD_SYSCALLS) $(_FILES_C_OBJ_BUILD_SYSTEM)
+all: $(_FILES_ASM_OBJ_BUILD_32) $(_FILES_ASM_OBJ_BUILD_64) $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_INTERRUPTS) $(_FILES_C_OBJ_BUILD_VIDEO) $(_FILES_C_OBJ_BUILD_SYSCALLS) $(_FILES_C_OBJ_BUILD_SYSTEM)
 	
 	@:
 
@@ -167,6 +181,12 @@ clean:
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_KERNEL)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_KERNEL)*
+	
+# Compiles an assembly file (32 bits)
+$(PATH_BUILD_32_CORE_OBJ_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_OBJ_KERNEL)$(@F) $(abspath $<)
 	
 # Compiles an assembly file (64 bits)
 $(PATH_BUILD_64_CORE_OBJ_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
@@ -182,12 +202,6 @@ $(PATH_BUILD_64_CORE_OBJ_KERNEL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 
 # Targets with second expansion
 .SECONDEXPANSION:
-
-# Compiles an assembly file (32 bits)
-$(PATH_BUILD_32_CORE_OBJ_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM) $$(subst $(PATH_BUILD_32_CORE_OBJ_KERNEL),$(PATH_BUILD_64_CORE_OBJ_KERNEL),$$@)
-	
-	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_OBJ_KERNEL)$(@F) $(abspath $<)
     
 # Compiles a C file (32 bits)
 $(PATH_BUILD_32_CORE_OBJ_KERNEL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_KERNEL),$(PATH_BUILD_64_CORE_OBJ_KERNEL),$$@)
