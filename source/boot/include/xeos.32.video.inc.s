@@ -65,8 +65,7 @@
 ; Defines, macros and procedures for the XEOS video services
 ; 
 ; Those procedures and macros are intended to be used only in 32 bits protected
-; mode. In real mode, please use the macros and procedures from the
-; 'xeos.16.video.inc.s' file.
+; mode.
 ;-------------------------------------------------------------------------------
 
 %ifndef __XEOS_32_VIDEO_INC_S__

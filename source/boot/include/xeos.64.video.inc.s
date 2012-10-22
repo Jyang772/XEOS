@@ -64,9 +64,7 @@
 ;-------------------------------------------------------------------------------
 ; Defines, macros and procedures for the XEOS video services
 ; 
-; Those procedures and macros are intended to be used only in 64 bits long
-; mode. In real mode, please use the macros and procedures from the
-; 'xeos.16.video.inc.s' file.
+; Those procedures and macros are intended to be used only in 64 bits long mode.
 ;-------------------------------------------------------------------------------
 
 %ifndef __XEOS_64_VIDEO_INC_S__
