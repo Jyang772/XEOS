@@ -1535,7 +1535,7 @@ XEOS.boot.stage2.32.run:
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-            @XEOS.32.string.numberToString      @XEOS.boot.stage2.kernel.address, 16, 4, 1, $XEOS.boot.stage2.str
+            @XEOS.32.string.numberToString      @XEOS.boot.stage2.kernel.address, 16, 8, 1, $XEOS.boot.stage2.str
             @XEOS.32.video.print                $XEOS.boot.stage2.str
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
@@ -1558,7 +1558,7 @@ XEOS.boot.stage2.32.run:
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-        @XEOS.32.string.numberToString      DWORD [ $XEOS.boot.stage2.kernel.32.entry ], 16, 4, 1, $XEOS.boot.stage2.str
+        @XEOS.32.string.numberToString      DWORD [ $XEOS.boot.stage2.kernel.32.entry ], 16, 8, 1, $XEOS.boot.stage2.str
         @XEOS.32.video.print                $XEOS.boot.stage2.str
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
