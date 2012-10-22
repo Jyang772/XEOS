@@ -532,7 +532,7 @@ XEOS.32.video.scroll:
 ;-------------------------------------------------------------------------------
 XEOS.32.video.cursor.move:
     
-    @XEOS.16.proc.start 0
+    @XEOS.32.proc.start 0
     
     ; Stores the new cursor position
     mov     [ $XEOS.32.video.cursor.x ],   bh
@@ -582,7 +582,7 @@ XEOS.32.video.cursor.move:
         mov     dx,         @XEOS.crt.controller.registers.index
         out     dx,         al
     
-    @XEOS.16.proc.end
+    @XEOS.32.proc.end
     
     ret
     
@@ -603,7 +603,7 @@ XEOS.32.video.cursor.move:
 ;-------------------------------------------------------------------------------
 XEOS.32.video.cursor.update:
     
-    @XEOS.16.proc.start 0
+    @XEOS.32.proc.start 0
     
     ; Current cursor position
     mov     bh,         [ $XEOS.32.video.cursor.x ]
@@ -612,7 +612,7 @@ XEOS.32.video.cursor.update:
     ; Moves the cursor to the current position
     call    XEOS.32.video.cursor.move
     
-    @XEOS.16.proc.end
+    @XEOS.32.proc.end
     
     ret
    
@@ -633,7 +633,7 @@ XEOS.32.video.cursor.update:
 ;-------------------------------------------------------------------------------
 XEOS.32.video.putc:
     
-    @XEOS.16.proc.start 0
+    @XEOS.32.proc.start 0
     
     ; Gets the current cursor position
     @XEOS.32.video._currentPosition
@@ -644,7 +644,7 @@ XEOS.32.video.putc:
     ; Prints the character
     mov	    [ edi ],    WORD ax
     
-    @XEOS.16.proc.end
+    @XEOS.32.proc.end
     
     ret
 
@@ -665,7 +665,7 @@ XEOS.32.video.putc:
 ;-------------------------------------------------------------------------------
 XEOS.32.video.print:
     
-    @XEOS.16.proc.start 0
+    @XEOS.32.proc.start 0
     
     ; Process a byte from the string
     .repeat:
@@ -741,7 +741,7 @@ XEOS.32.video.print:
         ; Updates the hardware cursor
         call    XEOS.32.video.cursor.update
     
-    @XEOS.16.proc.end
+    @XEOS.32.proc.end
     
     ret
 
