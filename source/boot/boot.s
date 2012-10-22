@@ -1386,6 +1386,7 @@ BITS    32
 ;-------------------------------------------------------------------------------
 
 %include "xeos.32.video.inc.s"      ; XEOS video services
+%include "xeos.32.string.inc.s"     ; String utilities
 
 ;-------------------------------------------------------------------------------
 ; Setups and executes the 32 bits kernel
@@ -1559,7 +1560,7 @@ XEOS.boot.stage2.32.run:
         mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
         
         ; Jumps to the kernel code
-        jmp     @XEOS.gdt.descriptors.32.code:eax
+        ;jmp     @XEOS.gdt.descriptors.32.code:eax
         
     ; Halts the system
     hlt
@@ -1572,6 +1573,7 @@ BITS    64
 ;-------------------------------------------------------------------------------
 
 %include "xeos.64.video.inc.s"      ; XEOS video services
+%include "xeos.64.string.inc.s"     ; String utilities
 
 ;-------------------------------------------------------------------------------
 ; Setups and executes the 64 bits kernel
