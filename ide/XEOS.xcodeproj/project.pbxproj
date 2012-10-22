@@ -10,6 +10,7 @@
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		051A31021635C08600AD4FC9 /* kernel_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.32.s; sourceTree = "<group>"; };
 		051A31031635C08600AD4FC9 /* kernel_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.64.s; sourceTree = "<group>"; };
+		051A31041635C3B900AD4FC9 /* xeos.64.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.video.inc.s; sourceTree = "<group>"; };
 		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
@@ -350,6 +351,7 @@
 				05AFEDFF1620F27C00740041 /* xeos.16.video.inc.s */,
 				05AFEE001620F27C00740041 /* xeos.16.a20.inc.s */,
 				05A393C416338FF0001F6C24 /* xeos.32.video.inc.s */,
+				051A31041635C3B900AD4FC9 /* xeos.64.video.inc.s */,
 			);
 			path = include;
 			sourceTree = "<group>";
