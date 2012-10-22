@@ -104,7 +104,7 @@ start: jmp main
 %include "xeos.16.io.fat12.inc.s"   ; FAT-12 IO procedures
 %include "xeos.ascii.inc.s"         ; ASCII table
 %include "xeos.16.cpu.inc.s"        ; CPU informations
-%include "xeos.gdt.inc.s"           ; GDT - Global Descriptor Table
+%include "xeos.16.gdt.inc.s"        ; GDT - Global Descriptor Table
 %include "xeos.16.a20.inc.s"        ; 20th address line enabling
 %include "xeos.16.elf.inc.s"        ; ELF binary format support
 %include "xeos.16.string.inc.s"     ; String utilities
@@ -122,7 +122,7 @@ $XEOS.files.kernel.64                           db  "XEOS64  ELF", @ASCII.NUL
 $XEOS.files.kernel.asm                          db  "KERNEL  BIN", @ASCII.NUL
 $XEOS.boot.stage2.cpu.vendor                    db  "            ", @ASCII.NUL
 $XEOS.boot.stage2.str                           db  "                              ", @ASCII.NUL
-$XEOS.boot.stage2.longMonde                     db  0
+$XEOS.boot.stage2.longMode                      db  0
 
 ;-------------------------------------------------------------------------------
 ; Strings
@@ -174,7 +174,8 @@ $XEOS.boot.stage2.msg.fat12.find                        db  "            ", 26, 
 $XEOS.boot.stage2.msg.fat12.load                        db  "            ", 26, " Loading the kernel image into memory:        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.verify.32                  db  "Verifying the kernel image (ELF-32):             ", @ASCII.NUL
 $XEOS.boot.stage2.msg.kernel.verify.64                  db  "Verifying the kernel image (ELF-64):             ", @ASCII.NUL
-$XEOS.boot.stage2.msg.gdt                               db  "Installing the GDT:                              ", @ASCII.NUL
+$XEOS.boot.stage2.msg.gdt.32                            db  "Installing the GDT (32 bits):                    ", @ASCII.NUL
+$XEOS.boot.stage2.msg.gdt.64                            db  "Installing the GDT (64 bits):                    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.check                         db  "Checking if the A-20 address line is enabled:    ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.bios                          db  "Enabling the A-20 address line (BIOS):           ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.keyboardControl               db  "Enabling the A-20 address line (KBDCTRL):        ", @ASCII.NUL
@@ -641,7 +642,7 @@ main:
             @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
             
             ; We won't switch to 64 bits long mode
-            mov     BYTE [ $XEOS.boot.stage2.longMonde ],   0
+            mov     BYTE [ $XEOS.boot.stage2.longMode ],   0
             
             jmp     .gdt
           
@@ -658,7 +659,7 @@ main:
             @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
             
             ; We'll need to switch to 64 bits long mode
-            mov     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+            mov     BYTE [ $XEOS.boot.stage2.longMode ],   1
     
     ;---------------------------------------------------------------------------
     ; Installs the GDT (Global Descriptor Table)
@@ -666,10 +667,30 @@ main:
     .gdt:
         
         @XEOS.boot.stage2.print.prompt
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt
-        call                    XEOS.gdt.install
-        @XEOS.boot.stage2.print.success
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+        
+        ; Checks which GDT to install (32 or 64 bits)
+        cmp     BYTE [ $XEOS.boot.stage2.longMode ],    1
+        je      .gdt.64
+        
+        .gdt.32:
+            
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt.32
+            
+            ; Installs the 32 bits GDT
+            call                    XEOS.gdt.install.32
+            jmp                     .gdt.success
+            
+        .gdt.64:
+            
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt.64
+            
+            ; Installs the 64 bits GDT
+            call                    XEOS.gdt.install.64
+            
+        .gdt.success:
+            
+            @XEOS.boot.stage2.print.success
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
         
     ;---------------------------------------------------------------------------
     ; A-20 address line
@@ -778,7 +799,7 @@ main:
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.kernel.load
         
         ; Checks if we must load the 32 or 64 bits kernel
-        cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+        cmp     BYTE [ $XEOS.boot.stage2.longMode ],   1
         je      .load.64
         
         .load.32:
@@ -808,7 +829,7 @@ main:
             je      .error.fat12.load
             
             ; Checks if we must check for an ELF-64 or ELF-32 image
-            cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+            cmp     BYTE [ $XEOS.boot.stage2.longMode ],   1
             je      .load.verify.64
         
         ;-----------------------------------------------------------------------
@@ -890,7 +911,7 @@ main:
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
             
             ; Checks if we must switch the CPU to 64 bits long mode
-            cmp     BYTE [ $XEOS.boot.stage2.longMonde ],   1
+            cmp     BYTE [ $XEOS.boot.stage2.longMode ],   1
             je      .switch64
     
     ;---------------------------------------------------------------------------
@@ -1312,7 +1333,7 @@ XEOS.boot.stage2.32:
         ; Setup the 32 bits kernel
         ; We are doing a far jump using our code descriptor
         ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-        jmp	    @XEOS.gdt.descriptors.code:.run
+        jmp	    @XEOS.gdt.descriptors.32.code:.run
         
         ; Halts the system
         hlt
@@ -1380,7 +1401,7 @@ BITS    32
 XEOS.boot.stage2.32.run:
     
     ; Sets the data segments to the GDT data descriptor
-    mov     ax,         @XEOS.gdt.descriptors.data
+    mov     ax,         @XEOS.gdt.descriptors.32.data
     mov     ds,         ax
     mov     ss,         ax
     mov     es,         ax
@@ -1531,7 +1552,7 @@ XEOS.boot.stage2.32.run:
         @XEOS.32.video.print                $XEOS.boot.stage2.nl
         
         ; Jumps to the kernel code
-        jmp	@XEOS.gdt.descriptors.code:@XEOS.boot.stage2.kernel.address
+        jmp	@XEOS.gdt.descriptors.32.code:@XEOS.boot.stage2.kernel.address
         
     ; Halts the system
     hlt

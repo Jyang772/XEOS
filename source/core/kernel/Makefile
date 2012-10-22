@@ -98,7 +98,6 @@ EXT_ASM_64           = 64.s
 #-------------------------------------------------------------------------------
 
 # Define the search paths for source files
-vpath %$(EXT_ASM)       $(PATH_SRC_CORE_KERNEL)
 vpath %$(EXT_ASM_32)    $(PATH_SRC_CORE_KERNEL)
 vpath %$(EXT_ASM_64)    $(PATH_SRC_CORE_KERNEL)
 vpath %$(EXT_C)         $(PATH_SRC_CORE_KERNEL)
@@ -113,14 +112,13 @@ vpath %$(EXT_H)         $(DIR_SRC_INC)
 #-------------------------------------------------------------------------------
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_ASM) $(EXT_ASM_32) $(EXT_ASM_64) $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+.SUFFIXES: $(EXT_ASM_32) $(EXT_ASM_64) $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Macros
 #-------------------------------------------------------------------------------
 
 # Gets every code file in the source directory
-_FILES_ASM                      = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_ASM)))
 _FILES_ASM_32                   = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_ASM_32)))
 _FILES_ASM_64                   = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_ASM_64)))
 _FILES_C                        = $(foreach dir,$(PATH_SRC_CORE_KERNEL),$(wildcard $(PATH_SRC_CORE_KERNEL)*$(EXT_C)))
@@ -164,7 +162,7 @@ _FILES_C_OBJ_BUILD_SYSTEM       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_KERNEL),$
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_KERNEL)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_KERNEL)%$(EXT_ASM)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_KERNEL)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -183,13 +181,13 @@ clean:
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_KERNEL)*
 	
 # Compiles an assembly file (32 bits)
-$(PATH_BUILD_32_CORE_OBJ_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
+$(PATH_BUILD_32_CORE_OBJ_KERNEL)%$(EXT_ASM_32)$(EXT_OBJ): %$(EXT_ASM_32)
 	
 	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_OBJ_KERNEL)$(@F) $(abspath $<)
 	
 # Compiles an assembly file (64 bits)
-$(PATH_BUILD_64_CORE_OBJ_KERNEL)%$(EXT_ASM)$(EXT_OBJ): %$(EXT_ASM)
+$(PATH_BUILD_64_CORE_OBJ_KERNEL)%$(EXT_ASM_64)$(EXT_OBJ): %$(EXT_ASM_64)
 	
 	@$(PRINT) $(PROMPT)"Compiling assembly file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_64) $(ARGS_AS_64) -o $(PATH_BUILD_64_CORE_OBJ_KERNEL)$(@F) $(abspath $<)
