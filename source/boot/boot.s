@@ -201,6 +201,7 @@ $XEOS.boot.stage2.msg.error.verify.32.e_ident.version   db  "Error: invalid ELF-
 $XEOS.boot.stage2.msg.error.verify.32.e_type            db  "Error: invalid ELF-32 type", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.32.e_machine         db  "Error: invalid ELF-32 machine type", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.32.e_version         db  "Error: invalid ELF-32 version", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.32.e_entry           db  "Error: invalid ELF-32 entry point address", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64                   db  "Error: invalid ELF-64 image", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64.e_ident.magic     db  "Error: invalid ELF-64 signature", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64.e_ident.class     db  "Error: invalid ELF-64 class", @ASCII.NUL
@@ -209,6 +210,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_ident.version   db  "Error: invalid ELF-
 $XEOS.boot.stage2.msg.error.verify.64.e_type            db  "Error: invalid ELF-64 type", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64.e_machine         db  "Error: invalid ELF-64 machine type", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-64 version", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.verify.64.e_entry           db  "Error: invalid ELF-64 entry point address", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -848,7 +850,7 @@ main:
             call    XEOS.16.elf.32.checkHeader
             mov     DWORD [ $XEOS.boot.stage2.kernel.32.entry ],    edi
             cmp     ax,     0
-            je      .load.verified
+            je      .load.verify.32.e_entry
             
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -871,6 +873,22 @@ main:
             jmp     .error.verify.32
             
         ;-----------------------------------------------------------------------
+        ; Verifies the kernel entry point address
+        ;-----------------------------------------------------------------------
+        .load.verify.32.e_entry:
+            
+            ; DEBUG - Dumps registers
+            ; call    XEOS.16.debug.registers.dump
+            
+            cmp     DWORD [ $XEOS.boot.stage2.kernel.32.entry ],    @XEOS.boot.stage2.kernel.address
+            jge     .load.verified
+            
+            @XEOS.boot.stage2.print.failure
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+            
+            jmp     .error.verify.32.e_entry
+            
+        ;-----------------------------------------------------------------------
         ; Verifies the kernel image (64 bits ELF)
         ;-----------------------------------------------------------------------
         .load.verify.64:
@@ -884,7 +902,7 @@ main:
             call    XEOS.16.elf.64.checkHeader
             mov     DWORD [ $XEOS.boot.stage2.kernel.64.entry ],    edi
             cmp     ax,     0
-            je      .load.verified
+            je      .load.verify.64.e_entry
             
             @XEOS.boot.stage2.print.failure
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -906,10 +924,23 @@ main:
             je      .error.verify.64.e_version
             jmp     .error.verify.64
             
-        .load.verified
+        ;-----------------------------------------------------------------------
+        ; Verifies the kernel entry point address
+        ;-----------------------------------------------------------------------
+        .load.verify.64.e_entry:
             
             ; DEBUG - Dumps registers
             ; call    XEOS.16.debug.registers.dump
+            
+            cmp     DWORD [ $XEOS.boot.stage2.kernel.64.entry ],    @XEOS.boot.stage2.kernel.address
+            jge     .load.verified
+            
+            @XEOS.boot.stage2.print.failure
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+            
+            jmp     .error.verify.64.e_entry
+            
+        .load.verified
             
             @XEOS.boot.stage2.print.success
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -994,6 +1025,11 @@ main:
         
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_version
         jmp                                 .error
+    
+    .error.verify.32.e_entry:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.32.e_entry
+        jmp                                 .error
         
     .error.verify.32:
         
@@ -1035,6 +1071,11 @@ main:
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_version
         jmp                                 .error
     
+    .error.verify.64.e_entry:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64.e_entry
+        jmp                                 .error
+        
     .error.verify.64:
         
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
@@ -1571,7 +1612,7 @@ XEOS.boot.stage2.32.run:
         mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
         
         ; Jumps to the kernel code
-        ;jmp     @XEOS.gdt.descriptors.32.code:eax
+        jmp     @XEOS.gdt.descriptors.32.code:eax
         
     ; Halts the system
     hlt
