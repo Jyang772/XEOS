@@ -339,14 +339,17 @@ BITS    32
 %macro @XEOS.32.video.putc 1
     
     ; Saves registers
-    push    ax
+    push    eax
+    
+    ; Resets RAX
+    xor     eax,        eax
     
     ; Prints the character
     mov     al,         %1
     call    XEOS.32.video.putc
     
     ; Restores registers
-    pop     ax
+    pop     eax
     
 %endmacro
 
@@ -398,8 +401,11 @@ XEOS.32.video.clear:
     
     @XEOS.32.proc.start 0
     
+    ; Resets registers
+    xor     eax,        eax
+    
     ; Computes the number of characters to write to clear the screen
-    mov     ax,         @XEOS.32.video.screen.rows
+    mov     eax,        @XEOS.32.video.screen.rows
     mov     ecx,        @XEOS.32.video.screen.cols
     mul     ecx
     
@@ -456,6 +462,9 @@ XEOS.32.video.clear:
 XEOS.32.video.scroll:
     
     @XEOS.32.proc.start 0
+    
+    ; Resets registers
+    xor     eax,        eax
     
     ; Start of the video memory
     mov     edi,        @XEOS.32.video.memory
@@ -519,7 +528,7 @@ XEOS.32.video.scroll:
 ; 
 ; Input registers:
 ;       
-;       - BX:       The cursor position (BH for X, BL for Y)
+;       - EBX:      The cursor position (BH for X, BL for Y)
 ; 
 ; Return registers:
 ;       
@@ -541,8 +550,9 @@ XEOS.32.video.cursor.move:
     ; cursor location = x + ( y * screen width )
     .newPosition:
         
-        ; Resets CX
+        ; Resets registers
         xor     eax,        eax
+        xor     edx,        edx
         
         ; Number of available columns
         mov     ecx,        @XEOS.32.video.screen.cols
@@ -603,6 +613,9 @@ XEOS.32.video.cursor.move:
 XEOS.32.video.cursor.update:
     
     @XEOS.32.proc.start 0
+    
+    ; Resets registers
+    xor     ebx,        ebx
     
     ; Current cursor position
     mov     bh,         [ $XEOS.32.video.cursor.x ]
