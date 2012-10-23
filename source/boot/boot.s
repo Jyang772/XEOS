@@ -1447,11 +1447,12 @@ XEOS.boot.stage2.32.run:
         mul     ebx
         mov     esi,        eax
         
-        ; The .text section is located at offset 0x1000
-        add     esi,        0x1000
-        
         ; Destination for the kernel
         mov     edi,        @XEOS.boot.stage2.kernel.address
+        
+        ; The .text section is located at offset 0x1000
+        ; Keep the ELF header, but copy it below
+        sub     edi,        0x1000
         
         ; Resets registers
         xor     eax,        eax
