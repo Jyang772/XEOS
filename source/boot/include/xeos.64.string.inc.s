@@ -226,7 +226,7 @@ XEOS.64.string.numberToString:
     .prefix.hex:
         
         ; Stores the padding
-        mov     rsi,        ecx
+        mov     rsi,        rcx
         
         ; Checkkcs if we need to prefix with 0x
         cmp     rdx,        0x01
