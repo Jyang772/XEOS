@@ -114,8 +114,8 @@ start: jmp main
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
-$XEOS.boot.stage2.kernel.32.entry               dd 0
-$XEOS.boot.stage2.kernel.64.entry               dd 0
+$XEOS.boot.stage2.kernel.32.entry               dd  0
+$XEOS.boot.stage2.kernel.64.entry               dd  0
 $XEOS.boot.stage2.dataSector                    dw  0
 $XEOS.boot.stage2.kernelSectors                 dw  0
 $XEOS.boot.stage2.nl                            db  @ASCII.NL,  @ASCII.NUL
@@ -215,9 +215,10 @@ $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-
 ;-------------------------------------------------------------------------------
 
 ; Addresses
-%define @XEOS.boot.stage2.fat.offset        0x7900
-%define @XEOS.boot.stage2.kernel.segment    0x1000
-%define @XEOS.boot.stage2.kernel.address    0x00201000
+%define @XEOS.boot.stage2.fat.offset            0x7900
+%define @XEOS.boot.stage2.kernel.segment        0x1000
+%define @XEOS.boot.stage2.kernel.address        0x00201000
+%define @XEOS.boot.stage2.kernel.text.offset    0x1000
 
 ;-------------------------------------------------------------------------------
 ; Prints text in color
@@ -1452,7 +1453,7 @@ XEOS.boot.stage2.32.run:
         
         ; The .text section is located at offset 0x1000
         ; Keep the ELF header, but copy it below
-        sub     edi,        0x1000
+        sub     edi,        @XEOS.boot.stage2.kernel.text.offset
         
         ; Resets registers
         xor     eax,        eax
@@ -1536,7 +1537,7 @@ XEOS.boot.stage2.32.run:
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-            @XEOS.32.string.numberToString      @XEOS.boot.stage2.kernel.address, 16, 8, 1, $XEOS.boot.stage2.str
+            @XEOS.32.string.numberToString      @XEOS.boot.stage2.kernel.address - @XEOS.boot.stage2.kernel.text.offset, 16, 8, 1, $XEOS.boot.stage2.str
             @XEOS.32.video.print                $XEOS.boot.stage2.str
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
             @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
@@ -1570,7 +1571,7 @@ XEOS.boot.stage2.32.run:
         mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
         
         ; Jumps to the kernel code
-        jmp     @XEOS.gdt.descriptors.32.code:eax
+        ;jmp     @XEOS.gdt.descriptors.32.code:eax
         
     ; Halts the system
     hlt
