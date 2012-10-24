@@ -194,7 +194,6 @@ endstruc
 ;       
 ;       None   
 ;-------------------------------------------------------------------------------
-%include "xeos.16.debug.inc.s"
 XEOS.16.elf.32.checkHeader:
     
     @XEOS.16.proc.start 0
