@@ -88,7 +88,7 @@ ORG     0x500
 BITS    16
 
 ; DEBUG - Forces the 32 bits mode
-%define XEOS32
+;%define XEOS32
 
 ; Jumps to the entry point
 start: jmp main
@@ -1350,41 +1350,41 @@ XEOS.boot.stage2.print.color:
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.32:
 
-        @XEOS.boot.stage2.print.prompt
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
-        
-        ; Resets registers
-        xor     ax,         ax
-        xor     bx,         bx
-        xor     cx,         cx
-        xor     dx,         dx
-        
-        ; Gets the cursor position, so it can be restored in 32 bits mode
-        mov     ah,         0x03
-        @XEOS.16.int.video
-        
-        ; Clears the interrupts
-        cli
-        
-        ; Gets the value of the primary control register
-        mov     eax,        cr0
-        
-        ; Sets the lowest bit, indicating the system must run in protected mode
-        or      eax,        1
-        
-        ; Sets the new value - We are now in 32 bits protected mode
-        mov     cr0,        eax
-        
-        ; Setup the 32 bits kernel
-        ; We are doing a far jump using our code descriptor
-        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-        jmp	    @XEOS.gdt.descriptors.32.code:.run
-        
-        ; Halts the system
-        hlt
+    @XEOS.boot.stage2.print.prompt
+    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
+    
+    ; Resets registers
+    xor     ax,         ax
+    xor     bx,         bx
+    xor     cx,         cx
+    xor     dx,         dx
+    
+    ; Gets the cursor position, so it can be restored in 32 bits mode
+    mov     ah,         0x03
+    @XEOS.16.int.video
+    
+    ; Clears the interrupts
+    cli
+    
+    ; Gets the value of the primary control register
+    mov     eax,        cr0
+    
+    ; Sets the lowest bit, indicating the system must run in protected mode
+    or      eax,        1
+    
+    ; Sets the new value - We are now in 32 bits protected mode
+    mov     cr0,        eax
+    
+    ; Setup the 32 bits kernel
+    ; We are doing a far jump using our code descriptor
+    ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+    jmp	    @XEOS.gdt.descriptors.32.code:.run
+    
+    ; Halts the system
+    hlt
 
 ;-------------------------------------------------------------------------------
-; Switches the CPU to 64 bits long mode
+; Switches the CPU to 32 bits protected mode, and then to 64 bits long mode
 ; 
 ; Input registers:
 ;       
@@ -1400,24 +1400,38 @@ XEOS.boot.stage2.32:
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.64:
 
-        @XEOS.boot.stage2.print.prompt
-        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
-        
-        ; Resets registers
-        xor     ax,         ax
-        xor     bx,         bx
-        xor     cx,         cx
-        xor     dx,         dx
-        
-        ; Gets the cursor position, so it can be restored in 64 bits mode
-        mov     ah,         0x03
-        @XEOS.16.int.video
-        
-        ; Clears the interrupts
-        cli
-        
-        ; Halts the system
-        hlt
+    @XEOS.boot.stage2.print.prompt
+    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
+    
+    ; Resets registers
+    xor     ax,         ax
+    xor     bx,         bx
+    xor     cx,         cx
+    xor     dx,         dx
+    
+    ; Gets the cursor position, so it can be restored in 64 bits mode
+    mov     ah,         0x03
+    @XEOS.16.int.video
+    
+    ; Clears the interrupts
+    cli
+    
+    ; Gets the value of the primary control register
+    mov     eax,        cr0
+    
+    ; Sets the lowest bit, indicating the system must run in protected mode
+    or      eax,        1
+    
+    ; Sets the new value - We are now in 32 bits protected mode
+    mov     cr0,        eax
+    
+    ; Setup the 32 bits kernel
+    ; We are doing a far jump using our code descriptor
+    ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+    jmp	    @XEOS.gdt.descriptors.64.code.32:.longMode
+    
+    ; Halts the system
+    hlt
     
 ; We are in 32 bits mode
 BITS    32
@@ -1614,6 +1628,49 @@ XEOS.boot.stage2.32.run:
         ; Jumps to the kernel code
         jmp     @XEOS.gdt.descriptors.32.code:eax
         
+    ; Halts the system
+    hlt
+
+;-------------------------------------------------------------------------------
+; Switches the CPU to 64 bits long mode
+; 
+; Input registers:
+;       
+;       - DX:       The current cursor position
+; 
+; Return registers:
+;       
+;       N/A (This procudure does not return)
+; 
+; Killed registers:
+;       
+;       N/A (This procudure does not return)
+;-------------------------------------------------------------------------------
+XEOS.boot.stage2.64.longMode:
+
+    ; Sets the data segments to the GDT data descriptor
+    mov     ax,         @XEOS.gdt.descriptors.64.data
+    mov     ds,         ax
+    mov     ss,         ax
+    mov     es,         ax
+    mov     esp,        0x90000
+    
+    ; Restores the cursor position
+    @XEOS.32.video.cursor.move dl, dh
+    
+    ; Sets color attributes
+    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+    @XEOS.32.video.setBackgroundColor   @XEOS.32.video.color.black
+    
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.success
+    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
+    @XEOS.32.video.print                $XEOS.boot.stage2.nl
+    
     ; Halts the system
     hlt
     
