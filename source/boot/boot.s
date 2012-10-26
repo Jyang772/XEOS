@@ -1422,8 +1422,14 @@ XEOS.boot.stage2.64:
         mov     ah,         0x03
         @XEOS.16.int.video
         
+        ; Kernel sectors and kernel entry points parameters
+        mov     cx,          WORD [ $XEOS.boot.stage2.kernel.sectors ]
+        mov     edi,        DWORD [ $XEOS.boot.stage2.kernel.64.entry ]
+        
         ; Saves registers
         push    dx
+        push    cx
+        push    edi
         
         ; Clears the interrupts
         cli
@@ -1486,11 +1492,9 @@ XEOS.boot.stage2.64:
         mov     cr0,        eax
         
         ; Restores registers
+        pop     edi
+        pop     cx
         pop     dx
-        
-        ; Kernel sectors and kernel entry points parameters
-        mov     cx,          WORD [ $XEOS.boot.stage2.kernel.sectors ]
-        mov     edi,        DWORD [ $XEOS.boot.stage2.kernel.64.entry ]
         
         ; Setup the 64 bits kernel
         ; We are doing a far jump using our code descriptor
@@ -1803,6 +1807,67 @@ XEOS.boot.stage2.64.run:
     @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
     @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
     @XEOS.64.video.print                $XEOS.boot.stage2.64.nl
+    
+    .copy:
+        
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.gray.light
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.prompt
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.gt
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.kernel.move
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.gray.light
+        
+        .copy.bytes:
+            
+            @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+            @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
+            @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+            @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.green.light
+            @XEOS.64.string.numberToString      @XEOS.boot.stage2.kernel.address - @XEOS.boot.stage2.kernel.text.offset, 16, 8, 1, $XEOS.boot.stage2.64.str
+            @XEOS.64.video.print                $XEOS.boot.stage2.64.str
+            @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+            @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+            @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
+            @XEOS.64.video.print                $XEOS.boot.stage2.64.nl
+            
+    .run:
+        
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.gray.light
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.prompt
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.gt
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.kernel.run
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.green.light
+        
+        xor rax, rax
+        mov eax, DWORD [ $XEOS.boot.stage2.64.kernel.entry ]
+        @XEOS.64.string.numberToString      rax, 16, 8, 1, $XEOS.boot.stage2.64.str
+        
+        @XEOS.64.video.print                $XEOS.boot.stage2.64.str
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
+        @XEOS.64.video.print                $XEOS.boot.stage2.64.nl
+        
+        ; Kernel entry point
+        xor     rax,        rax
+        mov     eax,        DWORD [ $XEOS.boot.stage2.64.kernel.entry ]
+        
+        ; Jumps to the kernel code
+        jmp     @XEOS.gdt.descriptors.64.code:rax
         
     ; Halts the system
     hlt
