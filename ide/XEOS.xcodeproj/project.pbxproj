@@ -11,7 +11,7 @@
 		051A31021635C08600AD4FC9 /* kernel_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.32.s; sourceTree = "<group>"; };
 		051A31031635C08600AD4FC9 /* kernel_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.64.s; sourceTree = "<group>"; };
 		051A31041635C3B900AD4FC9 /* xeos.64.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.video.inc.s; sourceTree = "<group>"; };
-		051A31071635CC3F00AD4FC9 /* xeos.16.gdt.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.gdt.inc.s; sourceTree = "<group>"; };
+		051A31071635CC3F00AD4FC9 /* xeos.gdt.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.gdt.inc.s; sourceTree = "<group>"; };
 		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
@@ -341,12 +341,12 @@
 				05AFEE011620F27C00740041 /* xeos.ascii.inc.s */,
 				0569C8691629645E00A8FF1D /* xeos.constants.inc.s */,
 				05AFEE031620F27C00740041 /* xeos.crt.controller.inc.s */,
+				051A31071635CC3F00AD4FC9 /* xeos.gdt.inc.s */,
 				05AFEE0A1620F27C00740041 /* xeos.io.fat12.mbr.inc.s */,
 				05AFEE091620F27C00740041 /* xeos.macros.inc.s */,
 				0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */,
 				05E6B332162F2BB800364B7D /* xeos.16.debug.inc.s */,
 				0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */,
-				051A31071635CC3F00AD4FC9 /* xeos.16.gdt.inc.s */,
 				05AFEDFD1620F27C00740041 /* xeos.16.int.inc.s */,
 				05AFEE081620F27C00740041 /* xeos.16.io.fat12.inc.s */,
 				055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */,

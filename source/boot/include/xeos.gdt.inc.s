@@ -145,8 +145,7 @@ XEOS.gdt.install.64:
 
 ; 64 bits descriptors
 %define @XEOS.gdt.descriptors.64.null       0x00
-%define @XEOS.gdt.descriptors.64.code.32    0x08
-%define @XEOS.gdt.descriptors.64.code.64    0x10
+%define @XEOS.gdt.descriptors.64.code       0x08
 %define @XEOS.gdt.descriptors.64.data       0x18
 
 ;-------------------------------------------------------------------------------
@@ -297,84 +296,42 @@ $XEOS.gdt.32
         
         ;-----------------------------------------------------------------------
         ; Null descriptor
-        ; 
-        ; 00000000 00000000 00000000 00000000
-        ; 00000000 00000000 00000000 00000000
         ;-----------------------------------------------------------------------
         
-        ; 8 bytes of zeros
-        dd  0
-        dd  0
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Middle
+        db 00000000b    ; Access
+        db 00000000b    ; Granularity
+        db 00000000b    ; Base / High
         
         ;-----------------------------------------------------------------------
         ; Kernel space code descriptor
-        ; 
-        ; 11111111 11111111 00000000 00000000
-        ; 10011010 00000000 00000000 11001111
         ;-----------------------------------------------------------------------
         
-        ; Segment limit (0-15)
-        dw  0xFFFF
-        
-        ; Base address (0-15)
-        dw  0
-        
-        ; Base address (16-23)
-        db  0
-        
-        ; Access:                   0       - Not using virtual memory
-        ; Descriptor type:          1       - Read and execute
-        ;                           0       - ???
-        ;                           1       - Code descriptor
-        ; Descriptor bit:           1       - Code/Data descriptor
-        ; Privilege level:          00      - Ring 0 (kernel level)
-        ; In memory:                1       - ???
-        db  10011010b
-        
-        ; Segment limit (16-19):    1111    - High bits for the segment limit
-        ; OS reserved:              0       - Nothing
-        ; Reserved:                 0       - Nothing
-        ; Segment type:             1       - 32 bits
-        ; Granularity:              1       - Segments bounded by 4K
-        db  11001111b
-        
-        ; Base address (24-31)
-        db  0
+        db 11111111b    ; Limit / Low
+        db 11111111b    ; Limit / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Middle
+        db 10011010b    ; Access
+        db 11001111b    ; Granularity
+        db 00000000b
         
         ;-----------------------------------------------------------------------
         ; Kernel space data descriptor
-        ; 
-        ; 11111111 11111111 00000000 00000000
-        ; 10010010 00000000 00000000 11001111
         ;-----------------------------------------------------------------------
         
-        ; Segment limit (0-15)
-        dw  0xFFFF
-        
-        ; Base address (0-15)
-        dw  0
-        
-        ; Base address (16-23)
-        db  0
-        
-        ; Access:                   0       - Not using virtual memory
-        ; Descriptor type:          1       - Read and write
-        ;                           0       - ???
-        ;                           0       - Data descriptor
-        ; Descriptor bit:           1       - Code/Data descriptor
-        ; Privilege level:          00      - Ring 0 (kernel level)
-        ; In memory:                1       - ???
-        db  10010010b
-        
-        ; Segment limit (16-19):    1111    - High bits for the segment limit
-        ; OS reserved:              0       - Nothing
-        ; Reserved:                 0       - Nothing
-        ; Segment type:             1       - 32 bits
-        ; Granularity:              1       - Segments bounded by 4K
-        db  11001111b
-        
-        ; Base address (24-31)
-        db  0
+        db 11111111b    ; Limit / Low
+        db 11111111b    ; Limit / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Middle
+        db 10010010b    ; Access
+        db 11001111b    ; Granularity
+        db 00000000b    ; Base / High
         
     iend
 
@@ -385,119 +342,42 @@ $XEOS.gdt.64
     
         ;-----------------------------------------------------------------------
         ; Null descriptor
-        ; 
-        ; 00000000 00000000 00000000 00000000
-        ; 00000000 00000000 00000000 00000000
         ;-----------------------------------------------------------------------
         
-        ; 8 bytes of zeros
-        dd  0
-        dd  0
-
-        ;-----------------------------------------------------------------------
-        ; Kernel space code descriptor (32 bits)
-        ; 
-        ; 11111111 11111111 00000000 00000000
-        ; 10011010 00000000 00000000 11001111
-        ;-----------------------------------------------------------------------
-        
-        ; Segment limit (0-15)
-        dw  0xFFFF
-        
-        ; Base address (0-15)
-        dw  0
-        
-        ; Base address (16-23)
-        db  0
-        
-        ; Access:                   0       - Not using virtual memory
-        ; Descriptor type:          1       - Read and execute
-        ;                           0       - ???
-        ;                           1       - Code descriptor
-        ; Descriptor bit:           1       - Code/Data descriptor
-        ; Privilege level:          00      - Ring 0 (kernel level)
-        ; In memory:                1       - ???
-        db  10011010b
-        
-        ; Segment limit (16-19):    1111    - High bits for the segment limit
-        ; OS reserved:              0       - Nothing
-        ; Reserved:                 0       - Nothing
-        ; Segment type:             1       - 32 bits
-        ; Granularity:              1       - Segments bounded by 4K
-        db  11001111b
-        
-        ; Base address (24-31)
-        db  0
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Middle
+        db 00000000b    ; Access
+        db 00000000b    ; Granularity
+        db 00000000b    ; Base / High
         
         ;-----------------------------------------------------------------------
-        ; Kernel space code descriptor (64 bits)
-        ; 
-        ; 11111111 11111111 00000000 00000000
-        ; 10011010 00000000 00000000 10101111
+        ; Kernel space code descriptor
         ;-----------------------------------------------------------------------
         
-        ; Segment limit (0-15)
-        dw  0xFFFF
-        
-        ; Base address (0-15)
-        dw  0
-        
-        ; Base address (16-23)
-        db  0
-        
-        ; Access:                   0       - Not using virtual memory
-        ; Descriptor type:          1       - Read and execute
-        ;                           0       - ???
-        ;                           1       - Code descriptor
-        ; Descriptor bit:           1       - Code/Data descriptor
-        ; Privilege level:          00      - Ring 0 (kernel level)
-        ; In memory:                1       - ???
-        db  10011010b
-        
-        ; Segment limit (16-19):    1111    - High bits for the segment limit
-        ; OS reserved:              0       - Nothing
-        ; Reserved:                 1       - Nothing
-        ; Segment type:             0       - 32 bits
-        ; Granularity:              1       - Segments bounded by 4K
-        db  10101111b
-        
-        ; Base address (24-31)
-        db  0
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Middle
+        db 10011000b    ; Access
+        db 00100000b    ; Granularity
+        db 00000000b    ; Base / High
         
         ;-----------------------------------------------------------------------
         ; Kernel space data descriptor
-        ; 
-        ; 11111111 11111111 00000000 00000000
-        ; 10010010 00000000 00000000 11001111
         ;-----------------------------------------------------------------------
         
-        ; Segment limit (0-15)
-        dw  0xFFFF
-        
-        ; Base address (0-15)
-        dw  0
-        
-        ; Base address (16-23)
-        db  0
-        
-        ; Access:                   0       - Not using virtual memory
-        ; Descriptor type:          1       - Read and write
-        ;                           0       - ???
-        ;                           0       - Data descriptor
-        ; Descriptor bit:           1       - Code/Data descriptor
-        ; Privilege level:          00      - Ring 0 (kernel level)
-        ; In memory:                1       - ???
-        db  10010010b
-        
-        ; Segment limit (16-19):    1111    - High bits for the segment limit
-        ; OS reserved:              0       - Nothing
-        ; Reserved:                 0       - Nothing
-        ; Segment type:             1       - 32 bits
-        ; Granularity:              1       - Segments bounded by 4K
-        db  11001111b
-        
-        ; Base address (24-31)
-        db  0
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Limit / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Low
+        db 00000000b    ; Base / Middle
+        db 10010000b    ; Access
+        db 00000000b    ; Granularity
+        db 00000000b    ; Base / High
         
     iend
 

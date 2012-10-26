@@ -88,7 +88,7 @@ ORG     0x500
 BITS    16
 
 ; DEBUG - Forces the 32 bits mode
-;%define XEOS32
+; %define XEOS32
 
 ; Jumps to the entry point
 start: jmp main
@@ -104,7 +104,7 @@ start: jmp main
 %include "xeos.16.io.fat12.inc.s"   ; FAT-12 IO procedures
 %include "xeos.ascii.inc.s"         ; ASCII table
 %include "xeos.16.cpu.inc.s"        ; CPU informations
-%include "xeos.16.gdt.inc.s"        ; GDT - Global Descriptor Table
+%include "xeos.gdt.inc.s"           ; GDT - Global Descriptor Table
 %include "xeos.16.a20.inc.s"        ; 20th address line enabling
 %include "xeos.16.elf.inc.s"        ; ELF binary format support
 %include "xeos.16.string.inc.s"     ; String utilities
@@ -648,7 +648,7 @@ main:
             ; We won't switch to 64 bits long mode
             mov     BYTE [ $XEOS.boot.stage2.longMode ],   0
             
-            jmp     .gdt
+            jmp     .a20
           
         ;-----------------------------------------------------------------------
         ; x86_c64 CPU
@@ -665,37 +665,6 @@ main:
             ; We'll need to switch to 64 bits long mode
             mov     BYTE [ $XEOS.boot.stage2.longMode ],   1
     
-    ;---------------------------------------------------------------------------
-    ; Installs the GDT (Global Descriptor Table)
-    ;---------------------------------------------------------------------------
-    .gdt:
-        
-        @XEOS.boot.stage2.print.prompt
-        
-        ; Checks which GDT to install (32 or 64 bits)
-        cmp     BYTE [ $XEOS.boot.stage2.longMode ],    1
-        je      .gdt.64
-        
-        .gdt.32:
-            
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt.32
-            
-            ; Installs the 32 bits GDT
-            call                    XEOS.gdt.install.32
-            jmp                     .gdt.success
-            
-        .gdt.64:
-            
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt.64
-            
-            ; Installs the 64 bits GDT
-            call                    XEOS.gdt.install.64
-            
-        .gdt.success:
-            
-            @XEOS.boot.stage2.print.success
-            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
-        
     ;---------------------------------------------------------------------------
     ; A-20 address line
     ;--------------------------------------------------------------------------- 
@@ -1349,36 +1318,55 @@ XEOS.boot.stage2.print.color:
 ;       N/A (This procudure does not return)
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.32:
-
-    @XEOS.boot.stage2.print.prompt
-    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
     
-    ; Resets registers
-    xor     ax,         ax
-    xor     bx,         bx
-    xor     cx,         cx
-    xor     dx,         dx
+    ;---------------------------------------------------------------------------
+    ; Installs the GDT (Global Descriptor Table)
+    ;---------------------------------------------------------------------------
+    .gdt:
+        
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt.32
+            
+        ; Installs the 32 bits GDT
+        call                    XEOS.gdt.install.32
+            
+        @XEOS.boot.stage2.print.success
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
     
-    ; Gets the cursor position, so it can be restored in 32 bits mode
-    mov     ah,         0x03
-    @XEOS.16.int.video
-    
-    ; Clears the interrupts
-    cli
-    
-    ; Gets the value of the primary control register
-    mov     eax,        cr0
-    
-    ; Sets the lowest bit, indicating the system must run in protected mode
-    or      eax,        1
-    
-    ; Sets the new value - We are now in 32 bits protected mode
-    mov     cr0,        eax
-    
-    ; Setup the 32 bits kernel
-    ; We are doing a far jump using our code descriptor
-    ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-    jmp	    @XEOS.gdt.descriptors.32.code:.run
+    ;---------------------------------------------------------------------------
+    ; Switch the processor to 32 bits protected mode
+    ;---------------------------------------------------------------------------
+    .switch:
+        
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch32
+        
+        ; Resets registers
+        xor     ax,         ax
+        xor     bx,         bx
+        xor     cx,         cx
+        xor     dx,         dx
+        
+        ; Gets the cursor position, so it can be restored in 32 bits mode
+        mov     ah,         0x03
+        @XEOS.16.int.video
+        
+        ; Clears the interrupts
+        cli
+        
+        ; Gets the value of the primary control register
+        mov     eax,        cr0
+        
+        ; Sets the lowest bit, indicating the system must run in protected mode
+        or      eax,        1
+        
+        ; Sets the new value - We are now in 32 bits protected mode
+        mov     cr0,        eax
+        
+        ; Setup the 32 bits kernel
+        ; We are doing a far jump using our code descriptor
+        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+        jmp	    @XEOS.gdt.descriptors.32.code:XEOS.boot.stage2.32.run
     
     ; Halts the system
     hlt
@@ -1399,37 +1387,104 @@ XEOS.boot.stage2.32:
 ;       N/A (This procudure does not return)
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.64:
-
-    @XEOS.boot.stage2.print.prompt
-    @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
     
-    ; Resets registers
-    xor     ax,         ax
-    xor     bx,         bx
-    xor     cx,         cx
-    xor     dx,         dx
+    ;---------------------------------------------------------------------------
+    ; Installs the GDT (Global Descriptor Table)
+    ;---------------------------------------------------------------------------
+    .gdt:
+        
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.gdt.64
+            
+        ; Installs the 32 bits GDT
+        call                    XEOS.gdt.install.64
+            
+        @XEOS.boot.stage2.print.success
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
     
-    ; Gets the cursor position, so it can be restored in 64 bits mode
-    mov     ah,         0x03
-    @XEOS.16.int.video
-    
-    ; Clears the interrupts
-    cli
-    
-    ; Gets the value of the primary control register
-    mov     eax,        cr0
-    
-    ; Sets the lowest bit, indicating the system must run in protected mode
-    or      eax,        1
-    
-    ; Sets the new value - We are now in 32 bits protected mode
-    mov     cr0,        eax
-    
-    ; Setup the 32 bits kernel
-    ; We are doing a far jump using our code descriptor
-    ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
-    jmp	    @XEOS.gdt.descriptors.64.code.32:.longMode
-    
+    ;---------------------------------------------------------------------------
+    ; Switch the processor to 64 bits long mode
+    ;---------------------------------------------------------------------------
+    .switch:
+        
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.switch64
+        
+        ; Resets registers
+        xor     ax,         ax
+        xor     bx,         bx
+        xor     cx,         cx
+        xor     dx,         dx
+        
+        ; Gets the cursor position, so it can be restored in 64 bits mode
+        mov     ah,         0x03
+        @XEOS.16.int.video
+        
+        ; Clears the interrupts
+        cli
+        
+        ; Clears the PG-bit of the control register (bit 31)
+        mov     eax,        cr0
+        and     eax,        0x7FFFFFFF    
+        mov     cr0,        eax
+        
+        ; Clears the page tables
+        mov     edi,        0x1000
+        mov     cr3,        edi
+        xor     eax,        eax
+        mov     ecx,        0x1000
+        rep     stosd
+        mov     edi,        cr3
+        
+        ; Sets up the page tables
+        ; 
+        ; PML4T:    0x1000
+        ; PDPT:     0x2000
+        ; PDT:      0x3000
+        ; PT:       0x4000
+        mov     DWORD [ edi ],  0x00002003
+        add     edi,            0x00001000
+        mov     DWORD [ edi ],  0x00003003
+        add     edi,            0x00001000
+        mov     DWORD [ edi ],  0x00004003
+        add     edi,            0x00001000
+        mov     ebx,            0x00000003
+        mov     ecx,            0x00000200
+        
+        ; Sets page entries
+        .entry.set:
+            
+            mov     DWORD [ edi ],  ebx
+            add     ebx,            0x1000
+            add     edi,            0x0008
+            loop    .entry.set
+        
+        ; Enables PAE-paging by setting the PAE-bit in the fourth control register
+        mov     eax,        cr4
+        or      eax,        0x20
+        mov     cr4,        eax
+        
+        ; Sets the long mode bit in the EFER MSR
+        mov     ecx,        0xC0000080
+        rdmsr
+        or      eax,        0x100
+        wrmsr
+        
+        ; Enables protected mode
+        mov     eax,        cr0
+        or      eax,        0x01
+        mov     cr0,        eax
+        
+        ; Enables paging
+        mov     eax,        cr0
+        or      eax,        0x80000000
+        mov     cr0,        eax
+        
+        ; Setup the 64 bits kernel
+        ; We are doing a far jump using our code descriptor
+        ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
+        jmp     @XEOS.gdt.descriptors.64.code:XEOS.boot.stage2.64.run
+        
     ; Halts the system
     hlt
     
@@ -1631,49 +1686,6 @@ XEOS.boot.stage2.32.run:
     ; Halts the system
     hlt
 
-;-------------------------------------------------------------------------------
-; Switches the CPU to 64 bits long mode
-; 
-; Input registers:
-;       
-;       - DX:       The current cursor position
-; 
-; Return registers:
-;       
-;       N/A (This procudure does not return)
-; 
-; Killed registers:
-;       
-;       N/A (This procudure does not return)
-;-------------------------------------------------------------------------------
-XEOS.boot.stage2.64.longMode:
-
-    ; Sets the data segments to the GDT data descriptor
-    mov     ax,         @XEOS.gdt.descriptors.64.data
-    mov     ds,         ax
-    mov     ss,         ax
-    mov     es,         ax
-    mov     esp,        0x90000
-    
-    ; Restores the cursor position
-    @XEOS.32.video.cursor.move dl, dh
-    
-    ; Sets color attributes
-    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-    @XEOS.32.video.setBackgroundColor   @XEOS.32.video.color.black
-    
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.success
-    @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.32.video.print                $XEOS.boot.stage2.nl
-    
-    ; Halts the system
-    hlt
-    
 ; We are in 64 bits mode
 BITS    64
 
@@ -1701,6 +1713,8 @@ BITS    64
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.64.run:
     
+    
+        
     ; Halts the system
     hlt
-    
+
