@@ -1,1 +1,0 @@
-../libc/include/errno.h
