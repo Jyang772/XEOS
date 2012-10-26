@@ -8,11 +8,56 @@
 
 /* Begin PBXFileReference section */
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		051A31021635C08600AD4FC9 /* kernel_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.32.s; sourceTree = "<group>"; };
-		051A31031635C08600AD4FC9 /* kernel_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.64.s; sourceTree = "<group>"; };
 		051A31041635C3B900AD4FC9 /* xeos.64.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.video.inc.s; sourceTree = "<group>"; };
 		051A31071635CC3F00AD4FC9 /* xeos.gdt.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.gdt.inc.s; sourceTree = "<group>"; };
-		055B2E0016236232001FE307 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
+		0556692F163B10ED00E67528 /* __video.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __video.c; sourceTree = "<group>"; };
+		05566932163B10ED00E67528 /* interrupts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interrupts.h; sourceTree = "<group>"; };
+		05566933163B10ED00E67528 /* video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video.h; sourceTree = "<group>"; };
+		05566934163B10ED00E67528 /* syscalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syscalls.h; sourceTree = "<group>"; };
+		05566935163B10ED00E67528 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
+		05566937163B10ED00E67528 /* kernel_interrupt_alignment_check_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_alignment_check_exception.c; sourceTree = "<group>"; };
+		05566938163B10ED00E67528 /* kernel_interrupt_bound_range_exceeded_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_bound_range_exceeded_exception.c; sourceTree = "<group>"; };
+		05566939163B10ED00E67528 /* kernel_interrupt_breakpoint_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_breakpoint_exception.c; sourceTree = "<group>"; };
+		0556693A163B10ED00E67528 /* kernel_interrupt_coprocessor_segment_overrun.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_coprocessor_segment_overrun.c; sourceTree = "<group>"; };
+		0556693B163B10ED00E67528 /* kernel_interrupt_debug_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_debug_exception.c; sourceTree = "<group>"; };
+		0556693C163B10ED00E67528 /* kernel_interrupt_default_handler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_default_handler.c; sourceTree = "<group>"; };
+		0556693D163B10ED00E67528 /* kernel_interrupt_device_not_available_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_device_not_available_exception.c; sourceTree = "<group>"; };
+		0556693E163B10ED00E67528 /* kernel_interrupt_divide_error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_divide_error.c; sourceTree = "<group>"; };
+		0556693F163B10ED00E67528 /* kernel_interrupt_double_fault_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_double_fault_exception.c; sourceTree = "<group>"; };
+		05566940163B10ED00E67528 /* kernel_interrupt_floating_point_error_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_floating_point_error_exception.c; sourceTree = "<group>"; };
+		05566941163B10ED00E67528 /* kernel_interrupt_general_protection_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_general_protection_exception.c; sourceTree = "<group>"; };
+		05566942163B10ED00E67528 /* kernel_interrupt_invalid_opcode_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_invalid_opcode_exception.c; sourceTree = "<group>"; };
+		05566943163B10ED00E67528 /* kernel_interrupt_invalid_tss_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_invalid_tss_exception.c; sourceTree = "<group>"; };
+		05566944163B10ED00E67528 /* kernel_interrupt_machine_check_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_machine_check_exception.c; sourceTree = "<group>"; };
+		05566945163B10ED00E67528 /* kernel_interrupt_nmi_interrupt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_nmi_interrupt.c; sourceTree = "<group>"; };
+		05566946163B10ED00E67528 /* kernel_interrupt_overflow_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_overflow_exception.c; sourceTree = "<group>"; };
+		05566947163B10ED00E67528 /* kernel_interrupt_page_fault_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_page_fault_exception.c; sourceTree = "<group>"; };
+		05566948163B10ED00E67528 /* kernel_interrupt_segment_not_present.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_segment_not_present.c; sourceTree = "<group>"; };
+		05566949163B10ED00E67528 /* kernel_interrupt_simd_floating_point_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_simd_floating_point_exception.c; sourceTree = "<group>"; };
+		0556694A163B10ED00E67528 /* kernel_interrupt_stack_fault_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_stack_fault_exception.c; sourceTree = "<group>"; };
+		0556694B163B10ED00E67528 /* kernel_interrupt_syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_syscall.c; sourceTree = "<group>"; };
+		0556694C163B10ED00E67528 /* kernel_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_main.c; sourceTree = "<group>"; };
+		0556694D163B10ED00E67528 /* kernel_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.32.s; sourceTree = "<group>"; };
+		0556694E163B10ED00E67528 /* kernel_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = kernel_stub.64.s; sourceTree = "<group>"; };
+		0556694F163B10ED00E67528 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05566951163B10ED00E67528 /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
+		05566953163B10ED00E67528 /* panic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = panic.c; sourceTree = "<group>"; };
+		05566955163B10ED00E67528 /* kernel_video_clear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_clear.c; sourceTree = "<group>"; };
+		05566956163B10ED00E67528 /* kernel_video_cursor_move.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_cursor_move.c; sourceTree = "<group>"; };
+		05566957163B10ED00E67528 /* kernel_video_cursor_x.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_cursor_x.c; sourceTree = "<group>"; };
+		05566958163B10ED00E67528 /* kernel_video_cursor_y.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_cursor_y.c; sourceTree = "<group>"; };
+		05566959163B10ED00E67528 /* kernel_video_itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_itoa.c; sourceTree = "<group>"; };
+		0556695A163B10ED00E67528 /* kernel_video_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_print.c; sourceTree = "<group>"; };
+		0556695B163B10ED00E67528 /* kernel_video_printf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_printf.c; sourceTree = "<group>"; };
+		0556695C163B10ED00E67528 /* kernel_video_prompt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_prompt.c; sourceTree = "<group>"; };
+		0556695D163B10ED00E67528 /* kernel_video_promptf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_promptf.c; sourceTree = "<group>"; };
+		0556695E163B10ED00E67528 /* kernel_video_putc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_putc.c; sourceTree = "<group>"; };
+		0556695F163B10ED00E67528 /* kernel_video_scroll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_scroll.c; sourceTree = "<group>"; };
+		05566960163B10ED00E67528 /* kernel_video_set_bg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_set_bg.c; sourceTree = "<group>"; };
+		05566961163B10ED00E67528 /* kernel_video_set_fg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_set_fg.c; sourceTree = "<group>"; };
+		05566962163B10ED00E67528 /* kernel_video_str_reverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_str_reverse.c; sourceTree = "<group>"; };
+		05566963163B10ED00E67528 /* kernel_video_utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_utoa.c; sourceTree = "<group>"; };
+		05566964163B10ED00E67528 /* kernel_video_vprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_vprintf.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
@@ -67,49 +112,6 @@
 		05AFEE2F1620F27C00740041 /* hal_smbios_uuid_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hal_smbios_uuid_string.c; sourceTree = "<group>"; };
 		05AFEE301620F27C00740041 /* hal_smbios_verifiy_checksum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hal_smbios_verifiy_checksum.c; sourceTree = "<group>"; };
 		05AFEE311620F27C00740041 /* hal_smbios_verifiy_intermediate_checksum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hal_smbios_verifiy_intermediate_checksum.c; sourceTree = "<group>"; };
-		05AFEE5B1620F27C00740041 /* __video.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __video.c; sourceTree = "<group>"; };
-		05AFEE5E1620F27C00740041 /* interrupts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interrupts.h; sourceTree = "<group>"; };
-		05AFEE5F1620F27C00740041 /* video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video.h; sourceTree = "<group>"; };
-		05AFEE601620F27C00740041 /* syscalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syscalls.h; sourceTree = "<group>"; };
-		05AFEE611620F27C00740041 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
-		05AFEE631620F27C00740041 /* kernel_interrupt_alignment_check_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_alignment_check_exception.c; sourceTree = "<group>"; };
-		05AFEE641620F27C00740041 /* kernel_interrupt_bound_range_exceeded_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_bound_range_exceeded_exception.c; sourceTree = "<group>"; };
-		05AFEE651620F27C00740041 /* kernel_interrupt_breakpoint_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_breakpoint_exception.c; sourceTree = "<group>"; };
-		05AFEE661620F27C00740041 /* kernel_interrupt_coprocessor_segment_overrun.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_coprocessor_segment_overrun.c; sourceTree = "<group>"; };
-		05AFEE671620F27C00740041 /* kernel_interrupt_debug_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_debug_exception.c; sourceTree = "<group>"; };
-		05AFEE681620F27C00740041 /* kernel_interrupt_default_handler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_default_handler.c; sourceTree = "<group>"; };
-		05AFEE691620F27C00740041 /* kernel_interrupt_device_not_available_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_device_not_available_exception.c; sourceTree = "<group>"; };
-		05AFEE6A1620F27C00740041 /* kernel_interrupt_divide_error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_divide_error.c; sourceTree = "<group>"; };
-		05AFEE6B1620F27C00740041 /* kernel_interrupt_double_fault_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_double_fault_exception.c; sourceTree = "<group>"; };
-		05AFEE6C1620F27C00740041 /* kernel_interrupt_floating_point_error_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_floating_point_error_exception.c; sourceTree = "<group>"; };
-		05AFEE6D1620F27C00740041 /* kernel_interrupt_general_protection_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_general_protection_exception.c; sourceTree = "<group>"; };
-		05AFEE6E1620F27C00740041 /* kernel_interrupt_invalid_opcode_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_invalid_opcode_exception.c; sourceTree = "<group>"; };
-		05AFEE6F1620F27C00740041 /* kernel_interrupt_invalid_tss_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_invalid_tss_exception.c; sourceTree = "<group>"; };
-		05AFEE701620F27C00740041 /* kernel_interrupt_machine_check_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_machine_check_exception.c; sourceTree = "<group>"; };
-		05AFEE711620F27C00740041 /* kernel_interrupt_nmi_interrupt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_nmi_interrupt.c; sourceTree = "<group>"; };
-		05AFEE721620F27C00740041 /* kernel_interrupt_overflow_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_overflow_exception.c; sourceTree = "<group>"; };
-		05AFEE731620F27C00740041 /* kernel_interrupt_page_fault_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_page_fault_exception.c; sourceTree = "<group>"; };
-		05AFEE741620F27C00740041 /* kernel_interrupt_segment_not_present.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_segment_not_present.c; sourceTree = "<group>"; };
-		05AFEE751620F27C00740041 /* kernel_interrupt_simd_floating_point_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_simd_floating_point_exception.c; sourceTree = "<group>"; };
-		05AFEE761620F27C00740041 /* kernel_interrupt_stack_fault_exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_stack_fault_exception.c; sourceTree = "<group>"; };
-		05AFEE771620F27C00740041 /* kernel_interrupt_syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_interrupt_syscall.c; sourceTree = "<group>"; };
-		05AFEE791620F27C00740041 /* kernel_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_main.c; sourceTree = "<group>"; };
-		05AFEE7A1620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		05AFEE7C1620F27C00740041 /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
-		05AFEE7E1620F27C00740041 /* panic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = panic.c; sourceTree = "<group>"; };
-		05AFEE801620F27C00740041 /* kernel_video_clear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_clear.c; sourceTree = "<group>"; };
-		05AFEE811620F27C00740041 /* kernel_video_cursor_move.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_cursor_move.c; sourceTree = "<group>"; };
-		05AFEE821620F27C00740041 /* kernel_video_cursor_x.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_cursor_x.c; sourceTree = "<group>"; };
-		05AFEE831620F27C00740041 /* kernel_video_cursor_y.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_cursor_y.c; sourceTree = "<group>"; };
-		05AFEE841620F27C00740041 /* kernel_video_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_print.c; sourceTree = "<group>"; };
-		05AFEE851620F27C00740041 /* kernel_video_printf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_printf.c; sourceTree = "<group>"; };
-		05AFEE861620F27C00740041 /* kernel_video_prompt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_prompt.c; sourceTree = "<group>"; };
-		05AFEE871620F27C00740041 /* kernel_video_promptf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_promptf.c; sourceTree = "<group>"; };
-		05AFEE881620F27C00740041 /* kernel_video_putc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_putc.c; sourceTree = "<group>"; };
-		05AFEE891620F27C00740041 /* kernel_video_scroll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_scroll.c; sourceTree = "<group>"; };
-		05AFEE8A1620F27C00740041 /* kernel_video_set_bg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_set_bg.c; sourceTree = "<group>"; };
-		05AFEE8B1620F27C00740041 /* kernel_video_set_fg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_set_fg.c; sourceTree = "<group>"; };
-		05AFEE8C1620F27C00740041 /* kernel_video_vprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_vprintf.c; sourceTree = "<group>"; };
 		05AFEE8E1620F27C00740041 /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __libc_assert.c; sourceTree = "<group>"; };
 		05AFEE8F1620F27C00740041 /* __libc_ctype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __libc_ctype.c; sourceTree = "<group>"; };
 		05AFEE901620F27C00740041 /* __libc_errno.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __libc_errno.c; sourceTree = "<group>"; };
@@ -233,8 +235,6 @@
 		05AFEF101620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
-		05DABB30162209D700DA8F66 /* kernel_video_itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_itoa.c; sourceTree = "<group>"; };
-		05DABB31162209E300DA8F66 /* kernel_video_utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kernel_video_utoa.c; sourceTree = "<group>"; };
 		05E6B332162F2BB800364B7D /* xeos.16.debug.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.debug.inc.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -245,6 +245,109 @@
 				05111DB516249A0500966E40 /* Makefile */,
 			);
 			path = binutils;
+			sourceTree = "<group>";
+		};
+		0556692E163B10ED00E67528 /* xeos */ = {
+			isa = PBXGroup;
+			children = (
+				0556692F163B10ED00E67528 /* __video.c */,
+				05566930163B10ED00E67528 /* include */,
+				05566936163B10ED00E67528 /* interrupts */,
+				0556694C163B10ED00E67528 /* kernel_main.c */,
+				0556694D163B10ED00E67528 /* kernel_stub.32.s */,
+				0556694E163B10ED00E67528 /* kernel_stub.64.s */,
+				0556694F163B10ED00E67528 /* Makefile */,
+				05566950163B10ED00E67528 /* syscalls */,
+				05566952163B10ED00E67528 /* system */,
+				05566954163B10ED00E67528 /* video */,
+			);
+			path = xeos;
+			sourceTree = "<group>";
+		};
+		05566930163B10ED00E67528 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05566931163B10ED00E67528 /* private */,
+				05566934163B10ED00E67528 /* syscalls.h */,
+				05566935163B10ED00E67528 /* system.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		05566931163B10ED00E67528 /* private */ = {
+			isa = PBXGroup;
+			children = (
+				05566932163B10ED00E67528 /* interrupts.h */,
+				05566933163B10ED00E67528 /* video.h */,
+			);
+			path = private;
+			sourceTree = "<group>";
+		};
+		05566936163B10ED00E67528 /* interrupts */ = {
+			isa = PBXGroup;
+			children = (
+				05566937163B10ED00E67528 /* kernel_interrupt_alignment_check_exception.c */,
+				05566938163B10ED00E67528 /* kernel_interrupt_bound_range_exceeded_exception.c */,
+				05566939163B10ED00E67528 /* kernel_interrupt_breakpoint_exception.c */,
+				0556693A163B10ED00E67528 /* kernel_interrupt_coprocessor_segment_overrun.c */,
+				0556693B163B10ED00E67528 /* kernel_interrupt_debug_exception.c */,
+				0556693C163B10ED00E67528 /* kernel_interrupt_default_handler.c */,
+				0556693D163B10ED00E67528 /* kernel_interrupt_device_not_available_exception.c */,
+				0556693E163B10ED00E67528 /* kernel_interrupt_divide_error.c */,
+				0556693F163B10ED00E67528 /* kernel_interrupt_double_fault_exception.c */,
+				05566940163B10ED00E67528 /* kernel_interrupt_floating_point_error_exception.c */,
+				05566941163B10ED00E67528 /* kernel_interrupt_general_protection_exception.c */,
+				05566942163B10ED00E67528 /* kernel_interrupt_invalid_opcode_exception.c */,
+				05566943163B10ED00E67528 /* kernel_interrupt_invalid_tss_exception.c */,
+				05566944163B10ED00E67528 /* kernel_interrupt_machine_check_exception.c */,
+				05566945163B10ED00E67528 /* kernel_interrupt_nmi_interrupt.c */,
+				05566946163B10ED00E67528 /* kernel_interrupt_overflow_exception.c */,
+				05566947163B10ED00E67528 /* kernel_interrupt_page_fault_exception.c */,
+				05566948163B10ED00E67528 /* kernel_interrupt_segment_not_present.c */,
+				05566949163B10ED00E67528 /* kernel_interrupt_simd_floating_point_exception.c */,
+				0556694A163B10ED00E67528 /* kernel_interrupt_stack_fault_exception.c */,
+				0556694B163B10ED00E67528 /* kernel_interrupt_syscall.c */,
+			);
+			path = interrupts;
+			sourceTree = "<group>";
+		};
+		05566950163B10ED00E67528 /* syscalls */ = {
+			isa = PBXGroup;
+			children = (
+				05566951163B10ED00E67528 /* syscall.c */,
+			);
+			path = syscalls;
+			sourceTree = "<group>";
+		};
+		05566952163B10ED00E67528 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				05566953163B10ED00E67528 /* panic.c */,
+			);
+			path = system;
+			sourceTree = "<group>";
+		};
+		05566954163B10ED00E67528 /* video */ = {
+			isa = PBXGroup;
+			children = (
+				05566955163B10ED00E67528 /* kernel_video_clear.c */,
+				05566956163B10ED00E67528 /* kernel_video_cursor_move.c */,
+				05566957163B10ED00E67528 /* kernel_video_cursor_x.c */,
+				05566958163B10ED00E67528 /* kernel_video_cursor_y.c */,
+				05566959163B10ED00E67528 /* kernel_video_itoa.c */,
+				0556695A163B10ED00E67528 /* kernel_video_print.c */,
+				0556695B163B10ED00E67528 /* kernel_video_printf.c */,
+				0556695C163B10ED00E67528 /* kernel_video_prompt.c */,
+				0556695D163B10ED00E67528 /* kernel_video_promptf.c */,
+				0556695E163B10ED00E67528 /* kernel_video_putc.c */,
+				0556695F163B10ED00E67528 /* kernel_video_scroll.c */,
+				05566960163B10ED00E67528 /* kernel_video_set_bg.c */,
+				05566961163B10ED00E67528 /* kernel_video_set_fg.c */,
+				05566962163B10ED00E67528 /* kernel_video_str_reverse.c */,
+				05566963163B10ED00E67528 /* kernel_video_utoa.c */,
+				05566964163B10ED00E67528 /* kernel_video_vprintf.c */,
+			);
+			path = video;
 			sourceTree = "<group>";
 		};
 		056A28B71628AA80003FBE80 /* release */ = {
@@ -364,9 +467,9 @@
 			isa = PBXGroup;
 			children = (
 				05AFEE101620F27C00740041 /* hal */,
-				05AFEE5A1620F27C00740041 /* kernel */,
 				05AFEE8D1620F27C00740041 /* libc */,
 				056A29211628ACF4003FBE80 /* pthread */,
+				0556692E163B10ED00E67528 /* xeos */,
 				05AFEF0F1620F27C00740041 /* linker.ld */,
 				05AFEF101620F27C00740041 /* Makefile */,
 			);
@@ -446,109 +549,6 @@
 				05AFEE311620F27C00740041 /* hal_smbios_verifiy_intermediate_checksum.c */,
 			);
 			path = smbios;
-			sourceTree = "<group>";
-		};
-		05AFEE5A1620F27C00740041 /* kernel */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEE5B1620F27C00740041 /* __video.c */,
-				05AFEE5C1620F27C00740041 /* include */,
-				05AFEE621620F27C00740041 /* interrupts */,
-				05AFEE791620F27C00740041 /* kernel_main.c */,
-				051A31021635C08600AD4FC9 /* kernel_stub.32.s */,
-				051A31031635C08600AD4FC9 /* kernel_stub.64.s */,
-				05AFEE7A1620F27C00740041 /* Makefile */,
-				05AFEE7B1620F27C00740041 /* syscalls */,
-				05AFEE7D1620F27C00740041 /* system */,
-				05AFEE7F1620F27C00740041 /* video */,
-			);
-			path = kernel;
-			sourceTree = "<group>";
-		};
-		05AFEE5C1620F27C00740041 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEE5D1620F27C00740041 /* private */,
-				05AFEE601620F27C00740041 /* syscalls.h */,
-				05AFEE611620F27C00740041 /* system.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		05AFEE5D1620F27C00740041 /* private */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEE5E1620F27C00740041 /* interrupts.h */,
-				05AFEE5F1620F27C00740041 /* video.h */,
-			);
-			path = private;
-			sourceTree = "<group>";
-		};
-		05AFEE621620F27C00740041 /* interrupts */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEE631620F27C00740041 /* kernel_interrupt_alignment_check_exception.c */,
-				05AFEE641620F27C00740041 /* kernel_interrupt_bound_range_exceeded_exception.c */,
-				05AFEE651620F27C00740041 /* kernel_interrupt_breakpoint_exception.c */,
-				05AFEE661620F27C00740041 /* kernel_interrupt_coprocessor_segment_overrun.c */,
-				05AFEE671620F27C00740041 /* kernel_interrupt_debug_exception.c */,
-				05AFEE681620F27C00740041 /* kernel_interrupt_default_handler.c */,
-				05AFEE691620F27C00740041 /* kernel_interrupt_device_not_available_exception.c */,
-				05AFEE6A1620F27C00740041 /* kernel_interrupt_divide_error.c */,
-				05AFEE6B1620F27C00740041 /* kernel_interrupt_double_fault_exception.c */,
-				05AFEE6C1620F27C00740041 /* kernel_interrupt_floating_point_error_exception.c */,
-				05AFEE6D1620F27C00740041 /* kernel_interrupt_general_protection_exception.c */,
-				05AFEE6E1620F27C00740041 /* kernel_interrupt_invalid_opcode_exception.c */,
-				05AFEE6F1620F27C00740041 /* kernel_interrupt_invalid_tss_exception.c */,
-				05AFEE701620F27C00740041 /* kernel_interrupt_machine_check_exception.c */,
-				05AFEE711620F27C00740041 /* kernel_interrupt_nmi_interrupt.c */,
-				05AFEE721620F27C00740041 /* kernel_interrupt_overflow_exception.c */,
-				05AFEE731620F27C00740041 /* kernel_interrupt_page_fault_exception.c */,
-				05AFEE741620F27C00740041 /* kernel_interrupt_segment_not_present.c */,
-				05AFEE761620F27C00740041 /* kernel_interrupt_stack_fault_exception.c */,
-				05AFEE771620F27C00740041 /* kernel_interrupt_syscall.c */,
-				05AFEE751620F27C00740041 /* kernel_interrupt_simd_floating_point_exception.c */,
-			);
-			path = interrupts;
-			sourceTree = "<group>";
-		};
-		05AFEE7B1620F27C00740041 /* syscalls */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEE7C1620F27C00740041 /* syscall.c */,
-			);
-			path = syscalls;
-			sourceTree = "<group>";
-		};
-		05AFEE7D1620F27C00740041 /* system */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEE7E1620F27C00740041 /* panic.c */,
-			);
-			path = system;
-			sourceTree = "<group>";
-		};
-		05AFEE7F1620F27C00740041 /* video */ = {
-			isa = PBXGroup;
-			children = (
-				05AFEE801620F27C00740041 /* kernel_video_clear.c */,
-				05AFEE811620F27C00740041 /* kernel_video_cursor_move.c */,
-				05AFEE821620F27C00740041 /* kernel_video_cursor_x.c */,
-				05AFEE831620F27C00740041 /* kernel_video_cursor_y.c */,
-				05DABB30162209D700DA8F66 /* kernel_video_itoa.c */,
-				05AFEE841620F27C00740041 /* kernel_video_print.c */,
-				05AFEE851620F27C00740041 /* kernel_video_printf.c */,
-				05AFEE861620F27C00740041 /* kernel_video_prompt.c */,
-				05AFEE871620F27C00740041 /* kernel_video_promptf.c */,
-				05AFEE881620F27C00740041 /* kernel_video_putc.c */,
-				05AFEE891620F27C00740041 /* kernel_video_scroll.c */,
-				05AFEE8A1620F27C00740041 /* kernel_video_set_bg.c */,
-				05AFEE8B1620F27C00740041 /* kernel_video_set_fg.c */,
-				055B2E0016236232001FE307 /* kernel_video_str_reverse.c */,
-				05DABB31162209E300DA8F66 /* kernel_video_utoa.c */,
-				05AFEE8C1620F27C00740041 /* kernel_video_vprintf.c */,
-			);
-			path = video;
 			sourceTree = "<group>";
 		};
 		05AFEE8D1620F27C00740041 /* libc */ = {

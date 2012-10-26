@@ -66,7 +66,7 @@
 #include <string.h>
 #include "smbios.h"
 
-#include <kernel/private/video.h>
+#include <xeos/private/video.h>
 
 hal_smbios_bios_infos            __hal_smbios_bios_infos;
 hal_smbios_system_infos          __hal_smbios_system_infos;
