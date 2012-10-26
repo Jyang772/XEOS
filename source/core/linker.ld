@@ -68,12 +68,9 @@ ENTRY( start )
 SECTIONS
 {
     /*
-     * Address of the kernel in memory.
-     * 
-     * Aligned on 4Kb, so the ELF header can fit. This will
-     * drastically reduce the binary size.
+     * Address of the kernel in memory (1MB).
      */
-    . = 0x00201000;
+    . = 0x00100000;
     
     /* Machine code */
     .text :
