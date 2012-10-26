@@ -117,7 +117,7 @@ start: jmp main
 $XEOS.boot.stage2.kernel.32.entry               dd  0
 $XEOS.boot.stage2.kernel.64.entry               dd  0
 $XEOS.boot.stage2.dataSector                    dw  0
-$XEOS.boot.stage2.kernelSectors                 dw  0
+$XEOS.boot.stage2.kernel.sectors                dw  0
 $XEOS.boot.stage2.nl                            db  @ASCII.NL,  @ASCII.NUL
 $XEOS.files.kernel.32                           db  "XEOS32  ELF", @ASCII.NUL
 $XEOS.files.kernel.64                           db  "XEOS64  ELF", @ASCII.NUL
@@ -183,10 +183,8 @@ $XEOS.boot.stage2.msg.a20.bios                          db  "Enabling the A-20 a
 $XEOS.boot.stage2.msg.a20.keyboardControl               db  "Enabling the A-20 address line (KBDCTRL):        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.keyboardOut                   db  "Enabling the A-20 address line (KBDOUT):         ", @ASCII.NUL
 $XEOS.boot.stage2.msg.a20.systemControl                 db  "Enabling the A-20 address line (SYSCTRL):        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits (protected) mode:   ", @ASCII.NUL
-$XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits (long) mode:        ", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.move                       db  "Moving the kernel image to its final location:   ", @ASCII.NUL
-$XEOS.boot.stage2.msg.kernel.run                        db  "Passing control to the kernel:                   ", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch32                          db  "Switching the CPU to 32 bits mode:               ", @ASCII.NUL
+$XEOS.boot.stage2.msg.switch64                          db  "Switching the CPU to 64 bits mode:               ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error                             db  "Press any key to reboot: ", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.dir                   db  "Error: cannot load the FAT-12 root directory",@ASCII.NUL
 $XEOS.boot.stage2.msg.error.fat12.find                  db  "Error: file not found", @ASCII.NUL
@@ -1192,7 +1190,7 @@ XEOS.boot.stage2.kernel.load:
         call    XEOS.16.io.fat12.loadFile
         
         ; Number of sectors read
-        mov     WORD [ $XEOS.boot.stage2.kernelSectors ], cx
+        mov     WORD [ $XEOS.boot.stage2.kernel.sectors ],  cx
         
         ; Restores registers
         pop    cx
@@ -1363,6 +1361,10 @@ XEOS.boot.stage2.32:
         ; Sets the new value - We are now in 32 bits protected mode
         mov     cr0,        eax
         
+        ; Kernel sectors and kernel entry points parameters
+        mov     cx,          WORD [ $XEOS.boot.stage2.kernel.sectors ]
+        mov     edi,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
+        
         ; Setup the 32 bits kernel
         ; We are doing a far jump using our code descriptor
         ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
@@ -1419,6 +1421,9 @@ XEOS.boot.stage2.64:
         ; Gets the cursor position, so it can be restored in 64 bits mode
         mov     ah,         0x03
         @XEOS.16.int.video
+        
+        ; Saves registers
+        push    dx
         
         ; Clears the interrupts
         cli
@@ -1480,6 +1485,13 @@ XEOS.boot.stage2.64:
         or      eax,        0x80000000
         mov     cr0,        eax
         
+        ; Restores registers
+        pop     dx
+        
+        ; Kernel sectors and kernel entry points parameters
+        mov     cx,          WORD [ $XEOS.boot.stage2.kernel.sectors ]
+        mov     edi,        DWORD [ $XEOS.boot.stage2.kernel.64.entry ]
+        
         ; Setup the 64 bits kernel
         ; We are doing a far jump using our code descriptor
         ; This way, we are entering ring 0 (from the GDT), and CS is fixed.
@@ -1499,11 +1511,36 @@ BITS    32
 %include "xeos.32.string.inc.s"     ; String utilities
 
 ;-------------------------------------------------------------------------------
+; Variables definition
+;-------------------------------------------------------------------------------
+
+$XEOS.boot.stage2.32.kernel.entry           dd  0
+$XEOS.boot.stage2.32.kernel.sectors         dw  0
+$XEOS.boot.stage2.32.nl                     db  @ASCII.NL,  @ASCII.NUL
+$XEOS.boot.stage2.32.str                    db  "                              ", @ASCII.NUL
+
+;-------------------------------------------------------------------------------
+; Strings
+;-------------------------------------------------------------------------------
+
+$XEOS.boot.stage2.msg.32.prompt             db  "XEOS", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.gt                 db  ">", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.space              db  " ", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.bracket.left       db  "[", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.bracket.right      db  "]", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.success            db  "OK", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.failure            db  "FAIL", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.kernel.move        db  "Moving the kernel image to its final location:   ", @ASCII.NUL
+$XEOS.boot.stage2.msg.32.kernel.run         db  "Passing control to the kernel:                   ", @ASCII.NUL
+
+;-------------------------------------------------------------------------------
 ; Setups and executes the 32 bits kernel
 ; 
 ; Input registers:
 ;       
+;       - CX:       The number of sectors for the kernel file
 ;       - DX:       The current cursor position
+;       - EDI:      The ckernel entry point
 ; 
 ; Return registers:
 ;       
@@ -1520,36 +1557,42 @@ XEOS.boot.stage2.32.run:
     mov     ds,         ax
     mov     ss,         ax
     mov     es,         ax
+    
+    ; Sets the stack pointer
     mov     esp,        0x90000
     
     ; Restores the cursor position
     @XEOS.32.video.cursor.move dl, dh
     
+    ; Saves kernel sectors and kernel entry points parameters
+    mov      WORD [ $XEOS.boot.stage2.32.kernel.sectors ],  cx
+    mov     DWORD [ $XEOS.boot.stage2.32.kernel.entry ],    edi
+    
     ; Sets color attributes
     @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
     @XEOS.32.video.setBackgroundColor   @XEOS.32.video.color.black
     
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.left
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
     @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.success
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.success
     @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-    @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
-    @XEOS.32.video.print                $XEOS.boot.stage2.nl
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
+    @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.right
+    @XEOS.32.video.print                $XEOS.boot.stage2.32.nl
     
     .copy:
         
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.left
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.gray.light
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.prompt
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.prompt
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.gt
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.move
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.right
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.gt
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.kernel.move
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.gray.light
         
         ; Location of the kernel in memory (multiplies the segment address by 16)
@@ -1570,7 +1613,7 @@ XEOS.boot.stage2.32.run:
         xor     ebx,        ebx
         
         ; Number of sectors loaded for the kernel
-        mov     ax,        WORD [ $XEOS.boot.stage2.kernelSectors ]
+        mov     ax,        WORD [ $XEOS.boot.stage2.32.kernel.sectors ]
         
         ; Multiplies by the number of bytes per sector
         mov     bx,        @XEOS.io.fat12.mbr.bytesPerSector
@@ -1644,41 +1687,41 @@ XEOS.boot.stage2.32.run:
             loop    .copy.bytes
             
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-            @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
-            @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.left
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-            @XEOS.32.string.numberToString      @XEOS.boot.stage2.kernel.address - @XEOS.boot.stage2.kernel.text.offset, 16, 8, 1, $XEOS.boot.stage2.str
-            @XEOS.32.video.print                $XEOS.boot.stage2.str
+            @XEOS.32.string.numberToString      @XEOS.boot.stage2.kernel.address - @XEOS.boot.stage2.kernel.text.offset, 16, 8, 1, $XEOS.boot.stage2.32.str
+            @XEOS.32.video.print                $XEOS.boot.stage2.32.str
             @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-            @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-            @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
-            @XEOS.32.video.print                $XEOS.boot.stage2.nl
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
+            @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.right
+            @XEOS.32.video.print                $XEOS.boot.stage2.32.nl
             
     .run:
         
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.left
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.gray.light
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.prompt
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.prompt
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.gt
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.kernel.run
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.right
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.gt
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.kernel.run
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.left
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.left
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-        @XEOS.32.string.numberToString      DWORD [ $XEOS.boot.stage2.kernel.32.entry ], 16, 8, 1, $XEOS.boot.stage2.str
-        @XEOS.32.video.print                $XEOS.boot.stage2.str
+        @XEOS.32.string.numberToString      DWORD [ $XEOS.boot.stage2.kernel.32.entry ], 16, 8, 1, $XEOS.boot.stage2.32.str
+        @XEOS.32.video.print                $XEOS.boot.stage2.32.str
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.space
-        @XEOS.32.video.print                $XEOS.boot.stage2.msg.bracket.right
-        @XEOS.32.video.print                $XEOS.boot.stage2.nl
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
+        @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.right
+        @XEOS.32.video.print                $XEOS.boot.stage2.32.nl
         
         ; Kernel entry point
-        mov     eax,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
+        mov     eax,        DWORD [ $XEOS.boot.stage2.32.kernel.entry ]
         
         ; Jumps to the kernel code
         jmp     @XEOS.gdt.descriptors.32.code:eax
@@ -1697,11 +1740,36 @@ BITS    64
 %include "xeos.64.string.inc.s"     ; String utilities
 
 ;-------------------------------------------------------------------------------
+; Variables definition
+;-------------------------------------------------------------------------------
+
+$XEOS.boot.stage2.64.kernel.entry           dd  0
+$XEOS.boot.stage2.64.kernel.sectors         dw  0
+$XEOS.boot.stage2.64.nl                     db  @ASCII.NL,  @ASCII.NUL
+$XEOS.boot.stage2.64.str                    db  "                              ", @ASCII.NUL
+
+;-------------------------------------------------------------------------------
+; Strings
+;-------------------------------------------------------------------------------
+
+$XEOS.boot.stage2.msg.64.prompt             db  "XEOS", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.gt                 db  ">", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.space              db  " ", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.bracket.left       db  "[", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.bracket.right      db  "]", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.success            db  "OK", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.failure            db  "FAIL", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.kernel.move        db  "Moving the kernel image to its final location:   ", @ASCII.NUL
+$XEOS.boot.stage2.msg.64.kernel.run         db  "Passing control to the kernel:                   ", @ASCII.NUL
+
+;-------------------------------------------------------------------------------
 ; Setups and executes the 64 bits kernel
 ; 
 ; Input registers:
 ;       
+;       - CX:       The number of sectors for the kernel file
 ;       - DX:       The current cursor position
+;       - EDI:      The ckernel entry point
 ; 
 ; Return registers:
 ;       
@@ -1713,7 +1781,28 @@ BITS    64
 ;-------------------------------------------------------------------------------
 XEOS.boot.stage2.64.run:
     
+    ; Sets the stack pointer
+    mov     rsp,        0x90000
     
+    ; Restores the cursor position
+    @XEOS.64.video.cursor.move dl, dh
+    
+    ; Saves kernel sectors and kernel entry points parameters
+    mov      WORD [ $XEOS.boot.stage2.64.kernel.sectors ],  cx
+    mov     DWORD [ $XEOS.boot.stage2.64.kernel.entry ],    edi
+    
+    ; Sets color attributes
+    @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+    @XEOS.64.video.setBackgroundColor   @XEOS.64.video.color.black
+    
+    @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
+    @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+    @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.green.light
+    @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.success
+    @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+    @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+    @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
+    @XEOS.64.video.print                $XEOS.boot.stage2.64C.nl
         
     ; Halts the system
     hlt
