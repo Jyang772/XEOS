@@ -1851,11 +1851,9 @@ XEOS.boot.stage2.64.run:
         @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
         @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
         @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.green.light
-        
-        xor rax, rax
-        mov eax, DWORD [ $XEOS.boot.stage2.64.kernel.entry ]
+        xor                                 rax, rax
+        mov                                 eax, DWORD [ $XEOS.boot.stage2.64.kernel.entry ]
         @XEOS.64.string.numberToString      rax, 16, 8, 1, $XEOS.boot.stage2.64.str
-        
         @XEOS.64.video.print                $XEOS.boot.stage2.64.str
         @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
         @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space

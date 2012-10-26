@@ -108,6 +108,7 @@ BITS    64
     push    rcx
     push    rdx
     push    rdi
+    push    rsi
     
     mov     rax,        %1
     mov     rbx,        %2
@@ -117,6 +118,7 @@ BITS    64
     call                XEOS.64.string.numberToString
     
     ; Restores registers
+    pop     rsi
     pop     rdi
     pop     rdx
     pop     rcx
