@@ -1822,7 +1822,104 @@ XEOS.boot.stage2.64.run:
         @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.kernel.move
         @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.gray.light
         
+        ; Location of the kernel in memory (multiplies the segment address by 16)
+        mov     rax,        @XEOS.boot.stage2.kernel.segment
+        mov     rbx,        0x10
+        mul     rbx
+        mov     rsi,        rax
+        
+        ; Destination for the kernel
+        mov     rdi,        @XEOS.boot.stage2.kernel.address
+        
+        ; The .text section is located at offset 0x1000
+        ; Keep the ELF header, but copy it below
+        sub     rdi,        @XEOS.boot.stage2.kernel.text.offset
+        
+        ; Resets registers
+        xor     rax,        rax
+        xor     rbx,        rbx
+        
+        ; Number of sectors loaded for the kernel
+        mov     ax,        WORD [ $XEOS.boot.stage2.64.kernel.sectors ]
+        
+        ; Multiplies by the number of bytes per sector
+        mov     bx,        @XEOS.io.fat12.mbr.bytesPerSector
+        mul     rbx
+        
+        ; We are going to read quad words, so divides the bytes by 8
+        mov     rbx,        0x08
+        div     rbx
+        
+        ; Clears the direction flag
+        cld
+        
+        ; Counter
+        mov     rcx,        rax
+        
         .copy.bytes:
+            
+            ; Moves bytes
+            movsq
+            
+            .copy.bytes.symbol:
+                
+                ; Saves registers
+                push    rax
+                push    rbx
+                push    rcx
+                push    rdx
+                push    rdi
+                
+                ; We've got 4 different symbols, so divide the counter
+                ; by 4 and checks the reminder
+                mov     rax,        rcx
+                xor     rdx,        rdx
+                mov     rbx,        0x04
+                div     rbx
+                cmp     rdx,        0x00
+                je      .copy.bytes.symbol.char.1
+                cmp     rdx,        0x01
+                je      .copy.bytes.symbol.char.2
+                cmp     rdx,        0x02
+                je      .copy.bytes.symbol.char.3
+                cmp     rdx,        0x03
+                je      .copy.bytes.symbol.char.4
+                
+                .copy.bytes.symbol.char.1:
+                    
+                    ; Prints '|'
+                    @XEOS.64.video.putc 0x7C
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.2:
+                    
+                    ; Prints '/'
+                    @XEOS.64.video.putc 0x2F
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.3:
+                    
+                    ; Prints '-'
+                    @XEOS.64.video.putc 0x2D
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.char.4:
+                    
+                    ; Prints '\'      
+                    @XEOS.64.video.putc 0x5C
+                    jmp                 .copy.bytes.symbol.done
+                    
+                .copy.bytes.symbol.done:
+                    
+                    ; Restores registers
+                    pop     rdi
+                    pop     rdx
+                    pop     rcx
+                    pop     rbx
+                    pop     rax
+            
+            ; Continues to move bytes
+            loop    .copy.bytes
             
             @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
             @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
