@@ -557,7 +557,7 @@ XEOS.32.video.cursor.move:
         ; Number of available columns
         mov     ecx,        @XEOS.32.video.screen.cols
         
-        ; New Y posotion
+        ; New Y position
         mov     al,         bl
         
         ; Multiplies Y by the number of columns
@@ -566,7 +566,7 @@ XEOS.32.video.cursor.move:
         ; Adds the X position
         add     al,         bh
         
-        ; Stores the new cursor posotion in EBX
+        ; Stores the new cursor position in EBX
         mov     ebx,        eax
         
         ; Tells the CRT microcontroller we are going to change to high byte for
