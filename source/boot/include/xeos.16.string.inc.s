@@ -220,7 +220,7 @@ XEOS.16.string.numberToString:
         ; Stores the padding
         mov     si,         cx
         
-        ; Checkkcs if we need to prefix with 0x
+        ; Checks if we need to prefix with 0x
         cmp     dx,         0x01
         jne     .start
         

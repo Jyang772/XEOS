@@ -221,7 +221,7 @@ XEOS.32.string.numberToString:
         ; Stores the padding
         mov     esi,        ecx
         
-        ; Checkkcs if we need to prefix with 0x
+        ; Checks if we need to prefix with 0x
         cmp     edx,        0x01
         jne     .start
         

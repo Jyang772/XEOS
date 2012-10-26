@@ -101,7 +101,7 @@ $XEOS.16.debug.register.gs                          dw  0
 $XEOS.16.debug.register.ss                          dw  0
 $XEOS.16.debug.register.eflags                      dd  0
 $XEOS.16.debug.char                                 db  " ", @ASCII.NUL
-$XEOS.16.debug.str                                  db  "                              ", @ASCII.NUL
+$XEOS.16.debug.str                                  dd  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Strings
