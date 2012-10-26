@@ -123,7 +123,7 @@ $XEOS.files.kernel.32                           db  "XEOS32  ELF", @ASCII.NUL
 $XEOS.files.kernel.64                           db  "XEOS64  ELF", @ASCII.NUL
 $XEOS.files.kernel.asm                          db  "KERNEL  BIN", @ASCII.NUL
 $XEOS.boot.stage2.cpu.vendor                    db  "            ", @ASCII.NUL
-$XEOS.boot.stage2.str                           db  "                              ", @ASCII.NUL
+$XEOS.boot.stage2.str                           dd  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @ASCII.NUL
 $XEOS.boot.stage2.longMode                      db  0
 
 ;-------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_entry           db  "Error: invalid ELF-
 ; Addresses
 %define @XEOS.boot.stage2.fat.offset            0x7900
 %define @XEOS.boot.stage2.kernel.segment        0x1000
-%define @XEOS.boot.stage2.kernel.address        0x00201000
+%define @XEOS.boot.stage2.kernel.address        0x00100000
 %define @XEOS.boot.stage2.kernel.text.offset    0x1000
 
 ;-------------------------------------------------------------------------------
@@ -1517,7 +1517,7 @@ BITS    32
 $XEOS.boot.stage2.32.kernel.entry           dd  0
 $XEOS.boot.stage2.32.kernel.sectors         dw  0
 $XEOS.boot.stage2.32.nl                     db  @ASCII.NL,  @ASCII.NUL
-$XEOS.boot.stage2.32.str                    db  "                              ", @ASCII.NUL
+$XEOS.boot.stage2.32.str                    dd  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Strings
@@ -1619,7 +1619,7 @@ XEOS.boot.stage2.32.run:
         mov     bx,        @XEOS.io.fat12.mbr.bytesPerSector
         mul     ebx
         
-        ; We are going to read doubles, so divides the bytes by 4
+        ; We are going to read double words, so divides the bytes by 4
         mov     ebx,        0x04
         div     ebx
         
@@ -1713,7 +1713,7 @@ XEOS.boot.stage2.32.run:
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.bracket.left
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.green.light
-        @XEOS.32.string.numberToString      DWORD [ $XEOS.boot.stage2.kernel.32.entry ], 16, 8, 1, $XEOS.boot.stage2.32.str
+        @XEOS.32.string.numberToString      DWORD [ $XEOS.boot.stage2.32.kernel.entry ], 16, 8, 1, $XEOS.boot.stage2.32.str
         @XEOS.32.video.print                $XEOS.boot.stage2.32.str
         @XEOS.32.video.setForegroundColor   @XEOS.32.video.color.white
         @XEOS.32.video.print                $XEOS.boot.stage2.msg.32.space
@@ -1746,7 +1746,7 @@ BITS    64
 $XEOS.boot.stage2.64.kernel.entry           dd  0
 $XEOS.boot.stage2.64.kernel.sectors         dw  0
 $XEOS.boot.stage2.64.nl                     db  @ASCII.NL,  @ASCII.NUL
-$XEOS.boot.stage2.64.str                    db  "                              ", @ASCII.NUL
+$XEOS.boot.stage2.64.str                    dd  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Strings
@@ -1802,7 +1802,7 @@ XEOS.boot.stage2.64.run:
     @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
     @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
     @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
-    @XEOS.64.video.print                $XEOS.boot.stage2.64C.nl
+    @XEOS.64.video.print                $XEOS.boot.stage2.64.nl
         
     ; Halts the system
     hlt
