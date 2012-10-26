@@ -1803,6 +1803,20 @@ XEOS.boot.stage2.64.run:
     @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
     @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
     @XEOS.64.video.print                $XEOS.boot.stage2.64.nl
+    
+    .copy:
+        
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.left
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.gray.light
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.prompt
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.white
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.bracket.right
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.gt
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.space
+        @XEOS.64.video.print                $XEOS.boot.stage2.msg.64.kernel.move
+        @XEOS.64.video.setForegroundColor   @XEOS.64.video.color.gray.light
         
     ; Halts the system
     hlt
