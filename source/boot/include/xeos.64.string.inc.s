@@ -67,8 +67,8 @@
 ; Those procedures and macros are intended to be used only in 64 bits long mode.
 ;-------------------------------------------------------------------------------
 
-%ifndef __XEOS_32_STRING_INC_S__
-%define __XEOS_32_STRING_INC_S__
+%ifndef __XEOS_64_STRING_INC_S__
+%define __XEOS_64_STRING_INC_S__
 
 ;-------------------------------------------------------------------------------
 ; Includes
@@ -79,7 +79,7 @@
 %include "xeos.ascii.inc.s"           ; ASCII table
 
 ; We are in 32 bits mode
-BITS    32
+BITS    64
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -228,7 +228,7 @@ XEOS.64.string.numberToString:
         ; Stores the padding
         mov     rsi,        rcx
         
-        ; Checkkcs if we need to prefix with 0x
+        ; Checks if we need to prefix with 0x
         cmp     rdx,        0x01
         jne     .start
         
