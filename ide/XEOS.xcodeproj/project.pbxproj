@@ -257,6 +257,43 @@
 		05661FF1163C6433005C174A /* localtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = localtime.c; sourceTree = "<group>"; };
 		05661FF2163C643C005C174A /* strftime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strftime.c; sourceTree = "<group>"; };
 		05661FF3163C65D5005C174A /* __wchar_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __wchar_t.h; sourceTree = "<group>"; };
+		05661FF5163C6A20005C174A /* __stdlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __stdlib.c; sourceTree = "<group>"; };
+		05661FF6163C6A20005C174A /* _Exit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = _Exit.c; sourceTree = "<group>"; };
+		05661FF7163C6A20005C174A /* abort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = abort.c; sourceTree = "<group>"; };
+		05661FF8163C6A20005C174A /* abs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = abs.c; sourceTree = "<group>"; };
+		05661FF9163C6A20005C174A /* atexit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = atexit.c; sourceTree = "<group>"; };
+		05661FFA163C6A20005C174A /* atof.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = atof.c; sourceTree = "<group>"; };
+		05661FFB163C6A20005C174A /* atoi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = atoi.c; sourceTree = "<group>"; };
+		05661FFC163C6A20005C174A /* atol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = atol.c; sourceTree = "<group>"; };
+		05661FFD163C6A20005C174A /* atoll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = atoll.c; sourceTree = "<group>"; };
+		05661FFE163C6A20005C174A /* bsearch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bsearch.c; sourceTree = "<group>"; };
+		05661FFF163C6A20005C174A /* calloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calloc.c; sourceTree = "<group>"; };
+		05662000163C6A20005C174A /* div.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = div.c; sourceTree = "<group>"; };
+		05662001163C6A20005C174A /* exit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = exit.c; sourceTree = "<group>"; };
+		05662002163C6A20005C174A /* free.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = free.c; sourceTree = "<group>"; };
+		05662003163C6A20005C174A /* getenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getenv.c; sourceTree = "<group>"; };
+		05662004163C6A20005C174A /* labs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = labs.c; sourceTree = "<group>"; };
+		05662005163C6A20005C174A /* ldiv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ldiv.c; sourceTree = "<group>"; };
+		05662006163C6A20005C174A /* llabs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = llabs.c; sourceTree = "<group>"; };
+		05662007163C6A20005C174A /* lldiv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lldiv.c; sourceTree = "<group>"; };
+		05662008163C6A20005C174A /* malloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = malloc.c; sourceTree = "<group>"; };
+		05662009163C6A20005C174A /* mblen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mblen.c; sourceTree = "<group>"; };
+		0566200A163C6A20005C174A /* mbstowcs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mbstowcs.c; sourceTree = "<group>"; };
+		0566200B163C6A20005C174A /* mbtowc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mbtowc.c; sourceTree = "<group>"; };
+		0566200C163C6A20005C174A /* qsort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qsort.c; sourceTree = "<group>"; };
+		0566200D163C6A20005C174A /* rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rand.c; sourceTree = "<group>"; };
+		0566200E163C6A20005C174A /* realloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = realloc.c; sourceTree = "<group>"; };
+		0566200F163C6A20005C174A /* srand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = srand.c; sourceTree = "<group>"; };
+		05662010163C6A20005C174A /* strtod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strtod.c; sourceTree = "<group>"; };
+		05662011163C6A20005C174A /* strtof.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strtof.c; sourceTree = "<group>"; };
+		05662012163C6A20005C174A /* strtol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strtol.c; sourceTree = "<group>"; };
+		05662013163C6A20005C174A /* strtold.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strtold.c; sourceTree = "<group>"; };
+		05662014163C6A20005C174A /* strtoll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strtoll.c; sourceTree = "<group>"; };
+		05662015163C6A20005C174A /* strtoul.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strtoul.c; sourceTree = "<group>"; };
+		05662016163C6A20005C174A /* strtoull.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strtoull.c; sourceTree = "<group>"; };
+		05662017163C6A20005C174A /* system.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = system.c; sourceTree = "<group>"; };
+		05662018163C6A20005C174A /* wcstombs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wcstombs.c; sourceTree = "<group>"; };
+		05662019163C6A20005C174A /* wctomb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wctomb.c; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
 		0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -760,6 +797,43 @@
 		058E292D163B520A0042A1DB /* stdlib */ = {
 			isa = PBXGroup;
 			children = (
+				05661FF5163C6A20005C174A /* __stdlib.c */,
+				05661FF6163C6A20005C174A /* _Exit.c */,
+				05661FF7163C6A20005C174A /* abort.c */,
+				05661FF8163C6A20005C174A /* abs.c */,
+				05661FF9163C6A20005C174A /* atexit.c */,
+				05661FFA163C6A20005C174A /* atof.c */,
+				05661FFB163C6A20005C174A /* atoi.c */,
+				05661FFC163C6A20005C174A /* atol.c */,
+				05661FFD163C6A20005C174A /* atoll.c */,
+				05661FFE163C6A20005C174A /* bsearch.c */,
+				05661FFF163C6A20005C174A /* calloc.c */,
+				05662000163C6A20005C174A /* div.c */,
+				05662001163C6A20005C174A /* exit.c */,
+				05662002163C6A20005C174A /* free.c */,
+				05662003163C6A20005C174A /* getenv.c */,
+				05662004163C6A20005C174A /* labs.c */,
+				05662005163C6A20005C174A /* ldiv.c */,
+				05662006163C6A20005C174A /* llabs.c */,
+				05662007163C6A20005C174A /* lldiv.c */,
+				05662008163C6A20005C174A /* malloc.c */,
+				05662009163C6A20005C174A /* mblen.c */,
+				0566200A163C6A20005C174A /* mbstowcs.c */,
+				0566200B163C6A20005C174A /* mbtowc.c */,
+				0566200C163C6A20005C174A /* qsort.c */,
+				0566200D163C6A20005C174A /* rand.c */,
+				0566200E163C6A20005C174A /* realloc.c */,
+				0566200F163C6A20005C174A /* srand.c */,
+				05662010163C6A20005C174A /* strtod.c */,
+				05662011163C6A20005C174A /* strtof.c */,
+				05662012163C6A20005C174A /* strtol.c */,
+				05662013163C6A20005C174A /* strtold.c */,
+				05662014163C6A20005C174A /* strtoll.c */,
+				05662015163C6A20005C174A /* strtoul.c */,
+				05662016163C6A20005C174A /* strtoull.c */,
+				05662017163C6A20005C174A /* system.c */,
+				05662018163C6A20005C174A /* wcstombs.c */,
+				05662019163C6A20005C174A /* wctomb.c */,
 			);
 			path = stdlib;
 			sourceTree = "<group>";

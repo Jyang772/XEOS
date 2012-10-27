@@ -71,11 +71,11 @@ extern "C" {
 
 #ifdef __WCHAR_TYPE__
     
-    typedef __WCHAR_TYPE__          wchar_t
+    typedef __WCHAR_TYPE__          wchar_t;
     
 #else
     
-    typedef short                   wchar_t
+    typedef short                   wchar_t;
     
 #endif
 
