@@ -381,7 +381,6 @@
 				058E2925163B520A0042A1DB /* math */,
 				058E2926163B520A0042A1DB /* setjmp */,
 				058E2927163B520A0042A1DB /* signal */,
-				058E2928163B520A0042A1DB /* stdarg */,
 				058E292C163B520A0042A1DB /* stdio */,
 				058E292D163B520A0042A1DB /* stdlib */,
 				058E292E163B520A0042A1DB /* string */,
@@ -706,13 +705,6 @@
 			children = (
 			);
 			path = signal;
-			sourceTree = "<group>";
-		};
-		058E2928163B520A0042A1DB /* stdarg */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = stdarg;
 			sourceTree = "<group>";
 		};
 		058E292C163B520A0042A1DB /* stdio */ = {
