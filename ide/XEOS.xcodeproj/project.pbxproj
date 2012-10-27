@@ -247,6 +247,15 @@
 		05661FE7163C5BC1005C174A /* raise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = raise.c; sourceTree = "<group>"; };
 		05661FE8163C6095005C174A /* setlocale.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setlocale.c; sourceTree = "<group>"; };
 		05661FE9163C609F005C174A /* localeconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = localeconv.c; sourceTree = "<group>"; };
+		05661FEA163C63FC005C174A /* clock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = clock.c; sourceTree = "<group>"; };
+		05661FEB163C640C005C174A /* difftime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = difftime.c; sourceTree = "<group>"; };
+		05661FEC163C6413005C174A /* mktime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mktime.c; sourceTree = "<group>"; };
+		05661FED163C6419005C174A /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
+		05661FEE163C6420005C174A /* asctime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = asctime.c; sourceTree = "<group>"; };
+		05661FEF163C6426005C174A /* ctime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ctime.c; sourceTree = "<group>"; };
+		05661FF0163C642D005C174A /* gmtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gmtime.c; sourceTree = "<group>"; };
+		05661FF1163C6433005C174A /* localtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = localtime.c; sourceTree = "<group>"; };
+		05661FF2163C643C005C174A /* strftime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strftime.c; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
 		0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -792,6 +801,15 @@
 		058E2930163B520A0042A1DB /* time */ = {
 			isa = PBXGroup;
 			children = (
+				05661FEA163C63FC005C174A /* clock.c */,
+				05661FEB163C640C005C174A /* difftime.c */,
+				05661FEC163C6413005C174A /* mktime.c */,
+				05661FED163C6419005C174A /* time.c */,
+				05661FEE163C6420005C174A /* asctime.c */,
+				05661FEF163C6426005C174A /* ctime.c */,
+				05661FF0163C642D005C174A /* gmtime.c */,
+				05661FF1163C6433005C174A /* localtime.c */,
+				05661FF2163C643C005C174A /* strftime.c */,
 			);
 			path = time;
 			sourceTree = "<group>";
