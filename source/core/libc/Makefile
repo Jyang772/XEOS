@@ -71,15 +71,24 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
+DIR_SRC_ASSERT      = $(PATH_SRC_CORE_LIBC)assert/
+DIR_SRC_COMPLEX     = $(PATH_SRC_CORE_LIBC)complex/
 DIR_SRC_CTYPE       = $(PATH_SRC_CORE_LIBC)ctype/
-DIR_SRC_LOCALE      = $(DIR_SRC)locale/
-DIR_SRC_MATH        = $(DIR_SRC)math/
-DIR_SRC_SIGNAL      = $(DIR_SRC)signal/
-DIR_SRC_STDIO       = $(DIR_SRC)stdio/
-DIR_SRC_STDLIB      = $(DIR_SRC)stdlib/
-DIR_SRC_STRING      = $(DIR_SRC)string/
-DIR_SRC_TIME        = $(DIR_SRC)time/
-DIR_SRC_INC         = $(DIR_SRC)include/
+DIR_SRC_ERRNO       = $(PATH_SRC_CORE_LIBC)errno/
+DIR_SRC_FENV        = $(PATH_SRC_CORE_LIBC)fenv/
+DIR_SRC_INTTYPES    = $(PATH_SRC_CORE_LIBC)inttypes/
+DIR_SRC_LOCALE      = $(PATH_SRC_CORE_LIBC)locale/
+DIR_SRC_MATH        = $(PATH_SRC_CORE_LIBC)math/
+DIR_SRC_SETJMP      = $(PATH_SRC_CORE_LIBC)setjmp/
+DIR_SRC_SIGNAL      = $(PATH_SRC_CORE_LIBC)signal/
+DIR_SRC_STDARG      = $(PATH_SRC_CORE_LIBC)stdarg/
+DIR_SRC_STDIO       = $(PATH_SRC_CORE_LIBC)stdio/
+DIR_SRC_STDLIB      = $(PATH_SRC_CORE_LIBC)stdlib/
+DIR_SRC_STRING      = $(PATH_SRC_CORE_LIBC)string/
+DIR_SRC_TGMATH      = $(PATH_SRC_CORE_LIBC)tgmath/
+DIR_SRC_TIME        = $(PATH_SRC_CORE_LIBC)time/
+DIR_SRC_WCHAR       = $(PATH_SRC_CORE_LIBC)wchar/
+DIR_SRC_WCTYPE      = $(PATH_SRC_CORE_LIBC)wctype/
 
 #-------------------------------------------------------------------------------
 # Software arguments
@@ -94,14 +103,24 @@ ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
 
 # Define the search paths for source files
 vpath %$(EXT_C) $(PATH_SRC_CORE_LIBC)
+vpath %$(EXT_C) $(DIR_SRC_ASSERT)
+vpath %$(EXT_C) $(DIR_SRC_COMPLEX)
 vpath %$(EXT_C) $(DIR_SRC_CTYPE)
+vpath %$(EXT_C) $(DIR_SRC_ERRNO)
+vpath %$(EXT_C) $(DIR_SRC_FENV)
+vpath %$(EXT_C) $(DIR_SRC_INTTYPES)
 vpath %$(EXT_C) $(DIR_SRC_LOCALE)
 vpath %$(EXT_C) $(DIR_SRC_MATH)
+vpath %$(EXT_C) $(DIR_SRC_SETJMP)
 vpath %$(EXT_C) $(DIR_SRC_SIGNAL)
+vpath %$(EXT_C) $(DIR_SRC_STDARG)
 vpath %$(EXT_C) $(DIR_SRC_STDIO)
 vpath %$(EXT_C) $(DIR_SRC_STDLIB)
 vpath %$(EXT_C) $(DIR_SRC_STRING)
+vpath %$(EXT_C) $(DIR_SRC_TGMATH)
 vpath %$(EXT_C) $(DIR_SRC_TIME)
+vpath %$(EXT_C) $(DIR_SRC_WCHAR)
+vpath %$(EXT_C) $(DIR_SRC_WCTYPE)
 vpath %$(EXT_H) $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
@@ -116,48 +135,88 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 #-------------------------------------------------------------------------------
 
 # Gets every code file in the source directory
-_FILES_C                  = $(foreach dir,$(PATH_SRC_CORE_LIBC),$(wildcard $(PATH_SRC_CORE_LIBC)*$(EXT_C)))
-_FILES_C_CTYPE            = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_CTYPE)*$(EXT_C)))
-_FILES_C_LOCALE           = $(foreach dir,$(DIR_SRC_LOCALE),$(wildcard $(DIR_SRC_LOCALE)*$(EXT_C)))
-_FILES_C_MATH             = $(foreach dir,$(DIR_SRC_MATH),$(wildcard $(DIR_SRC_MATH)*$(EXT_C)))
-_FILES_C_SIGNAL           = $(foreach dir,$(DIR_SRC_SIGNAL),$(wildcard $(DIR_SRC_SIGNAL)*$(EXT_C)))
-_FILES_C_STDIO            = $(foreach dir,$(DIR_SRC_STDIO),$(wildcard $(DIR_SRC_STDIO)*$(EXT_C)))
-_FILES_C_STDLIB           = $(foreach dir,$(DIR_SRC_STDLIB),$(wildcard $(DIR_SRC_STDLIB)*$(EXT_C)))
-_FILES_C_STRING           = $(foreach dir,$(DIR_SRC_STRING),$(wildcard $(DIR_SRC_STRING)*$(EXT_C)))
-_FILES_C_TIME             = $(foreach dir,$(DIR_SRC_TIME),$(wildcard $(DIR_SRC_TIME)*$(EXT_C)))
+_FILES_C                    = $(foreach dir,$(PATH_SRC_CORE_LIBC),$(wildcard $(PATH_SRC_CORE_LIBC)*$(EXT_C)))
+_FILES_C_ASSERT             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_ASSERT)*$(EXT_C)))
+_FILES_C_COMPLEX            = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_COMPLEX)*$(EXT_C)))
+_FILES_C_CTYPE              = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_CTYPE)*$(EXT_C)))
+_FILES_C_ERRNO              = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_ERRNO)*$(EXT_C)))
+_FILES_C_FENV               = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_FENV)*$(EXT_C)))
+_FILES_C_INTTYPES           = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_INTTYPES)*$(EXT_C)))
+_FILES_C_LOCALE             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_LOCALE)*$(EXT_C)))
+_FILES_C_MATH               = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_MATH)*$(EXT_C)))
+_FILES_C_SETJMP             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_SETJMP)*$(EXT_C)))
+_FILES_C_SIGNAL             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_SIGNAL)*$(EXT_C)))
+_FILES_C_STDARG             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_STDARG)*$(EXT_C)))
+_FILES_C_STDIO              = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_STDIO)*$(EXT_C)))
+_FILES_C_STDLIB             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_STDLIB)*$(EXT_C)))
+_FILES_C_STRING             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_STRING)*$(EXT_C)))
+_FILES_C_TGMATH             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_TGMATH)*$(EXT_C)))
+_FILES_C_TIME               = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_TIME)*$(EXT_C)))
+_FILES_C_WCHAR              = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_WCHAR)*$(EXT_C)))
+_FILES_C_WCTYPE             = $(foreach dir,$(DIR_SRC_CTYPE),$(wildcard $(DIR_SRC_WCTYPE)*$(EXT_C)))
 
 # Gets only the file name of the code files
-_FILES_C_REL              = $(notdir $(_FILES_C))
-_FILES_C_REL_CTYPE        = $(notdir $(_FILES_C_CTYPE))
-_FILES_C_REL_LOCALE       = $(notdir $(_FILES_C_LOCALE))
-_FILES_C_REL_MATH         = $(notdir $(_FILES_C_MATH))
-_FILES_C_REL_SIGNAL       = $(notdir $(_FILES_C_SIGNAL))
-_FILES_C_REL_STDIO        = $(notdir $(_FILES_C_STDIO))
-_FILES_C_REL_STDLIB       = $(notdir $(_FILES_C_STDLIB))
-_FILES_C_REL_STRING       = $(notdir $(_FILES_C_STRING))
-_FILES_C_REL_TIME         = $(notdir $(_FILES_C_TIME))
+_FILES_C_REL                = $(notdir $(_FILES_C))
+_FILES_C_REL_ASSERT         = $(notdir $(_FILES_C_ASSERT))
+_FILES_C_REL_COMPLEX        = $(notdir $(_FILES_C_COMPLEX))
+_FILES_C_REL_CTYPE          = $(notdir $(_FILES_C_CTYPE))
+_FILES_C_REL_ERRNO          = $(notdir $(_FILES_C_ERRNO))
+_FILES_C_REL_FENV           = $(notdir $(_FILES_C_FENV))
+_FILES_C_REL_INTTYPES       = $(notdir $(_FILES_C_INTTYPES))
+_FILES_C_REL_LOCALE         = $(notdir $(_FILES_C_LOCALE))
+_FILES_C_REL_MATH           = $(notdir $(_FILES_C_MATH))
+_FILES_C_REL_SETJMP         = $(notdir $(_FILES_C_SETJMP))
+_FILES_C_REL_SIGNAL         = $(notdir $(_FILES_C_SIGNAL))
+_FILES_C_REL_STDARG         = $(notdir $(_FILES_C_STDARG))
+_FILES_C_REL_STDIO          = $(notdir $(_FILES_C_STDIO))
+_FILES_C_REL_STDLIB         = $(notdir $(_FILES_C_STDLIB))
+_FILES_C_REL_STRING         = $(notdir $(_FILES_C_STRING))
+_FILES_C_REL_TGMATH         = $(notdir $(_FILES_C_TGMATH))
+_FILES_C_REL_TIME           = $(notdir $(_FILES_C_TIME))
+_FILES_C_REL_WCHAR          = $(notdir $(_FILES_C_WCHAR))
+_FILES_C_REL_WCTYPE         = $(notdir $(_FILES_C_WCTYPE))
 
 # Replace the code extension by the object one
-_FILES_C_OBJ              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
-_FILES_C_OBJ_CTYPE        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_CTYPE))
-_FILES_C_OBJ_LOCALE       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_LOCALE))
-_FILES_C_OBJ_MATH         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MATH))
-_FILES_C_OBJ_SIGNAL       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SIGNAL))
-_FILES_C_OBJ_STDIO        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STDIO))
-_FILES_C_OBJ_STDLIB       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STDLIB))
-_FILES_C_OBJ_STRING       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_STRING))
-_FILES_C_OBJ_TIME         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_TIME))
+_FILES_C_OBJ                = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
+_FILES_C_OBJ_ASSERT         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_ASSERT))
+_FILES_C_OBJ_COMPLEX        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_COMPLEX))
+_FILES_C_OBJ_CTYPE          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_CTYPE))
+_FILES_C_OBJ_ERRNO          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_ERRNO))
+_FILES_C_OBJ_FENV           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_FENV))
+_FILES_C_OBJ_INTTYPES       = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_INTTYPES))
+_FILES_C_OBJ_LOCALE         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_LOCALE))
+_FILES_C_OBJ_MATH           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_MATH))
+_FILES_C_OBJ_SETJMP         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_SETJMP))
+_FILES_C_OBJ_SIGNAL         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_SIGNAL))
+_FILES_C_OBJ_STDARG         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_STDARG))
+_FILES_C_OBJ_STDIO          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_STDIO))
+_FILES_C_OBJ_STDLIB         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_STDLIB))
+_FILES_C_OBJ_STRING         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_STRING))
+_FILES_C_OBJ_TGMATH         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_TGMATH))
+_FILES_C_OBJ_TIME           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_TIME))
+_FILES_C_OBJ_WCHAR          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_WCHAR))
+_FILES_C_OBJ_WCTYPE         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_WCTYPE))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_CTYPE  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_CTYPE))
-_FILES_C_OBJ_BUILD_LOCALE = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_LOCALE))
-_FILES_C_OBJ_BUILD_MATH   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_MATH))
-_FILES_C_OBJ_BUILD_SIGNAL = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_SIGNAL))
-_FILES_C_OBJ_BUILD_STDIO  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STDIO))
-_FILES_C_OBJ_BUILD_STDLIB = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STDLIB))
-_FILES_C_OBJ_BUILD_STRING = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STRING))
-_FILES_C_OBJ_BUILD_TIME   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_TIME))
+_FILES_C_OBJ_BUILD          = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_ASSERT   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_ASSERT))
+_FILES_C_OBJ_BUILD_COMPLEX  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_COMPLEX))
+_FILES_C_OBJ_BUILD_CTYPE    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_CTYPE))
+_FILES_C_OBJ_BUILD_ERRNO    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_ERRNO))
+_FILES_C_OBJ_BUILD_FENV     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_FENV))
+_FILES_C_OBJ_BUILD_INTTYPES = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_INTTYPES))
+_FILES_C_OBJ_BUILD_LOCALE   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_LOCALE))
+_FILES_C_OBJ_BUILD_MATH     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_MATH))
+_FILES_C_OBJ_BUILD_SETJMP   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_SETJMP))
+_FILES_C_OBJ_BUILD_SIGNAL   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_SIGNAL))
+_FILES_C_OBJ_BUILD_STDARG   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STDARG))
+_FILES_C_OBJ_BUILD_STDIO    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STDIO))
+_FILES_C_OBJ_BUILD_STDLIB   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STDLIB))
+_FILES_C_OBJ_BUILD_STRING   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_STRING))
+_FILES_C_OBJ_BUILD_TGMATH   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_TGMATH))
+_FILES_C_OBJ_BUILD_TIME     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_TIME))
+_FILES_C_OBJ_BUILD_WCHAR    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_WCHAR))
+_FILES_C_OBJ_BUILD_WCTYPE   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_C_OBJ_WCTYPE))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -174,8 +233,8 @@ _FILES_C_OBJ_BUILD_TIME   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_LIBC),$(_FILES_
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_CTYPE) $(_FILES_C_OBJ_BUILD_LOCALE) $(_FILES_C_OBJ_BUILD_MATH) $(_FILES_C_OBJ_BUILD_SIGNAL) $(_FILES_C_OBJ_BUILD_STDIO) $(_FILES_C_OBJ_BUILD_STDLIB) $(_FILES_C_OBJ_BUILD_STRING) $(_FILES_C_OBJ_BUILD_TIME)
-	
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_ASSERT) $(_FILES_C_OBJ_BUILD_COMPLEX) $(_FILES_C_OBJ_BUILD_CTYPE) $(_FILES_C_OBJ_BUILD_ERRNO) $(_FILES_C_OBJ_BUILD_FENV) $(_FILES_C_OBJ_BUILD_INTTYPES) $(_FILES_C_OBJ_BUILD_LOCALE) $(_FILES_C_OBJ_BUILD_MATH) $(_FILES_C_OBJ_BUILD_SETJMP) $(_FILES_C_OBJ_BUILD_SIGNAL) $(_FILES_C_OBJ_BUILD_STDARG) $(_FILES_C_OBJ_BUILD_STDIO) $(_FILES_C_OBJ_BUILD_STDLIB) $(_FILES_C_OBJ_BUILD_STRING) $(_FILES_C_OBJ_BUILD_TGMATH) $(_FILES_C_OBJ_BUILD_TIME) $(_FILES_C_OBJ_BUILD_WCHAR) $(_FILES_C_OBJ_BUILD_WCTYPE)
+		
 	@:
 
 # Cleans the build files
