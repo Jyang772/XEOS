@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "stdlib.h"
+#include "stdio.h"
 
 void perror( const char * s )
 {

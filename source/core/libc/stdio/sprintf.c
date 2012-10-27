@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "stdlib.h"
+#include "stdio.h"
 
 int sprintf( char * restrict s, const char * restrict format, ... )
 {

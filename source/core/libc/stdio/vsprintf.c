@@ -61,13 +61,13 @@
 
 /* $Id$ */
 
-#include "stdlib.h"
+#include "stdio.h"
 
 int vsprintf( char * restrict s, const char * restrict format, va_list arg )
 {
     ( void )s;
     ( void )format;
-    ( void )arg
+    ( void )arg;
     
     return 0;
 }

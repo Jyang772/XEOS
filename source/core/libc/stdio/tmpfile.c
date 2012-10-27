@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "stdlib.h"
+#include "stdio.h"
 
 FILE * tmpfile( void )
 {
