@@ -61,30 +61,12 @@
 
 /* $Id$ */
 
-#undef  assert
+#include "assert.h"
 
-#ifdef NDEBUG
-    
-    #define assert( _e_ )   ( ( void )0 )
-    
-#else
-    
-    #define assert( _e_ )   ( _e_ ) ? ( ( void )0 ) : ( __libc_assert( #_e_, __FILE__, __LINE__ ) )
-    
-#endif
-
-#ifndef __LIBC_ASSERT_H__
-#define __LIBC_ASSERT_H__
-#pragma once
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-extern void __libc_assert( char * expression, char * file, int line );
-
-#ifdef __cplusplus
+void __libc_assert( char * expression, char * file, int line );
+void __libc_assert( char * expression, char * file, int line )
+{
+    ( void )expression;
+    ( void )file;
+    ( void )line;
 }
-#endif
-
-#endif /* __LIBC_ASSERT_H__ */
