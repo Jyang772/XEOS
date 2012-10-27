@@ -243,6 +243,8 @@
 		05661FE3163C5A17005C174A /* fesetenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fesetenv.c; sourceTree = "<group>"; };
 		05661FE4163C5A1E005C174A /* feupdateenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = feupdateenv.c; sourceTree = "<group>"; };
 		05661FE5163C5A28005C174A /* __fenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __fenv.c; sourceTree = "<group>"; };
+		05661FE6163C5BBA005C174A /* signal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = signal.c; sourceTree = "<group>"; };
+		05661FE7163C5BC1005C174A /* raise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = raise.c; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
 		0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -727,6 +729,8 @@
 		058E2927163B520A0042A1DB /* signal */ = {
 			isa = PBXGroup;
 			children = (
+				05661FE6163C5BBA005C174A /* signal.c */,
+				05661FE7163C5BC1005C174A /* raise.c */,
 			);
 			path = signal;
 			sourceTree = "<group>";
