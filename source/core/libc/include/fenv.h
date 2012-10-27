@@ -71,10 +71,7 @@ extern "C" {
      
 typedef struct
 {
-    unsigned int            __reserved_0;
-    unsigned int            __reserved_1;
-    unsigned int            __reserved_2;
-    unsigned int            __reserved_4;
+    unsigned int            __reserved[ 4 ];
 }
 fenv_t;
 
