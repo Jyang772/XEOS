@@ -61,24 +61,10 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_ERRNO_H__
-#define __LIBC_ERRNO_H__
-#pragma once
+#include "errno.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define EDOM        0x01    /* Numerical argument out of domain */
-#define EILSEQ		0x02    /* Illegal byte sequence */
-#define	ERANGE		0x03    /* Result too large */
-
-#define errno ( __libc_errno() )
-
-extern int __libc_errno( void );
-
-#ifdef __cplusplus
+int __libc_errno( void );
+int __libc_errno( void )
+{
+    return 0;
 }
-#endif
-
-#endif /* __LIBC_ERRNO_H__ */
