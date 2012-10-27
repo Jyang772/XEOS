@@ -69,7 +69,16 @@
 extern "C" {
 #endif
 
+#if __STDC_VERSION__ < 199901L && __GNUC__ < 3
+    
+    typedef	int                         _Bool;
+    
+#endif
 
+#define __bool_true_false_are_defined   1
+#define true                            1
+#define false                           0
+#define bool                            _Bool
 
 #ifdef __cplusplus
 }
