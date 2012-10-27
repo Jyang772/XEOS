@@ -256,6 +256,7 @@
 		05661FF0163C642D005C174A /* gmtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gmtime.c; sourceTree = "<group>"; };
 		05661FF1163C6433005C174A /* localtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = localtime.c; sourceTree = "<group>"; };
 		05661FF2163C643C005C174A /* strftime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strftime.c; sourceTree = "<group>"; };
+		05661FF3163C65D5005C174A /* __wchar_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __wchar_t.h; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
 		0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -350,6 +351,7 @@
 				0564D04B163C284000394DFE /* __float.h */,
 				0564CFD7163C0C7800394DFE /* __null.h */,
 				0564CFD8163C0C7800394DFE /* __size_t.h */,
+				05661FF3163C65D5005C174A /* __wchar_t.h */,
 			);
 			path = libc;
 			sourceTree = "<group>";

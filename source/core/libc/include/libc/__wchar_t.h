@@ -61,24 +61,26 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_STDDEF_H__
-#define __LIBC_STDDEF_H__
+#ifndef __LIBC___WCHAR_T_H__
+#define __LIBC___WCHAR_T_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <libc/__null.h>
-#include <libc/__size_t.h>
-#include <libc/__wchar_t.h>
-
-typedef long                        ptrdiff_t
-
-#define offsetof( _type_, _field_)  ( ( size_t )( &( ( _type_ * ) 0 )->_field_ ) )
+#ifdef __WCHAR_TYPE__
+    
+    typedef __WCHAR_TYPE__          wchar_t
+    
+#else
+    
+    typedef short                   wchar_t
+    
+#endif
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBC_STDDEF_H__ */
+#endif /* __LIBC___WCHAR_T_H__ */
