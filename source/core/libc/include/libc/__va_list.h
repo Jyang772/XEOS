@@ -61,23 +61,18 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_STDARG_H__
-#define __LIBC_STDARG_H__
+#ifndef __LIBC___VA_LIST_H__
+#define __LIBC___VA_LIST_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <libc/__va_list.h>
-
-#define va_start( _ap_, _lastarg_ )     ap = ( char * ) & lastarg + sizeof( int )
-#define va_arg( _ap_, _type_ )          *( type * )( ap += sizeof( type ), ap - sizeof( type ) )
-#define va_copy( _dst_, _src_ )         ( ( void )( ( dst ) = ( src ) ) )
-#define va_end( _ap_ )                  ap = 0
+typedef char * va_list;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBC_STDARG_H__ */
+#endif /* __LIBC___VA_LIST_H__ */
