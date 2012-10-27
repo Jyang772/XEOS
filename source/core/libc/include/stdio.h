@@ -69,11 +69,24 @@
 extern "C" {
 #endif
 
-#include <libc/__size_t.h>
-#include <libc/__null.h>
-#include <libc/__va_list.h>
+#include <sys/__types.h>
 
-typedef long long           fpos_t;
+#ifndef __NULL
+#define __NULL
+#define NULL                        __XEOS_NULL
+#endif
+
+#ifndef __SIZE_T
+#define __SIZE_T
+typedef __xeos_size_t               size_t;
+#endif
+
+#ifndef __VA_LIST
+#define __VA_LIST
+typedef __xeos_va_list              va_list;
+#endif
+
+typedef long long                   fpos_t;
 
 typedef struct
 {
@@ -81,27 +94,27 @@ typedef struct
 }
 FILE;
 
-#define _IOFBF              0
-#define _IOLBF              1
-#define _IONBF              2
+#define _IOFBF                      0
+#define _IOLBF                      1
+#define _IONBF                      2
 
-#define BUFSIZ              1024
-#define EOF                 ( -1 )
+#define BUFSIZ                      1024
+#define EOF                         ( -1 )
 
-#define FOPEN_MAX           20
-#define FILENAME_MAX        1024
+#define FOPEN_MAX                   20
+#define FILENAME_MAX                1024
 
-#define L_tmpnam            1024
+#define L_tmpnam                    1024
 
-#define SEEK_SET            0
-#define SEEK_CUR            1
-#define SEEK_END            2
+#define SEEK_SET                    0
+#define SEEK_CUR                    1
+#define SEEK_END                    2
 
-#define TMP_MAX             0xFFFF
+#define TMP_MAX                     0xFFFF
 
-#define stderr              __libc_stderr_p
-#define stdin               __libc_stdin_p
-#define stdout              __libc_stdout_p
+#define stderr                      __libc_stderr_p
+#define stdin                       __libc_stdin_p
+#define stdout                      __libc_stdout_p
 
 extern FILE * __libc_stderr_p;
 extern FILE * __libc_stdin_p;

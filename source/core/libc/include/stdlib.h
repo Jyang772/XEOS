@@ -69,9 +69,30 @@
 extern "C" {
 #endif
 
-#include <libc/__null.h>
-#include <libc/__size_t.h>
-#include <libc/__wchar_t.h>
+#include <sys/__types.h>
+
+#ifndef __NULL
+#define __NULL
+#define NULL                    __XEOS_NULL
+#endif
+
+#ifndef __SIZE_T
+#define __SIZE_T
+typedef __xeos_size_t           size_t;
+#endif
+
+#ifndef __WCHAR_T
+#define __WCHAR_T
+typedef __xeos_wchar_t          wchar_t;
+#endif
+
+#define EXIT_FAILURE            1
+#define EXIT_SUCCESS            0
+
+#define RAND_MAX                0x7FFFFFFF
+#define	MB_CUR_MAX              __LIBC_MB_CUR_MAX
+
+extern int __LIBC_MB_CUR_MAX;
 
 typedef struct
 {
@@ -93,14 +114,6 @@ typedef struct
 	long long   rem;
 }
 lldiv_t;
-
-#define EXIT_FAILURE        1
-#define EXIT_SUCCESS        0
-
-#define RAND_MAX            0x7FFFFFFF
-#define	MB_CUR_MAX          __LIBC_MB_CUR_MAX
-
-extern int __LIBC_MB_CUR_MAX;
 
 double atof( const char * nptr );
 int atoi( const char * nptr );

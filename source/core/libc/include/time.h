@@ -69,13 +69,29 @@
 extern "C" {
 #endif
 
-#include <libc/__null.h>
-#include <libc/__size_t.h>
+#include <sys/__types.h>
+
+#ifndef __NULL
+#define __NULL
+#define NULL                    __XEOS_NULL
+#endif
+
+#ifndef __SIZE_T
+#define __SIZE_T
+typedef __xeos_size_t           size_t;
+#endif
+
+#ifndef __CLOCK_T
+#define __CLOCK_T
+typedef __xeos_clock_t          clock_t;
+#endif
+
+#ifndef __TIME_T
+#define __TIME_T
+typedef __xeos_time_t           time_t;
+#endif
 
 #define CLOCKS_PER_SEC          1000000
-
-typedef unsigned long           clock_t;
-typedef long                    time_t;
 
 struct tm
 {

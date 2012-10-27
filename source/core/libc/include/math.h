@@ -69,19 +69,19 @@
 extern "C" {
 #endif
 
-#include <libc/__float.h>
+#include <sys/__types.h>
 
-#if __LIBC_FLOAT_FLT_EVAL_METHOD__ == 0
+#if __XEOS_FLT_EVAL_METHOD__ == 0
     
     typedef float       float_t;
     typedef double      double_t;
     
-#elif __LIBC_FLOAT_FLT_EVAL_METHOD__ == 1
+#elif __XEOS_FLT_EVAL_METHOD__ == 1
     
     typedef double      float_t;
     typedef double      double_t;
     
-#elif __LIBC_FLOAT_FLT_EVAL_METHOD__ == 2 || __LIBC_FLOAT_FLT_EVAL_METHOD__ == -1
+#elif __XEOS_FLT_EVAL_METHOD__ == 2 || __XEOS_FLT_EVAL_METHOD__ == -1
     
     typedef long double float_t;
     typedef long double double_t;

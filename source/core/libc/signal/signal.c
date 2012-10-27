@@ -62,12 +62,12 @@
 /* $Id$ */
 
 #include "signal.h"
-#include "libc/__null.h"
+#include "stdlib.h"
 
 void ( * signal( int sig, void ( * func )( int ) ) )( int )
 {
     ( void )sig;
     ( void )func;
     
-    return NULL;
+    return __XEOS_NULL;
 }

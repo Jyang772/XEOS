@@ -69,6 +69,8 @@
 extern "C" {
 #endif
 
+#include <sys/__types.h>
+
 typedef signed char             int8_t;
 typedef short                   int16_t;
 typedef int                     int32_t;
@@ -99,8 +101,15 @@ typedef uint16_t                uint_fast16_t;
 typedef uint32_t                uint_fast32_t;
 typedef uint64_t                uint_fast64_t;
 
-typedef long                    intptr_t;
-typedef unsigned long           uintptr_t;
+#ifndef __INTPTR_T
+#define __INTPTR_T
+    typedef __xeos_intptr_t     intptr_t;
+#endif
+
+#ifndef __UINTPTR_T
+#define __UINTPTR_T
+    typedef __xeos_uintptr_t    uintptr_t;
+#endif
 
 typedef long long               intmax_t;
 typedef unsigned long long      uintmax_t;

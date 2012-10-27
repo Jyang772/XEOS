@@ -69,7 +69,12 @@
 extern "C" {
 #endif
 
-#include <libc/__va_list.h>
+#include <sys/__types.h>
+
+#ifndef __VA_LIST
+#define __VA_LIST
+typedef __xeos_va_list                  va_list;
+#endif
 
 #define va_start( _ap_, _lastarg_ )     ap = ( char * ) & lastarg + sizeof( int )
 #define va_arg( _ap_, _type_ )          *( type * )( ap += sizeof( type ), ap - sizeof( type ) )
