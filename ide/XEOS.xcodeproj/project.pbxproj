@@ -294,6 +294,54 @@
 		05662017163C6A20005C174A /* system.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = system.c; sourceTree = "<group>"; };
 		05662018163C6A20005C174A /* wcstombs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wcstombs.c; sourceTree = "<group>"; };
 		05662019163C6A20005C174A /* wctomb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wctomb.c; sourceTree = "<group>"; };
+		0566201B163C72CA005C174A /* __va_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __va_list.h; sourceTree = "<group>"; };
+		0566201C163C73CB005C174A /* __stdio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __stdio.c; sourceTree = "<group>"; };
+		0566201D163C73CB005C174A /* clearerr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = clearerr.c; sourceTree = "<group>"; };
+		0566201E163C73CB005C174A /* fclose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fclose.c; sourceTree = "<group>"; };
+		0566201F163C73CB005C174A /* feof.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = feof.c; sourceTree = "<group>"; };
+		05662020163C73CB005C174A /* ferror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ferror.c; sourceTree = "<group>"; };
+		05662021163C73CB005C174A /* fflush.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fflush.c; sourceTree = "<group>"; };
+		05662022163C73CB005C174A /* fgetc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fgetc.c; sourceTree = "<group>"; };
+		05662023163C73CB005C174A /* fgetpos.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fgetpos.c; sourceTree = "<group>"; };
+		05662024163C73CB005C174A /* fgets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fgets.c; sourceTree = "<group>"; };
+		05662025163C73CB005C174A /* fopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fopen.c; sourceTree = "<group>"; };
+		05662026163C73CB005C174A /* fprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fprintf.c; sourceTree = "<group>"; };
+		05662027163C73CB005C174A /* fputc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fputc.c; sourceTree = "<group>"; };
+		05662028163C73CB005C174A /* fputs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fputs.c; sourceTree = "<group>"; };
+		05662029163C73CB005C174A /* fread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fread.c; sourceTree = "<group>"; };
+		0566202A163C73CB005C174A /* freopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = freopen.c; sourceTree = "<group>"; };
+		0566202B163C73CB005C174A /* fscanf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fscanf.c; sourceTree = "<group>"; };
+		0566202C163C73CB005C174A /* fseek.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fseek.c; sourceTree = "<group>"; };
+		0566202D163C73CB005C174A /* fsetpos.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fsetpos.c; sourceTree = "<group>"; };
+		0566202E163C73CB005C174A /* ftell.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ftell.c; sourceTree = "<group>"; };
+		0566202F163C73CB005C174A /* fwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fwrite.c; sourceTree = "<group>"; };
+		05662030163C73CB005C174A /* getc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getc.c; sourceTree = "<group>"; };
+		05662031163C73CB005C174A /* getchar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getchar.c; sourceTree = "<group>"; };
+		05662032163C73CB005C174A /* gets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gets.c; sourceTree = "<group>"; };
+		05662033163C73CB005C174A /* perror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = perror.c; sourceTree = "<group>"; };
+		05662034163C73CB005C174A /* printf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = printf.c; sourceTree = "<group>"; };
+		05662035163C73CB005C174A /* putc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = putc.c; sourceTree = "<group>"; };
+		05662036163C73CB005C174A /* putchar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = putchar.c; sourceTree = "<group>"; };
+		05662037163C73CB005C174A /* puts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = puts.c; sourceTree = "<group>"; };
+		05662038163C73CB005C174A /* remove.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = remove.c; sourceTree = "<group>"; };
+		05662039163C73CB005C174A /* rename.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rename.c; sourceTree = "<group>"; };
+		0566203A163C73CB005C174A /* rewind.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rewind.c; sourceTree = "<group>"; };
+		0566203B163C73CB005C174A /* scanf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scanf.c; sourceTree = "<group>"; };
+		0566203C163C73CB005C174A /* setbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setbuf.c; sourceTree = "<group>"; };
+		0566203D163C73CB005C174A /* setvbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setvbuf.c; sourceTree = "<group>"; };
+		0566203E163C73CB005C174A /* snprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = snprintf.c; sourceTree = "<group>"; };
+		0566203F163C73CB005C174A /* sprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sprintf.c; sourceTree = "<group>"; };
+		05662040163C73CB005C174A /* sscanf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sscanf.c; sourceTree = "<group>"; };
+		05662041163C73CB005C174A /* tmpfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tmpfile.c; sourceTree = "<group>"; };
+		05662042163C73CB005C174A /* tmpnam.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tmpnam.c; sourceTree = "<group>"; };
+		05662043163C73CB005C174A /* ungetc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ungetc.c; sourceTree = "<group>"; };
+		05662044163C73CB005C174A /* vfprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vfprintf.c; sourceTree = "<group>"; };
+		05662045163C73CB005C174A /* vfscanf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vfscanf.c; sourceTree = "<group>"; };
+		05662046163C73CB005C174A /* vprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vprintf.c; sourceTree = "<group>"; };
+		05662047163C73CB005C174A /* vscanf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vscanf.c; sourceTree = "<group>"; };
+		05662048163C73CB005C174A /* vsnprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vsnprintf.c; sourceTree = "<group>"; };
+		05662049163C73CB005C174A /* vsprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vsprintf.c; sourceTree = "<group>"; };
+		0566204A163C73CB005C174A /* vsscanf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vsscanf.c; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
 		0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -389,6 +437,7 @@
 				0564CFD7163C0C7800394DFE /* __null.h */,
 				0564CFD8163C0C7800394DFE /* __size_t.h */,
 				05661FF3163C65D5005C174A /* __wchar_t.h */,
+				0566201B163C72CA005C174A /* __va_list.h */,
 			);
 			path = libc;
 			sourceTree = "<group>";
@@ -790,6 +839,53 @@
 		058E292C163B520A0042A1DB /* stdio */ = {
 			isa = PBXGroup;
 			children = (
+				0566201C163C73CB005C174A /* __stdio.c */,
+				0566201D163C73CB005C174A /* clearerr.c */,
+				0566201E163C73CB005C174A /* fclose.c */,
+				0566201F163C73CB005C174A /* feof.c */,
+				05662020163C73CB005C174A /* ferror.c */,
+				05662021163C73CB005C174A /* fflush.c */,
+				05662022163C73CB005C174A /* fgetc.c */,
+				05662023163C73CB005C174A /* fgetpos.c */,
+				05662024163C73CB005C174A /* fgets.c */,
+				05662025163C73CB005C174A /* fopen.c */,
+				05662026163C73CB005C174A /* fprintf.c */,
+				05662027163C73CB005C174A /* fputc.c */,
+				05662028163C73CB005C174A /* fputs.c */,
+				05662029163C73CB005C174A /* fread.c */,
+				0566202A163C73CB005C174A /* freopen.c */,
+				0566202B163C73CB005C174A /* fscanf.c */,
+				0566202C163C73CB005C174A /* fseek.c */,
+				0566202D163C73CB005C174A /* fsetpos.c */,
+				0566202E163C73CB005C174A /* ftell.c */,
+				0566202F163C73CB005C174A /* fwrite.c */,
+				05662030163C73CB005C174A /* getc.c */,
+				05662031163C73CB005C174A /* getchar.c */,
+				05662032163C73CB005C174A /* gets.c */,
+				05662033163C73CB005C174A /* perror.c */,
+				05662034163C73CB005C174A /* printf.c */,
+				05662035163C73CB005C174A /* putc.c */,
+				05662036163C73CB005C174A /* putchar.c */,
+				05662037163C73CB005C174A /* puts.c */,
+				05662038163C73CB005C174A /* remove.c */,
+				05662039163C73CB005C174A /* rename.c */,
+				0566203A163C73CB005C174A /* rewind.c */,
+				0566203B163C73CB005C174A /* scanf.c */,
+				0566203C163C73CB005C174A /* setbuf.c */,
+				0566203D163C73CB005C174A /* setvbuf.c */,
+				0566203E163C73CB005C174A /* snprintf.c */,
+				0566203F163C73CB005C174A /* sprintf.c */,
+				05662040163C73CB005C174A /* sscanf.c */,
+				05662041163C73CB005C174A /* tmpfile.c */,
+				05662042163C73CB005C174A /* tmpnam.c */,
+				05662043163C73CB005C174A /* ungetc.c */,
+				05662044163C73CB005C174A /* vfprintf.c */,
+				05662045163C73CB005C174A /* vfscanf.c */,
+				05662046163C73CB005C174A /* vprintf.c */,
+				05662047163C73CB005C174A /* vscanf.c */,
+				05662048163C73CB005C174A /* vsnprintf.c */,
+				05662049163C73CB005C174A /* vsprintf.c */,
+				0566204A163C73CB005C174A /* vsscanf.c */,
 			);
 			path = stdio;
 			sourceTree = "<group>";
