@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __LIB_SIZE_T_H__
-#define __LIB_SIZE_T_H__
+#ifndef __LIBC___SIZE_T_H__
+#define __LIBC___SIZE_T_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -75,4 +75,4 @@ typedef unsigned int size_t;
 }
 #endif
 
-#endif /* __LIB_SIZE_T_H__ */
+#endif /* __LIBC___SIZE_T_H__ */

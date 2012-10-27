@@ -69,8 +69,10 @@
 extern "C" {
 #endif
 
+#include <libc/__float.h>
+
 #define FLT_ROUNDS          1
-#define FLT_EVAL_METHOD     1
+#define FLT_EVAL_METHOD     __LIBC_FLOAT_FLT_EVAL_METHOD__
 
 #define FLT_RADIX           2
 

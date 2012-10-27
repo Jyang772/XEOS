@@ -69,8 +69,8 @@
 extern "C" {
 #endif
 
-#include <libc/null.h>
-#include <libc/size_t.h>
+#include <libc/__null.h>
+#include <libc/__size_t.h>
 
 typedef long                        ptrdiff_t
 

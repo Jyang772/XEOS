@@ -69,8 +69,8 @@
 extern "C" {
 #endif
 
-#include <libc/null.h>
-#include <libc/size_t.h>
+#include <libc/__null.h>
+#include <libc/__size_t.h>
 
 void * memcpy( void * restrict s1, const void * restrict s2, size_t n );
 void * memmove( void * s1, const void * s2, size_t n );

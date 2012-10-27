@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_NULL_H__
-#define __LIBC_NULL_H__
+#ifndef __LIBC___NULL_H__
+#define __LIBC___NULL_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -75,4 +75,4 @@ extern "C" {
 }
 #endif
 
-#endif /* __LIBC_NULL_H__ */
+#endif /* __LIBC___NULL_H__ */
