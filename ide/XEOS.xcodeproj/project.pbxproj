@@ -231,6 +231,18 @@
 		0564D131163C3DFE00394DFE /* trunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = trunc.c; sourceTree = "<group>"; };
 		0564D132163C3DFE00394DFE /* truncf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = truncf.c; sourceTree = "<group>"; };
 		0564D133163C3DFE00394DFE /* truncl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = truncl.c; sourceTree = "<group>"; };
+		05661FD9163C59D1005C174A /* feclearexcept.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = feclearexcept.c; sourceTree = "<group>"; };
+		05661FDB163C59DA005C174A /* fegetexceptflag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fegetexceptflag.c; sourceTree = "<group>"; };
+		05661FDC163C59E4005C174A /* feraiseexcept.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = feraiseexcept.c; sourceTree = "<group>"; };
+		05661FDD163C59EC005C174A /* fesetexceptflag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fesetexceptflag.c; sourceTree = "<group>"; };
+		05661FDE163C59F3005C174A /* fetestexcept.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fetestexcept.c; sourceTree = "<group>"; };
+		05661FDF163C59FB005C174A /* fegetround.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fegetround.c; sourceTree = "<group>"; };
+		05661FE0163C5A03005C174A /* fesetround.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fesetround.c; sourceTree = "<group>"; };
+		05661FE1163C5A0B005C174A /* fegetenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fegetenv.c; sourceTree = "<group>"; };
+		05661FE2163C5A11005C174A /* feholdexcept.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = feholdexcept.c; sourceTree = "<group>"; };
+		05661FE3163C5A17005C174A /* fesetenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fesetenv.c; sourceTree = "<group>"; };
+		05661FE4163C5A1E005C174A /* feupdateenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = feupdateenv.c; sourceTree = "<group>"; };
+		05661FE5163C5A28005C174A /* __fenv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __fenv.c; sourceTree = "<group>"; };
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
 		0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -439,6 +451,18 @@
 		058E2905163B520A0042A1DB /* fenv */ = {
 			isa = PBXGroup;
 			children = (
+				05661FE5163C5A28005C174A /* __fenv.c */,
+				05661FD9163C59D1005C174A /* feclearexcept.c */,
+				05661FDB163C59DA005C174A /* fegetexceptflag.c */,
+				05661FDC163C59E4005C174A /* feraiseexcept.c */,
+				05661FDD163C59EC005C174A /* fesetexceptflag.c */,
+				05661FDE163C59F3005C174A /* fetestexcept.c */,
+				05661FDF163C59FB005C174A /* fegetround.c */,
+				05661FE0163C5A03005C174A /* fesetround.c */,
+				05661FE1163C5A0B005C174A /* fegetenv.c */,
+				05661FE2163C5A11005C174A /* feholdexcept.c */,
+				05661FE3163C5A17005C174A /* fesetenv.c */,
+				05661FE4163C5A1E005C174A /* feupdateenv.c */,
 			);
 			path = fenv;
 			sourceTree = "<group>";

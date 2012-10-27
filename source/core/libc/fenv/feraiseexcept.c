@@ -61,56 +61,11 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_FENV_H__
-#define __LIBC_FENV_H__
-#pragma once
+#include "fenv.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-     
-typedef struct
+int feraiseexcept( int excepts )
 {
-    unsigned int            __reserved_0;
-    unsigned int            __reserved_1;
-    unsigned int            __reserved_2;
-    unsigned int            __reserved_4;
+    ( void )excepts;
+    
+    return 0;
 }
-fenv_t;
-
-typedef unsigned short      fexcept_t;
-
-#define FE_INVALID          0x0001
-#define FE_DIVBYZERO        0x0002
-#define FE_OVERFLOW         0x0004
-#define FE_UNDERFLOW        0x0008
-#define FE_INEXACT          0x0010
-
-#define FE_ALL_EXCEPT       0x001F
-
-#define FE_TONEAREST        0x00000000
-#define FE_UPWARD           0x00400000
-#define FE_DOWNWARD         0x00800000
-#define FE_TOWARDZERO       0x00C00000
-
-#define FE_DFL_ENV          &__LIBC_FE_DFL_ENV
-
-extern const fenv_t __LIBC_FE_DFL_ENV;
-
-int feclearexcept( int excepts );
-int fegetexceptflag( fexcept_t * flagp, int excepts );
-int feraiseexcept( int excepts );
-int fesetexceptflag( const fexcept_t * flagp, int excepts );
-int fetestexcept( int excepts );
-int fegetround( void );
-int fesetround( int round );
-int fegetenv( fenv_t * envp );
-int feholdexcept( fenv_t * envp );
-int fesetenv( const fenv_t * envp );
-int feupdateenv( const fenv_t * envp );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBC_FENV_H__ */
