@@ -94,9 +94,6 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX thread library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_PTHREAD) && $(MAKE)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS harware abstraction layer"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE_HAL) && $(MAKE)
-	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS kernel"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE)
 	
@@ -111,7 +108,6 @@ clean:
 	
 	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_CORE_PTHREAD) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_CORE_HAL) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE) clean
 	
 	@if [ -f $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF ]; then $(RM) $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF; fi;

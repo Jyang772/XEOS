@@ -104,8 +104,6 @@ PATH_BUILD_32_CORE_BIN          := $(PATH_BUILD_32_CORE)bin/
 PATH_BUILD_64_CORE_BIN          := $(PATH_BUILD_64_CORE)bin/
 PATH_BUILD_32_CORE_OBJ          := $(PATH_BUILD_32_CORE)obj/
 PATH_BUILD_64_CORE_OBJ          := $(PATH_BUILD_64_CORE)obj/
-PATH_BUILD_32_CORE_OBJ_HAL      := $(PATH_BUILD_32_CORE_OBJ)hal/
-PATH_BUILD_64_CORE_OBJ_HAL      := $(PATH_BUILD_64_CORE_OBJ)hal/
 PATH_BUILD_32_CORE_OBJ_KERNEL   := $(PATH_BUILD_32_CORE_OBJ)xeos/
 PATH_BUILD_64_CORE_OBJ_KERNEL   := $(PATH_BUILD_64_CORE_OBJ)xeos/
 PATH_BUILD_32_CORE_OBJ_LIBC     := $(PATH_BUILD_32_CORE_OBJ)libc/
@@ -117,7 +115,6 @@ PATH_BUILD_64_CORE_OBJ_PTHREAD  := $(PATH_BUILD_64_CORE_OBJ)pthread/
 
 PATH_SRC_BOOT                   := $(PATH_SRC)boot/
 PATH_SRC_CORE                   := $(PATH_SRC)core/
-PATH_SRC_CORE_HAL               := $(PATH_SRC_CORE)hal/
 PATH_SRC_CORE_KERNEL            := $(PATH_SRC_CORE)xeos/
 PATH_SRC_CORE_LIBC              := $(PATH_SRC_CORE)libc/
 PATH_SRC_CORE_PTHREAD           := $(PATH_SRC_CORE)pthread/
@@ -181,7 +178,7 @@ PRINT                           := echo
 
 # C compiler warning flags
 
-#ARGS_CC_WARN                    := -Weverything -Werror
+ARGS_CC_WARN                    := -Weverything -Werror
 ARGS_CC_STD                     := -std=c99
 ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -ccc-host-triple $(TARGET_32)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=x86-64 -ccc-host-triple $(TARGET_64)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
