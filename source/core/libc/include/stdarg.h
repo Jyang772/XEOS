@@ -69,7 +69,12 @@
 extern "C" {
 #endif
 
+typedef char * va_list;
 
+#define va_start( _ap_, _lastarg_ )     ap = ( char * ) & lastarg + sizeof( int )
+#define va_arg( _ap_, _type_ )          *( type * )( ap += sizeof( type ), ap - sizeof( type ) )
+#define va_copy( _dst_, _src_ )         ( ( void )( ( dst ) = ( src ) ) )
+#define va_end( _ap_ )                  ap = 0
 
 #ifdef __cplusplus
 }
