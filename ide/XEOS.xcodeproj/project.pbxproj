@@ -10,6 +10,19 @@
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		051A31041635C3B900AD4FC9 /* xeos.64.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.video.inc.s; sourceTree = "<group>"; };
 		051A31071635CC3F00AD4FC9 /* xeos.gdt.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.gdt.inc.s; sourceTree = "<group>"; };
+		05377BE5163C793300E8C542 /* linker.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linker.ld; sourceTree = "<group>"; };
+		05377BE9163C79AE00E8C542 /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hal.h; sourceTree = "<group>"; };
+		05377BEA163C79AE00E8C542 /* interrupts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interrupts.h; sourceTree = "<group>"; };
+		05377BEB163C79AE00E8C542 /* syscall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syscall.h; sourceTree = "<group>"; };
+		05377BEC163C79AE00E8C542 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
+		05377BED163C79AE00E8C542 /* video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video.h; sourceTree = "<group>"; };
+		05377BEF163C79AE00E8C542 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05377BF3163C79AE00E8C542 /* xeos_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xeos_main.c; sourceTree = "<group>"; };
+		05377BF4163C79AE00E8C542 /* xeos_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos_stub.32.s; sourceTree = "<group>"; };
+		05377BF5163C79AE00E8C542 /* xeos_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos_stub.64.s; sourceTree = "<group>"; };
+		05377BF6163C7AEC00E8C542 /* unistd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unistd.h; sourceTree = "<group>"; };
+		05377BF8163C7B2C00E8C542 /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
+		05377BF9163C7C6A00E8C542 /* panic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = panic.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
 		0564CFD7163C0C7800394DFE /* __null.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = __null.h; sourceTree = "<group>"; };
 		0564CFD8163C0C7800394DFE /* __size_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = __size_t.h; sourceTree = "<group>"; };
@@ -350,10 +363,6 @@
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
 		058E2841163B3F5F0042A1DB /* pthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = pthread.h; sourceTree = "<group>"; };
 		058E2842163B3F5F0042A1DB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		058E2844163B3F5F0042A1DB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		058E2845163B3F5F0042A1DB /* xeos_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xeos_main.c; sourceTree = "<group>"; };
-		058E2846163B3F5F0042A1DB /* xeos_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos_stub.32.s; sourceTree = "<group>"; };
-		058E2847163B3F5F0042A1DB /* xeos_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos_stub.64.s; sourceTree = "<group>"; };
 		058E28F2163B520A0042A1DB /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_assert.c; sourceTree = "<group>"; };
 		058E28F5163B520A0042A1DB /* isalnum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalnum.c; sourceTree = "<group>"; };
 		058E28F6163B520A0042A1DB /* isalpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalpha.c; sourceTree = "<group>"; };
@@ -414,7 +423,6 @@
 		05AFEE091620F27C00740041 /* xeos.macros.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.macros.inc.s; sourceTree = "<group>"; };
 		05AFEE0A1620F27C00740041 /* xeos.io.fat12.mbr.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.io.fat12.mbr.inc.s; sourceTree = "<group>"; };
 		05AFEE0E1620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		05AFEF0F1620F27C00740041 /* linker.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linker.ld; sourceTree = "<group>"; };
 		05AFEF101620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
@@ -428,6 +436,71 @@
 				05111DB516249A0500966E40 /* Makefile */,
 			);
 			path = binutils;
+			sourceTree = "<group>";
+		};
+		05377BE6163C79AE00E8C542 /* hal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = hal;
+			sourceTree = "<group>";
+		};
+		05377BE7163C79AE00E8C542 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05377BF6163C7AEC00E8C542 /* unistd.h */,
+				05377BE8163C79AE00E8C542 /* xeos */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		05377BE8163C79AE00E8C542 /* xeos */ = {
+			isa = PBXGroup;
+			children = (
+				05377BE9163C79AE00E8C542 /* hal.h */,
+				05377BEA163C79AE00E8C542 /* interrupts.h */,
+				05377BEB163C79AE00E8C542 /* syscall.h */,
+				05377BEC163C79AE00E8C542 /* system.h */,
+				05377BED163C79AE00E8C542 /* video.h */,
+			);
+			path = xeos;
+			sourceTree = "<group>";
+		};
+		05377BEE163C79AE00E8C542 /* interrupts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = interrupts;
+			sourceTree = "<group>";
+		};
+		05377BF0163C79AE00E8C542 /* syscall */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = syscall;
+			sourceTree = "<group>";
+		};
+		05377BF1163C79AE00E8C542 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				05377BF9163C7C6A00E8C542 /* panic.c */,
+			);
+			path = system;
+			sourceTree = "<group>";
+		};
+		05377BF2163C79AE00E8C542 /* video */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = video;
+			sourceTree = "<group>";
+		};
+		05377BF7163C7AF300E8C542 /* unistd */ = {
+			isa = PBXGroup;
+			children = (
+				05377BF8163C7B2C00E8C542 /* syscall.c */,
+			);
+			path = unistd;
 			sourceTree = "<group>";
 		};
 		0564CFD6163C0C7800394DFE /* libc */ = {
@@ -471,10 +544,17 @@
 		058E2843163B3F5F0042A1DB /* xeos */ = {
 			isa = PBXGroup;
 			children = (
-				058E2844163B3F5F0042A1DB /* Makefile */,
-				058E2845163B3F5F0042A1DB /* xeos_main.c */,
-				058E2846163B3F5F0042A1DB /* xeos_stub.32.s */,
-				058E2847163B3F5F0042A1DB /* xeos_stub.64.s */,
+				05377BE6163C79AE00E8C542 /* hal */,
+				05377BE7163C79AE00E8C542 /* include */,
+				05377BEE163C79AE00E8C542 /* interrupts */,
+				05377BEF163C79AE00E8C542 /* Makefile */,
+				05377BF0163C79AE00E8C542 /* syscall */,
+				05377BF1163C79AE00E8C542 /* system */,
+				05377BF7163C7AF300E8C542 /* unistd */,
+				05377BF2163C79AE00E8C542 /* video */,
+				05377BF3163C79AE00E8C542 /* xeos_main.c */,
+				05377BF4163C79AE00E8C542 /* xeos_stub.32.s */,
+				05377BF5163C79AE00E8C542 /* xeos_stub.64.s */,
 			);
 			path = xeos;
 			sourceTree = "<group>";
@@ -1093,7 +1173,7 @@
 				058E28F0163B520A0042A1DB /* libc */,
 				058E283F163B3F5F0042A1DB /* pthread */,
 				058E2843163B3F5F0042A1DB /* xeos */,
-				05AFEF0F1620F27C00740041 /* linker.ld */,
+				05377BE5163C793300E8C542 /* linker.ld */,
 				05AFEF101620F27C00740041 /* Makefile */,
 			);
 			path = core;
