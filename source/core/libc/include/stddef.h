@@ -69,7 +69,22 @@
 extern "C" {
 #endif
 
+#include <libc/null.h>
+#include <libc/size_t.h>
 
+typedef long                        ptrdiff_t
+
+#ifdef __WCHAR_TYPE__
+    
+    typedef __WCHAR_TYPE__          wchar_t
+    
+#else
+    
+    typedef short                   wchar_t
+    
+#endif
+
+#define offsetof( _type_, _field_)  ( ( size_t )( &( ( _type_ * ) 0 )->_field_ ) )
 
 #ifdef __cplusplus
 }
