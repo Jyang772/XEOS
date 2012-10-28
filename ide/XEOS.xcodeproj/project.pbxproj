@@ -21,11 +21,11 @@
 		05377BF4163C79AE00E8C542 /* xeos_stub.32.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos_stub.32.s; sourceTree = "<group>"; };
 		05377BF5163C79AE00E8C542 /* xeos_stub.64.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos_stub.64.s; sourceTree = "<group>"; };
 		05377BF6163C7AEC00E8C542 /* unistd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unistd.h; sourceTree = "<group>"; };
-		05377BF8163C7B2C00E8C542 /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
 		05377BF9163C7C6A00E8C542 /* panic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = panic.c; sourceTree = "<group>"; };
+		05377BFA163C8E0E00E8C542 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		05377BFB163C8FFC00E8C542 /* __types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __types.h; sourceTree = "<group>"; };
+		05377BFC163C9C1900E8C542 /* __unistd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __unistd.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
-		0564CFD7163C0C7800394DFE /* __null.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = __null.h; sourceTree = "<group>"; };
-		0564CFD8163C0C7800394DFE /* __size_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = __size_t.h; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
 		0564CFDB163C0D9500394DFE /* memcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcpy.c; sourceTree = "<group>"; };
@@ -48,7 +48,6 @@
 		0564CFEC163C0D9500394DFE /* strstr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = strstr.c; sourceTree = "<group>"; };
 		0564CFED163C0D9500394DFE /* strtok.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = strtok.c; sourceTree = "<group>"; };
 		0564CFEE163C0D9500394DFE /* strxfrm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = strxfrm.c; sourceTree = "<group>"; };
-		0564D04B163C284000394DFE /* __float.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = __float.h; sourceTree = "<group>"; };
 		0564D071163C3DFE00394DFE /* __libc_math_errhandling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_math_errhandling.c; sourceTree = "<group>"; };
 		0564D072163C3DFE00394DFE /* __libc_math_fpclassify_d.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_math_fpclassify_d.c; sourceTree = "<group>"; };
 		0564D073163C3DFE00394DFE /* __libc_math_fpclassify_f.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_math_fpclassify_f.c; sourceTree = "<group>"; };
@@ -269,7 +268,6 @@
 		05661FF0163C642D005C174A /* gmtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gmtime.c; sourceTree = "<group>"; };
 		05661FF1163C6433005C174A /* localtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = localtime.c; sourceTree = "<group>"; };
 		05661FF2163C643C005C174A /* strftime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strftime.c; sourceTree = "<group>"; };
-		05661FF3163C65D5005C174A /* __wchar_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __wchar_t.h; sourceTree = "<group>"; };
 		05661FF5163C6A20005C174A /* __stdlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __stdlib.c; sourceTree = "<group>"; };
 		05661FF6163C6A20005C174A /* _Exit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = _Exit.c; sourceTree = "<group>"; };
 		05661FF7163C6A20005C174A /* abort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = abort.c; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 		05662017163C6A20005C174A /* system.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = system.c; sourceTree = "<group>"; };
 		05662018163C6A20005C174A /* wcstombs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wcstombs.c; sourceTree = "<group>"; };
 		05662019163C6A20005C174A /* wctomb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wctomb.c; sourceTree = "<group>"; };
-		0566201B163C72CA005C174A /* __va_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __va_list.h; sourceTree = "<group>"; };
 		0566201C163C73CB005C174A /* __stdio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __stdio.c; sourceTree = "<group>"; };
 		0566201D163C73CB005C174A /* clearerr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = clearerr.c; sourceTree = "<group>"; };
 		0566201E163C73CB005C174A /* fclose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fclose.c; sourceTree = "<group>"; };
@@ -457,11 +454,13 @@
 		05377BE8163C79AE00E8C542 /* xeos */ = {
 			isa = PBXGroup;
 			children = (
+				05377BFB163C8FFC00E8C542 /* __types.h */,
 				05377BE9163C79AE00E8C542 /* hal.h */,
 				05377BEA163C79AE00E8C542 /* interrupts.h */,
 				05377BEB163C79AE00E8C542 /* syscall.h */,
 				05377BEC163C79AE00E8C542 /* system.h */,
 				05377BED163C79AE00E8C542 /* video.h */,
+				05377BFA163C8E0E00E8C542 /* types.h */,
 			);
 			path = xeos;
 			sourceTree = "<group>";
@@ -498,21 +497,9 @@
 		05377BF7163C7AF300E8C542 /* unistd */ = {
 			isa = PBXGroup;
 			children = (
-				05377BF8163C7B2C00E8C542 /* syscall.c */,
+				05377BFC163C9C1900E8C542 /* __unistd.c */,
 			);
 			path = unistd;
-			sourceTree = "<group>";
-		};
-		0564CFD6163C0C7800394DFE /* libc */ = {
-			isa = PBXGroup;
-			children = (
-				0564D04B163C284000394DFE /* __float.h */,
-				0564CFD7163C0C7800394DFE /* __null.h */,
-				0564CFD8163C0C7800394DFE /* __size_t.h */,
-				05661FF3163C65D5005C174A /* __wchar_t.h */,
-				0566201B163C72CA005C174A /* __va_list.h */,
-			);
-			path = libc;
 			sourceTree = "<group>";
 		};
 		056A28B71628AA80003FBE80 /* release */ = {
@@ -659,7 +646,6 @@
 				058E290D163B520A0042A1DB /* float.h */,
 				058E290E163B520A0042A1DB /* inttypes.h */,
 				058E290F163B520A0042A1DB /* iso646.h */,
-				0564CFD6163C0C7800394DFE /* libc */,
 				058E2910163B520A0042A1DB /* limits.h */,
 				058E2911163B520A0042A1DB /* locale.h */,
 				058E2912163B520A0042A1DB /* math.h */,
