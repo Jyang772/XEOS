@@ -61,83 +61,15 @@
 
 /* $Id$ */
 
-#ifndef __SYSTEM_SYS_MMAN_H__
-#define __SYSTEM_SYS_MMAN_H__
-#pragma once
+#include "sys/mman.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <xeos/__types.h>
-
-#ifndef __NULL
-#define __NULL
-#define NULL                                    __XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef __xeos_size_t                           size_t;
-#endif
-
-#ifndef __OFF_T
-#define __OFF_T
-typedef __xeos_off_t                            off_t;
-#endif
-
-#ifndef __MODE_T
-#define __MODE_T
-typedef __xeos_mode_t                           mode_t;
-#endif
-
-#define PROT_NONE                               0x00
-#define PROT_READ                               0x01
-#define PROT_WRITE                              0x02
-#define PROT_EXEC                               0x04
-
-#define MAP_SHARED                              0x0001
-#define MAP_PRIVATE                             0x0002
-#define MAP_FIXED                               0x0010
-
-#define MS_ASYNC                                0x0001
-#define MS_INVALIDATE                           0x0002
-#define MS_SYNC                                 0x0010
-
-#define MCL_CURRENT                             0x0001
-#define MCL_FUTURE                              0x0002
-
-#define POSIX_MADV_NORMAL                       0x00
-#define POSIX_MADV_RANDOM                       0x01
-#define POSIX_MADV_SEQUENTIAL                   0x02
-#define POSIX_MADV_WILLNEED                     0x03
-#define POSIX_MADV_DONTNEED                     0x04
-#define POSIX_TYPED_MEM_ALLOCATE                0x05
-#define POSIX_TYPED_MEM_ALLOCATE_CONTIG         0x06
-#define POSIX_TYPED_MEM_MAP_ALLOCATABLE         0x07
-
-struct posix_typed_mem_info
+int posix_mem_offset( const void * restrict addr, size_t len, off_t * restrict off, size_t * restrict contig_len, int * restrict fildes )
 {
-    size_t  posix_tmi_length;
-};
-
-int mlock( const void * addr, size_t len );
-int mlockall( int flags );
-void * mmap( void * addr, size_t len, int prot, int flags, int fildes, off_t off );
-int mprotect( void * addr, size_t len, int prot );
-int msync( void * addr, size_t len, int flags );
-int munlock( const void * addr, size_t len );
-int munlockall( void );
-int munmap( void * addr, size_t len );
-int posix_madvise( void * addr, size_t len, int advice );
-int posix_mem_offset( const void * restrict addr, size_t len, off_t * restrict off, size_t * restrict contig_len, int * restrict fildes );
-int posix_typed_mem_get_info( int fildes, struct posix_typed_mem_info * info );
-int posix_typed_mem_open( const char * name, int oflag, int tflag );
-int shm_open( const char * name, int oflag, mode_t mode );
-int shm_unlink( const char * name );
-
-#ifdef __cplusplus
+    ( void )addr;
+    ( void )len;
+    ( void )off;
+    ( void )contig_len;
+    ( void )fildes;
+    
+    return 0;
 }
-#endif
-
-#endif /* __SYSTEM_SYS_MMAN_H__ */

@@ -112,6 +112,20 @@
 		05377C6E163D7C0200E8C542 /* usleep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = usleep.c; sourceTree = "<group>"; };
 		05377C6F163D7C0200E8C542 /* vfork.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vfork.c; sourceTree = "<group>"; };
 		05377C70163D7C0200E8C542 /* write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = write.c; sourceTree = "<group>"; };
+		05377C71163DF7AB00E8C542 /* mlock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mlock.c; sourceTree = "<group>"; };
+		05377C72163DF7B500E8C542 /* mlockall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mlockall.c; sourceTree = "<group>"; };
+		05377C73163DF7C100E8C542 /* mmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmap.c; sourceTree = "<group>"; };
+		05377C74163DF7CA00E8C542 /* mprotect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mprotect.c; sourceTree = "<group>"; };
+		05377C75163DF7D400E8C542 /* msync.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = msync.c; sourceTree = "<group>"; };
+		05377C76163DF7DD00E8C542 /* munlock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = munlock.c; sourceTree = "<group>"; };
+		05377C77163DF7E800E8C542 /* munlockall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = munlockall.c; sourceTree = "<group>"; };
+		05377C78163DF7F300E8C542 /* munmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = munmap.c; sourceTree = "<group>"; };
+		05377C79163DF7FD00E8C542 /* posix_madvise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = posix_madvise.c; sourceTree = "<group>"; };
+		05377C7A163DF80700E8C542 /* posix_mem_offset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = posix_mem_offset.c; sourceTree = "<group>"; };
+		05377C7B163DF81500E8C542 /* posix_typed_mem_get_info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = posix_typed_mem_get_info.c; sourceTree = "<group>"; };
+		05377C7C163DF82000E8C542 /* posix_typed_mem_open.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = posix_typed_mem_open.c; sourceTree = "<group>"; };
+		05377C7D163DF82C00E8C542 /* shm_open.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shm_open.c; sourceTree = "<group>"; };
+		05377C7E163DF83B00E8C542 /* shm_unlink.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shm_unlink.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
@@ -555,6 +569,20 @@
 		05377C05163D76D300E8C542 /* mman */ = {
 			isa = PBXGroup;
 			children = (
+				05377C71163DF7AB00E8C542 /* mlock.c */,
+				05377C72163DF7B500E8C542 /* mlockall.c */,
+				05377C73163DF7C100E8C542 /* mmap.c */,
+				05377C74163DF7CA00E8C542 /* mprotect.c */,
+				05377C75163DF7D400E8C542 /* msync.c */,
+				05377C76163DF7DD00E8C542 /* munlock.c */,
+				05377C77163DF7E800E8C542 /* munlockall.c */,
+				05377C78163DF7F300E8C542 /* munmap.c */,
+				05377C79163DF7FD00E8C542 /* posix_madvise.c */,
+				05377C7A163DF80700E8C542 /* posix_mem_offset.c */,
+				05377C7B163DF81500E8C542 /* posix_typed_mem_get_info.c */,
+				05377C7C163DF82000E8C542 /* posix_typed_mem_open.c */,
+				05377C7D163DF82C00E8C542 /* shm_open.c */,
+				05377C7E163DF83B00E8C542 /* shm_unlink.c */,
 			);
 			path = mman;
 			sourceTree = "<group>";
