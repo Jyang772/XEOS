@@ -69,7 +69,7 @@
 extern "C" {
 #endif
 
-#include <sys/__types.h>
+#include <xeos/__types.h>
 
 #define FLT_ROUNDS          1
 #define FLT_EVAL_METHOD     __XEOS_FLT_EVAL_METHOD__

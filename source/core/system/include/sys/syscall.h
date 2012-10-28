@@ -61,18 +61,18 @@
 
 /* $Id$ */
 
-#ifndef __LIBC___NULL_H__
-#define __LIBC___NULL_H__
+#ifndef __SYSTEM_SYS_SYSCALL_H__
+#define __SYSTEM_SYS_SYSCALL_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define NULL ( ( void * )0 )
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBC___NULL_H__ */
+#endif /* __SYSTEM_SYS_SYSCALL_H__ */

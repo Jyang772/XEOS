@@ -61,18 +61,18 @@
 
 /* $Id$ */
 
-#ifndef __LIBC___SIZE_T_H__
-#define __LIBC___SIZE_T_H__
+#ifndef __SYSTEM_SYS_MMAN_H__
+#define __SYSTEM_SYS_MMAN_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef unsigned int size_t;
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBC___SIZE_T_H__ */
+#endif /* __SYSTEM_SYS_MMAN_H__ */

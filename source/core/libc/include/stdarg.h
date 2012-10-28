@@ -69,7 +69,7 @@
 extern "C" {
 #endif
 
-#include <sys/__types.h>
+#include <xeos/__types.h>
 
 #ifndef __VA_LIST
 #define __VA_LIST

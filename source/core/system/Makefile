@@ -59,20 +59,68 @@
 
 # $Id$
 
-include ../../Makefile-Config.mk
+include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]>           *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SYS  "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
+# Paths
+#-------------------------------------------------------------------------------
+
+DIR_SRC_MMAN        = $(PATH_SRC_CORE_SYSTEM)mman/
+DIR_SRC_UNISTD      = $(PATH_SRC_CORE_SYSTEM)unistd/
 
 #-------------------------------------------------------------------------------
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_LD_32          := -T linker.ld $(ARGS_LD_32) -s -z max-page-size=0x1000
-ARGS_LD_64          := -T linker.ld $(ARGS_LD_64) -s -z max-page-size=0x1000
+ARGS_CC_32          := -iquote $(DIR_SRC_INC) $(ARGS_CC_32)
+ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
+
+#-------------------------------------------------------------------------------
+# Search paths
+#-------------------------------------------------------------------------------
+
+# Define the search paths for source files
+vpath %$(EXT_C) $(PATH_SRC_CORE_SYSTEM)
+vpath %$(EXT_C) $(DIR_SRC_MMAN)
+vpath %$(EXT_C) $(DIR_SRC_UNISTD)
+vpath %$(EXT_H) $(DIR_SRC_INC)
+
+#-------------------------------------------------------------------------------
+# File suffixes
+#-------------------------------------------------------------------------------
+
+# Adds the suffixes used in this file
+.SUFFIXES: $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+
+#-------------------------------------------------------------------------------
+# Macros
+#-------------------------------------------------------------------------------
+
+# Gets every code file in the source directory
+_FILES_C                    = $(foreach dir,$(PATH_SRC_CORE_SYSTEM),$(wildcard $(PATH_SRC_CORE_SYSTEM)*$(EXT_C)))
+_FILES_C_MMAN               = $(foreach dir,$(DIR_SRC_MMAN),$(wildcard $(DIR_SRC_MMAN)*$(EXT_C)))
+_FILES_C_UNISTD             = $(foreach dir,$(DIR_SRC_UNISTD),$(wildcard $(DIR_SRC_UNISTD)*$(EXT_C)))
+
+# Gets only the file name of the code files
+_FILES_C_REL                = $(notdir $(_FILES_C))
+_FILES_C_REL_MMAN           = $(notdir $(_FILES_C_MMAN))
+_FILES_C_REL_UNISTD         = $(notdir $(_FILES_C_UNISTD))
+
+# Replace the code extension by the object one
+_FILES_C_OBJ                = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
+_FILES_C_OBJ_MMAN           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MMAN))
+_FILES_C_OBJ_UNISTD         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_UNISTD))
+
+# Prefix all binary files with the build directory
+_FILES_C_OBJ_BUILD          = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_MMAN     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_MMAN))
+_FILES_C_OBJ_BUILD_UNISTD   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_UNISTD))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -81,38 +129,36 @@ ARGS_LD_64          := -T linker.ld $(ARGS_LD_64) -s -z max-page-size=0x1000
 # Declaration for phony targets, to avoid problems with local files
 .PHONY: all clean
 
+# Declaration for precious targets, to avoid cleaning of intermediate files
+.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_SYSTEM)%$(EXT_C)$(EXT_OBJ)
+
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C standard library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX thread library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE_PTHREAD) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE_SYSTEM) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS kernel"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Linking the XEOS kernel"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"XEOS32.ELF"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_32) -o $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF $(PATH_BUILD_32_CORE_OBJ_KERNEL)*
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Linking the XEOS kernel"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"XEOS64.ELF"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_64) -o $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF $(PATH_BUILD_64_CORE_OBJ_KERNEL)*
-	
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_MMAN) $(_FILES_C_OBJ_BUILD_UNISTD)
+		
+	@:
+
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_CORE_LIBC) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_CORE_SYSTEM) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_CORE_PTHREAD) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE) clean
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_SYSTEM)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_SYSTEM)*
 	
-	@if [ -f $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF ]; then $(RM) $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF; fi;
-	@if [ -f $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF ]; then $(RM) $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF; fi;
+# Compiles a C file (64 bits)
+$(PATH_BUILD_64_CORE_OBJ_SYSTEM)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_SYSTEM)$(@F) -c $(abspath $<)
+
+# Targets with second expansion
+.SECONDEXPANSION:
+
+# Compiles a C file (32 bits)
+$(PATH_BUILD_32_CORE_OBJ_SYSTEM)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(PATH_BUILD_64_CORE_OBJ_SYSTEM),$$@)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_SYSTEM)$(@F) -c $(abspath $<)

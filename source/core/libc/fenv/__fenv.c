@@ -63,4 +63,4 @@
 
 #include "fenv.h"
 
-const fenv_t __LIBC_FE_DFL_ENV = { 0, 0, 0, 0 };
+const fenv_t __LIBC_FE_DFL_ENV;

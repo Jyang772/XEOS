@@ -69,7 +69,7 @@
 extern "C" {
 #endif
 
-#include <sys/__types.h>
+#include <xeos/__types.h>
 
 typedef signed char             int8_t;
 typedef short                   int16_t;

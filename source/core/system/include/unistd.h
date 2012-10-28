@@ -61,15 +61,15 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_HAL_H__
-#define __XEOS_HAL_H__
+#ifndef __SYSTEM_UNISTD_H__
+#define __SYSTEM_UNISTD_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <sys/__types.h>
+#include <xeos/__types.h>
 
 #ifndef __NULL
 #define __NULL
@@ -99,6 +99,11 @@ typedef __xeos_off_t                            off_t;
 #ifndef __PID_T
 #define __PID_T
 typedef __xeos_pid_t                            pid_t;
+#endif
+
+#ifndef __GID_T
+#define __GID_T
+typedef __xeos_gid_t                            gid_t;
 #endif
 
 #ifndef __USECONDS_T
@@ -425,4 +430,4 @@ ssize_t write( int fd, const void * buf, size_t len );
 }
 #endif
 
-#endif /* __XEOS_HAL_H__ */
+#endif /* __SYSTEM_UNISTD_H__ */

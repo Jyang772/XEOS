@@ -61,15 +61,15 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_TYPES_H__
-#define __XEOS_TYPES_H__
+#ifndef __SYSTEM_SYS_TYPES_H__
+#define __SYSTEM_SYS_TYPES_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <sys/__types.h>
+#include <xeos/__types.h>
 
 #ifndef __BLKCNT_T
 #define __BLKCNT_T
@@ -270,4 +270,4 @@ extern "C" {
 }
 #endif
 
-#endif /* __XEOS_TYPES_H__ */
+#endif /* __SYSTEM_SYS_TYPES_H__ */

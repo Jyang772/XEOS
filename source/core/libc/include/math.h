@@ -69,7 +69,7 @@
 extern "C" {
 #endif
 
-#include <sys/__types.h>
+#include <xeos/__types.h>
 
 #if __XEOS_FLT_EVAL_METHOD__ == 0
     
