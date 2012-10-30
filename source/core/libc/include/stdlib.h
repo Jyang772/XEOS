@@ -78,12 +78,12 @@ extern "C" {
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __xeos_size_t           size_t;
+typedef __XEOS_size_t           size_t;
 #endif
 
 #ifndef __WCHAR_T
 #define __WCHAR_T
-typedef __xeos_wchar_t          wchar_t;
+typedef __XEOS_wchar_t          wchar_t;
 #endif
 
 #define EXIT_FAILURE            1

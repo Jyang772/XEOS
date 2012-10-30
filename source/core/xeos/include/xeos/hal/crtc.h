@@ -61,28 +61,45 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_STDARG_H__
-#define __LIBC_STDARG_H__
+#ifndef __XEOS_HAL_CRTC_H__
+#define __XEOS_HAL_CRTC_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <xeos/__types.h>
+#define XEOS_HAL_CRTC_DATA_REGISTER                 0x03D4
+#define XEOS_HAL_CRTC_INDEX_REGISTER                0x03D5
 
-#ifndef __VA_LIST
-#define __VA_LIST
-typedef __XEOS_va_list                  va_list;
-#endif
-
-#define va_start( _ap_, _lastarg_ )     ap = ( char * ) & lastarg + sizeof( int )
-#define va_arg( _ap_, _type_ )          *( type * )( ap += sizeof( type ), ap - sizeof( type ) )
-#define va_copy( _dst_, _src_ )         ( ( void )( ( dst ) = ( src ) ) )
-#define va_end( _ap_ )                  ap = 0
+#define XEOS_HAL_CRTC_HORIZONTAL_TOTAL              0x0000
+#define XEOS_HAL_CRTC_END_HORIZONTAL_DISPLAY        0x0001
+#define XEOS_HAL_CRTC_START_HORIZONTAL_BLANKING     0x0002
+#define XEOS_HAL_CRTC_END_HORIZONTAL_BLANKING       0x0003
+#define XEOS_HAL_CRTC_START_HORIZONTAL_RETRACE      0x0004
+#define XEOS_HAL_CRTC_END_HORIZONTAL_RETRACE        0x0005
+#define XEOS_HAL_CRTC_VERTICAL_TOTAL                0x0006
+#define XEOS_HAL_CRTC_OVERFLOW                      0x0007
+#define XEOS_HAL_CRTC_PRESET_ROW_SCAN               0x0008
+#define XEOS_HAL_CRTC_MAXIMUM_SCAN_LINE             0x0009
+#define XEOS_HAL_CRTC_CURSOR_START                  0x000A
+#define XEOS_HAL_CRTC_CURSOR_END                    0x000B
+#define XEOS_HAL_CRTC_START_ADDRESS_HIGH            0x000C
+#define XEOS_HAL_CRTC_START_ADDRESS_LOW             0x000D
+#define XEOS_HAL_CRTC_CURSOR_LOCATION_HIGH          0x000E
+#define XEOS_HAL_CRTC_CURSOR_LOCATION_LOW           0x000F
+#define XEOS_HAL_CRTC_VERTICAL_RETRACE_START        0x0010
+#define XEOS_HAL_CRTC_VERTICAL_RETRACE_END          0x0011
+#define XEOS_HAL_CRTC_VERTICAL_DISPLAY_END          0x0012
+#define XEOS_HAL_CRTC_OFFSET                        0x0013
+#define XEOS_HAL_CRTC_UNDERLINE_LOCATION            0x0014
+#define XEOS_HAL_CRTC_START_VERTICAL_BLANKING       0x0015
+#define XEOS_HAL_CRTC_END_VERTICAL_BLANKING         0x0016
+#define XEOS_HAL_CRTC_CRTC_MODE_CONTROL             0x0017
+#define XEOS_HAL_CRTC_LINE_COMPARE                  0x0018
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBC_STDARG_H__ */
+#endif /* __XEOS_HAL_CRTC_H__ */

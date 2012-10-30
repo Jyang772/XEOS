@@ -78,17 +78,17 @@ extern "C" {
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __xeos_size_t                           size_t;
+typedef __XEOS_size_t                           size_t;
 #endif
 
 #ifndef __OFF_T
 #define __OFF_T
-typedef __xeos_off_t                            off_t;
+typedef __XEOS_off_t                            off_t;
 #endif
 
 #ifndef __MODE_T
 #define __MODE_T
-typedef __xeos_mode_t                           mode_t;
+typedef __XEOS_mode_t                           mode_t;
 #endif
 
 #define PROT_NONE                               0x0000

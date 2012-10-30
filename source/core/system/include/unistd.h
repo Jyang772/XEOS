@@ -78,42 +78,42 @@ extern "C" {
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __xeos_size_t                           size_t;
+typedef __XEOS_size_t                           size_t;
 #endif
 
 #ifndef __SSIZE_T
 #define __SSIZE_T
-typedef __xeos_ssize_t                          ssize_t;
+typedef __XEOS_ssize_t                          ssize_t;
 #endif
 
 #ifndef __UID_T
 #define __UID_T
-typedef __xeos_uid_t                            uid_t;
+typedef __XEOS_uid_t                            uid_t;
 #endif
 
 #ifndef __OFF_T
 #define __OFF_T
-typedef __xeos_off_t                            off_t;
+typedef __XEOS_off_t                            off_t;
 #endif
 
 #ifndef __PID_T
 #define __PID_T
-typedef __xeos_pid_t                            pid_t;
+typedef __XEOS_pid_t                            pid_t;
 #endif
 
 #ifndef __GID_T
 #define __GID_T
-typedef __xeos_gid_t                            gid_t;
+typedef __XEOS_gid_t                            gid_t;
 #endif
 
 #ifndef __USECONDS_T
 #define __USECONDS_T
-typedef __xeos_useconds_t                       useconds_t;
+typedef __XEOS_useconds_t                       useconds_t;
 #endif
 
 #ifndef __INTPTR_T
 #define __INTPTR_T
-typedef __xeos_intptr_t                         intptr_t;
+typedef __XEOS_intptr_t                         intptr_t;
 #endif
 
 #define	_POSIX_VERSION                          0

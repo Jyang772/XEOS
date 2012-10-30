@@ -78,7 +78,7 @@ extern "C" {
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __xeos_size_t           size_t;
+typedef __XEOS_size_t           size_t;
 #endif
 
 void * memcpy( void * restrict s1, const void * restrict s2, size_t n );

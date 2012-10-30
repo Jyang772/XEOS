@@ -61,28 +61,13 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_STDARG_H__
-#define __LIBC_STDARG_H__
-#pragma once
+#include "xeos/video.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <xeos/__types.h>
-
-#ifndef __VA_LIST
-#define __VA_LIST
-typedef __XEOS_va_list                  va_list;
-#endif
-
-#define va_start( _ap_, _lastarg_ )     ap = ( char * ) & lastarg + sizeof( int )
-#define va_arg( _ap_, _type_ )          *( type * )( ap += sizeof( type ), ap - sizeof( type ) )
-#define va_copy( _dst_, _src_ )         ( ( void )( ( dst ) = ( src ) ) )
-#define va_end( _ap_ )                  ap = 0
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBC_STDARG_H__ */
+unsigned char __XEOS_Video_Attribute    = XEOS_Video_ColorBlack << 4 | XEOS_Video_ColorWhite;
+unsigned int __XEOS_Video_X             = 0x00;
+unsigned int __XEOS_Video_Y             = 0x00;
+char __XEOS_Video_HexChars[ 16 ]        =
+{
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'A', 'B', 'C', 'D', 'E', 'F'
+};

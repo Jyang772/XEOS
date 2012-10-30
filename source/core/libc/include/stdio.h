@@ -78,12 +78,12 @@ extern "C" {
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __xeos_size_t               size_t;
+typedef __XEOS_size_t               size_t;
 #endif
 
 #ifndef __VA_LIST
 #define __VA_LIST
-typedef __xeos_va_list              va_list;
+typedef __XEOS_va_list              va_list;
 #endif
 
 typedef long long                   fpos_t;

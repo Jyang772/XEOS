@@ -78,17 +78,17 @@ extern "C" {
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __xeos_size_t           size_t;
+typedef __XEOS_size_t           size_t;
 #endif
 
 #ifndef __CLOCK_T
 #define __CLOCK_T
-typedef __xeos_clock_t          clock_t;
+typedef __XEOS_clock_t          clock_t;
 #endif
 
 #ifndef __TIME_T
 #define __TIME_T
-typedef __xeos_time_t           time_t;
+typedef __XEOS_time_t           time_t;
 #endif
 
 #define CLOCKS_PER_SEC          1000000
