@@ -65,9 +65,16 @@
 
 size_t strxfrm( char * restrict s1, const char * restrict s2, size_t n )
 {
-    ( void )s1;
-    ( void )s2;
-    ( void )n;
+    size_t len;
     
-    return 0;
+    len = strlen( s2 );
+    
+    if( len < n )
+    {
+        memcpy( s1, s2, len );
+        
+        s1[ len ] = 0;
+    }
+    
+    return len;
 }
