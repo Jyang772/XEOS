@@ -76,10 +76,10 @@ extern "C" {
 typedef __XEOS_va_list                  va_list;
 #endif
 
-#define va_start( _ap_, _lastarg_ )     ap = ( char * ) & lastarg + sizeof( int )
-#define va_arg( _ap_, _type_ )          *( type * )( ap += sizeof( type ), ap - sizeof( type ) )
-#define va_copy( _dst_, _src_ )         ( ( void )( ( dst ) = ( src ) ) )
-#define va_end( _ap_ )                  ap = 0
+#define va_start( _ap_, _lastarg_ )     _ap_ = ( char * ) & _lastarg_ + sizeof( int )
+#define va_arg( _ap_, _type_ )          *( _type_ * )( _ap_ += sizeof( _type_ ), _ap_ - sizeof( _type_ ) )
+#define va_copy( _dst_, _src_ )         ( ( void )( ( _dst_ ) = ( _src_ ) ) )
+#define va_end( _ap_ )                  _ap_ = 0
 
 #ifdef __cplusplus
 }
