@@ -549,6 +549,7 @@
 		05E6E18B163F0C8D008D2DBD /* idt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idt.h; sourceTree = "<group>"; };
 		05E6E18C163F0C8D008D2DBD /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
 		05E6E18D163F0C8D008D2DBD /* smbios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smbios.h; sourceTree = "<group>"; };
+		05ED55CE164096B400A43B9C /* XEOS_ISR_DefaultHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_DefaultHandler.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -787,6 +788,7 @@
 		05377C7F163E83AA00E8C542 /* isr */ = {
 			isa = PBXGroup;
 			children = (
+				05ED55CE164096B400A43B9C /* XEOS_ISR_DefaultHandler.c */,
 			);
 			path = isr;
 			sourceTree = "<group>";
