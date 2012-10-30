@@ -18,7 +18,6 @@
 		05377C04163D76D300E8C542 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05377C0C163D76D300E8C542 /* __types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __types.h; sourceTree = "<group>"; };
 		05377C0D163D76D300E8C542 /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hal.h; sourceTree = "<group>"; };
-		05377C0E163D76D300E8C542 /* isr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = isr.h; sourceTree = "<group>"; };
 		05377C0F163D76D300E8C542 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		05377C10163D76D300E8C542 /* video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video.h; sourceTree = "<group>"; };
 		05377C12163D76D300E8C542 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -549,7 +548,8 @@
 		05E6E18B163F0C8D008D2DBD /* idt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idt.h; sourceTree = "<group>"; };
 		05E6E18C163F0C8D008D2DBD /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
 		05E6E18D163F0C8D008D2DBD /* smbios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smbios.h; sourceTree = "<group>"; };
-		05ED55CE164096B400A43B9C /* XEOS_ISR_DefaultHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_DefaultHandler.c; sourceTree = "<group>"; };
+		05ED55D11640981600A43B9C /* irq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = irq.h; sourceTree = "<group>"; };
+		05ED55D31640983300A43B9C /* XEOS_IRQ_DefaultHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_DefaultHandler.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -710,7 +710,7 @@
 			children = (
 				05377C09163D76D300E8C542 /* hal */,
 				05377C0A163D76D300E8C542 /* include */,
-				05377C7F163E83AA00E8C542 /* isr */,
+				05ED55D21640983200A43B9C /* irq */,
 				05377C12163D76D300E8C542 /* Makefile */,
 				05377C14163D76D300E8C542 /* system */,
 				05377C17163D76D300E8C542 /* video */,
@@ -746,7 +746,7 @@
 				05377C0C163D76D300E8C542 /* __types.h */,
 				05E6E188163F0C8C008D2DBD /* hal */,
 				05377C0D163D76D300E8C542 /* hal.h */,
-				05377C0E163D76D300E8C542 /* isr.h */,
+				05ED55D11640981600A43B9C /* irq.h */,
 				05377C0F163D76D300E8C542 /* system.h */,
 				05377C10163D76D300E8C542 /* video.h */,
 			);
@@ -783,14 +783,6 @@
 				05377C8F163E87D400E8C542 /* XEOS_Video_Utoa.c */,
 			);
 			path = video;
-			sourceTree = "<group>";
-		};
-		05377C7F163E83AA00E8C542 /* isr */ = {
-			isa = PBXGroup;
-			children = (
-				05ED55CE164096B400A43B9C /* XEOS_ISR_DefaultHandler.c */,
-			);
-			path = isr;
 			sourceTree = "<group>";
 		};
 		056A28B71628AA80003FBE80 /* release */ = {
@@ -1479,6 +1471,14 @@
 				05E6E18D163F0C8D008D2DBD /* smbios.h */,
 			);
 			path = hal;
+			sourceTree = "<group>";
+		};
+		05ED55D21640983200A43B9C /* irq */ = {
+			isa = PBXGroup;
+			children = (
+				05ED55D31640983300A43B9C /* XEOS_IRQ_DefaultHandler.c */,
+			);
+			path = irq;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
