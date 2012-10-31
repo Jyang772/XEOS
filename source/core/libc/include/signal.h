@@ -83,6 +83,7 @@ typedef int             sig_atomic_t;
 #define SIGTERM         15
 
 void ( * signal( int sig, void ( * func )( int ) ) )( int );
+
 int raise( int sig );
 
 #ifdef __cplusplus

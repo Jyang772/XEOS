@@ -113,7 +113,7 @@ struct lconv
     char __pad_0[ 2 ];
 };
 
-char * setlocale( int category, const char * locale );
+char         * setlocale( int category, const char * locale );
 struct lconv * localeconv( void );
 
 #ifdef __cplusplus

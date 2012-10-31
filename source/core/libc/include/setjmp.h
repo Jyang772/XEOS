@@ -119,8 +119,8 @@ extern "C" {
 
 typedef int jmp_buf[ __JMP_BUF_LENGTH ];
 
-int setjmp( jmp_buf env );
-void longjmp( jmp_buf env, int val );
+int     setjmp( jmp_buf env );
+void    longjmp( jmp_buf env, int val );
 
 #ifdef __cplusplus
 }

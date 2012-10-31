@@ -121,20 +121,20 @@ struct posix_typed_mem_info
     size_t  posix_tmi_length;
 };
 
-int mlock( const void * addr, size_t len );
-int mlockall( int flags );
-void * mmap( void * addr, size_t len, int prot, int flags, int fildes, off_t off );
-int mprotect( void * addr, size_t len, int prot );
-int msync( void * addr, size_t len, int flags );
-int munlock( const void * addr, size_t len );
-int munlockall( void );
-int munmap( void * addr, size_t len );
-int posix_madvise( void * addr, size_t len, int advice );
-int posix_mem_offset( const void * restrict addr, size_t len, off_t * restrict off, size_t * restrict contig_len, int * restrict fildes );
-int posix_typed_mem_get_info( int fildes, struct posix_typed_mem_info * info );
-int posix_typed_mem_open( const char * name, int oflag, int tflag );
-int shm_open( const char * name, int oflag, mode_t mode );
-int shm_unlink( const char * name );
+int     mlock( const void * addr, size_t len );
+int     mlockall( int flags );
+void *  mmap( void * addr, size_t len, int prot, int flags, int fildes, off_t off );
+int     mprotect( void * addr, size_t len, int prot );
+int     msync( void * addr, size_t len, int flags );
+int     munlock( const void * addr, size_t len );
+int     munlockall( void );
+int     munmap( void * addr, size_t len );
+int     posix_madvise( void * addr, size_t len, int advice );
+int     posix_mem_offset( const void * restrict addr, size_t len, off_t * restrict off, size_t * restrict contig_len, int * restrict fildes );
+int     posix_typed_mem_get_info( int fildes, struct posix_typed_mem_info * info );
+int     posix_typed_mem_open( const char * name, int oflag, int tflag );
+int     shm_open( const char * name, int oflag, mode_t mode );
+int     shm_unlink( const char * name );
 
 #ifdef __cplusplus
 }
