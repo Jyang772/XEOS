@@ -69,7 +69,12 @@
 extern "C" {
 #endif
 
+int syscall( int n, ... );
 
+#define SYS_MAXSYSCALL          256
+
+#define SYS_null                0
+#define SYS_exit                1
 
 #ifdef __cplusplus
 }

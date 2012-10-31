@@ -550,6 +550,13 @@
 		05E6E18D163F0C8D008D2DBD /* smbios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smbios.h; sourceTree = "<group>"; };
 		05ED55D11640981600A43B9C /* irq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = irq.h; sourceTree = "<group>"; };
 		05ED55D31640983300A43B9C /* XEOS_IRQ_DefaultHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_DefaultHandler.c; sourceTree = "<group>"; };
+		05ED55D416409F2D00A43B9C /* __XEOS_HAL_IDT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_HAL_IDT.c; sourceTree = "<group>"; };
+		05ED55D61641246500A43B9C /* cpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
+		05ED55DE164125F800A43B9C /* XEOS_HAL_CPU_DisableInterrupts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_DisableInterrupts.c; sourceTree = "<group>"; };
+		05ED55DF164125F800A43B9C /* XEOS_HAL_CPU_EnableInterrupts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_EnableInterrupts.c; sourceTree = "<group>"; };
+		05ED55E0164125F800A43B9C /* XEOS_HAL_CPU_Halt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_Halt.c; sourceTree = "<group>"; };
+		05ED55E1164125F800A43B9C /* XEOS_HAL_CPU_LoadGDT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_LoadGDT.c; sourceTree = "<group>"; };
+		05ED55E2164125F800A43B9C /* XEOS_HAL_CPU_LoadIDT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_LoadIDT.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -724,6 +731,7 @@
 		05377C09163D76D300E8C542 /* hal */ = {
 			isa = PBXGroup;
 			children = (
+				05ED55DD164125F800A43B9C /* cpu */,
 				05E6E182163F0C81008D2DBD /* gdt */,
 				05E6E183163F0C81008D2DBD /* idt */,
 				05E6E184163F0C81008D2DBD /* io */,
@@ -1441,6 +1449,7 @@
 		05E6E183163F0C81008D2DBD /* idt */ = {
 			isa = PBXGroup;
 			children = (
+				05ED55D416409F2D00A43B9C /* __XEOS_HAL_IDT.c */,
 			);
 			path = idt;
 			sourceTree = "<group>";
@@ -1464,6 +1473,7 @@
 		05E6E188163F0C8C008D2DBD /* hal */ = {
 			isa = PBXGroup;
 			children = (
+				05ED55D61641246500A43B9C /* cpu.h */,
 				05E6E189163F0C8D008D2DBD /* crtc.h */,
 				05E6E18A163F0C8D008D2DBD /* gdt.h */,
 				05E6E18B163F0C8D008D2DBD /* idt.h */,
@@ -1479,6 +1489,18 @@
 				05ED55D31640983300A43B9C /* XEOS_IRQ_DefaultHandler.c */,
 			);
 			path = irq;
+			sourceTree = "<group>";
+		};
+		05ED55DD164125F800A43B9C /* cpu */ = {
+			isa = PBXGroup;
+			children = (
+				05ED55DE164125F800A43B9C /* XEOS_HAL_CPU_DisableInterrupts.c */,
+				05ED55DF164125F800A43B9C /* XEOS_HAL_CPU_EnableInterrupts.c */,
+				05ED55E0164125F800A43B9C /* XEOS_HAL_CPU_Halt.c */,
+				05ED55E1164125F800A43B9C /* XEOS_HAL_CPU_LoadGDT.c */,
+				05ED55E2164125F800A43B9C /* XEOS_HAL_CPU_LoadIDT.c */,
+			);
+			path = cpu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
