@@ -148,6 +148,7 @@
 		05377C8D163E87B800E8C542 /* XEOS_Video_StringReverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_StringReverse.c; sourceTree = "<group>"; };
 		05377C8E163E87C800E8C542 /* XEOS_Video_Itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Itoa.c; sourceTree = "<group>"; };
 		05377C8F163E87D400E8C542 /* XEOS_Video_Utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Utoa.c; sourceTree = "<group>"; };
+		055510C41641DEA700680FB8 /* XEOS_System_Panicf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_System_Panicf.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
@@ -772,6 +773,7 @@
 			isa = PBXGroup;
 			children = (
 				05377C15163D76D300E8C542 /* XEOS_System_Panic.c */,
+				055510C41641DEA700680FB8 /* XEOS_System_Panicf.c */,
 			);
 			path = system;
 			sourceTree = "<group>";
