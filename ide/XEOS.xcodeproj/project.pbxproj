@@ -146,6 +146,7 @@
 		05377C8E163E87C800E8C542 /* XEOS_Video_Itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Itoa.c; sourceTree = "<group>"; };
 		05377C8F163E87D400E8C542 /* XEOS_Video_Utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Utoa.c; sourceTree = "<group>"; };
 		0550B6BF164841F70072D4B0 /* XEOS_HAL_CPU_SoftwareInterrupt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SoftwareInterrupt.c; sourceTree = "<group>"; };
+		0550B6F0164863140072D4B0 /* XEOS_HAL_PIC_GetRegister.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_GetRegister.c; sourceTree = "<group>"; };
 		055510C41641DEA700680FB8 /* XEOS_System_Panicf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_System_Panicf.c; sourceTree = "<group>"; };
 		055510F91642FA2E00680FB8 /* XEOS_ISR_ExceptionHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_ExceptionHandler.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
@@ -526,6 +527,10 @@
 		058E2924163B520A0042A1DB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		058E2933163B60EF0042A1DB /* setjmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setjmp.c; sourceTree = "<group>"; };
 		058E2934163B60FF0042A1DB /* longjmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = longjmp.c; sourceTree = "<group>"; };
+		059C73E61649A39A00DDABA9 /* XEOS_HAL_PIC_ReadData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_ReadData.c; sourceTree = "<group>"; };
+		059C73E81649A55800DDABA9 /* XEOS_HAL_PIC_SendData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_SendData.c; sourceTree = "<group>"; };
+		059C73E91649A5CB00DDABA9 /* XEOS_HAL_PIC_SendCommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_SendCommand.c; sourceTree = "<group>"; };
+		059C73EA1649A68800DDABA9 /* XEOS_HAL_PIC_Init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_Init.c; sourceTree = "<group>"; };
 		05A393C416338FF0001F6C24 /* xeos.32.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.video.inc.s; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
@@ -754,6 +759,8 @@
 				05E6E182163F0C81008D2DBD /* gdt */,
 				05E6E183163F0C81008D2DBD /* idt */,
 				05E6E184163F0C81008D2DBD /* io */,
+				0550B6ED164863030072D4B0 /* pic */,
+				0550B6EE164863030072D4B0 /* pit */,
 				05E6E187163F0C81008D2DBD /* smbios */,
 			);
 			path = hal;
@@ -811,6 +818,25 @@
 				05377C8F163E87D400E8C542 /* XEOS_Video_Utoa.c */,
 			);
 			path = video;
+			sourceTree = "<group>";
+		};
+		0550B6ED164863030072D4B0 /* pic */ = {
+			isa = PBXGroup;
+			children = (
+				059C73EA1649A68800DDABA9 /* XEOS_HAL_PIC_Init.c */,
+				0550B6F0164863140072D4B0 /* XEOS_HAL_PIC_GetRegister.c */,
+				059C73E91649A5CB00DDABA9 /* XEOS_HAL_PIC_SendCommand.c */,
+				059C73E61649A39A00DDABA9 /* XEOS_HAL_PIC_ReadData.c */,
+				059C73E81649A55800DDABA9 /* XEOS_HAL_PIC_SendData.c */,
+			);
+			path = pic;
+			sourceTree = "<group>";
+		};
+		0550B6EE164863030072D4B0 /* pit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = pit;
 			sourceTree = "<group>";
 		};
 		055510F81642FA2E00680FB8 /* isr */ = {
