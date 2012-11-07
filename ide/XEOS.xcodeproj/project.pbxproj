@@ -19,6 +19,11 @@
 		0533D3AF164B17F60090F5C0 /* XEOS_HAL_CPU_InterruptsEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_InterruptsEnabled.c; sourceTree = "<group>"; };
 		0533D3B0164B19310090F5C0 /* XEOS_HAL_CPU_RDMSR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_RDMSR.c; sourceTree = "<group>"; };
 		0533D3B1164B19390090F5C0 /* XEOS_HAL_CPU_WRMSR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_WRMSR.c; sourceTree = "<group>"; };
+		0533D3B2164B1BF60090F5C0 /* XEOS_HAL_CPU_ReadCR0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_ReadCR0.c; sourceTree = "<group>"; };
+		0533D3B3164B1BFC0090F5C0 /* XEOS_HAL_CPU_ReadCR1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_ReadCR1.c; sourceTree = "<group>"; };
+		0533D3B4164B1C010090F5C0 /* XEOS_HAL_CPU_ReadCR2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_ReadCR2.c; sourceTree = "<group>"; };
+		0533D3B5164B1C0A0090F5C0 /* XEOS_HAL_CPU_ReadCR4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_ReadCR4.c; sourceTree = "<group>"; };
+		0533D3B6164B1C100090F5C0 /* XEOS_HAL_CPU_ReadCR3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_ReadCR3.c; sourceTree = "<group>"; };
 		05377BE5163C793300E8C542 /* linker.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linker.ld; sourceTree = "<group>"; };
 		05377C00163D76D300E8C542 /* mman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mman.h; sourceTree = "<group>"; };
 		05377C01163D76D300E8C542 /* syscall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syscall.h; sourceTree = "<group>"; };
@@ -1585,6 +1590,11 @@
 				0550B6BF164841F70072D4B0 /* XEOS_HAL_CPU_SoftwareInterrupt.c */,
 				0533D3B0164B19310090F5C0 /* XEOS_HAL_CPU_RDMSR.c */,
 				0533D3B1164B19390090F5C0 /* XEOS_HAL_CPU_WRMSR.c */,
+				0533D3B2164B1BF60090F5C0 /* XEOS_HAL_CPU_ReadCR0.c */,
+				0533D3B3164B1BFC0090F5C0 /* XEOS_HAL_CPU_ReadCR1.c */,
+				0533D3B4164B1C010090F5C0 /* XEOS_HAL_CPU_ReadCR2.c */,
+				0533D3B6164B1C100090F5C0 /* XEOS_HAL_CPU_ReadCR3.c */,
+				0533D3B5164B1C0A0090F5C0 /* XEOS_HAL_CPU_ReadCR4.c */,
 			);
 			path = cpu;
 			sourceTree = "<group>";
