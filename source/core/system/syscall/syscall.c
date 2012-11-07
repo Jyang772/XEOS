@@ -68,7 +68,7 @@ __asm__
     ".global syscall\n"
     "syscall:"
     "\n"
-    "int $0x20\n"
+    "int $0x80\n"
     "\n"
     "ret"
 );
