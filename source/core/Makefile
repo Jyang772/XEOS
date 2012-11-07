@@ -71,8 +71,8 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_LD_32          := -T linker.ld $(ARGS_LD_32) -s -z max-page-size=0x1000
-ARGS_LD_64          := -T linker.ld $(ARGS_LD_64) -s -z max-page-size=0x1000
+ARGS_LD_32          := -T linker.ld $(ARGS_LD_32) -z max-page-size=0x1000 #-s
+ARGS_LD_64          := -T linker.ld $(ARGS_LD_64) -z max-page-size=0x1000 #-s
 
 #-------------------------------------------------------------------------------
 # Built-in targets

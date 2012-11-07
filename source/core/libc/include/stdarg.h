@@ -80,7 +80,7 @@ typedef __XEOS_va_list                  va_list;
 
 #define va_start( _ap_, _lastarg_ )     __builtin_va_start( _ap_, _lastarg_ )
 #define va_arg( _ap_, _type_ )          __builtin_va_arg( _ap_, _type_ )
-#define va_copy( _dst_, _src_ )         __builtin_va_copy( _dts_, _src_ )
+#define va_copy( _dst_, _src_ )         __builtin_va_copy( _dst_, _src_ )
 #define va_end( _ap_ )                  __builtin_va_end( _ap_ )
 
 #else

@@ -563,6 +563,8 @@
 		05B7CE2B1645F92000D5B256 /* XEOS_HAL_IDT_ISREntryGetPresent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IDT_ISREntryGetPresent.c; sourceTree = "<group>"; };
 		05B7CE2C1645F92800D5B256 /* XEOS_HAL_IDT_ISREntryGetHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IDT_ISREntryGetHandler.c; sourceTree = "<group>"; };
 		05B7CE2D164607EE00D5B256 /* XEOS_HAL_IDT_ISREntryGetIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IDT_ISREntryGetIndex.c; sourceTree = "<group>"; };
+		05B8276D1649C2EB0075418D /* XEOS_ISR_SysCall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_SysCall.c; sourceTree = "<group>"; };
+		05B827701649C6110075418D /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05E6B332162F2BB800364B7D /* xeos.16.debug.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.debug.inc.s; sourceTree = "<group>"; };
 		05E6E17D163F063F008D2DBD /* __XEOS_Video.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_Video.c; sourceTree = "<group>"; };
@@ -598,6 +600,7 @@
 				05377BFE163D76D300E8C542 /* include */,
 				05377C04163D76D300E8C542 /* Makefile */,
 				05377C05163D76D300E8C542 /* mman */,
+				05B8276F1649C6050075418D /* syscall */,
 				05377C06163D76D300E8C542 /* unistd */,
 			);
 			path = system;
@@ -843,6 +846,7 @@
 			isa = PBXGroup;
 			children = (
 				055510F91642FA2E00680FB8 /* XEOS_ISR_ExceptionHandler.c */,
+				05B8276D1649C2EB0075418D /* XEOS_ISR_SysCall.c */,
 			);
 			path = isr;
 			sourceTree = "<group>";
@@ -1491,6 +1495,14 @@
 				05AFEF101620F27C00740041 /* Makefile */,
 			);
 			path = core;
+			sourceTree = "<group>";
+		};
+		05B8276F1649C6050075418D /* syscall */ = {
+			isa = PBXGroup;
+			children = (
+				05B827701649C6110075418D /* syscall.c */,
+			);
+			path = syscall;
 			sourceTree = "<group>";
 		};
 		05E6E182163F0C81008D2DBD /* gdt */ = {

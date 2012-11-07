@@ -72,6 +72,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 #-------------------------------------------------------------------------------
 
 DIR_SRC_MMAN        = $(PATH_SRC_CORE_SYSTEM)mman/
+DIR_SRC_SYSCALL     = $(PATH_SRC_CORE_SYSTEM)syscall/
 DIR_SRC_UNISTD      = $(PATH_SRC_CORE_SYSTEM)unistd/
 
 #-------------------------------------------------------------------------------
@@ -88,6 +89,7 @@ ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
 # Define the search paths for source files
 vpath %$(EXT_C) $(PATH_SRC_CORE_SYSTEM)
 vpath %$(EXT_C) $(DIR_SRC_MMAN)
+vpath %$(EXT_C) $(DIR_SRC_SYSCALL)
 vpath %$(EXT_C) $(DIR_SRC_UNISTD)
 vpath %$(EXT_H) $(DIR_SRC_INC)
 
@@ -105,21 +107,25 @@ vpath %$(EXT_H) $(DIR_SRC_INC)
 # Gets every code file in the source directory
 _FILES_C                    = $(foreach dir,$(PATH_SRC_CORE_SYSTEM),$(wildcard $(PATH_SRC_CORE_SYSTEM)*$(EXT_C)))
 _FILES_C_MMAN               = $(foreach dir,$(DIR_SRC_MMAN),$(wildcard $(DIR_SRC_MMAN)*$(EXT_C)))
+_FILES_C_SYSCALL            = $(foreach dir,$(DIR_SRC_SYSCALL),$(wildcard $(DIR_SRC_SYSCALL)*$(EXT_C)))
 _FILES_C_UNISTD             = $(foreach dir,$(DIR_SRC_UNISTD),$(wildcard $(DIR_SRC_UNISTD)*$(EXT_C)))
 
 # Gets only the file name of the code files
 _FILES_C_REL                = $(notdir $(_FILES_C))
 _FILES_C_REL_MMAN           = $(notdir $(_FILES_C_MMAN))
+_FILES_C_REL_SYSCALL        = $(notdir $(_FILES_C_SYSCALL))
 _FILES_C_REL_UNISTD         = $(notdir $(_FILES_C_UNISTD))
 
 # Replace the code extension by the object one
 _FILES_C_OBJ                = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
 _FILES_C_OBJ_MMAN           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MMAN))
+_FILES_C_OBJ_SYSCALL        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSCALL))
 _FILES_C_OBJ_UNISTD         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_UNISTD))
 
 # Prefix all binary files with the build directory
 _FILES_C_OBJ_BUILD          = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ))
 _FILES_C_OBJ_BUILD_MMAN     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_MMAN))
+_FILES_C_OBJ_BUILD_SYSCALL  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_SYSCALL))
 _FILES_C_OBJ_BUILD_UNISTD   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_UNISTD))
 
 #-------------------------------------------------------------------------------
@@ -137,7 +143,7 @@ _FILES_C_OBJ_BUILD_UNISTD   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FI
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_MMAN) $(_FILES_C_OBJ_BUILD_UNISTD)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_MMAN) $(_FILES_C_OBJ_BUILD_SYSCALL) $(_FILES_C_OBJ_BUILD_UNISTD)
 		
 	@:
 
