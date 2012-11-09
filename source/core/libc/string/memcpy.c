@@ -65,9 +65,52 @@
 
 void * memcpy( void * restrict s1, const void * restrict s2, size_t n )
 {
-    ( void )s1;
-    ( void )s2;
-    ( void )n;
+    register unsigned int * p1;
+    register unsigned int * p2;
+    register unsigned int * end;
     
-    return NULL;
+    p1  = ( unsigned int * )s1;
+    p2  = ( unsigned int * )s2;
+    end = ( unsigned int * )( ( void * )( ( char * )p1 + ( n & ~( unsigned int )0x03 ) ) );
+    
+    while( p1 != end )
+    {
+        *( p1 )++ = *( p2 )++;
+    }
+    
+    switch( n & 0x03 )
+    {
+        case 0:
+            
+            break;
+            
+        case 1:
+            
+            *( ( char * )p1 ) = *( ( char * )p2 );
+            
+            break;
+            
+        case 2:
+            
+            *( ( char * )p1 ) = *( ( char * )p2 );
+            p1                = ( unsigned int * )( ( void * )( ( char * )p1 + 1 ) );
+            p2                = ( unsigned int * )( ( void * )( ( char * )p2 + 1 ) );
+            *( ( char * )p1 ) = *( ( char * )p2 );
+            
+            break;
+            
+        case 3:
+            
+            *( ( char * )p1 ) = *( ( char * )p2 );
+            p1                = ( unsigned int * )( ( void * )( ( char * )p1 + 1 ) );
+            p2                = ( unsigned int * )( ( void * )( ( char * )p2 + 1 ) );
+            *( ( char * )p1 ) = *( ( char * )p2 );
+            p1                = ( unsigned int * )( ( void * )( ( char * )p1 + 1 ) );
+            p2                = ( unsigned int * )( ( void * )( ( char * )p2 + 1 ) );
+            *( ( char * )p1 ) = *( ( char * )p2 );
+            
+            break;
+    }
+    
+    return s1;
 }
