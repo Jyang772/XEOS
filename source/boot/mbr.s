@@ -144,7 +144,7 @@ $XEOS.boot.stage1.msg.ok        db  "BOOT",   @ASCII.NL, @ASCII.NUL
 ;       - 0x0040 - 0x004F:  BIOS data
 ;       - 0x0050 - 0x07BF:  Free
 ;       - 0x07C0 - 0x07DF:  Bootloader
-;       - 0x07CE - 0x9FFF:  Free
+;       - 0x07E0 - 0x9FFF:  Free
 ;       - 0xA000 - 0xBFFF:  BIOS video sub-system
 ;       - 0xC000 - 0xEFFF:  BIOS ROM
 ;       - 0xF000 - 0xFFFF:  System ROM

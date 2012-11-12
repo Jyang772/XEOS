@@ -216,7 +216,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_entry           db  "Error: invalid ELF-
 
 ; Addresses
 %define @XEOS.boot.stage2.fat.offset            0x7900
-%define @XEOS.boot.stage2.kernel.segment        0x1000
+%define @XEOS.boot.stage2.kernel.segment        0x5000
 %define @XEOS.boot.stage2.kernel.address        0x00100000
 %define @XEOS.boot.stage2.kernel.text.offset    0x1000
 
@@ -512,7 +512,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_entry           db  "Error: invalid ELF-
 ;       - 0x0040 - 0x004F:  BIOS data
 ;       - 0x0050 - 0x07BF:  Second stage bootloader
 ;       - 0x07C0 - 0x07DF:  First stage bootloader
-;       - 0x07CE - 0x9FFF:  Free
+;       - 0x07E0 - 0x9FFF:  Free
 ;       - 0xA000 - 0xBFFF:  BIOS video sub-system
 ;       - 0xC000 - 0xEFFF:  BIOS ROM
 ;       - 0xF000 - 0xFFFF:  System ROM
@@ -1301,6 +1301,70 @@ XEOS.boot.stage2.print.color:
     ret
 
 ;-------------------------------------------------------------------------------
+; Enables paging
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       None
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.boot.stage2.enablePaging:
+    
+    @XEOS.16.proc.start 0
+    
+    ; Clears the PG-bit of the control register (bit 31)
+    mov     eax,        cr0
+    and     eax,        0x7FFFFFFF    
+    mov     cr0,        eax
+    
+    ; Clears the page tables
+    mov     edi,        0x1000
+    mov     cr3,        edi
+    xor     eax,        eax
+    mov     ecx,        0x1000
+    rep     stosd
+    mov     edi,        cr3
+    
+    ; Sets up the page tables
+    ; 
+    ; PML4T:    0x1000
+    ; PDPT:     0x2000
+    ; PDT:      0x3000
+    ; PT:       0x4000
+    mov     DWORD [ edi ],  0x00002003
+    add     edi,            0x00001000
+    mov     DWORD [ edi ],  0x00003003
+    add     edi,            0x00001000
+    mov     DWORD [ edi ],  0x00004003
+    add     edi,            0x00001000
+    mov     ebx,            0x00000003
+    mov     ecx,            0x00000200
+    
+    ; Sets page entries
+    .entry.set:
+        
+        mov     DWORD [ edi ],  ebx
+        add     ebx,            0x1000
+        add     edi,            0x0008
+        loop    .entry.set
+    
+    ; Enables PAE-paging by setting the PAE-bit in the fourth control register
+    mov     eax,        cr4
+    or      eax,        0x20
+    mov     cr4,        eax
+    
+    @XEOS.16.proc.end
+    
+    ret
+
+;-------------------------------------------------------------------------------
 ; Switches the CPU to 32 bits protected mode
 ; 
 ; Input registers:
@@ -1434,46 +1498,8 @@ XEOS.boot.stage2.64:
         ; Clears the interrupts
         cli
         
-        ; Clears the PG-bit of the control register (bit 31)
-        mov     eax,        cr0
-        and     eax,        0x7FFFFFFF    
-        mov     cr0,        eax
-        
-        ; Clears the page tables
-        mov     edi,        0x1000
-        mov     cr3,        edi
-        xor     eax,        eax
-        mov     ecx,        0x1000
-        rep     stosd
-        mov     edi,        cr3
-        
-        ; Sets up the page tables
-        ; 
-        ; PML4T:    0x1000
-        ; PDPT:     0x2000
-        ; PDT:      0x3000
-        ; PT:       0x4000
-        mov     DWORD [ edi ],  0x00002003
-        add     edi,            0x00001000
-        mov     DWORD [ edi ],  0x00003003
-        add     edi,            0x00001000
-        mov     DWORD [ edi ],  0x00004003
-        add     edi,            0x00001000
-        mov     ebx,            0x00000003
-        mov     ecx,            0x00000200
-        
-        ; Sets page entries
-        .entry.set:
-            
-            mov     DWORD [ edi ],  ebx
-            add     ebx,            0x1000
-            add     edi,            0x0008
-            loop    .entry.set
-        
-        ; Enables PAE-paging by setting the PAE-bit in the fourth control register
-        mov     eax,        cr4
-        or      eax,        0x20
-        mov     cr4,        eax
+        ; Enables paging
+        call XEOS.boot.stage2.enablePaging
         
         ; Sets the long mode bit in the EFER MSR
         mov     ecx,        0xC0000080
