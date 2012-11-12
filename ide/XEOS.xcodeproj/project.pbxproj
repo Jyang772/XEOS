@@ -163,6 +163,7 @@
 		05377C8F163E87D400E8C542 /* XEOS_Video_Utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Utoa.c; sourceTree = "<group>"; };
 		0550B6BF164841F70072D4B0 /* XEOS_HAL_CPU_SoftwareInterrupt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SoftwareInterrupt.c; sourceTree = "<group>"; };
 		0550B6F0164863140072D4B0 /* XEOS_HAL_PIC_GetRegister.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_GetRegister.c; sourceTree = "<group>"; };
+		0553A9D3165192020026FB8A /* paging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paging.h; sourceTree = "<group>"; };
 		055510C41641DEA700680FB8 /* XEOS_System_Panicf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_System_Panicf.c; sourceTree = "<group>"; };
 		055510F91642FA2E00680FB8 /* XEOS_ISR_ExceptionHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_ExceptionHandler.c; sourceTree = "<group>"; };
 		055C3D12162E1844009A4FFC /* xeos.16.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
@@ -779,6 +780,7 @@
 				05E6E182163F0C81008D2DBD /* gdt */,
 				05E6E183163F0C81008D2DBD /* idt */,
 				05E6E184163F0C81008D2DBD /* io */,
+				0553A9D5165192240026FB8A /* paging */,
 				0550B6ED164863030072D4B0 /* pic */,
 				0550B6EE164863030072D4B0 /* pit */,
 				05E6E187163F0C81008D2DBD /* smbios */,
@@ -858,6 +860,13 @@
 			children = (
 			);
 			path = pit;
+			sourceTree = "<group>";
+		};
+		0553A9D5165192240026FB8A /* paging */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = paging;
 			sourceTree = "<group>";
 		};
 		055510F81642FA2E00680FB8 /* isr */ = {
@@ -1580,6 +1589,7 @@
 				05E6E18A163F0C8D008D2DBD /* gdt.h */,
 				05E6E18B163F0C8D008D2DBD /* idt.h */,
 				05E6E18C163F0C8D008D2DBD /* io.h */,
+				0553A9D3165192020026FB8A /* paging.h */,
 				052F6AF51646D48C00DDADD8 /* pic.h */,
 				052F6AF61646D48C00DDADD8 /* pit.h */,
 				05E6E18D163F0C8D008D2DBD /* smbios.h */,
