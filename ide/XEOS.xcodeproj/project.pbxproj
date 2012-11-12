@@ -546,7 +546,7 @@
 		059C73E61649A39A00DDABA9 /* XEOS_HAL_PIC_ReadData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_ReadData.c; sourceTree = "<group>"; };
 		059C73E81649A55800DDABA9 /* XEOS_HAL_PIC_SendData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_SendData.c; sourceTree = "<group>"; };
 		059C73E91649A5CB00DDABA9 /* XEOS_HAL_PIC_SendCommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_SendCommand.c; sourceTree = "<group>"; };
-		059C73EA1649A68800DDABA9 /* XEOS_HAL_PIC_Init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_Init.c; sourceTree = "<group>"; };
+		059C73EA1649A68800DDABA9 /* XEOS_HAL_PIC_Remap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_Remap.c; sourceTree = "<group>"; };
 		05A393C416338FF0001F6C24 /* xeos.32.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.video.inc.s; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AC9BCC164C9ACF0036E977 /* __video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __video.h; sourceTree = "<group>"; };
@@ -844,7 +844,7 @@
 		0550B6ED164863030072D4B0 /* pic */ = {
 			isa = PBXGroup;
 			children = (
-				059C73EA1649A68800DDABA9 /* XEOS_HAL_PIC_Init.c */,
+				059C73EA1649A68800DDABA9 /* XEOS_HAL_PIC_Remap.c */,
 				0550B6F0164863140072D4B0 /* XEOS_HAL_PIC_GetRegister.c */,
 				059C73E91649A5CB00DDABA9 /* XEOS_HAL_PIC_SendCommand.c */,
 				059C73E61649A39A00DDABA9 /* XEOS_HAL_PIC_ReadData.c */,
