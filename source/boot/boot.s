@@ -1308,6 +1308,8 @@ XEOS.boot.stage2.print.color:
 ;       PDT:      0x3000 (Page Directory Table)
 ;       PT:       0x4000 (Page Table)
 ; 
+; PAE (Physical Address Extension) will also be enabled if available.
+; 
 ; Input registers:
 ;       
 ;       None
@@ -1441,8 +1443,20 @@ XEOS.boot.stage2.32:
         mov     ah,         0x03
         @XEOS.16.int.video
         
+        ; Kernel sectors and kernel entry points parameters
+        mov     cx,          WORD [ $XEOS.boot.stage2.kernel.sectors ]
+        mov     edi,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
+        
+        ; Saves registers
+        push    dx
+        push    cx
+        push    edi
+        
         ; Clears the interrupts
         cli
+        
+        ; Enables paging
+        call XEOS.boot.stage2.enablePaging
         
         ; Gets the value of the primary control register
         mov     eax,        cr0
@@ -1453,9 +1467,10 @@ XEOS.boot.stage2.32:
         ; Sets the new value - We are now in 32 bits protected mode
         mov     cr0,        eax
         
-        ; Kernel sectors and kernel entry points parameters
-        mov     cx,          WORD [ $XEOS.boot.stage2.kernel.sectors ]
-        mov     edi,        DWORD [ $XEOS.boot.stage2.kernel.32.entry ]
+        ; Restores registers
+        pop     edi
+        pop     cx
+        pop     dx
         
         ; Setup the 32 bits kernel
         ; We are doing a far jump using our code descriptor
