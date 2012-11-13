@@ -1331,46 +1331,85 @@ XEOS.boot.stage2.enablePaging:
     and     eax,        0x7FFFFFFF    
     mov     cr0,        eax
     
-    ; Location of the first table (PML4T)
-    mov     edi,        0x1000
-    mov     cr3,        edi
+    ; Checks if PAE is available
+    call XEOS.16.cpu.pae
     
-    ; Clears the page tables
-    ; Each entry is 4096 bytes
-    ; 4 x 4096 bytes tables, starting at 0x1000, moving double words
-    xor     eax,        eax
-    mov     ecx,        0x1000
-    rep     stosd
+    ; Saves registers
+    push    ax
     
-    ; Location of the first table (PML4T -> 0x1000)
-    mov     edi,        cr3
+    ; Set-ups PAE if available
+    cmp     ax,         0x01
+    je      .setup.pae
     
-    ; PML4T points to PDPT (0x2000)
-    ; 3 is for the first two bits (present + read/write)
-    mov     DWORD [ edi ],  0x00002003
+    .setup:
+        
+        ; Location of the first table (PDT)
+        mov     edi,        0x3000
+        mov     cr3,        edi
+        
+        ; Clears the page tables
+        ; Each entry is 4096 bytes
+        ; 2 x 4096 bytes tables, starting at 0x3000, moving double words
+        xor     eax,        eax
+        mov     ecx,        0x400
+        rep     stosd
+        
+        ; Location of the first table (PDT -> 0x3000)
+        mov     edi,        cr3
+        
+        ; PDT points to PT (0x4000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi ],  0x00004003
+        
+        ; Location of the fourth table (PT -> PDT + 0x1000 -> 0x4000)
+        add     edi,            0x00001000
+        
+        jmp     .setup.done
     
-    ; Location of the second table (PDPT -> PML4T + 0x1000 -> 0x2000)
-    add     edi,            0x00001000
+    .setup.pae:
+        
+        ; Location of the first table (PML4T)
+        mov     edi,        0x1000
+        mov     cr3,        edi
+        
+        ; Clears the page tables
+        ; Each entry is 4096 bytes
+        ; 4 x 4096 bytes tables, starting at 0x1000, moving double words
+        xor     eax,        eax
+        mov     ecx,        0x1000
+        rep     stosd
+        
+        ; Location of the first table (PML4T -> 0x1000)
+        mov     edi,        cr3
+        
+        ; PML4T points to PDPT (0x2000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi ],  0x00002003
+        
+        ; Location of the second table (PDPT -> PML4T + 0x1000 -> 0x2000)
+        add     edi,            0x00001000
+        
+        ; PDPT points to PDT (0x3000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi ],  0x00003003
+        
+        ; Location of the third table (PDT -> PDPT + 0x1000 -> 0x3000)
+        add     edi,            0x00001000
+        
+        ; PDT points to PT (0x4000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi ],  0x00004003
+        
+        ; Location of the fourth table (PT -> PDT + 0x1000 -> 0x4000)
+        add     edi,            0x00001000
     
-    ; PDPT points to PDT (0x3000)
-    ; 3 is for the first two bits (present + read/write)
-    mov     DWORD [ edi ],  0x00003003
+    .setup.done:
     
-    ; Location of the third table (PDT -> PDPT + 0x1000 -> 0x3000)
-    add     edi,            0x00001000
-    
-    ; PDT points to PT (0x4000)
-    ; 3 is for the first two bits (present + read/write)
-    mov     DWORD [ edi ],  0x00004003
-    
-    ; Location of the fourth table (PT -> PDT + 0x1000 -> 0x4000)
-    add     edi,            0x00001000
-    
-    ; Entry flags (preset + read/write)
-    mov     ebx,            0x00000003
-    
-    ; 512 entries in PT
-    mov     ecx,            0x00000200
+        ; Entry flags (preset + read/write)
+        mov     ebx,            0x00000003
+        
+        ; 512 entries in PT
+        mov     ecx,            0x00000200
     
     ; Sets page entries
     .entry.set:
@@ -1385,10 +1424,21 @@ XEOS.boot.stage2.enablePaging:
         add     edi,            0x0008
         loop    .entry.set
     
-    ; Enables PAE-paging by setting the PAE-bit in the fourth control register
-    mov     eax,        cr4
-    or      eax,        0x20
-    mov     cr4,        eax
+    ; Restores registers
+    pop     ax
+    
+    ; Enables PAE if available
+    cmp     ax,         0x01
+    jne     .end
+    
+    .pae.enable:
+        
+        ; Enables PAE-paging by setting the PAE-bit in the fourth control register
+        mov     eax,        cr4
+        or      eax,        0x20
+        mov     cr4,        eax
+    
+    .end:
     
     @XEOS.16.proc.end
     

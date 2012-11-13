@@ -230,4 +230,50 @@ XEOS.16.cpu.64:
         
         ret
 
+;-------------------------------------------------------------------------------
+; Checks if the CPU supports PAE (Physical Address Extension)
+; 
+; Input registers:
+;       
+;       None
+; 
+; Return registers:
+;       
+;       - AX:       The result code (1 if PAE is available, otherwise 0)
+; 
+; Killed registers:
+;       
+;       None
+;-------------------------------------------------------------------------------
+XEOS.16.cpu.pae:
+    
+    @XEOS.16.proc.start 0
+    
+    ; Indentifies CPU
+    mov     eax,        0x01
+    cpuid
+    
+    ; PAE is bit 6 of EDX
+    and     edx,        0x40
+    cmp     edx,        0
+    je      .error
+        
+    .success
+        
+        @XEOS.16.proc.end
+        
+        ; Success - Stores result code in AX
+        mov     ax,         0x01
+        
+        ret
+        
+    .error:
+        
+        @XEOS.16.proc.end
+        
+        ; Error - Stores result code in AX
+        xor     ax,         ax
+        
+        ret
+
 %endif
