@@ -140,20 +140,21 @@ $XEOS.boot.stage1.msg.ok        db  "BOOT",   @ASCII.NL, @ASCII.NUL
 ; 
 ; At that time, the memory layout should be the following:
 ; 
-;       - 0x0000 - 0x003F:  ISR vectors addresses (Interrupt Service Routine)
-;       - 0x0040 - 0x004F:  BIOS data
-;       - 0x0050 - 0x07BF:  Free
-;       - 0x07C0 - 0x07DF:  Bootloader
-;       - 0x07E0 - 0x9FFF:  Free
-;       - 0xA000 - 0xBFFF:  BIOS video sub-system
-;       - 0xC000 - 0xEFFF:  BIOS ROM
-;       - 0xF000 - 0xFFFF:  System ROM
+;       0x000000 - 0x00003F:      1'024 bytes       ISR vectors addresses
+;       0x000400 - 0x0004F0:        256 bytes       BIOS data
+;       0x000500 - 0x007BF0:     30'464 bytes       Free
+;       0x007C00 - 0x007DF0:        512 bytes       1st stage boot loader
+;       0x007E00 - 0x09FFF0:    623'104 bytes       Free
+;       0x0A0000 - 0x0BFFF0:    131'072 bytes       BIOS video sub-system
+;       0x0C0000 - 0x0EFFF0:    196'608 bytes       BIOS ROM
+;       0x0F0000 - 0x0FFFF0:     65'536 bytes       System ROM
 ; 
-; Note that those addresses uses the segment:offset addressing mode:
+; Stuff will be loaded at the following locations:
 ; 
-;       base address = base address * segment size (16) + offset
-; 
-; So 0x07C0 is 07C0:0000 which is 0x07C00.
+;       0x000500 - 0x007BFF:     30'464 bytes       2nd stage boot loader
+;       0x007C00 - 0x007DFF:        512 bytes       1st stage boot loader
+;       0x007E00 - 0x0099FF:      7'168 bytes 	    FAT-12 Root Directory
+;       0x009A00 - 0x00FFFF:     18'432 bytes       FATs
 ;-------------------------------------------------------------------------------
 main:
     
@@ -181,7 +182,7 @@ main:
     call    XEOS.16.video.print
     
     ; Loads the FAT-12 root directory at ES:0200
-    ; (07CE:0000 -> just after this bootloader)
+    ; (07C0:0200 -> 0x007E00 -> just after this bootloader)
     mov     di,         0x0200
     call    XEOS.16.io.fat12.loadRootDirectory
     
@@ -207,9 +208,9 @@ main:
     ; Loads the file at 0050:0000 (first area of free/unused memory)
     mov     ax,         0x0050
     
-    ; Loads the FAT at ES:0200
-    ; (07CE:0000 -> just after this bootloader)
-    mov     bx,         0x0200
+    ; Loads the FAT at ES:1E00
+    ; (07C0:1E00 -> 0x009A00 -> just after this FAT-12 root directory)
+    mov     bx,         0x1E00
     
     ; Data sector location
     mov     cx,         WORD [ $XEOS.boot.stage1.dataSector ]

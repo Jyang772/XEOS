@@ -109,6 +109,7 @@ start: jmp main
 %include "xeos.16.elf.inc.s"        ; ELF binary format support
 %include "xeos.16.string.inc.s"     ; String utilities
 %include "xeos.16.debug.inc.s"      ; Debugging
+%include "xeos.16.mem.inc.s"        ; Memory related procedures
 
 ;-------------------------------------------------------------------------------
 ; Variables definition
@@ -125,6 +126,15 @@ $XEOS.files.kernel.asm                          db  "KERNEL  BIN", @ASCII.NUL
 $XEOS.boot.stage2.cpu.vendor                    db  "            ", @ASCII.NUL
 $XEOS.boot.stage2.str                           dd  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @ASCII.NUL
 $XEOS.boot.stage2.longMode                      db  0
+
+$XEOS.boot.stage2.mem.infos:
+    
+    istruc XEOS.16.mem.infos
+        
+        dd  0
+        dd  0
+        
+    iend
 
 ;-------------------------------------------------------------------------------
 ; Strings
@@ -162,6 +172,7 @@ $XEOS.boot.stage2.msg.copyright.1.right                 db  4 ,"                
 $XEOS.boot.stage2.msg.copyright.2                       db  "                                                                             ", @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.3                       db  "      Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>      ", @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.4                       db  "                       All rights (& wrongs) reserved                        ", @ASCII.NUL
+$XEOS.boot.stage2.msg.memory                            db  "Detecting available memory:                      ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu                               db  "Getting CPU informations:                        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.vendor                        db  "            ", 26, " CPU vendor:                                  ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type                          db  "            ", 26, " CPU type:                                    ", @ASCII.NUL
@@ -209,14 +220,17 @@ $XEOS.boot.stage2.msg.error.verify.64.e_type            db  "Error: invalid ELF-
 $XEOS.boot.stage2.msg.error.verify.64.e_machine         db  "Error: invalid ELF-64 machine type", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-64 version", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64.e_entry           db  "Error: invalid ELF-64 entry point address", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.memory                      db  "Error: unable to detect available memory", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
 ;-------------------------------------------------------------------------------
 
 ; Addresses
-%define @XEOS.boot.stage2.fat.offset            0x7900
-%define @XEOS.boot.stage2.kernel.segment        0x5000
+%define @XEOS.boot.stage2.fat12.root.offset     0x7900      ; 0050:7900 - 0x007E00
+%define @XEOS.boot.stage2.fat12.fat.offset      0x9500      ; 0050:9500 - 0x009A00
+%define @XEOS.boot.stage2.memory.info.segment   0x1500      ; 1500:0000 - 0x015000
+%define @XEOS.boot.stage2.kernel.segment        0x2000      ; 2000:0000 - 0x020000
 %define @XEOS.boot.stage2.kernel.address        0x00100000
 %define @XEOS.boot.stage2.kernel.text.offset    0x1000
 
@@ -508,20 +522,26 @@ $XEOS.boot.stage2.msg.error.verify.64.e_entry           db  "Error: invalid ELF-
 ; 
 ; At this time, the memory layout is the following:
 ; 
-;       - 0x0000 - 0x003F:  ISR vectors addresses (Interrupt Service Routine)
-;       - 0x0040 - 0x004F:  BIOS data
-;       - 0x0050 - 0x07BF:  Second stage bootloader
-;       - 0x07C0 - 0x07DF:  First stage bootloader
-;       - 0x07E0 - 0x9FFF:  Free
-;       - 0xA000 - 0xBFFF:  BIOS video sub-system
-;       - 0xC000 - 0xEFFF:  BIOS ROM
-;       - 0xF000 - 0xFFFF:  System ROM
+;       0x000000 - 0x00003F:      1'024 bytes       ISR vectors addresses
+;       0x000400 - 0x0004F0         256 bytes       BIOS data
+;       0x000500 - 0x007BF0:     30'464 bytes       2nd stage boot loader
+;       0x007C00 - 0x007DF0:        512 bytes       1st stage boot loader
+;       0x007E00 - 0x09FFF0:    623'104 bytes       Free
+;       0x0A0000 - 0x0BFFF0:    131'072 bytes       BIOS video sub-system
+;       0x0C0000 - 0x0EFFF0:    196'608 bytes       BIOS ROM
+;       0x0F0000 - 0x0FFFF0:     65'536 bytes       System ROM
 ; 
-; Note that those addresses uses the segment:offset addressing mode:
+; Stuff will be loaded at the following locations:
 ; 
-;       base address = base address * segment size (16) + offset
-; 
-; So 0x0050 is 0x0050:0000 which is 0x00500.
+;       0x007E00 - 0x0099FF:      7'168 bytes 	    FAT-12 Root Directory
+;       0x009A00 - 0x00FFFF:     18'432 bytes       FATs
+;       0x010000 - 0x010FFF:      4'096 bytes       PML4T
+;       0x011000 - 0x011FFF:      4'096 bytes       PDPT
+;       0x012000 - 0x012FFF:      4'096 bytes       PDT
+;       0x013000 - 0x013FFF:      4'096 bytes       PT
+;       0x015000 - 0x01FFFF:     45'056 bytes       INT 0x15 data
+;       0x020000 - 0x09FFFF:    524'288 bytes       Kernel data (temporary)
+;       0x100000 - 0x??????:                        Kernel data (executable)
 ;-------------------------------------------------------------------------------
 main:
     
@@ -585,6 +605,34 @@ main:
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.nl
         
+    ;---------------------------------------------------------------------------
+    ; Memory detection
+    ;---------------------------------------------------------------------------
+    .memory:
+        
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.memory
+        
+        ; Detects memory
+        mov     ax,         @XEOS.boot.stage2.memory.info.segment
+        call    XEOS.16.mem.getMemoryLayout
+        cmp     eax,        0
+        jg      .memory.success
+        
+        .memory.fail:
+        
+            @XEOS.boot.stage2.print.failure
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+            jmp     .error.memory
+            
+        .memory.success:
+            
+            mov DWORD [ $XEOS.boot.stage2.mem.infos + XEOS.16.mem.infos.address ],  @XEOS.boot.stage2.memory.info.segment
+            mov DWORD [ $XEOS.boot.stage2.mem.infos + XEOS.16.mem.infos.length ],   eax
+            
+            @XEOS.boot.stage2.print.success
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+            
     ;---------------------------------------------------------------------------
     ; CPU check
     ;---------------------------------------------------------------------------
@@ -1047,7 +1095,12 @@ main:
         
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.verify.64
         jmp                                 .error
-    
+        
+    .error.memory:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.memory
+        jmp                                 .error
+        
     .error:
         
         ; Prints the error message
@@ -1101,7 +1154,7 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.fat12.root
         
         ; Offset the FAT-12 root directory location
-        mov     di,             @XEOS.boot.stage2.fat.offset
+        mov     di,             @XEOS.boot.stage2.fat12.root.offset
         call    XEOS.16.io.fat12.loadRootDirectory
         
         ; Checks for an error code
@@ -1131,7 +1184,7 @@ XEOS.boot.stage2.kernel.load:
         @XEOS.16.string.numberToString  cs, 16, 4, 0, $XEOS.boot.stage2.str
         @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.separator
-        @XEOS.16.string.numberToString  @XEOS.boot.stage2.fat.offset, 16, 4, dx, $XEOS.boot.stage2.str
+        @XEOS.16.string.numberToString  @XEOS.boot.stage2.fat12.root.offset, 16, 4, dx, $XEOS.boot.stage2.str
         @XEOS.boot.stage2.print.color   $XEOS.boot.stage2.str, @XEOS.16.video.color.green.light, @XEOS.16.video.color.black
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.space
         @XEOS.boot.stage2.print         $XEOS.boot.stage2.msg.bracket.right
@@ -1145,7 +1198,7 @@ XEOS.boot.stage2.kernel.load:
         mov     WORD [ $XEOS.boot.stage2.dataSector ],  dx
         
         ; location of the FAT-12 root directory
-        mov     di,         @XEOS.boot.stage2.fat.offset
+        mov     di,         @XEOS.boot.stage2.fat12.root.offset
         
         ; Finds the second stage bootloader
         call    XEOS.16.io.fat12.findFile
@@ -1181,7 +1234,7 @@ XEOS.boot.stage2.kernel.load:
         mov     ax,         @XEOS.boot.stage2.kernel.segment
         
         ; FAT location
-        mov     bx,         @XEOS.boot.stage2.fat.offset
+        mov     bx,         @XEOS.boot.stage2.fat12.fat.offset
         
         ; Data sector location
         mov     cx,         WORD [ $XEOS.boot.stage2.dataSector ]
@@ -1301,14 +1354,25 @@ XEOS.boot.stage2.print.color:
     ret
 
 ;-------------------------------------------------------------------------------
-; Enables paging, and maps the first two megabytes:
+; Enables paging
 ; 
-;       PML4T:    0x1000 (Page-Map Level-4 Table)
-;       PDPT:     0x2000 (Page Directory Pointer Table)
-;       PDT:      0x3000 (Page Directory Table)
-;       PT:       0x4000 (Page Table)
+; If PAE (Physical Address Extension) is available, the layout will be
+; the following:
 ; 
-; PAE (Physical Address Extension) will also be enabled if available.
+;       PML4T:    0x010000 (Page-Map Level-4 Table)
+;       PDPT:     0x011000 (Page Directory Pointer Table)
+;       PDT:      0x012000 (Page Directory Table)
+;       PT:       0x013000 (Page Table)
+; 
+; Otherwise:
+; 
+;       PDT:      0x012000 (Page Directory Table)
+;       PT:       0x013000 (Page Table)
+; 
+; PAE will be set accordingly.
+; 
+; Depending on whether PAE is available, the first megabytes of memory will
+; be mapped. First two megabytes with PAE, First 4 megabytes without PAE.
 ; 
 ; Input registers:
 ;       
@@ -1325,6 +1389,16 @@ XEOS.boot.stage2.print.color:
 XEOS.boot.stage2.enablePaging:
     
     @XEOS.16.proc.start 0
+    
+    ; Saves registers
+    push    ds
+    push    es
+    
+    ; Sets the data and extra segments to the location of the first table (PML4T)
+    ; (1000:0000 -> 0x10000)
+    mov     ax,         0x1000
+    mov     ds,         ax
+    mov     es,         ax
     
     ; Clears the PG-bit of the control register (bit 31)
     mov     eax,        cr0
@@ -1343,93 +1417,120 @@ XEOS.boot.stage2.enablePaging:
     
     .setup:
         
-        ; Location of the first table (PDT)
-        mov     edi,        0x3000
+        ; Loads CR3 with the absolute location of the first table (PDT)
+        mov     edi,        0x00012000
         mov     cr3,        edi
         
         ; Clears the page tables
         ; Each entry is 4096 bytes
-        ; 2 x 4096 bytes tables, starting at 0x3000, moving double words
-        xor     eax,        eax
-        mov     ecx,        0x400
+        ; 2 x 4096 bytes tables, starting at 1000:2000, moving double words
+        mov     edi,        0x2000
+        mov     ecx,        0x0400
         rep     stosd
         
-        ; Location of the first table (PDT -> 0x3000)
-        mov     edi,        cr3
+        ; Indirect location of the first table;
+        ; (PDT -> 1000:1200 -> 0x00012000)
+        mov     edi,        0x2000
         
-        ; PDT points to PT (0x4000)
+        ; PDT points to PT (0x00013000)
         ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00004003
+        mov     DWORD [ edi ],  0x00013003
         
-        ; Location of the fourth table (PT -> PDT + 0x1000 -> 0x4000)
+        ; Indirect location of the second table
+        ; (PT -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
         add     edi,            0x00001000
         
-        jmp     .setup.done
-    
-    .setup.pae:
-        
-        ; Location of the first table (PML4T)
-        mov     edi,        0x1000
-        mov     cr3,        edi
-        
-        ; Clears the page tables
-        ; Each entry is 4096 bytes
-        ; 4 x 4096 bytes tables, starting at 0x1000, moving double words
-        xor     eax,        eax
-        mov     ecx,        0x1000
-        rep     stosd
-        
-        ; Location of the first table (PML4T -> 0x1000)
-        mov     edi,        cr3
-        
-        ; PML4T points to PDPT (0x2000)
-        ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00002003
-        
-        ; Location of the second table (PDPT -> PML4T + 0x1000 -> 0x2000)
-        add     edi,            0x00001000
-        
-        ; PDPT points to PDT (0x3000)
-        ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00003003
-        
-        ; Location of the third table (PDT -> PDPT + 0x1000 -> 0x3000)
-        add     edi,            0x00001000
-        
-        ; PDT points to PT (0x4000)
-        ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00004003
-        
-        ; Location of the fourth table (PT -> PDT + 0x1000 -> 0x4000)
-        add     edi,            0x00001000
-    
-    .setup.done:
-    
         ; Entry flags (preset + read/write)
         mov     ebx,            0x00000003
         
-        ; 512 entries in PT
+        ; 1024 32 bits entries in PT
+        mov     ecx,            0x00000400
+    
+        ; Sets page entries
+        .setup.entry.set:
+            
+            ; Stores the entry data
+            mov     DWORD [ edi ],  ebx
+            
+            ; Next page address (aligned on 4096 bytes)
+            add     ebx,            0x1000
+            
+            ; Process next entry
+            add     edi,            0x0004
+            loop    .setup.entry.set
+        
+        jmp     .setup.done
+
+    .setup.pae:
+        
+        ; Loads CR3 with the absolute location of the first table (PML4T)
+        mov     edi,        0x00010000
+        mov     cr3,        edi
+        
+        ; Clears the page tables
+        ; Each entry is 4096 bytes
+        ; 4 x 4096 bytes tables, starting at 1000:0000, moving double words
+        xor     eax,        eax
+        mov     edi,        eax
+        mov     ecx,        0x1000
+        rep     stosd
+        
+        ; Indirect location of the first table
+        ; (PML4T -> 1000:0000 -> 0x00010000)
+        xor     eax,        eax
+        mov     edi,        eax
+        
+        ; PML4T points to PDPT (0x00011000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi ],  0x00011003
+        
+        ; Indirect location of the second table
+        ; (PDPT -> PML4T + 0x1000 -> 1000:1100 -> 0x00011000)
+        add     edi,            0x00001000
+        
+        ; PDPT points to PDT (0x00012000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi ],  0x00012003
+        
+        ; Indirect location of the third table;
+        ; (PDT -> PDPT + 0x1000 -> 1000:1200 -> 0x00012000)
+        add     edi,            0x00001000
+        
+        ; PDT points to PT (0x00013000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi ],  0x00013003
+        
+        ; Indirect location of the fourth table
+        ; (PT -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
+        add     edi,            0x00001000
+        
+        ; Entry flags (preset + read/write)
+        mov     ebx,            0x00000003
+        
+        ; 512 64 bits entries in PT
         mov     ecx,            0x00000200
     
-    ; Sets page entries
-    .entry.set:
+        ; Sets page entries
+        .setup.pae.entry.set:
+            
+            ; Stores the entry data
+            mov     DWORD [ edi ],  ebx
+            
+            ; Next page address (aligned on 4096 bytes)
+            add     ebx,            0x1000
+            
+            ; Process next entry
+            add     edi,            0x0008
+            loop    .setup.pae.entry.set
+            
+    .setup.done:
         
-        ; Stores the entry data
-        mov     DWORD [ edi ],  ebx
+        ; Restores registers
+        pop     ax
         
-        ; Next page address (aligned on 4096 bytes)
-        add     ebx,            0x1000
-        
-        ; Process next entry
-        add     edi,            0x0008
-        loop    .entry.set
-    
-    ; Restores registers
-    pop     ax
-    
-    ; Enables PAE if available
-    cmp     ax,         0x01
-    jne     .end
+        ; Enables PAE if available
+        cmp     ax,         0x01
+        jne     .end
     
     .pae.enable:
         
@@ -1439,6 +1540,10 @@ XEOS.boot.stage2.enablePaging:
         mov     cr4,        eax
     
     .end:
+    
+    ; Restores registers
+    pop     es
+    pop     ds
     
     @XEOS.16.proc.end
     
@@ -1663,7 +1768,7 @@ $XEOS.boot.stage2.msg.32.kernel.run         db  "Passing control to the kernel: 
 ;       
 ;       - CX:       The number of sectors for the kernel file
 ;       - DX:       The current cursor position
-;       - EDI:      The ckernel entry point
+;       - EDI:      The kernel entry point
 ; 
 ; Return registers:
 ;       
@@ -1846,6 +1951,9 @@ XEOS.boot.stage2.32.run:
         ; Kernel entry point
         mov     eax,        DWORD [ $XEOS.boot.stage2.32.kernel.entry ]
         
+        ; Memory infos
+        mov     edi,        $XEOS.boot.stage2.mem.infos
+        
         ; Jumps to the kernel code
         jmp     @XEOS.gdt.descriptors.32.code:eax
         
@@ -1892,7 +2000,7 @@ $XEOS.boot.stage2.msg.64.kernel.run         db  "Passing control to the kernel: 
 ;       
 ;       - CX:       The number of sectors for the kernel file
 ;       - DX:       The current cursor position
-;       - EDI:      The ckernel entry point
+;       - EDI:      The kernel entry point
 ; 
 ; Return registers:
 ;       
@@ -2079,6 +2187,9 @@ XEOS.boot.stage2.64.run:
         ; Kernel entry point
         xor     rax,        rax
         mov     eax,        DWORD [ $XEOS.boot.stage2.64.kernel.entry ]
+        
+        ; Memory infos
+        mov     rdi,        $XEOS.boot.stage2.mem.infos
         
         ; Jumps to the kernel code
         jmp     @XEOS.gdt.descriptors.64.code:rax
