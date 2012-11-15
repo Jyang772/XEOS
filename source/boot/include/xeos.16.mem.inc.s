@@ -190,7 +190,6 @@ XEOS.16.mem.getMemoryLayout:
         
         ; Success - Stores result in EAX
         mov     eax,            DWORD [ $XEOS.16.mem.infos.bytes ]
-        mov eax, 1
         ret
     
     .error:
