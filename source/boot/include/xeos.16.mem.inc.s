@@ -135,7 +135,7 @@ XEOS.16.mem.getMemoryLayout:
     
     ; Gets the first memory entry
     mov     eax,            0x0000E820
-    mov     ecx,            0x00000018
+    mov     ecx,            0x00000014
     mov     edx,            0x534D4150
     xor     ebx,            ebx
     @XEOS.16.int.misc
@@ -150,9 +150,8 @@ XEOS.16.mem.getMemoryLayout:
     
     .loop:
         
-        ; Only keep 20 first bytes, bypassing optional extended attributes
-        ; (like ACPI 3.0)
-        add         eax,        0x14
+        ; 20 bytes written
+        add     eax,            0x14
         
         ; Location of the next buffer
         add     di,             0x14
