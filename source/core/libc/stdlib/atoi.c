@@ -62,10 +62,20 @@
 /* $Id$ */
 
 #include "stdlib.h"
+#include "ctype.h"
 
 int atoi( const char * nptr )
 {
-    ( void )nptr;
+    int n;
     
-    return 0;
+    n = 0;
+    
+    while( isspace( *( nptr++ ) ) );
+    
+	while( isdigit( *( nptr ) ) )
+    {
+		n = ( n * 10 ) + ( *( nptr++ ) - '0' );
+    }
+    
+    return n;
 }
