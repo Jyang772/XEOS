@@ -622,7 +622,7 @@ main:
         ; Detects memory
         mov     ax,         @XEOS.boot.stage2.memory.info.segment
         call    XEOS.16.mem.getMemoryLayout
-        cmp     eax,        0
+        cmp     eax,        0x00
         jg      .memory.success
         
         .memory.fail:
@@ -1430,6 +1430,7 @@ XEOS.boot.stage2.enablePaging:
         ; Clears the page tables
         ; Each entry is 4096 bytes
         ; 2 x 4096 bytes tables, starting at 1000:2000, moving double words
+        xor     eax,        eax
         mov     edi,        0x2000
         mov     ecx,        0x0400
         rep     stosd
