@@ -119,8 +119,6 @@ $XEOS.16.mem.infos.bytes    dd  0
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-$_dot db ".", 0
-
 XEOS.16.mem.getMemoryLayout:
     
     @XEOS.16.proc.start 0
