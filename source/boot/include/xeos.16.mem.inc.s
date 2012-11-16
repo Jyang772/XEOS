@@ -119,6 +119,8 @@ $XEOS.16.mem.infos.bytes    dd  0
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
+$_dot db ".", 0
+
 XEOS.16.mem.getMemoryLayout:
     
     @XEOS.16.proc.start 0
@@ -127,7 +129,7 @@ XEOS.16.mem.getMemoryLayout:
     xor     di,            di
     mov     es,            ax
     
-    ; Gets first memory entry
+    ; Gets the first memory entry
     mov     eax,            0x0000E820
     mov     ecx,            0x00000018
     mov     edx,            0x534D4150
@@ -139,39 +141,28 @@ XEOS.16.mem.getMemoryLayout:
     cmp     eax,            0x534D4150
     jne     .error
     
-    ; Number of bytes written
+    ; Resets EAX
     xor     eax,            eax
-    mov     al,             cl
     
     .loop:
+        
+        ; Only keep 20 first bytes, bypassing optional extended attributes
+        ; (like ACPI 3.0)
+        add         eax,        0x14
+        
+        ; Location of the next buffer
+        add     di,             0x14
         
         ; Saves registers
         push    eax
         
-        ; Number of bytes written
-        xor     eax,            eax
-        mov     al,             cl
-        add     di,             ax
-        
-        ; Gets next memory entry
+        ; Gets the next memory entry
         mov     eax,            0x0000E820
         mov     ecx,            0x00000018
         @XEOS.16.int.misc
         
         ; Restores registers
         pop     eax
-        
-        ; Saves registers
-        push    edx
-        
-        ; Number of byes written
-        xor     edx,            edx
-        mov     dl,             cl
-        add     eax,            edx
-        @XEOS.16.int.misc
-        
-        ; Restores registers
-        pop     edx
         
         ; Checks for the end of the list
         jc      .done
