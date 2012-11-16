@@ -70,7 +70,10 @@ int atoi( const char * nptr )
     
     n = 0;
     
-    while( isspace( *( nptr++ ) ) );
+    while( isspace( *( nptr ) ) )
+    {
+        nptr++;
+    }
     
 	while( isdigit( *( nptr ) ) )
     {
