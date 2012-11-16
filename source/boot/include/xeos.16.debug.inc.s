@@ -62,6 +62,12 @@
 ; $Id$
 
 ;-------------------------------------------------------------------------------
+; @file            xeos.16.debug.inc.s
+; @author          Jean-David Gadina
+; @copyright       (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; Debug procedures
 ; 
 ; Those procedures and macros are intended to be used only in 16 bits real mode.

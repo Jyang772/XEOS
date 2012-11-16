@@ -62,6 +62,12 @@
 ; $Id$
 
 ;-------------------------------------------------------------------------------
+; @file            xeos.16.a20.inc.s
+; @author          Jean-David Gadina
+; @copyright       (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; Procedures to enable the A20 address line
 ; 
 ; The 8086 processor was originally designed with a 20bits address bus

@@ -62,6 +62,12 @@
 ; $Id$
 
 ;-------------------------------------------------------------------------------
+; @file            mbr.s
+; @author          Jean-David Gadina
+; @copyright       (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; XEOS first stage bootloader
 ; 
 ; The binary form of this file must not be larger than 512 bytes (one sector).

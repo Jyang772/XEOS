@@ -62,6 +62,12 @@
 ; $Id$
 
 ;-------------------------------------------------------------------------------
+; @file            xeos.64.video.inc.s
+; @author          Jean-David Gadina
+; @copyright       (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; Defines, macros and procedures for the XEOS video services
 ; 
 ; Those procedures and macros are intended to be used only in 64 bits long mode.

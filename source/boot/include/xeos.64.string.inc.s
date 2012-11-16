@@ -62,6 +62,12 @@
 ; $Id$
 
 ;-------------------------------------------------------------------------------
+; @file            xeos.64.string.inc.s
+; @author          Jean-David Gadina
+; @copyright       (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
 ; String procedures
 ; 
 ; Those procedures and macros are intended to be used only in 64 bits long mode.
