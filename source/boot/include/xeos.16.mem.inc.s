@@ -130,8 +130,9 @@ XEOS.16.mem.getMemoryLayout:
     @XEOS.16.proc.start 0
     
     ; Sets the destination for the memory informations
-    xor     di,             di
     mov     es,             ax
+    xor     eax,            eax
+    mov     edi,            eax
     
     ; Gets the first memory entry
     mov     eax,            0x0000E820

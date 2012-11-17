@@ -633,7 +633,7 @@ main:
             
         .memory.success:
             
-            mov DWORD [ $XEOS.boot.stage2.mem.infos + XEOS.16.mem.infos.address ],  @XEOS.boot.stage2.memory.info.segment
+            mov DWORD [ $XEOS.boot.stage2.mem.infos + XEOS.16.mem.infos.address ],  @XEOS.boot.stage2.memory.info.segment * 0x10
             mov DWORD [ $XEOS.boot.stage2.mem.infos + XEOS.16.mem.infos.length ],   eax
             
             @XEOS.boot.stage2.print.success
