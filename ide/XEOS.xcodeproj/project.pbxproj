@@ -181,6 +181,8 @@
 		0561C54C1657A70200E7C0FE /* nmi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nmi.h; sourceTree = "<group>"; };
 		0561C54D1657A73F00E7C0FE /* XEOS_HAL_NMI_Enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_NMI_Enable.c; sourceTree = "<group>"; };
 		0561C54E1657A74700E7C0FE /* XEOS_HAL_NMI_Disable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_NMI_Disable.c; sourceTree = "<group>"; };
+		0561C54F16583B2100E7C0FE /* XEOS_HAL_CMOS_Read.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CMOS_Read.c; sourceTree = "<group>"; };
+		0561C55016583B2D00E7C0FE /* XEOS_HAL_CMOS_Write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CMOS_Write.c; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
 		0564CFDB163C0D9500394DFE /* memcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcpy.c; sourceTree = "<group>"; };
@@ -926,6 +928,8 @@
 		0561C53B165796FB00E7C0FE /* cmos */ = {
 			isa = PBXGroup;
 			children = (
+				0561C54F16583B2100E7C0FE /* XEOS_HAL_CMOS_Read.c */,
+				0561C55016583B2D00E7C0FE /* XEOS_HAL_CMOS_Write.c */,
 			);
 			path = cmos;
 			sourceTree = "<group>";
