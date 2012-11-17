@@ -160,9 +160,6 @@
 		05377C8A163E879100E8C542 /* XEOS_Video_VPrintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_VPrintf.c; sourceTree = "<group>"; };
 		05377C8B163E879B00E8C542 /* XEOS_Video_Putc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Putc.c; sourceTree = "<group>"; };
 		05377C8C163E87A600E8C542 /* XEOS_Video_Scroll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Scroll.c; sourceTree = "<group>"; };
-		05377C8D163E87B800E8C542 /* XEOS_Video_StringReverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_StringReverse.c; sourceTree = "<group>"; };
-		05377C8E163E87C800E8C542 /* XEOS_Video_Itoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Itoa.c; sourceTree = "<group>"; };
-		05377C8F163E87D400E8C542 /* XEOS_Video_Utoa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_Utoa.c; sourceTree = "<group>"; };
 		0550B6BF164841F70072D4B0 /* XEOS_HAL_CPU_SoftwareInterrupt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SoftwareInterrupt.c; sourceTree = "<group>"; };
 		0550B6F0164863140072D4B0 /* XEOS_HAL_PIC_GetRegister.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_GetRegister.c; sourceTree = "<group>"; };
 		055510C41641DEA700680FB8 /* XEOS_System_Panicf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_System_Panicf.c; sourceTree = "<group>"; };
@@ -875,9 +872,6 @@
 				05377C8A163E879100E8C542 /* XEOS_Video_VPrintf.c */,
 				05377C8B163E879B00E8C542 /* XEOS_Video_Putc.c */,
 				05377C8C163E87A600E8C542 /* XEOS_Video_Scroll.c */,
-				05377C8D163E87B800E8C542 /* XEOS_Video_StringReverse.c */,
-				05377C8E163E87C800E8C542 /* XEOS_Video_Itoa.c */,
-				05377C8F163E87D400E8C542 /* XEOS_Video_Utoa.c */,
 			);
 			path = video;
 			sourceTree = "<group>";
