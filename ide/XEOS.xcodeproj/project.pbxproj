@@ -177,6 +177,9 @@
 		055CF9251652DAB100036A75 /* mem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mem.h; sourceTree = "<group>"; };
 		055CF9271652DB2700036A75 /* vm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vm.h; sourceTree = "<group>"; };
 		055CF9291652E37500036A75 /* xeos.16.mem.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.mem.inc.s; sourceTree = "<group>"; };
+		0561C5361657968F00E7C0FE /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
+		0561C5381657969400E7C0FE /* cmos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cmos.h; sourceTree = "<group>"; };
+		0561C5391657969C00E7C0FE /* rtc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rtc.h; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
 		0564CFDB163C0D9500394DFE /* memcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcpy.c; sourceTree = "<group>"; };
@@ -805,6 +808,8 @@
 		05377C09163D76D300E8C542 /* hal */ = {
 			isa = PBXGroup;
 			children = (
+				0561C53A165796FB00E7C0FE /* acpi */,
+				0561C53B165796FB00E7C0FE /* cmos */,
 				05ED55DD164125F800A43B9C /* cpu */,
 				05E6E182163F0C81008D2DBD /* gdt */,
 				05E6E183163F0C81008D2DBD /* idt */,
@@ -812,6 +817,7 @@
 				055CF9241652DA7B00036A75 /* mem */,
 				0550B6ED164863030072D4B0 /* pic */,
 				0550B6EE164863030072D4B0 /* pit */,
+				0561C53C165796FB00E7C0FE /* rtc */,
 				05E6E187163F0C81008D2DBD /* smbios */,
 			);
 			path = hal;
@@ -919,6 +925,27 @@
 			children = (
 			);
 			path = vm;
+			sourceTree = "<group>";
+		};
+		0561C53A165796FB00E7C0FE /* acpi */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = acpi;
+			sourceTree = "<group>";
+		};
+		0561C53B165796FB00E7C0FE /* cmos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = cmos;
+			sourceTree = "<group>";
+		};
+		0561C53C165796FB00E7C0FE /* rtc */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = rtc;
 			sourceTree = "<group>";
 		};
 		056A28B71628AA80003FBE80 /* release */ = {
@@ -1628,6 +1655,8 @@
 				0533D3B7164BB27C0090F5C0 /* __cpu.h */,
 				05B7CE211645F09B00D5B256 /* __idt.h */,
 				05292A6B16565FDF00E7C555 /* __mem.h */,
+				0561C5361657968F00E7C0FE /* acpi.h */,
+				0561C5381657969400E7C0FE /* cmos.h */,
 				05ED55D61641246500A43B9C /* cpu.h */,
 				05E6E189163F0C8D008D2DBD /* crtc.h */,
 				05E6E18A163F0C8D008D2DBD /* gdt.h */,
@@ -1636,6 +1665,7 @@
 				055CF9251652DAB100036A75 /* mem.h */,
 				052F6AF51646D48C00DDADD8 /* pic.h */,
 				052F6AF61646D48C00DDADD8 /* pit.h */,
+				0561C5391657969C00E7C0FE /* rtc.h */,
 				05E6E18D163F0C8D008D2DBD /* smbios.h */,
 			);
 			path = hal;
