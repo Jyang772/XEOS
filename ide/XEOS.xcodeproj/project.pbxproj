@@ -178,6 +178,9 @@
 		0561C54816579BB000E7C0FE /* XEOS_Info_MemoryGetEntryAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Info_MemoryGetEntryAtIndex.c; sourceTree = "<group>"; };
 		0561C54916579BB000E7C0FE /* XEOS_Info_MemoryGetNumberOfEntries.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Info_MemoryGetNumberOfEntries.c; sourceTree = "<group>"; };
 		0561C54A16579BCE00E7C0FE /* XEOS_Info_GetMemory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Info_GetMemory.c; sourceTree = "<group>"; };
+		0561C54C1657A70200E7C0FE /* nmi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nmi.h; sourceTree = "<group>"; };
+		0561C54D1657A73F00E7C0FE /* XEOS_HAL_NMI_Enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_NMI_Enable.c; sourceTree = "<group>"; };
+		0561C54E1657A74700E7C0FE /* XEOS_HAL_NMI_Disable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_NMI_Disable.c; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
 		0564CFDB163C0D9500394DFE /* memcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcpy.c; sourceTree = "<group>"; };
@@ -813,6 +816,7 @@
 				05E6E182163F0C81008D2DBD /* gdt */,
 				05E6E183163F0C81008D2DBD /* idt */,
 				05E6E184163F0C81008D2DBD /* io */,
+				0561C54B1657A6EF00E7C0FE /* nmi */,
 				0550B6ED164863030072D4B0 /* pic */,
 				0550B6EE164863030072D4B0 /* pit */,
 				0561C53C165796FB00E7C0FE /* rtc */,
@@ -944,6 +948,15 @@
 				0561C54916579BB000E7C0FE /* XEOS_Info_MemoryGetNumberOfEntries.c */,
 			);
 			path = info;
+			sourceTree = "<group>";
+		};
+		0561C54B1657A6EF00E7C0FE /* nmi */ = {
+			isa = PBXGroup;
+			children = (
+				0561C54D1657A73F00E7C0FE /* XEOS_HAL_NMI_Enable.c */,
+				0561C54E1657A74700E7C0FE /* XEOS_HAL_NMI_Disable.c */,
+			);
+			path = nmi;
 			sourceTree = "<group>";
 		};
 		056A28B71628AA80003FBE80 /* release */ = {
@@ -1659,6 +1672,7 @@
 				05E6E18A163F0C8D008D2DBD /* gdt.h */,
 				05E6E18B163F0C8D008D2DBD /* idt.h */,
 				05E6E18C163F0C8D008D2DBD /* io.h */,
+				0561C54C1657A70200E7C0FE /* nmi.h */,
 				052F6AF51646D48C00DDADD8 /* pic.h */,
 				052F6AF61646D48C00DDADD8 /* pit.h */,
 				0561C5391657969C00E7C0FE /* rtc.h */,
