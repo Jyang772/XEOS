@@ -183,6 +183,7 @@
 		0561C54E1657A74700E7C0FE /* XEOS_HAL_NMI_Disable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_NMI_Disable.c; sourceTree = "<group>"; };
 		0561C54F16583B2100E7C0FE /* XEOS_HAL_CMOS_Read.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CMOS_Read.c; sourceTree = "<group>"; };
 		0561C55016583B2D00E7C0FE /* XEOS_HAL_CMOS_Write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CMOS_Write.c; sourceTree = "<group>"; };
+		0561C55116584B1000E7C0FE /* __XEOS_Video_ProcessFormatString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_Video_ProcessFormatString.c; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
 		0564CFDB163C0D9500394DFE /* memcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcpy.c; sourceTree = "<group>"; };
@@ -865,6 +866,7 @@
 			isa = PBXGroup;
 			children = (
 				05E6E17D163F063F008D2DBD /* __XEOS_Video.c */,
+				0561C55116584B1000E7C0FE /* __XEOS_Video_ProcessFormatString.c */,
 				05377C80163E872A00E8C542 /* XEOS_Video_Clear.c */,
 				05377C81163E874200E8C542 /* XEOS_Video_SetBG.c */,
 				05377C82163E874A00E8C542 /* XEOS_Video_SetFG.c */,
