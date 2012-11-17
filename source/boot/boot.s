@@ -118,6 +118,29 @@ start: jmp main
 %include "xeos.16.mem.inc.s"        ; Memory related procedures
 
 ;-------------------------------------------------------------------------------
+; Types definition
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
+; Memory informations Structure:
+;-------------------------------------------------------------------------------
+struc XEOS.info.memory_t
+
+    .address:   resd    1
+    .length:    resd    1
+
+endstruc
+
+;-------------------------------------------------------------------------------
+; Informations Structure:
+;-------------------------------------------------------------------------------
+struc XEOS.info_t
+
+    .memory:    resb    XEOS.info.memory_t_size
+
+endstruc
+
+;-------------------------------------------------------------------------------
 ; Variables definition
 ;-------------------------------------------------------------------------------
 
@@ -133,9 +156,9 @@ $XEOS.boot.stage2.cpu.vendor                    db  "            ", @ASCII.NUL
 $XEOS.boot.stage2.str                           dd  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @ASCII.NUL
 $XEOS.boot.stage2.longMode                      db  0
 
-$XEOS.boot.stage2.mem.infos:
+$XEOS.boot.stage2.info:
     
-    istruc XEOS.16.mem.infos
+    istruc XEOS.info_t
         
         dd  0
         dd  0
@@ -633,8 +656,8 @@ main:
             
         .memory.success:
             
-            mov DWORD [ $XEOS.boot.stage2.mem.infos + XEOS.16.mem.infos.address ],  @XEOS.boot.stage2.memory.info.segment * 0x10
-            mov DWORD [ $XEOS.boot.stage2.mem.infos + XEOS.16.mem.infos.length ],   eax
+            mov DWORD [ $XEOS.boot.stage2.info + XEOS.info_t.memory + XEOS.info.memory_t.address ], @XEOS.boot.stage2.memory.info.segment * 0x10
+            mov DWORD [ $XEOS.boot.stage2.info + XEOS.info_t.memory + XEOS.info.memory_t.length ],  eax
             
             @XEOS.boot.stage2.print.success
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
@@ -1958,8 +1981,8 @@ XEOS.boot.stage2.32.run:
         ; Kernel entry point
         mov     eax,        DWORD [ $XEOS.boot.stage2.32.kernel.entry ]
         
-        ; Memory infos
-        mov     edi,        $XEOS.boot.stage2.mem.infos
+        ; Boot infos
+        mov     edi,        $XEOS.boot.stage2.info
         
         ; Jumps to the kernel code
         jmp     @XEOS.gdt.descriptors.32.code:eax
@@ -2195,8 +2218,8 @@ XEOS.boot.stage2.64.run:
         xor     rax,        rax
         mov     eax,        DWORD [ $XEOS.boot.stage2.64.kernel.entry ]
         
-        ; Memory infos
-        mov     rdi,        $XEOS.boot.stage2.mem.infos
+        ; Boot infos
+        mov     rdi,        $XEOS.boot.stage2.info
         
         ; Jumps to the kernel code
         jmp     @XEOS.gdt.descriptors.64.code:rax
