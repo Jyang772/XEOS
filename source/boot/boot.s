@@ -551,26 +551,28 @@ $XEOS.boot.stage2.msg.error.memory                      db  "Error: unable to de
 ; 
 ; At this time, the memory layout is the following:
 ; 
-;       0x000000 - 0x00003F:      1'024 bytes       ISR vectors addresses
-;       0x000400 - 0x0004F0         256 bytes       BIOS data
-;       0x000500 - 0x007BF0:     30'464 bytes       2nd stage boot loader
-;       0x007C00 - 0x007DF0:        512 bytes       1st stage boot loader
-;       0x007E00 - 0x09FFF0:    623'104 bytes       Free
-;       0x0A0000 - 0x0BFFF0:    131'072 bytes       BIOS video sub-system
-;       0x0C0000 - 0x0EFFF0:    196'608 bytes       BIOS ROM
-;       0x0F0000 - 0x0FFFF0:     65'536 bytes       System ROM
+;       0x00000000 - 0x000003FF:      1'024 bytes       ISR vectors addresses
+;       0x00000400 - 0x000004FF:        256 bytes       BIOS data
+;       0x00000500 - 0x00007BFF:     30'464 bytes       2nd stage boot loader
+;       0x00007C00 - 0x00007DFF:        512 bytes       1st stage boot loader
+;       0x00007E00 - 0x0007FFFF:    492'032 bytes       Free
+;       0x00080000 - 0x0009FBFF:    130'048 bytes       Free
+;       0x0009FC00 - 0x0009FFFF:      1'024 bytes       EBDA (Extended BIOS Data Area)
+;       0x000A0000 - 0x000BFFFF:    131'072 bytes       BIOS video sub-system
+;       0x000C0000 - 0x000EFFFF:    196'608 bytes       BIOS ROM
+;       0x000F0000 - 0x000FFFFF:     65'536 bytes       System ROM
 ; 
 ; Stuff will be loaded at the following locations:
 ; 
-;       0x007E00 - 0x0099FF:      7'168 bytes 	    FAT-12 Root Directory
-;       0x009A00 - 0x00FFFF:     18'432 bytes       FATs
-;       0x010000 - 0x010FFF:      4'096 bytes       PML4T
-;       0x011000 - 0x011FFF:      4'096 bytes       PDPT
-;       0x012000 - 0x012FFF:      4'096 bytes       PDT
-;       0x013000 - 0x013FFF:      4'096 bytes       PT
-;       0x015000 - 0x01FFFF:     45'056 bytes       INT 0x15 data
-;       0x020000 - 0x09FFFF:    524'288 bytes       Kernel data (temporary)
-;       0x100000 - 0x??????:                        Kernel data (executable)
+;       0x00007E00 - 0x000099FF:      7'168 bytes 	    FAT-12 Root Directory
+;       0x00009A00 - 0x0000FFFF:     18'432 bytes       FATs
+;       0x00010000 - 0x00010FFF:      4'096 bytes       PML4T
+;       0x00011000 - 0x00011FFF:      4'096 bytes       PDPT
+;       0x00012000 - 0x00012FFF:      4'096 bytes       PDT
+;       0x00013000 - 0x00013FFF:      4'096 bytes       PT
+;       0x00015000 - 0x0001FFFF:     45'056 bytes       INT 0x15 data
+;       0x00020000 - 0x0009FFFF:    524'288 bytes       Kernel data (temporary)
+;       0x00100000 - 0x????????:                        Kernel data (executable)
 ;-------------------------------------------------------------------------------
 main:
     
