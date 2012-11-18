@@ -72,7 +72,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>            
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean boot core release toolchain
+.PHONY: all clean boot core release toolchain test
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -111,3 +111,8 @@ release:
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS release files"$(COLOR_NONE)
 	@$(CD) $(PATH_RELEASE) && $(MAKE)
+	
+# Runs XEOS in VirtualBox with debug support
+test: all
+	
+	@/Applications/VirtualBox.app/Contents/MacOS/VirtualBox --startvm XEOS --debug
