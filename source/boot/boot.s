@@ -116,6 +116,7 @@ start: jmp main
 %include "xeos.16.string.inc.s"     ; String utilities
 %include "xeos.16.debug.inc.s"      ; Debugging
 %include "xeos.16.mem.inc.s"        ; Memory related procedures
+%include "xeos.16.sse.inc.s"        ; SSE related procedures
 
 ;-------------------------------------------------------------------------------
 ; Types definition
@@ -202,6 +203,7 @@ $XEOS.boot.stage2.msg.copyright.2                       db  "                   
 $XEOS.boot.stage2.msg.copyright.3                       db  "      Copyright (c) 2010-2012 Jean-David Gadina <macmade@eosgarden.com>      ", @ASCII.NUL
 $XEOS.boot.stage2.msg.copyright.4                       db  "                       All rights (& wrongs) reserved                        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.memory                            db  "Detecting available memory:                      ", @ASCII.NUL
+$XEOS.boot.stage2.msg.sse                               db  "Enabling SSE instructions:                       ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu                               db  "Getting CPU informations:                        ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.vendor                        db  "            ", 26, " CPU vendor:                                  ", @ASCII.NUL
 $XEOS.boot.stage2.msg.cpu.type                          db  "            ", 26, " CPU type:                                    ", @ASCII.NUL
@@ -250,6 +252,7 @@ $XEOS.boot.stage2.msg.error.verify.64.e_machine         db  "Error: invalid ELF-
 $XEOS.boot.stage2.msg.error.verify.64.e_version         db  "Error: invalid ELF-64 version", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.verify.64.e_entry           db  "Error: invalid ELF-64 entry point address", @ASCII.NUL
 $XEOS.boot.stage2.msg.error.memory                      db  "Error: unable to detect available memory", @ASCII.NUL
+$XEOS.boot.stage2.msg.error.sse                         db  "Error: SSE instructions are not avalable", @ASCII.NUL
 
 ;-------------------------------------------------------------------------------
 ; Definitions & Macros
@@ -674,7 +677,7 @@ main:
         
         ; Checks if we can use CPUID
         call    XEOS.16.cpu.hasCPUID
-        cmp     ax,         1
+        cmp     ax,         0x01
         je      .cpuid.ok
         
         .cpuid.fail:
@@ -707,7 +710,7 @@ main:
             %endif
             
             ; Checks if the CPU has 64 bits capabilities
-            cmp     ax,         1
+            cmp     ax,         0x01
             je      .cpuid.x86_64
         
         ;-----------------------------------------------------------------------
@@ -723,7 +726,7 @@ main:
             @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
             
             ; We won't switch to 64 bits long mode
-            mov     BYTE [ $XEOS.boot.stage2.longMode ],   0
+            mov     BYTE [ $XEOS.boot.stage2.longMode ],   0x00
             
             jmp     .a20
           
@@ -740,7 +743,7 @@ main:
             @XEOS.boot.stage2.print                 $XEOS.boot.stage2.nl
             
             ; We'll need to switch to 64 bits long mode
-            mov     BYTE [ $XEOS.boot.stage2.longMode ],   1
+            mov     BYTE [ $XEOS.boot.stage2.longMode ],   0x01
     
     ;---------------------------------------------------------------------------
     ; A-20 address line
@@ -756,7 +759,7 @@ main:
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.check
             call                    XEOS.16.a20.enabled
             
-            cmp     ax,             0
+            cmp     ax,             0x00
             je      .a20.enable
             
             @XEOS.boot.stage2.print.yes
@@ -778,7 +781,7 @@ main:
             @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.a20.bios
             call                    XEOS.16.a20.enable.bios
             
-            cmp     ax,             0
+            cmp     ax,             0x00
             je      .a20.enable.success
             
             @XEOS.boot.stage2.print.failure
@@ -794,7 +797,7 @@ main:
             call                    XEOS.16.a20.enable.systemControl
             call                    XEOS.16.a20.enabled
             
-            cmp     ax,             1
+            cmp     ax,             0x01
             je      .a20.enable.success
             
             @XEOS.boot.stage2.print.failure
@@ -810,7 +813,7 @@ main:
             call                    XEOS.16.a20.enable.keyboard.out
             call                    XEOS.16.a20.enabled
             
-            cmp     ax,             1
+            cmp     ax,             0x01
             je      .a20.enable.success
             
             @XEOS.boot.stage2.print.failure
@@ -826,7 +829,7 @@ main:
             call                    XEOS.16.a20.enable.keyboard.control
             call                    XEOS.16.a20.enabled
             
-            cmp     ax,             1
+            cmp     ax,             0x01
             je      .a20.enable.success
             
             @XEOS.boot.stage2.print.failure
@@ -839,6 +842,33 @@ main:
             @XEOS.boot.stage2.print.success
             @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
        
+    
+    ;---------------------------------------------------------------------------
+    ; Enables SSE instructions
+    ;---------------------------------------------------------------------------
+    .sse:
+        
+        @XEOS.boot.stage2.print.prompt
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.msg.sse
+        
+        ; Checks if SSE are available
+        call    XEOS.16.sse.available
+        cmp     ax,         0x01
+        je      .sse.success
+        
+        @XEOS.boot.stage2.print.failure
+        @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+        
+        jmp     .error.sse
+        
+        .sse.success:
+            
+            ; Enables SSE
+            call    XEOS.16.sse.enable
+            
+            @XEOS.boot.stage2.print.success
+            @XEOS.boot.stage2.print $XEOS.boot.stage2.nl
+        
     ;---------------------------------------------------------------------------
     ; Loads the kernel file
     ;---------------------------------------------------------------------------
@@ -1130,6 +1160,11 @@ main:
     .error.memory:
         
         @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.memory
+        jmp                                 .error
+        
+    .error.sse:
+        
+        @XEOS.boot.stage2.print.line.error  $XEOS.boot.stage2.msg.error.sse
         jmp                                 .error
         
     .error:
