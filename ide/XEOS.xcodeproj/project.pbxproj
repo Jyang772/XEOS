@@ -24,6 +24,11 @@
 		0532F45B165926740065D4D5 /* XEOS_HAL_RTC_DateTimeSetCentury.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetCentury.c; sourceTree = "<group>"; };
 		0532F45C16592E8D0065D4D5 /* XEOS_HAL_RTC_UpdateInProgress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_UpdateInProgress.c; sourceTree = "<group>"; };
 		0532F45D16592F750065D4D5 /* __XEOS_HAL_RTC_ReadRegister.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_HAL_RTC_ReadRegister.c; sourceTree = "<group>"; };
+		0532F45E16593F0A0065D4D5 /* __XEOS_System.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_System.c; sourceTree = "<group>"; };
+		0532F45F16593F6B0065D4D5 /* __system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __system.h; sourceTree = "<group>"; };
+		0532F460165940930065D4D5 /* XEOS_System_GetTime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_System_GetTime.c; sourceTree = "<group>"; };
+		0532F4611659409C0065D4D5 /* XEOS_System_GetTimeMilliSeconds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_System_GetTimeMilliSeconds.c; sourceTree = "<group>"; };
+		0532F4621659462E0065D4D5 /* XEOS_HAL_RTC_DateTimeGetTM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetTM.c; sourceTree = "<group>"; };
 		0533D3AE164B14A70090F5C0 /* XEOS_HAL_IO_Wait.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IO_Wait.c; sourceTree = "<group>"; };
 		0533D3AF164B17F60090F5C0 /* XEOS_HAL_CPU_InterruptsEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_InterruptsEnabled.c; sourceTree = "<group>"; };
 		0533D3B0164B19310090F5C0 /* XEOS_HAL_CPU_RDMSR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_RDMSR.c; sourceTree = "<group>"; };
@@ -877,6 +882,7 @@
 			children = (
 				0561C53F1657985D00E7C0FE /* __info.h */,
 				05632E8C1658FEF6006EC216 /* __irq.h */,
+				0532F45F16593F6B0065D4D5 /* __system.h */,
 				05377C0C163D76D300E8C542 /* __types.h */,
 				05AC9BCC164C9ACF0036E977 /* __video.h */,
 				05E6E188163F0C8C008D2DBD /* hal */,
@@ -894,8 +900,11 @@
 		05377C14163D76D300E8C542 /* system */ = {
 			isa = PBXGroup;
 			children = (
+				0532F45E16593F0A0065D4D5 /* __XEOS_System.c */,
 				05377C15163D76D300E8C542 /* XEOS_System_Panic.c */,
 				055510C41641DEA700680FB8 /* XEOS_System_Panicf.c */,
+				0532F460165940930065D4D5 /* XEOS_System_GetTime.c */,
+				0532F4611659409C0065D4D5 /* XEOS_System_GetTimeMilliSeconds.c */,
 			);
 			path = system;
 			sourceTree = "<group>";
@@ -1001,6 +1010,7 @@
 				0532F45A1659266C0065D4D5 /* XEOS_HAL_RTC_DateTimeSetYear.c */,
 				0532F45B165926740065D4D5 /* XEOS_HAL_RTC_DateTimeSetCentury.c */,
 				0532F45C16592E8D0065D4D5 /* XEOS_HAL_RTC_UpdateInProgress.c */,
+				0532F4621659462E0065D4D5 /* XEOS_HAL_RTC_DateTimeGetTM.c */,
 			);
 			path = rtc;
 			sourceTree = "<group>";
