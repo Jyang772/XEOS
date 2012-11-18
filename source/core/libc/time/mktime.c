@@ -62,10 +62,45 @@
 /* $Id$ */
 
 #include "time.h"
+#include <stdint.h>
+
+static time_t __yearDays[ 12 ] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
 
 time_t mktime( struct tm * timeptr )
 {
-    ( void )timeptr;
+    register time_t month;
+    register time_t year;
+    register time_t	result;
     
-    return 0;
+    month  = ( time_t )timeptr->tm_mon;
+    year   = ( time_t )( timeptr->tm_year ) + month / 12 + 1900;
+    month %= 12;
+    
+    if( ( int64_t )month < 0 )
+    {
+        year  -= 1;
+        month += 12;
+    }
+    
+    result = ( year - 1970 ) * 365 + ( year - 1969 ) / 4 + __yearDays[ month ];
+    result = ( year - 1970 ) * 365 + __yearDays[ month ];
+    
+    if( month <= 1 )
+    {
+        year -= 1;
+    }
+    
+    result += ( year - 1968 ) / 4;
+    result -= ( year - 1900 ) / 100;
+    result += ( year - 1600 ) / 400;
+    result += ( time_t )( timeptr->tm_mday );
+    result -= 1;
+    result *= 24;
+    result += ( time_t )( timeptr->tm_hour );
+    result *= 60;
+    result += ( time_t )( timeptr->tm_min );
+    result *= 60;
+    result += ( time_t )( timeptr->tm_sec );
+    
+    return result;
 }
