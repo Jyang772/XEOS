@@ -16,6 +16,12 @@
 		052C7E531641D06A0054C138 /* XEOS_HAL_IDT_Reload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IDT_Reload.c; sourceTree = "<group>"; };
 		052F6AF51646D48C00DDADD8 /* pic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pic.h; sourceTree = "<group>"; };
 		052F6AF61646D48C00DDADD8 /* pit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pit.h; sourceTree = "<group>"; };
+		0532F4551659264D0065D4D5 /* XEOS_HAL_RTC_DateTimeSetHours.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetHours.c; sourceTree = "<group>"; };
+		0532F457165926550065D4D5 /* XEOS_HAL_RTC_DateTimeSetWeekday.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetWeekday.c; sourceTree = "<group>"; };
+		0532F4581659265E0065D4D5 /* XEOS_HAL_RTC_DateTimeSetDayOfMonth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetDayOfMonth.c; sourceTree = "<group>"; };
+		0532F459165926650065D4D5 /* XEOS_HAL_RTC_DateTimeSetMonth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetMonth.c; sourceTree = "<group>"; };
+		0532F45A1659266C0065D4D5 /* XEOS_HAL_RTC_DateTimeSetYear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetYear.c; sourceTree = "<group>"; };
+		0532F45B165926740065D4D5 /* XEOS_HAL_RTC_DateTimeSetCentury.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetCentury.c; sourceTree = "<group>"; };
 		0533D3AE164B14A70090F5C0 /* XEOS_HAL_IO_Wait.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IO_Wait.c; sourceTree = "<group>"; };
 		0533D3AF164B17F60090F5C0 /* XEOS_HAL_CPU_InterruptsEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_InterruptsEnabled.c; sourceTree = "<group>"; };
 		0533D3B0164B19310090F5C0 /* XEOS_HAL_CPU_RDMSR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_RDMSR.c; sourceTree = "<group>"; };
@@ -184,7 +190,6 @@
 		0561C55016583B2D00E7C0FE /* XEOS_HAL_CMOS_Write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CMOS_Write.c; sourceTree = "<group>"; };
 		0561C55116584B1000E7C0FE /* __XEOS_Video_ProcessFormatString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_Video_ProcessFormatString.c; sourceTree = "<group>"; };
 		0561C55216584F0800E7C0FE /* __rtc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __rtc.h; sourceTree = "<group>"; };
-		0561C55316585D9D00E7C0FE /* XEOS_HAL_RTC_Update.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_Update.c; sourceTree = "<group>"; };
 		0561C55416585F6A00E7C0FE /* XEOS_HAL_RTC_EnablePeriodicInterrupts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_EnablePeriodicInterrupts.c; sourceTree = "<group>"; };
 		0561C55516585F7800E7C0FE /* XEOS_HAL_RTC_DisablePeriodicInterrupts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DisablePeriodicInterrupts.c; sourceTree = "<group>"; };
 		0561C5561658FA5000E7C0FE /* XEOS_ISR_IRQ.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_IRQ.c; sourceTree = "<group>"; };
@@ -201,6 +206,17 @@
 		05632E94165905D5006EC216 /* XEOS_IRQ_ExecuteIRQHandlers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_ExecuteIRQHandlers.c; sourceTree = "<group>"; };
 		05632E9516590F5C006EC216 /* XEOS_HAL_PIC_MaskIRQLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_MaskIRQLine.c; sourceTree = "<group>"; };
 		05632E9616590F66006EC216 /* XEOS_HAL_PIC_UnmaskIRQLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_UnmaskIRQLine.c; sourceTree = "<group>"; };
+		05632E9716592594006EC216 /* XEOS_HAL_RTC_DateTimeGetSystemTime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetSystemTime.c; sourceTree = "<group>"; };
+		05632E99165925A3006EC216 /* XEOS_HAL_RTC_DateTimeGetSeconds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetSeconds.c; sourceTree = "<group>"; };
+		05632E9A165925AA006EC216 /* XEOS_HAL_RTC_DateTimeGetMinutes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetMinutes.c; sourceTree = "<group>"; };
+		05632E9B165925B2006EC216 /* XEOS_HAL_RTC_DateTimeGetHours.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetHours.c; sourceTree = "<group>"; };
+		05632E9C165925B8006EC216 /* XEOS_HAL_RTC_DateTimeGetWeekday.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetWeekday.c; sourceTree = "<group>"; };
+		05632E9D165925C0006EC216 /* XEOS_HAL_RTC_DateTimeGetDayOfMonth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetDayOfMonth.c; sourceTree = "<group>"; };
+		05632E9E165925C8006EC216 /* XEOS_HAL_RTC_DateTimeGetMonth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetMonth.c; sourceTree = "<group>"; };
+		05632E9F165925D0006EC216 /* XEOS_HAL_RTC_DateTimeGetYear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetYear.c; sourceTree = "<group>"; };
+		05632EA0165925EB006EC216 /* XEOS_HAL_RTC_DateTimeGetCentury.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetCentury.c; sourceTree = "<group>"; };
+		05632EA1165925F5006EC216 /* XEOS_HAL_RTC_DateTimeSetSeconds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetSeconds.c; sourceTree = "<group>"; };
+		05632EA21659260D006EC216 /* XEOS_HAL_RTC_DateTimeSetMinutes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeSetMinutes.c; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
 		0564CFDB163C0D9500394DFE /* memcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcpy.c; sourceTree = "<group>"; };
@@ -962,9 +978,25 @@
 		0561C53C165796FB00E7C0FE /* rtc */ = {
 			isa = PBXGroup;
 			children = (
-				0561C55316585D9D00E7C0FE /* XEOS_HAL_RTC_Update.c */,
 				0561C55416585F6A00E7C0FE /* XEOS_HAL_RTC_EnablePeriodicInterrupts.c */,
 				0561C55516585F7800E7C0FE /* XEOS_HAL_RTC_DisablePeriodicInterrupts.c */,
+				05632E9716592594006EC216 /* XEOS_HAL_RTC_DateTimeGetSystemTime.c */,
+				05632E99165925A3006EC216 /* XEOS_HAL_RTC_DateTimeGetSeconds.c */,
+				05632E9A165925AA006EC216 /* XEOS_HAL_RTC_DateTimeGetMinutes.c */,
+				05632E9B165925B2006EC216 /* XEOS_HAL_RTC_DateTimeGetHours.c */,
+				05632E9C165925B8006EC216 /* XEOS_HAL_RTC_DateTimeGetWeekday.c */,
+				05632E9D165925C0006EC216 /* XEOS_HAL_RTC_DateTimeGetDayOfMonth.c */,
+				05632E9E165925C8006EC216 /* XEOS_HAL_RTC_DateTimeGetMonth.c */,
+				05632E9F165925D0006EC216 /* XEOS_HAL_RTC_DateTimeGetYear.c */,
+				05632EA0165925EB006EC216 /* XEOS_HAL_RTC_DateTimeGetCentury.c */,
+				05632EA1165925F5006EC216 /* XEOS_HAL_RTC_DateTimeSetSeconds.c */,
+				05632EA21659260D006EC216 /* XEOS_HAL_RTC_DateTimeSetMinutes.c */,
+				0532F4551659264D0065D4D5 /* XEOS_HAL_RTC_DateTimeSetHours.c */,
+				0532F457165926550065D4D5 /* XEOS_HAL_RTC_DateTimeSetWeekday.c */,
+				0532F4581659265E0065D4D5 /* XEOS_HAL_RTC_DateTimeSetDayOfMonth.c */,
+				0532F459165926650065D4D5 /* XEOS_HAL_RTC_DateTimeSetMonth.c */,
+				0532F45A1659266C0065D4D5 /* XEOS_HAL_RTC_DateTimeSetYear.c */,
+				0532F45B165926740065D4D5 /* XEOS_HAL_RTC_DateTimeSetCentury.c */,
 			);
 			path = rtc;
 			sourceTree = "<group>";
