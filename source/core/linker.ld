@@ -72,30 +72,50 @@ SECTIONS
      */
     . = 0x00100000;
     
+    __XEOS_KERNEL_START = .;
+    
     /* Machine code */
     .text :
     {
+        __XEOS_KERNEL_SECTION_TEXT_START = .;
+        
         *( .text )
+        
+        __XEOS_KERNEL_SECTION_TEXT_END = .;
     }
     
     /* Constant data */
     .rodata ALIGN( 0x1000 ) :
     {
+        __XEOS_KERNEL_SECTION_RODATA_START = .;
+        
         *( .rodata )
+        
+        __XEOS_KERNEL_SECTION_RODATA_END = .;
     }
     
     /* Initialized data */
     .data ALIGN( 0x1000 ) :
     {
+        __XEOS_KERNEL_SECTION_DATA_START = .;
+        
         *( .data )
+        
+        __XEOS_KERNEL_SECTION_DATA_END = .;
     }
     
     /* Uninitialized data */
-    .bss :
+    .bss ALIGN( 0x1000 ) :
     {
+        __XEOS_KERNEL_SECTION_BSS_START = .;
+        
         sbss = .;
         *( COMMON )
         *( .bss )
         ebss = .;
+        
+        __XEOS_KERNEL_SECTION_BSS_END = .;
     }
+    
+    __XEOS_KERNEL_END = .;
 }
