@@ -115,4 +115,4 @@ release:
 # Runs XEOS in VirtualBox with debug support
 test: all
 	
-	@/Applications/VirtualBox.app/Contents/MacOS/VirtualBox --startvm XEOS --debug
+	@/Applications/VirtualBox.app/Contents/MacOS/VirtualBox --startvm XEOS --debug --start-running
