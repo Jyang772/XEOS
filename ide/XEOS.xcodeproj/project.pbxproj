@@ -193,6 +193,12 @@
 		05632E8C1658FEF6006EC216 /* __irq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __irq.h; sourceTree = "<group>"; };
 		05632E8D1658FF30006EC216 /* __XEOS_IRQ.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_IRQ.c; sourceTree = "<group>"; };
 		05632E8E1658FFA3006EC216 /* XEOS_HAL_PIC_SendEOI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_SendEOI.c; sourceTree = "<group>"; };
+		05632E8F165904A6006EC216 /* __XEOS_IRQ_Init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_IRQ_Init.c; sourceTree = "<group>"; };
+		05632E90165904B6006EC216 /* XEOS_IRQ_AddIRQHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_AddIRQHandler.c; sourceTree = "<group>"; };
+		05632E91165904BD006EC216 /* XEOS_IRQ_RemoveIRQHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_RemoveIRQHandler.c; sourceTree = "<group>"; };
+		05632E92165904C5006EC216 /* XEOS_IRQ_SystemTimer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_SystemTimer.c; sourceTree = "<group>"; };
+		05632E93165904CC006EC216 /* XEOS_IRQ_RealTimeClock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_RealTimeClock.c; sourceTree = "<group>"; };
+		05632E94165905D5006EC216 /* XEOS_IRQ_ExecuteIRQHandlers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_ExecuteIRQHandlers.c; sourceTree = "<group>"; };
 		0564CFD9163C0D9500394DFE /* memchr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memchr.c; sourceTree = "<group>"; };
 		0564CFDA163C0D9500394DFE /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcmp.c; sourceTree = "<group>"; };
 		0564CFDB163C0D9500394DFE /* memcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = memcpy.c; sourceTree = "<group>"; };
@@ -985,6 +991,12 @@
 			isa = PBXGroup;
 			children = (
 				05632E8D1658FF30006EC216 /* __XEOS_IRQ.c */,
+				05632E8F165904A6006EC216 /* __XEOS_IRQ_Init.c */,
+				05632E90165904B6006EC216 /* XEOS_IRQ_AddIRQHandler.c */,
+				05632E91165904BD006EC216 /* XEOS_IRQ_RemoveIRQHandler.c */,
+				05632E94165905D5006EC216 /* XEOS_IRQ_ExecuteIRQHandlers.c */,
+				05632E92165904C5006EC216 /* XEOS_IRQ_SystemTimer.c */,
+				05632E93165904CC006EC216 /* XEOS_IRQ_RealTimeClock.c */,
 			);
 			path = irq;
 			sourceTree = "<group>";
