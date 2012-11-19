@@ -573,7 +573,7 @@ $XEOS.boot.stage2.msg.error.sse                         db  "Error: SSE instruct
 ;       0x00011000 - 0x00011FFF:      4'096 bytes       PDPT
 ;       0x00012000 - 0x00012FFF:      4'096 bytes       PDT
 ;       0x00013000 - 0x00013FFF:      4'096 bytes       PT1
-;       0x00014000 - 0x00014FFF:      4'096 bytes       PT2
+;       0x00014000 - 0x00014FFF:      4'096 bytes       PT2 (only if PAE)
 ;       0x00015000 - 0x0001FFFF:     45'056 bytes       INT 0x15 data
 ;       0x00020000 - 0x0009FFFF:    524'288 bytes       Kernel data (temporary)
 ;       0x00100000 - 0x????????:                        Kernel data (executable)
