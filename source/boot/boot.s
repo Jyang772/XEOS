@@ -572,7 +572,8 @@ $XEOS.boot.stage2.msg.error.sse                         db  "Error: SSE instruct
 ;       0x00010000 - 0x00010FFF:      4'096 bytes       PML4T
 ;       0x00011000 - 0x00011FFF:      4'096 bytes       PDPT
 ;       0x00012000 - 0x00012FFF:      4'096 bytes       PDT
-;       0x00013000 - 0x00013FFF:      4'096 bytes       PT
+;       0x00013000 - 0x00013FFF:      4'096 bytes       PT1
+;       0x00014000 - 0x00014FFF:      4'096 bytes       PT2
 ;       0x00015000 - 0x0001FFFF:     45'056 bytes       INT 0x15 data
 ;       0x00020000 - 0x0009FFFF:    524'288 bytes       Kernel data (temporary)
 ;       0x00100000 - 0x????????:                        Kernel data (executable)
@@ -1428,7 +1429,8 @@ XEOS.boot.stage2.print.color:
 ;       PML4T:    0x010000 (Page-Map Level-4 Table)
 ;       PDPT:     0x011000 (Page Directory Pointer Table)
 ;       PDT:      0x012000 (Page Directory Table)
-;       PT:       0x013000 (Page Table)
+;       PT1:      0x013000 (Page Table 1)
+;       PT2:      0x014000 (Page Table 2)
 ; 
 ; Otherwise:
 ; 
@@ -1437,8 +1439,8 @@ XEOS.boot.stage2.print.color:
 ; 
 ; PAE will be set accordingly.
 ; 
-; Depending on whether PAE is available, the first megabytes of memory will
-; be mapped. First two megabytes with PAE, First 4 megabytes without PAE.
+; The first 4 megabytes will be mapped, using a single page table if PAE is not
+; available, otherwise using two page tables.
 ; 
 ; Input registers:
 ;       
@@ -1531,51 +1533,58 @@ XEOS.boot.stage2.enablePaging:
     .setup.pae:
         
         ; Loads CR3 with the absolute location of the first table (PML4T)
-        mov     edi,        0x00010000
-        mov     cr3,        edi
+        mov     edi,                0x00010000
+        mov     cr3,                edi
         
         ; Clears the page tables
         ; Each entry is 4096 bytes
-        ; 4 x 4096 bytes tables, starting at 1000:0000, moving double words
-        xor     eax,        eax
-        mov     edi,        eax
-        mov     ecx,        0x1000
+        ; 5 x 4096 bytes tables, starting at 1000:0000, moving double words
+        xor     eax,                eax
+        mov     edi,                eax
+        mov     ecx,                0x1400
         rep     stosd
         
         ; Indirect location of the first table
         ; (PML4T -> 1000:0000 -> 0x00010000)
-        xor     eax,        eax
-        mov     edi,        eax
+        xor     eax,                eax
+        mov     edi,                eax
         
         ; PML4T points to PDPT (0x00011000)
         ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00011003
+        mov     DWORD [ edi ],      0x00011003
         
         ; Indirect location of the second table
         ; (PDPT -> PML4T + 0x1000 -> 1000:1100 -> 0x00011000)
-        add     edi,            0x00001000
+        add     edi,                0x00001000
         
         ; PDPT points to PDT (0x00012000)
         ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00012003
+        mov     DWORD [ edi ],      0x00012003
         
         ; Indirect location of the third table;
         ; (PDT -> PDPT + 0x1000 -> 1000:1200 -> 0x00012000)
-        add     edi,            0x00001000
+        add     edi,                0x00001000
         
-        ; PDT points to PT (0x00013000)
+        ; PDT[ 1 ] points to PT1 (0x00013000)
         ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00013003
+        mov     DWORD [ edi ],      0x00013003
+        
+        ; PDT[ 2 ] points to PT2 (0x00014000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi + 16 ], 0x00014003
         
         ; Indirect location of the fourth table
-        ; (PT -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
-        add     edi,            0x00001000
+        ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
+        add     edi,                0x00001000
         
         ; Entry flags (preset + read/write)
-        mov     ebx,            0x00000003
+        mov     ebx,                0x00000003
         
-        ; 512 64 bits entries in PT
-        mov     ecx,            0x00000200
+        ; 512 64 bits entries in PT1
+        mov     ecx,                0x00000200
+        
+        ; 512 64 bits entries in PT2
+        add     ecx,                0x00000200
     
         ; Sets page entries
         .setup.pae.entry.set:
