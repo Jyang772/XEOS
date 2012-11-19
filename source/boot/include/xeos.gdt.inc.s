@@ -323,7 +323,7 @@ $XEOS.gdt.32
         db 00000000b    ; Base / Middle
         db 10011010b    ; Access
         db 11001111b    ; Granularity
-        db 00000000b
+        db 00000000b    ; Base / High
         
         ;-----------------------------------------------------------------------
         ; Kernel space data descriptor
