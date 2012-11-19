@@ -570,7 +570,7 @@ $XEOS.boot.stage2.msg.error.sse                         db  "Error: SSE instruct
 ;       0x00007E00 - 0x000099FF:      7'168 bytes 	    FAT-12 Root Directory
 ;       0x00009A00 - 0x0000FFFF:     18'432 bytes       FATs
 ;       0x00010000 - 0x00010FFF:      4'096 bytes       PML4T
-;       0x00011000 - 0x00011FFF:      4'096 bytes       PDPT
+;       0x00011000 - 0x00011FFF:      4'096 bytes       PDPT (only if PAE)
 ;       0x00012000 - 0x00012FFF:      4'096 bytes       PDT
 ;       0x00013000 - 0x00013FFF:      4'096 bytes       PT1
 ;       0x00014000 - 0x00014FFF:      4'096 bytes       PT2 (only if PAE)
@@ -1423,10 +1423,17 @@ XEOS.boot.stage2.print.color:
 ;-------------------------------------------------------------------------------
 ; Enables paging
 ; 
-; If PAE (Physical Address Extension) is available, the layout will be
-; the following:
+; For 64 bits, the layout will be the following:
 ; 
 ;       PML4T:    0x010000 (Page-Map Level-4 Table)
+;       PDPT:     0x011000 (Page Directory Pointer Table)
+;       PDT:      0x012000 (Page Directory Table)
+;       PT1:      0x013000 (Page Table 1)
+;       PT2:      0x014000 (Page Table 2)
+; 
+; For 32 bits, if PAE (Physical Address Extension) is available, the layout
+; will be the following:
+; 
 ;       PDPT:     0x011000 (Page Directory Pointer Table)
 ;       PDT:      0x012000 (Page Directory Table)
 ;       PT1:      0x013000 (Page Table 1)
@@ -1462,6 +1469,11 @@ XEOS.boot.stage2.setupPaging:
     push    ds
     push    es
     
+    ; Whether we are going to load a 64 bits kernel
+    xor     ax,         ax
+    mov     al,         BYTE [ $XEOS.boot.stage2.longMode ]
+    push    ax
+    
     ; Sets the data and extra segments to the location of the first table (PML4T)
     ; (1000:0000 -> 0x10000)
     mov     ax,         0x1000
@@ -1485,7 +1497,7 @@ XEOS.boot.stage2.setupPaging:
     
     .setup:
         
-        ; Loads CR3 with the absolute location of the first table (PDT)
+        ; Loads CR3 with the absolute location of PDT
         mov     edi,        0x00012000
         mov     cr3,        edi
         
@@ -1497,22 +1509,22 @@ XEOS.boot.stage2.setupPaging:
         mov     ecx,        0x0400
         rep     stosd
         
-        ; Indirect location of the first table;
+        ; Indirect location of PDT
         ; (PDT -> 1000:1200 -> 0x00012000)
         mov     edi,        0x2000
         
-        ; PDT points to PT (0x00013000)
+        ; PDT[ 0 ] points to PT1 (0x00013000)
         ; 3 is for the first two bits (present + read/write)
         mov     DWORD [ edi ],  0x00013003
         
-        ; Indirect location of the second table
-        ; (PT -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
+        ; Indirect location of PT1
+        ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
         add     edi,            0x00001000
         
         ; Entry flags (preset + read/write)
         mov     ebx,            0x00000003
         
-        ; 1024 32 bits entries in PT
+        ; 1024 32 bits entries in PT1
         mov     ecx,            0x00000400
     
         ; Sets page entries
@@ -1532,60 +1544,125 @@ XEOS.boot.stage2.setupPaging:
 
     .setup.pae:
         
-        ; Loads CR3 with the absolute location of the first table (PML4T)
-        mov     edi,                0x00010000
-        mov     cr3,                edi
+        ; Restores registers
+        pop     ax
+        pop     bx
         
-        ; Clears the page tables
-        ; Each entry is 4096 bytes
-        ; 5 x 4096 bytes tables, starting at 1000:0000, moving double words
-        xor     eax,                eax
-        mov     edi,                eax
-        mov     ecx,                0x1400
-        rep     stosd
+        ; Saves registers
+        push    ax
         
-        ; Indirect location of the first table
-        ; (PML4T -> 1000:0000 -> 0x00010000)
-        xor     eax,                eax
-        mov     edi,                eax
+        ; Checks if we must setup PAE for 32 or 64 bits
+        cmp     bx,                 0x01
+        je      .setup.pae.64
         
-        ; PML4T points to PDPT (0x00011000)
-        ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],      0x00011003
+        .setup.pae.32:
+            
+            ; Loads CR3 with the absolute location of PDPT
+            mov     edi,                0x00011000
+            mov     cr3,                edi
+            
+            ; Clears the page tables
+            ; Each entry is 4096 bytes
+            ; 4 x 4096 bytes tables, starting at 1000:1000, moving double words
+            mov     eax,                0x1000
+            mov     edi,                eax
+            xor     eax,                eax
+            mov     ecx,                0x1000
+            rep     stosd
+            
+            ; Indirect location of PDPT
+            ; (PDPT -> 1000:1000 -> 0x00011000)
+            mov     eax,                0x1000
+            mov     edi,                eax
+            
+            ; PDPT[ 0 ] points to PDT (0x00012000)
+            ; 1 is for the first bit (present)
+            mov     DWORD [ edi ],      0x00012001
+            
+            ; Indirect location of PDT
+            ; (PDT -> PDPT + 0x1000 -> 1000:1200 -> 0x00012000)
+            add     edi,                0x00001000
+            
+            ; PDT[ 0 ] points to PT1 (0x00013000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi ],      0x00013003
+            
+            ; PDT[ 1 ] points to PT2 (0x00014000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 8 ],  0x00014003
+            
+            ; Indirect location of PT1
+            ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
+            add     edi,                0x00001000
+            
+            ; Entry flags (preset + read/write)
+            mov     ebx,                0x00000003
+            
+            ; 512 64 bits entries in PT1
+            mov     ecx,                0x00000200
+            
+            ; 512 64 bits entries in PT2
+            add     ecx,                0x00000200
+            
+            ; Setup entries
+            jmp     .setup.pae.entry.set
+            
+        .setup.pae.64:
+            
+            ; Loads CR3 with the absolute location of PML4T
+            mov     edi,                0x00010000
+            mov     cr3,                edi
+            
+            ; Clears the page tables
+            ; Each entry is 4096 bytes
+            ; 5 x 4096 bytes tables, starting at 1000:0000, moving double words
+            xor     eax,                eax
+            mov     edi,                eax
+            mov     ecx,                0x1400
+            rep     stosd
+            
+            ; Indirect location of PML4T
+            ; (PML4T -> 1000:0000 -> 0x00010000)
+            xor     eax,                eax
+            mov     edi,                eax
+            
+            ; PML4T[ 0 ] points to PDPT (0x00011000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi ],      0x00011003
+            
+            ; Indirect location of PDPT
+            ; (PDPT -> PML4T + 0x1000 -> 1000:1100 -> 0x00011000)
+            add     edi,                0x00001000
+            
+            ; PDPT[ 0 ] points to PDT (0x00012000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi ],      0x00012003
+            
+            ; Indirect location of PDT
+            ; (PDT -> PDPT + 0x1000 -> 1000:1200 -> 0x00012000)
+            add     edi,                0x00001000
+            
+            ; PDT[ 0 ] points to PT1 (0x00013000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi ],      0x00013003
+            
+            ; PDT[ 1 ] points to PT2 (0x00014000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 8 ],  0x00014003
+            
+            ; Indirect location of PT1
+            ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
+            add     edi,                0x00001000
+            
+            ; Entry flags (preset + read/write)
+            mov     ebx,                0x00000003
+            
+            ; 512 64 bits entries in PT1
+            mov     ecx,                0x00000200
+            
+            ; 512 64 bits entries in PT2
+            add     ecx,                0x00000200
         
-        ; Indirect location of the second table
-        ; (PDPT -> PML4T + 0x1000 -> 1000:1100 -> 0x00011000)
-        add     edi,                0x00001000
-        
-        ; PDPT points to PDT (0x00012000)
-        ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],      0x00012003
-        
-        ; Indirect location of the third table;
-        ; (PDT -> PDPT + 0x1000 -> 1000:1200 -> 0x00012000)
-        add     edi,                0x00001000
-        
-        ; PDT[ 1 ] points to PT1 (0x00013000)
-        ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],      0x00013003
-        
-        ; PDT[ 2 ] points to PT2 (0x00014000)
-        ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi + 8 ],  0x00014003
-        
-        ; Indirect location of the fourth table
-        ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
-        add     edi,                0x00001000
-        
-        ; Entry flags (preset + read/write)
-        mov     ebx,                0x00000003
-        
-        ; 512 64 bits entries in PT1
-        mov     ecx,                0x00000200
-        
-        ; 512 64 bits entries in PT2
-        add     ecx,                0x00000200
-    
         ; Sets page entries
         .setup.pae.entry.set:
             
@@ -1692,6 +1769,11 @@ XEOS.boot.stage2.32:
         ; Enables protected mode
         mov     eax,        cr0
         or      eax,        0x01
+        mov     cr0,        eax
+        
+        ; Enables paging
+        mov     eax,        cr0
+        or      eax,        0x80000000
         mov     cr0,        eax
         
         ; Restores registers
