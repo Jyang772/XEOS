@@ -285,8 +285,7 @@ endstruc
 struc XEOS.gdt_64_t
 
     .null           resb    XEOS.gdt.descriptor_64_t_size
-    .code.32        resb    XEOS.gdt.descriptor_64_t_size
-    .code.64        resb    XEOS.gdt.descriptor_64_t_size
+    .code           resb    XEOS.gdt.descriptor_64_t_size
     .data           resb    XEOS.gdt.descriptor_64_t_size
 
 endstruc
