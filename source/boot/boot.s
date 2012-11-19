@@ -1571,7 +1571,7 @@ XEOS.boot.stage2.enablePaging:
         
         ; PDT[ 2 ] points to PT2 (0x00014000)
         ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi + 16 ], 0x00014003
+        mov     DWORD [ edi + 8 ],  0x00014003
         
         ; Indirect location of the fourth table
         ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
