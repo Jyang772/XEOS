@@ -1454,7 +1454,7 @@ XEOS.boot.stage2.print.color:
 ;       
 ;       None
 ;-------------------------------------------------------------------------------
-XEOS.boot.stage2.enablePaging:
+XEOS.boot.stage2.setupPaging:
     
     @XEOS.16.proc.start 0
     
@@ -1686,16 +1686,12 @@ XEOS.boot.stage2.32:
         ; Clears the interrupts
         cli
         
-        ; Enables paging
-        call XEOS.boot.stage2.enablePaging
+        ; Setups paging
+        call XEOS.boot.stage2.setupPaging
         
-        ; Gets the value of the primary control register
+        ; Enables protected mode
         mov     eax,        cr0
-        
-        ; Sets the lowest bit, indicating the system must run in protected mode
-        or      eax,        1
-        
-        ; Sets the new value - We are now in 32 bits protected mode
+        or      eax,        0x01
         mov     cr0,        eax
         
         ; Restores registers
@@ -1772,8 +1768,8 @@ XEOS.boot.stage2.64:
         ; Clears the interrupts
         cli
         
-        ; Enables paging
-        call XEOS.boot.stage2.enablePaging
+        ; Setups paging
+        call XEOS.boot.stage2.setupPaging
         
         ; Sets the long mode bit in the EFER MSR
         mov     ecx,        0xC0000080
