@@ -261,7 +261,7 @@ $XEOS.boot.stage2.msg.error.sse                         db  "Error: SSE instruct
 ; Addresses
 %define @XEOS.boot.stage2.fat12.root.offset     0x7900      ; 0050:7900 - 0x007E00
 %define @XEOS.boot.stage2.fat12.fat.offset      0x9500      ; 0050:9500 - 0x009A00
-%define @XEOS.boot.stage2.memory.info.segment   0x1500      ; 1500:0000 - 0x015000
+%define @XEOS.boot.stage2.memory.info.segment   0x1900      ; 1500:0000 - 0x015000
 %define @XEOS.boot.stage2.kernel.segment        0x2000      ; 2000:0000 - 0x020000
 %define @XEOS.boot.stage2.kernel.address        0x00100000
 %define @XEOS.boot.stage2.kernel.text.offset    0x1000
@@ -569,12 +569,16 @@ $XEOS.boot.stage2.msg.error.sse                         db  "Error: SSE instruct
 ; 
 ;       0x00007E00 - 0x000099FF:      7'168 bytes 	    FAT-12 Root Directory
 ;       0x00009A00 - 0x0000FFFF:     18'432 bytes       FATs
-;       0x00010000 - 0x00010FFF:      4'096 bytes       PML4T
+;       0x00010000 - 0x00010FFF:      4'096 bytes       PML4T (only if PAE and 64 bits)
 ;       0x00011000 - 0x00011FFF:      4'096 bytes       PDPT (only if PAE)
 ;       0x00012000 - 0x00012FFF:      4'096 bytes       PDT
 ;       0x00013000 - 0x00013FFF:      4'096 bytes       PT1
-;       0x00014000 - 0x00014FFF:      4'096 bytes       PT2 (only if PAE)
-;       0x00015000 - 0x0001FFFF:     45'056 bytes       INT 0x15 data
+;       0x00014000 - 0x00014FFF:      4'096 bytes       PT2
+;       0x00015000 - 0x00015FFF:      4'096 bytes       PT3
+;       0x00016000 - 0x00016FFF:      4'096 bytes       PT4 (only if PAE)
+;       0x00017000 - 0x00017FFF:      4'096 bytes       PT5 (only if PAE)
+;       0x00018000 - 0x00018FFF:      4'096 bytes       PT6 (only if PAE)
+;       0x00019000 - 0x0001FFFF:     45'056 bytes       INT 0x15 data
 ;       0x00020000 - 0x0009FFFF:    524'288 bytes       Kernel data (temporary)
 ;       0x00100000 - 0x????????:                        Kernel data (executable)
 ;-------------------------------------------------------------------------------
@@ -1425,29 +1429,39 @@ XEOS.boot.stage2.print.color:
 ; 
 ; For 64 bits, the layout will be the following:
 ; 
-;       PML4T:    0x010000 (Page-Map Level-4 Table)
-;       PDPT:     0x011000 (Page Directory Pointer Table)
-;       PDT:      0x012000 (Page Directory Table)
-;       PT1:      0x013000 (Page Table 1)
-;       PT2:      0x014000 (Page Table 2)
+;       PML4T:      0x010000 (Page-Map Level-4 Table)
+;       PDPT:       0x011000 (Page Directory Pointer Table)
+;       PDT:        0x012000 (Page Directory Table)
+;       PT1:        0x013000 (Page Table 1)
+;       PT2:        0x014000 (Page Table 2)
+;       PT3:        0x015000 (Page Table 3)
+;       PT4:        0x016000 (Page Table 4)
+;       PT5:        0x017000 (Page Table 5)
+;       PT6:        0x018000 (Page Table 6)
 ; 
 ; For 32 bits, if PAE (Physical Address Extension) is available, the layout
 ; will be the following:
 ; 
-;       PDPT:     0x011000 (Page Directory Pointer Table)
-;       PDT:      0x012000 (Page Directory Table)
-;       PT1:      0x013000 (Page Table 1)
-;       PT2:      0x014000 (Page Table 2)
+;       PDPT:       0x011000 (Page Directory Pointer Table)
+;       PDT:        0x012000 (Page Directory Table)
+;       PT1:        0x013000 (Page Table 1)
+;       PT2:        0x014000 (Page Table 2)
+;       PT3:        0x015000 (Page Table 3)
+;       PT4:        0x016000 (Page Table 4)
+;       PT5:        0x017000 (Page Table 5)
+;       PT6:        0x018000 (Page Table 6)
 ; 
 ; Otherwise:
 ; 
-;       PDT:      0x012000 (Page Directory Table)
-;       PT:       0x013000 (Page Table)
+;       PDT:        0x012000 (Page Directory Table)
+;       PT1:        0x013000 (Page Table 1)
+;       PT2:        0x014000 (Page Table 2)
+;       PT3:        0x015000 (Page Table 3)
 ; 
 ; PAE will be set accordingly.
 ; 
-; The first 4 megabytes will be mapped, using a single page table if PAE is not
-; available, otherwise using two page tables.
+; The first 12 megabytes will be mapped, using three page table if PAE is not
+; available, otherwise using six page tables.
 ; 
 ; Input registers:
 ;       
@@ -1503,29 +1517,43 @@ XEOS.boot.stage2.setupPaging:
         
         ; Clears the page tables
         ; Each entry is 4096 bytes
-        ; 2 x 4096 bytes tables, starting at 1000:2000, moving double words
+        ; 4 x 4096 bytes tables, starting at 1000:2000, moving double words
         xor     eax,        eax
         mov     edi,        0x2000
-        mov     ecx,        0x0400
+        mov     ecx,        0x1000
         rep     stosd
         
         ; Indirect location of PDT
         ; (PDT -> 1000:1200 -> 0x00012000)
-        mov     edi,        0x2000
+        mov     edi,                0x2000
         
         ; PDT[ 0 ] points to PT1 (0x00013000)
         ; 3 is for the first two bits (present + read/write)
-        mov     DWORD [ edi ],  0x00013003
+        mov     DWORD [ edi ],      0x00013003
+        
+        ; PDT[ 1 ] points to PT2 (0x00014000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi + 4 ],  0x00014003
+        
+        ; PDT[ 2 ] points to PT3 (0x00015000)
+        ; 3 is for the first two bits (present + read/write)
+        mov     DWORD [ edi + 8 ],  0x00015003
         
         ; Indirect location of PT1
         ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
-        add     edi,            0x00001000
+        add     edi,                0x00001000
         
         ; Entry flags (preset + read/write)
-        mov     ebx,            0x00000003
+        mov     ebx,                0x00000003
         
         ; 1024 32 bits entries in PT1
-        mov     ecx,            0x00000400
+        mov     ecx,                0x00000400
+        
+        ; Adds 1024 32 bits entries in PT2
+        add     ecx,                0x00000400
+        
+        ; Adds 1024 32 bits entries in PT3
+        add     ecx,                0x00000400
     
         ; Sets page entries
         .setup.entry.set:
@@ -1563,11 +1591,11 @@ XEOS.boot.stage2.setupPaging:
             
             ; Clears the page tables
             ; Each entry is 4096 bytes
-            ; 4 x 4096 bytes tables, starting at 1000:1000, moving double words
+            ; 8 x 4096 bytes tables, starting at 1000:1000, moving double words
             mov     eax,                0x1000
             mov     edi,                eax
             xor     eax,                eax
-            mov     ecx,                0x1000
+            mov     ecx,                0x2000
             rep     stosd
             
             ; Indirect location of PDPT
@@ -1591,6 +1619,22 @@ XEOS.boot.stage2.setupPaging:
             ; 3 is for the first two bits (present + read/write)
             mov     DWORD [ edi + 8 ],  0x00014003
             
+            ; PDT[ 2 ] points to PT3 (0x00015000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 16 ], 0x00015003
+            
+            ; PDT[ 3 ] points to PT4 (0x00016000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 24 ], 0x00016003
+            
+            ; PDT[ 4 ] points to PT5 (0x00017000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 32 ], 0x00017003
+            
+            ; PDT[ 5 ] points to PT6 (0x00018000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 40 ], 0x00018003
+            
             ; Indirect location of PT1
             ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
             add     edi,                0x00001000
@@ -1601,7 +1645,19 @@ XEOS.boot.stage2.setupPaging:
             ; 512 64 bits entries in PT1
             mov     ecx,                0x00000200
             
-            ; 512 64 bits entries in PT2
+            ; Adds 512 64 bits entries in PT2
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT3
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT4
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT5
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT6
             add     ecx,                0x00000200
             
             ; Setup entries
@@ -1615,10 +1671,10 @@ XEOS.boot.stage2.setupPaging:
             
             ; Clears the page tables
             ; Each entry is 4096 bytes
-            ; 5 x 4096 bytes tables, starting at 1000:0000, moving double words
+            ; 9 x 4096 bytes tables, starting at 1000:0000, moving double words
             xor     eax,                eax
             mov     edi,                eax
-            mov     ecx,                0x1400
+            mov     ecx,                0x2400
             rep     stosd
             
             ; Indirect location of PML4T
@@ -1650,6 +1706,22 @@ XEOS.boot.stage2.setupPaging:
             ; 3 is for the first two bits (present + read/write)
             mov     DWORD [ edi + 8 ],  0x00014003
             
+            ; PDT[ 2 ] points to PT3 (0x00015000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 16 ], 0x00015003
+            
+            ; PDT[ 3 ] points to PT4 (0x00016000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 24 ], 0x00016003
+            
+            ; PDT[ 4 ] points to PT5 (0x00017000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 32 ], 0x00017003
+            
+            ; PDT[ 5 ] points to PT6 (0x00018000)
+            ; 3 is for the first two bits (present + read/write)
+            mov     DWORD [ edi + 40 ], 0x00018003
+            
             ; Indirect location of PT1
             ; (PT1 -> PDT + 0x1000 -> 1000:1300 -> 0x00013000)
             add     edi,                0x00001000
@@ -1660,7 +1732,19 @@ XEOS.boot.stage2.setupPaging:
             ; 512 64 bits entries in PT1
             mov     ecx,                0x00000200
             
-            ; 512 64 bits entries in PT2
+            ; Adds 512 64 bits entries in PT2
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT3
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT4
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT5
+            add     ecx,                0x00000200
+            
+            ; Adds 512 64 bits entries in PT6
             add     ecx,                0x00000200
         
         ; Sets page entries
