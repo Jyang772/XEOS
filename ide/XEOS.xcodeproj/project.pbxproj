@@ -202,17 +202,11 @@
 		054F29A3165C3B45008997E6 /* XEOS_VM_PTClear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PTClear.c; sourceTree = "<group>"; };
 		054F29A4165C3DB6008997E6 /* XEOS_VM_PTGetEntryAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PTGetEntryAtIndex.c; sourceTree = "<group>"; };
 		054F29A5165C3DBF008997E6 /* XEOS_VM_PTEntryClear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PTEntryClear.c; sourceTree = "<group>"; };
-		054F29A7165C433E008997E6 /* XEOS_VM_EnablePaging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_EnablePaging.c; sourceTree = "<group>"; };
-		054F29A8165C4349008997E6 /* XEOS_VM_DisablePaging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_DisablePaging.c; sourceTree = "<group>"; };
-		054F29A9165C4370008997E6 /* XEOS_VM_PagingEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PagingEnabled.c; sourceTree = "<group>"; };
-		054F29AA165C437B008997E6 /* XEOS_VM_PAEEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PAEEnabled.c; sourceTree = "<group>"; };
 		054F29AB165C4892008997E6 /* XEOS_HAL_CPU_SetCR0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SetCR0.c; sourceTree = "<group>"; };
 		054F29AC165C4892008997E6 /* XEOS_HAL_CPU_SetCR1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SetCR1.c; sourceTree = "<group>"; };
 		054F29AD165C4892008997E6 /* XEOS_HAL_CPU_SetCR2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SetCR2.c; sourceTree = "<group>"; };
 		054F29AE165C4892008997E6 /* XEOS_HAL_CPU_SetCR3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SetCR3.c; sourceTree = "<group>"; };
 		054F29AF165C4892008997E6 /* XEOS_HAL_CPU_SetCR4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_SetCR4.c; sourceTree = "<group>"; };
-		054F29B0165CD3AD008997E6 /* XEOS_VM_EnablePAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_EnablePAE.c; sourceTree = "<group>"; };
-		054F29B1165CD3B7008997E6 /* XEOS_VM_DisablePAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_DisablePAE.c; sourceTree = "<group>"; };
 		054F29B2165CD42F008997E6 /* XEOS_Info_MemoryGetTotalBytes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Info_MemoryGetTotalBytes.c; sourceTree = "<group>"; };
 		054F29B4165CD937008997E6 /* XEOS_VM_SystemMap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMap.c; sourceTree = "<group>"; };
 		055020D0165EE4EF001B2AAD /* XEOS_VM_PML4TEntrySetPDPT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PML4TEntrySetPDPT.c; sourceTree = "<group>"; };
@@ -702,6 +696,12 @@
 		05CC626F165D688400A3AC55 /* XEOS_VM_SystemMapGetLength.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetLength.c; sourceTree = "<group>"; };
 		05CC6270165D688C00A3AC55 /* XEOS_VM_SystemMapGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetType.c; sourceTree = "<group>"; };
 		05D7141A166107D10004E5D7 /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
+		05D7141C166111AC0004E5D7 /* XEOS_HAL_CPU_DisablePAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_DisablePAE.c; sourceTree = "<group>"; };
+		05D7141D166111AC0004E5D7 /* XEOS_HAL_CPU_DisablePaging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_DisablePaging.c; sourceTree = "<group>"; };
+		05D7141E166111AC0004E5D7 /* XEOS_HAL_CPU_EnablePAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_EnablePAE.c; sourceTree = "<group>"; };
+		05D7141F166111AC0004E5D7 /* XEOS_HAL_CPU_EnablePaging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_EnablePaging.c; sourceTree = "<group>"; };
+		05D71420166111AC0004E5D7 /* XEOS_HAL_CPU_PAEEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_PAEEnabled.c; sourceTree = "<group>"; };
+		05D71421166111AC0004E5D7 /* XEOS_HAL_CPU_PagingEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_PagingEnabled.c; sourceTree = "<group>"; };
 		05E6B332162F2BB800364B7D /* xeos.16.debug.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.debug.inc.s; sourceTree = "<group>"; };
 		05E6E17D163F063F008D2DBD /* __XEOS_Video.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_Video.c; sourceTree = "<group>"; };
 		05E6E185163F0C81008D2DBD /* XEOS_HAL_IO_PortIn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IO_PortIn.c; sourceTree = "<group>"; };
@@ -1036,12 +1036,6 @@
 				05CC626E165D687E00A3AC55 /* XEOS_VM_SystemMapGetAddress.c */,
 				05CC626F165D688400A3AC55 /* XEOS_VM_SystemMapGetLength.c */,
 				05CC6270165D688C00A3AC55 /* XEOS_VM_SystemMapGetType.c */,
-				054F29A7165C433E008997E6 /* XEOS_VM_EnablePaging.c */,
-				054F29A8165C4349008997E6 /* XEOS_VM_DisablePaging.c */,
-				054F29A9165C4370008997E6 /* XEOS_VM_PagingEnabled.c */,
-				054F29B0165CD3AD008997E6 /* XEOS_VM_EnablePAE.c */,
-				054F29B1165CD3B7008997E6 /* XEOS_VM_DisablePAE.c */,
-				054F29AA165C437B008997E6 /* XEOS_VM_PAEEnabled.c */,
 				054F2996165C3AE9008997E6 /* XEOS_VM_PML4TClear.c */,
 				054F2998165C3AFB008997E6 /* XEOS_VM_PML4TGetEntryAtIndex.c */,
 				054F2999165C3B03008997E6 /* XEOS_VM_PML4TEntryClear.c */,
@@ -1919,6 +1913,12 @@
 				0533D3B9164BB4080090F5C0 /* XEOS_HAL_CPU_HasFeature.c */,
 				0533D3BA164BB4120090F5C0 /* XEOS_HAL_CPU_GetVendorID.c */,
 				0533D3BB164BB41C0090F5C0 /* XEOS_HAL_CPU_GetBrandName.c */,
+				05D7141C166111AC0004E5D7 /* XEOS_HAL_CPU_DisablePAE.c */,
+				05D7141D166111AC0004E5D7 /* XEOS_HAL_CPU_DisablePaging.c */,
+				05D7141E166111AC0004E5D7 /* XEOS_HAL_CPU_EnablePAE.c */,
+				05D7141F166111AC0004E5D7 /* XEOS_HAL_CPU_EnablePaging.c */,
+				05D71420166111AC0004E5D7 /* XEOS_HAL_CPU_PAEEnabled.c */,
+				05D71421166111AC0004E5D7 /* XEOS_HAL_CPU_PagingEnabled.c */,
 			);
 			path = cpu;
 			sourceTree = "<group>";
