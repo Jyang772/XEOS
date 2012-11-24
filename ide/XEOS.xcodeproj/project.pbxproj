@@ -688,6 +688,7 @@
 		05B7CE2D164607EE00D5B256 /* XEOS_HAL_IDT_ISREntryGetIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IDT_ISREntryGetIndex.c; sourceTree = "<group>"; };
 		05B8276D1649C2EB0075418D /* XEOS_ISR_SysCall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_SysCall.c; sourceTree = "<group>"; };
 		05B827701649C6110075418D /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
+		05BA5A9D166120A50090989B /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05CC626A165D65F400A3AC55 /* __vm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __vm.h; sourceTree = "<group>"; };
 		05CC626C165D66B300A3AC55 /* __XEOS_VM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_VM.c; sourceTree = "<group>"; };
@@ -949,6 +950,7 @@
 				05AC9BCC164C9ACF0036E977 /* __video.h */,
 				05CC626A165D65F400A3AC55 /* __vm.h */,
 				05E6E188163F0C8C008D2DBD /* hal */,
+				05BA5A9D166120A50090989B /* atomic.h */,
 				05377C0D163D76D300E8C542 /* hal.h */,
 				0561C53E1657974500E7C0FE /* info.h */,
 				05632E8B1658FEB2006EC216 /* irq.h */,
