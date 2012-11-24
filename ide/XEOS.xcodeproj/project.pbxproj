@@ -701,6 +701,7 @@
 		05CC626E165D687E00A3AC55 /* XEOS_VM_SystemMapGetAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetAddress.c; sourceTree = "<group>"; };
 		05CC626F165D688400A3AC55 /* XEOS_VM_SystemMapGetLength.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetLength.c; sourceTree = "<group>"; };
 		05CC6270165D688C00A3AC55 /* XEOS_VM_SystemMapGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetType.c; sourceTree = "<group>"; };
+		05D7141A166107D10004E5D7 /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
 		05E6B332162F2BB800364B7D /* xeos.16.debug.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.debug.inc.s; sourceTree = "<group>"; };
 		05E6E17D163F063F008D2DBD /* __XEOS_Video.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_Video.c; sourceTree = "<group>"; };
 		05E6E185163F0C81008D2DBD /* XEOS_HAL_IO_PortIn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IO_PortIn.c; sourceTree = "<group>"; };
@@ -952,6 +953,7 @@
 				0561C53E1657974500E7C0FE /* info.h */,
 				05632E8B1658FEB2006EC216 /* irq.h */,
 				05ED55D11640981600A43B9C /* isr.h */,
+				05D7141A166107D10004E5D7 /* macros.h */,
 				05377C0F163D76D300E8C542 /* system.h */,
 				05377C10163D76D300E8C542 /* video.h */,
 				055CF9271652DB2700036A75 /* vm.h */,
