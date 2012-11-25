@@ -688,7 +688,34 @@
 		05B7CE2D164607EE00D5B256 /* XEOS_HAL_IDT_ISREntryGetIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_IDT_ISREntryGetIndex.c; sourceTree = "<group>"; };
 		05B8276D1649C2EB0075418D /* XEOS_ISR_SysCall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_SysCall.c; sourceTree = "<group>"; };
 		05B827701649C6110075418D /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
-		05BA5A9D166120A50090989B /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
+		05BA5ADE1661AC740090989B /* atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
+		05BA5AE01661AE0E0090989B /* System_Atomic_Add32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Add32.c; sourceTree = "<group>"; };
+		05BA5AE11661AE150090989B /* System_Atomic_Increment32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Increment32.c; sourceTree = "<group>"; };
+		05BA5AE21661AE1B0090989B /* System_Atomic_Decrement32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Decrement32.c; sourceTree = "<group>"; };
+		05BA5AE31661AE210090989B /* System_Atomic_Or32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Or32.c; sourceTree = "<group>"; };
+		05BA5AE41661AE2B0090989B /* System_Atomic_And32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_And32.c; sourceTree = "<group>"; };
+		05BA5AE51661AE320090989B /* System_Atomic_Xor32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Xor32.c; sourceTree = "<group>"; };
+		05BA5AE61661AE390090989B /* System_Atomic_Add64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Add64.c; sourceTree = "<group>"; };
+		05BA5AE71661AE400090989B /* System_Atomic_Increment64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Increment64.c; sourceTree = "<group>"; };
+		05BA5AE81661AE470090989B /* System_Atomic_Decrement64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Decrement64.c; sourceTree = "<group>"; };
+		05BA5AE91661AE4F0090989B /* System_Atomic_Or64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Or64.c; sourceTree = "<group>"; };
+		05BA5AEA1661AE550090989B /* System_Atomic_And64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_And64.c; sourceTree = "<group>"; };
+		05BA5AEB1661AE5D0090989B /* System_Atomic_Xor64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_Xor64.c; sourceTree = "<group>"; };
+		05BA5AEC1661AE650090989B /* System_Atomic_CompareAndSwapInt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_CompareAndSwapInt.c; sourceTree = "<group>"; };
+		05BA5AED1661AE6C0090989B /* System_Atomic_CompareAndSwapLong.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_CompareAndSwapLong.c; sourceTree = "<group>"; };
+		05BA5AEE1661AE730090989B /* System_Atomic_CompareAndSwapPtr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_CompareAndSwapPtr.c; sourceTree = "<group>"; };
+		05BA5AEF1661AE7A0090989B /* System_Atomic_CompareAndSwap32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_CompareAndSwap32.c; sourceTree = "<group>"; };
+		05BA5AF01661AE810090989B /* System_Atomic_CompareAndSwap64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_CompareAndSwap64.c; sourceTree = "<group>"; };
+		05BA5AF11661AE880090989B /* System_Atomic_TestAndSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_TestAndSet.c; sourceTree = "<group>"; };
+		05BA5AF21661AE8F0090989B /* System_Atomic_TestAndClear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_TestAndClear.c; sourceTree = "<group>"; };
+		05BA5AF31661AE970090989B /* System_Atomic_SpinLockTry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_SpinLockTry.c; sourceTree = "<group>"; };
+		05BA5AF41661AE9F0090989B /* System_Atomic_SpinLockLock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_SpinLockLock.c; sourceTree = "<group>"; };
+		05BA5AF51661AEA60090989B /* System_Atomic_SpinLockUnlock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_SpinLockUnlock.c; sourceTree = "<group>"; };
+		05BA5AF61661AEAF0090989B /* System_Atomic_MemoryBarrier.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_MemoryBarrier.c; sourceTree = "<group>"; };
+		05BA5AF71661B2000090989B /* System_Atomic_XCHG64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_XCHG64.c; sourceTree = "<group>"; };
+		05BA5AF81661B2070090989B /* System_Atomic_XCHG32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_XCHG32.c; sourceTree = "<group>"; };
+		05BA5AF91661B20E0090989B /* System_Atomic_XCHG16.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_XCHG16.c; sourceTree = "<group>"; };
+		05BA5AFA1661B2150090989B /* System_Atomic_XCHG8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = System_Atomic_XCHG8.c; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05CC626A165D65F400A3AC55 /* __vm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __vm.h; sourceTree = "<group>"; };
 		05CC626C165D66B300A3AC55 /* __XEOS_VM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_VM.c; sourceTree = "<group>"; };
@@ -751,6 +778,7 @@
 		05377BFD163D76D300E8C542 /* system */ = {
 			isa = PBXGroup;
 			children = (
+				05BA5ADF1661ADFA0090989B /* atomic */,
 				05377BFE163D76D300E8C542 /* include */,
 				05377C04163D76D300E8C542 /* Makefile */,
 				05377C05163D76D300E8C542 /* mman */,
@@ -772,6 +800,7 @@
 		05377BFF163D76D300E8C542 /* sys */ = {
 			isa = PBXGroup;
 			children = (
+				05BA5ADE1661AC740090989B /* atomic.h */,
 				05377C00163D76D300E8C542 /* mman.h */,
 				05377C01163D76D300E8C542 /* syscall.h */,
 				05377C02163D76D300E8C542 /* types.h */,
@@ -950,7 +979,6 @@
 				05AC9BCC164C9ACF0036E977 /* __video.h */,
 				05CC626A165D65F400A3AC55 /* __vm.h */,
 				05E6E188163F0C8C008D2DBD /* hal */,
-				05BA5A9D166120A50090989B /* atomic.h */,
 				05377C0D163D76D300E8C542 /* hal.h */,
 				0561C53E1657974500E7C0FE /* info.h */,
 				05632E8B1658FEB2006EC216 /* irq.h */,
@@ -1817,6 +1845,40 @@
 				05B827701649C6110075418D /* syscall.c */,
 			);
 			path = syscall;
+			sourceTree = "<group>";
+		};
+		05BA5ADF1661ADFA0090989B /* atomic */ = {
+			isa = PBXGroup;
+			children = (
+				05BA5AE01661AE0E0090989B /* System_Atomic_Add32.c */,
+				05BA5AE11661AE150090989B /* System_Atomic_Increment32.c */,
+				05BA5AE21661AE1B0090989B /* System_Atomic_Decrement32.c */,
+				05BA5AE31661AE210090989B /* System_Atomic_Or32.c */,
+				05BA5AE41661AE2B0090989B /* System_Atomic_And32.c */,
+				05BA5AE51661AE320090989B /* System_Atomic_Xor32.c */,
+				05BA5AE61661AE390090989B /* System_Atomic_Add64.c */,
+				05BA5AE71661AE400090989B /* System_Atomic_Increment64.c */,
+				05BA5AE81661AE470090989B /* System_Atomic_Decrement64.c */,
+				05BA5AE91661AE4F0090989B /* System_Atomic_Or64.c */,
+				05BA5AEA1661AE550090989B /* System_Atomic_And64.c */,
+				05BA5AEB1661AE5D0090989B /* System_Atomic_Xor64.c */,
+				05BA5AEC1661AE650090989B /* System_Atomic_CompareAndSwapInt.c */,
+				05BA5AED1661AE6C0090989B /* System_Atomic_CompareAndSwapLong.c */,
+				05BA5AEE1661AE730090989B /* System_Atomic_CompareAndSwapPtr.c */,
+				05BA5AEF1661AE7A0090989B /* System_Atomic_CompareAndSwap32.c */,
+				05BA5AF01661AE810090989B /* System_Atomic_CompareAndSwap64.c */,
+				05BA5AF11661AE880090989B /* System_Atomic_TestAndSet.c */,
+				05BA5AF21661AE8F0090989B /* System_Atomic_TestAndClear.c */,
+				05BA5AF31661AE970090989B /* System_Atomic_SpinLockTry.c */,
+				05BA5AF41661AE9F0090989B /* System_Atomic_SpinLockLock.c */,
+				05BA5AF51661AEA60090989B /* System_Atomic_SpinLockUnlock.c */,
+				05BA5AF61661AEAF0090989B /* System_Atomic_MemoryBarrier.c */,
+				05BA5AF71661B2000090989B /* System_Atomic_XCHG64.c */,
+				05BA5AF81661B2070090989B /* System_Atomic_XCHG32.c */,
+				05BA5AF91661B20E0090989B /* System_Atomic_XCHG16.c */,
+				05BA5AFA1661B2150090989B /* System_Atomic_XCHG8.c */,
+			);
+			path = atomic;
 			sourceTree = "<group>";
 		};
 		05E6E182163F0C81008D2DBD /* gdt */ = {
