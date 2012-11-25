@@ -80,59 +80,78 @@ DIR_SRC_ATOMIC      = $(PATH_SRC_CORE_SYSTEM)atomic/
 # Software arguments
 #-------------------------------------------------------------------------------
 
+ARGS_AS_32          := -f $(TARGET_ABI) -I $(PATH_SRC_CORE_INC)
+ARGS_AS_64          := -f $(TARGET_ABI)64 -I $(PATH_SRC_CORE_INC)
 ARGS_CC_32          := -iquote $(DIR_SRC_INC) $(ARGS_CC_32)
 ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
+
+#-------------------------------------------------------------------------------
+# File extensions
+#-------------------------------------------------------------------------------
+
+EXT_ASM_32           = 32.s
+EXT_ASM_64           = 64.s
 
 #-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
 # Define the search paths for source files
-vpath %$(EXT_C) $(PATH_SRC_CORE_SYSTEM)
-vpath %$(EXT_C) $(DIR_SRC_MMAN)
-vpath %$(EXT_C) $(DIR_SRC_SYSCALL)
-vpath %$(EXT_C) $(DIR_SRC_UNISTD)
-vpath %$(EXT_C) $(DIR_SRC_ATOMIC)
-vpath %$(EXT_H) $(DIR_SRC_INC)
+vpath %$(EXT_C)         $(PATH_SRC_CORE_SYSTEM)
+vpath %$(EXT_C)         $(DIR_SRC_MMAN)
+vpath %$(EXT_C)         $(DIR_SRC_SYSCALL)
+vpath %$(EXT_C)         $(DIR_SRC_UNISTD)
+vpath %$(EXT_C)         $(DIR_SRC_ATOMIC)
+vpath %$(EXT_ASM_32)    $(DIR_SRC_ATOMIC)
+vpath %$(EXT_ASM_64)    $(DIR_SRC_ATOMIC)
+vpath %$(EXT_H)         $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
 # File suffixes
 #-------------------------------------------------------------------------------
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+.SUFFIXES: $(EXT_ASM_32) $(EXT_ASM_64) $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Macros
 #-------------------------------------------------------------------------------
 
 # Gets every code file in the source directory
-_FILES_C                    = $(foreach dir,$(PATH_SRC_CORE_SYSTEM),$(wildcard $(PATH_SRC_CORE_SYSTEM)*$(EXT_C)))
-_FILES_C_MMAN               = $(foreach dir,$(DIR_SRC_MMAN),$(wildcard $(DIR_SRC_MMAN)*$(EXT_C)))
-_FILES_C_SYSCALL            = $(foreach dir,$(DIR_SRC_SYSCALL),$(wildcard $(DIR_SRC_SYSCALL)*$(EXT_C)))
-_FILES_C_UNISTD             = $(foreach dir,$(DIR_SRC_UNISTD),$(wildcard $(DIR_SRC_UNISTD)*$(EXT_C)))
-_FILES_C_ATOMIC             = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_C)))
+_FILES_C                        = $(foreach dir,$(PATH_SRC_CORE_SYSTEM),$(wildcard $(PATH_SRC_CORE_SYSTEM)*$(EXT_C)))
+_FILES_C_MMAN                   = $(foreach dir,$(DIR_SRC_MMAN),$(wildcard $(DIR_SRC_MMAN)*$(EXT_C)))
+_FILES_C_SYSCALL                = $(foreach dir,$(DIR_SRC_SYSCALL),$(wildcard $(DIR_SRC_SYSCALL)*$(EXT_C)))
+_FILES_C_UNISTD                 = $(foreach dir,$(DIR_SRC_UNISTD),$(wildcard $(DIR_SRC_UNISTD)*$(EXT_C)))
+_FILES_C_ATOMIC                 = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_C)))
+_FILES_ASM_32_ATOMIC            = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_ASM_32)))
+_FILES_ASM_64_ATOMIC            = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_ASM_64)))
 
 # Gets only the file name of the code files
-_FILES_C_REL                = $(notdir $(_FILES_C))
-_FILES_C_REL_MMAN           = $(notdir $(_FILES_C_MMAN))
-_FILES_C_REL_SYSCALL        = $(notdir $(_FILES_C_SYSCALL))
-_FILES_C_REL_UNISTD         = $(notdir $(_FILES_C_UNISTD))
-_FILES_C_REL_ATOMIC         = $(notdir $(_FILES_C_ATOMIC))
+_FILES_C_REL                    = $(notdir $(_FILES_C))
+_FILES_C_REL_MMAN               = $(notdir $(_FILES_C_MMAN))
+_FILES_C_REL_SYSCALL            = $(notdir $(_FILES_C_SYSCALL))
+_FILES_C_REL_UNISTD             = $(notdir $(_FILES_C_UNISTD))
+_FILES_C_REL_ATOMIC             = $(notdir $(_FILES_C_ATOMIC))
+_FILES_ASM_32_REL_ATOMIC        = $(notdir $(_FILES_ASM_32_ATOMIC))
+_FILES_ASM_64_REL_ATOMIC        = $(notdir $(_FILES_ASM_64_ATOMIC))
 
 # Replace the code extension by the object one
-_FILES_C_OBJ                = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
-_FILES_C_OBJ_MMAN           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MMAN))
-_FILES_C_OBJ_SYSCALL        = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSCALL))
-_FILES_C_OBJ_UNISTD         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_UNISTD))
-_FILES_C_OBJ_ATOMIC         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ATOMIC))
+_FILES_C_OBJ                    = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL))
+_FILES_C_OBJ_MMAN               = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MMAN))
+_FILES_C_OBJ_SYSCALL            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSCALL))
+_FILES_C_OBJ_UNISTD             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_UNISTD))
+_FILES_C_OBJ_ATOMIC             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ATOMIC))
+_FILES_ASM_32_OBJ_ATOMIC        = $(subst $(EXT_ASM_32),$(EXT_ASM_32)$(EXT_OBJ),$(_FILES_ASM_32_REL_ATOMIC))
+_FILES_ASM_64_OBJ_ATOMIC        = $(subst $(EXT_ASM_64),$(EXT_ASM_64)$(EXT_OBJ),$(_FILES_ASM_64_REL_ATOMIC))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD          = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ))
-_FILES_C_OBJ_BUILD_MMAN     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_MMAN))
-_FILES_C_OBJ_BUILD_SYSCALL  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_SYSCALL))
-_FILES_C_OBJ_BUILD_UNISTD   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_UNISTD))
-_FILES_C_OBJ_BUILD_ATOMIC   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_ATOMIC))
+_FILES_C_OBJ_BUILD              = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ))
+_FILES_C_OBJ_BUILD_MMAN         = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_MMAN))
+_FILES_C_OBJ_BUILD_SYSCALL      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_SYSCALL))
+_FILES_C_OBJ_BUILD_UNISTD       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_UNISTD))
+_FILES_C_OBJ_BUILD_ATOMIC       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_ATOMIC))
+_FILES_ASM_32_OBJ_BUILD_ATOMIC  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_ASM_32_OBJ_ATOMIC))
+_FILES_ASM_64_OBJ_BUILD_ATOMIC  = $(addprefix $(PATH_BUILD_64_CORE_OBJ_SYSTEM),$(_FILES_ASM_64_OBJ_ATOMIC))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -149,7 +168,7 @@ _FILES_C_OBJ_BUILD_ATOMIC   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FI
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_MMAN) $(_FILES_C_OBJ_BUILD_SYSCALL) $(_FILES_C_OBJ_BUILD_UNISTD) $(_FILES_C_OBJ_BUILD_ATOMIC)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_MMAN) $(_FILES_C_OBJ_BUILD_SYSCALL) $(_FILES_C_OBJ_BUILD_UNISTD) $(_FILES_C_OBJ_BUILD_ATOMIC) $(_FILES_ASM_32_OBJ_BUILD_ATOMIC) $(_FILES_ASM_64_OBJ_BUILD_ATOMIC)
 		
 	@:
 
@@ -159,6 +178,18 @@ clean:
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_SYSTEM)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_SYSTEM)*
+	
+# Compiles an assembly file (32 bits)
+$(PATH_BUILD_32_CORE_OBJ_SYSTEM)%$(EXT_ASM_32)$(EXT_OBJ): %$(EXT_ASM_32)
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_OBJ_SYSTEM)$(@F) $(abspath $<)
+	
+# Compiles an assembly file (64 bits)
+$(PATH_BUILD_64_CORE_OBJ_SYSTEM)%$(EXT_ASM_64)$(EXT_OBJ): %$(EXT_ASM_64)
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_64) $(ARGS_AS_64) -o $(PATH_BUILD_64_CORE_OBJ_SYSTEM)$(@F) $(abspath $<)
 	
 # Compiles a C file (64 bits)
 $(PATH_BUILD_64_CORE_OBJ_SYSTEM)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)

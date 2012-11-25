@@ -76,37 +76,30 @@
 
 typedef int32_t System_Atomic_SpinLock;
 
-int32_t System_Atomic_Add32( int32_t amount, volatile int32_t * value );
-int32_t System_Atomic_Increment32( volatile int32_t * value );
-int32_t System_Atomic_Decrement32( volatile int32_t * value );
-int32_t System_Atomic_Or32( uint32_t mask, volatile uint32_t * value );
-int32_t System_Atomic_And32( uint32_t mask, volatile uint32_t * value );
-int32_t System_Atomic_Xor32( uint32_t mask, volatile uint32_t * value );
+void System_Atomic_MemoryBarrier( void );
 
-int64_t System_Atomic_Add64( int64_t amount, volatile int64_t * value );
-int64_t System_Atomic_Increment64( volatile int64_t * value );
-int64_t System_Atomic_Decrement64( volatile int64_t * value );
-int64_t System_Atomic_Or64( uint64_t mask, volatile uint64_t * value );
-int64_t System_Atomic_And64( uint64_t mask, volatile uint64_t * value );
-int64_t System_Atomic_Xor64( uint64_t mask, volatile uint64_t * value );
-
+bool System_Atomic_CompareAndSwap32( int32_t oldValue, int32_t newValue, volatile int32_t * value );
+bool System_Atomic_CompareAndSwap64( int64_t oldValue, int64_t newValue, volatile int64_t * value );
 bool System_Atomic_CompareAndSwapInt( int oldValue, int newValue, volatile int * value );
 bool System_Atomic_CompareAndSwapLong( long oldValue, long newValue, volatile long * value );
 bool System_Atomic_CompareAndSwapPtr( void * oldValue, void * newValue, void * volatile * value );
-bool System_Atomic_CompareAndSwap32( int32_t oldValue, int32_t newValue, volatile int32_t * value );
-bool System_Atomic_CompareAndSwap64( int64_t oldValue, int64_t newValue, volatile int64_t * value );
-bool System_Atomic_TestAndSet( uint32_t n, volatile void * address );
+
 bool System_Atomic_TestAndClear( uint32_t n, volatile void * address );
+bool System_Atomic_TestAndSet( uint32_t n, volatile void * address );
 
-bool System_Atomic_SpinLockTry( System_Atomic_SpinLock * lock );
+int32_t System_Atomic_And32( uint32_t mask, volatile uint32_t * value );
+int32_t System_Atomic_Or32( uint32_t mask, volatile uint32_t * value );
+int32_t System_Atomic_Xor32( uint32_t mask, volatile uint32_t * value );
+
+int32_t System_Atomic_Add32( int32_t amount, volatile int32_t * value );
+int64_t System_Atomic_Add64( int64_t amount, volatile int64_t * value );
+int32_t System_Atomic_Decrement32( volatile int32_t * value );
+int64_t System_Atomic_Decrement64( volatile int64_t * value );
+int32_t System_Atomic_Increment32( volatile int32_t * value );
+int64_t System_Atomic_Increment64( volatile int64_t * value );
+
 void System_Atomic_SpinLockLock( System_Atomic_SpinLock * lock );
+bool System_Atomic_SpinLockTry( System_Atomic_SpinLock * lock );
 void System_Atomic_SpinLockUnlock( System_Atomic_SpinLock * lock );
-
-void System_Atomic_MemoryBarrier( void );
-
-uint64_t System_Atomic_XCHG64( void * ptr, uint64_t x );
-uint32_t System_Atomic_XCHG32( void * ptr, uint32_t x );
-uint16_t System_Atomic_XCHG16( void * ptr, uint16_t x );
-uint8_t System_Atomic_XCHG8( void * ptr, uint8_t x );
 
 #endif /* __SYSTEM_ATOMIC_H__ */
