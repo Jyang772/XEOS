@@ -76,13 +76,9 @@ global System_Atomic_CompareAndSwapPtr
 global System_Atomic_TestAndClear
 global System_Atomic_TestAndSet
 global System_Atomic_And32
-global System_Atomic_And64
 global System_Atomic_Or32
-global System_Atomic_Or64
 global System_Atomic_Xor32
-global System_Atomic_Xor64
 global System_Atomic_Add32
-global System_Atomic_Add64
 global System_Atomic_Decrement32
 global System_Atomic_Decrement64
 global System_Atomic_Increment32
