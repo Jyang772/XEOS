@@ -92,7 +92,11 @@ global System_Atomic_SpinLockTry
 global System_Atomic_SpinLockUnlock
 
 %macro __System_Atomic_BitOperation     1
-
+    
+    xor     eax,        eax
+    cmp     rsi,        0
+    je      .end
+    
     xor     edi,        7
     shl     rsi,        3
     add     rsi,        rdi
@@ -104,10 +108,16 @@ global System_Atomic_SpinLockUnlock
     %1      [ rsi ],    edi
     setc    al
     movzx   eax,        al
+    
+    .end:
 
 %endmacro
 
 %macro __System_Atomic_Arithmetic       1
+    
+    xor     eax,        eax
+    cmp     rsi,        0
+    je      .end
     
     mov     eax,        [ rsi ]
     
@@ -120,6 +130,8 @@ global System_Atomic_SpinLockUnlock
         jnz     .1
         
     mov     eax,        edx
+    
+    .end:
     
 %endmacro
 
@@ -139,13 +151,19 @@ System_Atomic_MemoryBarrier:
 ;-------------------------------------------------------------------------------
 System_Atomic_CompareAndSwap32:
     
-    mov        eax,             edi
-	lock
-    cmpxchg    [ rdx ],         esi
-	sete       al
-	movzx      eax,             al
+    xor         eax,            eax
+    cmp         rdx,            0
+    je          .end
     
-    ret
+    mov         eax,            edi
+	lock
+    cmpxchg     [ rdx ],        esi
+	sete        al
+	movzx       eax,            al
+    
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwap64( int64_t oldValue,
@@ -154,13 +172,19 @@ System_Atomic_CompareAndSwap32:
 ;-------------------------------------------------------------------------------
 System_Atomic_CompareAndSwap64:
     
+    xor         eax,            eax
+    cmp         rdx,            0
+    je          .end
+    
     mov         rax,            rdi
     lock
     cmpxchg     [ rdx ],        rsi
     sete        al
     movzx       eax,            al
     
-    ret
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwapInt( int oldValue,
@@ -239,24 +263,36 @@ System_Atomic_Xor32:
 ;-------------------------------------------------------------------------------
 System_Atomic_Add32:
     
+    xor     eax,                eax
+    cmp     rsi,                0
+    je      .end
+    
     mov     eax,                edi
     lock
     xadd    [ rsi ],            edi
     add     edi,                eax
     
-    ret
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; int64_t System_Atomic_Add64( int64_t amount, volatile int64_t * value );
 ;-------------------------------------------------------------------------------
 System_Atomic_Add64:
     
+    xor     rax,                rax
+    cmp     rsi,                0
+    je      .end
+    
     mov     rax,                rdi
     lock
     xadd    [ rsi ],            rdi
     add     rdi,                rax
     
-    ret
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; int32_t System_Atomic_Decrement32( volatile int32_t * value );
@@ -313,6 +349,9 @@ System_Atomic_SpinLockLock:
     sub     rsp,                8
     mov     rbx,                rdi
     
+    cmp     rdi,                0
+    je      .end
+    
     .compare:
         
         mov     rdx,                rbx
@@ -339,22 +378,33 @@ System_Atomic_SpinLockLock:
 ;-------------------------------------------------------------------------------
 System_Atomic_SpinLockTry:
     
+    xor     eax,                eax
+    cmp     rdi,                0
+    je      .end
+    
     mov     rdx,                rdi
     xor     edi,                edi
     mov     esi,                1
     call    System_Atomic_CompareAndSwap32
     movzx   eax,                al
     
-    ret
+    .end:
+        
+        ret
   
 ;-------------------------------------------------------------------------------
 ; void System_Atomic_SpinLockUnlock( System_Atomic_SpinLock * lock );
 ;-------------------------------------------------------------------------------
 System_Atomic_SpinLockUnlock:
     
+    cmp     rdi,                0
+    je      .end
+    
     mfence
     
     mov     DWORD [ rdi ],      0
     
-    ret
+    .end:
+        
+        ret
     

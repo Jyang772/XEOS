@@ -93,8 +93,11 @@ global System_Atomic_SpinLockUnlock
 
 %macro __System_Atomic_BitOperation     1
 
-    mov     eax,        [ esp + 4 ]
     mov     edx,        [ esp + 8 ]
+    cmp     edx,        0
+    je      .end
+    
+    mov     eax,        [ esp + 4 ]
     shld    ecx,        edx,            3
     shl     edx,        3
     xor     eax,        7
@@ -108,12 +111,17 @@ global System_Atomic_SpinLockUnlock
     %1      [ edx ],    eax
     setc    al
     movzx   eax,        al
+    
+    .end:
 
 %endmacro
 
 %macro __System_Atomic_Arithmetic       1
     
     mov     ecx,        [ esp + 8 ]
+    cmp     ecx,        0
+    je      .end
+    
     mov     eax,        [ ecx ]
     
     .1:
@@ -125,6 +133,8 @@ global System_Atomic_SpinLockUnlock
         jnz     .1
         
     mov 	eax,        edx
+    
+    .end:
     
 %endmacro
 
@@ -144,15 +154,21 @@ System_Atomic_MemoryBarrier:
 ;-------------------------------------------------------------------------------
 System_Atomic_CompareAndSwap32:
     
+    xor         eax,        eax
+	mov         ecx,        [ esp + 12 ]
+    cmp         ecx,        0
+    je          .end
+    
     mov         eax,        [ esp + 4 ]
 	mov         edx,        [ esp + 8 ]
-	mov         ecx,        [ esp + 12 ]
     lock
     cmpxchg    [ ecx ],     edx
 	sete       al
 	movzx       eax,         al
     
-    ret
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwap64( int64_t oldValue,
@@ -163,11 +179,16 @@ System_Atomic_CompareAndSwap64:
     
     push        ebx
     push        esi
+    
+    xor         eax,            eax
+    mov         esi,            [ esp + 28 ]
+    cmp         esi,            0
+    je          .end
+    
     mov         eax,            [ esp + 12 ]
     mov         edx,            [ esp + 16 ]
     mov         ebx,            [ esp + 20 ]
     mov         ecx,            [ esp + 24 ]
-    mov         esi,            [ esp + 28 ]
     lock
     cmpxchg8b   [ esi ]
     sete        al
@@ -175,7 +196,9 @@ System_Atomic_CompareAndSwap64:
     pop         esi
     pop         ebx
     
-    ret
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwapInt( int oldValue,
@@ -254,14 +277,20 @@ System_Atomic_Xor32:
 ;-------------------------------------------------------------------------------    
 System_Atomic_Add32:
     
-    mov     eax,                [ esp + 4 ]
+    xor     eax,                eax
     mov     edx,                [ esp + 8 ]
+    cmp     edx,                0
+    je      .end
+    
+    mov     eax,                [ esp + 4 ]
     mov     ecx,                eax
     lock
     xadd    [ edx ],            eax
     add     eax,                ecx
     
-    ret
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; int64_t System_Atomic_Add64( int64_t amount, volatile int64_t * value );
@@ -272,6 +301,9 @@ System_Atomic_Add64:
     push    esi
     
     mov 	esi,                [ esp + 20 ]
+    cmp     esi,                0
+    je      .end
+    
     mov 	eax,                [ esi ]
     mov 	edx,                [ esi + 4 ]
     
@@ -290,10 +322,12 @@ System_Atomic_Add64:
     mov 	eax,                ebx
     mov 	edx,                ecx
     
-    pop 	esi
-    pop 	ebx
-    
-    ret
+    .end:
+        
+        pop 	esi
+        pop 	ebx
+            
+        ret
 
 ;-------------------------------------------------------------------------------
 ; int32_t System_Atomic_Decrement32( volatile int32_t * value );
@@ -387,6 +421,9 @@ System_Atomic_SpinLockLock:
     sub 	esp,                24
     
     mov 	eax,                DWORD [ ebp + 8 ]
+    cmp     eax,                0
+    je      .end
+    
     mov 	DWORD [ esp ],      0
     mov 	DWORD [ esp + 4 ],  1
     mov 	DWORD [ esp + 8 ],  eax
@@ -418,6 +455,9 @@ System_Atomic_SpinLockTry:
     sub 	esp,                24
     
     mov 	eax,                DWORD [ ebp + 8 ]
+    cmp     eax,                0
+    je      .end
+    
     mov 	DWORD [ esp ],      0
     mov 	DWORD [ esp + 4 ],  1
     mov 	DWORD [ esp + 8 ],  eax
@@ -428,17 +468,24 @@ System_Atomic_SpinLockTry:
     add 	esp,                24
     pop 	ebp
     
-    ret
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; void System_Atomic_SpinLockUnlock( System_Atomic_SpinLock * lock );
 ;-------------------------------------------------------------------------------
 System_Atomic_SpinLockUnlock:
     
+    mov     eax,                [ esp + 4 ]
+    cmp     eax,                0
+    je      .end
+    
     mfence
     
-    mov     eax,                [ esp + 4 ]
 	mov     DWORD [ eax ],      0
     
-    ret
+    .end:
+        
+        ret
     
