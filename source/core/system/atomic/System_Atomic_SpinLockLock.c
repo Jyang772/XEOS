@@ -65,5 +65,15 @@
 
 void System_Atomic_SpinLockLock( System_Atomic_SpinLock * lock )
 {
-    ( void )lock;
+    while( System_Atomic_CompareAndSwap32( 0, 1, lock ) == 0 )
+    {
+        __asm__ __volatile__
+        (
+            "pause"
+            
+            :
+            :
+            : "memory"
+        );
+    }
 }

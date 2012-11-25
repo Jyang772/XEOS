@@ -65,7 +65,5 @@
 
 bool System_Atomic_SpinLockTry( System_Atomic_SpinLock * lock )
 {
-    ( void )lock;
-    
-    return false;
+    return System_Atomic_CompareAndSwap32( 0, 1, lock );
 }

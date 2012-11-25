@@ -65,6 +65,14 @@
 
 void System_Atomic_SpinLockUnlock( System_Atomic_SpinLock * lock )
 {
-    ( void )lock;
+    __asm__ __volatile__
+    (
+        ""
+        
+        :
+        :
+        : "memory"
+    );
+    
+    *( lock ) = 0;
 }
-
