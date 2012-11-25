@@ -63,5 +63,13 @@
 
 #include "sys/atomic.h"
 
-void System_Atomic_MemoryBarrier( void )
-{}
+__asm__
+(
+    ".global System_Atomic_MemoryBarrier\n"
+    "\n"
+    "System_Atomic_MemoryBarrier:\n"
+    "\n"
+    "mfence\n"
+    "\n"
+    "ret\n"
+);
