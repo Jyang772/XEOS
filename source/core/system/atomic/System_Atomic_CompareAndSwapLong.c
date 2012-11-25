@@ -65,9 +65,13 @@
 
 bool System_Atomic_CompareAndSwapLong( long oldValue, long newValue, volatile long * value )
 {
-    ( void )oldValue;
-    ( void )newValue;
-    ( void )value;
+    #ifdef __LP64__
     
-    return false;
+    return System_Atomic_CompareAndSwap64( oldValue, newValue, ( volatile int64_t * )value );
+    
+    #else
+    
+    return System_Atomic_CompareAndSwap32( oldValue, newValue, ( volatile int32_t * )value );
+    
+    #endif
 }

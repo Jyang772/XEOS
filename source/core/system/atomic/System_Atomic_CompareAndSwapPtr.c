@@ -65,9 +65,13 @@
 
 bool System_Atomic_CompareAndSwapPtr( void * oldValue, void * newValue, void * volatile * value )
 {
-    ( void )oldValue;
-    ( void )newValue;
-    ( void )value;
+    #ifdef __LP64__
     
-    return false;
+    return System_Atomic_CompareAndSwap64( ( int64_t )oldValue, ( int64_t )newValue, ( volatile int64_t * )value );
+    
+    #else
+    
+    return System_Atomic_CompareAndSwap32( ( int32_t )oldValue, ( int32_t )newValue, ( volatile int32_t * )value );
+    
+    #endif
 }

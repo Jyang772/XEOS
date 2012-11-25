@@ -63,11 +63,40 @@
 
 #include "sys/atomic.h"
 
-bool System_Atomic_CompareAndSwap32( int32_t oldValue, int32_t newValue, volatile int32_t * value )
-{
-    ( void )oldValue;
-    ( void )newValue;
-    ( void )value;
-    
-    return false;
-}
+#ifdef __LP64__
+
+__asm__
+(
+    ".global System_Atomic_CompareAndSwap32\n"
+    "\n"
+    "System_Atomic_CompareAndSwap32:\n"
+    "\n"
+    "movl       %edi,       %eax\n"
+	"lock\n"
+    "cmpxchgl   %esi,       (%rdx)\n"
+	"sete       %al\n"
+	"movzbl     %al,        %eax\n"
+    "\n"
+    "ret\n"
+);
+
+#else
+
+__asm__
+(
+    ".global System_Atomic_CompareAndSwap32\n"
+    "\n"
+    "System_Atomic_CompareAndSwap32:\n"
+    "\n"
+    "movl       4(%esp),    %eax\n"
+	"movl       8(%esp),    %edx\n"
+	"movl       12(%esp),   %ecx\n"
+    "lock\n"
+    "cmpxchgl   %edx,       (%ecx)\n"
+	"sete       %al\n"
+	"movzbl     %al,        %eax\n"
+    "\n"
+    "ret\n"
+);
+
+#endif

@@ -65,9 +65,5 @@
 
 bool System_Atomic_CompareAndSwapInt( int oldValue, int newValue, volatile int * value )
 {
-    ( void )oldValue;
-    ( void )newValue;
-    ( void )value;
-    
-    return false;
+    return System_Atomic_CompareAndSwap32( oldValue, newValue, value );
 }
