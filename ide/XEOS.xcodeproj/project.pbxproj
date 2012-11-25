@@ -598,8 +598,6 @@
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056E9B601635EB740032AE55 /* xeos.32.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
-		058E2841163B3F5F0042A1DB /* pthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = pthread.h; sourceTree = "<group>"; };
-		058E2842163B3F5F0042A1DB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		058E28F2163B520A0042A1DB /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_assert.c; sourceTree = "<group>"; };
 		058E28F5163B520A0042A1DB /* isalnum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalnum.c; sourceTree = "<group>"; };
 		058E28F6163B520A0042A1DB /* isalpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalpha.c; sourceTree = "<group>"; };
@@ -658,6 +656,7 @@
 		05A885B6165EC38C00AFCE25 /* XEOS_VM_PDTEntryGetFlag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PDTEntryGetFlag.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AC9BCC164C9ACF0036E977 /* __video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __video.h; sourceTree = "<group>"; };
+		05AE662A1662D458005EBEAD /* pthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		05AFEDF41620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -757,6 +756,7 @@
 				05377BFE163D76D300E8C542 /* include */,
 				05377C04163D76D300E8C542 /* Makefile */,
 				05377C05163D76D300E8C542 /* mman */,
+				05AE662B1662D46A005EBEAD /* pthread */,
 				05B8276F1649C6050075418D /* syscall */,
 				05377C06163D76D300E8C542 /* unistd */,
 			);
@@ -766,6 +766,7 @@
 		05377BFE163D76D300E8C542 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				05AE662A1662D458005EBEAD /* pthread.h */,
 				05377BFF163D76D300E8C542 /* sys */,
 				05377C03163D76D300E8C542 /* unistd.h */,
 			);
@@ -1173,23 +1174,6 @@
 			);
 			name = release;
 			path = ../release;
-			sourceTree = "<group>";
-		};
-		058E283F163B3F5F0042A1DB /* pthread */ = {
-			isa = PBXGroup;
-			children = (
-				058E2840163B3F5F0042A1DB /* include */,
-				058E2842163B3F5F0042A1DB /* Makefile */,
-			);
-			path = pthread;
-			sourceTree = "<group>";
-		};
-		058E2840163B3F5F0042A1DB /* include */ = {
-			isa = PBXGroup;
-			children = (
-				058E2841163B3F5F0042A1DB /* pthread.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 		058E28F0163B520A0042A1DB /* libc */ = {
@@ -1720,6 +1704,13 @@
 			path = yasm;
 			sourceTree = "<group>";
 		};
+		05AE662B1662D46A005EBEAD /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = pthread;
+			sourceTree = "<group>";
+		};
 		05AFEDB01620F26400740041 = {
 			isa = PBXGroup;
 			children = (
@@ -1805,7 +1796,6 @@
 			isa = PBXGroup;
 			children = (
 				058E28F0163B520A0042A1DB /* libc */,
-				058E283F163B3F5F0042A1DB /* pthread */,
 				05377BFD163D76D300E8C542 /* system */,
 				05377C08163D76D300E8C542 /* xeos */,
 				05377BE5163C793300E8C542 /* linker.ld */,

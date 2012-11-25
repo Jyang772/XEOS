@@ -110,8 +110,6 @@ PATH_BUILD_32_CORE_OBJ_LIBC     := $(PATH_BUILD_32_CORE_OBJ)libc/
 PATH_BUILD_64_CORE_OBJ_LIBC     := $(PATH_BUILD_64_CORE_OBJ)libc/
 PATH_BUILD_32_CORE_OBJ_SYSTEM   := $(PATH_BUILD_32_CORE_OBJ)system/
 PATH_BUILD_64_CORE_OBJ_SYSTEM   := $(PATH_BUILD_64_CORE_OBJ)system/
-PATH_BUILD_32_CORE_OBJ_PTHREAD  := $(PATH_BUILD_32_CORE_OBJ)pthread/
-PATH_BUILD_64_CORE_OBJ_PTHREAD  := $(PATH_BUILD_64_CORE_OBJ)pthread/
 
 # Source directories
 
@@ -120,7 +118,6 @@ PATH_SRC_CORE                   := $(PATH_SRC)core/
 PATH_SRC_CORE_KERNEL            := $(PATH_SRC_CORE)xeos/
 PATH_SRC_CORE_LIBC              := $(PATH_SRC_CORE)libc/
 PATH_SRC_CORE_SYSTEM            := $(PATH_SRC_CORE)system/
-PATH_SRC_CORE_PTHREAD           := $(PATH_SRC_CORE)pthread/
 PATH_SRC_CORE_INC               := $(PATH_SRC_CORE)include/
 
 # Release directories

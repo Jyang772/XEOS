@@ -74,6 +74,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 DIR_SRC_MMAN        = $(PATH_SRC_CORE_SYSTEM)mman/
 DIR_SRC_SYSCALL     = $(PATH_SRC_CORE_SYSTEM)syscall/
 DIR_SRC_UNISTD      = $(PATH_SRC_CORE_SYSTEM)unistd/
+DIR_SRC_PTHREAD     = $(PATH_SRC_CORE_SYSTEM)pthread/
 DIR_SRC_ATOMIC      = $(PATH_SRC_CORE_SYSTEM)atomic/
 
 #-------------------------------------------------------------------------------
@@ -101,6 +102,7 @@ vpath %$(EXT_C)         $(PATH_SRC_CORE_SYSTEM)
 vpath %$(EXT_C)         $(DIR_SRC_MMAN)
 vpath %$(EXT_C)         $(DIR_SRC_SYSCALL)
 vpath %$(EXT_C)         $(DIR_SRC_UNISTD)
+vpath %$(EXT_C)         $(DIR_SRC_PTHREAD)
 vpath %$(EXT_C)         $(DIR_SRC_ATOMIC)
 vpath %$(EXT_ASM_32)    $(DIR_SRC_ATOMIC)
 vpath %$(EXT_ASM_64)    $(DIR_SRC_ATOMIC)
@@ -122,6 +124,7 @@ _FILES_C                        = $(foreach dir,$(PATH_SRC_CORE_SYSTEM),$(wildca
 _FILES_C_MMAN                   = $(foreach dir,$(DIR_SRC_MMAN),$(wildcard $(DIR_SRC_MMAN)*$(EXT_C)))
 _FILES_C_SYSCALL                = $(foreach dir,$(DIR_SRC_SYSCALL),$(wildcard $(DIR_SRC_SYSCALL)*$(EXT_C)))
 _FILES_C_UNISTD                 = $(foreach dir,$(DIR_SRC_UNISTD),$(wildcard $(DIR_SRC_UNISTD)*$(EXT_C)))
+_FILES_C_PTHREAD                = $(foreach dir,$(DIR_SRC_PTHREAD),$(wildcard $(DIR_SRC_PTHREAD)*$(EXT_C)))
 _FILES_C_ATOMIC                 = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_C)))
 _FILES_ASM_32_ATOMIC            = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_ASM_32)))
 _FILES_ASM_64_ATOMIC            = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_ASM_64)))
@@ -131,6 +134,7 @@ _FILES_C_REL                    = $(notdir $(_FILES_C))
 _FILES_C_REL_MMAN               = $(notdir $(_FILES_C_MMAN))
 _FILES_C_REL_SYSCALL            = $(notdir $(_FILES_C_SYSCALL))
 _FILES_C_REL_UNISTD             = $(notdir $(_FILES_C_UNISTD))
+_FILES_C_REL_PTHREAD            = $(notdir $(_FILES_C_PTHREAD))
 _FILES_C_REL_ATOMIC             = $(notdir $(_FILES_C_ATOMIC))
 _FILES_ASM_32_REL_ATOMIC        = $(notdir $(_FILES_ASM_32_ATOMIC))
 _FILES_ASM_64_REL_ATOMIC        = $(notdir $(_FILES_ASM_64_ATOMIC))
@@ -140,6 +144,7 @@ _FILES_C_OBJ                    = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C
 _FILES_C_OBJ_MMAN               = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_MMAN))
 _FILES_C_OBJ_SYSCALL            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_SYSCALL))
 _FILES_C_OBJ_UNISTD             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_UNISTD))
+_FILES_C_OBJ_PTHREAD            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_PTHREAD))
 _FILES_C_OBJ_ATOMIC             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ATOMIC))
 _FILES_ASM_32_OBJ_ATOMIC        = $(subst $(EXT_ASM_32),$(EXT_ASM_32)$(EXT_OBJ),$(_FILES_ASM_32_REL_ATOMIC))
 _FILES_ASM_64_OBJ_ATOMIC        = $(subst $(EXT_ASM_64),$(EXT_ASM_64)$(EXT_OBJ),$(_FILES_ASM_64_REL_ATOMIC))
@@ -149,6 +154,7 @@ _FILES_C_OBJ_BUILD              = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$
 _FILES_C_OBJ_BUILD_MMAN         = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_MMAN))
 _FILES_C_OBJ_BUILD_SYSCALL      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_SYSCALL))
 _FILES_C_OBJ_BUILD_UNISTD       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_UNISTD))
+_FILES_C_OBJ_BUILD_PTHREAD      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_PTHREAD))
 _FILES_C_OBJ_BUILD_ATOMIC       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_C_OBJ_ATOMIC))
 _FILES_ASM_32_OBJ_BUILD_ATOMIC  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_ASM_32_OBJ_ATOMIC))
 _FILES_ASM_64_OBJ_BUILD_ATOMIC  = $(addprefix $(PATH_BUILD_64_CORE_OBJ_SYSTEM),$(_FILES_ASM_64_OBJ_ATOMIC))
@@ -168,7 +174,7 @@ _FILES_ASM_64_OBJ_BUILD_ATOMIC  = $(addprefix $(PATH_BUILD_64_CORE_OBJ_SYSTEM),$
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_MMAN) $(_FILES_C_OBJ_BUILD_SYSCALL) $(_FILES_C_OBJ_BUILD_UNISTD) $(_FILES_C_OBJ_BUILD_ATOMIC) $(_FILES_ASM_32_OBJ_BUILD_ATOMIC) $(_FILES_ASM_64_OBJ_BUILD_ATOMIC)
+all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_MMAN) $(_FILES_C_OBJ_BUILD_SYSCALL) $(_FILES_C_OBJ_BUILD_UNISTD) $(_FILES_C_OBJ_BUILD_PTHREAD) $(_FILES_C_OBJ_BUILD_ATOMIC) $(_FILES_ASM_32_OBJ_BUILD_ATOMIC) $(_FILES_ASM_64_OBJ_BUILD_ATOMIC)
 		
 	@:
 
