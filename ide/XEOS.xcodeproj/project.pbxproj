@@ -65,7 +65,7 @@
 		05377C02163D76D300E8C542 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		05377C03163D76D300E8C542 /* unistd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unistd.h; sourceTree = "<group>"; };
 		05377C04163D76D300E8C542 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		05377C0C163D76D300E8C542 /* __types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __types.h; sourceTree = "<group>"; };
+		05377C0C163D76D300E8C542 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		05377C0D163D76D300E8C542 /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hal.h; sourceTree = "<group>"; };
 		05377C0F163D76D300E8C542 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		05377C10163D76D300E8C542 /* video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video.h; sourceTree = "<group>"; };
@@ -968,7 +968,6 @@
 				05632E8C1658FEF6006EC216 /* __irq.h */,
 				057D6516166403750062DFD9 /* __proc.h */,
 				0532F45F16593F6B0065D4D5 /* __system.h */,
-				05377C0C163D76D300E8C542 /* __types.h */,
 				05AC9BCC164C9ACF0036E977 /* __video.h */,
 				05CC626A165D65F400A3AC55 /* __vm.h */,
 				05E6E188163F0C8C008D2DBD /* hal */,
@@ -979,6 +978,7 @@
 				05D7141A166107D10004E5D7 /* macros.h */,
 				057D65151664036D0062DFD9 /* proc.h */,
 				05377C0F163D76D300E8C542 /* system.h */,
+				05377C0C163D76D300E8C542 /* types.h */,
 				05377C10163D76D300E8C542 /* video.h */,
 				055CF9271652DB2700036A75 /* vm.h */,
 			);

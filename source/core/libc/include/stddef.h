@@ -69,21 +69,21 @@
 extern "C" {
 #endif
 
-#include <xeos/__types.h>
+#include <xeos/types.h>
 
 #ifndef __NULL
 #define __NULL
-#define NULL                        __XEOS_NULL
+#define NULL                        XEOS_NULL
 #endif
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __XEOS_size_t               size_t;
+typedef XEOS_Size                   size_t;
 #endif
 
 #ifndef __WCHAR_T
 #define __WCHAR_T
-typedef __XEOS_wchar_t              wchar_t;
+typedef XEOS_WChar                  wchar_t;
 #endif
 
 typedef long                        ptrdiff_t

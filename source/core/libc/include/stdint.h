@@ -69,7 +69,7 @@
 extern "C" {
 #endif
 
-#include <xeos/__types.h>
+#include <xeos/types.h>
 
 typedef signed char             int8_t;
 typedef short                   int16_t;
@@ -103,12 +103,12 @@ typedef uint64_t                uint_fast64_t;
 
 #ifndef __INTPTR_T
 #define __INTPTR_T
-    typedef __XEOS_intptr_t     intptr_t;
+    typedef XEOS_IntPointer     intptr_t;
 #endif
 
 #ifndef __UINTPTR_T
 #define __UINTPTR_T
-    typedef __XEOS_uintptr_t    uintptr_t;
+    typedef XEOS_UIntPointer    uintptr_t;
 #endif
 
 typedef long long               intmax_t;

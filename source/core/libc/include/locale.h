@@ -69,11 +69,11 @@
 extern "C" {
 #endif
 
-#include <xeos/__types.h>
+#include <xeos/types.h>
 
 #ifndef __NULL
 #define __NULL
-#define NULL                        __XEOS_NULL
+#define NULL                        XEOS_NULL
 #endif
 
 #define LC_ALL                      0

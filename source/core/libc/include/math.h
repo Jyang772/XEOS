@@ -69,19 +69,19 @@
 extern "C" {
 #endif
 
-#include <xeos/__types.h>
+#include <xeos/types.h>
 
-#if __XEOS_FLT_EVAL_METHOD__ == 0
+#if XEOS_FLT_EVAL_METHOD == 0
     
     typedef float       float_t;
     typedef double      double_t;
     
-#elif __XEOS_FLT_EVAL_METHOD__ == 1
+#elif XEOS_FLT_EVAL_METHOD == 1
     
     typedef double      float_t;
     typedef double      double_t;
     
-#elif __XEOS_FLT_EVAL_METHOD__ == 2 || __XEOS_FLT_EVAL_METHOD__ == -1
+#elif XEOS_FLT_EVAL_METHOD == 2 || XEOS_FLT_EVAL_METHOD == -1
     
     typedef long double float_t;
     typedef long double double_t;

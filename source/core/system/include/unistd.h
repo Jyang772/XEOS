@@ -69,51 +69,51 @@
 extern "C" {
 #endif
 
-#include <xeos/__types.h>
+#include <xeos/types.h>
 
 #ifndef __NULL
 #define __NULL
-#define NULL                                    __XEOS_NULL
+#define NULL                                    XEOS_NULL
 #endif
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __XEOS_size_t                           size_t;
+typedef XEOS_Size                               size_t;
 #endif
 
 #ifndef __SSIZE_T
 #define __SSIZE_T
-typedef __XEOS_ssize_t                          ssize_t;
+typedef XEOS_SSize                              ssize_t;
 #endif
 
 #ifndef __UID_T
 #define __UID_T
-typedef __XEOS_uid_t                            uid_t;
+typedef XEOS_UserID                             uid_t;
 #endif
 
 #ifndef __OFF_T
 #define __OFF_T
-typedef __XEOS_off_t                            off_t;
+typedef XEOS_Offset                             off_t;
 #endif
 
 #ifndef __PID_T
 #define __PID_T
-typedef __XEOS_pid_t                            pid_t;
+typedef XEOS_ProcessID                          pid_t;
 #endif
 
 #ifndef __GID_T
 #define __GID_T
-typedef __XEOS_gid_t                            gid_t;
+typedef XEOS_GroupID                            gid_t;
 #endif
 
 #ifndef __USECONDS_T
 #define __USECONDS_T
-typedef __XEOS_useconds_t                       useconds_t;
+typedef XEOS_USeconds                           useconds_t;
 #endif
 
 #ifndef __INTPTR_T
 #define __INTPTR_T
-typedef __XEOS_intptr_t                         intptr_t;
+typedef XEOS_IntPointer                         intptr_t;
 #endif
 
 #define	_POSIX_VERSION                          0

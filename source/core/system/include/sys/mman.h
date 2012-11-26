@@ -69,26 +69,26 @@
 extern "C" {
 #endif
 
-#include <xeos/__types.h>
+#include <xeos/types.h>
 
 #ifndef __NULL
 #define __NULL
-#define NULL                                    __XEOS_NULL
+#define NULL                                    XEOS_NULL
 #endif
 
 #ifndef __SIZE_T
 #define __SIZE_T
-typedef __XEOS_size_t                           size_t;
+typedef XEOS_Size                               size_t;
 #endif
 
 #ifndef __OFF_T
 #define __OFF_T
-typedef __XEOS_off_t                            off_t;
+typedef XEOS_Offset                             off_t;
 #endif
 
 #ifndef __MODE_T
 #define __MODE_T
-typedef __XEOS_mode_t                           mode_t;
+typedef XEOS_Mode                               mode_t;
 #endif
 
 #define PROT_NONE                               0x0000
