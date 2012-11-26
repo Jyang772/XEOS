@@ -252,7 +252,7 @@
 		05632E91165904BD006EC216 /* XEOS_IRQ_RemoveIRQHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_RemoveIRQHandler.c; sourceTree = "<group>"; };
 		05632E92165904C5006EC216 /* XEOS_IRQ_SystemTimer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_SystemTimer.c; sourceTree = "<group>"; };
 		05632E93165904CC006EC216 /* XEOS_IRQ_RealTimeClock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_RealTimeClock.c; sourceTree = "<group>"; };
-		05632E94165905D5006EC216 /* XEOS_IRQ_ExecuteIRQHandlers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = XEOS_IRQ_ExecuteIRQHandlers.c; path = irq/XEOS_IRQ_ExecuteIRQHandlers.c; sourceTree = "<group>"; };
+		05632E94165905D5006EC216 /* XEOS_IRQ_ExecuteIRQHandlers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_IRQ_ExecuteIRQHandlers.c; sourceTree = "<group>"; };
 		05632E9516590F5C006EC216 /* XEOS_HAL_PIC_MaskIRQLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_MaskIRQLine.c; sourceTree = "<group>"; };
 		05632E9616590F66006EC216 /* XEOS_HAL_PIC_UnmaskIRQLine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_UnmaskIRQLine.c; sourceTree = "<group>"; };
 		05632E9716592594006EC216 /* XEOS_HAL_RTC_DateTimeGetSystemTime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_RTC_DateTimeGetSystemTime.c; sourceTree = "<group>"; };
@@ -921,7 +921,6 @@
 				05632E891658FEA6006EC216 /* irq */,
 				055510F81642FA2E00680FB8 /* isr */,
 				05377C12163D76D300E8C542 /* Makefile */,
-				05632E94165905D5006EC216 /* XEOS_IRQ_ExecuteIRQHandlers.c */,
 				05377C14163D76D300E8C542 /* system */,
 				05377C17163D76D300E8C542 /* video */,
 				055CF9281652DB3C00036A75 /* vm */,
@@ -1186,6 +1185,7 @@
 				05632E8D1658FF30006EC216 /* __XEOS_IRQ.c */,
 				05632E8F165904A6006EC216 /* __XEOS_IRQ_Init.c */,
 				05632E90165904B6006EC216 /* XEOS_IRQ_AddIRQHandler.c */,
+				05632E94165905D5006EC216 /* XEOS_IRQ_ExecuteIRQHandlers.c */,
 				05632E91165904BD006EC216 /* XEOS_IRQ_RemoveIRQHandler.c */,
 				05632E92165904C5006EC216 /* XEOS_IRQ_SystemTimer.c */,
 				05632E93165904CC006EC216 /* XEOS_IRQ_RealTimeClock.c */,
