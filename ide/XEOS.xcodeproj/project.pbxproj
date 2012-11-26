@@ -598,6 +598,14 @@
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056E9B601635EB740032AE55 /* xeos.32.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
+		057D650B166400930062DFD9 /* XEOS_VM_MemoryMapGetPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPTCount.c; sourceTree = "<group>"; };
+		057D650D1664009C0062DFD9 /* XEOS_VM_MemoryMapGetPDTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPDTCount.c; sourceTree = "<group>"; };
+		057D650E166400A40062DFD9 /* XEOS_VM_MemoryMapGetPDPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPDPTCount.c; sourceTree = "<group>"; };
+		057D650F166400AC0062DFD9 /* XEOS_VM_MemoryMapGetPML4TCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPML4TCount.c; sourceTree = "<group>"; };
+		057D6510166400B70062DFD9 /* XEOS_VM_MemoryMapSetPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetPTCount.c; sourceTree = "<group>"; };
+		057D6511166400BF0062DFD9 /* XEOS_VM_MemoryMapSetPDTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetPDTCount.c; sourceTree = "<group>"; };
+		057D6512166400C60062DFD9 /* XEOS_VM_MemoryMapSetPDPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetPDPTCount.c; sourceTree = "<group>"; };
+		057D6513166400CF0062DFD9 /* XEOS_VM_MemoryMapSetPML4TCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetPML4TCount.c; sourceTree = "<group>"; };
 		058E28F2163B520A0042A1DB /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_assert.c; sourceTree = "<group>"; };
 		058E28F5163B520A0042A1DB /* isalnum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalnum.c; sourceTree = "<group>"; };
 		058E28F6163B520A0042A1DB /* isalpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalpha.c; sourceTree = "<group>"; };
@@ -657,6 +665,11 @@
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AC9BCC164C9ACF0036E977 /* __video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __video.h; sourceTree = "<group>"; };
 		05AE662A1662D458005EBEAD /* pthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
+		05AE667E1663FD7D005EBEAD /* XEOS_VM_MemoryMapGetCR3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetCR3.c; sourceTree = "<group>"; };
+		05AE667F1663FD8C005EBEAD /* XEOS_VM_MemoryMapSetAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetAddress.c; sourceTree = "<group>"; };
+		05AE66801663FD95005EBEAD /* XEOS_VM_MemoryMapSetLength.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetLength.c; sourceTree = "<group>"; };
+		05AE66811663FD9E005EBEAD /* XEOS_VM_MemoryMapSetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetType.c; sourceTree = "<group>"; };
+		05AE66821663FDAF005EBEAD /* XEOS_VM_MemoryMapSetCR3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetCR3.c; sourceTree = "<group>"; };
 		05AFEDD81620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05AFEDD91620F27C00740041 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		05AFEDF41620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -694,9 +707,9 @@
 		05CC626A165D65F400A3AC55 /* __vm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __vm.h; sourceTree = "<group>"; };
 		05CC626C165D66B300A3AC55 /* __XEOS_VM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_VM.c; sourceTree = "<group>"; };
 		05CC626D165D687700A3AC55 /* XEOS_VM_SystemMapInitialize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapInitialize.c; sourceTree = "<group>"; };
-		05CC626E165D687E00A3AC55 /* XEOS_VM_SystemMapGetAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetAddress.c; sourceTree = "<group>"; };
-		05CC626F165D688400A3AC55 /* XEOS_VM_SystemMapGetLength.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetLength.c; sourceTree = "<group>"; };
-		05CC6270165D688C00A3AC55 /* XEOS_VM_SystemMapGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapGetType.c; sourceTree = "<group>"; };
+		05CC626E165D687E00A3AC55 /* XEOS_VM_MemoryMapGetAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetAddress.c; sourceTree = "<group>"; };
+		05CC626F165D688400A3AC55 /* XEOS_VM_MemoryMapGetLength.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetLength.c; sourceTree = "<group>"; };
+		05CC6270165D688C00A3AC55 /* XEOS_VM_MemoryMapGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetType.c; sourceTree = "<group>"; };
 		05D7141A166107D10004E5D7 /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
 		05D7141C166111AC0004E5D7 /* XEOS_HAL_CPU_DisablePAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_DisablePAE.c; sourceTree = "<group>"; };
 		05D7141D166111AC0004E5D7 /* XEOS_HAL_CPU_DisablePaging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_DisablePaging.c; sourceTree = "<group>"; };
@@ -1039,9 +1052,22 @@
 				05CC626C165D66B300A3AC55 /* __XEOS_VM.c */,
 				054F29B4165CD937008997E6 /* XEOS_VM_SystemMap.c */,
 				05CC626D165D687700A3AC55 /* XEOS_VM_SystemMapInitialize.c */,
-				05CC626E165D687E00A3AC55 /* XEOS_VM_SystemMapGetAddress.c */,
-				05CC626F165D688400A3AC55 /* XEOS_VM_SystemMapGetLength.c */,
-				05CC6270165D688C00A3AC55 /* XEOS_VM_SystemMapGetType.c */,
+				05CC626E165D687E00A3AC55 /* XEOS_VM_MemoryMapGetAddress.c */,
+				05CC626F165D688400A3AC55 /* XEOS_VM_MemoryMapGetLength.c */,
+				05CC6270165D688C00A3AC55 /* XEOS_VM_MemoryMapGetType.c */,
+				05AE667E1663FD7D005EBEAD /* XEOS_VM_MemoryMapGetCR3.c */,
+				057D650B166400930062DFD9 /* XEOS_VM_MemoryMapGetPTCount.c */,
+				057D650D1664009C0062DFD9 /* XEOS_VM_MemoryMapGetPDTCount.c */,
+				057D650E166400A40062DFD9 /* XEOS_VM_MemoryMapGetPDPTCount.c */,
+				057D650F166400AC0062DFD9 /* XEOS_VM_MemoryMapGetPML4TCount.c */,
+				05AE667F1663FD8C005EBEAD /* XEOS_VM_MemoryMapSetAddress.c */,
+				05AE66801663FD95005EBEAD /* XEOS_VM_MemoryMapSetLength.c */,
+				05AE66811663FD9E005EBEAD /* XEOS_VM_MemoryMapSetType.c */,
+				05AE66821663FDAF005EBEAD /* XEOS_VM_MemoryMapSetCR3.c */,
+				057D6510166400B70062DFD9 /* XEOS_VM_MemoryMapSetPTCount.c */,
+				057D6511166400BF0062DFD9 /* XEOS_VM_MemoryMapSetPDTCount.c */,
+				057D6512166400C60062DFD9 /* XEOS_VM_MemoryMapSetPDPTCount.c */,
+				057D6513166400CF0062DFD9 /* XEOS_VM_MemoryMapSetPML4TCount.c */,
 				054F2996165C3AE9008997E6 /* XEOS_VM_PML4TClear.c */,
 				054F2998165C3AFB008997E6 /* XEOS_VM_PML4TGetEntryAtIndex.c */,
 				054F2999165C3B03008997E6 /* XEOS_VM_PML4TEntryClear.c */,

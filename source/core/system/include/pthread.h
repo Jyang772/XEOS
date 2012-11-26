@@ -69,7 +69,38 @@
 extern "C" {
 #endif
 
+#define PTHREAD_CANCELED                ( ( void * )1 )
 
+#define PTHREAD_CANCEL_DISABLE          0x00
+#define PTHREAD_CANCEL_ENABLE           0x01
+#define PTHREAD_CANCEL_DEFERRED         0x02
+#define PTHREAD_CANCEL_ASYNCHRONOUS     0x03
+
+#define PTHREAD_CREATE_JOINABLE         0x01
+#define PTHREAD_CREATE_DETACHED         0x02
+
+#define PTHREAD_COND_INITIALIZER        0x00
+#define PTHREAD_MUTEX_INITIALIZER       0x00
+#define PTHREAD_RWLOCK_INITIALIZER      0x00
+#define PTHREAD_ONCE_INIT               0x00
+
+#define PTHREAD_MUTEX_NORMAL            0x00
+#define PTHREAD_MUTEX_DEFAULT           0x00
+#define PTHREAD_MUTEX_ERRORCHECK        0x01
+#define PTHREAD_MUTEX_RECURSIVE         0x02
+
+#define PTHREAD_PRIO_NONE               0x00
+#define PTHREAD_PRIO_INHERIT            0x01
+#define PTHREAD_PRIO_PROTECT            0x02
+
+#define PTHREAD_PROCESS_SHARED          0x01
+#define PTHREAD_PROCESS_PRIVATE         0x02
+
+#define PTHREAD_INHERIT_SCHED           0x01
+#define PTHREAD_EXPLICIT_SCHED          0x02
+
+#define PTHREAD_SCOPE_SYSTEM            0x01
+#define PTHREAD_SCOPE_PROCESS           0x02
 
 #ifdef __cplusplus
 }
