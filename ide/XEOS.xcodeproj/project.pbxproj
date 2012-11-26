@@ -606,6 +606,9 @@
 		057D6511166400BF0062DFD9 /* XEOS_VM_MemoryMapSetPDTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetPDTCount.c; sourceTree = "<group>"; };
 		057D6512166400C60062DFD9 /* XEOS_VM_MemoryMapSetPDPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetPDPTCount.c; sourceTree = "<group>"; };
 		057D6513166400CF0062DFD9 /* XEOS_VM_MemoryMapSetPML4TCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapSetPML4TCount.c; sourceTree = "<group>"; };
+		057D65151664036D0062DFD9 /* proc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = proc.h; sourceTree = "<group>"; };
+		057D6516166403750062DFD9 /* __proc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __proc.h; sourceTree = "<group>"; };
+		057D6517166403C20062DFD9 /* __XEOS_Proc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_Proc.c; sourceTree = "<group>"; };
 		058E28F2163B520A0042A1DB /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_assert.c; sourceTree = "<group>"; };
 		058E28F5163B520A0042A1DB /* isalnum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalnum.c; sourceTree = "<group>"; };
 		058E28F6163B520A0042A1DB /* isalpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalpha.c; sourceTree = "<group>"; };
@@ -921,6 +924,7 @@
 				05632E891658FEA6006EC216 /* irq */,
 				055510F81642FA2E00680FB8 /* isr */,
 				05377C12163D76D300E8C542 /* Makefile */,
+				057D6514166403630062DFD9 /* proc */,
 				05377C14163D76D300E8C542 /* system */,
 				05377C17163D76D300E8C542 /* video */,
 				055CF9281652DB3C00036A75 /* vm */,
@@ -962,6 +966,7 @@
 			children = (
 				0561C53F1657985D00E7C0FE /* __info.h */,
 				05632E8C1658FEF6006EC216 /* __irq.h */,
+				057D6516166403750062DFD9 /* __proc.h */,
 				0532F45F16593F6B0065D4D5 /* __system.h */,
 				05377C0C163D76D300E8C542 /* __types.h */,
 				05AC9BCC164C9ACF0036E977 /* __video.h */,
@@ -972,6 +977,7 @@
 				05632E8B1658FEB2006EC216 /* irq.h */,
 				05ED55D11640981600A43B9C /* isr.h */,
 				05D7141A166107D10004E5D7 /* macros.h */,
+				057D65151664036D0062DFD9 /* proc.h */,
 				05377C0F163D76D300E8C542 /* system.h */,
 				05377C10163D76D300E8C542 /* video.h */,
 				055CF9271652DB2700036A75 /* vm.h */,
@@ -1200,6 +1206,14 @@
 			);
 			name = release;
 			path = ../release;
+			sourceTree = "<group>";
+		};
+		057D6514166403630062DFD9 /* proc */ = {
+			isa = PBXGroup;
+			children = (
+				057D6517166403C20062DFD9 /* __XEOS_Proc.c */,
+			);
+			path = proc;
 			sourceTree = "<group>";
 		};
 		058E28F0163B520A0042A1DB /* libc */ = {
