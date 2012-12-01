@@ -1,0 +1,3 @@
+[submodule "source/core/xeos/third-party/acpica/source"]
+	path = source/core/xeos/third-party/acpica/source
+	url = git@github.com:macmade/acpica.git
