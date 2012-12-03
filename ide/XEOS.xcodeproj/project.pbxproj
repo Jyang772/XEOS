@@ -10,6 +10,7 @@
 		05014379166D3E140089B49E /* XEOS_Mem_FreePage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_FreePage.c; sourceTree = "<group>"; };
 		0501437A166D42AA0089B49E /* XEOS_Mem_AllocPages.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_AllocPages.c; sourceTree = "<group>"; };
 		0501437B166D42B30089B49E /* XEOS_Mem_FreePages.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_FreePages.c; sourceTree = "<group>"; };
+		0501437C166D49670089B49E /* XEOS_Mem_GetTotalBytes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_GetTotalBytes.c; sourceTree = "<group>"; };
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		051A31041635C3B900AD4FC9 /* xeos.64.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.video.inc.s; sourceTree = "<group>"; };
 		051A31071635CC3F00AD4FC9 /* xeos.gdt.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.gdt.inc.s; sourceTree = "<group>"; };
@@ -8868,6 +8869,7 @@
 				057D652716641CE40062DFD9 /* XEOS_Mem_ZoneGetPageCount.c */,
 				05E7F22B1664BE1800AE2944 /* XEOS_Mem_ZoneGetFreePageCount.c */,
 				057D652816641CE40062DFD9 /* XEOS_Mem_ZoneGetType.c */,
+				0501437C166D49670089B49E /* XEOS_Mem_GetTotalBytes.c */,
 			);
 			path = mem;
 			sourceTree = "<group>";
