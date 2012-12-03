@@ -78,8 +78,12 @@ typedef int32_t System_Atomic_SpinLock;
 
 void System_Atomic_MemoryBarrier( void );
 
+bool System_Atomic_CompareAndSwap8( int8_t oldValue, int8_t newValue, volatile int8_t * value );
+bool System_Atomic_CompareAndSwap16( int16_t oldValue, int16_t newValue, volatile int16_t * value );
 bool System_Atomic_CompareAndSwap32( int32_t oldValue, int32_t newValue, volatile int32_t * value );
 bool System_Atomic_CompareAndSwap64( int64_t oldValue, int64_t newValue, volatile int64_t * value );
+bool System_Atomic_CompareAndSwapChar( char oldValue, char newValue, volatile char * value );
+bool System_Atomic_CompareAndSwapShort( short oldValue, short newValue, volatile short * value );
 bool System_Atomic_CompareAndSwapInt( int oldValue, int newValue, volatile int * value );
 bool System_Atomic_CompareAndSwapLong( long oldValue, long newValue, volatile long * value );
 bool System_Atomic_CompareAndSwapPtr( void * oldValue, void * newValue, void * volatile * value );

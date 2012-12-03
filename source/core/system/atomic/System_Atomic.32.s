@@ -68,8 +68,12 @@
 ;-------------------------------------------------------------------------------
 
 global System_Atomic_MemoryBarrier
+global System_Atomic_CompareAndSwap8
+global System_Atomic_CompareAndSwap16
 global System_Atomic_CompareAndSwap32
 global System_Atomic_CompareAndSwap64
+global System_Atomic_CompareAndSwapChar
+global System_Atomic_CompareAndSwapShort
 global System_Atomic_CompareAndSwapInt
 global System_Atomic_CompareAndSwapLong
 global System_Atomic_CompareAndSwapPtr
@@ -79,6 +83,7 @@ global System_Atomic_And32
 global System_Atomic_Or32
 global System_Atomic_Xor32
 global System_Atomic_Add32
+global System_Atomic_Add64
 global System_Atomic_Decrement32
 global System_Atomic_Decrement64
 global System_Atomic_Increment32
@@ -144,6 +149,24 @@ System_Atomic_MemoryBarrier:
     ret
 
 ;-------------------------------------------------------------------------------
+; bool System_Atomic_CompareAndSwap8( int8_t oldValue,
+;                                     int8_t newValue,
+;                                     volatile int8_t * value );
+;-------------------------------------------------------------------------------
+System_Atomic_CompareAndSwap8:
+    
+    ret
+    
+;-------------------------------------------------------------------------------
+; bool System_Atomic_CompareAndSwap16( int16_t oldValue,
+;                                      int16_t newValue,
+;                                      volatile int16_t * value );
+;-------------------------------------------------------------------------------
+System_Atomic_CompareAndSwap16:
+    
+    ret
+
+;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwap32( int32_t oldValue,
 ;                                      int32_t newValue,
 ;                                      volatile int32_t * value );
@@ -151,16 +174,16 @@ System_Atomic_MemoryBarrier:
 System_Atomic_CompareAndSwap32:
     
     xor         eax,        eax
-	mov         ecx,        [ esp + 12 ]
+    mov         ecx,        [ esp + 12 ]
     cmp         ecx,        0
     je          .end
     
     mov         eax,        [ esp + 4 ]
-	mov         edx,        [ esp + 8 ]
+    mov         edx,        [ esp + 8 ]
     lock
     cmpxchg    [ ecx ],     edx
-	sete       al
-	movzx       eax,         al
+    sete       al
+    movzx       eax,         al
     
     .end:
         
@@ -195,6 +218,24 @@ System_Atomic_CompareAndSwap64:
     .end:
         
         ret
+
+;-------------------------------------------------------------------------------
+; bool System_Atomic_CompareAndSwapChar( char oldValue,
+;                                        char newValue,
+;                                        volatile char * value );
+;-------------------------------------------------------------------------------
+System_Atomic_CompareAndSwapChar:
+    
+    jmp     System_Atomic_CompareAndSwap8
+
+;-------------------------------------------------------------------------------
+; bool System_Atomic_CompareAndSwapShort( short oldValue,
+;                                         short newValue,
+;                                         volatile short * value );
+;-------------------------------------------------------------------------------
+System_Atomic_CompareAndSwapShort:
+    
+    jmp     System_Atomic_CompareAndSwap16
 
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwapInt( int oldValue,
