@@ -155,7 +155,21 @@ System_Atomic_MemoryBarrier:
 ;-------------------------------------------------------------------------------
 System_Atomic_CompareAndSwap8:
     
-    jmp     System_Atomic_CompareAndSwap32
+    xor         eax,        eax
+    mov         ecx,        [ esp + 12 ]
+    cmp         ecx,        0
+    je          .end
+    
+    mov         eax,        [ esp + 4 ]
+    mov         edx,        [ esp + 8 ]
+    lock
+    cmpxchg    [ ecx ],     dl
+    sete       al
+    movzx      eax,         al
+    
+    .end:
+        
+        ret
     
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwap16( int16_t oldValue,
@@ -164,7 +178,21 @@ System_Atomic_CompareAndSwap8:
 ;-------------------------------------------------------------------------------
 System_Atomic_CompareAndSwap16:
     
-    jmp     System_Atomic_CompareAndSwap32
+    xor         eax,        eax
+    mov         ecx,        [ esp + 12 ]
+    cmp         ecx,        0
+    je          .end
+    
+    mov         eax,        [ esp + 4 ]
+    mov         edx,        [ esp + 8 ]
+    lock
+    cmpxchg    [ ecx ],     dx
+    sete       al
+    movzx      eax,         al
+    
+    .end:
+        
+        ret
 
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwap32( int32_t oldValue,
