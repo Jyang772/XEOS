@@ -155,7 +155,7 @@ System_Atomic_MemoryBarrier:
 ;-------------------------------------------------------------------------------
 System_Atomic_CompareAndSwap8:
     
-    ret
+    jmp     System_Atomic_CompareAndSwap32
     
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwap16( int16_t oldValue,
@@ -164,7 +164,7 @@ System_Atomic_CompareAndSwap8:
 ;-------------------------------------------------------------------------------
 System_Atomic_CompareAndSwap16:
     
-    ret
+    jmp     System_Atomic_CompareAndSwap32
 
 ;-------------------------------------------------------------------------------
 ; bool System_Atomic_CompareAndSwap32( int32_t oldValue,
@@ -183,7 +183,7 @@ System_Atomic_CompareAndSwap32:
     lock
     cmpxchg    [ ecx ],     edx
     sete       al
-    movzx       eax,         al
+    movzx      eax,         al
     
     .end:
         
