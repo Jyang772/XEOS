@@ -2542,6 +2542,16 @@
 		0569DB2A1671357C00647F52 /* XEOS_HAL_Keyboard_SetLED.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SetLED.c; sourceTree = "<group>"; };
 		0569DB2B1671357C00647F52 /* XEOS_HAL_Keyboard_SetRateAndDelay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SetRateAndDelay.c; sourceTree = "<group>"; };
 		0569DB2C1671357C00647F52 /* XEOS_HAL_Keyboard_SetScanCodeSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SetScanCodeSet.c; sourceTree = "<group>"; };
+		0569DB2E16715EF000647F52 /* XEOS_HAL_Keyboard_ReadData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_ReadData.c; sourceTree = "<group>"; };
+		0569DB2F167160B700647F52 /* ps2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ps2.h; sourceTree = "<group>"; };
+		0569DB311671632D00647F52 /* XEOS_HAL_PS2_InputBufferEmpty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_InputBufferEmpty.c; sourceTree = "<group>"; };
+		0569DB321671632D00647F52 /* XEOS_HAL_PS2_OutputBufferEmpty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_OutputBufferEmpty.c; sourceTree = "<group>"; };
+		0569DB331671632D00647F52 /* XEOS_HAL_PS2_ParityError.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_ParityError.c; sourceTree = "<group>"; };
+		0569DB341671632D00647F52 /* XEOS_HAL_PS2_ReadData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_ReadData.c; sourceTree = "<group>"; };
+		0569DB351671632D00647F52 /* XEOS_HAL_PS2_GetStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_GetStatus.c; sourceTree = "<group>"; };
+		0569DB361671632D00647F52 /* XEOS_HAL_PS2_TimeoutError.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_TimeoutError.c; sourceTree = "<group>"; };
+		0569DB371671632D00647F52 /* XEOS_HAL_PS2_SendCommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_SendCommand.c; sourceTree = "<group>"; };
+		0569DB381671632D00647F52 /* XEOS_HAL_PS2_WriteData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_WriteData.c; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056E9B601635EB740032AE55 /* xeos.32.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
@@ -2917,6 +2927,7 @@
 				0561C54B1657A6EF00E7C0FE /* nmi */,
 				0550B6ED164863030072D4B0 /* pic */,
 				0550B6EE164863030072D4B0 /* pit */,
+				0569DB30167160E500647F52 /* ps2 */,
 				0561C53C165796FB00E7C0FE /* rtc */,
 				05E6E187163F0C81008D2DBD /* smbios */,
 			);
@@ -8855,6 +8866,21 @@
 			path = irq;
 			sourceTree = "<group>";
 		};
+		0569DB30167160E500647F52 /* ps2 */ = {
+			isa = PBXGroup;
+			children = (
+				0569DB311671632D00647F52 /* XEOS_HAL_PS2_InputBufferEmpty.c */,
+				0569DB321671632D00647F52 /* XEOS_HAL_PS2_OutputBufferEmpty.c */,
+				0569DB331671632D00647F52 /* XEOS_HAL_PS2_ParityError.c */,
+				0569DB341671632D00647F52 /* XEOS_HAL_PS2_ReadData.c */,
+				0569DB351671632D00647F52 /* XEOS_HAL_PS2_GetStatus.c */,
+				0569DB361671632D00647F52 /* XEOS_HAL_PS2_TimeoutError.c */,
+				0569DB371671632D00647F52 /* XEOS_HAL_PS2_SendCommand.c */,
+				0569DB381671632D00647F52 /* XEOS_HAL_PS2_WriteData.c */,
+			);
+			path = ps2;
+			sourceTree = "<group>";
+		};
 		056A28B71628AA80003FBE80 /* release */ = {
 			isa = PBXGroup;
 			children = (
@@ -8871,6 +8897,7 @@
 				0569DB221671357C00647F52 /* XEOS_HAL_Keyboard_Echo.c */,
 				0569DB231671357C00647F52 /* XEOS_HAL_Keyboard_EnableScan.c */,
 				0569DB241671357C00647F52 /* XEOS_HAL_Keyboard_GetScanCodeSet.c */,
+				0569DB2E16715EF000647F52 /* XEOS_HAL_Keyboard_ReadData.c */,
 				0569DB251671357C00647F52 /* XEOS_HAL_Keyboard_ResendLastByte.c */,
 				0569DB261671357C00647F52 /* XEOS_HAL_Keyboard_Reset.c */,
 				0569DB271671357C00647F52 /* XEOS_HAL_Keyboard_SendCommand.c */,
@@ -9632,6 +9659,7 @@
 				0561C54C1657A70200E7C0FE /* nmi.h */,
 				052F6AF51646D48C00DDADD8 /* pic.h */,
 				052F6AF61646D48C00DDADD8 /* pit.h */,
+				0569DB2F167160B700647F52 /* ps2.h */,
 				0561C5391657969C00E7C0FE /* rtc.h */,
 				05E6E18D163F0C8D008D2DBD /* smbios.h */,
 			);
