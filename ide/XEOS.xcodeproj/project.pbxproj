@@ -2530,6 +2530,18 @@
 		0569C8691629645E00A8FF1D /* xeos.constants.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
 		0569C86C162AF3FE00A8FF1D /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
 		0569C86D162B0A6800A8FF1D /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
+		0569DB211671357C00647F52 /* XEOS_HAL_Keyboard_DisableScan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_DisableScan.c; sourceTree = "<group>"; };
+		0569DB221671357C00647F52 /* XEOS_HAL_Keyboard_Echo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_Echo.c; sourceTree = "<group>"; };
+		0569DB231671357C00647F52 /* XEOS_HAL_Keyboard_EnableScan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_EnableScan.c; sourceTree = "<group>"; };
+		0569DB241671357C00647F52 /* XEOS_HAL_Keyboard_GetScanCodeSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_GetScanCodeSet.c; sourceTree = "<group>"; };
+		0569DB251671357C00647F52 /* XEOS_HAL_Keyboard_ResendLastByte.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_ResendLastByte.c; sourceTree = "<group>"; };
+		0569DB261671357C00647F52 /* XEOS_HAL_Keyboard_Reset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_Reset.c; sourceTree = "<group>"; };
+		0569DB271671357C00647F52 /* XEOS_HAL_Keyboard_SendCommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SendCommand.c; sourceTree = "<group>"; };
+		0569DB281671357C00647F52 /* XEOS_HAL_Keyboard_SendCommandWithData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SendCommandWithData.c; sourceTree = "<group>"; };
+		0569DB291671357C00647F52 /* XEOS_HAL_Keyboard_SetDefaultParameters.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SetDefaultParameters.c; sourceTree = "<group>"; };
+		0569DB2A1671357C00647F52 /* XEOS_HAL_Keyboard_SetLED.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SetLED.c; sourceTree = "<group>"; };
+		0569DB2B1671357C00647F52 /* XEOS_HAL_Keyboard_SetRateAndDelay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SetRateAndDelay.c; sourceTree = "<group>"; };
+		0569DB2C1671357C00647F52 /* XEOS_HAL_Keyboard_SetScanCodeSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_Keyboard_SetScanCodeSet.c; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056E9B601635EB740032AE55 /* xeos.32.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
@@ -8855,6 +8867,18 @@
 		05773AD8167016F400A1597A /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				0569DB211671357C00647F52 /* XEOS_HAL_Keyboard_DisableScan.c */,
+				0569DB221671357C00647F52 /* XEOS_HAL_Keyboard_Echo.c */,
+				0569DB231671357C00647F52 /* XEOS_HAL_Keyboard_EnableScan.c */,
+				0569DB241671357C00647F52 /* XEOS_HAL_Keyboard_GetScanCodeSet.c */,
+				0569DB251671357C00647F52 /* XEOS_HAL_Keyboard_ResendLastByte.c */,
+				0569DB261671357C00647F52 /* XEOS_HAL_Keyboard_Reset.c */,
+				0569DB271671357C00647F52 /* XEOS_HAL_Keyboard_SendCommand.c */,
+				0569DB281671357C00647F52 /* XEOS_HAL_Keyboard_SendCommandWithData.c */,
+				0569DB291671357C00647F52 /* XEOS_HAL_Keyboard_SetDefaultParameters.c */,
+				0569DB2A1671357C00647F52 /* XEOS_HAL_Keyboard_SetLED.c */,
+				0569DB2B1671357C00647F52 /* XEOS_HAL_Keyboard_SetRateAndDelay.c */,
+				0569DB2C1671357C00647F52 /* XEOS_HAL_Keyboard_SetScanCodeSet.c */,
 			);
 			path = keyboard;
 			sourceTree = "<group>";
