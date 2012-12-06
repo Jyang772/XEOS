@@ -69,12 +69,24 @@
 extern "C" {
 #endif
 
-int syscall( int n, ... );
+#include <stdint.h>
+
+#ifdef __LP64__
+
+uint64_t syscall( int n, ... );
+
+#else
+
+uint32_t syscall( int n, ... );
+
+#endif
 
 #define SYS_MAXSYSCALL          256
 
 #define SYS_null                0
 #define SYS_exit                1
+#define SYS_munmap              73
+#define SYS_mmap                197
 
 #ifdef __cplusplus
 }

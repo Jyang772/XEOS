@@ -62,15 +62,9 @@
 /* $Id$ */
 
 #include "sys/mman.h"
+#include "sys/syscall.h"
 
 void * mmap( void * addr, size_t len, int prot, int flags, int fildes, off_t off )
 {
-    ( void )addr;
-    ( void )len;
-    ( void )prot;
-    ( void )flags;
-    ( void )fildes;
-    ( void )off;
-    
-    return NULL;
+    return ( void * )( syscall( SYS_mmap, addr, len, prot, flags, fildes, off ) );
 }

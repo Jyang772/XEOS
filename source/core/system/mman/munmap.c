@@ -62,11 +62,10 @@
 /* $Id$ */
 
 #include "sys/mman.h"
+#include "sys/syscall.h"
 
 int munmap( void * addr, size_t len )
 {
-    ( void )addr;
-    ( void )len;
-    
-    return 0;
+    return ( int )( syscall( SYS_munmap, addr, len ) );
+
 }
