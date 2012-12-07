@@ -2552,6 +2552,7 @@
 		0569DB361671632D00647F52 /* XEOS_HAL_PS2_TimeoutError.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_TimeoutError.c; sourceTree = "<group>"; };
 		0569DB371671632D00647F52 /* XEOS_HAL_PS2_SendCommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_SendCommand.c; sourceTree = "<group>"; };
 		0569DB381671632D00647F52 /* XEOS_HAL_PS2_WriteData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_WriteData.c; sourceTree = "<group>"; };
+		0569DB3C16716B3300647F52 /* XEOS_HAL_PIC_IRQLineMasked.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_IRQLineMasked.c; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056E9B601635EB740032AE55 /* xeos.32.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
@@ -8696,6 +8697,7 @@
 				05632E8E1658FFA3006EC216 /* XEOS_HAL_PIC_SendEOI.c */,
 				05632E9516590F5C006EC216 /* XEOS_HAL_PIC_MaskIRQLine.c */,
 				05632E9616590F66006EC216 /* XEOS_HAL_PIC_UnmaskIRQLine.c */,
+				0569DB3C16716B3300647F52 /* XEOS_HAL_PIC_IRQLineMasked.c */,
 			);
 			path = pic;
 			sourceTree = "<group>";
