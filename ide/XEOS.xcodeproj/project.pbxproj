@@ -2576,7 +2576,7 @@
 		057D652116641CE40062DFD9 /* XEOS_Mem_ZoneGetAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_ZoneGetAddress.c; sourceTree = "<group>"; };
 		057D652416641CE40062DFD9 /* XEOS_Mem_ZoneGetLength.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_ZoneGetLength.c; sourceTree = "<group>"; };
 		057D652516641CE40062DFD9 /* XEOS_Mem_ZoneGetNext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_ZoneGetNext.c; sourceTree = "<group>"; };
-		057D652616641CE40062DFD9 /* XEOS_Mem_ZoneGetPageAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_ZoneGetPageAtIndex.c; sourceTree = "<group>"; };
+		057D652616641CE40062DFD9 /* XEOS_Mem_ZoneGetPages.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_ZoneGetPages.c; sourceTree = "<group>"; };
 		057D652716641CE40062DFD9 /* XEOS_Mem_ZoneGetPageCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_ZoneGetPageCount.c; sourceTree = "<group>"; };
 		057D652816641CE40062DFD9 /* XEOS_Mem_ZoneGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Mem_ZoneGetType.c; sourceTree = "<group>"; };
 		058E28F2163B520A0042A1DB /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_assert.c; sourceTree = "<group>"; };
@@ -8934,7 +8934,7 @@
 				057D652116641CE40062DFD9 /* XEOS_Mem_ZoneGetAddress.c */,
 				057D652416641CE40062DFD9 /* XEOS_Mem_ZoneGetLength.c */,
 				057D652516641CE40062DFD9 /* XEOS_Mem_ZoneGetNext.c */,
-				057D652616641CE40062DFD9 /* XEOS_Mem_ZoneGetPageAtIndex.c */,
+				057D652616641CE40062DFD9 /* XEOS_Mem_ZoneGetPages.c */,
 				057D652716641CE40062DFD9 /* XEOS_Mem_ZoneGetPageCount.c */,
 				05E7F22B1664BE1800AE2944 /* XEOS_Mem_ZoneGetFreePageCount.c */,
 				057D652816641CE40062DFD9 /* XEOS_Mem_ZoneGetType.c */,
