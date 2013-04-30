@@ -1,7 +1,7 @@
 /*******************************************************************************
  * XEOS - X86 Experimental Operating System
  * 
- * Copyright (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
+ * Copyright (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  * All rights reserved.
  * 
  * XEOS Software License - Version 1.0 - December 21, 2012
@@ -63,8 +63,4 @@
 
 #include "errno.h"
 
-int __libc_errno( void );
-int __libc_errno( void )
-{
-    return 0;
-}
+int __libc_errno = 0;

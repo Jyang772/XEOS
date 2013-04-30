@@ -1,7 +1,7 @@
 /*******************************************************************************
  * XEOS - X86 Experimental Operating System
  * 
- * Copyright (c) 2010-2012, Jean-David Gadina <macmade@eosgarden.com>
+ * Copyright (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  * All rights reserved.
  * 
  * XEOS Software License - Version 1.0 - December 21, 2012
@@ -62,10 +62,24 @@
 /* $Id$ */
 
 #include "math.h"
+#include "float.h"
+#include "errno.h"
 
 double log2( double x )
 {
-    ( void )x;
+    if( fabs( x ) < DBL_EPSILON ) /* Zero */
+    {
+        __libc_errno = ERANGE;
+        
+        return -INFINITY;
+    }
     
-    return 0;
+    if( x < 0 )
+    {
+        __libc_errno = EDOM;
+        
+        return NAN;
+    }
+    
+    return log( x ) / log( 2 );
 }
