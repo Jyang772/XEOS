@@ -9729,7 +9729,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = eosgarden;
+				ORGANIZATIONNAME = XS-Labs;
 			};
 			buildConfigurationList = 05AFEDB51620F26400740041 /* Build configuration list for PBXProject "XEOS" */;
 			compatibilityVersion = "Xcode 3.2";
