@@ -67,19 +67,7 @@
 
 double log2( double x )
 {
-    if( fabs( x ) < DBL_EPSILON ) /* Zero */
-    {
-        __libc_errno = ERANGE;
-        
-        return -INFINITY;
-    }
+    ( void )x;
     
-    if( x < 0 )
-    {
-        __libc_errno = EDOM;
-        
-        return NAN;
-    }
-    
-    return log( x ) / log( 2 );
+    return 0;
 }

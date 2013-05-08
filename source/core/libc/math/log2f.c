@@ -67,19 +67,7 @@
 
 float log2f( float x )
 {
-    if( fabsf( x ) < FLT_EPSILON ) /* Zero */
-    {
-        __libc_errno = ERANGE;
-        
-        return -INFINITY;
-    }
+    ( void )x;
     
-    if( x < 0 )
-    {
-        __libc_errno = EDOM;
-        
-        return NAN;
-    }
-    
-    return logf( x ) / logf( 2 );
+    return 0;
 }

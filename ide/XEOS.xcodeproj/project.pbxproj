@@ -9729,7 +9729,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = XS-Labs;
+				ORGANIZATIONNAME = "XS-Labs";
 			};
 			buildConfigurationList = 05AFEDB51620F26400740041 /* Build configuration list for PBXProject "XEOS" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -9763,12 +9763,14 @@
 		05AFEDBB1620F26400740041 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Debug;
 		};
 		05AFEDBC1620F26400740041 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Release;
 		};

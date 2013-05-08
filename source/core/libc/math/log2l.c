@@ -67,19 +67,7 @@
 
 long double log2l( long double x )
 {
-    if( fabl( x ) < LDBL_EPSILON ) /* Zero */
-    {
-        __libc_errno = ERANGE;
-        
-        return -INFINITY;
-    }
+    ( void )x;
     
-    if( x < 0 )
-    {
-        __libc_errno = EDOM;
-        
-        return NAN;
-    }
-    
-    return logl( x ) / logl( 2 );
+    return 0;
 }
