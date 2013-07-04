@@ -9751,6 +9751,7 @@
 		05AFEDB81620F26400740041 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
