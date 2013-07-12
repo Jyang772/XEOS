@@ -69,6 +69,7 @@
 
 #pragma clang diagnostic ignored "-Wpadded"
 #pragma clang diagnostic ignored "-Wunused-macros"
+#pragma clang diagnostic ignored "-Wused-but-marked-unused"
 #pragma clang diagnostic ignored "-Wunused-parameter"
 #pragma clang diagnostic ignored "-Wcast-align"
 #pragma clang diagnostic ignored "-Wsign-conversion"
