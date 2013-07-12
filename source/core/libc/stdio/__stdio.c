@@ -63,9 +63,9 @@
 
 #include "stdio.h"
 
-FILE __libc_stderr;
-FILE __libc_stdin;
-FILE __libc_stdout;
+static FILE __libc_stderr;
+static FILE __libc_stdin;
+static FILE __libc_stdout;
 
 FILE * __libc_stderr_p  = &__libc_stderr;
 FILE * __libc_stdin_p   = &__libc_stdin;
