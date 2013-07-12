@@ -65,7 +65,7 @@ include ../../../Makefile-Config.mk
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" ACPICA "$(COLOR_NONE)"]> *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" ACPI "$(COLOR_NONE)"]> *** "
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -86,8 +86,8 @@ DIR_SRC_COMPONENTS_UTILITIES    = $(DIR_SRC_COMPONENTS)utilities/
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_CC_32          := -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_32)
-ARGS_CC_64          := -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_64)
+ARGS_CC_32          := -include $(PATH_SRC_CORE_ACPICA)clang-warnings.h -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_32)
+ARGS_CC_64          := -include $(PATH_SRC_CORE_ACPICA)clang-warnings.h -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -95,6 +95,14 @@ ARGS_CC_64          := -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(AR
 
 # Define the search paths for source files
 vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_DISPATCHER)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_EVENTS)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_EXECUTER)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_HARDWARE)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_NAMESPACE)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_PARSER)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_RESOURCES)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_TABLES)
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_UTILITIES)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -109,15 +117,47 @@ vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_DISPATCHER)
 
 # Gets every code file in the source directory
 _FILES_C_COMPONENTS_DISPATCHER              = $(foreach dir,$(DIR_SRC_COMPONENTS_DISPATCHER),$(wildcard $(DIR_SRC_COMPONENTS_DISPATCHER)*$(EXT_C)))
+_FILES_C_COMPONENTS_EVENTS                  = $(foreach dir,$(DIR_SRC_COMPONENTS_EVENTS),$(wildcard $(DIR_SRC_COMPONENTS_EVENTS)*$(EXT_C)))
+_FILES_C_COMPONENTS_EXECUTER                = $(foreach dir,$(DIR_SRC_COMPONENTS_EXECUTER),$(wildcard $(DIR_SRC_COMPONENTS_EXECUTER)*$(EXT_C)))
+_FILES_C_COMPONENTS_HARDWARE                = $(foreach dir,$(DIR_SRC_COMPONENTS_HARDWARE),$(wildcard $(DIR_SRC_COMPONENTS_HARDWARE)*$(EXT_C)))
+_FILES_C_COMPONENTS_NAMESPACE               = $(foreach dir,$(DIR_SRC_COMPONENTS_NAMESPACE),$(wildcard $(DIR_SRC_COMPONENTS_NAMESPACE)*$(EXT_C)))
+_FILES_C_COMPONENTS_PARSER                  = $(foreach dir,$(DIR_SRC_COMPONENTS_PARSER),$(wildcard $(DIR_SRC_COMPONENTS_PARSER)*$(EXT_C)))
+_FILES_C_COMPONENTS_RESOURCES               = $(foreach dir,$(DIR_SRC_COMPONENTS_RESOURCES),$(wildcard $(DIR_SRC_COMPONENTS_RESOURCES)*$(EXT_C)))
+_FILES_C_COMPONENTS_TABLES                  = $(foreach dir,$(DIR_SRC_COMPONENTS_TABLES),$(wildcard $(DIR_SRC_COMPONENTS_TABLES)*$(EXT_C)))
+_FILES_C_COMPONENTS_UTILITIES               = $(foreach dir,$(DIR_SRC_COMPONENTS_UTILITIES),$(wildcard $(DIR_SRC_COMPONENTS_UTILITIES)*$(EXT_C)))
 
 # Gets only the file name of the code files
 _FILES_C_REL_COMPONENTS_DISPATCHER          = $(notdir $(_FILES_C_COMPONENTS_DISPATCHER))
+_FILES_C_REL_COMPONENTS_EVENTS              = $(notdir $(_FILES_C_COMPONENTS_EVENTS))
+_FILES_C_REL_COMPONENTS_EXECUTER            = $(notdir $(_FILES_C_COMPONENTS_EXECUTER))
+_FILES_C_REL_COMPONENTS_HARDWARE            = $(notdir $(_FILES_C_COMPONENTS_HARDWARE))
+_FILES_C_REL_COMPONENTS_NAMESPACE           = $(notdir $(_FILES_C_COMPONENTS_NAMESPACE))
+_FILES_C_REL_COMPONENTS_PARSER              = $(notdir $(_FILES_C_COMPONENTS_PARSER))
+_FILES_C_REL_COMPONENTS_RESOURCES           = $(notdir $(_FILES_C_COMPONENTS_RESOURCES))
+_FILES_C_REL_COMPONENTS_TABLES              = $(notdir $(_FILES_C_COMPONENTS_TABLES))
+_FILES_C_REL_COMPONENTS_UTILITIES           = $(notdir $(_FILES_C_COMPONENTS_UTILITIES))
 
 # Replace the code extension by the object one
 _FILES_C_OBJ_COMPONENTS_DISPATCHER          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_DISPATCHER))
+_FILES_C_OBJ_COMPONENTS_EVENTS              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_EVENTS))
+_FILES_C_OBJ_COMPONENTS_EXECUTER            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_EXECUTER))
+_FILES_C_OBJ_COMPONENTS_HARDWARE            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_HARDWARE))
+_FILES_C_OBJ_COMPONENTS_NAMESPACE           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_NAMESPACE))
+_FILES_C_OBJ_COMPONENTS_PARSER              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_PARSER))
+_FILES_C_OBJ_COMPONENTS_RESOURCES           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_RESOURCES))
+_FILES_C_OBJ_COMPONENTS_TABLES              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_TABLES))
+_FILES_C_OBJ_COMPONENTS_UTILITIES           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_UTILITIES))
 
 # Prefix all binary files with the build directory
 _FILES_C_OBJ_BUILD_COMPONENTS_DISPATCHER    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_DISPATCHER))
+_FILES_C_OBJ_BUILD_COMPONENTS_EVENTS        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_EVENTS))
+_FILES_C_OBJ_BUILD_COMPONENTS_EXECUTER      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_EXECUTER))
+_FILES_C_OBJ_BUILD_COMPONENTS_HARDWARE      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_HARDWARE))
+_FILES_C_OBJ_BUILD_COMPONENTS_NAMESPACE     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_NAMESPACE))
+_FILES_C_OBJ_BUILD_COMPONENTS_PARSER        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_PARSER))
+_FILES_C_OBJ_BUILD_COMPONENTS_RESOURCES     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_RESOURCES))
+_FILES_C_OBJ_BUILD_COMPONENTS_TABLES        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_TABLES))
+_FILES_C_OBJ_BUILD_COMPONENTS_UTILITIES     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_UTILITIES))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -134,7 +174,7 @@ _FILES_C_OBJ_BUILD_COMPONENTS_DISPATCHER    = $(addprefix $(PATH_BUILD_32_CORE_O
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: 
+all: $(_FILES_C_OBJ_BUILD_COMPONENTS_DISPATCHER) $(_FILES_C_OBJ_BUILD_COMPONENTS_EVENTS) $(_FILES_C_OBJ_BUILD_COMPONENTS_EXECUTER) $(_FILES_C_OBJ_BUILD_COMPONENTS_HARDWARE) $(_FILES_C_OBJ_BUILD_COMPONENTS_NAMESPACE) $(_FILES_C_OBJ_BUILD_COMPONENTS_PARSER) $(_FILES_C_OBJ_BUILD_COMPONENTS_RESOURCES) $(_FILES_C_OBJ_BUILD_COMPONENTS_TABLES) $(_FILES_C_OBJ_BUILD_COMPONENTS_UTILITIES)
 		
 	@:
 

@@ -2556,6 +2556,8 @@
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056E9B601635EB740032AE55 /* xeos.32.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
+		056F56CA1790668000F468B5 /* acxeos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acxeos.h; sourceTree = "<group>"; };
+		056F56CB179067BB00F468B5 /* clang-warnings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "clang-warnings.h"; sourceTree = "<group>"; };
 		05773AD6167016C800A1597A /* keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyboard.h; sourceTree = "<group>"; };
 		057D650B166400930062DFD9 /* XEOS_VM_MemoryMapGetPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPTCount.c; sourceTree = "<group>"; };
 		057D650D1664009C0062DFD9 /* XEOS_VM_MemoryMapGetPDTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPDTCount.c; sourceTree = "<group>"; };
@@ -11532,6 +11534,7 @@
 		05E179AE1790499500E88B69 /* acpica */ = {
 			isa = PBXGroup;
 			children = (
+				056F56CB179067BB00F468B5 /* clang-warnings.h */,
 				05E179AF1790499600E88B69 /* Makefile */,
 				05E179B01790499600E88B69 /* source */,
 			);
@@ -12170,6 +12173,7 @@
 				05E17B391790499600E88B69 /* acos2.h */,
 				05E17B3A1790499600E88B69 /* acwin.h */,
 				05E17B3B1790499600E88B69 /* acwin64.h */,
+				056F56CA1790668000F468B5 /* acxeos.h */,
 			);
 			path = platform;
 			sourceTree = "<group>";
