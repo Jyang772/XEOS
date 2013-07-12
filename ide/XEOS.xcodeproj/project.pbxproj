@@ -2680,7 +2680,7 @@
 		05B8276D1649C2EB0075418D /* XEOS_ISR_SysCall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_ISR_SysCall.c; sourceTree = "<group>"; };
 		05B827701649C6110075418D /* syscall.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = syscall.c; sourceTree = "<group>"; };
 		05BA5ADE1661AC740090989B /* atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
-		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
+		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05CC626A165D65F400A3AC55 /* __vm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __vm.h; sourceTree = "<group>"; };
 		05CC626C165D66B300A3AC55 /* __XEOS_VM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_VM.c; sourceTree = "<group>"; };
 		05CC626D165D687700A3AC55 /* XEOS_VM_SystemMapInitialize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_SystemMapInitialize.c; sourceTree = "<group>"; };
@@ -2694,7 +2694,7 @@
 		05D7141F166111AC0004E5D7 /* XEOS_HAL_CPU_EnablePaging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_EnablePaging.c; sourceTree = "<group>"; };
 		05D71420166111AC0004E5D7 /* XEOS_HAL_CPU_PAEEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_PAEEnabled.c; sourceTree = "<group>"; };
 		05D71421166111AC0004E5D7 /* XEOS_HAL_CPU_PagingEnabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CPU_PagingEnabled.c; sourceTree = "<group>"; };
-		05E179AF1790499600E88B69 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05E179AF1790499600E88B69 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05E179B11790499600E88B69 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		05E179B31790499600E88B69 /* acpica-reference.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "acpica-reference.doc"; sourceTree = "<group>"; };
 		05E179B41790499600E88B69 /* acpica-reference.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "acpica-reference.pdf"; sourceTree = "<group>"; };
