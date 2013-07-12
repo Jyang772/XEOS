@@ -106,6 +106,8 @@ PATH_BUILD_32_CORE_OBJ          := $(PATH_BUILD_32_CORE)obj/
 PATH_BUILD_64_CORE_OBJ          := $(PATH_BUILD_64_CORE)obj/
 PATH_BUILD_32_CORE_OBJ_KERNEL   := $(PATH_BUILD_32_CORE_OBJ)xeos/
 PATH_BUILD_64_CORE_OBJ_KERNEL   := $(PATH_BUILD_64_CORE_OBJ)xeos/
+PATH_BUILD_32_CORE_OBJ_ACPICA   := $(PATH_BUILD_32_CORE_OBJ)acpica/
+PATH_BUILD_64_CORE_OBJ_ACPICA   := $(PATH_BUILD_64_CORE_OBJ)acpica/
 PATH_BUILD_32_CORE_OBJ_LIBC     := $(PATH_BUILD_32_CORE_OBJ)libc/
 PATH_BUILD_64_CORE_OBJ_LIBC     := $(PATH_BUILD_64_CORE_OBJ)libc/
 PATH_BUILD_32_CORE_OBJ_SYSTEM   := $(PATH_BUILD_32_CORE_OBJ)system/
@@ -116,6 +118,7 @@ PATH_BUILD_64_CORE_OBJ_SYSTEM   := $(PATH_BUILD_64_CORE_OBJ)system/
 PATH_SRC_BOOT                   := $(PATH_SRC)boot/
 PATH_SRC_CORE                   := $(PATH_SRC)core/
 PATH_SRC_CORE_KERNEL            := $(PATH_SRC_CORE)xeos/
+PATH_SRC_CORE_ACPICA            := $(PATH_SRC_CORE)acpica/
 PATH_SRC_CORE_LIBC              := $(PATH_SRC_CORE)libc/
 PATH_SRC_CORE_SYSTEM            := $(PATH_SRC_CORE)system/
 PATH_SRC_CORE_INC               := $(PATH_SRC_CORE)include/
@@ -180,8 +183,8 @@ PRINT                           := echo
 
 ARGS_CC_WARN                    := -Weverything -Werror
 ARGS_CC_STD                     := -std=c99
-ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -ccc-host-triple $(TARGET_32)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
-ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=x86-64 -ccc-host-triple $(TARGET_64)-$(TARGET_ABI)-freebsd -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -target $(TARGET_32)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -nostdinc -ffreestanding -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=x86-64 -target $(TARGET_64)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -nostdinc -ffreestanding -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 
 # Linker flags
 

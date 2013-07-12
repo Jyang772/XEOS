@@ -94,6 +94,9 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_SYSTEM) && $(MAKE)
 	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS ACPI library (ACPICA)"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_CORE_ACPICA) && $(MAKE)
+	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS kernel"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE)
 	

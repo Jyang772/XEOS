@@ -94,8 +94,8 @@ DIR_SRC_WCTYPE      = $(PATH_SRC_CORE_LIBC)wctype/
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_CC_32          := -iquote $(DIR_SRC_INC) $(ARGS_CC_32)
-ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
+ARGS_CC_32          := $(ARGS_CC_32)
+ARGS_CC_64          := $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -120,7 +120,6 @@ vpath %$(EXT_C) $(DIR_SRC_TGMATH)
 vpath %$(EXT_C) $(DIR_SRC_TIME)
 vpath %$(EXT_C) $(DIR_SRC_WCHAR)
 vpath %$(EXT_C) $(DIR_SRC_WCTYPE)
-vpath %$(EXT_H) $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
 # File suffixes

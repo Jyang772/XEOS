@@ -83,8 +83,8 @@ DIR_SRC_ATOMIC      = $(PATH_SRC_CORE_SYSTEM)atomic/
 
 ARGS_AS_32          := -f $(TARGET_ABI) -I $(PATH_SRC_CORE_INC)
 ARGS_AS_64          := -f $(TARGET_ABI)64 -I $(PATH_SRC_CORE_INC)
-ARGS_CC_32          := -iquote $(DIR_SRC_INC) $(ARGS_CC_32)
-ARGS_CC_64          := -iquote $(DIR_SRC_INC) $(ARGS_CC_64)
+ARGS_CC_32          := $(ARGS_CC_32)
+ARGS_CC_64          := $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # File extensions
@@ -106,7 +106,6 @@ vpath %$(EXT_C)         $(DIR_SRC_PTHREAD)
 vpath %$(EXT_C)         $(DIR_SRC_ATOMIC)
 vpath %$(EXT_ASM_32)    $(DIR_SRC_ATOMIC)
 vpath %$(EXT_ASM_64)    $(DIR_SRC_ATOMIC)
-vpath %$(EXT_H)         $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
 # File suffixes
