@@ -1,1 +1,4 @@
 
+[submodule "source/core/acpica/source"]
+	path = source/core/acpica/source
+	url = git://github.com/macmade/acpica.git
