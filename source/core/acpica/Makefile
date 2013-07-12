@@ -65,4 +65,97 @@ include ../../../Makefile-Config.mk
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" ACPI "$(COLOR_NONE)"]> *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" ACPICA "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
+# Paths
+#-------------------------------------------------------------------------------
+
+DIR_SRC_COMPONENTS              = $(PATH_SRC_CORE_ACPICA)source/source/components/
+DIR_SRC_COMPONENTS_DISPATCHER   = $(DIR_SRC_COMPONENTS)dispatcher/
+DIR_SRC_COMPONENTS_EVENTS       = $(DIR_SRC_COMPONENTS)events/
+DIR_SRC_COMPONENTS_EXECUTER     = $(DIR_SRC_COMPONENTS)executer/
+DIR_SRC_COMPONENTS_HARDWARE     = $(DIR_SRC_COMPONENTS)hardware/
+DIR_SRC_COMPONENTS_NAMESPACE    = $(DIR_SRC_COMPONENTS)namespace/
+DIR_SRC_COMPONENTS_PARSER       = $(DIR_SRC_COMPONENTS)parser/
+DIR_SRC_COMPONENTS_RESOURCES    = $(DIR_SRC_COMPONENTS)resources/
+DIR_SRC_COMPONENTS_TABLES       = $(DIR_SRC_COMPONENTS)tables/
+DIR_SRC_COMPONENTS_UTILITIES    = $(DIR_SRC_COMPONENTS)utilities/
+
+#-------------------------------------------------------------------------------
+# Software arguments
+#-------------------------------------------------------------------------------
+
+ARGS_CC_32          := -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_32)
+ARGS_CC_64          := -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_64)
+
+#-------------------------------------------------------------------------------
+# Search paths
+#-------------------------------------------------------------------------------
+
+# Define the search paths for source files
+vpath %$(EXT_C) $(DIR_SRC_COMPONENTS_DISPATCHER)
+
+#-------------------------------------------------------------------------------
+# File suffixes
+#-------------------------------------------------------------------------------
+
+# Adds the suffixes used in this file
+.SUFFIXES: $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+
+#-------------------------------------------------------------------------------
+# Macros
+#-------------------------------------------------------------------------------
+
+# Gets every code file in the source directory
+_FILES_C_COMPONENTS_DISPATCHER              = $(foreach dir,$(DIR_SRC_COMPONENTS_DISPATCHER),$(wildcard $(DIR_SRC_COMPONENTS_DISPATCHER)*$(EXT_C)))
+
+# Gets only the file name of the code files
+_FILES_C_REL_COMPONENTS_DISPATCHER          = $(notdir $(_FILES_C_COMPONENTS_DISPATCHER))
+
+# Replace the code extension by the object one
+_FILES_C_OBJ_COMPONENTS_DISPATCHER          = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_DISPATCHER))
+
+# Prefix all binary files with the build directory
+_FILES_C_OBJ_BUILD_COMPONENTS_DISPATCHER    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_DISPATCHER))
+
+#-------------------------------------------------------------------------------
+# Built-in targets
+#-------------------------------------------------------------------------------
+
+# Declaration for phony targets, to avoid problems with local files
+.PHONY: all clean
+
+# Declaration for precious targets, to avoid cleaning of intermediate files
+.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_ACPICA)%$(EXT_C)$(EXT_OBJ)
+
+#-------------------------------------------------------------------------------
+# Phony targets
+#-------------------------------------------------------------------------------
+
+# Build the full project
+all: 
+		
+	@:
+
+# Cleans the build files
+clean:
+	
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPICA)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPICA)*
+	
+# Compiles a C file (64 bits)
+$(PATH_BUILD_64_CORE_OBJ_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_ACPICA)$(@F) -c $(abspath $<)
+
+# Targets with second expansion
+.SECONDEXPANSION:
+
+# Compiles a C file (32 bits)
+$(PATH_BUILD_32_CORE_OBJ_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(PATH_BUILD_64_CORE_OBJ_ACPICA),$$@)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_ACPICA)$(@F) -c $(abspath $<)
