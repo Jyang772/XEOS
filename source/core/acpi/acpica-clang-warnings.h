@@ -61,13 +61,23 @@
 
 /* $Id$ */
 
-/*!
- * @file            AcpiOsWaitEventsComplete.c
- * @author          Jean-David Gadina
- * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
- */
+#ifndef __ACPI_CLANG_WARNINGS_H__
+#define __ACPI_CLANG_WARNINGS_H__
+#pragma once
 
-#include "acpica.h"
+#ifdef __clang__
 
-void AcpiOsWaitEventsComplete( void )
-{}
+#pragma clang diagnostic ignored "-Wpadded"
+#pragma clang diagnostic ignored "-Wunused-macros"
+#pragma clang diagnostic ignored "-Wused-but-marked-unused"
+#pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Wcast-align"
+#pragma clang diagnostic ignored "-Wsign-conversion"
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#pragma clang diagnostic ignored "-Wmissing-variable-declarations"
+#pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
+#pragma clang diagnostic ignored "-Wuninitialized"
+
+#endif
+
+#endif /* __ACPI_CLANG_WARNINGS_H__ */

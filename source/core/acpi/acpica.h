@@ -61,23 +61,19 @@
 
 /* $Id$ */
 
-#ifndef __ACPICA_CLANG_WARNINGS_H__
-#define __ACPICA_CLANG_WARNINGS_H__
+#ifndef __ACPI_ACPICA_H__
+#define __ACPI_ACPICA_H__
 #pragma once
 
 #ifdef __clang__
-
-#pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wunused-macros"
-#pragma clang diagnostic ignored "-Wused-but-marked-unused"
-#pragma clang diagnostic ignored "-Wunused-parameter"
-#pragma clang diagnostic ignored "-Wcast-align"
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#pragma clang diagnostic ignored "-Wmissing-variable-declarations"
-#pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
-#pragma clang diagnostic ignored "-Wuninitialized"
-
+#pragma clang diagnostic push
+#include "acpica-clang-warnings.h"
 #endif
 
-#endif /* __ACPICA_CLANG_WARNINGS_H__ */
+#include "acpi.h"
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
+#endif /* __ACPI_ACPICA_H__ */

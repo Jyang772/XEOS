@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "acpi.h"
+#include "acpica.h"
 
 ACPI_STATUS AcpiOsWaitSemaphore( ACPI_SEMAPHORE handle, UINT32 units, UINT16 timeout )
 {

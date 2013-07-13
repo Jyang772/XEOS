@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "acpi.h"
+#include "acpica.h"
 
 ACPI_STATUS AcpiOsCreateCache( char * cacheName, UINT16 objectSize, UINT16 maxDepth, ACPI_CACHE_T ** returnCache )
 {

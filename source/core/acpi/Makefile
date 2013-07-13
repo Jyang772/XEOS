@@ -94,8 +94,8 @@ ARGS_CC_32          := -iquote $(PATH_SRC_CORE_ACPI)acpica/source/include $(ARGS
 ARGS_CC_64          := -iquote $(PATH_SRC_CORE_ACPI)acpica/source/include $(ARGS_CC_64)
 ARGS_CC_32_OSL      := $(ARGS_CC_32)
 ARGS_CC_64_OSL      := $(ARGS_CC_64)
-ARGS_CC_32_ACPICA   := -include $(PATH_SRC_CORE_ACPI)clang-warnings.h $(ARGS_CC_32)
-ARGS_CC_64_ACPICA   := -include $(PATH_SRC_CORE_ACPI)clang-warnings.h $(ARGS_CC_64)
+ARGS_CC_32_ACPICA   := -include $(PATH_SRC_CORE_ACPI)acpica-clang-warnings.h $(ARGS_CC_32)
+ARGS_CC_64_ACPICA   := -include $(PATH_SRC_CORE_ACPI)acpica-clang-warnings.h $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths

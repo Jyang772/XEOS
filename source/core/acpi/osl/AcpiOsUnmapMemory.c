@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "acpi.h"
+#include "acpica.h"
 
 void AcpiOsUnmapMemory( void * logicalAddress, ACPI_SIZE length )
 {
