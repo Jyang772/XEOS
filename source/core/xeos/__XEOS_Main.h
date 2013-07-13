@@ -62,21 +62,32 @@
 /* $Id$ */
 
 /*!
- * @file            ACPI_SetLoggingFunction.c
+ * @header          __XEOS_Main.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "__acpi.h"
-#include "acpi.h"
-#include <stdlib.h>
+#ifndef __XEOS___MAIN_H__
+#define __XEOS___MAIN_H__
+#pragma once
 
-int ( * ACPI_SetLoggingFunction( int ( * func )( const char *, va_list ) ) )( const char *, va_list )
-{
-    int ( * old )( const char *, va_list );
-    
-    old                    = __ACPI_LoggingFunction;
-    __ACPI_LoggingFunction = func;
-    
-    return old;
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "xeos/video.h"
+
+void __XEOS_Main_PrintCopyright( void );
+void __XEOS_Main_PromptWithStatus( const char * message, const char * status, XEOS_Video_Color statusColor );
+void __XEOS_Main_PrintInfoLine( const char * format, ... ) XEOS_FORMAT_ATTRIBUTE( printf, 1, 2 );
+int  __XEOS_Main_PrintExternalInfoLine( const char * s, ... ) XEOS_FORMAT_ATTRIBUTE( printf, 1, 2 );
+int  __XEOS_Main_VPrintExternalInfoLine( const char * s, va_list args );
+void __XEOS_Main_Prompt( const char * message );
+void __XEOS_Main_PromptSuccess( const char * successMessage );
+void __XEOS_Main_PromptFailure( const char * failureMessage );
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* __XEOS___MAIN_H__ */

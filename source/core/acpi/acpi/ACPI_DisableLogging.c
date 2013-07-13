@@ -58,8 +58,14 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
- 
+
 /* $Id$ */
+
+/*!
+ * @file            ACPI_EnableLogging.c
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
 
 #include "__acpi.h"
 #include "acpi.h"

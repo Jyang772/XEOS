@@ -61,6 +61,12 @@
 
 /* $Id$ */
 
+/*!
+ * @header          acpica.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
+
 #ifndef __ACPI_ACPICA_H__
 #define __ACPI_ACPICA_H__
 #pragma once

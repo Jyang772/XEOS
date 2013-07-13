@@ -62,21 +62,25 @@
 /* $Id$ */
 
 /*!
- * @file            ACPI_SetLoggingFunction.c
+ * @header          XEOS_Main.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "__acpi.h"
-#include "acpi.h"
-#include <stdlib.h>
+#ifndef __XEOS_MAIN_H__
+#define __XEOS_MAIN_H__
+#pragma once
 
-int ( * ACPI_SetLoggingFunction( int ( * func )( const char *, va_list ) ) )( const char *, va_list )
-{
-    int ( * old )( const char *, va_list );
-    
-    old                    = __ACPI_LoggingFunction;
-    __ACPI_LoggingFunction = func;
-    
-    return old;
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "xeos/info.h"
+
+void XEOS_Main( XEOS_InfoRef info ) XEOS_NORETURN_ATTRIBUTE;
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* __XEOS_MAIN_H__ */
