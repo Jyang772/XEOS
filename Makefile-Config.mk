@@ -185,8 +185,8 @@ PRINT                           := echo
 
 ARGS_CC_WARN                    := -Weverything -Werror
 ARGS_CC_STD                     := -std=c99
-ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -target $(TARGET_32)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -nostdinc -ffreestanding -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
-ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=x86-64 -target $(TARGET_64)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -nostdinc -ffreestanding -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -target $(TARGET_32)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=x86-64 -target $(TARGET_64)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 
 # Linker flags
 

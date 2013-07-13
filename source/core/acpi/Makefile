@@ -216,6 +216,8 @@ clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)*
 	
 # Compiles a C file (64 bits) / OSL
