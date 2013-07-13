@@ -81,7 +81,7 @@ void AcpiOsVprintf( const char * format, va_list args )
     
     if( __ACPI_LoggingFunction == NULL )
     {
-        XEOS_Video_VPrintf( format, args );
+        XEOS_Video_VPrintf  ( format, args );
     }
     else
     {
