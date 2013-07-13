@@ -71,6 +71,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
+DIR_SRC_ACPI                            = $(PATH_SRC_CORE_ACPI)acpi/
 DIR_SRC_OSL                             = $(PATH_SRC_CORE_ACPI)osl/
 DIR_SRC_ACPICA                          = $(PATH_SRC_CORE_ACPI)acpica/source/
 DIR_SRC_ACPICA_COMPONENTS               = $(DIR_SRC_ACPICA)components/
@@ -102,6 +103,7 @@ ARGS_CC_64_ACPICA   := -include acpica-clang-warnings.h -iquote $(PATH_SRC_CORE_
 #-------------------------------------------------------------------------------
 
 # Define the search paths for source files
+vpath %$(EXT_C) $(DIR_SRC_ACPI)
 vpath %$(EXT_C) $(DIR_SRC_OSL)
 vpath %$(EXT_C) $(DIR_SRC_ACPICA_COMPONENTS_DEBUGGER)
 vpath %$(EXT_C) $(DIR_SRC_ACPICA_COMPONENTS_DISASSEMBLER)
@@ -127,6 +129,7 @@ vpath %$(EXT_C) $(DIR_SRC_ACPICA_COMPONENTS_UTILITIES)
 #-------------------------------------------------------------------------------
 
 # Gets every code file in the source directory
+_FILES_C_ACPI                                       = $(foreach dir,$(DIR_SRC_ACPI),$(wildcard $(DIR_SRC_ACPI)*$(EXT_C)))
 _FILES_C_OSL                                        = $(foreach dir,$(DIR_SRC_OSL),$(wildcard $(DIR_SRC_OSL)*$(EXT_C)))
 _FILES_C_ACPICA_COMPONENTS_DEBUGGER                 = $(foreach dir,$(DIR_SRC_ACPICA_COMPONENTS_DEBUGGER),$(wildcard $(DIR_SRC_ACPICA_COMPONENTS_DEBUGGER)*$(EXT_C)))
 _FILES_C_ACPICA_COMPONENTS_DISASSEMBLER             = $(foreach dir,$(DIR_SRC_ACPICA_COMPONENTS_DISASSEMBLER),$(wildcard $(DIR_SRC_ACPICA_COMPONENTS_DISASSEMBLER)*$(EXT_C)))
@@ -141,6 +144,7 @@ _FILES_C_ACPICA_COMPONENTS_TABLES                   = $(foreach dir,$(DIR_SRC_AC
 _FILES_C_ACPICA_COMPONENTS_UTILITIES                = $(foreach dir,$(DIR_SRC_ACPICA_COMPONENTS_UTILITIES),$(wildcard $(DIR_SRC_ACPICA_COMPONENTS_UTILITIES)*$(EXT_C)))
 
 # Gets only the file name of the code files
+_FILES_C_REL_ACPI                                   = $(notdir $(_FILES_C_ACPI))
 _FILES_C_REL_OSL                                    = $(notdir $(_FILES_C_OSL))
 _FILES_C_REL_ACPICA_COMPONENTS_DEBUGGER             = $(notdir $(_FILES_C_ACPICA_COMPONENTS_DEBUGGER))
 _FILES_C_REL_ACPICA_COMPONENTS_DISASSEMBLER         = $(notdir $(_FILES_C_ACPICA_COMPONENTS_DISASSEMBLER))
@@ -155,6 +159,7 @@ _FILES_C_REL_ACPICA_COMPONENTS_TABLES               = $(notdir $(_FILES_C_ACPICA
 _FILES_C_REL_ACPICA_COMPONENTS_UTILITIES            = $(notdir $(_FILES_C_ACPICA_COMPONENTS_UTILITIES))
 
 # Replace the code extension by the object one
+_FILES_C_OBJ_ACPI                                   = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ACPI))
 _FILES_C_OBJ_OSL                                    = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_OSL))
 _FILES_C_OBJ_ACPICA_COMPONENTS_DEBUGGER             = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ACPICA_COMPONENTS_DEBUGGER))
 _FILES_C_OBJ_ACPICA_COMPONENTS_DISASSEMBLER         = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ACPICA_COMPONENTS_DISASSEMBLER))
@@ -169,6 +174,7 @@ _FILES_C_OBJ_ACPICA_COMPONENTS_TABLES               = $(subst $(EXT_C),$(EXT_C)$
 _FILES_C_OBJ_ACPICA_COMPONENTS_UTILITIES            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ACPICA_COMPONENTS_UTILITIES))
 
 # Prefix all binary files with the build directory
+_FILES_C_OBJ_BUILD_ACPI                             = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(_FILES_C_OBJ_ACPI))
 _FILES_C_OBJ_BUILD_OSL                              = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(_FILES_C_OBJ_OSL))
 _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA),$(_FILES_C_OBJ_ACPICA_COMPONENTS_DEBUGGER))
 _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISASSEMBLER   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA),$(_FILES_C_OBJ_ACPICA_COMPONENTS_DISASSEMBLER))
@@ -197,7 +203,7 @@ _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES      = $(addprefix $(PATH_BUILD_3
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: osl acpica
+all: $(_FILES_C_OBJ_BUILD_ACPI) osl acpica
     
 	@:
 
@@ -215,10 +221,18 @@ acpica: $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER) $(_FILES_C_OBJ_BUILD_AC
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPI)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPI)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)*
+	
+# Compiles a C file (64 bits)
+$(PATH_BUILD_64_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_ACPI)$(@F) -c $(abspath $<)
 	
 # Compiles a C file (64 bits) / OSL
 $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
@@ -234,6 +248,12 @@ $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 
 # Targets with second expansion
 .SECONDEXPANSION:
+
+# Compiles a C file (32 bits)
+$(PATH_BUILD_32_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI),$(PATH_BUILD_64_CORE_OBJ_ACPI),$$@)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_ACPI)$(@F) -c $(abspath $<)
 
 # Compiles a C file (32 bits) / OSL
 $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(PATH_BUILD_64_CORE_OBJ_ACPI_OSL),$$@)

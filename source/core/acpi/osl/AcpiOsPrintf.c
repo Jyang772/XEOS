@@ -68,13 +68,28 @@
  */
 
 #include "acpica.h"
+#include "acpi.h"
+#include "__acpi.h"
 
 void ACPI_INTERNAL_VAR_XFACE AcpiOsPrintf( const char * format, ... )
 {
     va_list args;
     
+    if( __ACPI_LoggingEnabled == false )
+    {
+        return;
+    }
+    
     va_start( args, format );
-    AcpiOsVprintf( format, args );
+    
+    if( __ACPI_LoggingFunction == NULL )
+    {
+        AcpiOsVprintf( format, args );
+    }
+    else
+    {
+        __ACPI_LoggingFunction( format, args );
+    }
     
     va_end( args );
 }

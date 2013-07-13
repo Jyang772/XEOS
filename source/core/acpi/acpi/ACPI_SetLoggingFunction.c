@@ -58,26 +58,19 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-
+ 
 /* $Id$ */
 
-#ifndef __ACPI_ACPICA_CLANG_WARNINGS_H__
-#define __ACPI_ACPICA_CLANG_WARNINGS_H__
-#pragma once
+#include "__acpi.h"
+#include "acpi.h"
+#include <stdlib.h>
 
-#ifdef __clang__
-
-#pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wunused-macros"
-#pragma clang diagnostic ignored "-Wused-but-marked-unused"
-#pragma clang diagnostic ignored "-Wunused-parameter"
-#pragma clang diagnostic ignored "-Wcast-align"
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#pragma clang diagnostic ignored "-Wmissing-variable-declarations"
-#pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
-#pragma clang diagnostic ignored "-Wuninitialized"
-
-#endif
-
-#endif /* __ACPI_ACPICA_CLANG_WARNINGS_H__ */
+int ( * ACPI_SetLoggingFunction( int ( * func )( const char *, va_list ) ) )( const char *, va_list )
+{
+    int ( * old )( const char *, va_list );
+    
+    old                    = __ACPI_LoggingFunction;
+    __ACPI_LoggingFunction = func;
+    
+    return old;
+}

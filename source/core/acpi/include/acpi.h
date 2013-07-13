@@ -58,26 +58,31 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-
+ 
 /* $Id$ */
 
-#ifndef __ACPI_ACPICA_CLANG_WARNINGS_H__
-#define __ACPI_ACPICA_CLANG_WARNINGS_H__
+/*!
+ * @header          acpi.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
+
+#ifndef __ACPI_ACPI_H__
+#define __ACPI_ACPI_H__
 #pragma once
 
-#ifdef __clang__
-
-#pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wunused-macros"
-#pragma clang diagnostic ignored "-Wused-but-marked-unused"
-#pragma clang diagnostic ignored "-Wunused-parameter"
-#pragma clang diagnostic ignored "-Wcast-align"
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#pragma clang diagnostic ignored "-Wmissing-variable-declarations"
-#pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
-#pragma clang diagnostic ignored "-Wuninitialized"
-
+#ifdef __cplusplus
+extern "C" {
 #endif
 
-#endif /* __ACPI_ACPICA_CLANG_WARNINGS_H__ */
+#include <stdarg.h>
+
+int ( * ACPI_SetLoggingFunction( int ( * func )( const char *, va_list ) ) )( const char *, va_list );
+void ACPI_EnableLogging( void );
+void ACPI_DisableLogging( void );
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __ACPI_ACPI_H__ */

@@ -2690,6 +2690,12 @@
 		059E18A21791F74B004D5ADF /* AcpiOsWriteMemory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AcpiOsWriteMemory.c; sourceTree = "<group>"; };
 		059E18A31791F74B004D5ADF /* AcpiOsWritePciConfiguration.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AcpiOsWritePciConfiguration.c; sourceTree = "<group>"; };
 		059E18A41791F74B004D5ADF /* AcpiOsWritePort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AcpiOsWritePort.c; sourceTree = "<group>"; };
+		059E18A51792024E004D5ADF /* __ACPI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __ACPI.c; sourceTree = "<group>"; };
+		059E18A71792027C004D5ADF /* ACPI_SetLoggingFunction.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ACPI_SetLoggingFunction.c; sourceTree = "<group>"; };
+		059E18A8179202C9004D5ADF /* ACPI_EnableLogging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ACPI_EnableLogging.c; sourceTree = "<group>"; };
+		059E18A9179202D6004D5ADF /* ACPI_DisableLogging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ACPI_DisableLogging.c; sourceTree = "<group>"; };
+		059E18AA17920335004D5ADF /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
+		059E18AB1792033E004D5ADF /* __acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __acpi.h; sourceTree = "<group>"; };
 		05A393C416338FF0001F6C24 /* xeos.32.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.video.inc.s; sourceTree = "<group>"; };
 		05A885AB165EBCF400AFCE25 /* XEOS_VM_PTEntryGetAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PTEntryGetAddress.c; sourceTree = "<group>"; };
 		05A885AC165EBCFE00AFCE25 /* XEOS_VM_PTEntryGetFlag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PTEntryGetFlag.c; sourceTree = "<group>"; };
@@ -9547,6 +9553,10 @@
 		059E183A1791F74B004D5ADF /* acpi */ = {
 			isa = PBXGroup;
 			children = (
+				059E18A51792024E004D5ADF /* __ACPI.c */,
+				059E18A71792027C004D5ADF /* ACPI_SetLoggingFunction.c */,
+				059E18A8179202C9004D5ADF /* ACPI_EnableLogging.c */,
+				059E18A9179202D6004D5ADF /* ACPI_DisableLogging.c */,
 			);
 			path = acpi;
 			sourceTree = "<group>";
@@ -9554,6 +9564,8 @@
 		059E183B1791F74B004D5ADF /* include */ = {
 			isa = PBXGroup;
 			children = (
+				059E18AB1792033E004D5ADF /* __acpi.h */,
+				059E18AA17920335004D5ADF /* acpi.h */,
 				059E183C1791F74B004D5ADF /* acpica */,
 				059E18701791F74B004D5ADF /* acpica-clang-warnings.h */,
 				059E18711791F74B004D5ADF /* acpica.h */,
