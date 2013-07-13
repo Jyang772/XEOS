@@ -2582,6 +2582,7 @@
 		057F6BE51790D3E900920C1B /* acxeos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = acxeos.h; sourceTree = "<group>"; };
 		057F73B71790D3ED00920C1B /* clang-warnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "clang-warnings.h"; sourceTree = "<group>"; };
 		057F73B81790D3ED00920C1B /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		057F73BA1790D74000920C1B /* AcpiOsInitialize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AcpiOsInitialize.c; sourceTree = "<group>"; };
 		058E28F2163B520A0042A1DB /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_assert.c; sourceTree = "<group>"; };
 		058E28F5163B520A0042A1DB /* isalnum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalnum.c; sourceTree = "<group>"; };
 		058E28F6163B520A0042A1DB /* isalpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalpha.c; sourceTree = "<group>"; };
@@ -8992,6 +8993,7 @@
 		057F73B91790D3ED00920C1B /* osl */ = {
 			isa = PBXGroup;
 			children = (
+				057F73BA1790D74000920C1B /* AcpiOsInitialize.c */,
 			);
 			path = osl;
 			sourceTree = "<group>";
