@@ -72,6 +72,11 @@ time_t mktime( struct tm * timeptr )
     register time_t year;
     register time_t	result;
     
+    if( timeptr == NULL )
+    {
+        return ( time_t )-1;
+    }
+    
     month  = ( time_t )timeptr->tm_mon;
     year   = ( time_t )( timeptr->tm_year ) + month / 12 + 1900;
     month %= 12;
