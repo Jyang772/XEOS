@@ -71,7 +71,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_SRC_COMPONENTS              = $(PATH_SRC_CORE_ACPICA)source/source/components/
+DIR_SRC_COMPONENTS              = $(PATH_SRC_CORE_ACPI)acpica/source/components/
 DIR_SRC_COMPONENTS_DEBUGGER     = $(DIR_SRC_COMPONENTS)debugger/
 DIR_SRC_COMPONENTS_DISASSEMBLER = $(DIR_SRC_COMPONENTS)disassembler/
 DIR_SRC_COMPONENTS_DISPATCHER   = $(DIR_SRC_COMPONENTS)dispatcher/
@@ -88,8 +88,8 @@ DIR_SRC_COMPONENTS_UTILITIES    = $(DIR_SRC_COMPONENTS)utilities/
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_CC_32          := -include $(PATH_SRC_CORE_ACPICA)clang-warnings.h -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_32)
-ARGS_CC_64          := -include $(PATH_SRC_CORE_ACPICA)clang-warnings.h -iquote $(PATH_SRC_CORE_ACPICA)source/source/include $(ARGS_CC_64)
+ARGS_CC_32          := -include $(PATH_SRC_CORE_ACPI)clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)acpica/source/include $(ARGS_CC_32)
+ARGS_CC_64          := -include $(PATH_SRC_CORE_ACPI)clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)acpica/source/include $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -159,17 +159,17 @@ _FILES_C_OBJ_COMPONENTS_TABLES              = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ
 _FILES_C_OBJ_COMPONENTS_UTILITIES           = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_COMPONENTS_UTILITIES))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD_COMPONENTS_DEBUGGER      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_DEBUGGER))
-_FILES_C_OBJ_BUILD_COMPONENTS_DISASSEMBLER  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_DISASSEMBLER))
-_FILES_C_OBJ_BUILD_COMPONENTS_DISPATCHER    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_DISPATCHER))
-_FILES_C_OBJ_BUILD_COMPONENTS_EVENTS        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_EVENTS))
-_FILES_C_OBJ_BUILD_COMPONENTS_EXECUTER      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_EXECUTER))
-_FILES_C_OBJ_BUILD_COMPONENTS_HARDWARE      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_HARDWARE))
-_FILES_C_OBJ_BUILD_COMPONENTS_NAMESPACE     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_NAMESPACE))
-_FILES_C_OBJ_BUILD_COMPONENTS_PARSER        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_PARSER))
-_FILES_C_OBJ_BUILD_COMPONENTS_RESOURCES     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_RESOURCES))
-_FILES_C_OBJ_BUILD_COMPONENTS_TABLES        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_TABLES))
-_FILES_C_OBJ_BUILD_COMPONENTS_UTILITIES     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(_FILES_C_OBJ_COMPONENTS_UTILITIES))
+_FILES_C_OBJ_BUILD_COMPONENTS_DEBUGGER      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_DEBUGGER))
+_FILES_C_OBJ_BUILD_COMPONENTS_DISASSEMBLER  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_DISASSEMBLER))
+_FILES_C_OBJ_BUILD_COMPONENTS_DISPATCHER    = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_DISPATCHER))
+_FILES_C_OBJ_BUILD_COMPONENTS_EVENTS        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_EVENTS))
+_FILES_C_OBJ_BUILD_COMPONENTS_EXECUTER      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_EXECUTER))
+_FILES_C_OBJ_BUILD_COMPONENTS_HARDWARE      = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_HARDWARE))
+_FILES_C_OBJ_BUILD_COMPONENTS_NAMESPACE     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_NAMESPACE))
+_FILES_C_OBJ_BUILD_COMPONENTS_PARSER        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_PARSER))
+_FILES_C_OBJ_BUILD_COMPONENTS_RESOURCES     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_RESOURCES))
+_FILES_C_OBJ_BUILD_COMPONENTS_TABLES        = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_TABLES))
+_FILES_C_OBJ_BUILD_COMPONENTS_UTILITIES     = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_COMPONENTS_UTILITIES))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -179,7 +179,7 @@ _FILES_C_OBJ_BUILD_COMPONENTS_UTILITIES     = $(addprefix $(PATH_BUILD_32_CORE_O
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_ACPICA)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -194,20 +194,20 @@ all: $(_FILES_C_OBJ_BUILD_COMPONENTS_DEBUGGER) $(_FILES_C_OBJ_BUILD_COMPONENTS_D
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPICA)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPICA)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_ACPI)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_ACPI)*
 	
 # Compiles a C file (64 bits)
-$(PATH_BUILD_64_CORE_OBJ_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+$(PATH_BUILD_64_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 	
 	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_ACPICA)$(@F) -c $(abspath $<)
+	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_ACPI)$(@F) -c $(abspath $<)
 
 # Targets with second expansion
 .SECONDEXPANSION:
 
 # Compiles a C file (32 bits)
-$(PATH_BUILD_32_CORE_OBJ_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPICA),$(PATH_BUILD_64_CORE_OBJ_ACPICA),$$@)
+$(PATH_BUILD_32_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI),$(PATH_BUILD_64_CORE_OBJ_ACPI),$$@)
 	
 	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_ACPICA)$(@F) -c $(abspath $<)
+	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_ACPI)$(@F) -c $(abspath $<)
