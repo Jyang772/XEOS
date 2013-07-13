@@ -74,5 +74,7 @@ ACPI_STATUS AcpiOsTableOverride( ACPI_TABLE_HEADER * existingTable, ACPI_TABLE_H
     ( void )existingTable;
     ( void )newTable;
     
-    return AE_ERROR;
+    *( newTable ) = NULL;
+    
+    return AE_OK;
 }

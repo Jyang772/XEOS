@@ -71,5 +71,5 @@
 
 ACPI_STATUS AcpiOsTerminate( void )
 {
-    return AE_ERROR;
+    return AE_OK;
 }

@@ -72,7 +72,8 @@
 ACPI_STATUS AcpiOsPredefinedOverride( const ACPI_PREDEFINED_NAMES * predefinedObject, ACPI_STRING * newValue )
 {
     ( void )predefinedObject;
-    ( void )newValue;
     
-    return AE_ERROR;
+    *( newValue ) = NULL;
+    
+    return AE_OK;
 }
