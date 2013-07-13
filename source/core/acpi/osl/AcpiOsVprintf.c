@@ -68,9 +68,23 @@
  */
 
 #include "acpica.h"
+#include "acpi.h"
+#include "__acpi.h"
 #include <xeos/video.h>
 
 void AcpiOsVprintf( const char * format, va_list args )
 {
-    XEOS_Video_VPrintf( format, args );
+    if( __ACPI_LoggingEnabled == false )
+    {
+        return;
+    }
+    
+    if( __ACPI_LoggingFunction == NULL )
+    {
+        XEOS_Video_VPrintf( format, args );
+    }
+    else
+    {
+        __ACPI_LoggingFunction( format, args );
+    }
 }
