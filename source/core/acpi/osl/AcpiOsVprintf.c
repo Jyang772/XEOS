@@ -62,14 +62,15 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsVprintf.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+void AcpiOsVprintf( const char * format, va_list args )
 {
-    return AE_ERROR;
+    ( void )format;
+    ( void )args;
 }

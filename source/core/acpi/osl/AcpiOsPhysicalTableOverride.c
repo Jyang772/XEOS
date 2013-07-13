@@ -62,14 +62,18 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsPhysicalTableOverride.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsPhysicalTableOverride( ACPI_TABLE_HEADER * existingTable, ACPI_PHYSICAL_ADDRESS * newAddress, UINT32 * newTableLength )
 {
+    ( void )existingTable;
+    ( void )newAddress;
+    ( void )newTableLength;
+    
     return AE_ERROR;
 }

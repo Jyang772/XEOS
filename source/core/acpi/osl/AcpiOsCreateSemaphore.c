@@ -62,14 +62,18 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsCreateSemaphore.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsCreateSemaphore( UINT32 maxUnits, UINT32 initialUnits, ACPI_SEMAPHORE * outHandle )
 {
+    ( void )maxUnits;
+    ( void )initialUnits;
+    ( void )outHandle;
+    
     return AE_ERROR;
 }

@@ -62,14 +62,16 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsCreateLock.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsCreateLock( ACPI_SPINLOCK * outHandle )
 {
+    ( void )outHandle;
+    
     return AE_ERROR;
 }

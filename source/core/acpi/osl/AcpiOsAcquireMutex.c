@@ -62,14 +62,17 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsAcquireMutex.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsAcquireMutex( ACPI_MUTEX handle, UINT16 timeout )
 {
+    ( void )handle;
+    ( void )timeout;
+    
     return AE_ERROR;
 }

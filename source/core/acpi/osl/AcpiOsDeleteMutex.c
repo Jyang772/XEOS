@@ -62,14 +62,14 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsDeleteMutex.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+void AcpiOsDeleteMutex( ACPI_MUTEX handle )
 {
-    return AE_ERROR;
+    ( void )handle;
 }

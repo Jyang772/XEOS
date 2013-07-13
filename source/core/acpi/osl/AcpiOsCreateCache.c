@@ -62,14 +62,19 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsCreateCache.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsCreateCache( char * cacheName, UINT16 objectSize, UINT16 maxDepth, ACPI_CACHE_T ** returnCache )
 {
+    ( void )cacheName;
+    ( void )objectSize;
+    ( void )maxDepth;
+    ( void )returnCache;
+    
     return AE_ERROR;
 }

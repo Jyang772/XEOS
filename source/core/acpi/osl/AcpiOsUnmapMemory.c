@@ -62,14 +62,15 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsUnmapMemory.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+void AcpiOsUnmapMemory( void * logicalAddress, ACPI_SIZE length )
 {
-    return AE_ERROR;
+    ( void )logicalAddress;
+    ( void )length;
 }

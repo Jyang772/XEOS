@@ -62,14 +62,17 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsReadable.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+BOOLEAN AcpiOsReadable( void * memory, ACPI_SIZE length )
 {
-    return AE_ERROR;
+    ( void )memory;
+    ( void )length;
+    
+    return 0;
 }

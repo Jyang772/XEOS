@@ -62,14 +62,14 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsSleep.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+void AcpiOsSleep( UINT64 milliseconds )
 {
-    return AE_ERROR;
+    ( void )milliseconds;
 }

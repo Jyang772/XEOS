@@ -62,14 +62,17 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsGetPhysicalAddress.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsGetPhysicalAddress( void * logicalAddress, ACPI_PHYSICAL_ADDRESS * physicalAddress )
 {
+    ( void )logicalAddress;
+    ( void )physicalAddress;
+    
     return AE_ERROR;
 }

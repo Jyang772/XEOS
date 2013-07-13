@@ -62,14 +62,18 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsWriteMemory.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsWriteMemory( ACPI_PHYSICAL_ADDRESS address, UINT64 value, UINT32 width )
 {
+    ( void )address;
+    ( void )value;
+    ( void )width;
+    
     return AE_ERROR;
 }

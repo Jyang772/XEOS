@@ -62,14 +62,17 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsTableOverride.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsTableOverride( ACPI_TABLE_HEADER * existingTable, ACPI_TABLE_HEADER ** newTable )
 {
+    ( void )existingTable;
+    ( void )newTable;
+    
     return AE_ERROR;
 }

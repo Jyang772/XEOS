@@ -62,14 +62,18 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsInstallInterruptHandler.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsInstallInterruptHandler( UINT32 interruptLevel, ACPI_OSD_HANDLER handler, void * context )
 {
+    ( void )interruptLevel;
+    ( void )handler;
+    ( void )context;
+    
     return AE_ERROR;
 }

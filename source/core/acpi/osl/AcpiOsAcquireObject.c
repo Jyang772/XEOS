@@ -62,14 +62,16 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsAcquireObject.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+void * AcpiOsAcquireObject( ACPI_CACHE_T * cache )
 {
-    return AE_ERROR;
+    ( void )cache;
+    
+    return NULL;
 }

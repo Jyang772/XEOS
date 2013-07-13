@@ -62,14 +62,17 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsPredefinedOverride.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsPredefinedOverride( const ACPI_PREDEFINED_NAMES * predefinedObject, ACPI_STRING * newValue )
 {
+    ( void )predefinedObject;
+    ( void )newValue;
+    
     return AE_ERROR;
 }

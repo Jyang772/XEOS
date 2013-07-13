@@ -62,14 +62,19 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsReadPciConfiguration.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsReadPciConfiguration( ACPI_PCI_ID * pciID, UINT32 reg, UINT64 * value, UINT32 width )
 {
+    ( void )pciID;
+    ( void )reg;
+    ( void )value;
+    ( void )width;
+    
     return AE_ERROR;
 }

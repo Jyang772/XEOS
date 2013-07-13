@@ -62,14 +62,16 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsCreateMutex.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsCreateMutex( ACPI_MUTEX * outHandle )
 {
+    ( void )outHandle;
+    
     return AE_ERROR;
 }

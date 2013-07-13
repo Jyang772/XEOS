@@ -62,14 +62,18 @@
 /* $Id$ */
 
 /*!
- * @file            AcpiOsInitialize.c
+ * @file            AcpiOsExecute.c
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
 #include "acpi.h"
 
-ACPI_STATUS AcpiOsInitialize( void )
+ACPI_STATUS AcpiOsExecute( ACPI_EXECUTE_TYPE type, ACPI_OSD_EXEC_CALLBACK function, void * context )
 {
+    ( void )type;
+    ( void )function;
+    ( void )context;
+    
     return AE_ERROR;
 }
