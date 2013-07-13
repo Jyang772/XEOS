@@ -71,5 +71,10 @@
 
 void ACPI_INTERNAL_VAR_XFACE AcpiOsPrintf( const char * format, ... )
 {
-    ( void )format;
+    va_list args;
+    
+    va_start( args, format );
+    AcpiOsVprintf( format, args );
+    
+    va_end( args );
 }

@@ -68,9 +68,9 @@
  */
 
 #include "acpica.h"
+#include <xeos/video.h>
 
 void AcpiOsVprintf( const char * format, va_list args )
 {
-    ( void )format;
-    ( void )args;
+    XEOS_Video_VPrintf( format, args );
 }
