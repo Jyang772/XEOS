@@ -2689,6 +2689,7 @@
 		059E18351791BB9B004D5ADF /* XEOS_Video_PrintPrompt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_PrintPrompt.c; sourceTree = "<group>"; };
 		059E18361791BC7C004D5ADF /* XEOS_Video_GetPromptLength.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_GetPromptLength.c; sourceTree = "<group>"; };
 		059E18371791C8F1004D5ADF /* __XEOS_Main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = __XEOS_Main.c; sourceTree = "<group>"; };
+		059E18381791CC91004D5ADF /* XEOS_Video_SetStickyLines.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_Video_SetStickyLines.c; sourceTree = "<group>"; };
 		05A393C416338FF0001F6C24 /* xeos.32.video.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.video.inc.s; sourceTree = "<group>"; };
 		05A885AB165EBCF400AFCE25 /* XEOS_VM_PTEntryGetAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PTEntryGetAddress.c; sourceTree = "<group>"; };
 		05A885AC165EBCFE00AFCE25 /* XEOS_VM_PTEntryGetFlag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PTEntryGetFlag.c; sourceTree = "<group>"; };
@@ -3059,6 +3060,7 @@
 				05377C8A163E879100E8C542 /* XEOS_Video_VPrintf.c */,
 				05377C8B163E879B00E8C542 /* XEOS_Video_Putc.c */,
 				05377C8C163E87A600E8C542 /* XEOS_Video_Scroll.c */,
+				059E18381791CC91004D5ADF /* XEOS_Video_SetStickyLines.c */,
 			);
 			path = video;
 			sourceTree = "<group>";
