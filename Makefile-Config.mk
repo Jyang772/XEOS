@@ -65,6 +65,14 @@
 
 # Targets / Architectures
 
+TARGET_ABI_MACHO                := macho
+TARGET_32_MACHO                 := i386
+TARGET_64_MACHO                 := x86_64
+TARGET_32_MARCH_MACHO           := i386
+TARGET_64_MARCH_MACHO           := x86-64
+TARGET_32_TRIPLE_MACHO          := i386-mach-freebsd
+TARGET_64_TRIPLE_MACHO          := x86_64-mach-freebsd
+
 TARGET_ABI_ELF                  := elf
 TARGET_32_ELF                   := i386
 TARGET_64_ELF                   := x86_64
@@ -167,9 +175,9 @@ AS_64                           := $(AS)
 
 # Linker
 
-LD                              := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32)-$(TARGET_ABI)/bin/ld
+LD                              := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ld
 LD_32                           := $(LD)
-LD_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64)-$(TARGET_ABI)/bin/ld
+LD_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_ELF)/bin/ld
 
 # C compiler
 

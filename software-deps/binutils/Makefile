@@ -78,8 +78,10 @@ VERSION_BINUTILS    := 2.22
 #-------------------------------------------------------------------------------
 
 DIR_BUILD           := $(realpath ./build/)/
-DIR_BUILD_32        := $(DIR_BUILD)$(TARGET_32)/
-DIR_BUILD_64        := $(DIR_BUILD)$(TARGET_64)/
+DIR_BUILD_32_MACHO  := $(DIR_BUILD)$(TARGET_32_TRIPLE_MACHO)/
+DIR_BUILD_64_MACHO  := $(DIR_BUILD)$(TARGET_64_TRIPLE_MACHO)/
+DIR_BUILD_32_ELF    := $(DIR_BUILD)$(TARGET_32_TRIPLE_ELF)/
+DIR_BUILD_64_ELF    := $(DIR_BUILD)$(TARGET_64_TRIPLE_ELF)/
 DIR_SRC             := $(realpath ./source/)/
 DIR_SRC_BINUTILS    := $(DIR_SRC)binutils-$(VERSION_BINUTILS)
 DIR_DISTRIB         := $(realpath ./distrib/)/
@@ -90,14 +92,14 @@ DISTRIB_BINUTILS    := $(DIR_DISTRIB)binutils-$(VERSION_BINUTILS).tar.bz2
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean binutils_32 binutils_64
+.PHONY: all clean binutils_macho32 binutils_macho64 binutils_elf32 binutils_elf64
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: binutils_32 binutils_64
+all: binutils_macho32 binutils_macho64 clean binutils_elf32 binutils_elf64
 
 	@:
 
@@ -105,38 +107,70 @@ all: binutils_32 binutils_64
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_32)*
-	@$(RM) $(ARGS_RM) $(DIR_BUILD_64)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_32_MACHO)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_64_MACHO)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_32_ELF)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_64_ELF)*
 	
 	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
 
-# Builds GNU/BinUtils / 32 bits
-binutils_32:
+# Builds GNU/BinUtils / 32 bits / MACHO
+binutils_macho32:
 	
 	@$(PRINT) $(PROMPT)"Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
 	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
 	
-	@$(PRINT) $(PROMPT)"Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
-	@$(CD) $(DIR_BUILD_32) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_32)-$(TARGET_ABI) --disable-nls --disable-werror
+	@$(PRINT) $(PROMPT)"Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32_TRIPLE_MACHO))"
+	@$(CD) $(DIR_BUILD_32_MACHO) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_32_TRIPLE_MACHO) --disable-nls --disable-werror
 	
-	@$(PRINT) $(PROMPT)"Building GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
-	@$(CD) $(DIR_BUILD_32) && $(MAKE) $(ARGS_MAKE_BUILD)
+	@$(PRINT) $(PROMPT)"Building GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32_TRIPLE_MACHO))"
+	@$(CD) $(DIR_BUILD_32_MACHO) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-	@$(PRINT) $(PROMPT)"Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
-	@$(CD) $(DIR_BUILD_32) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
+	@$(PRINT) $(PROMPT)"Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32_TRIPLE_MACHO))"
+	@$(CD) $(DIR_BUILD_32_MACHO) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 
-# Builds GNU/BinUtils / 64 bits
-binutils_64:
+# Builds GNU/BinUtils / 64 bits / MACHO
+binutils_macho64:
 	
 	@$(PRINT) $(PROMPT)"Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
 	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
 	
-	@$(PRINT) $(PROMPT)"Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32))"
-	@$(CD) $(DIR_BUILD_64) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_64)-$(TARGET_ABI) --disable-nls --disable-werror
+	@$(PRINT) $(PROMPT)"Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64_TRIPLE_MACHO))"
+	@$(CD) $(DIR_BUILD_64_MACHO) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_64_TRIPLE_MACHO) --disable-nls --disable-werror
 	
-	@$(PRINT) $(PROMPT)"Building GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
-	@$(CD) $(DIR_BUILD_64) && $(MAKE) $(ARGS_MAKE_BUILD)
+	@$(PRINT) $(PROMPT)"Building GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64_TRIPLE_MACHO))"
+	@$(CD) $(DIR_BUILD_64_MACHO) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-	@$(PRINT) $(PROMPT)"Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64))"
-	@$(CD) $(DIR_BUILD_64) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
+	@$(PRINT) $(PROMPT)"Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64_TRIPLE_MACHO))"
+	@$(CD) $(DIR_BUILD_64_MACHO) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
+
+# Builds GNU/BinUtils / 32 bits / ELF
+binutils_elf32:
+	
+	@$(PRINT) $(PROMPT)"Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
+	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
+	
+	@$(PRINT) $(PROMPT)"Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32_TRIPLE_ELF))"
+	@$(CD) $(DIR_BUILD_32_ELF) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_32_TRIPLE_ELF) --disable-nls --disable-werror
+	
+	@$(PRINT) $(PROMPT)"Building GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32_TRIPLE_ELF))"
+	@$(CD) $(DIR_BUILD_32_ELF) && $(MAKE) $(ARGS_MAKE_BUILD)
+	
+	@$(PRINT) $(PROMPT)"Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_32_TRIPLE_ELF))"
+	@$(CD) $(DIR_BUILD_32_ELF) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
+
+# Builds GNU/BinUtils / 64 bits / ELF
+binutils_elf64:
+	
+	@$(PRINT) $(PROMPT)"Unpacking GNU/BinUtils ($(VERSION_BINUTILS))"
+	@if [ ! -d $(DIR_SRC_BINUTILS) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BINUTILS) -C $(DIR_SRC); fi
+	
+	@$(PRINT) $(PROMPT)"Configuring GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64_TRIPLE_ELF))"
+	@$(CD) $(DIR_BUILD_64_ELF) && $(EXEC) $(DIR_SRC_BINUTILS)/configure --prefix=$(PATH_TOOLCHAIN_BINUTILS) --target=$(TARGET_64_TRIPLE_ELF) --disable-nls --disable-werror
+	
+	@$(PRINT) $(PROMPT)"Building GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64_TRIPLE_ELF))"
+	@$(CD) $(DIR_BUILD_64_ELF) && $(MAKE) $(ARGS_MAKE_BUILD)
+	
+	@$(PRINT) $(PROMPT)"Installing GNU/BinUtils ($(VERSION_BINUTILS)) - ($(TARGET_64_TRIPLE_ELF))"
+	@$(CD) $(DIR_BUILD_64_ELF) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
