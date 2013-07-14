@@ -174,7 +174,7 @@ _FILES_C_OBJ_ACPICA_COMPONENTS_TABLES               = $(subst $(EXT_C),$(EXT_C)$
 _FILES_C_OBJ_ACPICA_COMPONENTS_UTILITIES            = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_REL_ACPICA_COMPONENTS_UTILITIES))
 
 # Prefix all binary files with the build directory
-_FILES_C_OBJ_BUILD_ACPI                             = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(_FILES_C_OBJ_ACPI))
+_FILES_C_OBJ_BUILD_ACPI                             = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI),$(_FILES_C_OBJ_ACPI))
 _FILES_C_OBJ_BUILD_OSL                              = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(_FILES_C_OBJ_OSL))
 _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER       = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA),$(_FILES_C_OBJ_ACPICA_COMPONENTS_DEBUGGER))
 _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISASSEMBLER   = $(addprefix $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA),$(_FILES_C_OBJ_ACPICA_COMPONENTS_DISASSEMBLER))
@@ -196,7 +196,7 @@ _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES      = $(addprefix $(PATH_BUILD_3
 .PHONY: all clean osl acpica
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
