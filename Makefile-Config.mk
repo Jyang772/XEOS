@@ -65,9 +65,21 @@
 
 # Targets / Architectures
 
-TARGET_32                       := i386
-TARGET_64                       := x86_64
-TARGET_ABI                      := elf
+TARGET_ABI_ELF                  := elf
+TARGET_32_ELF                   := i386
+TARGET_64_ELF                   := x86_64
+TARGET_32_MARCH_ELF             := i386
+TARGET_64_MARCH_ELF             := x86-64
+TARGET_32_TRIPLE_ELF            := i386-elf-freebsd
+TARGET_64_TRIPLE_ELF            := x86_64-elf-freebsd
+
+TARGET_ABI                      := $(TARGET_ABI_ELF)
+TARGET_32                       := $(TARGET_32_ELF)
+TARGET_64                       := $(TARGET_64_ELF)
+TARGET_32_MARCH                 := $(TARGET_32_MARCH_ELF)
+TARGET_64_MARCH                 := $(TARGET_64_MARCH_ELF)
+TARGET_32_TRIPLE                := $(TARGET_32_TRIPLE_ELF)
+TARGET_64_TRIPLE                := $(TARGET_64_TRIPLE_ELF)
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -187,13 +199,18 @@ PRINT                           := echo
 
 ARGS_CC_WARN                    := -Weverything -Werror
 ARGS_CC_STD                     := -std=c99
-ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32) -target $(TARGET_32)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
-ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=x86-64 -target $(TARGET_64)-$(TARGET_ABI)-freebsd -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32_MARCH) -target $(TARGET_32_TRIPLE) -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_64_MARCH) -target $(TARGET_64_TRIPLE) -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
 
 # Linker flags
 
 ARGS_LD_32                      := -z max-page-size=0x1000 -s
 ARGS_LD_64                      := -z max-page-size=0x1000 -s
+
+# Assembler flags
+
+ARGS_AS_32                      := -f $(TARGET_ABI)
+ARGS_AS_64                      := -f $(TARGET_ABI)64
 
 # Utilities
 
