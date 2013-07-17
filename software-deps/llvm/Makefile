@@ -88,6 +88,12 @@ DIR_CRT             := $(DIR_LLVM)projects/compiler-rt/
 DIR_LLD             := $(DIR_LLVM)tools/lld/
 
 #-------------------------------------------------------------------------------
+# Options
+#-------------------------------------------------------------------------------
+
+LLVM_TARGETS        := x86,x86_64
+
+#-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
@@ -138,7 +144,7 @@ lld_co:
 llvm_build:
 	
 	@$(PRINT) $(PROMPT)"Configuring Clang/LLVM"
-	@$(CD) $(DIR_BUILD) && $(DIR_LLVM)configure --prefix=$(PATH_TOOLCHAIN_LLVM)
+	@$(CD) $(DIR_BUILD) && $(DIR_LLVM)configure --prefix=$(PATH_TOOLCHAIN_LLVM) --enable-targets=$(LLVM_TARGETS)
 
 	@$(PRINT) $(PROMPT)"Bulding Clang/LLVM"
 	@$(CD) $(DIR_BUILD) && $(MAKE)
