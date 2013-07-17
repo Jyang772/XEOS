@@ -74,6 +74,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 REPOS_LLVM          := http://llvm.org/svn/llvm-project/llvm/trunk
 REPOS_CLANG         := http://llvm.org/svn/llvm-project/cfe/trunk
 REPOS_CRT           := http://llvm.org/svn/llvm-project/compiler-rt/trunk
+REPOS_LLD           := http://llvm.org/svn/llvm-project/lld/trunk
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -84,20 +85,21 @@ DIR_SRC             := $(realpath ./source/)/
 DIR_LLVM            := $(DIR_SRC)llvm/
 DIR_CLANG           := $(DIR_LLVM)tools/clang/
 DIR_CRT             := $(DIR_LLVM)projects/compiler-rt/
+DIR_LLD             := $(DIR_LLVM)tools/lld/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean llvm_co clang_co crt_co llvm_build
+.PHONY: all clean llvm_co clang_co crt_co lld_co llvm_build
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: llvm_co clang_co crt_co llvm_build
+all: llvm_co clang_co crt_co lld_co llvm_build
 
 	@:
 
@@ -125,6 +127,12 @@ crt_co:
 	
 	@$(PRINT) $(PROMPT)"Checking out CRT sources"
 	@if [ ! -d $(DIR_CRT) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_CRT) $(DIR_CRT); fi
+
+# LLD checkout
+lld_co:
+	
+	@$(PRINT) $(PROMPT)"Checking out LLD sources"
+	@if [ ! -d $(DIR_LLD) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_LLD) $(DIR_LLD); fi
 
 # LLVM build
 llvm_build:
