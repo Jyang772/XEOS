@@ -74,20 +74,21 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 DIR_YASM            := $(PATH_SW)yasm/
 DIR_LLVM            := $(PATH_SW)llvm/
 DIR_BINUTILS        := $(PATH_SW)binutils/
+DIR_CMAKE           := $(PATH_SW)cmake/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean yasm binutils llvm
+.PHONY: all clean yasm binutils llvm cmake
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: yasm binutils llvm
+all: yasm binutils cmake llvm
 
 	@:
 
@@ -95,6 +96,7 @@ all: yasm binutils llvm
 clean:
 	
 	@$(CD) $(DIR_YASM) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(DIR_CMAKE) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	@$(CD) $(DIR_LLVM) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	@$(CD) $(DIR_BINUTILS) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	
@@ -103,6 +105,12 @@ yasm:
 	
 	@$(PRINT) $(PROMPT)"Building YASM"
 	@$(CD) $(DIR_YASM) && $(MAKE)
+	
+# CMake
+cmake:
+	
+	@$(PRINT) $(PROMPT)"Building CMake"
+	@$(CD) $(DIR_CMAKE) && $(MAKE)
 	
 # GNU BinUtils
 binutils:

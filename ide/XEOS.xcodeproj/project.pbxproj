@@ -623,6 +623,7 @@
 		0569DB381671632D00647F52 /* XEOS_HAL_PS2_WriteData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PS2_WriteData.c; sourceTree = "<group>"; };
 		0569DB3C16716B3300647F52 /* XEOS_HAL_PIC_IRQLineMasked.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_PIC_IRQLineMasked.c; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		056D305C1798AB75009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056E9B601635EB740032AE55 /* xeos.32.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
 		056E9B611635EB740032AE55 /* xeos.64.string.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
 		05773AD6167016C800A1597A /* keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyboard.h; sourceTree = "<group>"; };
@@ -1349,6 +1350,14 @@
 			path = ../release;
 			sourceTree = "<group>";
 		};
+		056D30581798AB75009DC18C /* cmake */ = {
+			isa = PBXGroup;
+			children = (
+				056D305C1798AB75009DC18C /* Makefile */,
+			);
+			path = cmake;
+			sourceTree = "<group>";
+		};
 		05773AD8167016F400A1597A /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2067,6 +2076,7 @@
 			isa = PBXGroup;
 			children = (
 				0511119016249A0200966E40 /* binutils */,
+				056D30581798AB75009DC18C /* cmake */,
 				05AFEDF11620F27C00740041 /* llvm */,
 				05A8F94E1625690B000484EB /* yasm */,
 				05AFEDF71620F27C00740041 /* Makefile */,
