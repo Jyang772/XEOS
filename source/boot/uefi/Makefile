@@ -65,7 +65,7 @@ include ../../../Makefile-Config.mk
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" BOOT "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" EFI  "$(COLOR_NONE)"]> *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" BOOT "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" UEFI "$(COLOR_NONE)"]> *** "
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -111,4 +111,4 @@ all:
 clean:
 
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_BOOT_EFI)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_BOOT_UEFI)*

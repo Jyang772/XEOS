@@ -84,11 +84,11 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS BIOS bootloader"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_BOOT_BIOS) && $(MAKE)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS EFI bootloader"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_BOOT_EFI) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS UEFI bootloader"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_BOOT_UEFI) && $(MAKE)
     
 # Cleans the build files
 clean:
 	
 	@$(CD) $(PATH_SRC_BOOT_BIOS) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_BOOT_EFI) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_BOOT_UEFI) && $(MAKE) clean

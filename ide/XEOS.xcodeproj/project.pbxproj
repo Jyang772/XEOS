@@ -639,8 +639,8 @@
 		056D30BC179AF41E009DC18C /* xeos.macros.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.macros.inc.s; sourceTree = "<group>"; };
 		056D30BD179AF41E009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D30BE179AF41E009DC18C /* mbr.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = mbr.s; sourceTree = "<group>"; };
-		056D30C0179AF580009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D30C1179AF5EC009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		056D30C3179AF797009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05773AD6167016C800A1597A /* keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyboard.h; sourceTree = "<group>"; };
 		057D650B166400930062DFD9 /* XEOS_VM_MemoryMapGetPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPTCount.c; sourceTree = "<group>"; };
 		057D650D1664009C0062DFD9 /* XEOS_VM_MemoryMapGetPDTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPDTCount.c; sourceTree = "<group>"; };
@@ -1364,7 +1364,7 @@
 			isa = PBXGroup;
 			children = (
 				056D30A6179AF41E009DC18C /* bios */,
-				056D30BF179AF41E009DC18C /* efi */,
+				056D30C2179AF797009DC18C /* uefi */,
 				056D30C1179AF5EC009DC18C /* Makefile */,
 			);
 			path = boot;
@@ -1408,12 +1408,12 @@
 			path = include;
 			sourceTree = "<group>";
 		};
-		056D30BF179AF41E009DC18C /* efi */ = {
+		056D30C2179AF797009DC18C /* uefi */ = {
 			isa = PBXGroup;
 			children = (
-				056D30C0179AF580009DC18C /* Makefile */,
+				056D30C3179AF797009DC18C /* Makefile */,
 			);
-			path = efi;
+			path = uefi;
 			sourceTree = "<group>";
 		};
 		05773AD8167016F400A1597A /* keyboard */ = {

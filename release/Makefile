@@ -71,8 +71,8 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
-MBR                 := $(PATH_BUILD_BOOT)MBR.BIN
-BOOTLOADER          := $(PATH_BUILD_BOOT)BOOT.BIN
+MBR                 := $(PATH_BUILD_BOOT_BIOS)MBR.BIN
+BOOTLOADER          := $(PATH_BUILD_BOOT_BIOS)BOOT.BIN
 KERNEL32            := $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF
 KERNEL64            := $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF
 FLOPPY_DMG          := $(PATH_BUILD_TMP)boot.dmg
