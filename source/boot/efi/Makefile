@@ -59,13 +59,37 @@
 
 # $Id$
 
-include ../../Makefile-Config.mk
+include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" BOOT "$(COLOR_NONE)"]>           *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" BOOT "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" EFI  "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
+# Paths
+#-------------------------------------------------------------------------------
+
+
+
+#-------------------------------------------------------------------------------
+# Search paths
+#-------------------------------------------------------------------------------
+
+
+
+#-------------------------------------------------------------------------------
+# File suffixes
+#-------------------------------------------------------------------------------
+
+
+
+#-------------------------------------------------------------------------------
+# Macros
+#-------------------------------------------------------------------------------
+
+
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -80,15 +104,11 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 
 # Build the full project
 all:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS BIOS bootloader"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_BOOT_BIOS) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS EFI bootloader"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_BOOT_EFI) && $(MAKE)
-    
+
+	@:
+
 # Cleans the build files
 clean:
-	
-	@$(CD) $(PATH_SRC_BOOT_BIOS) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_BOOT_EFI) && $(MAKE) clean
+
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_BOOT_EFI)*

@@ -115,6 +115,8 @@ PATH_SW                         := $(PATH_PROJECT)software-deps/
 # Build directories
 
 PATH_BUILD_BOOT                     := $(PATH_BUILD)boot/
+PATH_BUILD_BOOT_BIOS                := $(PATH_BUILD_BOOT)bios/
+PATH_BUILD_BOOT_EFI                 := $(PATH_BUILD_BOOT)efi/
 PATH_BUILD_TMP                      := $(PATH_BUILD)tmp/
 PATH_BUILD_MOUNT                    := $(PATH_BUILD)mount/
 PATH_BUILD_32                       := $(PATH_BUILD)$(TARGET_32)/
@@ -141,6 +143,8 @@ PATH_BUILD_64_CORE_OBJ_SYSTEM       := $(PATH_BUILD_64_CORE_OBJ)system/
 # Source directories
 
 PATH_SRC_BOOT                   := $(PATH_SRC)boot/
+PATH_SRC_BOOT_BIOS              := $(PATH_SRC_BOOT)bios/
+PATH_SRC_BOOT_EFI               := $(PATH_SRC_BOOT)efi/
 PATH_SRC_CORE                   := $(PATH_SRC)core/
 PATH_SRC_CORE_KERNEL            := $(PATH_SRC_CORE)xeos/
 PATH_SRC_CORE_ACPI              := $(PATH_SRC_CORE)acpi/
