@@ -92,6 +92,7 @@ DIR_LLD             := $(DIR_LLVM)tools/lld/
 #-------------------------------------------------------------------------------
 
 LLVM_TARGETS        := x86,x86_64
+LLVM_TARGETS_CMAKE  := X86
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -141,10 +142,22 @@ lld_co:
 	@if [ ! -d $(DIR_LLD) ]; then $(SVN) $(ARGS_SVN_CO) $(REPOS_LLD) $(DIR_LLD); fi
 
 # LLVM build
+#llvm_build:
+#	
+#	@$(PRINT) $(PROMPT)"Configuring Clang/LLVM"
+#	@$(CD) $(DIR_BUILD) && $(DIR_LLVM)configure --prefix=$(PATH_TOOLCHAIN_LLVM) --enable-targets=$(LLVM_TARGETS) --enable-optimized
+#
+#	@$(PRINT) $(PROMPT)"Bulding Clang/LLVM"
+#	@$(CD) $(DIR_BUILD) && $(MAKE)
+#	
+#	@$(PRINT) $(PROMPT)"Installing Clang/LLVM"
+#	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
+
+# LLVM build
 llvm_build:
 	
 	@$(PRINT) $(PROMPT)"Configuring Clang/LLVM"
-	@$(CD) $(DIR_BUILD) && $(DIR_LLVM)configure --prefix=$(PATH_TOOLCHAIN_LLVM) --enable-targets=$(LLVM_TARGETS)
+	@$(CD) $(DIR_BUILD) && $(CMAKE) -DCMAKE_INSTALL_PREFIX:PATH=$(PATH_TOOLCHAIN_LLVM) -DLLVM_TARGETS_TO_BUILD:STRING=$(LLVM_TARGETS_CMAKE) -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_CXX_FLAGS:STRING="-std=c++11 -stdlib=libc++" $(DIR_LLVM)
 
 	@$(PRINT) $(PROMPT)"Bulding Clang/LLVM"
 	@$(CD) $(DIR_BUILD) && $(MAKE)

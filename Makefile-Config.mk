@@ -189,6 +189,7 @@ CC_64                           := $(CC)
 # Utilities
 
 MAKE                            := make
+CMAKE                           := $(PATH_TOOLCHAIN_CMAKE)bin/cmake
 CD                              := cd
 MV                              := mv
 CP                              := cp
