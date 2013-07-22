@@ -641,6 +641,7 @@
 		056D30BE179AF41E009DC18C /* mbr.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = mbr.s; sourceTree = "<group>"; };
 		056D30C1179AF5EC009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D30C3179AF797009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		056D30CA179D2776009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05773AD6167016C800A1597A /* keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyboard.h; sourceTree = "<group>"; };
 		057D650B166400930062DFD9 /* XEOS_VM_MemoryMapGetPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPTCount.c; sourceTree = "<group>"; };
 		057D650D1664009C0062DFD9 /* XEOS_VM_MemoryMapGetPDTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPDTCount.c; sourceTree = "<group>"; };
@@ -1416,6 +1417,14 @@
 			path = uefi;
 			sourceTree = "<group>";
 		};
+		056D30C4179D2776009DC18C /* udk2010 */ = {
+			isa = PBXGroup;
+			children = (
+				056D30CA179D2776009DC18C /* Makefile */,
+			);
+			path = udk2010;
+			sourceTree = "<group>";
+		};
 		05773AD8167016F400A1597A /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2136,6 +2145,7 @@
 				0511119016249A0200966E40 /* binutils */,
 				056D30581798AB75009DC18C /* cmake */,
 				05AFEDF11620F27C00740041 /* llvm */,
+				056D30C4179D2776009DC18C /* udk2010 */,
 				05A8F94E1625690B000484EB /* yasm */,
 				05AFEDF71620F27C00740041 /* Makefile */,
 			);

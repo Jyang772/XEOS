@@ -75,20 +75,21 @@ DIR_YASM            := $(PATH_SW)yasm/
 DIR_LLVM            := $(PATH_SW)llvm/
 DIR_BINUTILS        := $(PATH_SW)binutils/
 DIR_CMAKE           := $(PATH_SW)cmake/
+DIR_UDK             := $(PATH_SW)udk2010/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean yasm binutils llvm cmake
+.PHONY: all clean yasm binutils llvm cmake udk
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: yasm binutils cmake llvm
+all: yasm binutils cmake llvm udk
 
 	@:
 
@@ -99,6 +100,7 @@ clean:
 	@$(CD) $(DIR_CMAKE) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	@$(CD) $(DIR_LLVM) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	@$(CD) $(DIR_BINUTILS) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(DIR_UDK) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	
 # YASM
 yasm:
@@ -123,3 +125,9 @@ llvm:
 	
 	@$(PRINT) $(PROMPT)"Building Clang/LLVM"
 	@$(CD) $(DIR_LLVM) && $(MAKE)
+	
+# UDK
+udk:
+	
+	@$(PRINT) $(PROMPT)"Building UDK (UEFI Developmet Kit)"
+	@$(CD) $(DIR_UDK) && $(MAKE)
