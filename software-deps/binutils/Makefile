@@ -99,18 +99,21 @@ DISTRIB_BINUTILS    := $(DIR_DISTRIB)binutils-$(VERSION_BINUTILS).tar.bz2
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: binutils_macho32 binutils_macho64 clean binutils_elf32 binutils_elf64
+all: binutils_macho32 binutils_macho64 clean_src binutils_elf32 binutils_elf64 clean_src
 
 	@:
 
 # Cleans the build files
-clean:
+clean: clean_src
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_32_MACHO)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_64_MACHO)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_32_ELF)*
 	@$(RM) $(ARGS_RM) $(DIR_BUILD_64_ELF)*
+	
+# Cleans the source files
+clean_src:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
