@@ -62,16 +62,10 @@
 include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
-# Software versions
-#-------------------------------------------------------------------------------
-
-VERSION_YASM        := 1.2.0
-
-#-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" YASM "$(COLOR_NONE)"]>           *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" UDK  "$(COLOR_NONE)"]>           *** "
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -79,23 +73,25 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 
 DIR_BUILD           := $(realpath ./build/)/
 DIR_SRC             := $(realpath ./source/)/
-DIR_SRC_YASM        := $(DIR_SRC)yasm-$(VERSION_YASM)
+DIR_BASE            := $(DIR_SRC)BaseTools\(Unix\)/
+DIR_UDK             := $(DIR_SRC)udk/
 DIR_DISTRIB         := $(realpath ./distrib/)/
-DISTRIB_YASM        := $(DIR_DISTRIB)yasm-$(VERSION_YASM).tar.gz
+DISTRIB_BASE        := $(DIR_DISTRIB)BaseTools\(Unix\).tar
+DISTRIB_UDK         := $(DIR_DISTRIB)UDK2010.SR1.UP1.MyWorkSpace.zip
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean yasm
+.PHONY: all clean env base udk
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: yasm
+all: env base udk
 
 	@:
 
@@ -108,18 +104,16 @@ clean:
 	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
 
-# Builds YASM
-yasm:
+# Environment variables
+env:
+	@$(PRINT) $(PROMPT)"Setting environment variables"
+    
+# Builds Base Tools
+base:
 	
-	@$(PRINT) $(PROMPT)"Unpacking YASM ($(VERSION_YASM))"
-	@if [ ! -d $(DIR_SRC_YASM) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_YASM) -C $(DIR_SRC); fi
+	@$(PRINT) $(PROMPT)"Unpacking Base Tools"
+	@if [ ! -d $(DIR_BASE) ]; then $(MKDIR) $(DIR_BASE) && $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BASE) -C $(DIR_BASE); fi
 
-	@$(PRINT) $(PROMPT)"Configuring YASM ($(VERSION_YASM))"
-	@$(CD) $(DIR_BUILD) && exec $(DIR_SRC_YASM)/configure --prefix=$(PATH_TOOLCHAIN_YASM)
-
-	@$(PRINT) $(PROMPT)"Building YASM ($(VERSION_YASM))"
-	@$(CD) $(DIR_BUILD) && $(MAKE) $(ARGS_MAKE_BUILD)
-	
-	@$(PRINT) $(PROMPT)"Installing YASM ($(VERSION_YASM))"
-	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
+# UDK
+udk:
 	
