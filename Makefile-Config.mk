@@ -100,8 +100,10 @@ PATH_TOOLCHAIN                  := /usr/local/xeos-build/
 # Toolchain software
 
 PATH_TOOLCHAIN_YASM             := $(PATH_TOOLCHAIN)yasm/
-PATH_TOOLCHAIN_CMAKE            := $(PATH_TOOLCHAIN)cmake/
+PATH_TOOLCHAIN_GMP              := $(PATH_TOOLCHAIN)gmp/
+PATH_TOOLCHAIN_MPFR             := $(PATH_TOOLCHAIN)mpfr/
 PATH_TOOLCHAIN_BINUTILS         := $(PATH_TOOLCHAIN)binutils/
+PATH_TOOLCHAIN_CMAKE            := $(PATH_TOOLCHAIN)cmake/
 PATH_TOOLCHAIN_LLVM             := $(PATH_TOOLCHAIN)llvm/
 
 # Project root directories
@@ -204,6 +206,7 @@ SVN                             := svn
 DD                              := dd
 EXEC                            := exec
 PRINT                           := echo
+MKDIR                           := mkdir
 
 #-------------------------------------------------------------------------------
 # Software arguments

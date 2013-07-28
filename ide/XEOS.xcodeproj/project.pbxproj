@@ -790,6 +790,9 @@
 		05A885B5165EC38300AFCE25 /* XEOS_VM_PDTEntrySetFlag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PDTEntrySetFlag.c; sourceTree = "<group>"; };
 		05A885B6165EC38C00AFCE25 /* XEOS_VM_PDTEntryGetFlag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PDTEntryGetFlag.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05AA0679179DA93B006F75CB /* mingw-gcc-build.py.patch */ = {isa = PBXFileReference; lastKnownFileType = text; path = "mingw-gcc-build.py.patch"; sourceTree = "<group>"; };
+		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AC9BCC164C9ACF0036E977 /* __video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __video.h; sourceTree = "<group>"; };
 		05AE662A1662D458005EBEAD /* pthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
 		05AE667E1663FD7D005EBEAD /* XEOS_VM_MemoryMapGetCR3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetCR3.c; sourceTree = "<group>"; };
@@ -1420,6 +1423,7 @@
 		056D30C4179D2776009DC18C /* udk2010 */ = {
 			isa = PBXGroup;
 			children = (
+				05AA0679179DA93B006F75CB /* mingw-gcc-build.py.patch */,
 				056D30CA179D2776009DC18C /* Makefile */,
 			);
 			path = udk2010;
@@ -2119,6 +2123,22 @@
 			path = yasm;
 			sourceTree = "<group>";
 		};
+		05AA067A179E7232006F75CB /* gmp */ = {
+			isa = PBXGroup;
+			children = (
+				05AA0685179E725A006F75CB /* Makefile */,
+			);
+			path = gmp;
+			sourceTree = "<group>";
+		};
+		05AA067F179E7232006F75CB /* mpfr */ = {
+			isa = PBXGroup;
+			children = (
+				05AA0686179E7262006F75CB /* Makefile */,
+			);
+			path = mpfr;
+			sourceTree = "<group>";
+		};
 		05AE662B1662D46A005EBEAD /* pthread */ = {
 			isa = PBXGroup;
 			children = (
@@ -2144,7 +2164,9 @@
 			children = (
 				0511119016249A0200966E40 /* binutils */,
 				056D30581798AB75009DC18C /* cmake */,
+				05AA067A179E7232006F75CB /* gmp */,
 				05AFEDF11620F27C00740041 /* llvm */,
+				05AA067F179E7232006F75CB /* mpfr */,
 				056D30C4179D2776009DC18C /* udk2010 */,
 				05A8F94E1625690B000484EB /* yasm */,
 				05AFEDF71620F27C00740041 /* Makefile */,

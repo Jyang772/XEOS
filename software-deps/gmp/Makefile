@@ -59,91 +59,67 @@
 
 # $Id$
 
-include ../Makefile-Config.mk
+include ../../Makefile-Config.mk
+
+#-------------------------------------------------------------------------------
+# Software versions
+#-------------------------------------------------------------------------------
+
+VERSION_GMP         := 5.1.2
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]>                     *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" GMP  "$(COLOR_NONE)"]>           *** "
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_YASM            := $(PATH_SW)yasm/
-DIR_GMP             := $(PATH_SW)gmp/
-DIR_MPFR            := $(PATH_SW)mpfr/
-DIR_BINUTILS        := $(PATH_SW)binutils/
-DIR_CMAKE           := $(PATH_SW)cmake/
-DIR_LLVM            := $(PATH_SW)llvm/
-DIR_UDK             := $(PATH_SW)udk2010/
+DIR_BUILD           := $(realpath ./build/)/
+DIR_SRC             := $(realpath ./source/)/
+DIR_SRC_GMP         := $(DIR_SRC)gmp-$(VERSION_GMP)
+DIR_DISTRIB         := $(realpath ./distrib/)/
+DISTRIB_GMP         := $(DIR_DISTRIB)gmp-$(VERSION_GMP).tar.bz2
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean yasm gmp mpfr binutils cmake llvm udk
+.PHONY: all clean gmp
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: yasm gmp mpfr binutils cmake llvm udk
+all: gmp
 
 	@:
 
 # Cleans the build files
 clean:
+
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
 	
-	@$(CD) $(DIR_YASM) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_GMP) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_MPFR) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_BINUTILS) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_CMAKE) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_LLVM) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_UDK) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	
-# YASM
-yasm:
-	
-	@$(PRINT) $(PROMPT)"Building YASM"
-	@$(CD) $(DIR_YASM) && $(MAKE)
-	
-# GMP
+	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
+	@$(RM) $(ARGS_RM) $(DIR_SRC)*
+
+# Builds GMP
 gmp:
 	
-	@$(PRINT) $(PROMPT)"Building GMP"
-	@$(CD) $(DIR_GMP) && $(MAKE)
+	@$(PRINT) $(PROMPT)"Unpacking GMP ($(VERSION_GMP))"
+	@if [ ! -d $(DIR_SRC_GMP) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_GMP) -C $(DIR_SRC); fi
+
+	@$(PRINT) $(PROMPT)"Configuring GMP ($(VERSION_GMP))"
+	@$(CD) $(DIR_BUILD) && exec $(DIR_SRC_GMP)/configure --prefix=$(PATH_TOOLCHAIN_GMP)
+
+	@$(PRINT) $(PROMPT)"Building GMP ($(VERSION_GMP))"
+	@$(CD) $(DIR_BUILD) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-# MPFR
-mpfr:
+	@$(PRINT) $(PROMPT)"Installing GMP ($(VERSION_GMP))"
+	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 	
-	@$(PRINT) $(PROMPT)"Building MPFR"
-	@$(CD) $(DIR_MPFR) && $(MAKE)
-	
-# GNU BinUtils
-binutils:
-	
-	@$(PRINT) $(PROMPT)"Building GNU BinUtils"
-	@$(CD) $(DIR_BINUTILS) && $(MAKE)
-	
-# CMake
-cmake:
-	
-	@$(PRINT) $(PROMPT)"Building CMake"
-	@$(CD) $(DIR_CMAKE) && $(MAKE)
-	
-# LLVM
-llvm:
-	
-	@$(PRINT) $(PROMPT)"Building Clang/LLVM"
-	@$(CD) $(DIR_LLVM) && $(MAKE)
-	
-# UDK
-udk:
-	
-	@$(PRINT) $(PROMPT)"Building UDK (UEFI Developmet Kit)"
-	@$(CD) $(DIR_UDK) && $(MAKE)

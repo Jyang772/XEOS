@@ -59,91 +59,67 @@
 
 # $Id$
 
-include ../Makefile-Config.mk
+include ../../Makefile-Config.mk
+
+#-------------------------------------------------------------------------------
+# Software versions
+#-------------------------------------------------------------------------------
+
+VERSION_MPFR        := 3.1.2
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]>                     *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)"  SW  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" MPFR "$(COLOR_NONE)"]>           *** "
 
 #-------------------------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_YASM            := $(PATH_SW)yasm/
-DIR_GMP             := $(PATH_SW)gmp/
-DIR_MPFR            := $(PATH_SW)mpfr/
-DIR_BINUTILS        := $(PATH_SW)binutils/
-DIR_CMAKE           := $(PATH_SW)cmake/
-DIR_LLVM            := $(PATH_SW)llvm/
-DIR_UDK             := $(PATH_SW)udk2010/
+DIR_BUILD           := $(realpath ./build/)/
+DIR_SRC             := $(realpath ./source/)/
+DIR_SRC_MPFR        := $(DIR_SRC)mpfr-$(VERSION_MPFR)
+DIR_DISTRIB         := $(realpath ./distrib/)/
+DISTRIB_MPFR        := $(DIR_DISTRIB)mpfr-$(VERSION_MPFR).tar.bz2
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean yasm gmp mpfr binutils cmake llvm udk
+.PHONY: all clean mpfr
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: yasm gmp mpfr binutils cmake llvm udk
+all: mpfr
 
 	@:
 
 # Cleans the build files
 clean:
+
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
 	
-	@$(CD) $(DIR_YASM) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_GMP) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_MPFR) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_BINUTILS) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_CMAKE) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_LLVM) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_UDK) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	
-# YASM
-yasm:
-	
-	@$(PRINT) $(PROMPT)"Building YASM"
-	@$(CD) $(DIR_YASM) && $(MAKE)
-	
-# GMP
-gmp:
-	
-	@$(PRINT) $(PROMPT)"Building GMP"
-	@$(CD) $(DIR_GMP) && $(MAKE)
-	
-# MPFR
+	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
+	@$(RM) $(ARGS_RM) $(DIR_SRC)*
+
+# Builds MPFR
 mpfr:
 	
-	@$(PRINT) $(PROMPT)"Building MPFR"
-	@$(CD) $(DIR_MPFR) && $(MAKE)
+	@$(PRINT) $(PROMPT)"Unpacking MPFR ($(VERSION_MPFR))"
+	@if [ ! -d $(DIR_SRC_MPFR) ]; then $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_MPFR) -C $(DIR_SRC); fi
+
+	@$(PRINT) $(PROMPT)"Configuring MPFR ($(VERSION_MPFR))"
+	@$(CD) $(DIR_BUILD) && exec $(DIR_SRC_MPFR)/configure --prefix=$(PATH_TOOLCHAIN_MPFR) --with-gmp=$(PATH_TOOLCHAIN_GMP)
+
+	@$(PRINT) $(PROMPT)"Building MPFR ($(VERSION_MPFR))"
+	@$(CD) $(DIR_BUILD) && $(MAKE) $(ARGS_MAKE_BUILD)
 	
-# GNU BinUtils
-binutils:
+	@$(PRINT) $(PROMPT)"Installing MPFR ($(VERSION_MPFR))"
+	@$(CD) $(DIR_BUILD) && $(SUDO) $(MAKE) $(ARGS_MAKE_INSTALL)
 	
-	@$(PRINT) $(PROMPT)"Building GNU BinUtils"
-	@$(CD) $(DIR_BINUTILS) && $(MAKE)
-	
-# CMake
-cmake:
-	
-	@$(PRINT) $(PROMPT)"Building CMake"
-	@$(CD) $(DIR_CMAKE) && $(MAKE)
-	
-# LLVM
-llvm:
-	
-	@$(PRINT) $(PROMPT)"Building Clang/LLVM"
-	@$(CD) $(DIR_LLVM) && $(MAKE)
-	
-# UDK
-udk:
-	
-	@$(PRINT) $(PROMPT)"Building UDK (UEFI Developmet Kit)"
-	@$(CD) $(DIR_UDK) && $(MAKE)
