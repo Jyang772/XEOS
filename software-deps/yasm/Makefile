@@ -104,6 +104,7 @@ clean:
 
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD).deps/
 	
 	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
