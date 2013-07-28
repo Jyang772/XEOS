@@ -207,6 +207,10 @@ DD                              := dd
 EXEC                            := exec
 PRINT                           := echo
 MKDIR                           := mkdir
+PATCH                           := patch
+TOUCH                           := touch
+SOURCE                          := source
+PYTHON                          := python
 
 #-------------------------------------------------------------------------------
 # Software arguments

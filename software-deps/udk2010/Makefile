@@ -72,8 +72,9 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 #-------------------------------------------------------------------------------
 
 DIR_BUILD           := $(realpath ./build/)/
+DIR_BUILD_BASE      := $(DIR_BUILD)BaseTools-Unix/
 DIR_SRC             := $(realpath ./source/)/
-DIR_BASE            := $(DIR_SRC)BaseTools\(Unix\)/
+DIR_BASE            := $(DIR_SRC)BaseTools-Unix/
 DIR_UDK             := $(DIR_SRC)udk/
 DIR_DISTRIB         := $(realpath ./distrib/)/
 DISTRIB_BASE        := $(DIR_DISTRIB)BaseTools\(Unix\).tar
@@ -99,7 +100,7 @@ all: env base udk
 clean:
 
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(DIR_BUILD)*
+	@$(RM) $(ARGS_RM) $(DIR_BUILD_BASE)*
 	
 	@$(PRINT) $(PROMPT)"Cleaning all temporary files"
 	@$(RM) $(ARGS_RM) $(DIR_SRC)*
@@ -113,6 +114,10 @@ base:
 	
 	@$(PRINT) $(PROMPT)"Unpacking Base Tools"
 	@if [ ! -d $(DIR_BASE) ]; then $(MKDIR) $(DIR_BASE) && $(TAR) $(ARGS_TAR_EXPAND) $(DISTRIB_BASE) -C $(DIR_BASE); fi
+	@if [ ! -f $(DIR_BASE)BaseTools/gcc/XEOS-PATCHED ]; then $(PATCH) $(DIR_BASE)BaseTools/gcc/mingw-gcc-build.py mingw-gcc-build.py.patch > /dev/null; fi
+	@$(TOUCH) $(DIR_BASE)BaseTools/gcc/XEOS-PATCHED
+	@$(CD) $(DIR_BASE) && $(SOURCE) edksetup.sh &> /dev/null
+	@$(CD) $(DIR_BUILD_BASE) && $(PYTHON) $(DIR_BASE)BaseTools/gcc/mingw-gcc-build.py --arch x64
 
 # UDK
 udk:
