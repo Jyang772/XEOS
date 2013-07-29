@@ -137,6 +137,7 @@ PATH_BUILD_32_CORE_BIN              := $(PATH_BUILD_32_CORE)bin/
 PATH_BUILD_64_CORE_BIN              := $(PATH_BUILD_64_CORE)bin/
 PATH_BUILD_32_CORE_LIB              := $(PATH_BUILD_32_CORE)lib/
 PATH_BUILD_64_CORE_LIB              := $(PATH_BUILD_64_CORE)lib/
+
 PATH_BUILD_32_CORE_OBJ              := $(PATH_BUILD_32_CORE)obj/
 PATH_BUILD_64_CORE_OBJ              := $(PATH_BUILD_64_CORE)obj/
 PATH_BUILD_32_CORE_OBJ_KERNEL       := $(PATH_BUILD_32_CORE_OBJ)xeos/
@@ -151,6 +152,21 @@ PATH_BUILD_32_CORE_OBJ_LIBC         := $(PATH_BUILD_32_CORE_OBJ)libc/
 PATH_BUILD_64_CORE_OBJ_LIBC         := $(PATH_BUILD_64_CORE_OBJ)libc/
 PATH_BUILD_32_CORE_OBJ_SYSTEM       := $(PATH_BUILD_32_CORE_OBJ)system/
 PATH_BUILD_64_CORE_OBJ_SYSTEM       := $(PATH_BUILD_64_CORE_OBJ)system/
+
+PATH_BUILD_32_CORE_OBJ_PIC              := $(PATH_BUILD_32_CORE)obj-pic/
+PATH_BUILD_64_CORE_OBJ_PIC              := $(PATH_BUILD_64_CORE)obj-pic/
+PATH_BUILD_32_CORE_OBJ_PIC_KERNEL       := $(PATH_BUILD_32_CORE_OBJ_PIC)xeos/
+PATH_BUILD_64_CORE_OBJ_PIC_KERNEL       := $(PATH_BUILD_64_CORE_OBJ_PIC)xeos/
+PATH_BUILD_32_CORE_OBJ_PIC_ACPI         := $(PATH_BUILD_32_CORE_OBJ_PIC)acpi/
+PATH_BUILD_64_CORE_OBJ_PIC_ACPI         := $(PATH_BUILD_64_CORE_OBJ_PIC)acpi/
+PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA  := $(PATH_BUILD_32_CORE_OBJ_PIC)acpi-acpica/
+PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA  := $(PATH_BUILD_64_CORE_OBJ_PIC)acpi-acpica/
+PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL     := $(PATH_BUILD_32_CORE_OBJ_PIC)acpi-osl/
+PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL     := $(PATH_BUILD_64_CORE_OBJ_PIC)acpi-osl/
+PATH_BUILD_32_CORE_OBJ_PIC_LIBC         := $(PATH_BUILD_32_CORE_OBJ_PIC)libc/
+PATH_BUILD_64_CORE_OBJ_PIC_LIBC         := $(PATH_BUILD_64_CORE_OBJ_PIC)libc/
+PATH_BUILD_32_CORE_OBJ_PIC_SYSTEM       := $(PATH_BUILD_32_CORE_OBJ_PIC)system/
+PATH_BUILD_64_CORE_OBJ_PIC_SYSTEM       := $(PATH_BUILD_64_CORE_OBJ_PIC)system/
 
 # Source directories
 
@@ -258,6 +274,7 @@ ARGS_CC_STD                     := -std=c99
 ARGS_CC_CONST                   := -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__
 ARGS_CC_INC                     := -I $(PATH_SRC_CORE_INC)
 ARGS_CC_MISC                    := -Os -nostdlib -fno-builtin
+ARGS_CC_PIC                     := -fPIC
 
 ARGS_CC_TARGET_MACHO_32         := -march=$(TARGET_32_MARCH_MACHO) -target $(TARGET_32_TRIPLE_MACHO)
 ARGS_CC_TARGET_MACHO_54         := -march=$(TARGET_64_MARCH_MACHO) -target $(TARGET_64_TRIPLE_MACHO)
@@ -281,6 +298,8 @@ ARGS_CC_64                      := $(ARGS_CC_TARGET_64) $(ARGS_CC_MISC) $(ARGS_C
 
 ARGS_LD_32                      := -z max-page-size=0x1000 -s
 ARGS_LD_64                      := -z max-page-size=0x1000 -s
+ARGS_LD_SHARED_32               := -z max-page-size=0x1000 -s --shared
+ARGS_LD_SHARED_64               := -z max-page-size=0x1000 -s --shared
 
 # Archiver flags
 
