@@ -190,6 +190,8 @@ PATH_RELEASE_FLOPPY                     := $(PATH_RELEASE)floppy/
 #-------------------------------------------------------------------------------
 
 EXT_ASM                                 := .s
+EXT_ASM_32                              := 32.$(EXT_ASM)
+EXT_ASM_64                              := 64.$(EXT_ASM)
 EXT_C                                   := .c
 EXT_H                                   := .h
 EXT_OBJ                                 := .o
