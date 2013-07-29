@@ -153,21 +153,6 @@ PATH_BUILD_64_CORE_OBJ_LIBC             := $(PATH_BUILD_64_CORE_OBJ)libc/
 PATH_BUILD_32_CORE_OBJ_SYSTEM           := $(PATH_BUILD_32_CORE_OBJ)system/
 PATH_BUILD_64_CORE_OBJ_SYSTEM           := $(PATH_BUILD_64_CORE_OBJ)system/
 
-PATH_BUILD_32_CORE_OBJ_PIC              := $(PATH_BUILD_32_CORE)obj-pic/
-PATH_BUILD_64_CORE_OBJ_PIC              := $(PATH_BUILD_64_CORE)obj-pic/
-PATH_BUILD_32_CORE_OBJ_PIC_KERNEL       := $(PATH_BUILD_32_CORE_OBJ_PIC)xeos/
-PATH_BUILD_64_CORE_OBJ_PIC_KERNEL       := $(PATH_BUILD_64_CORE_OBJ_PIC)xeos/
-PATH_BUILD_32_CORE_OBJ_PIC_ACPI         := $(PATH_BUILD_32_CORE_OBJ_PIC)acpi/
-PATH_BUILD_64_CORE_OBJ_PIC_ACPI         := $(PATH_BUILD_64_CORE_OBJ_PIC)acpi/
-PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA  := $(PATH_BUILD_32_CORE_OBJ_PIC)acpi-acpica/
-PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA  := $(PATH_BUILD_64_CORE_OBJ_PIC)acpi-acpica/
-PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL     := $(PATH_BUILD_32_CORE_OBJ_PIC)acpi-osl/
-PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL     := $(PATH_BUILD_64_CORE_OBJ_PIC)acpi-osl/
-PATH_BUILD_32_CORE_OBJ_PIC_LIBC         := $(PATH_BUILD_32_CORE_OBJ_PIC)libc/
-PATH_BUILD_64_CORE_OBJ_PIC_LIBC         := $(PATH_BUILD_64_CORE_OBJ_PIC)libc/
-PATH_BUILD_32_CORE_OBJ_PIC_SYSTEM       := $(PATH_BUILD_32_CORE_OBJ_PIC)system/
-PATH_BUILD_64_CORE_OBJ_PIC_SYSTEM       := $(PATH_BUILD_64_CORE_OBJ_PIC)system/
-
 # Source directories
 
 PATH_SRC_BOOT                           := $(PATH_SRC)boot/
@@ -195,6 +180,7 @@ EXT_ASM_64                              := 64.s
 EXT_C                                   := .c
 EXT_H                                   := .h
 EXT_OBJ                                 := .o
+EXT_OBJ_PIC                             := .o-pic
 EXT_BIN_RAW                             := .BIN
 EXT_BIN                                 := .$(TARGET_ABI)
 
@@ -371,6 +357,12 @@ XEOS_FUNC_C_OBJ                         = $(addprefix $(1),$(call XEOS_FUNC_C_OB
 # Targets with second expansion
 #-------------------------------------------------------------------------------
 
+# Declaration for precious targets, to avoid cleaning of intermediate files
+.PRECIOUS:  $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ)    \
+            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ_PIC)     \
+            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)         \
+            $(PATH_BUILD_32)%$(EXT_C)$(EXT_OBJ_PIC)
+
 .SECONDEXPANSION:
 
 # Compiles an assembly file (64 bits)
@@ -385,14 +377,26 @@ $(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $
 	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_32) $(ARGS_AS_32) -o $@ $(abspath $<)
 
-# Compiles a C file (64 bits)
-$(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@))
+# Compiles a C file (64 bits - PIC)
+$(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ_PIC): $$(notdir $$(subst $(EXT_OBJ_PIC),,$$@))
 	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_64) $(ARGS_CC_PIC) $(ARGS_CC_64) -o $@ -c $(abspath $<)
+
+# Compiles a C file (64 bits)
+$(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(EXT_OBJ),$(EXT_OBJ_PIC),$$@)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(CC_64) $(ARGS_CC_64) -o $@ -c $(abspath $<)
 
-# Compiles a C file (32 bits)
-$(PATH_BUILD_32)%$(EXT_C)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$$@)
+# Compiles a C file (32 bits - PIC)
+$(PATH_BUILD_32)%$(EXT_C)$(EXT_OBJ_PIC): $$(notdir $$(subst $(EXT_OBJ_PIC),,$$@))
 	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_32) $(ARGS_CC_PIC) $(ARGS_CC_32) -o $@ -c $(abspath $<)
+
+# Compiles a C file (32 bits)
+$(PATH_BUILD_32)%$(EXT_C)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$$@) $$(subst $(EXT_OBJ),$(EXT_OBJ_PIC),$$@)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(CC_32) $(ARGS_CC_32) -o $@ -c $(abspath $<)
