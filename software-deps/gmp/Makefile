@@ -88,7 +88,9 @@ DISTRIB_GMP         := $(DIR_DISTRIB)gmp-$(VERSION_GMP).tar.bz2
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean gmp
+.PHONY: all     \
+        clean   \
+        gmp
 
 #-------------------------------------------------------------------------------
 # Phony targets

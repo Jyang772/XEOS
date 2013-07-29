@@ -88,7 +88,9 @@ DISTRIB_CMAKE       := $(DIR_DISTRIB)cmake-$(VERSION_CMAKE).tar.gz
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean cmake
+.PHONY: all     \
+        clean   \
+        cmake
 
 #-------------------------------------------------------------------------------
 # Phony targets

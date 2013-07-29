@@ -65,7 +65,7 @@ include ../../../Makefile-Config.mk
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" ACPI "$(COLOR_NONE)"]> *** "
+PROMPT                                  := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" CORE "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" ACPI "$(COLOR_NONE)"]> *** "
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -91,12 +91,8 @@ DIR_SRC_ACPICA_COMPONENTS_UTILITIES     = $(DIR_SRC_ACPICA_COMPONENTS)utilities/
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_CC_32          := -iquote $(PATH_SRC_CORE_ACPI)include $(ARGS_CC_32)
-ARGS_CC_64          := -iquote $(PATH_SRC_CORE_ACPI)include $(ARGS_CC_64)
-ARGS_CC_32_OSL      := $(ARGS_CC_32)
-ARGS_CC_64_OSL      := $(ARGS_CC_64)
-ARGS_CC_32_ACPICA   := -include acpica-clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)include/acpica $(ARGS_CC_32)
-ARGS_CC_64_ACPICA   := -include acpica-clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)include/acpica $(ARGS_CC_64)
+ARGS_CC_32                              := -iquote $(PATH_SRC_CORE_ACPI)include $(ARGS_CC_32)
+ARGS_CC_64                              := -iquote $(PATH_SRC_CORE_ACPI)include $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -122,7 +118,10 @@ vpath %$(EXT_C) $(DIR_SRC_ACPICA_COMPONENTS_UTILITIES)
 #-------------------------------------------------------------------------------
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+.SUFFIXES:  $(EXT_C)    \
+            $(EXT_H)    \
+            $(EXT_OBJ)  \
+            $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Files
@@ -147,18 +146,22 @@ _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES      = $(call XEOS_FUNC_C_OBJ,$(P
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean
+.PHONY: all     \
+        clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ) $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS:  $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ)    \
+            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD_ACPI) $(_FILES_C_OBJ_BUILD_OSL) acpica
-	    
+all:    $(_FILES_C_OBJ_BUILD_ACPI)  \
+        $(_FILES_C_OBJ_BUILD_OSL)   \
+        acpica
+	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libacpi.a"$(COLOR_NONE)
 	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_CORE_LIB)libacpi.a $(PATH_BUILD_32_CORE_OBJ_ACPI)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA)*$(EXT_OBJ)
 	@$(RANLIB_32) $(PATH_BUILD_32_CORE_LIB)libacpi.a
@@ -195,6 +198,16 @@ clean:
 # ACPICA library
 acpica: ARGS_CC_32 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)include/acpica $(ARGS_CC_32)
 acpica: ARGS_CC_64 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)include/acpica $(ARGS_CC_64)
-acpica: $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISASSEMBLER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISPATCHER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EVENTS) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EXECUTER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_HARDWARE) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_NAMESPACE) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_PARSER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_RESOURCES) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_TABLES) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES)
+acpica: $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER)        \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISASSEMBLER)    \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISPATCHER)      \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EVENTS)          \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EXECUTER)        \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_HARDWARE)        \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_NAMESPACE)       \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_PARSER)          \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_RESOURCES)       \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_TABLES)          \
+        $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES)
 	
 	@:

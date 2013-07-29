@@ -88,7 +88,9 @@ DISTRIB_MPFR        := $(DIR_DISTRIB)mpfr-$(VERSION_MPFR).tar.bz2
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean mpfr
+.PHONY: all     \
+        clean   \
+        mpfr
 
 #-------------------------------------------------------------------------------
 # Phony targets

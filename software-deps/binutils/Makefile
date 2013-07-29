@@ -94,14 +94,29 @@ DISTRIB_BINUTILS    := $(DIR_DISTRIB)binutils-$(VERSION_BINUTILS).tar.bz2
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean binutils_macho32 binutils_macho64 binutils_elf32 binutils_elf64 binutils_efi32 binutils_efi64
+.PHONY: all                 \
+        clean               \
+        binutils_macho32    \
+        binutils_macho64    \
+        binutils_elf32      \
+        binutils_elf64      \
+        binutils_efi32      \
+        binutils_efi64
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: binutils_macho32 binutils_macho64 clean_src binutils_elf32 binutils_elf64 clean_src binutils_efi32 binutils_efi64 clean_src
+all:    binutils_macho32    \
+        binutils_macho64    \
+        clean_src           \
+        binutils_elf32      \
+        binutils_elf64      \
+        clean_src           \
+        binutils_efi32      \
+        binutils_efi64      \
+        clean_src
 
 	@:
 

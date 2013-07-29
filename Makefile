@@ -72,14 +72,22 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>            
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean boot core release toolchain test
+.PHONY: all         \
+        clean       \
+        boot        \
+        core        \
+        release     \
+        toolchain   \
+        test
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: boot core release
+all:    boot    \
+        core    \
+        release
 	
 # Cleans the build files
 clean:

@@ -99,14 +99,24 @@ LLVM_TARGETS_CMAKE  := X86
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean llvm_co clang_co crt_co lld_co llvm_build
+.PHONY: all         \
+        clean       \
+        llvm_co     \
+        clang_co    \
+        crt_co      \
+        lld_co      \
+        llvm_build
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: llvm_co clang_co crt_co lld_co llvm_build
+all:    llvm_co     \
+        clang_co    \
+        crt_co      \
+        lld_co      \
+        llvm_build
 
 	@:
 

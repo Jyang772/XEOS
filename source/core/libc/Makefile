@@ -91,13 +91,6 @@ DIR_SRC_WCHAR       = $(PATH_SRC_CORE_LIBC)wchar/
 DIR_SRC_WCTYPE      = $(PATH_SRC_CORE_LIBC)wctype/
 
 #-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_CC_32          := $(ARGS_CC_32)
-ARGS_CC_64          := $(ARGS_CC_64)
-
-#-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
@@ -126,7 +119,10 @@ vpath %$(EXT_C) $(DIR_SRC_WCTYPE)
 #-------------------------------------------------------------------------------
 
 # Adds the suffixes used in this file
-.SUFFIXES: $(EXT_C) $(EXT_H) $(EXT_OBJ) $(EXT_BIN)
+.SUFFIXES:  $(EXT_C)    \
+            $(EXT_H)    \
+            $(EXT_OBJ)  \
+            $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Files
@@ -156,17 +152,36 @@ _FILES_C_OBJ_BUILD_WCTYPE   = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_CORE_OBJ_LI
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean
+.PHONY: all     \
+        clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ) $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS:  $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ)    \
+            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_ASSERT) $(_FILES_C_OBJ_BUILD_COMPLEX) $(_FILES_C_OBJ_BUILD_CTYPE) $(_FILES_C_OBJ_BUILD_ERRNO) $(_FILES_C_OBJ_BUILD_FENV) $(_FILES_C_OBJ_BUILD_INTTYPES) $(_FILES_C_OBJ_BUILD_LOCALE) $(_FILES_C_OBJ_BUILD_MATH) $(_FILES_C_OBJ_BUILD_SETJMP) $(_FILES_C_OBJ_BUILD_SIGNAL) $(_FILES_C_OBJ_BUILD_STDIO) $(_FILES_C_OBJ_BUILD_STDLIB) $(_FILES_C_OBJ_BUILD_STRING) $(_FILES_C_OBJ_BUILD_TGMATH) $(_FILES_C_OBJ_BUILD_TIME) $(_FILES_C_OBJ_BUILD_WCHAR) $(_FILES_C_OBJ_BUILD_WCTYPE)
+all:    $(_FILES_C_OBJ_BUILD)           \
+        $(_FILES_C_OBJ_BUILD_ASSERT)    \
+        $(_FILES_C_OBJ_BUILD_COMPLEX)   \
+        $(_FILES_C_OBJ_BUILD_CTYPE)     \
+        $(_FILES_C_OBJ_BUILD_ERRNO)     \
+        $(_FILES_C_OBJ_BUILD_FENV)      \
+        $(_FILES_C_OBJ_BUILD_INTTYPES)  \
+        $(_FILES_C_OBJ_BUILD_LOCALE)    \
+        $(_FILES_C_OBJ_BUILD_MATH)      \
+        $(_FILES_C_OBJ_BUILD_SETJMP)    \
+        $(_FILES_C_OBJ_BUILD_SIGNAL)    \
+        $(_FILES_C_OBJ_BUILD_STDIO)     \
+        $(_FILES_C_OBJ_BUILD_STDLIB)    \
+        $(_FILES_C_OBJ_BUILD_STRING)    \
+        $(_FILES_C_OBJ_BUILD_TGMATH)    \
+        $(_FILES_C_OBJ_BUILD_TIME)      \
+        $(_FILES_C_OBJ_BUILD_WCHAR)     \
+        $(_FILES_C_OBJ_BUILD_WCTYPE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libc.a"$(COLOR_NONE)
 	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_CORE_LIB)libc.a $(PATH_BUILD_32_CORE_OBJ_LIBC)*$(EXT_OBJ)

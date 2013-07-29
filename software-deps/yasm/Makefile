@@ -88,7 +88,9 @@ DISTRIB_YASM        := $(DIR_DISTRIB)yasm-$(VERSION_YASM).tar.gz
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean yasm
+.PHONY: all     \
+        clean   \
+        yasm
 
 #-------------------------------------------------------------------------------
 # Phony targets

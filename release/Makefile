@@ -84,14 +84,19 @@ CD_IMG              := $(PATH_RELEASE)XEOS.iso
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean boot_floppy_image boot_floppy cdrom
+.PHONY: all                 \
+        clean               \
+        boot_floppy_image   \
+        boot_floppy         \
+        cdrom
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: boot_floppy cdrom
+all:    boot_floppy \
+        cdrom
 
 boot_floppy_image:
 	
