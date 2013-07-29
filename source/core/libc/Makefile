@@ -243,6 +243,8 @@ clean:
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_LIBC)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_LIBC)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIB)libc.*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIB)libc.*
 	
 # Compiles a C file (64 bits)
 $(PATH_BUILD_64_CORE_OBJ_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
