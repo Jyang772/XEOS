@@ -81,6 +81,14 @@ TARGET_64_MARCH_ELF             := x86-64
 TARGET_32_TRIPLE_ELF            := i386-elf-freebsd
 TARGET_64_TRIPLE_ELF            := x86_64-elf-freebsd
 
+TARGET_ABI_EFI                  := efi
+TARGET_32_EFI                   := i386
+TARGET_64_EFI                   := x86_64
+TARGET_32_MARCH_EFI             := i386
+TARGET_64_MARCH_EFI             := x86-64
+TARGET_32_TRIPLE_EFI            := i386-efi-pe
+TARGET_64_TRIPLE_EFI            := x86_64-efi-pe
+
 TARGET_ABI                      := $(TARGET_ABI_ELF)
 TARGET_32                       := $(TARGET_32_ELF)
 TARGET_64                       := $(TARGET_64_ELF)
@@ -220,8 +228,27 @@ PYTHON                          := python
 
 ARGS_CC_WARN                    := -Weverything -Werror
 ARGS_CC_STD                     := -std=c99
-ARGS_CC_32                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_32_MARCH) -target $(TARGET_32_TRIPLE) -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
-ARGS_CC_64                      := -Os -I $(PATH_SRC_CORE_INC) -march=$(TARGET_64_MARCH) -target $(TARGET_64_TRIPLE) -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__ -nostdlib -fno-builtin $(ARGS_CC_STD) $(ARGS_CC_WARN)
+ARGS_CC_CONST                   := -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__
+ARGS_CC_INC                     := -I $(PATH_SRC_CORE_INC)
+ARGS_CC_MISC                    := -Os -nostdlib -fno-builtin
+
+ARGS_CC_TARGET_MACHO_32         := -march=$(TARGET_32_MARCH_MACHO) -target $(TARGET_32_TRIPLE_MACHO)
+ARGS_CC_TARGET_MACHO_54         := -march=$(TARGET_64_MARCH_MACHO) -target $(TARGET_64_TRIPLE_MACHO)
+ARGS_CC_TARGET_ELF_32           := -march=$(TARGET_32_MARCH_ELF) -target $(TARGET_32_TRIPLE_ELF)
+ARGS_CC_TARGET_ELF_64           := -march=$(TARGET_64_MARCH_ELF) -target $(TARGET_64_TRIPLE_ELF)
+ARGS_CC_TARGET_EFI_32           := -march=$(TARGET_32_MARCH_EFI) -target $(TARGET_32_TRIPLE_EFI)
+ARGS_CC_TARGET_EFI_64           := -march=$(TARGET_64_MARCH_EFI) -target $(TARGET_64_TRIPLE_EFI)
+ARGS_CC_TARGET_32               := -march=$(TARGET_32_MARCH) -target $(TARGET_32_TRIPLE)
+ARGS_CC_TARGET_64               := -march=$(TARGET_64_MARCH) -target $(TARGET_64_TRIPLE)
+
+ARGS_CC_MACHO_32                := $(ARGS_CC_TARGET_MACHO_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_MACHO_64                := $(ARGS_CC_TARGET_MACHO_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_ELF_32                  := $(ARGS_CC_TARGET_ELF_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_ELF_64                  := $(ARGS_CC_TARGET_ELF_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_EFI_32                  := $(ARGS_CC_TARGET_EFI_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_EFI_64                  := $(ARGS_CC_TARGET_EFI_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_32                      := $(ARGS_CC_TARGET_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_64                      := $(ARGS_CC_TARGET_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
 
 # Linker flags
 
