@@ -58,25 +58,31 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-
+ 
 /* $Id$ */
 
 /*!
- * @file            XEOS_HAL_RTC_DateTimeSetMinutes.c
+ * @header          __acpi.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "xeos/hal/rtc.h"
-#include "xeos/hal/__private/rtc.h"
-#include <stdlib.h>
+#ifndef __ACPI___ACPI_H__
+#define __ACPI___ACPI_H__
+#pragma once
 
-void XEOS_HAL_RTC_DateTimeSetMinutes( XEOS_HAL_RTC_DateTimeRef time, uint8_t value )
-{
-    if( time == NULL )
-    {
-        return;
-    }
-    
-    time->minutes = ( value > 59 ) ? 0 : value;
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdbool.h>
+#include <stdarg.h>
+
+extern int ( * __ACPI_LoggingFunction )( const char *, va_list );
+extern bool __ACPI_LoggingEnabled;
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* __ACPI___ACPI_H__ */

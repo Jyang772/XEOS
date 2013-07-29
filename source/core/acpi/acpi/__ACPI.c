@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "__acpi.h"
+#include "__private/acpi.h"
 #include "acpi.h"
 #include <stdlib.h>
 
