@@ -157,7 +157,5 @@ clean:
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_SYSTEM)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_SYSTEM)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_OBJ_PIC_SYSTEM)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_PIC_SYSTEM)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIB)libsystem.*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIB)libsystem.*
