@@ -358,6 +358,11 @@ COLOR_CYAN                              := "\x1b[36;01m"
 # Functions
 #-------------------------------------------------------------------------------
 
+XEOS_FUNC_S_SRC                         = $(foreach dir,$(1),$(wildcard $(1)*$(EXT_ASM_32)))
+XEOS_FUNC_S_SRC_REL                     = $(notdir $(call XEOS_FUNC_S_SRC,$(1)))
+XEOS_FUNC_S_OBJ_REL                     = $(subst $(EXT_ASM_32),$(EXT_ASM_32)$(EXT_OBJ),$(call XEOS_FUNC_S_SRC_REL,$(1)))
+XEOS_FUNC_S_OBJ                         = $(addprefix $(1),$(call XEOS_FUNC_S_OBJ_REL,$(2)))
+
 XEOS_FUNC_C_SRC                         = $(foreach dir,$(1),$(wildcard $(1)*$(EXT_C)))
 XEOS_FUNC_C_SRC_REL                     = $(notdir $(call XEOS_FUNC_C_SRC,$(1)))
 XEOS_FUNC_C_OBJ_REL                     = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(call XEOS_FUNC_C_SRC_REL,$(1)))

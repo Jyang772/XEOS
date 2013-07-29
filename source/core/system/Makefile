@@ -118,14 +118,7 @@ vpath %$(EXT_ASM_64)    $(DIR_SRC_ATOMIC)
 # Files
 #-------------------------------------------------------------------------------
 
-_FILES_ASM_32_ATOMIC            = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_ASM_32)))
-_FILES_ASM_64_ATOMIC            = $(foreach dir,$(DIR_SRC_ATOMIC),$(wildcard $(DIR_SRC_ATOMIC)*$(EXT_ASM_64)))
-_FILES_ASM_32_REL_ATOMIC        = $(notdir $(_FILES_ASM_32_ATOMIC))
-_FILES_ASM_64_REL_ATOMIC        = $(notdir $(_FILES_ASM_64_ATOMIC))
-_FILES_ASM_32_OBJ_ATOMIC        = $(subst $(EXT_ASM_32),$(EXT_ASM_32)$(EXT_OBJ),$(_FILES_ASM_32_REL_ATOMIC))
-_FILES_ASM_64_OBJ_ATOMIC        = $(subst $(EXT_ASM_64),$(EXT_ASM_64)$(EXT_OBJ),$(_FILES_ASM_64_REL_ATOMIC))
-_FILES_ASM_32_OBJ_BUILD_ATOMIC  = $(addprefix $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(_FILES_ASM_32_OBJ_ATOMIC))
-_FILES_ASM_64_OBJ_BUILD_ATOMIC  = $(addprefix $(PATH_BUILD_64_CORE_OBJ_SYSTEM),$(_FILES_ASM_64_OBJ_ATOMIC))
+_FILES_ASM_64_OBJ_BUILD_ATOMIC  = $(call XEOS_FUNC_S_OBJ,$(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(DIR_SRC_ATOMIC))
 
 _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(PATH_SRC_CORE_SYSTEM))
 _FILES_C_OBJ_BUILD_MMAN         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(DIR_SRC_MMAN))
@@ -176,13 +169,6 @@ clean:
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIB)libsystem.*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIB)libsystem.*
 	
-# Compiles an assembly file (32 bits)
-$(PATH_BUILD_32_CORE_OBJ_SYSTEM)%$(EXT_ASM_32)$(EXT_OBJ): %$(EXT_ASM_32)
-	
-	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_OBJ_SYSTEM)$(@F) $(abspath $<)
-	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_OBJ_PIC_SYSTEM)$(@F) $(abspath $<)
-	
 # Compiles an assembly file (64 bits)
 $(PATH_BUILD_64_CORE_OBJ_SYSTEM)%$(EXT_ASM_64)$(EXT_OBJ): %$(EXT_ASM_64)
 	
@@ -210,6 +196,12 @@ $(PATH_BUILD_32_CORE_OBJ_PIC_SYSTEM)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
 
 # Targets with second expansion
 .SECONDEXPANSION:
+
+# Compiles an assembly file (32 bits)
+$(PATH_BUILD_32_CORE_OBJ_SYSTEM)%$(EXT_ASM_32)$(EXT_OBJ): %$(EXT_ASM_32) $$(subst $(EXT_ASM_32),$(EXT_ASM_64),$$(subst $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(PATH_BUILD_64_CORE_OBJ_SYSTEM),$$@))
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_32) $(ARGS_AS_32) -o $(PATH_BUILD_32_CORE_OBJ_SYSTEM)$(@F) $(abspath $<)
 
 # Compiles a C file (32 bits)
 $(PATH_BUILD_32_CORE_OBJ_SYSTEM)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(PATH_BUILD_64_CORE_OBJ_PIC_SYSTEM),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(PATH_BUILD_64_CORE_OBJ_SYSTEM),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_SYSTEM),$(PATH_BUILD_32_CORE_OBJ_PIC_SYSTEM),$$@)
