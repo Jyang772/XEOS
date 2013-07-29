@@ -670,6 +670,7 @@
 		05860AF417A728F40092ECE7 /* cpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
 		05860AF517A728F40092ECE7 /* idt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = idt.h; sourceTree = "<group>"; };
 		05860AF617A728F40092ECE7 /* rtc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rtc.h; sourceTree = "<group>"; };
+		05860AF717A730540092ECE7 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		058E28F2163B520A0042A1DB /* __libc_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = __libc_assert.c; sourceTree = "<group>"; };
 		058E28F5163B520A0042A1DB /* isalnum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalnum.c; sourceTree = "<group>"; };
 		058E28F6163B520A0042A1DB /* isalpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = isalpha.c; sourceTree = "<group>"; };
@@ -2204,6 +2205,7 @@
 		05AFEDF81620F27C00740041 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				05860AF717A730540092ECE7 /* Makefile */,
 				056D30A5179AF41E009DC18C /* boot */,
 				05AFEE0F1620F27C00740041 /* core */,
 			);

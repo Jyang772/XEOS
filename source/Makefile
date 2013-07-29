@@ -59,13 +59,13 @@
 
 # $Id$
 
-include ./Makefile-Config.mk
+include ../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>                               *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]>                     *** "
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -74,44 +74,31 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>            
 # Declaration for phony targets, to avoid problems with local files
 .PHONY: all         \
         clean       \
-        source      \
-        release     \
-        toolchain   \
-        test
+        boot        \
+        core
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    source      \
-        release
+all:    boot    \
+        core
 	
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_RELEASE) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(PATH_SRC_BOOT) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
 
-# Builds the XEOS toolchain
-toolchain:
+# Builds the boot files
+boot:
 	
-	@$(PRINT) $(PROMPT)"Building the XEOS toolchain"
-	@$(CD) $(PATH_SW) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS boot files"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_BOOT) && $(MAKE)
 
-# Builds the source files
-source:
+# Builds the core files
+core:
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS source files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC) && $(MAKE)
-
-# Builds the release files
-release:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS release files"$(COLOR_NONE)
-	@$(CD) $(PATH_RELEASE) && $(MAKE)
-	
-# Runs XEOS in VirtualBox with debug support
-test: all
-	
-	@/Applications/VirtualBox.app/Contents/MacOS/VirtualBox --startvm XEOS --debug --start-running
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS core files"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_CORE) && $(MAKE)
