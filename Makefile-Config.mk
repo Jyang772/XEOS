@@ -369,3 +369,33 @@ XEOS_FUNC_C_SRC                         = $(foreach dir,$(1),$(wildcard $(1)*$(E
 XEOS_FUNC_C_SRC_REL                     = $(notdir $(call XEOS_FUNC_C_SRC,$(1)))
 XEOS_FUNC_C_OBJ_REL                     = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(call XEOS_FUNC_C_SRC_REL,$(1)))
 XEOS_FUNC_C_OBJ                         = $(addprefix $(1),$(call XEOS_FUNC_C_OBJ_REL,$(2)))
+
+#-------------------------------------------------------------------------------
+# Targets with second expansion
+#-------------------------------------------------------------------------------
+
+.SECONDEXPANSION:
+
+# Compiles an assembly file (64 bits)
+$(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@))
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_64) $(ARGS_AS_64) -o $@ $(abspath $<)
+
+# Compiles an assembly file (32 bits)
+$(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$$(subst $(EXT_ASM_32),$(EXT_ASM_64),$$@))
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_32) $(ARGS_AS_32) -o $@ $(abspath $<)
+
+# Compiles a C file (64 bits)
+$(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@))
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_64) $(ARGS_CC_64) -o $@ -c $(abspath $<)
+
+# Compiles a C file (32 bits)
+$(PATH_BUILD_32)%$(EXT_C)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$$@)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(CC_32) $(ARGS_CC_32) -o $@ -c $(abspath $<)

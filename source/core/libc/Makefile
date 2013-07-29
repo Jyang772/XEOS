@@ -159,7 +159,7 @@ _FILES_C_OBJ_BUILD_WCTYPE   = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_CORE_OBJ_LI
 .PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_PIC_LIBC)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_LIBC)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_LIBC)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ) $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
@@ -176,11 +176,11 @@ all: $(_FILES_C_OBJ_BUILD) $(_FILES_C_OBJ_BUILD_ASSERT) $(_FILES_C_OBJ_BUILD_COM
 	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_CORE_LIB)libc.a $(PATH_BUILD_64_CORE_OBJ_LIBC)*$(EXT_OBJ)
 	@$(RANLIB_64) $(PATH_BUILD_64_CORE_LIB)libc.a
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libc.so"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_CORE_LIB)libc.so $(PATH_BUILD_32_CORE_OBJ_PIC_LIBC)*$(EXT_OBJ)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libc.so"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_CORE_LIB)libc.so $(PATH_BUILD_64_CORE_OBJ_PIC_LIBC)*$(EXT_OBJ)
+#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libc.so"$(COLOR_NONE)
+#	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_CORE_LIB)libc.so $(PATH_BUILD_32_CORE_OBJ_PIC_LIBC)*$(EXT_OBJ)
+#	
+#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libc.so"$(COLOR_NONE)
+#	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_CORE_LIB)libc.so $(PATH_BUILD_64_CORE_OBJ_PIC_LIBC)*$(EXT_OBJ)
 	
 # Cleans the build files
 clean:
@@ -192,30 +192,3 @@ clean:
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_PIC_LIBC)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIB)libc.*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIB)libc.*
-	
-# Compiles a C file (64 bits - PIC)
-$(PATH_BUILD_64_CORE_OBJ_PIC_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_PIC) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_PIC_LIBC)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (64 bits)
-$(PATH_BUILD_64_CORE_OBJ_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_LIBC)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (32 bits - PIC)
-$(PATH_BUILD_32_CORE_OBJ_PIC_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_PIC) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_PIC_LIBC)$(@F) -c $(abspath $<)
-
-# Targets with second expansion
-.SECONDEXPANSION:
-
-# Compiles a C file (32 bits)
-$(PATH_BUILD_32_CORE_OBJ_LIBC)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_LIBC),$(PATH_BUILD_64_CORE_OBJ_PIC_LIBC),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_LIBC),$(PATH_BUILD_64_CORE_OBJ_LIBC),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_LIBC),$(PATH_BUILD_32_CORE_OBJ_PIC_LIBC),$$@)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_LIBC)$(@F) -c $(abspath $<)

@@ -147,18 +147,18 @@ _FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES      = $(call XEOS_FUNC_C_OBJ,$(P
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean osl acpica
+.PHONY: all clean
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS: $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL)%$(EXT_C)$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ)
+.PRECIOUS: $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ) $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: $(_FILES_C_OBJ_BUILD_ACPI) osl acpica
-    
+all: $(_FILES_C_OBJ_BUILD_ACPI) $(_FILES_C_OBJ_BUILD_OSL) acpica
+	    
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libacpi.a"$(COLOR_NONE)
 	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_CORE_LIB)libacpi.a $(PATH_BUILD_32_CORE_OBJ_ACPI)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA)*$(EXT_OBJ)
 	@$(RANLIB_32) $(PATH_BUILD_32_CORE_LIB)libacpi.a
@@ -167,22 +167,12 @@ all: $(_FILES_C_OBJ_BUILD_ACPI) osl acpica
 	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_CORE_LIB)libacpi.a $(PATH_BUILD_64_CORE_OBJ_ACPI)*$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)*$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)*$(EXT_OBJ)
 	@$(RANLIB_64) $(PATH_BUILD_64_CORE_LIB)libacpi.a
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libacpi.so"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_CORE_LIB)libacpi.so $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA)*$(EXT_OBJ)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libacpi.so"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_CORE_LIB)libacpi.so $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI)*$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL)*$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA)*$(EXT_OBJ)
+#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libacpi.so"$(COLOR_NONE)
+#	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_CORE_LIB)libacpi.so $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL)*$(EXT_OBJ) $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA)*$(EXT_OBJ)
+#	
+#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libacpi.so"$(COLOR_NONE)
+#	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_CORE_LIB)libacpi.so $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI)*$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL)*$(EXT_OBJ) $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA)*$(EXT_OBJ)
 
-# Build OSL (OS Services Layer)
-osl: $(_FILES_C_OBJ_BUILD_OSL)
-    
-	@:
-
-# Build the full project
-acpica: $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISASSEMBLER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISPATCHER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EVENTS) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EXECUTER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_HARDWARE) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_NAMESPACE) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_PARSER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_RESOURCES) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_TABLES) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES)
-	
-	@:
-	
 # Cleans the build files
 clean:
 	
@@ -201,78 +191,10 @@ clean:
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_CORE_LIB)libacpi.*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_CORE_LIB)libacpi.*
-	
-# Compiles a C file (64 bits - PIC)
-$(PATH_BUILD_64_CORE_OBJ_PIC_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_PIC) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (64 bits)
-$(PATH_BUILD_64_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_64) -o $(PATH_BUILD_64_CORE_OBJ_ACPI)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (32 bits - PIC)
-$(PATH_BUILD_32_CORE_OBJ_PIC_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_PIC) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (64 bits - PIC) / OSL
-$(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_PIC) $(ARGS_CC_64_OSL) -o $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (64 bits) / OSL
-$(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_64_OSL) -o $(PATH_BUILD_64_CORE_OBJ_ACPI_OSL)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (32 bits - PIC) / OSL
-$(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_PIC) $(ARGS_CC_32_OSL) -o $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (64 bits - PIC) / ACPICA
-$(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_PIC) $(ARGS_CC_64_ACPICA) -o $(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (64 bits) / ACPICA
-$(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 64 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_64) $(ARGS_CC_64_ACPICA) -o $(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA)$(@F) -c $(abspath $<)
-	
-# Compiles a C file (32 bits - PIC) / ACPICA
-$(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_PIC) $(ARGS_CC_32_ACPICA) -o $(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA)$(@F) -c $(abspath $<)
 
-# Targets with second expansion
-.SECONDEXPANSION:
-
-# Compiles a C file (32 bits)
-$(PATH_BUILD_32_CORE_OBJ_ACPI)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI),$(PATH_BUILD_64_CORE_OBJ_PIC_ACPI),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI),$(PATH_BUILD_64_CORE_OBJ_ACPI),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI),$(PATH_BUILD_32_CORE_OBJ_PIC_ACPI),$$@)
+# ACPICA library
+acpica: ARGS_CC_32 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)include/acpica $(ARGS_CC_32)
+acpica: ARGS_CC_64 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_CORE_ACPI)include/acpica $(ARGS_CC_64)
+acpica: $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISASSEMBLER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISPATCHER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EVENTS) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_EXECUTER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_HARDWARE) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_NAMESPACE) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_PARSER) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_RESOURCES) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_TABLES) $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_UTILITIES)
 	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_32) -o $(PATH_BUILD_32_CORE_OBJ_ACPI)$(@F) -c $(abspath $<)
-
-# Compiles a C file (32 bits) / OSL
-$(PATH_BUILD_32_CORE_OBJ_ACPI_OSL)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_OSL),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(PATH_BUILD_64_CORE_OBJ_ACPI_OSL),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL),$(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_OSL),$$@)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_32_OSL) -o $(PATH_BUILD_32_CORE_OBJ_ACPI_OSL)$(@F) -c $(abspath $<)
-
-# Compiles a C file (32 bits) / ACPICA
-$(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA)%$(EXT_C)$(EXT_OBJ): %$(EXT_C) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA),$(PATH_BUILD_64_CORE_OBJ_PIC_ACPI_ACPICA),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA),$(PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA),$$@) $$(subst $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA),$(PATH_BUILD_32_CORE_OBJ_PIC_ACPI_ACPICA),$$@)
-	
-	@$(PRINT) $(PROMPT)"Compiling C file [ 32 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
-	@$(CC_32) $(ARGS_CC_32_ACPICA) -o $(PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA)$(@F) -c $(abspath $<)
+	@:
