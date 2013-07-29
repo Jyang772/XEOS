@@ -190,8 +190,13 @@ AS_64                           := $(AS)
 
 # Linker
 
-LD                              := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ld
-LD_32                           := $(LD)
+LD_MACHO_32                     := $(PATH_TOOLCHAIN_LLVM)/bin/lld
+LD_MACHO_64                     := $(PATH_TOOLCHAIN_LLVM)/bin/lld
+LD_ELF_32                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ld
+LD_ELF_64                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_ELF)/bin/ld
+LD_EFI_32                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ld
+LD_EFI_64                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_EFI)/bin/ld
+LD_32                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ld
 LD_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE)/bin/ld
 
 # C compiler
