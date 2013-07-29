@@ -91,7 +91,7 @@ DIR_UDK             := $(PATH_SW)udk2010/
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all: yasm gmp mpfr binutils cmake llvm udk
+all: yasm gmp mpfr binutils cmake llvm
 
 	@:
 
@@ -141,9 +141,3 @@ llvm:
 	
 	@$(PRINT) $(PROMPT)"Building Clang/LLVM"
 	@$(CD) $(DIR_LLVM) && $(MAKE)
-	
-# UDK
-udk:
-	
-	@$(PRINT) $(PROMPT)"Building UDK (UEFI Developmet Kit)"
-	@$(CD) $(DIR_UDK) && $(MAKE)

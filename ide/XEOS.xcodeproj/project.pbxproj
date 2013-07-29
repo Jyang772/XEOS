@@ -641,7 +641,6 @@
 		056D30BE179AF41E009DC18C /* mbr.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = mbr.s; sourceTree = "<group>"; };
 		056D30C1179AF5EC009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D30C3179AF797009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		056D30CA179D2776009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05773AD6167016C800A1597A /* keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyboard.h; sourceTree = "<group>"; };
 		057D650B166400930062DFD9 /* XEOS_VM_MemoryMapGetPTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPTCount.c; sourceTree = "<group>"; };
 		057D650D1664009C0062DFD9 /* XEOS_VM_MemoryMapGetPDTCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_MemoryMapGetPDTCount.c; sourceTree = "<group>"; };
@@ -790,7 +789,6 @@
 		05A885B5165EC38300AFCE25 /* XEOS_VM_PDTEntrySetFlag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PDTEntrySetFlag.c; sourceTree = "<group>"; };
 		05A885B6165EC38C00AFCE25 /* XEOS_VM_PDTEntryGetFlag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VM_PDTEntryGetFlag.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		05AA0679179DA93B006F75CB /* mingw-gcc-build.py.patch */ = {isa = PBXFileReference; lastKnownFileType = text; path = "mingw-gcc-build.py.patch"; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AC9BCC164C9ACF0036E977 /* __video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __video.h; sourceTree = "<group>"; };
@@ -1418,15 +1416,6 @@
 				056D30C3179AF797009DC18C /* Makefile */,
 			);
 			path = uefi;
-			sourceTree = "<group>";
-		};
-		056D30C4179D2776009DC18C /* udk2010 */ = {
-			isa = PBXGroup;
-			children = (
-				05AA0679179DA93B006F75CB /* mingw-gcc-build.py.patch */,
-				056D30CA179D2776009DC18C /* Makefile */,
-			);
-			path = udk2010;
 			sourceTree = "<group>";
 		};
 		05773AD8167016F400A1597A /* keyboard */ = {
@@ -2167,7 +2156,6 @@
 				05AA067A179E7232006F75CB /* gmp */,
 				05AFEDF11620F27C00740041 /* llvm */,
 				05AA067F179E7232006F75CB /* mpfr */,
-				056D30C4179D2776009DC18C /* udk2010 */,
 				05A8F94E1625690B000484EB /* yasm */,
 				05AFEDF71620F27C00740041 /* Makefile */,
 			);
