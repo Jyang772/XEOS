@@ -1,1 +1,1 @@
-../libc/include/inttypes.h
+../../lib/libc/include/inttypes.h

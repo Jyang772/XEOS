@@ -1,1 +1,1 @@
-../libc/include/wctype.h
+../../lib/libc/include/wctype.h

@@ -1,1 +1,1 @@
-../libc/include/stdarg.h
+../../lib/libc/include/stdarg.h

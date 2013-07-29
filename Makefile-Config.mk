@@ -137,7 +137,6 @@ PATH_BUILD_32_CORE_BIN                  := $(PATH_BUILD_32_CORE)bin/
 PATH_BUILD_64_CORE_BIN                  := $(PATH_BUILD_64_CORE)bin/
 PATH_BUILD_32_CORE_LIB                  := $(PATH_BUILD_32_CORE)lib/
 PATH_BUILD_64_CORE_LIB                  := $(PATH_BUILD_64_CORE)lib/
-
 PATH_BUILD_32_CORE_OBJ                  := $(PATH_BUILD_32_CORE)obj/
 PATH_BUILD_64_CORE_OBJ                  := $(PATH_BUILD_64_CORE)obj/
 PATH_BUILD_32_CORE_OBJ_KERNEL           := $(PATH_BUILD_32_CORE_OBJ)xeos/
@@ -148,10 +147,18 @@ PATH_BUILD_32_CORE_OBJ_ACPI_ACPICA      := $(PATH_BUILD_32_CORE_OBJ)acpi-acpica/
 PATH_BUILD_64_CORE_OBJ_ACPI_ACPICA      := $(PATH_BUILD_64_CORE_OBJ)acpi-acpica/
 PATH_BUILD_32_CORE_OBJ_ACPI_OSL         := $(PATH_BUILD_32_CORE_OBJ)acpi-osl/
 PATH_BUILD_64_CORE_OBJ_ACPI_OSL         := $(PATH_BUILD_64_CORE_OBJ)acpi-osl/
-PATH_BUILD_32_CORE_OBJ_LIBC             := $(PATH_BUILD_32_CORE_OBJ)libc/
-PATH_BUILD_64_CORE_OBJ_LIBC             := $(PATH_BUILD_64_CORE_OBJ)libc/
 PATH_BUILD_32_CORE_OBJ_SYSTEM           := $(PATH_BUILD_32_CORE_OBJ)system/
 PATH_BUILD_64_CORE_OBJ_SYSTEM           := $(PATH_BUILD_64_CORE_OBJ)system/
+PATH_BUILD_32_LIB                       := $(PATH_BUILD_32)lib/
+PATH_BUILD_64_LIB                       := $(PATH_BUILD_64)lib/
+PATH_BUILD_32_LIB_BIN                   := $(PATH_BUILD_32_LIB)bin/
+PATH_BUILD_64_LIB_BIN                   := $(PATH_BUILD_64_LIB)bin/
+PATH_BUILD_32_LIB_LIB                   := $(PATH_BUILD_32_LIB)lib/
+PATH_BUILD_64_LIB_LIB                   := $(PATH_BUILD_64_LIB)lib/
+PATH_BUILD_32_LIB_OBJ                   := $(PATH_BUILD_32_LIB)obj/
+PATH_BUILD_64_LIB_OBJ                   := $(PATH_BUILD_64_LIB)obj/
+PATH_BUILD_32_LIB_OBJ_LIBC              := $(PATH_BUILD_32_LIB_OBJ)libc/
+PATH_BUILD_64_LIB_OBJ_LIBC              := $(PATH_BUILD_64_LIB_OBJ)libc/
 
 # Source directories
 
@@ -161,9 +168,10 @@ PATH_SRC_BOOT_UEFI                      := $(PATH_SRC_BOOT)uefi/
 PATH_SRC_CORE                           := $(PATH_SRC)core/
 PATH_SRC_CORE_KERNEL                    := $(PATH_SRC_CORE)xeos/
 PATH_SRC_CORE_ACPI                      := $(PATH_SRC_CORE)acpi/
-PATH_SRC_CORE_LIBC                      := $(PATH_SRC_CORE)libc/
 PATH_SRC_CORE_SYSTEM                    := $(PATH_SRC_CORE)system/
 PATH_SRC_CORE_INC                       := $(PATH_SRC_CORE)include/
+PATH_SRC_LIB                            := $(PATH_SRC)lib/
+PATH_SRC_LIB_LIBC                       := $(PATH_SRC_LIB)libc/
 
 # Release directories
 

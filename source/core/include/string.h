@@ -1,1 +1,1 @@
-../libc/include/string.h
+../../lib/libc/include/string.h

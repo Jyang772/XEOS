@@ -1,1 +1,1 @@
-../libc/include/stdbool.h
+../../lib/libc/include/stdbool.h

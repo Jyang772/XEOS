@@ -1,1 +1,1 @@
-../libc/include/stdio.h
+../../lib/libc/include/stdio.h

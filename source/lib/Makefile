@@ -59,55 +59,32 @@
 
 # $Id$
 
-include ../Makefile-Config.mk
+include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]>                     *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LIB  "$(COLOR_NONE)"]>           *** "
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all         \
-        clean       \
-        boot        \
-        lib         \
-        core
+.PHONY: all clean
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    boot    \
-        lib     \
-        core
+all:
+	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C standard library"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_LIB_LIBC) && $(MAKE)
 	
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_BOOT) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC_LIB) && $(MAKE) $(ARGS_MAKE_CLEAN)
-
-# Builds the boot files
-boot:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS boot files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_BOOT) && $(MAKE)
-
-# Builds the library files
-lib:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS library files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB) && $(MAKE)
-
-# Builds the core files
-core:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS core files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE) && $(MAKE)
+	@$(CD) $(PATH_SRC_LIB_LIBC) && $(MAKE) clean

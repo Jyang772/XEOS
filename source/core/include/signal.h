@@ -1,1 +1,1 @@
-../libc/include/signal.h
+../../lib/libc/include/signal.h

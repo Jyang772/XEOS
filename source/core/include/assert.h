@@ -1,1 +1,1 @@
-../libc/include/assert.h
+../../lib/libc/include/assert.h

@@ -1,1 +1,1 @@
-../libc/include/math.h
+../../lib/libc/include/math.h

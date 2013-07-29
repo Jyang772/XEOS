@@ -1,1 +1,1 @@
-../libc/include/locale.h
+../../lib/libc/include/locale.h

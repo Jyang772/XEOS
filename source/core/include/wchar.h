@@ -1,1 +1,1 @@
-../libc/include/wchar.h
+../../lib/libc/include/wchar.h

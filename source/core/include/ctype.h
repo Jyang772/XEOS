@@ -1,1 +1,1 @@
-../libc/include/ctype.h
+../../lib/libc/include/ctype.h

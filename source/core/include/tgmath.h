@@ -1,1 +1,1 @@
-../libc/include/tgmath.h
+../../lib/libc/include/tgmath.h

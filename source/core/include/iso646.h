@@ -1,1 +1,1 @@
-../libc/include/iso646.h
+../../lib/libc/include/iso646.h
