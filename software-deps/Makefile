@@ -77,14 +77,13 @@ DIR_MPFR            := $(PATH_SW)mpfr/
 DIR_BINUTILS        := $(PATH_SW)binutils/
 DIR_CMAKE           := $(PATH_SW)cmake/
 DIR_LLVM            := $(PATH_SW)llvm/
-DIR_UDK             := $(PATH_SW)udk2010/
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean yasm gmp mpfr binutils cmake llvm udk
+.PHONY: all clean yasm gmp mpfr binutils cmake llvm
 
 #-------------------------------------------------------------------------------
 # Phony targets
