@@ -135,6 +135,8 @@ PATH_BUILD_32_CORE                  := $(PATH_BUILD_32)core/
 PATH_BUILD_64_CORE                  := $(PATH_BUILD_64)core/
 PATH_BUILD_32_CORE_BIN              := $(PATH_BUILD_32_CORE)bin/
 PATH_BUILD_64_CORE_BIN              := $(PATH_BUILD_64_CORE)bin/
+PATH_BUILD_32_CORE_LIB              := $(PATH_BUILD_32_CORE)lib/
+PATH_BUILD_64_CORE_LIB              := $(PATH_BUILD_64_CORE)lib/
 PATH_BUILD_32_CORE_OBJ              := $(PATH_BUILD_32_CORE)obj/
 PATH_BUILD_64_CORE_OBJ              := $(PATH_BUILD_64_CORE)obj/
 PATH_BUILD_32_CORE_OBJ_KERNEL       := $(PATH_BUILD_32_CORE_OBJ)xeos/
@@ -190,8 +192,8 @@ AS_64                           := $(AS)
 
 # Linker
 
-LD_MACHO_32                     := $(PATH_TOOLCHAIN_LLVM)/bin/lld
-LD_MACHO_64                     := $(PATH_TOOLCHAIN_LLVM)/bin/lld
+LD_MACHO_32                     := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ld
+LD_MACHO_64                     := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_MACHO)/bin/ld
 LD_ELF_32                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ld
 LD_ELF_64                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_ELF)/bin/ld
 LD_EFI_32                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ld
@@ -204,6 +206,26 @@ LD_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE)
 CC                              := $(PATH_TOOLCHAIN_LLVM)bin/clang
 CC_32                           := $(CC)
 CC_64                           := $(CC)
+
+# Archiver
+
+AR_MACHO_32                     := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ar
+AR_MACHO_64                     := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ar
+AR_ELF_32                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ar
+AR_ELF_64                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ar
+AR_EFI_32                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ar
+AR_EFI_64                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ar
+AR_32                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ar
+AR_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ar
+
+RANLIB_MACHO_32                 := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ranlib
+RANLIB_MACHO_64                 := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ranlib
+RANLIB_ELF_32                   := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ranlib
+RANLIB_ELF_64                   := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ranlib
+RANLIB_EFI_32                   := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ranlib
+RANLIB_EFI_64                   := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ranlib
+RANLIB_32                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ranlib
+RANLIB_64                       := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ranlib
 
 # Utilities
 
@@ -259,6 +281,11 @@ ARGS_CC_64                      := $(ARGS_CC_TARGET_64) $(ARGS_CC_MISC) $(ARGS_C
 
 ARGS_LD_32                      := -z max-page-size=0x1000 -s
 ARGS_LD_64                      := -z max-page-size=0x1000 -s
+
+# Archiver flags
+
+ARGS_AR_32                      := rcs
+ARGS_AR_64                      := rcs
 
 # Assembler flags
 
