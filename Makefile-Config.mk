@@ -367,23 +367,37 @@ XEOS_FUNC_C_OBJ                         = $(addprefix $(1),$(call XEOS_FUNC_C_OB
 #-------------------------------------------------------------------------------
 
 # Declaration for precious targets, to avoid cleaning of intermediate files
-.PRECIOUS:  $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ)    \
-            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ_PIC)     \
-            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)         \
+.PRECIOUS:  $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ_PIC)    \
+            $(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ)        \
+            $(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ_PIC)    \
+            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ_PIC)         \
+            $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ)             \
             $(PATH_BUILD_32)%$(EXT_C)$(EXT_OBJ_PIC)
 
 .SECONDEXPANSION:
 
-# Compiles an assembly file (64 bits)
-$(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@))
+# Compiles an assembly file (64 bits - PIC)
+$(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ_PIC): $$(notdir $$(subst $(EXT_OBJ_PIC),,$$@))
 	
-	@$(PRINT) $(PROMPT)"Compiling assembly file [ 64 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 64 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_64) $(ARGS_AS_64) -o $@ $(abspath $<)
 
-# Compiles an assembly file (32 bits)
-$(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$$(subst $(EXT_ASM_32),$(EXT_ASM_64),$$@))
+# Compiles an assembly file (64 bits)
+$(PATH_BUILD_64)%$(EXT_ASM_64)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(EXT_OBJ),$(EXT_OBJ_PIC),$$@)
 	
-	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 64 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_64) $(ARGS_AS_64) -o $@ $(abspath $<)
+
+# Compiles an assembly file (32 bits - PIC)
+$(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ_PIC): $$(notdir $$(subst $(EXT_OBJ_PIC),,$$@))
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits - PIC ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(AS_32) $(ARGS_AS_32) -o $@ $(abspath $<)
+
+# Compiles an assembly file (32 bits)
+$(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$$(subst $(EXT_ASM_32),$(EXT_ASM_64),$$@)) $$(subst $(EXT_OBJ),$(EXT_OBJ_PIC),$$@)
+	
+	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_32) $(ARGS_AS_32) -o $@ $(abspath $<)
 
 # Compiles a C file (64 bits - PIC)

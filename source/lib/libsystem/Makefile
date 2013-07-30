@@ -72,6 +72,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 #-------------------------------------------------------------------------------
 
 DIR_SRC_ATOMIC      = $(PATH_SRC_LIB_LIBSYSTEM)atomic/
+DIR_SRC_RT          = $(PATH_SRC_LIB_LIBSYSTEM)rt/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -79,9 +80,10 @@ DIR_SRC_ATOMIC      = $(PATH_SRC_LIB_LIBSYSTEM)atomic/
 
 # Define the search paths for source files
 vpath %$(EXT_C)         $(PATH_SRC_LIB_LIBSYSTEM)
-vpath %$(EXT_C)         $(DIR_SRC_ATOMIC)
 vpath %$(EXT_ASM_32)    $(DIR_SRC_ATOMIC)
 vpath %$(EXT_ASM_64)    $(DIR_SRC_ATOMIC)
+vpath %$(EXT_ASM_32)    $(DIR_SRC_RT)
+vpath %$(EXT_ASM_64)    $(DIR_SRC_RT)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -99,10 +101,9 @@ vpath %$(EXT_ASM_64)    $(DIR_SRC_ATOMIC)
 # Files
 #-------------------------------------------------------------------------------
 
+_FILES_ASM_OBJ_BUILD_RT         = $(call XEOS_FUNC_S_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(DIR_SRC_RT))
 _FILES_ASM_OBJ_BUILD_ATOMIC     = $(call XEOS_FUNC_S_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(DIR_SRC_ATOMIC))
-
 _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(PATH_SRC_LIB_LIBSYSTEM))
-_FILES_C_OBJ_BUILD_ATOMIC       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(DIR_SRC_ATOMIC))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -117,7 +118,8 @@ _FILES_C_OBJ_BUILD_ATOMIC       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    $(_FILES_ASM_OBJ_BUILD_ATOMIC)  \
+all:    $(_FILES_ASM_OBJ_BUILD_RT)      \
+        $(_FILES_ASM_OBJ_BUILD_ATOMIC)  \
         $(_FILES_C_OBJ_BUILD)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libsystem.a"$(COLOR_NONE)
@@ -128,11 +130,11 @@ all:    $(_FILES_ASM_OBJ_BUILD_ATOMIC)  \
 	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libsystem.a $(PATH_BUILD_64_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ)
 	@$(RANLIB_64) $(PATH_BUILD_64_LIB_BIN)libsystem.a
 	
-#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
-#	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libsystem.so $(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
-#	
-#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
-#	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libsystem.so $(PATH_BUILD_64_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
+	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libsystem.so $(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
+	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
+	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libsystem.so $(PATH_BUILD_64_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
 
 # Cleans the build files
 clean:

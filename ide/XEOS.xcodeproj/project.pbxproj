@@ -2532,6 +2532,11 @@
 		0598166A17A753960072FDD9 /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
 		0598166B17A753960072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0598166C17A753960072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		0598166F17A7DD260072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		0598167217A7E0680072FDD9 /* __udivdi3.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __udivdi3.32.s; sourceTree = "<group>"; };
+		0598167317A7E0680072FDD9 /* __udivdi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __udivdi3.64.s; sourceTree = "<group>"; };
+		0598167417A7E0680072FDD9 /* __umoddi3.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.32.s; sourceTree = "<group>"; };
+		0598167517A7E0680072FDD9 /* __umoddi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.64.s; sourceTree = "<group>"; };
 		0598FCEE17A750F60072FDD9 /* boot.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = boot.s; sourceTree = "<group>"; };
 		0598FCF017A750F60072FDD9 /* xeos.16.a20.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.a20.inc.s; sourceTree = "<group>"; };
 		0598FCF117A750F60072FDD9 /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -2561,10 +2566,6 @@
 		0598FD0B17A750F60072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0598FD0D17A750F60072FDD9 /* __XEOS_Main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_Main.c; sourceTree = "<group>"; };
 		0598FD0E17A750F60072FDD9 /* __XEOS_Main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __XEOS_Main.h; sourceTree = "<group>"; };
-		0598FD1117A750F60072FDD9 /* __udivdi3.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __udivdi3.32.s; sourceTree = "<group>"; };
-		0598FD1217A750F60072FDD9 /* __udivdi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __udivdi3.64.s; sourceTree = "<group>"; };
-		0598FD1317A750F60072FDD9 /* __umoddi3.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.32.s; sourceTree = "<group>"; };
-		0598FD1417A750F60072FDD9 /* __umoddi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.64.s; sourceTree = "<group>"; };
 		0598FD1717A750F60072FDD9 /* XEOS_HAL_CMOS_Read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CMOS_Read.c; sourceTree = "<group>"; };
 		0598FD1817A750F60072FDD9 /* XEOS_HAL_CMOS_Write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_HAL_CMOS_Write.c; sourceTree = "<group>"; };
 		0598FD1A17A750F60072FDD9 /* __XEOS_HAL_CPU.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_HAL_CPU.c; sourceTree = "<group>"; };
@@ -3024,6 +3025,7 @@
 				05980AA317A753910072FDD9 /* libacpi */,
 				0598147517A753960072FDD9 /* libc */,
 				059815F417A753960072FDD9 /* libposix */,
+				0598166D17A7DD260072FDD9 /* libpthread */,
 				0598166517A753960072FDD9 /* libsystem */,
 				0598166C17A753960072FDD9 /* Makefile */,
 			);
@@ -9501,6 +9503,7 @@
 				0598166617A753960072FDD9 /* atomic */,
 				0598166917A753960072FDD9 /* include */,
 				0598166B17A753960072FDD9 /* Makefile */,
+				0598167117A7E0680072FDD9 /* rt */,
 			);
 			path = libsystem;
 			sourceTree = "<group>";
@@ -9520,6 +9523,41 @@
 				0598166A17A753960072FDD9 /* atomic.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		0598166D17A7DD260072FDD9 /* libpthread */ = {
+			isa = PBXGroup;
+			children = (
+				0598166E17A7DD260072FDD9 /* include */,
+				0598166F17A7DD260072FDD9 /* Makefile */,
+				0598167017A7DD260072FDD9 /* pthread */,
+			);
+			path = libpthread;
+			sourceTree = "<group>";
+		};
+		0598166E17A7DD260072FDD9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		0598167017A7DD260072FDD9 /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = pthread;
+			sourceTree = "<group>";
+		};
+		0598167117A7E0680072FDD9 /* rt */ = {
+			isa = PBXGroup;
+			children = (
+				0598167217A7E0680072FDD9 /* __udivdi3.32.s */,
+				0598167317A7E0680072FDD9 /* __udivdi3.64.s */,
+				0598167417A7E0680072FDD9 /* __umoddi3.32.s */,
+				0598167517A7E0680072FDD9 /* __umoddi3.64.s */,
+			);
+			path = rt;
 			sourceTree = "<group>";
 		};
 		0598FCEB17A750F60072FDD9 /* source */ = {
@@ -9606,7 +9644,6 @@
 			children = (
 				0598FD0D17A750F60072FDD9 /* __XEOS_Main.c */,
 				0598FD0E17A750F60072FDD9 /* __XEOS_Main.h */,
-				0598FD0F17A750F60072FDD9 /* asm */,
 				0598FD1517A750F60072FDD9 /* hal */,
 				0598FD8A17A750F60072FDD9 /* include */,
 				0598FDB217A750F60072FDD9 /* info */,
@@ -9625,25 +9662,6 @@
 				0598FE3417A750F60072FDD9 /* XEOS_Stub.64.s */,
 			);
 			path = xeos;
-			sourceTree = "<group>";
-		};
-		0598FD0F17A750F60072FDD9 /* asm */ = {
-			isa = PBXGroup;
-			children = (
-				0598FD1017A750F60072FDD9 /* rt */,
-			);
-			path = asm;
-			sourceTree = "<group>";
-		};
-		0598FD1017A750F60072FDD9 /* rt */ = {
-			isa = PBXGroup;
-			children = (
-				0598FD1117A750F60072FDD9 /* __udivdi3.32.s */,
-				0598FD1217A750F60072FDD9 /* __udivdi3.64.s */,
-				0598FD1317A750F60072FDD9 /* __umoddi3.32.s */,
-				0598FD1417A750F60072FDD9 /* __umoddi3.64.s */,
-			);
-			path = rt;
 			sourceTree = "<group>";
 		};
 		0598FD1517A750F60072FDD9 /* hal */ = {
