@@ -70,6 +70,7 @@ extern "C" {
 #endif
 
 #include <sys/types.h>
+#include <sched.h>
 
 #define PTHREAD_CANCELED                ( ( void * )1 )
 
@@ -105,7 +106,7 @@ extern "C" {
 #define PTHREAD_SCOPE_PROCESS           0x02
 
 int         pthread_create( pthread_t * thread, const pthread_attr_t * attr, void * ( * start_routine )( void * ), void * arg );
-int         pthread_once( pthread_once_t *, void ( * init_routine )( void ) );
+int         pthread_once( pthread_once_t * once_control, void ( * init_routine )( void ) );
 int         pthread_cancel( pthread_t thread );
 void        pthread_exit( void * value_ptr );
 int         pthread_detach( pthread_t thread );
@@ -126,13 +127,13 @@ int         pthread_setcanceltype( int type, int * oldtype );
 int         pthread_attr_init( pthread_attr_t * attr );
 int         pthread_attr_destroy( pthread_attr_t * attr );
 int         pthread_attr_getdetachstate( const pthread_attr_t * attr, int * detachstate );
-int         pthread_attr_setdetachstate( pthread_attr_t *, int detachstate );
+int         pthread_attr_setdetachstate( pthread_attr_t * attr, int detachstate );
 int         pthread_attr_getguardsize( const pthread_attr_t * attr, size_t * guardsize );
 int         pthread_attr_setguardsize( pthread_attr_t * attr, size_t guardsize );
 int         pthread_attr_getinheritsched( const pthread_attr_t * attr, int * inheritsched );
 int         pthread_attr_setinheritsched( pthread_attr_t * attr, int inheritsched );
 int         pthread_attr_getschedparam( const pthread_attr_t * attr, struct sched_param * param );
-int         pthread_attr_setschedparam( pthread_attr_t *, const struct sched_param * );
+int         pthread_attr_setschedparam( pthread_attr_t * attr, const struct sched_param * param );
 int         pthread_attr_getschedpolicy( const pthread_attr_t * attr, int * policy );
 int         pthread_attr_setschedpolicy( pthread_attr_t * attr, int policy );
 int         pthread_attr_getscope( const pthread_attr_t * attr, int * contentionscope );

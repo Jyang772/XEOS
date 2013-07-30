@@ -63,10 +63,10 @@
 
 #include "pthread.h"
 
-int pthread_attr_setschedparam( pthread_attr_t *, const struct sched_param * )
+int pthread_attr_setschedparam( pthread_attr_t * attr, const struct sched_param * param )
 {
     ( void )attr;
-    ( void )sched_param;
+    ( void )param;
     
     return 0;
 }

@@ -63,7 +63,7 @@
 
 #include "pthread.h"
 
-int pthread_attr_setdetachstate( pthread_attr_t *, int detachstate )
+int pthread_attr_setdetachstate( pthread_attr_t * attr, int detachstate )
 {
     ( void )attr;
     ( void )detachstate;

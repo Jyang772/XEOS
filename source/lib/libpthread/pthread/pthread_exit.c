@@ -66,6 +66,4 @@
 void pthread_exit( void * value_ptr )
 {
     ( void )value_ptr;
-    
-    return 0;
 }

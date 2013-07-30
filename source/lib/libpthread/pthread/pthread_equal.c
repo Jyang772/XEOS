@@ -63,7 +63,7 @@
 
 #include "pthread.h"
 
-int pthread_equal( pthread_t t1, t2 )
+int pthread_equal( pthread_t t1, pthread_t t2 )
 {
     ( void )t1;
     ( void )t2;

@@ -66,7 +66,7 @@
 int sched_setscheduler( pid_t pid, int policy, const struct sched_param * param )
 {
     ( void )pid;
-    ( void )pid;
+    ( void )policy;
     ( void )param;
     
     return 0;

@@ -63,7 +63,7 @@
 
 #include "pthread.h"
 
-int pthread_rwlockattr_setpshared( const pthread_rwlockattr_t * attr, int pshared )
+int pthread_rwlockattr_setpshared( pthread_rwlockattr_t * attr, int pshared )
 {
     ( void )attr;
     ( void )pshared;

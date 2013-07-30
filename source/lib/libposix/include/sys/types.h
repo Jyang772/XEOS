@@ -69,7 +69,7 @@
 extern "C" {
 #endif
 
-#include <sys/types/pid_t.h>
+#include <sys/__types/__pid_t.h>
 #include <xeos/types.h>
 
 #ifndef __BLKCNT_T

@@ -63,9 +63,9 @@
 
 #include "pthread.h"
 
-int pthread_once( pthread_once_t *, void ( * init_routine )( void ) )
+int pthread_once( pthread_once_t * once_control, void ( * init_routine )( void ) )
 {
-    ( void )attr;
+    ( void )once_control;
     ( void )init_routine;
     
     return 0;
