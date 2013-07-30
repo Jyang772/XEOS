@@ -77,6 +77,13 @@ DIR_SRC_UNISTD      = $(PATH_SRC_LIB_LIBPOSIX)unistd/
 DIR_SRC_PTHREAD     = $(PATH_SRC_LIB_LIBPOSIX)pthread/
 
 #-------------------------------------------------------------------------------
+# Software arguments
+#-------------------------------------------------------------------------------
+
+ARGS_CC_32          := -iquote $(PATH_SRC_LIB_LIBPOSIX)include/ $(ARGS_CC_32)
+ARGS_CC_64          := -iquote $(PATH_SRC_LIB_LIBPOSIX)include/ $(ARGS_CC_64)
+
+#-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 

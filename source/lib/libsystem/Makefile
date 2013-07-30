@@ -75,6 +75,13 @@ DIR_SRC_ATOMIC      = $(PATH_SRC_LIB_LIBSYSTEM)atomic/
 DIR_SRC_RT          = $(PATH_SRC_LIB_LIBSYSTEM)rt/
 
 #-------------------------------------------------------------------------------
+# Software arguments
+#-------------------------------------------------------------------------------
+
+ARGS_CC_32          := -iquote $(PATH_SRC_LIB_LIBSYSTEM)include/ $(ARGS_CC_32)
+ARGS_CC_64          := -iquote $(PATH_SRC_LIB_LIBSYSTEM)include/ $(ARGS_CC_64)
+
+#-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
