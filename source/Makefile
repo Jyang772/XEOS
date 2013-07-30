@@ -91,8 +91,8 @@ all:    boot    \
 clean:
 	
 	@$(CD) $(PATH_SRC_BOOT) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	@$(CD) $(PATH_SRC_LIB) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(CD) $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
 
 # Builds the boot files
 boot:
