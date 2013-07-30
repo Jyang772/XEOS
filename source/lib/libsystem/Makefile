@@ -128,11 +128,11 @@ all:    $(_FILES_ASM_OBJ_BUILD_ATOMIC)  \
 	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libsystem.a $(PATH_BUILD_64_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ)
 	@$(RANLIB_64) $(PATH_BUILD_64_LIB_BIN)libsystem.a
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libsystem.so $(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libsystem.so $(PATH_BUILD_64_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
+#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
+#	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libsystem.so $(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
+#	
+#	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libsystem.so"$(COLOR_NONE)
+#	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libsystem.so $(PATH_BUILD_64_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ_PIC)
 
 # Cleans the build files
 clean:
