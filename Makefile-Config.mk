@@ -153,6 +153,8 @@ PATH_BUILD_32_LIB_OBJ_LIBSYSTEM         := $(PATH_BUILD_32_LIB_OBJ)libsystem/
 PATH_BUILD_64_LIB_OBJ_LIBSYSTEM         := $(PATH_BUILD_64_LIB_OBJ)libsystem/
 PATH_BUILD_32_LIB_OBJ_LIBPOSIX          := $(PATH_BUILD_32_LIB_OBJ)libposix/
 PATH_BUILD_64_LIB_OBJ_LIBPOSIX          := $(PATH_BUILD_64_LIB_OBJ)libposix/
+PATH_BUILD_32_LIB_OBJ_LIBPTHREAD        := $(PATH_BUILD_32_LIB_OBJ)libpthread/
+PATH_BUILD_64_LIB_OBJ_LIBPTHREAD        := $(PATH_BUILD_64_LIB_OBJ)libpthread/
 PATH_BUILD_32_LIB_OBJ_LIBACPI           := $(PATH_BUILD_32_LIB_OBJ)libacpi/
 PATH_BUILD_64_LIB_OBJ_LIBACPI           := $(PATH_BUILD_64_LIB_OBJ)libacpi/
 PATH_BUILD_32_LIB_OBJ_LIBACPI_ACPICA    := $(PATH_BUILD_32_LIB_OBJ)libacpi-acpica/
@@ -172,6 +174,7 @@ PATH_SRC_LIB                            := $(PATH_SRC)lib/
 PATH_SRC_LIB_LIBC                       := $(PATH_SRC_LIB)libc/
 PATH_SRC_LIB_LIBSYSTEM                  := $(PATH_SRC_LIB)libsystem/
 PATH_SRC_LIB_LIBPOSIX                   := $(PATH_SRC_LIB)libposix/
+PATH_SRC_LIB_LIBPTHREAD                 := $(PATH_SRC_LIB)libpthread/
 PATH_SRC_LIB_LIBACPI                    := $(PATH_SRC_LIB)libacpi/
 
 # Release directories
