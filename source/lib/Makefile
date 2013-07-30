@@ -87,6 +87,9 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_LIBPOSIX) && $(MAKE)
 	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX Thread library"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_LIB_LIBPTHREAD) && $(MAKE)
+	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE)
 	
@@ -98,5 +101,6 @@ clean:
 	
 	@$(CD) $(PATH_SRC_LIB_LIBC) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_LIBPOSIX) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_LIBPTHREAD) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_LIBACPI) && $(MAKE) clean
