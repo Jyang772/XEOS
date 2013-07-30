@@ -202,7 +202,7 @@ extern "C" {
 #endif
 
 #ifndef __PTHREAD_SPINLOCK_T
-#define__PTHREAD_SPINLOCK_T__
+#define __PTHREAD_SPINLOCK_T__
     typedef XEOS_PThreadSpinlock                pthread_spinlock_t;
 #endif
 
