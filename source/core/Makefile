@@ -88,9 +88,6 @@ ARGS_LD_64          := -T linker.ld $(ARGS_LD_64)
 # Build the full project
 all:
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE_SYSTEM) && $(MAKE)
-	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS ACPI library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_CORE_ACPI) && $(MAKE)
 	
@@ -106,7 +103,6 @@ all:
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_CORE_SYSTEM) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_CORE_ACPI) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE) clean
 	

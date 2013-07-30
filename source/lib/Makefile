@@ -84,7 +84,11 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C standard library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_LIBC) && $(MAKE)
 	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE)
+	
 # Cleans the build files
 clean:
 	
 	@$(CD) $(PATH_SRC_LIB_LIBC) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE) clean
