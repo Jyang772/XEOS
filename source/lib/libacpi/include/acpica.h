@@ -73,10 +73,10 @@
 
 #ifdef __clang__
 #pragma clang diagnostic push
-#include <acpi/acpica-clang-warnings.h>
+#include <libacpi/acpica-clang-warnings.h>
 #endif
 
-#include <acpi/acpica/acpi.h>
+#include <libacpi/acpica/acpi.h>
 
 #ifdef __clang__
 #pragma clang diagnostic pop
