@@ -69,7 +69,7 @@
 
 #include "acpica.h"
 #include "acpi.h"
-#include "__acpi.h"
+#include "__private/acpi.h"
 
 void ACPI_INTERNAL_VAR_XFACE AcpiOsPrintf( const char * format, ... )
 {
