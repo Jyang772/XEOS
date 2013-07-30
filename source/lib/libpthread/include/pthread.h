@@ -71,6 +71,7 @@ extern "C" {
 
 #include <sys/types.h>
 #include <sched.h>
+#include <time.h>
 
 #define PTHREAD_CANCELED                ( ( void * )1 )
 
