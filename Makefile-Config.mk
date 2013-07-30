@@ -160,12 +160,12 @@ PATH_BUILD_64_LIB_OBJ_LIBACPI_OSL       := $(PATH_BUILD_64_LIB_OBJ)libacpi-osl/
 
 # Source directories
 
+PATH_SRC_INC                            := $(PATH_SRC)include/
 PATH_SRC_BOOT                           := $(PATH_SRC)boot/
 PATH_SRC_BOOT_BIOS                      := $(PATH_SRC_BOOT)bios/
 PATH_SRC_BOOT_UEFI                      := $(PATH_SRC_BOOT)uefi/
 PATH_SRC_CORE                           := $(PATH_SRC)core/
 PATH_SRC_CORE_KERNEL                    := $(PATH_SRC_CORE)xeos/
-PATH_SRC_CORE_INC                       := $(PATH_SRC_CORE)include/
 PATH_SRC_LIB                            := $(PATH_SRC)lib/
 PATH_SRC_LIB_LIBC                       := $(PATH_SRC_LIB)libc/
 PATH_SRC_LIB_LIBSYSTEM                  := $(PATH_SRC_LIB)libsystem/
@@ -266,7 +266,7 @@ PYTHON                                  := python
 ARGS_CC_WARN                            := -Weverything -Werror
 ARGS_CC_STD                             := -std=c99
 ARGS_CC_CONST                           := -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__
-ARGS_CC_INC                             := -I $(PATH_SRC_CORE_INC)
+ARGS_CC_INC                             := -I $(PATH_SRC_INC)
 ARGS_CC_MISC                            := -Os -nostdlib -fno-builtin
 ARGS_CC_PIC                             := -fPIC
 
