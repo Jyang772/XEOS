@@ -71,7 +71,7 @@ extern "C" {
 
 #include <stdint.h>
 
-typedef uint32_t    trace_attr_t;
+typedef uint32_t    trace_id_t;
 
 #ifdef __cplusplus
 }
