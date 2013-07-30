@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "shed.h"
+#include "sched.h"
 
 int sched_getparam( pid_t pid, struct sched_param * param )
 {
