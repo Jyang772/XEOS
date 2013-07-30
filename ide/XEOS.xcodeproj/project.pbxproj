@@ -3068,6 +3068,7 @@
 		05AFEDF71620F27C00740041 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
+		05ECDAC017A801D6000B6C8A /* sched.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sched.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -9426,6 +9427,7 @@
 				059815F517A753960072FDD9 /* include */,
 				059815FC17A753960072FDD9 /* Makefile */,
 				059815FD17A753960072FDD9 /* mman */,
+				05ECDAC117A801E1000B6C8A /* sched */,
 				0598160C17A753960072FDD9 /* syscall */,
 				0598160E17A753960072FDD9 /* unistd */,
 			);
@@ -9435,6 +9437,7 @@
 		059815F517A753960072FDD9 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				05ECDAC017A801D6000B6C8A /* sched.h */,
 				059815F717A753960072FDD9 /* sys */,
 				059815FB17A753960072FDD9 /* unistd.h */,
 			);
@@ -10563,6 +10566,13 @@
 				05AFEDF41620F27C00740041 /* Makefile */,
 			);
 			path = llvm;
+			sourceTree = "<group>";
+		};
+		05ECDAC117A801E1000B6C8A /* sched */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = sched;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
