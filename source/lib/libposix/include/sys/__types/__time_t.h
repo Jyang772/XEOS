@@ -71,7 +71,7 @@ extern "C" {
 
 #include <stdint.h>
 
-typedef uint64_t    time_t;
+typedef uint32_t    time_t;
 
 #ifdef __cplusplus
 }
