@@ -151,12 +151,12 @@ PATH_BUILD_32_LIB_OBJ_LIBC              := $(PATH_BUILD_32_LIB_OBJ)libc/
 PATH_BUILD_64_LIB_OBJ_LIBC              := $(PATH_BUILD_64_LIB_OBJ)libc/
 PATH_BUILD_32_LIB_OBJ_LIBSYSTEM         := $(PATH_BUILD_32_LIB_OBJ)libsystem/
 PATH_BUILD_64_LIB_OBJ_LIBSYSTEM         := $(PATH_BUILD_64_LIB_OBJ)libsystem/
-PATH_BUILD_32_LIB_OBJ_LIBACPI           := $(PATH_BUILD_32_LIB_OBJ)acpi/
-PATH_BUILD_64_LIB_OBJ_LIBACPI           := $(PATH_BUILD_64_LIB_OBJ)acpi/
-PATH_BUILD_32_LIB_OBJ_LIBACPI_ACPICA    := $(PATH_BUILD_32_LIB_OBJ)acpi-acpica/
-PATH_BUILD_64_LIB_OBJ_LIBACPI_ACPICA    := $(PATH_BUILD_64_LIB_OBJ)acpi-acpica/
-PATH_BUILD_32_LIB_OBJ_LIBACPI_OSL       := $(PATH_BUILD_32_LIB_OBJ)acpi-osl/
-PATH_BUILD_64_LIB_OBJ_LIBACPI_OSL       := $(PATH_BUILD_64_LIB_OBJ)acpi-osl/
+PATH_BUILD_32_LIB_OBJ_LIBACPI           := $(PATH_BUILD_32_LIB_OBJ)libacpi/
+PATH_BUILD_64_LIB_OBJ_LIBACPI           := $(PATH_BUILD_64_LIB_OBJ)libacpi/
+PATH_BUILD_32_LIB_OBJ_LIBACPI_ACPICA    := $(PATH_BUILD_32_LIB_OBJ)libacpi-acpica/
+PATH_BUILD_64_LIB_OBJ_LIBACPI_ACPICA    := $(PATH_BUILD_64_LIB_OBJ)libacpi-acpica/
+PATH_BUILD_32_LIB_OBJ_LIBACPI_OSL       := $(PATH_BUILD_32_LIB_OBJ)libacpi-osl/
+PATH_BUILD_64_LIB_OBJ_LIBACPI_OSL       := $(PATH_BUILD_64_LIB_OBJ)libacpi-osl/
 
 # Source directories
 
@@ -169,7 +169,7 @@ PATH_SRC_CORE_INC                       := $(PATH_SRC_CORE)include/
 PATH_SRC_LIB                            := $(PATH_SRC)lib/
 PATH_SRC_LIB_LIBC                       := $(PATH_SRC_LIB)libc/
 PATH_SRC_LIB_LIBSYSTEM                  := $(PATH_SRC_LIB)libsystem/
-PATH_SRC_LIB_LIBACPI                    := $(PATH_SRC_LIB)acpi/
+PATH_SRC_LIB_LIBACPI                    := $(PATH_SRC_LIB)libacpi/
 
 # Release directories
 
