@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __SYSTEM_SYS_TYPES_H__
-#define __SYSTEM_SYS_TYPES_H__
+#ifndef __LIBPOSIX_SYS_TYPES_H__
+#define __LIBPOSIX_SYS_TYPES_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -270,4 +270,4 @@ extern "C" {
 }
 #endif
 
-#endif /* __SYSTEM_SYS_TYPES_H__ */
+#endif /* __LIBPOSIX_SYS_TYPES_H__ */

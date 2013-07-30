@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __SYSTEM_ATOMIC_H__
-#define __SYSTEM_ATOMIC_H__
+#ifndef __LIBSYSTEM_ATOMIC_H__
+#define __LIBSYSTEM_ATOMIC_H__
 #pragma once
 
 #include <stdint.h>
@@ -106,4 +106,4 @@ void System_Atomic_SpinLockLock( System_Atomic_SpinLock * lock );
 bool System_Atomic_SpinLockTry( System_Atomic_SpinLock * lock );
 void System_Atomic_SpinLockUnlock( System_Atomic_SpinLock * lock );
 
-#endif /* __SYSTEM_ATOMIC_H__ */
+#endif /* __LIBSYSTEM_ATOMIC_H__ */

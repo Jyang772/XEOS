@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __ACPI_ACPICA_H__
-#define __ACPI_ACPICA_H__
+#ifndef __LIBACPI_ACPICA_H__
+#define __LIBACPI_ACPICA_H__
 #pragma once
 
 #ifdef __clang__
@@ -82,4 +82,4 @@
 #pragma clang diagnostic pop
 #endif
 
-#endif /* __ACPI_ACPICA_H__ */
+#endif /* __LIBACPI_ACPICA_H__ */

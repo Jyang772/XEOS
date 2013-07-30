@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __PTHREAD_H__
-#define __PTHREAD_H__
+#ifndef __LIBPTHREAD_PTHREAD_H__
+#define __LIBPTHREAD_PTHREAD_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -196,4 +196,4 @@ int         pthread_rwlockattr_setpshared( pthread_rwlockattr_t * attr, int psha
 }
 #endif
 
-#endif /* __PTHREAD_H__ */
+#endif /* __LIBPTHREAD_PTHREAD_H__ */

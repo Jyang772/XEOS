@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __SYSTEM_SYS_MMAN_H__
-#define __SYSTEM_SYS_MMAN_H__
+#ifndef __LIBPOSIX_SYS_MMAN_H__
+#define __LIBPOSIX_SYS_MMAN_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -140,4 +140,4 @@ int     shm_unlink( const char * name );
 }
 #endif
 
-#endif /* __SYSTEM_SYS_MMAN_H__ */
+#endif /* __LIBPOSIX_SYS_MMAN_H__ */

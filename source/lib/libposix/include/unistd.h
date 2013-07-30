@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __SYSTEM_UNISTD_H__
-#define __SYSTEM_UNISTD_H__
+#ifndef __LIBPOSIX_UNISTD_H__
+#define __LIBPOSIX_UNISTD_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -430,4 +430,4 @@ ssize_t         write( int fd, const void * buf, size_t len );
 }
 #endif
 
-#endif /* __SYSTEM_UNISTD_H__ */
+#endif /* __LIBPOSIX_UNISTD_H__ */

@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __SYSTEM_SCHED_H__
-#define __SYSTEM_SCHED_H__
+#ifndef __LIBPOSIX_SCHED_H__
+#define __LIBPOSIX_SCHED_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -75,4 +75,4 @@ extern "C" {
 }
 #endif
 
-#endif /* __SYSTEM_SCHED_H__ */
+#endif /* __LIBPOSIX_SCHED_H__ */

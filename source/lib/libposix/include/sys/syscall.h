@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __SYSTEM_SYS_SYSCALL_H__
-#define __SYSTEM_SYS_SYSCALL_H__
+#ifndef __LIBPOSIX_SYS_SYSCALL_H__
+#define __LIBPOSIX_SYS_SYSCALL_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -92,4 +92,4 @@ uint32_t syscall( int n, ... );
 }
 #endif
 
-#endif /* __SYSTEM_SYS_SYSCALL_H__ */
+#endif /* __LIBPOSIX_SYS_SYSCALL_H__ */

@@ -1946,7 +1946,6 @@
 		0598140317A753950072FDD9 /* grammar.asl */ = {isa = PBXFileReference; lastKnownFileType = text; path = grammar.asl; sourceTree = "<group>"; };
 		0598140517A753950072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0598140617A753950072FDD9 /* templates.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = templates.sh; sourceTree = "<group>"; };
-		0598140817A753950072FDD9 /* __acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __acpi.h; sourceTree = "<group>"; };
 		0598140A17A753950072FDD9 /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
 		0598140B17A753950072FDD9 /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
 		0598140D17A753950072FDD9 /* acapps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acapps.h; sourceTree = "<group>"; };
@@ -8802,7 +8801,6 @@
 		0598140717A753950072FDD9 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				0598140817A753950072FDD9 /* __acpi.h */,
 				0598140917A753950072FDD9 /* __private */,
 				0598140B17A753950072FDD9 /* acpi.h */,
 				0598140C17A753950072FDD9 /* acpica */,

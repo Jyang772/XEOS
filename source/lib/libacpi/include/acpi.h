@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __ACPI_ACPI_H__
-#define __ACPI_ACPI_H__
+#ifndef __LIBACPI_ACPI_H__
+#define __LIBACPI_ACPI_H__
 #pragma once
 
 #ifdef __cplusplus
@@ -85,4 +85,4 @@ void ACPI_DisableLogging( void );
 }
 #endif
 
-#endif /* __ACPI_ACPI_H__ */
+#endif /* __LIBACPI_ACPI_H__ */
