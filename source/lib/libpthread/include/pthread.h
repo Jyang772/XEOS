@@ -110,7 +110,7 @@ int         pthread_cancel( pthread_t thread );
 void        pthread_exit( void * value_ptr );
 int         pthread_detach( pthread_t thread );
 int         pthread_join( pthread_t thread, void ** value_ptr );
-int         pthread_equal( pthread_t t1, t2 );
+int         pthread_equal( pthread_t t1, pthread_t t2 );
 void        pthread_testcancel( void );
 pthread_t   pthread_self( void );
 
