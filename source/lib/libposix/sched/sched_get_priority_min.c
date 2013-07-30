@@ -61,37 +61,9 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_SCHED_H__
-#define __LIBPOSIX_SCHED_H__
-#pragma once
+#include "shed.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <time.h>
-#include <sys/__types/__pid_t.h>
-
-#define SCHED_FIFO      0
-#define SCHED_RR        1
-#define SCHED_OTHER     2
-
-struct sched_param
+int sched_get_priority_min( int policy )
 {
-    int sched_priority;
-};
-
-int sched_get_priority_max( int policy );
-int sched_get_priority_min( int policy );
-int sched_getparam( pid_t pid, struct sched_param * param );
-int sched_getscheduler( pid_t pid );
-int sched_rr_get_interval( pid_t pid, struct timespec * interval );
-int sched_setparam( pid_t pid, const struct sched_param * param );
-int sched_setscheduler( pid_t pid, int policy, const struct sched_param * param );
-int sched_yield( void );
-
-#ifdef __cplusplus
+    return 0;
 }
-#endif
-
-#endif /* __LIBPOSIX_SCHED_H__ */

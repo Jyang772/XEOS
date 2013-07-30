@@ -3068,6 +3068,15 @@
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05ECDAC017A801D6000B6C8A /* sched.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sched.h; sourceTree = "<group>"; };
+		05ECDAC517A8070C000B6C8A /* __pid_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pid_t.h; sourceTree = "<group>"; };
+		05ECDAC617A80744000B6C8A /* sched_get_priority_max.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_get_priority_max.c; sourceTree = "<group>"; };
+		05ECDAC717A8074B000B6C8A /* sched_get_priority_min.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_get_priority_min.c; sourceTree = "<group>"; };
+		05ECDAC817A80754000B6C8A /* sched_getparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_getparam.c; sourceTree = "<group>"; };
+		05ECDAC917A8075B000B6C8A /* sched_getscheduler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_getscheduler.c; sourceTree = "<group>"; };
+		05ECDACA17A80762000B6C8A /* sched_rr_get_interval.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_rr_get_interval.c; sourceTree = "<group>"; };
+		05ECDACB17A8076D000B6C8A /* sched_setparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_setparam.c; sourceTree = "<group>"; };
+		05ECDACC17A80774000B6C8A /* sched_setscheduler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_setscheduler.c; sourceTree = "<group>"; };
+		05ECDACD17A8077D000B6C8A /* sched_yield.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_yield.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -9445,6 +9454,7 @@
 		059815F717A753960072FDD9 /* sys */ = {
 			isa = PBXGroup;
 			children = (
+				05ECDAC417A8070C000B6C8A /* __types */,
 				059815F817A753960072FDD9 /* mman.h */,
 				059815F917A753960072FDD9 /* syscall.h */,
 				059815FA17A753960072FDD9 /* types.h */,
@@ -10569,8 +10579,24 @@
 		05ECDAC117A801E1000B6C8A /* sched */ = {
 			isa = PBXGroup;
 			children = (
+				05ECDAC617A80744000B6C8A /* sched_get_priority_max.c */,
+				05ECDAC717A8074B000B6C8A /* sched_get_priority_min.c */,
+				05ECDAC817A80754000B6C8A /* sched_getparam.c */,
+				05ECDAC917A8075B000B6C8A /* sched_getscheduler.c */,
+				05ECDACA17A80762000B6C8A /* sched_rr_get_interval.c */,
+				05ECDACB17A8076D000B6C8A /* sched_setparam.c */,
+				05ECDACC17A80774000B6C8A /* sched_setscheduler.c */,
+				05ECDACD17A8077D000B6C8A /* sched_yield.c */,
 			);
 			path = sched;
+			sourceTree = "<group>";
+		};
+		05ECDAC417A8070C000B6C8A /* __types */ = {
+			isa = PBXGroup;
+			children = (
+				05ECDAC517A8070C000B6C8A /* __pid_t.h */,
+			);
+			path = __types;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
