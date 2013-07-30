@@ -69,6 +69,8 @@
 extern "C" {
 #endif
 
+#include <sys/types.h>
+
 #define PTHREAD_CANCELED                ( ( void * )1 )
 
 #define PTHREAD_CANCEL_DISABLE          0x00

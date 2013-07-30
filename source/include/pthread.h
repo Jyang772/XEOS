@@ -1,1 +1,1 @@
-libposix/pthread.h
+libpthread/pthread.h

@@ -2420,7 +2420,6 @@
 		059815F117A753960072FDD9 /* mktime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mktime.c; sourceTree = "<group>"; };
 		059815F217A753960072FDD9 /* strftime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strftime.c; sourceTree = "<group>"; };
 		059815F317A753960072FDD9 /* time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
-		059815F617A753960072FDD9 /* pthread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
 		059815F817A753960072FDD9 /* mman.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mman.h; sourceTree = "<group>"; };
 		059815F917A753960072FDD9 /* syscall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = syscall.h; sourceTree = "<group>"; };
 		059815FA17A753960072FDD9 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
@@ -2537,6 +2536,7 @@
 		0598167317A7E0680072FDD9 /* __udivdi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __udivdi3.64.s; sourceTree = "<group>"; };
 		0598167417A7E0680072FDD9 /* __umoddi3.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.32.s; sourceTree = "<group>"; };
 		0598167517A7E0680072FDD9 /* __umoddi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.64.s; sourceTree = "<group>"; };
+		0598167617A7EC380072FDD9 /* pthread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
 		0598FCEE17A750F60072FDD9 /* boot.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = boot.s; sourceTree = "<group>"; };
 		0598FCF017A750F60072FDD9 /* xeos.16.a20.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.a20.inc.s; sourceTree = "<group>"; };
 		0598FCF117A750F60072FDD9 /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -9358,7 +9358,6 @@
 		059815F517A753960072FDD9 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				059815F617A753960072FDD9 /* pthread.h */,
 				059815F717A753960072FDD9 /* sys */,
 				059815FB17A753960072FDD9 /* unistd.h */,
 			);
@@ -9538,6 +9537,7 @@
 		0598166E17A7DD260072FDD9 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				0598167617A7EC380072FDD9 /* pthread.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
