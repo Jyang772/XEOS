@@ -1,0 +1,3 @@
+[submodule "source/lib/libacpi/acpica"]
+	path = source/lib/libacpi/acpica
+	url = https://github.com/macmade/acpica
