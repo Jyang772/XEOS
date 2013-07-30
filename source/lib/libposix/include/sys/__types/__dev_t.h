@@ -61,56 +61,20 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_SYS_TYPES_H__
-#define __LIBPOSIX_SYS_TYPES_H__
+#ifndef __LIBPOSIX_SYS___TYPES___DEV_T_H__
+#define __LIBPOSIX_SYS___TYPES___DEV_T_H__
 #pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <sys/__types/__blkcnt_t.h>
-#include <sys/__types/__blksize_t.h>
-#include <sys/__types/__clock_t.h>
-#include <sys/__types/__clockid_t.h>
-#include <sys/__types/__dev_t.h>
-#include <sys/__types/__fsblkcnt_t.h>
-#include <sys/__types/__fsfilcnt_t.h>
-#include <sys/__types/__gid_t.h>
-#include <sys/__types/__id_t.h>
-#include <sys/__types/__ino_t.h>
-#include <sys/__types/__key_t.h>
-#include <sys/__types/__mode_t.h>
-#include <sys/__types/__nlink_t.h>
-#include <sys/__types/__off_t.h>
-#include <sys/__types/__pid_t.h>
-#include <sys/__types/__pthread_attr_t.h>
-#include <sys/__types/__pthread_barrier_t.h>
-#include <sys/__types/__pthread_barrierattr_t.h>
-#include <sys/__types/__pthread_cond_t.h>
-#include <sys/__types/__pthread_condattr_t.h>
-#include <sys/__types/__pthread_key_t.h>
-#include <sys/__types/__pthread_mutex_t.h>
-#include <sys/__types/__pthread_mutexattr_t.h>
-#include <sys/__types/__pthread_once_t.h>
-#include <sys/__types/__pthread_rwlock_t.h>
-#include <sys/__types/__pthread_rwlockattr_t.h>
-#include <sys/__types/__pthread_spinlock_t.h>
-#include <sys/__types/__pthread_t.h>
-#include <sys/__types/__size_t.h>
-#include <sys/__types/__ssize_t.h>
-#include <sys/__types/__suseconds_t.h>
-#include <sys/__types/__time_t.h>
-#include <sys/__types/__timer_t.h>
-#include <sys/__types/__trace_attr_t.h>
-#include <sys/__types/__trace_event_id_t.h>
-#include <sys/__types/__trace_event_set_t.h>
-#include <sys/__types/__trace_id_t.h>
-#include <sys/__types/__uid_t.h>
-#include <sys/__types/__useconds_t.h>
+#include <stdint.h>
+
+typedef uint32_t    dev_t;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBPOSIX_SYS_TYPES_H__ */
+#endif /* __LIBPOSIX_SYS___TYPES___DEV_T_H__ */

@@ -8,6 +8,45 @@
 
 /* Begin PBXFileReference section */
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		052F735917A80DB4001601CB /* __blkcnt_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __blkcnt_t.h; sourceTree = "<group>"; };
+		052F735A17A80DB4001601CB /* __blksize_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __blksize_t.h; sourceTree = "<group>"; };
+		052F735B17A80DB4001601CB /* __clock_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __clock_t.h; sourceTree = "<group>"; };
+		052F735C17A80DB4001601CB /* __clockid_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __clockid_t.h; sourceTree = "<group>"; };
+		052F735D17A80DB4001601CB /* __dev_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __dev_t.h; sourceTree = "<group>"; };
+		052F735E17A80DB4001601CB /* __fsblkcnt_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __fsblkcnt_t.h; sourceTree = "<group>"; };
+		052F735F17A80DB4001601CB /* __fsfilcnt_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __fsfilcnt_t.h; sourceTree = "<group>"; };
+		052F736017A80DB4001601CB /* __gid_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __gid_t.h; sourceTree = "<group>"; };
+		052F736117A80DB4001601CB /* __id_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __id_t.h; sourceTree = "<group>"; };
+		052F736217A80DB4001601CB /* __ino_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __ino_t.h; sourceTree = "<group>"; };
+		052F736317A80DB4001601CB /* __key_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __key_t.h; sourceTree = "<group>"; };
+		052F736417A80DB4001601CB /* __mode_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __mode_t.h; sourceTree = "<group>"; };
+		052F736517A80DB4001601CB /* __nlink_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __nlink_t.h; sourceTree = "<group>"; };
+		052F736617A80DB4001601CB /* __off_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __off_t.h; sourceTree = "<group>"; };
+		052F736717A80DB4001601CB /* __pid_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pid_t.h; sourceTree = "<group>"; };
+		052F736817A80DB4001601CB /* __pthread_attr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_attr_t.h; sourceTree = "<group>"; };
+		052F736917A80DB4001601CB /* __pthread_barrier_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_barrier_t.h; sourceTree = "<group>"; };
+		052F736A17A80DB4001601CB /* __pthread_barrierattr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_barrierattr_t.h; sourceTree = "<group>"; };
+		052F736B17A80DB4001601CB /* __pthread_cond_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_cond_t.h; sourceTree = "<group>"; };
+		052F736C17A80DB4001601CB /* __pthread_condattr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_condattr_t.h; sourceTree = "<group>"; };
+		052F736D17A80DB4001601CB /* __pthread_key_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_key_t.h; sourceTree = "<group>"; };
+		052F736E17A80DB4001601CB /* __pthread_mutex_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_mutex_t.h; sourceTree = "<group>"; };
+		052F736F17A80DB4001601CB /* __pthread_mutexattr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_mutexattr_t.h; sourceTree = "<group>"; };
+		052F737017A80DB4001601CB /* __pthread_once_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_once_t.h; sourceTree = "<group>"; };
+		052F737117A80DB4001601CB /* __pthread_rwlock_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_rwlock_t.h; sourceTree = "<group>"; };
+		052F737217A80DB4001601CB /* __pthread_rwlockattr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_rwlockattr_t.h; sourceTree = "<group>"; };
+		052F737317A80DB4001601CB /* __pthread_spinlock_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_spinlock_t.h; sourceTree = "<group>"; };
+		052F737417A80DB4001601CB /* __pthread_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pthread_t.h; sourceTree = "<group>"; };
+		052F737517A80DB4001601CB /* __size_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __size_t.h; sourceTree = "<group>"; };
+		052F737617A80DB4001601CB /* __ssize_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __ssize_t.h; sourceTree = "<group>"; };
+		052F737717A80DB4001601CB /* __suseconds_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __suseconds_t.h; sourceTree = "<group>"; };
+		052F737817A80DB4001601CB /* __time_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __time_t.h; sourceTree = "<group>"; };
+		052F737917A80DB4001601CB /* __timer_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __timer_t.h; sourceTree = "<group>"; };
+		052F737A17A80DB4001601CB /* __trace_attr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __trace_attr_t.h; sourceTree = "<group>"; };
+		052F737B17A80DB4001601CB /* __trace_event_id_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __trace_event_id_t.h; sourceTree = "<group>"; };
+		052F737C17A80DB4001601CB /* __trace_event_set_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __trace_event_set_t.h; sourceTree = "<group>"; };
+		052F737D17A80DB4001601CB /* __trace_id_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __trace_id_t.h; sourceTree = "<group>"; };
+		052F737E17A80DB4001601CB /* __uid_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __uid_t.h; sourceTree = "<group>"; };
+		052F737F17A80DB4001601CB /* __useconds_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __useconds_t.h; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D305C1798AB75009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05980AA117A750FC0072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -3068,7 +3107,6 @@
 		05AFEF121620F8F700740041 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05BE237C1625E354002C1185 /* Makefile-Config.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
 		05ECDAC017A801D6000B6C8A /* sched.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sched.h; sourceTree = "<group>"; };
-		05ECDAC517A8070C000B6C8A /* __pid_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __pid_t.h; sourceTree = "<group>"; };
 		05ECDAC617A80744000B6C8A /* sched_get_priority_max.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_get_priority_max.c; sourceTree = "<group>"; };
 		05ECDAC717A8074B000B6C8A /* sched_get_priority_min.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_get_priority_min.c; sourceTree = "<group>"; };
 		05ECDAC817A80754000B6C8A /* sched_getparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_getparam.c; sourceTree = "<group>"; };
@@ -10594,7 +10632,45 @@
 		05ECDAC417A8070C000B6C8A /* __types */ = {
 			isa = PBXGroup;
 			children = (
-				05ECDAC517A8070C000B6C8A /* __pid_t.h */,
+				052F735917A80DB4001601CB /* __blkcnt_t.h */,
+				052F735A17A80DB4001601CB /* __blksize_t.h */,
+				052F735B17A80DB4001601CB /* __clock_t.h */,
+				052F735C17A80DB4001601CB /* __clockid_t.h */,
+				052F735D17A80DB4001601CB /* __dev_t.h */,
+				052F735E17A80DB4001601CB /* __fsblkcnt_t.h */,
+				052F735F17A80DB4001601CB /* __fsfilcnt_t.h */,
+				052F736017A80DB4001601CB /* __gid_t.h */,
+				052F736117A80DB4001601CB /* __id_t.h */,
+				052F736217A80DB4001601CB /* __ino_t.h */,
+				052F736317A80DB4001601CB /* __key_t.h */,
+				052F736417A80DB4001601CB /* __mode_t.h */,
+				052F736517A80DB4001601CB /* __nlink_t.h */,
+				052F736617A80DB4001601CB /* __off_t.h */,
+				052F736717A80DB4001601CB /* __pid_t.h */,
+				052F736817A80DB4001601CB /* __pthread_attr_t.h */,
+				052F736917A80DB4001601CB /* __pthread_barrier_t.h */,
+				052F736A17A80DB4001601CB /* __pthread_barrierattr_t.h */,
+				052F736B17A80DB4001601CB /* __pthread_cond_t.h */,
+				052F736C17A80DB4001601CB /* __pthread_condattr_t.h */,
+				052F736D17A80DB4001601CB /* __pthread_key_t.h */,
+				052F736E17A80DB4001601CB /* __pthread_mutex_t.h */,
+				052F736F17A80DB4001601CB /* __pthread_mutexattr_t.h */,
+				052F737017A80DB4001601CB /* __pthread_once_t.h */,
+				052F737117A80DB4001601CB /* __pthread_rwlock_t.h */,
+				052F737217A80DB4001601CB /* __pthread_rwlockattr_t.h */,
+				052F737317A80DB4001601CB /* __pthread_spinlock_t.h */,
+				052F737417A80DB4001601CB /* __pthread_t.h */,
+				052F737517A80DB4001601CB /* __size_t.h */,
+				052F737617A80DB4001601CB /* __ssize_t.h */,
+				052F737717A80DB4001601CB /* __suseconds_t.h */,
+				052F737817A80DB4001601CB /* __time_t.h */,
+				052F737917A80DB4001601CB /* __timer_t.h */,
+				052F737A17A80DB4001601CB /* __trace_attr_t.h */,
+				052F737B17A80DB4001601CB /* __trace_event_id_t.h */,
+				052F737C17A80DB4001601CB /* __trace_event_set_t.h */,
+				052F737D17A80DB4001601CB /* __trace_id_t.h */,
+				052F737E17A80DB4001601CB /* __uid_t.h */,
+				052F737F17A80DB4001601CB /* __useconds_t.h */,
 			);
 			path = __types;
 			sourceTree = "<group>";
