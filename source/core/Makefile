@@ -92,10 +92,10 @@ all:
 	@$(CD) $(PATH_SRC_CORE_KERNEL) && $(MAKE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Linking the XEOS kernel"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"XEOS32.ELF"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_32) -o $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF $(PATH_BUILD_32_CORE_OBJ_KERNEL)*$(EXT_OBJ) -L$(PATH_BUILD_32_CORE_LIB) -L$(PATH_BUILD_32_LIB_BIN) -static -lacpi -lc99 -lposix -lsystem
+	@$(LD_32) $(ARGS_LD_32) -o $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF $(PATH_BUILD_32_CORE_OBJ_KERNEL)*$(EXT_OBJ) -L$(PATH_BUILD_32_LIB_BIN) -static -lacpi -lc99 -lposix -lsystem
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Linking the XEOS kernel"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"XEOS64.ELF"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_64) -o $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF $(PATH_BUILD_64_CORE_OBJ_KERNEL)*$(EXT_OBJ) -L$(PATH_BUILD_64_CORE_LIB) -L$(PATH_BUILD_64_LIB_BIN) -static -lacpi -lc99 -lposix -lsystem
+	@$(LD_64) $(ARGS_LD_64) -o $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF $(PATH_BUILD_64_CORE_OBJ_KERNEL)*$(EXT_OBJ) -L$(PATH_BUILD_64_LIB_BIN) -static -lacpi -lc99 -lposix -lsystem
 	
 # Cleans the build files
 clean:
