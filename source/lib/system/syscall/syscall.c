@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include <syscall.h>
+#include <system/syscall.h>
 
 __asm__
 (
