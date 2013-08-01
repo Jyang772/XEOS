@@ -176,7 +176,6 @@
 		050BCA8017AA992E004D14C5 /* proc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = proc.h; sourceTree = "<group>"; };
 		050BCA8117AA992E004D14C5 /* syscall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = syscall.h; sourceTree = "<group>"; };
 		050BCA8217AA992E004D14C5 /* system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
-		050BCA8317AA992E004D14C5 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		050BCA8417AA992E004D14C5 /* video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = video.h; sourceTree = "<group>"; };
 		050BCA8517AA992E004D14C5 /* vm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vm.h; sourceTree = "<group>"; };
 		050BCA8717AA992E004D14C5 /* XEOS_Info_GetKernelBSSSectionEndAddress.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Info_GetKernelBSSSectionEndAddress.c; sourceTree = "<group>"; };
@@ -3369,7 +3368,6 @@
 				050BCA8017AA992E004D14C5 /* proc.h */,
 				050BCA8117AA992E004D14C5 /* syscall.h */,
 				050BCA8217AA992E004D14C5 /* system.h */,
-				050BCA8317AA992E004D14C5 /* types.h */,
 				050BCA8417AA992E004D14C5 /* video.h */,
 				050BCA8517AA992E004D14C5 /* vm.h */,
 			);
