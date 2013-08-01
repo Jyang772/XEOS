@@ -62,22 +62,20 @@
 /* $Id$ */
 
 /*!
- * @header          struct_timespec.h
+ * @header          struct_sched_param.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBSYSTEM_TYPES_STRUCT_TIMESPEC_H__
-#define __LIBSYSTEM_TYPES_STRUCT_TIMESPEC_H__
+#ifndef __LIBSYSTEM_TYPES_STRUCT_SCHED_PARAM_H__
+#define __LIBSYSTEM_TYPES_STRUCT_SCHED_PARAM_H__
 #pragma once
 
 #include <libsystem/types/__private/stdint.h>
-#include <libsystem/types/time_t.h>
 
-struct timespec
+struct sched_param
 {
-    time_t  tv_sec;
-    long    tv_nsec;
+    int sched_priority;
 };
 
-#endif /* __LIBSYSTEM_TYPES_STRUCT_TIMESPEC_H__ */
+#endif /* __LIBSYSTEM_TYPES_STRUCT_SCHED_PARAM_H__ */

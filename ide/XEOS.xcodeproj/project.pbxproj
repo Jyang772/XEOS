@@ -92,6 +92,7 @@
 		050BAAF217A9FB33004D14C5 /* va_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = va_list.h; sourceTree = "<group>"; };
 		050BAAF317A9FB33004D14C5 /* wchar_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wchar_t.h; sourceTree = "<group>"; };
 		050BAB3417AA0564004D14C5 /* struct_timespec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_timespec.h; sourceTree = "<group>"; };
+		050BAB3517AA0743004D14C5 /* struct_sched_param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_sched_param.h; sourceTree = "<group>"; };
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D305C1798AB75009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -3222,6 +3223,7 @@
 				050BAAD717A9FB33004D14C5 /* ssize_t.h */,
 				050BAAD817A9FB33004D14C5 /* struct_lconv.h */,
 				050BAAD917A9FB33004D14C5 /* struct_posix_typed_mem_info.h */,
+				050BAB3517AA0743004D14C5 /* struct_sched_param.h */,
 				050BAB3417AA0564004D14C5 /* struct_timespec.h */,
 				050BAADA17A9FB33004D14C5 /* struct_tm.h */,
 				050BAADB17A9FB33004D14C5 /* suseconds_t.h */,

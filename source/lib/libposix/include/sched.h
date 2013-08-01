@@ -71,17 +71,11 @@ extern "C" {
 
 #include <time.h>
 #include <libsystem/types/pid_t.h>
-#include <libsystem/types/struct_timespec.h>
+#include <libsystem/types/struct_sched_param.h>
 
 #define SCHED_FIFO      0
 #define SCHED_RR        1
 #define SCHED_OTHER     2
-
-struct sched_param
-{
-    int sched_priority;
-};
-
 
 int sched_get_priority_max( int policy );
 int sched_get_priority_min( int policy );
