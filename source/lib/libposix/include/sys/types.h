@@ -69,7 +69,6 @@
 extern "C" {
 #endif
 
-#include <sys/__types/__pid_t.h>
 #include <xeos/types.h>
 
 #ifndef __BLKCNT_T
@@ -140,6 +139,11 @@ extern "C" {
 #ifndef __OFF_T
 #define __OFF_T
     typedef XEOS_Offset                         off_t;
+#endif
+
+#ifndef __PID_T
+#define __PID_T
+    typedef XEOS_ProcessID                      pid_t;
 #endif
 
 #ifndef __PTHREAD_ATTR_T

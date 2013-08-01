@@ -70,7 +70,6 @@ extern "C" {
 #endif
 
 #include <time.h>
-#include <sys/__types/__pid_t.h>
 
 #define SCHED_FIFO      0
 #define SCHED_RR        1
@@ -80,6 +79,7 @@ struct sched_param
 {
     int sched_priority;
 };
+
 
 int sched_get_priority_max( int policy );
 int sched_get_priority_min( int policy );
