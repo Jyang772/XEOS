@@ -68,7 +68,7 @@
  */
 
 #include <acpi/__private/acpi.h>
-#include <acpi/acpi.h">
+#include <acpi/acpi.h>
 
 void ACPI_DisableLogging( void )
 {

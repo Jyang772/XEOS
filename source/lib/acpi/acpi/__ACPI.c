@@ -68,7 +68,7 @@
  */
 
 #include <acpi/__private/acpi.h>
-#include <acpi/acpi.h">
+#include <acpi/acpi.h>
 #include <stdlib.h>
 
 int ( * __ACPI_LoggingFunction )( const char *, va_list ) = NULL;

@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <acpi/acpi.h">
+#include <acpi/acpica.h>
 
 ACPI_CPU_FLAGS AcpiOsAcquireLock( ACPI_SPINLOCK handle )
 {
