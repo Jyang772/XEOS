@@ -2650,30 +2650,14 @@
 		050BD61E17AA9934004D14C5 /* strtok.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strtok.c; sourceTree = "<group>"; };
 		050BD61F17AA9934004D14C5 /* strxfrm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strxfrm.c; sourceTree = "<group>"; };
 		050BD62117AA9934004D14C5 /* asctime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = asctime.c; sourceTree = "<group>"; };
-		050BD62217AA9934004D14C5 /* asctime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = asctime_r.c; sourceTree = "<group>"; };
 		050BD62317AA9934004D14C5 /* clock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock.c; sourceTree = "<group>"; };
-		050BD62417AA9934004D14C5 /* clock_getres.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_getres.c; sourceTree = "<group>"; };
-		050BD62517AA9934004D14C5 /* clock_gettime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_gettime.c; sourceTree = "<group>"; };
-		050BD62617AA9934004D14C5 /* clock_settime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_settime.c; sourceTree = "<group>"; };
 		050BD62717AA9934004D14C5 /* ctime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ctime.c; sourceTree = "<group>"; };
-		050BD62817AA9934004D14C5 /* ctime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ctime_r.c; sourceTree = "<group>"; };
 		050BD62917AA9934004D14C5 /* difftime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = difftime.c; sourceTree = "<group>"; };
-		050BD62A17AA9934004D14C5 /* getdate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = getdate.c; sourceTree = "<group>"; };
 		050BD62B17AA9934004D14C5 /* gmtime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gmtime.c; sourceTree = "<group>"; };
-		050BD62C17AA9934004D14C5 /* gmtime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gmtime_r.c; sourceTree = "<group>"; };
 		050BD62D17AA9934004D14C5 /* localtime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = localtime.c; sourceTree = "<group>"; };
-		050BD62E17AA9934004D14C5 /* localtime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = localtime_r.c; sourceTree = "<group>"; };
 		050BD62F17AA9934004D14C5 /* mktime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mktime.c; sourceTree = "<group>"; };
-		050BD63017AA9934004D14C5 /* nanosleep.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = nanosleep.c; sourceTree = "<group>"; };
 		050BD63117AA9934004D14C5 /* strftime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strftime.c; sourceTree = "<group>"; };
-		050BD63217AA9934004D14C5 /* strptime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strptime.c; sourceTree = "<group>"; };
 		050BD63317AA9934004D14C5 /* time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
-		050BD63417AA9934004D14C5 /* timer_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_create.c; sourceTree = "<group>"; };
-		050BD63517AA9934004D14C5 /* timer_delete.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_delete.c; sourceTree = "<group>"; };
-		050BD63617AA9934004D14C5 /* timer_getoverrun.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_getoverrun.c; sourceTree = "<group>"; };
-		050BD63717AA9934004D14C5 /* timer_gettime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_gettime.c; sourceTree = "<group>"; };
-		050BD63817AA9934004D14C5 /* timer_settime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_settime.c; sourceTree = "<group>"; };
-		050BD63917AA9934004D14C5 /* tzset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tzset.c; sourceTree = "<group>"; };
 		050BD63A17AA9934004D14C5 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		050BD66A17AA9934004D14C5 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		050BD67B17AA9934004D14C5 /* sched_get_priority_max.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sched_get_priority_max.c; sourceTree = "<group>"; };
@@ -9892,30 +9876,14 @@
 			isa = PBXGroup;
 			children = (
 				050BD62117AA9934004D14C5 /* asctime.c */,
-				050BD62217AA9934004D14C5 /* asctime_r.c */,
 				050BD62317AA9934004D14C5 /* clock.c */,
-				050BD62417AA9934004D14C5 /* clock_getres.c */,
-				050BD62517AA9934004D14C5 /* clock_gettime.c */,
-				050BD62617AA9934004D14C5 /* clock_settime.c */,
 				050BD62717AA9934004D14C5 /* ctime.c */,
-				050BD62817AA9934004D14C5 /* ctime_r.c */,
 				050BD62917AA9934004D14C5 /* difftime.c */,
-				050BD62A17AA9934004D14C5 /* getdate.c */,
 				050BD62B17AA9934004D14C5 /* gmtime.c */,
-				050BD62C17AA9934004D14C5 /* gmtime_r.c */,
 				050BD62D17AA9934004D14C5 /* localtime.c */,
-				050BD62E17AA9934004D14C5 /* localtime_r.c */,
 				050BD62F17AA9934004D14C5 /* mktime.c */,
-				050BD63017AA9934004D14C5 /* nanosleep.c */,
 				050BD63117AA9934004D14C5 /* strftime.c */,
-				050BD63217AA9934004D14C5 /* strptime.c */,
 				050BD63317AA9934004D14C5 /* time.c */,
-				050BD63417AA9934004D14C5 /* timer_create.c */,
-				050BD63517AA9934004D14C5 /* timer_delete.c */,
-				050BD63617AA9934004D14C5 /* timer_getoverrun.c */,
-				050BD63717AA9934004D14C5 /* timer_gettime.c */,
-				050BD63817AA9934004D14C5 /* timer_settime.c */,
-				050BD63917AA9934004D14C5 /* tzset.c */,
 			);
 			path = time;
 			sourceTree = "<group>";
