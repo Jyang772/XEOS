@@ -3045,6 +3045,7 @@
 		05959E4717AAB1B80021435A /* posix_typed_mem_open.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = posix_typed_mem_open.c; sourceTree = "<group>"; };
 		05959E4817AAB1B80021435A /* shm_open.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shm_open.c; sourceTree = "<group>"; };
 		05959E4917AAB1B80021435A /* shm_unlink.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shm_unlink.c; sourceTree = "<group>"; };
+		05959E4A17AAB35E0021435A /* fcntl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fcntl.h; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -10362,6 +10363,7 @@
 				05959DDC17AAAEBF0021435A /* cpio.h */,
 				05959DDD17AAAEBF0021435A /* dirent.h */,
 				05959DDE17AAAEBF0021435A /* dlfcn.h */,
+				05959E4A17AAB35E0021435A /* fcntl.h */,
 				05959DDF17AAAEBF0021435A /* fmtmsg.h */,
 				05959DE017AAAEBF0021435A /* fnmatch.h */,
 				05959DE117AAAEBF0021435A /* ftw.h */,
