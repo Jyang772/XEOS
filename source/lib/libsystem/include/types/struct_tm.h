@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_STRUCT_TM_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 struct tm
 {
     int tm_sec;

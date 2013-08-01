@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_UINT8_T_H__
 #pragma once
 
-typedef unsigned char uint8_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_UInt8 uint8_t;
 
 #endif /* __LIBSYSTEM_TYPES_UINT8_T_H__ */

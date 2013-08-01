@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_JMP_BUF_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 #ifdef __LP64__
 
     /*

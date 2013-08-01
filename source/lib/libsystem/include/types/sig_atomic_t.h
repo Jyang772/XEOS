@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_SIG_ATOMIC_T_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 typedef int sig_atomic_t;
 
 #endif /* __LIBSYSTEM_TYPES_SIG_ATOMIC_T_H__ */

@@ -69,202 +69,45 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __BLKCNT_T
-#define __BLKCNT_T
-    typedef XEOS_BlockCount                     blkcnt_t;
-#endif
-
-#ifndef __BLKSIZE_T
-#define __BLKSIZE_T
-    typedef XEOS_BlockSize                      blksize_t;
-#endif
-
-#ifndef __CLOCK_T
-#define __CLOCK_T
-    typedef XEOS_Clock                          clock_t;
-#endif
-
-#ifndef __CLOCKID_T
-#define __CLOCKID_T
-    typedef XEOS_ClockID                        clockid_t;
-#endif
-
-#ifndef __DEV_T
-#define __DEV_T
-    typedef XEOS_Device                         dev_t;
-#endif
-
-#ifndef __FSBLKCNT_T
-#define __FSBLKCNT_T
-    typedef XEOS_FSBlockCount                   fsblkcnt_t;
-#endif
-
-#ifndef __FSFILCNT_T
-#define __FSFILCNT_T
-    typedef XEOS_FSFileCount                    fsfilcnt_t;
-#endif
-
-#ifndef __GID_T
-#define __GID_T
-    typedef XEOS_GroupID                        gid_t;
-#endif
-
-#ifndef __ID_T
-#define __ID_T
-    typedef XEOS_ID                             id_t;
-#endif
-
-#ifndef __INO_T
-#define __INO_T
-    typedef XEOS_Inode                          ino_t;
-#endif
-
-#ifndef __KEY_T
-#define __KEY_T
-    typedef XEOS_Key                            key_t;
-#endif
-
-#ifndef __MODE_T
-#define __MODE_T
-    typedef XEOS_Mode                           mode_t;
-#endif
-
-#ifndef __NLINK_T
-#define __NLINK_T
-    typedef XEOS_NLink                          nlink_t;
-#endif
-
-#ifndef __OFF_T
-#define __OFF_T
-    typedef XEOS_Offset                         off_t;
-#endif
-
-#ifndef __PID_T
-#define __PID_T
-    typedef XEOS_ProcessID                      pid_t;
-#endif
-
-#ifndef __PTHREAD_ATTR_T
-#define __PTHREAD_ATTR_T
-    typedef XEOS_PThreadAttribute               pthread_attr_t;
-#endif
-
-#ifndef __PTHREAD_BARRIER_T
-#define __PTHREAD_BARRIER_T
-    typedef XEOS_PThreadBarrier                 pthread_barrier_t;
-#endif
-
-#ifndef __PTHREAD_BARRIERATTR_T
-#define __PTHREAD_BARRIERATTR_T
-    typedef XEOS_PThreadBarrierAttribute        pthread_barrierattr_t;
-#endif
-
-#ifndef __PTHREAD_COND_T
-#define __PTHREAD_COND_T
-    typedef XEOS_PThreadCondition               pthread_cond_t;
-#endif
-
-#ifndef __PTHREAD_CONDATTR_T
-#define __PTHREAD_CONDATTR_T
-    typedef XEOS_PThreadConditionAttribute      pthread_condattr_t;
-#endif
-
-#ifndef __PTHREAD_KEY_T
-#define __PTHREAD_KEY_T
-    typedef XEOS_PThreadKey                     pthread_key_t;
-#endif
-
-#ifndef __PTHREAD_MUTEX_T
-#define __PTHREAD_MUTEX_T
-    typedef XEOS_PThreadMutex                   pthread_mutex_t;
-#endif
-
-#ifndef __PTHREAD_MUTEXATTR_T
-#define __PTHREAD_MUTEXATTR_T
-    typedef XEOS_PThreadMutexAttribute          pthread_mutexattr_t;
-#endif
-
-#ifndef __PTHREAD_ONCE_T
-#define __PTHREAD_ONCE_T
-    typedef XEOS_PThreadOnce                    pthread_once_t;
-#endif
-
-#ifndef __PTHREAD_RWLOCK_T
-#define __PTHREAD_RWLOCK_T
-    typedef XEOS_PThreadRWLock                  pthread_rwlock_t;
-#endif
-
-#ifndef __PTHREAD_RWLOCKATTR_T
-#define __PTHREAD_RWLOCKATTR_T
-    typedef XEOS_PThreadRWLockAttribute         pthread_rwlockattr_t;
-#endif
-
-#ifndef __PTHREAD_SPINLOCK_T
-#define __PTHREAD_SPINLOCK_T__
-    typedef XEOS_PThreadSpinlock                pthread_spinlock_t;
-#endif
-
-#ifndef __PTHREAD_T
-#define __PTHREAD_T
-    typedef XEOS_PThread                        pthread_t;
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-    typedef XEOS_Size                           size_t;
-#endif
-
-#ifndef __SSIZE_T
-#define __SSIZE_T
-    typedef XEOS_SSize                          ssize_t;
-#endif
-
-#ifndef __SUSECONDS_T
-#define __SUSECONDS_T
-    typedef XEOS_SUSeconds                      suseconds_t;
-#endif
-
-#ifndef __TIME_T
-#define __TIME_T
-    typedef XEOS_Time                           time_t;
-#endif
-
-#ifndef __TIMER_T
-#define __TIMER_T
-    typedef XEOS_Timer                          timer_t;
-#endif
-
-#ifndef __TRACE_ATTR_T
-#define __TRACE_ATTR_T
-    typedef XEOS_TraceAttribute                 trace_attr_t;
-#endif
-
-#ifndef __TRACE_EVENT_ID_T
-#define __TRACE_EVENT_ID_T
-    typedef XEOS_TraceEventID                   trace_event_id_t;
-#endif
-
-#ifndef __TRACE_EVENT_SET_T
-#define __TRACE_EVENT_SET_T
-    typedef XEOS_TraceEventSet                  trace_event_set_t;
-#endif
-
-#ifndef __TRACE_ID_T
-#define __TRACE_ID_T
-    typedef XEOS_TraceID                        trace_id_t;
-#endif
-
-#ifndef __UID_T
-#define __UID_T
-    typedef XEOS_UserID                         uid_t;
-#endif
-
-#ifndef __USECONDS_T
-#define __USECONDS_T
-    typedef XEOS_USeconds                       useconds_t;
-#endif
+#include <libsystem/types/blkcnt_t.h>
+#include <libsystem/types/blksize_t.h>
+#include <libsystem/types/clock_t.h>
+#include <libsystem/types/clockid_t.h>
+#include <libsystem/types/dev_t.h>
+#include <libsystem/types/fsblkcnt_t.h>
+#include <libsystem/types/fsfilcnt_t.h>
+#include <libsystem/types/gid_t.h>
+#include <libsystem/types/id_t.h>
+#include <libsystem/types/ino_t.h>
+#include <libsystem/types/key_t.h>
+#include <libsystem/types/mode_t.h>
+#include <libsystem/types/nlink_t.h>
+#include <libsystem/types/off_t.h>
+#include <libsystem/types/pid_t.h>
+#include <libsystem/types/pthread_attr_t.h>
+#include <libsystem/types/pthread_barrier_t.h>
+#include <libsystem/types/pthread_barrierattr_t.h>
+#include <libsystem/types/pthread_cond_t.h>
+#include <libsystem/types/pthread_condattr_t.h>
+#include <libsystem/types/pthread_key_t.h>
+#include <libsystem/types/pthread_mutex_t.h>
+#include <libsystem/types/pthread_mutexattr_t.h>
+#include <libsystem/types/pthread_once_t.h>
+#include <libsystem/types/pthread_rwlock_t.h>
+#include <libsystem/types/pthread_rwlockattr_t.h>
+#include <libsystem/types/pthread_spinlock_t.h>
+#include <libsystem/types/pthread_t.h>
+#include <libsystem/types/size_t.h>
+#include <libsystem/types/ssize_t.h>
+#include <libsystem/types/suseconds_t.h>
+#include <libsystem/types/time_t.h>
+#include <libsystem/types/timer_t.h>
+#include <libsystem/types/trace_attr_t.h>
+#include <libsystem/types/trace_event_id_t.h>
+#include <libsystem/types/trace_event_set_t.h>
+#include <libsystem/types/trace_id_t.h>
+#include <libsystem/types/uid_t.h>
+#include <libsystem/types/useconds_t.h>
 
 #ifdef __cplusplus
 }

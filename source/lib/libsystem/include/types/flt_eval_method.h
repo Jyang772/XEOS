@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_FLT_EVAL_METHOD_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 #define FLT_EVAL_METHOD 1
 
 #endif /* __LIBSYSTEM_TYPES_FLT_EVAL_METHOD_H__ */

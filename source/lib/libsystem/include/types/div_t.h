@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_DIV_T_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 typedef struct
 {
 	int quot;

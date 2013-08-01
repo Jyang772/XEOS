@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_UINT32_T_H__
 #pragma once
 
-typedef unsigned int uint32_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_UInt32 uint32_t;
 
 #endif /* __LIBSYSTEM_TYPES_UINT32_T_H__ */

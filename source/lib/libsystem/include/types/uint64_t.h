@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_UINT64_T_H__
 #pragma once
 
-typedef unsigned long long uint64_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_UInt64 uint64_t;
 
 #endif /* __LIBSYSTEM_TYPES_UINT64_T_H__ */

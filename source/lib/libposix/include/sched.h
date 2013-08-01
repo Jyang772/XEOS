@@ -70,6 +70,7 @@ extern "C" {
 #endif
 
 #include <time.h>
+#include <libsystem/types/pid_t.h>
 
 #define SCHED_FIFO      0
 #define SCHED_RR        1

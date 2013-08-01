@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_FENV_T_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 typedef struct
 {
     unsigned int __reserved[ 4 ];

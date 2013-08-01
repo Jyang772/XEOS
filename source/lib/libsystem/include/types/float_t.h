@@ -71,6 +71,7 @@
 #define __LIBSYSTEM_TYPES_FLOAT_T_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
 #include <libsystem/types/flt_eval_method.h>
 
 #if FLT_EVAL_METHOD == 0

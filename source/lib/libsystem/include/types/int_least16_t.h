@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INT_LEAST16_T_H__
 #pragma once
 
-typedef short int_least16_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int16 int_least16_t;
 
 #endif /* __LIBSYSTEM_TYPES_INT_LEAST16_T_H__ */

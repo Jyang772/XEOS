@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INTMAX_T_H__
 #pragma once
 
-typedef unsigned long long intmax_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int64 intmax_t;
 
 #endif /* __LIBSYSTEM_TYPES_INTMAX_T_H__ */

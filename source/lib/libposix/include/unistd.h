@@ -69,52 +69,15 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __NULL
-#define __NULL
-#define NULL                                    XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef XEOS_Size                               size_t;
-#endif
-
-#ifndef __SSIZE_T
-#define __SSIZE_T
-typedef XEOS_SSize                              ssize_t;
-#endif
-
-#ifndef __UID_T
-#define __UID_T
-typedef XEOS_UserID                             uid_t;
-#endif
-
-#ifndef __OFF_T
-#define __OFF_T
-typedef XEOS_Offset                             off_t;
-#endif
-
-#ifndef __PID_T
-#define __PID_T
-typedef XEOS_ProcessID                          pid_t;
-#endif
-
-#ifndef __GID_T
-#define __GID_T
-typedef XEOS_GroupID                            gid_t;
-#endif
-
-#ifndef __USECONDS_T
-#define __USECONDS_T
-typedef XEOS_USeconds                           useconds_t;
-#endif
-
-#ifndef __INTPTR_T
-#define __INTPTR_T
-typedef XEOS_IntPointer                         intptr_t;
-#endif
+#include <libsystem/types/null.h>
+#include <libsystem/types/size_t.h>
+#include <libsystem/types/ssize_t.h>
+#include <libsystem/types/uid_t.h>
+#include <libsystem/types/off_t.h>
+#include <libsystem/types/pid_t.h>
+#include <libsystem/types/gid_t.h>
+#include <libsystem/types/useconds_t.h>
+#include <libsystem/types/intptr_t.h>
 
 #define	_POSIX_VERSION                          0
 #define	_POSIX2_VERSION                         0

@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_UINT16_T_H__
 #pragma once
 
-typedef unsigned short uint16_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_UInt16 uint16_t;
 
 #endif /* __LIBSYSTEM_TYPES_UINT16_T_H__ */

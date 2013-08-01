@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_NULL_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 #define NULL ( ( void * )0 )
 
 #endif /* __LIBSYSTEM_TYPES_NULL_H__ */

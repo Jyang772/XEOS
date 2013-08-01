@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_CLOCK_T_H__
 #pragma once
 
-typedef unsigned long clock_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef long clock_t;
 
 #endif /* __LIBSYSTEM_TYPES_CLOCK_T_H__ */

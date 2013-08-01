@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_FPOS_T_H__
 #pragma once
 
-typedef long long fpos_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int64 fpos_t;
 
 #endif /* __LIBSYSTEM_TYPES_FPOS_T_H__ */

@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INTPTR_T_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 typedef long intptr_t;
 
 #endif /* __LIBSYSTEM_TYPES_INTPTR_T_H__ */

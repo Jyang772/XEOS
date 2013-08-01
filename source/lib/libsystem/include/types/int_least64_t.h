@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INT_LEAST64_T_H__
 #pragma once
 
-typedef long long int_least64_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int64 int_least64_t;
 
 #endif /* __LIBSYSTEM_TYPES_INT_LEAST64_T_H__ */

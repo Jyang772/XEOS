@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INT_FAST64_T_H__
 #pragma once
 
-typedef long long int_fast64_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int64 int_fast64_t;
 
 #endif /* __LIBSYSTEM_TYPES_INT_FAST64_T_H__ */

@@ -71,9 +71,11 @@
 #define __LIBSYSTEM_TYPES_FILE_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 typedef struct
 {
-    unsigned int reserved[ 64 ];
+    __XEOS_UInt32 __reserved[ 8 ];
 }
 FILE;
 

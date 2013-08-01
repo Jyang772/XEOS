@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INT_FAST16_T_H__
 #pragma once
 
-typedef short int_fast16_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int16 int_fast16_t;
 
 #endif /* __LIBSYSTEM_TYPES_INT_FAST16_T_H__ */

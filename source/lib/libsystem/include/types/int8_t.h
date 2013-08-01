@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INT8_T_H__
 #pragma once
 
-typedef signed char int8_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int8 int8_t;
 
 #endif /* __LIBSYSTEM_TYPES_INT8_T_H__ */

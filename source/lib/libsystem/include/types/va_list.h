@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_VA_LIST_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 #ifdef __clang__
     typedef __builtin_va_list va_list;
 #else

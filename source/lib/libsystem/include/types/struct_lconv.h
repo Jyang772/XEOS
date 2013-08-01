@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_STRUCT_LCONV_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 struct lconv
 {
     char  * decimal_point;

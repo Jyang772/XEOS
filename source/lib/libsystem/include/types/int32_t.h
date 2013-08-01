@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_INT32_T_H__
 #pragma once
 
-typedef int int32_t;
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_Int32 int32_t;
 
 #endif /* __LIBSYSTEM_TYPES_INT32_T_H__ */

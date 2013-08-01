@@ -69,27 +69,11 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __NULL
-#define __NULL
-#define NULL                                    XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef XEOS_Size                               size_t;
-#endif
-
-#ifndef __OFF_T
-#define __OFF_T
-typedef XEOS_Offset                             off_t;
-#endif
-
-#ifndef __MODE_T
-#define __MODE_T
-typedef XEOS_Mode                               mode_t;
-#endif
+#include <libsystem/types/null.h>
+#include <libsystem/types/size_t.h>
+#include <libsystem/types/off_t.h>
+#include <libsystem/types/mode_t.h>
+#include <libsystem/types/struct_posix_typed_mem_info.h>
 
 #define PROT_NONE                               0x0000
 #define PROT_READ                               0x0001
@@ -115,11 +99,6 @@ typedef XEOS_Mode                               mode_t;
 #define POSIX_TYPED_MEM_ALLOCATE                0x0005
 #define POSIX_TYPED_MEM_ALLOCATE_CONTIG         0x0006
 #define POSIX_TYPED_MEM_MAP_ALLOCATABLE         0x0007
-
-struct posix_typed_mem_info
-{
-    size_t  posix_tmi_length;
-};
 
 int     mlock( const void * addr, size_t len );
 int     mlockall( int flags );

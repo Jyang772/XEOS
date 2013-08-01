@@ -71,6 +71,8 @@
 #define __LIBSYSTEM_TYPES_WCHAR_T_H__
 #pragma once
 
+#include <libsystem/types/__private/stdint.h>
+
 #ifdef __WCHAR_TYPE__
     typedef __WCHAR_TYPE__ wchar_t;
 #else
