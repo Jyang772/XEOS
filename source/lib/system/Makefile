@@ -79,8 +79,8 @@ DIR_SRC_SYSCALL     = $(PATH_SRC_LIB_LIBSYSTEM)syscall/
 # Software arguments
 #-------------------------------------------------------------------------------
 
-ARGS_CC_32          := -iquote $(PATH_SRC_LIB_LIBSYSTEM)include/ $(ARGS_CC_32)
-ARGS_CC_64          := -iquote $(PATH_SRC_LIB_LIBSYSTEM)include/ $(ARGS_CC_64)
+ARGS_CC_32          := -iquote $(PATH_SRC_LIB_LIBSYSTEM)include/system/ $(ARGS_CC_32)
+ARGS_CC_64          := -iquote $(PATH_SRC_LIB_LIBSYSTEM)include/system/ $(ARGS_CC_64)
 
 #-------------------------------------------------------------------------------
 # Search paths

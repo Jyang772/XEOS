@@ -2238,7 +2238,6 @@
 		050BD46E17AA9933004D14C5 /* templates.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = templates.sh; sourceTree = "<group>"; };
 		050BD47217AA9933004D14C5 /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
 		050BD47317AA9933004D14C5 /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
-		050BD47417AA9933004D14C5 /* acpica */ = {isa = PBXFileReference; lastKnownFileType = file; path = acpica; sourceTree = "<group>"; };
 		050BD47517AA9933004D14C5 /* acpica-clang-warnings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "acpica-clang-warnings.h"; sourceTree = "<group>"; };
 		050BD47617AA9933004D14C5 /* acpica.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpica.h; sourceTree = "<group>"; };
 		050BD47717AA9933004D14C5 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -3033,7 +3032,6 @@
 		050BD7B217AA9934004D14C5 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		050BD7B617AA9A90004D14C5 /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
 		050BD7B717AA9A90004D14C5 /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
-		050BD7B817AA9A90004D14C5 /* acpica */ = {isa = PBXFileReference; lastKnownFileType = file; path = acpica; sourceTree = "<group>"; };
 		050BD7B917AA9A90004D14C5 /* acpica-clang-warnings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "acpica-clang-warnings.h"; sourceTree = "<group>"; };
 		050BD7BA17AA9A90004D14C5 /* acpica.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpica.h; sourceTree = "<group>"; };
 		050BD7BB17AA9A90004D14C5 /* assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
@@ -9581,7 +9579,6 @@
 			children = (
 				050BD47117AA9933004D14C5 /* __private */,
 				050BD47317AA9933004D14C5 /* acpi.h */,
-				050BD47417AA9933004D14C5 /* acpica */,
 				050BD47517AA9933004D14C5 /* acpica-clang-warnings.h */,
 				050BD47617AA9933004D14C5 /* acpica.h */,
 			);
@@ -10728,7 +10725,6 @@
 			children = (
 				050BD7B517AA9A90004D14C5 /* __private */,
 				050BD7B717AA9A90004D14C5 /* acpi.h */,
-				050BD7B817AA9A90004D14C5 /* acpica */,
 				050BD7B917AA9A90004D14C5 /* acpica-clang-warnings.h */,
 				050BD7BA17AA9A90004D14C5 /* acpica.h */,
 			);
