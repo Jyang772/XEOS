@@ -61,39 +61,23 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_SCHED_H__
-#define __LIBPOSIX_SCHED_H__
+/*!
+ * @header          struct_timespec.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
+
+#ifndef __LIBSYSTEM_TYPES_STRUCT_TIMESPEC_H__
+#define __LIBSYSTEM_TYPES_STRUCT_TIMESPEC_H__
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <libsystem/types/__private/stdint.h>
+#include <libsystem/types/time_t.h>
 
-#include <time.h>
-#include <libsystem/types/pid_t.h>
-#include <libsystem/types/struct_timespec.h>
-
-#define SCHED_FIFO      0
-#define SCHED_RR        1
-#define SCHED_OTHER     2
-
-struct sched_param
+struct struct_timespec
 {
-    int sched_priority;
+    time_t  tv_sec;
+    long    tv_nsec;
 };
 
-
-int sched_get_priority_max( int policy );
-int sched_get_priority_min( int policy );
-int sched_getparam( pid_t pid, struct sched_param * param );
-int sched_getscheduler( pid_t pid );
-int sched_rr_get_interval( pid_t pid, struct timespec * interval );
-int sched_setparam( pid_t pid, const struct sched_param * param );
-int sched_setscheduler( pid_t pid, int policy, const struct sched_param * param );
-int sched_yield( void );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBPOSIX_SCHED_H__ */
+#endif /* __LIBSYSTEM_TYPES_STRUCT_TIMESPEC_H__ */
