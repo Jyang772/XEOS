@@ -2617,9 +2617,7 @@
 		0598166C17A753960072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0598166F17A7DD260072FDD9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0598167217A7E0680072FDD9 /* __udivdi3.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __udivdi3.32.s; sourceTree = "<group>"; };
-		0598167317A7E0680072FDD9 /* __udivdi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __udivdi3.64.s; sourceTree = "<group>"; };
 		0598167417A7E0680072FDD9 /* __umoddi3.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.32.s; sourceTree = "<group>"; };
-		0598167517A7E0680072FDD9 /* __umoddi3.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = __umoddi3.64.s; sourceTree = "<group>"; };
 		0598167617A7EC380072FDD9 /* pthread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
 		0598167717A7F7B90072FDD9 /* pthread_attr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_destroy.c; sourceTree = "<group>"; };
 		0598167817A7F7B90072FDD9 /* pthread_attr_getdetachstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getdetachstate.c; sourceTree = "<group>"; };
@@ -9901,9 +9899,7 @@
 			isa = PBXGroup;
 			children = (
 				0598167217A7E0680072FDD9 /* __udivdi3.32.s */,
-				0598167317A7E0680072FDD9 /* __udivdi3.64.s */,
 				0598167417A7E0680072FDD9 /* __umoddi3.32.s */,
-				0598167517A7E0680072FDD9 /* __umoddi3.64.s */,
 			);
 			path = rt;
 			sourceTree = "<group>";
