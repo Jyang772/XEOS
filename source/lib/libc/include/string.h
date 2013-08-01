@@ -69,17 +69,8 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __NULL
-#define __NULL
-#define NULL                    XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef XEOS_Size               size_t;
-#endif
+#include <libsystem/types/null.h>
+#include <libsystem/types/size_t.h>
 
 void      * memcpy( void * restrict s1, const void * restrict s2, size_t n );
 void      * memmove( void * s1, const void * s2, size_t n );

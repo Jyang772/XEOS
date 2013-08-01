@@ -69,10 +69,9 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
+#include <libsystem/types/flt_eval_method.h>
 
 #define FLT_ROUNDS          1
-#define FLT_EVAL_METHOD     XEOS_FLT_EVAL_METHOD
 
 #define FLT_RADIX           2
 

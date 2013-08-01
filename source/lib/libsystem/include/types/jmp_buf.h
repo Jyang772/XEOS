@@ -61,29 +61,62 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_LOCALE_H__
-#define __LIBC_LOCALE_H__
+/*!
+ * @header          jmp_buf.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
+
+#ifndef __LIBSYSTEM_TYPES_JMP_BUF_H__
+#define __LIBSYSTEM_TYPES_JMP_BUF_H__
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
+#ifdef __LP64__
+
+    /*
+     * __JMP_BUF_LENGTH is number of ints required to save the following:
+     *      
+     *      RFLAGS:             8 bytes
+     *      RIP:                8 bytes
+     *      RBP:                8 bytes
+     *      RSP:                8 bytes
+     *      RBX:                8 bytes
+     *      R12:                8 bytes
+     *      R13:                8 bytes
+     *      R14:                8 bytes
+     *      R15:                8 bytes
+     *      MXCSR:              4 bytes
+     *      FP Control Word:    4 bytes
+     *      SigMask:            4 bytes
+     */
+    typedef int jmp_buf[ 21 ];
+    
+#else
+
+    /*
+     * __JMP_BUF_LENGTH is number of ints required to save the following:
+     * 
+     *      EAX:        4 bytes
+     *      EBX:        4 bytes
+     *      ECX:        4 bytes
+     *      EDX:        4 bytes
+     *      EDI:        4 bytes
+     *      ESI:        4 bytes
+     *      EBP:        4 bytes
+     *      ESP:        4 bytes
+     *      SS:         4 bytes
+     *      EFLAGS:     4 bytes
+     *      EIP:        4 bytes
+     *      CS:         4 bytes
+     *      DS:         4 bytes
+     *      ES:         4 bytes
+     *      FS:         4 bytes
+     *      GS:         4 bytes
+     *      OnStack:    4 bytes
+     *      Mask:       4 bytes
+     */
+    typedef int jmp_buf[ 18 ];
+    
 #endif
 
-#include <libsystem/types/null.h>
-#include <libsystem/types/struct_lconv.h>
-
-#define LC_ALL                      0
-#define LC_COLLATE                  1
-#define LC_CTYPE                    2
-#define LC_MONETARY                 3
-#define LC_NUMERIC                  4
-#define LC_TIME                     5
-
-char         * setlocale( int category, const char * locale );
-struct lconv * localeconv( void );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBC_LOCALE_H__ */
+#endif /* __LIBSYSTEM_TYPES_JMP_BUF_H__ */

@@ -69,22 +69,12 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __NULL
-#define __NULL
-#define NULL                    XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef XEOS_Size               size_t;
-#endif
-
-#ifndef __WCHAR_T
-#define __WCHAR_T
-typedef XEOS_WChar              wchar_t;
-#endif
+#include <libsystem/types/null.h>
+#include <libsystem/types/size_t.h>
+#include <libsystem/types/wchar_t.h>
+#include <libsystem/types/div_t.h>
+#include <libsystem/types/ldiv_t.h>
+#include <libsystem/types/lldiv_t.h>
 
 #define EXIT_FAILURE            1
 #define EXIT_SUCCESS            0
@@ -93,27 +83,6 @@ typedef XEOS_WChar              wchar_t;
 #define	MB_CUR_MAX              __LIBC_MB_CUR_MAX
 
 extern int __LIBC_MB_CUR_MAX;
-
-typedef struct
-{
-	int         quot;
-	int         rem;
-}
-div_t;
-
-typedef struct
-{
-	long        quot;
-	long        rem;
-}
-ldiv_t;
-
-typedef struct
-{
-	long long   quot;
-	long long   rem;
-}
-lldiv_t;
 
 double                  atof( const char * nptr );
 int                     atoi( const char * nptr );

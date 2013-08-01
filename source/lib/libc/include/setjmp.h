@@ -69,55 +69,7 @@
 extern "C" {
 #endif
 
-#ifdef __LP64__
-
-    /*
-     * __JMP_BUF_LENGTH is number of ints required to save the following:
-     *      
-     *      RFLAGS:             8 bytes
-     *      RIP:                8 bytes
-     *      RBP:                8 bytes
-     *      RSP:                8 bytes
-     *      RBX:                8 bytes
-     *      R12:                8 bytes
-     *      R13:                8 bytes
-     *      R14:                8 bytes
-     *      R15:                8 bytes
-     *      MXCSR:              4 bytes
-     *      FP Control Word:    4 bytes
-     *      SigMask:            4 bytes
-     */
-    #define __JMP_BUF_LENGTH    ( 21 )
-    
-#else
-
-    /*
-     * __JMP_BUF_LENGTH is number of ints required to save the following:
-     * 
-     *      EAX:        4 bytes
-     *      EBX:        4 bytes
-     *      ECX:        4 bytes
-     *      EDX:        4 bytes
-     *      EDI:        4 bytes
-     *      ESI:        4 bytes
-     *      EBP:        4 bytes
-     *      ESP:        4 bytes
-     *      SS:         4 bytes
-     *      EFLAGS:     4 bytes
-     *      EIP:        4 bytes
-     *      CS:         4 bytes
-     *      DS:         4 bytes
-     *      ES:         4 bytes
-     *      FS:         4 bytes
-     *      GS:         4 bytes
-     *      OnStack:    4 bytes
-     *      Mask:       4 bytes
-     */
-    #define __JMP_BUF_LENGTH    ( 18 )
-    
-#endif
-
-typedef int jmp_buf[ __JMP_BUF_LENGTH ];
+#include <libsystem/types/jmp_buf.h>
 
 int     setjmp( jmp_buf env );
 void    longjmp( jmp_buf env, int val );

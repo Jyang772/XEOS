@@ -61,29 +61,34 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_LOCALE_H__
-#define __LIBC_LOCALE_H__
+/*!
+ * @header          float_t.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
+
+#ifndef __LIBSYSTEM_TYPES_FLOAT_T_H__
+#define __LIBSYSTEM_TYPES_FLOAT_T_H__
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
+#include <libsystem/types/flt_eval_method.h>
+
+#if FLT_EVAL_METHOD == 0
+    
+    typedef float float_t;
+    
+#elif FLT_EVAL_METHOD == 1
+    
+    typedef double float_t;
+    
+#elif FLT_EVAL_METHOD == 2 || FLT_EVAL_METHOD == -1
+    
+    typedef long double float_t;
+    
+#else
+    
+    typedef float float_t;
+    
 #endif
 
-#include <libsystem/types/null.h>
-#include <libsystem/types/struct_lconv.h>
-
-#define LC_ALL                      0
-#define LC_COLLATE                  1
-#define LC_CTYPE                    2
-#define LC_MONETARY                 3
-#define LC_NUMERIC                  4
-#define LC_TIME                     5
-
-char         * setlocale( int category, const char * locale );
-struct lconv * localeconv( void );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBC_LOCALE_H__ */
+#endif /* __LIBSYSTEM_TYPES_FLOAT_T_H__ */

@@ -68,14 +68,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-     
-typedef struct
-{
-    unsigned int            __reserved[ 4 ];
-}
-fenv_t;
 
-typedef unsigned short      fexcept_t;
+#include <libsystem/types/fenv_t.h>
+#include <libsystem/types/fexcept_t.h>
 
 #define FE_INVALID          0x0001
 #define FE_DIVBYZERO        0x0002

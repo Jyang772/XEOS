@@ -69,12 +69,7 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __VA_LIST
-#define __VA_LIST
-typedef XEOS_VAList                     va_list;
-#endif
+#include <libsystem/types/va_list.h>
 
 #ifdef __clang__
 

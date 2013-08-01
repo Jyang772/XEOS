@@ -69,54 +69,13 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
+#include <libsystem/types/null.h>
+#include <libsystem/types/size_t.h>
+#include <libsystem/types/clock_t.h>
+#include <libsystem/types/time_t.h>
+#include <libsystem/types/struct_tm.h>
 
-#ifndef __NULL
-#define __NULL
-#define NULL                    XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef XEOS_Size               size_t;
-#endif
-
-#ifndef __CLOCK_T
-#define __CLOCK_T
-typedef XEOS_Clock              clock_t;
-#endif
-
-#ifndef __TIME_T
-#define __TIME_T
-typedef XEOS_Time               time_t;
-#endif
-
-#define CLOCKS_PER_SEC          1000000
-
-struct tm
-{
-    int                 tm_sec;
-    int                 tm_min;
-    int                 tm_hour;
-    int                 tm_mday;
-    int                 tm_mon;
-    int                 tm_year;
-    int                 tm_wday;
-    int                 tm_yday;
-    int                 tm_isdst;
-};
-
-struct timespec
-{
-    time_t              tv_sec;
-    long                tv_nsec;
-};
-
-struct itimerspec
-{
-    struct timespec     it_interval;
-    struct timespec     it_value;
-};
+#define CLOCKS_PER_SEC 1000000
 
 clock_t     clock( void );
 double      difftime( time_t time1, time_t time0 );

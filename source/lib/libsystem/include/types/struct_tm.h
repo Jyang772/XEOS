@@ -61,29 +61,27 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_LOCALE_H__
-#define __LIBC_LOCALE_H__
+/*!
+ * @header          struct_tm.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
+
+#ifndef __LIBSYSTEM_TYPES_STRUCT_TM_H__
+#define __LIBSYSTEM_TYPES_STRUCT_TM_H__
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+struct tm
+{
+    int tm_sec;
+    int tm_min;
+    int tm_hour;
+    int tm_mday;
+    int tm_mon;
+    int tm_year;
+    int tm_wday;
+    int tm_yday;
+    int tm_isdst;
+};
 
-#include <libsystem/types/null.h>
-#include <libsystem/types/struct_lconv.h>
-
-#define LC_ALL                      0
-#define LC_COLLATE                  1
-#define LC_CTYPE                    2
-#define LC_MONETARY                 3
-#define LC_NUMERIC                  4
-#define LC_TIME                     5
-
-char         * setlocale( int category, const char * locale );
-struct lconv * localeconv( void );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBC_LOCALE_H__ */
+#endif /* __LIBSYSTEM_TYPES_STRUCT_TM_H__ */

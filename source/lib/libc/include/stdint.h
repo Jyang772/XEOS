@@ -69,50 +69,41 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
+#include <libsystem/types/int8_t.h>
+#include <libsystem/types/int16_t.h>
+#include <libsystem/types/int32_t.h>
+#include <libsystem/types/int64_t.h>
 
-typedef signed char             int8_t;
-typedef short                   int16_t;
-typedef int                     int32_t;
-typedef long long               int64_t;
+#include <libsystem/types/uint8_t.h>
+#include <libsystem/types/uint16_t.h>
+#include <libsystem/types/uint32_t.h>
+#include <libsystem/types/uint64_t.h>
 
-typedef unsigned char           uint8_t;
-typedef unsigned short          uint16_t;
-typedef unsigned int            uint32_t;
-typedef unsigned long long      uint64_t;
+#include <libsystem/types/int_least8_t.h>
+#include <libsystem/types/int_least16_t.h>
+#include <libsystem/types/int_least32_t.h>
+#include <libsystem/types/int_least64_t.h>
 
-typedef int8_t                  int_least8_t;
-typedef int16_t                 int_least16_t;
-typedef int32_t                 int_least32_t;
-typedef int64_t                 int_least64_t;
+#include <libsystem/types/uint_least8_t.h>
+#include <libsystem/types/uint_least16_t.h>
+#include <libsystem/types/uint_least32_t.h>
+#include <libsystem/types/uint_least64_t.h>
 
-typedef uint8_t                 uint_least8_t;
-typedef uint16_t                uint_least16_t;
-typedef uint32_t                uint_least32_t;
-typedef uint64_t                uint_least64_t;
+#include <libsystem/types/int_fast8_t.h>
+#include <libsystem/types/int_fast16_t.h>
+#include <libsystem/types/int_fast32_t.h>
+#include <libsystem/types/int_fast64_t.h>
 
-typedef int8_t                  int_fast8_t;
-typedef int16_t                 int_fast16_t;
-typedef int32_t                 int_fast32_t;
-typedef int64_t                 int_fast64_t;
+#include <libsystem/types/uint_fast8_t.h>
+#include <libsystem/types/uint_fast16_t.h>
+#include <libsystem/types/uint_fast32_t.h>
+#include <libsystem/types/uint_fast64_t.h>
 
-typedef uint8_t                 uint_fast8_t;
-typedef uint16_t                uint_fast16_t;
-typedef uint32_t                uint_fast32_t;
-typedef uint64_t                uint_fast64_t;
+#include <libsystem/types/intptr_t.h>
+#include <libsystem/types/uintptr_t.h>
 
-#ifndef __INTPTR_T
-#define __INTPTR_T
-    typedef XEOS_IntPointer     intptr_t;
-#endif
-
-#ifndef __UINTPTR_T
-#define __UINTPTR_T
-    typedef XEOS_UIntPointer    uintptr_t;
-#endif
-
-typedef long long               intmax_t;
-typedef unsigned long long      uintmax_t;
+#include <libsystem/types/intmax_t.h>
+#include <libsystem/types/uintmax_t.h>
 
 #define INT8_MAX                0x7F
 #define INT16_MAX               0x7FFF

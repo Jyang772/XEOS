@@ -69,29 +69,9 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#if XEOS_FLT_EVAL_METHOD == 0
-    
-    typedef float       float_t;
-    typedef double      double_t;
-    
-#elif XEOS_FLT_EVAL_METHOD == 1
-    
-    typedef double      float_t;
-    typedef double      double_t;
-    
-#elif XEOS_FLT_EVAL_METHOD == 2 || XEOS_FLT_EVAL_METHOD == -1
-    
-    typedef long double float_t;
-    typedef long double double_t;
-    
-#else
-    
-    typedef float       float_t;
-    typedef double      double_t;
-    
-#endif
+#include <libsystem/types/flt_eval_method.h>
+#include <libsystem/types/float_t.h>
+#include <libsystem/types/double_t.h>
 
 #define HUGE_VAL                1e500
 #define HUGE_VALF               1e50f

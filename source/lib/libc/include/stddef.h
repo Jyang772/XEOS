@@ -69,24 +69,10 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __NULL
-#define __NULL
-#define NULL                        XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef XEOS_Size                   size_t;
-#endif
-
-#ifndef __WCHAR_T
-#define __WCHAR_T
-typedef XEOS_WChar                  wchar_t;
-#endif
-
-typedef long                        ptrdiff_t
+#include <libsystem/types/null.h>
+#include <libsystem/types/size_t.h>
+#include <libsystem/types/wchar_t.h>
+#include <libsystem/types/ptrdiff_t.h>
 
 #define offsetof( _type_, _field_)  ( ( size_t )( &( ( _type_ * ) 0 )->_field_ ) )
 

@@ -69,30 +69,11 @@
 extern "C" {
 #endif
 
-#include <xeos/types.h>
-
-#ifndef __NULL
-#define __NULL
-#define NULL                        XEOS_NULL
-#endif
-
-#ifndef __SIZE_T
-#define __SIZE_T
-typedef XEOS_Size                   size_t;
-#endif
-
-#ifndef __VA_LIST
-#define __VA_LIST
-typedef XEOS_VAList                 va_list;
-#endif
-
-typedef long long                   fpos_t;
-
-typedef struct
-{
-    unsigned int reserved[ 64 ];
-}
-FILE;
+#include <libsystem/types/null.h>
+#include <libsystem/types/size_t.h>
+#include <libsystem/types/va_list.h>
+#include <libsystem/types/fpos_t.h>
+#include <libsystem/types/file.h>
 
 #define _IOFBF                      0
 #define _IOLBF                      1

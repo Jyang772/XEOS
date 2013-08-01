@@ -69,7 +69,7 @@
 extern "C" {
 #endif
 
-typedef int             sig_atomic_t;
+#include <libsystem/types/sig_atomic_t.h>
 
 #define SIG_DFL         ( ( void ( * )( int ) )0 )
 #define SIG_ERR         ( ( void ( * )( int ) )-1 )
