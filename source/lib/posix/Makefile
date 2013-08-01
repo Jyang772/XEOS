@@ -71,8 +71,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_SRC_MMAN        = $(PATH_SRC_LIB_LIBPOSIX)mman/
-DIR_SRC_SYSCALL     = $(PATH_SRC_LIB_LIBPOSIX)syscall/
+DIR_SRC_SYS_MMAN    = $(PATH_SRC_LIB_LIBPOSIX)sys_mman/
 DIR_SRC_UNISTD      = $(PATH_SRC_LIB_LIBPOSIX)unistd/
 DIR_SRC_SCHED       = $(PATH_SRC_LIB_LIBPOSIX)sched/
 DIR_SRC_TIME        = $(PATH_SRC_LIB_LIBPOSIX)time/
@@ -91,8 +90,7 @@ ARGS_CC_64          := -iquote $(PATH_SRC_LIB_LIBPOSIX)include/posix/ $(ARGS_CC_
 
 # Define the search paths for source files
 vpath %$(EXT_C)         $(PATH_SRC_LIB_LIBPOSIX)
-vpath %$(EXT_C)         $(DIR_SRC_MMAN)
-vpath %$(EXT_C)         $(DIR_SRC_SYSCALL)
+vpath %$(EXT_C)         $(DIR_SRC_SYS_MMAN)
 vpath %$(EXT_C)         $(DIR_SRC_UNISTD)
 vpath %$(EXT_C)         $(DIR_SRC_SCHED)
 vpath %$(EXT_C)         $(DIR_SRC_TIME)
@@ -115,8 +113,7 @@ vpath %$(EXT_C)         $(DIR_SRC_SIGNAL)
 #-------------------------------------------------------------------------------
 
 _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(PATH_SRC_LIB_LIBPOSIX))
-_FILES_C_OBJ_BUILD_MMAN         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_MMAN))
-_FILES_C_OBJ_BUILD_SYSCALL      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_SYSCALL))
+_FILES_C_OBJ_BUILD_SYS_MMAN     = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_SYS_MMAN))
 _FILES_C_OBJ_BUILD_UNISTD       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_UNISTD))
 _FILES_C_OBJ_BUILD_SCHED        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_SCHED))
 _FILES_C_OBJ_BUILD_TIME         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_TIME))
@@ -136,7 +133,7 @@ _FILES_C_OBJ_BUILD_SIGNAL       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 
 # Build the full project
 all:    $(_FILES_C_OBJ_BUILD)           \
-        $(_FILES_C_OBJ_BUILD_MMAN)      \
+        $(_FILES_C_OBJ_BUILD_SYS_MMAN)  \
         $(_FILES_C_OBJ_BUILD_SYSCALL)   \
         $(_FILES_C_OBJ_BUILD_UNISTD)    \
         $(_FILES_C_OBJ_BUILD_SCHED)     \
