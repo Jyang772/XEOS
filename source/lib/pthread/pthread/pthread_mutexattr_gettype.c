@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_mutexattr_gettype( const pthread_mutexattr_t * attr, int * type )
 {

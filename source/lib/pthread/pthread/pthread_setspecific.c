@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_setspecific( pthread_key_t key, const void * value )
 {

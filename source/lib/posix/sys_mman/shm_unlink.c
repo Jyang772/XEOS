@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "sys/mman.h"
+#include <sys/mman.h>
 
 int shm_unlink( const char * name )
 {

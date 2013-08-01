@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 long int sysconf( int name )
 {

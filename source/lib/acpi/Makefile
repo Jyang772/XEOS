@@ -88,13 +88,6 @@ DIR_SRC_ACPICA_COMPONENTS_TABLES        = $(DIR_SRC_ACPICA_COMPONENTS)tables/
 DIR_SRC_ACPICA_COMPONENTS_UTILITIES     = $(DIR_SRC_ACPICA_COMPONENTS)utilities/
 
 #-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_CC_32                              := -iquote $(PATH_SRC_LIB_LIBACPI)include/acpi/ $(ARGS_CC_32)
-ARGS_CC_64                              := -iquote $(PATH_SRC_LIB_LIBACPI)include/acpi/ $(ARGS_CC_64)
-
-#-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 

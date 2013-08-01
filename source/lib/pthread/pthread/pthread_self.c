@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 pthread_t pthread_self( void )
 {

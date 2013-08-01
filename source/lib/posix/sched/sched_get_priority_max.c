@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "sched.h"
+#include <sched.h>
 
 int sched_get_priority_max( int policy )
 {

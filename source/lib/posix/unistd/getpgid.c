@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 pid_t getpgid( pid_t pid )
 {

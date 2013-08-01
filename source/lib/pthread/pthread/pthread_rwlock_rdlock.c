@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_rwlock_rdlock( pthread_rwlock_t * rwlock )
 {

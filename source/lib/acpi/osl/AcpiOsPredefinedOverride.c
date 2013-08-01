@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "acpica.h"
+#include <acpi/acpica.h>
 
 ACPI_STATUS AcpiOsPredefinedOverride( const ACPI_PREDEFINED_NAMES * predefinedObject, ACPI_STRING * newValue )
 {

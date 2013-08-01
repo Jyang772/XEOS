@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "acpica.h"
+#include <acpi/acpica.h>
 
 ACPI_STATUS AcpiOsCreateLock( ACPI_SPINLOCK * outHandle )
 {

@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 int truncate( const char * file, off_t len )
 {

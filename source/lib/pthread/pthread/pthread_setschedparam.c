@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_setschedparam( pthread_t thread, int policy, const struct sched_param * param )
 {

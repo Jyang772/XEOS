@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_mutexattr_init( pthread_mutexattr_t * attr )
 {

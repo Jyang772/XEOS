@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "__private/acpi.h"
-#include "acpi.h"
+#include <acpi/__private/acpi.h>
+#include <acpi/acpi.h">
 #include <stdlib.h>
 
 int ( * __ACPI_LoggingFunction )( const char *, va_list ) = NULL;

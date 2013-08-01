@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_mutex_setprioceiling( pthread_mutex_t * mutex, int prioceiling )
 {

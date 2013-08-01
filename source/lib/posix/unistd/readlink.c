@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 int readlink( const char * path, char * buf, size_t len )
 {

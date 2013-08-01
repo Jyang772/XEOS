@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 int rmdir( const char * path )
 {

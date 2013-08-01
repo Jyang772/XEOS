@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 void pthread_cleanup_push( void ( * routine )( void * ), void * arg )
 {

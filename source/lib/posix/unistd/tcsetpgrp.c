@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 int tcsetpgrp( int fd, pid_t pgrp_id )
 {

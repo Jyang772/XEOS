@@ -78,13 +78,6 @@ DIR_SRC_TIME        = $(PATH_SRC_LIB_LIBPOSIX)time/
 DIR_SRC_SIGNAL      = $(PATH_SRC_LIB_LIBPOSIX)signal/
 
 #-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_CC_32          := -iquote $(PATH_SRC_LIB_LIBPOSIX)include/posix/ $(ARGS_CC_32)
-ARGS_CC_64          := -iquote $(PATH_SRC_LIB_LIBPOSIX)include/posix/ $(ARGS_CC_64)
-
-#-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 

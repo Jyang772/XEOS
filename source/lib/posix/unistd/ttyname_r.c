@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 int ttyname_r( int fd, char * buf, size_t len )
 {

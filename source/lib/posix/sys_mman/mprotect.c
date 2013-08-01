@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "sys/mman.h"
+#include <sys/mman.h>
 
 int mprotect( void * addr, size_t len, int prot )
 {

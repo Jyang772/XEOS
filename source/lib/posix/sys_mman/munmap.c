@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "sys/mman.h"
+#include <sys/mman.h>
 #include <system/syscall.h>
 
 int munmap( void * addr, size_t len )

@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_rwlockattr_destroy( pthread_rwlockattr_t * attr )
 {

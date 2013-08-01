@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 void encrypt( char block[ 64 ], int edflag )
 {

@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 useconds_t ualarm( useconds_t value, useconds_t interval )
 {

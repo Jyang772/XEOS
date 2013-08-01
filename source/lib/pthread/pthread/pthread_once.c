@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_once( pthread_once_t * once_control, void ( * init_routine )( void ) )
 {

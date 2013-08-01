@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#include "time.h"
-#include "signal.h"
+#include <time.h>
+#include <signal.h>
 
 int timer_create( clockid_t clockid, struct sigevent * restrict evp, timer_t * restrict timerid )
 {

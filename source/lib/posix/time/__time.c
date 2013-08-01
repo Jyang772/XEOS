@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "time.h"
+#include <time.h>
 
 int          getdate_err    = 0;
 int          daylight       = 0;

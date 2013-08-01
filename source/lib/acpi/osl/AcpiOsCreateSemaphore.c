@@ -67,7 +67,7 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#include "acpica.h"
+#include <acpi/acpica.h>
 
 ACPI_STATUS AcpiOsCreateSemaphore( UINT32 maxUnits, UINT32 initialUnits, ACPI_SEMAPHORE * outHandle )
 {

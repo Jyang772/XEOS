@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_condattr_getpshared( const pthread_condattr_t * attr, int * pshared )
 {

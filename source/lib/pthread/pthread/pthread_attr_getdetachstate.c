@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "pthread.h"
+#include <pthread.h>
 
 int pthread_attr_getdetachstate( const pthread_attr_t * attr, int * detachstate )
 {

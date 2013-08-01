@@ -61,7 +61,7 @@
 
 /* $Id$ */
 
-#include "unistd.h"
+#include <unistd.h>
 
 size_t confstr( int name, char * buf, size_t len )
 {
