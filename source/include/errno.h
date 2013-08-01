@@ -1,1 +1,1 @@
-libc/errno.h
+c99/errno.h

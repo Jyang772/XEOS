@@ -1,1 +1,1 @@
-libposix/sched.h
+posix/sched.h

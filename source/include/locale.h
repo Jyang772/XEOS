@@ -1,1 +1,1 @@
-libc/locale.h
+c99/locale.h

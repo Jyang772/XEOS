@@ -1,1 +1,1 @@
-libc/math.h
+c99/math.h

@@ -1,1 +1,1 @@
-libpthread/pthread.h
+pthread/pthread.h

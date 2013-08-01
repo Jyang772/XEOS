@@ -1,1 +1,1 @@
-libc/stdint.h
+c99/stdint.h

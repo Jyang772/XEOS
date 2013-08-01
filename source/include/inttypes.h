@@ -1,1 +1,1 @@
-libc/inttypes.h
+c99/inttypes.h

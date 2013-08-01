@@ -1,1 +1,1 @@
-libc/stdarg.h
+c99/stdarg.h

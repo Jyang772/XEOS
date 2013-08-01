@@ -1,1 +1,1 @@
-libc/stdbool.h
+c99/stdbool.h
