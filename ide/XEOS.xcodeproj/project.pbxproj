@@ -2787,7 +2787,6 @@
 		050BD6EA17AA9934004D14C5 /* usleep.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = usleep.c; sourceTree = "<group>"; };
 		050BD6EB17AA9934004D14C5 /* vfork.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vfork.c; sourceTree = "<group>"; };
 		050BD6EC17AA9934004D14C5 /* write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = write.c; sourceTree = "<group>"; };
-		050BD6F017AA9934004D14C5 /* pthread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
 		050BD6F117AA9934004D14C5 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		050BD6F317AA9934004D14C5 /* pthread_attr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_destroy.c; sourceTree = "<group>"; };
 		050BD6F417AA9934004D14C5 /* pthread_attr_getdetachstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getdetachstate.c; sourceTree = "<group>"; };
@@ -3046,6 +3045,11 @@
 		05959E4817AAB1B80021435A /* shm_open.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shm_open.c; sourceTree = "<group>"; };
 		05959E4917AAB1B80021435A /* shm_unlink.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shm_unlink.c; sourceTree = "<group>"; };
 		05959E4A17AAB35E0021435A /* fcntl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fcntl.h; sourceTree = "<group>"; };
+		05959E4B17AAB67F0021435A /* pthread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
+		05959E4C17AAB6870021435A /* posix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = posix.h; sourceTree = "<group>"; };
+		05959E4D17AAB68F0021435A /* system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
+		05959E6717AAB6A00021435A /* c99.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = c99.h; sourceTree = "<group>"; };
+		05959E6817AAB6A90021435A /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -9306,6 +9310,7 @@
 		050BD46F17AA9933004D14C5 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				05959E6817AAB6A90021435A /* acpi.h */,
 				050BD47017AA9933004D14C5 /* acpi */,
 			);
 			path = include;
@@ -9466,6 +9471,7 @@
 		050BD4CB17AA9933004D14C5 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				05959E6717AAB6A00021435A /* c99.h */,
 				050BD4CC17AA9933004D14C5 /* c99 */,
 			);
 			path = include;
@@ -9907,6 +9913,7 @@
 		050BD63C17AA9934004D14C5 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				05959E4C17AAB6870021435A /* posix.h */,
 				05959DD817AAAEBF0021435A /* posix */,
 			);
 			path = include;
@@ -10064,17 +10071,9 @@
 		050BD6EE17AA9934004D14C5 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				050BD6EF17AA9934004D14C5 /* pthread */,
+				05959E4B17AAB67F0021435A /* pthread.h */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		050BD6EF17AA9934004D14C5 /* pthread */ = {
-			isa = PBXGroup;
-			children = (
-				050BD6F017AA9934004D14C5 /* pthread.h */,
-			);
-			path = pthread;
 			sourceTree = "<group>";
 		};
 		050BD6F217AA9934004D14C5 /* pthread */ = {
@@ -10185,6 +10184,7 @@
 		050BD74417AA9934004D14C5 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				05959E4D17AAB68F0021435A /* system.h */,
 				050BD74517AA9934004D14C5 /* system */,
 			);
 			path = include;
