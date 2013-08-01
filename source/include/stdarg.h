@@ -1,1 +1,1 @@
-c99/stdarg.h
+posix/stdarg.h

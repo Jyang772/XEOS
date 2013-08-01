@@ -61,32 +61,23 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_SIGNAL_H__
-#define __LIBC_SIGNAL_H__
+#ifndef __LIBPOSIX_CTYPE_H__
+#define __LIBPOSIX_CTYPE_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <system/types/sig_atomic_t.h>
+#include <c99/ctype.h>
 
-#define SIG_DFL         ( ( void ( * )( int ) )0 )
-#define SIG_ERR         ( ( void ( * )( int ) )-1 )
-#define SIG_IGN         ( ( void ( * )( int ) )1 )
+#ifdef _POSIX_C_SOURCE
 
-#define SIGINT          1
-#define SIGILL          4
-#define SIGABRT         6
-#define SIGFPE          8
-#define SIGSEGV         11
-#define SIGTERM         15
 
-void ( * signal( int sig, void ( * func )( int ) ) )( int );
 
-int raise( int sig );
+#endif /* _POSIX_C_SOURCE */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBC_SIGNAL_H__ */
+#endif /* __LIBPOSIX_CTYPE_H__ */

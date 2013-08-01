@@ -1,1 +1,1 @@
-c99/stdint.h
+posix/stdint.h

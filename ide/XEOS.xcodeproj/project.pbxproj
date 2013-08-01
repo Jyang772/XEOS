@@ -3050,6 +3050,30 @@
 		05959E4D17AAB68F0021435A /* system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		05959E6717AAB6A00021435A /* c99.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = c99.h; sourceTree = "<group>"; };
 		05959E6817AAB6A90021435A /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
+		05959E6917AAB9370021435A /* assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
+		05959E6A17AAB9370021435A /* complex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = complex.h; sourceTree = "<group>"; };
+		05959E6B17AAB9370021435A /* ctype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ctype.h; sourceTree = "<group>"; };
+		05959E6C17AAB9370021435A /* errno.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = errno.h; sourceTree = "<group>"; };
+		05959E6D17AAB9370021435A /* fenv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fenv.h; sourceTree = "<group>"; };
+		05959E6E17AAB9370021435A /* float.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = float.h; sourceTree = "<group>"; };
+		05959E6F17AAB9370021435A /* inttypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
+		05959E7017AAB9370021435A /* iso646.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iso646.h; sourceTree = "<group>"; };
+		05959E7117AAB9370021435A /* limits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = limits.h; sourceTree = "<group>"; };
+		05959E7217AAB9370021435A /* locale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale.h; sourceTree = "<group>"; };
+		05959E7317AAB9370021435A /* math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = math.h; sourceTree = "<group>"; };
+		05959E7417AAB9370021435A /* setjmp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = setjmp.h; sourceTree = "<group>"; };
+		05959E7517AAB9370021435A /* signal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = signal.h; sourceTree = "<group>"; };
+		05959E7617AAB9370021435A /* stdarg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdarg.h; sourceTree = "<group>"; };
+		05959E7717AAB9370021435A /* stdbool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdbool.h; sourceTree = "<group>"; };
+		05959E7817AAB9370021435A /* stddef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stddef.h; sourceTree = "<group>"; };
+		05959E7917AAB9370021435A /* stdint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
+		05959E7A17AAB9370021435A /* stdio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdio.h; sourceTree = "<group>"; };
+		05959E7B17AAB9370021435A /* stdlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdlib.h; sourceTree = "<group>"; };
+		05959E7C17AAB9370021435A /* string.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = string.h; sourceTree = "<group>"; };
+		05959E7D17AAB9370021435A /* tgmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tgmath.h; sourceTree = "<group>"; };
+		05959E7E17AAB9370021435A /* time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
+		05959E7F17AAB9370021435A /* wchar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wchar.h; sourceTree = "<group>"; };
+		05959E8017AAB9370021435A /* wctype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wctype.h; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -10358,6 +10382,30 @@
 		05959DD817AAAEBF0021435A /* posix */ = {
 			isa = PBXGroup;
 			children = (
+				05959E6917AAB9370021435A /* assert.h */,
+				05959E6A17AAB9370021435A /* complex.h */,
+				05959E6B17AAB9370021435A /* ctype.h */,
+				05959E6C17AAB9370021435A /* errno.h */,
+				05959E6D17AAB9370021435A /* fenv.h */,
+				05959E6E17AAB9370021435A /* float.h */,
+				05959E6F17AAB9370021435A /* inttypes.h */,
+				05959E7017AAB9370021435A /* iso646.h */,
+				05959E7117AAB9370021435A /* limits.h */,
+				05959E7217AAB9370021435A /* locale.h */,
+				05959E7317AAB9370021435A /* math.h */,
+				05959E7417AAB9370021435A /* setjmp.h */,
+				05959E7517AAB9370021435A /* signal.h */,
+				05959E7617AAB9370021435A /* stdarg.h */,
+				05959E7717AAB9370021435A /* stdbool.h */,
+				05959E7817AAB9370021435A /* stddef.h */,
+				05959E7917AAB9370021435A /* stdint.h */,
+				05959E7A17AAB9370021435A /* stdio.h */,
+				05959E7B17AAB9370021435A /* stdlib.h */,
+				05959E7C17AAB9370021435A /* string.h */,
+				05959E7D17AAB9370021435A /* tgmath.h */,
+				05959E7E17AAB9370021435A /* time.h */,
+				05959E7F17AAB9370021435A /* wchar.h */,
+				05959E8017AAB9370021435A /* wctype.h */,
 				05959DD917AAAEBF0021435A /* aio.h */,
 				05959DDA17AAAEBF0021435A /* arpa */,
 				05959DDC17AAAEBF0021435A /* cpio.h */,

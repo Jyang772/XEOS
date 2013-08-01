@@ -1,1 +1,1 @@
-c99/stdbool.h
+posix/stdbool.h

@@ -1,1 +1,1 @@
-c99/inttypes.h
+posix/inttypes.h

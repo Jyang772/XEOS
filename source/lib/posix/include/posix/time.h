@@ -61,32 +61,58 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_SIGNAL_H__
-#define __LIBC_SIGNAL_H__
+#ifndef __LIBPOSIX_TIME_H__
+#define __LIBPOSIX_TIME_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <system/types/sig_atomic_t.h>
+#include <c99/time.h>
 
-#define SIG_DFL         ( ( void ( * )( int ) )0 )
-#define SIG_ERR         ( ( void ( * )( int ) )-1 )
-#define SIG_IGN         ( ( void ( * )( int ) )1 )
+#ifdef _POSIX_C_SOURCE
 
-#define SIGINT          1
-#define SIGILL          4
-#define SIGABRT         6
-#define SIGFPE          8
-#define SIGSEGV         11
-#define SIGTERM         15
+#include <signal.h>
+#include <system/types/pid_t.h>
+#include <system/types/clockid_t.h>
+#include <system/types/timer_t.h>
+#include <system/types/struct_timespec.h>
+#include <system/types/struct_itimerspec.h>
 
-void ( * signal( int sig, void ( * func )( int ) ) )( int );
+struct sigevent;
 
-int raise( int sig );
+#define TIMER_ABSTIME               0
+#define CLOCK_REALTIME              0
+#define CLOCK_MONOTONIC             0
+#define CLOCK_PROCESS_CPUTIME_ID    0
+#define CLOCK_THREAD_CPUTIME_ID     0
+
+extern int          getdate_err;
+extern int          daylight;
+extern long int     timezone;
+extern char       * tzname[];
+
+char      * asctime_r( const struct tm * restrict timeptr, char * restrict buf );
+int         clock_getres( clockid_t clock_id, struct timespec * res );
+int         clock_gettime( clockid_t clock_id, struct timespec * tp );
+int         clock_settime( clockid_t clock_id, const struct timespec * tp );
+char      * ctime_r( const time_t *, char * buf );
+struct tm * getdate( const char * str );
+struct tm * gmtime_r( const time_t * restrict timer, struct tm * restrict result );
+struct tm * localtime_r( const time_t * restrict timer, struct tm * restrict result );
+int         nanosleep( const struct timespec * rqtp, struct timespec * rmtp );
+char      * strptime( const char * restrict buf, const char * restrict format, struct tm * restrict tm );
+int         timer_create( clockid_t clockid, struct sigevent * restrict evp, timer_t * restrict timerid );
+int         timer_delete( timer_t timerid );
+int         timer_getoverrun( timer_t timerid );
+int         timer_gettime( timer_t timerid, struct itimerspec * value );
+int         timer_settime( timer_t timerid, int flags, const struct itimerspec * restrict value, struct itimerspec * restrict ovalue );
+void        tzset( void );
+
+#endif /* _POSIX_C_SOURCE */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __LIBC_SIGNAL_H__ */
+#endif /* __LIBPOSIX_TIME_H__ */
