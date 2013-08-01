@@ -61,79 +61,23 @@
 
 /* $Id$ */
 
-#ifndef __LIBC_TIME_H__
-#define __LIBC_TIME_H__
+/*!
+ * @header          struct_itimerspec.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
+
+#ifndef __LIBSYSTEM_TYPES_STRUCT_ITIMERSPEC_H__
+#define __LIBSYSTEM_TYPES_STRUCT_ITIMERSPEC_H__
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <libsystem/types/null.h>
-#include <libsystem/types/size_t.h>
-#include <libsystem/types/clock_t.h>
-#include <libsystem/types/time_t.h>
-#include <libsystem/types/struct_tm.h>
-
-#define CLOCKS_PER_SEC 1000000
-
-clock_t     clock( void );
-double      difftime( time_t time1, time_t time0 );
-time_t      mktime( struct tm * timeptr );
-time_t      time( time_t * timer );
-char      * asctime( const struct tm * timeptr );
-char      * ctime( const time_t * timer );
-struct tm * gmtime( const time_t * timer );
-struct tm * localtime( const time_t * timer );
-size_t      strftime( char * restrict s, size_t maxsize, const char * restrict format, const struct tm * restrict timeptr );
-
-/*******************************************************************************
- # POSIX definitions
- ******************************************************************************/
-
-#ifdef _POSIX_C_SOURCE
-
-#include <signal.h>
-#include <libsystem/types/pid_t.h>
-#include <libsystem/types/clockid_t.h>
-#include <libsystem/types/timer_t.h>
+#include <libsystem/types/__private/stdint.h>
 #include <libsystem/types/struct_timespec.h>
-#include <libsystem/types/struct_itimerspec.h>
 
-struct sigevent;
+struct itimerspec
+{
+    struct timespec it_interval;
+    struct timespec it_value;
+};
 
-#define TIMER_ABSTIME               0
-#define CLOCK_REALTIME              0
-#define CLOCK_MONOTONIC             0
-#define CLOCK_PROCESS_CPUTIME_ID    0
-#define CLOCK_THREAD_CPUTIME_ID     0
-
-extern int          getdate_err;
-extern int          daylight;
-extern long int     timezone;
-extern char       * tzname[];
-
-char      * asctime_r( const struct tm * timeptr, char * buf );
-int         clock_getres( clockid_t clock_id, struct timespec * res );
-int         clock_gettime( clockid_t clock_id, struct timespec * tp );
-int         clock_settime( clockid_t clock_id, const struct timespec * tp );
-char      * ctime_r( const time_t *, char * buf );
-struct tm * getdate( const char * str );
-struct tm * gmtime_r( const time_t *, struct tm * result );
-struct tm * localtime_r( const time_t *, struct tm * result );
-int         nanosleep( const struct timespec * rqtp, struct timespec * rmtp );
-char      * strptime( const char * buf, const char * format, struct tm * tm );
-int         timer_create( clockid_t clockid, struct sigevent * evp, timer_t * timerid );
-int         timer_delete( timer_t timerid );
-int         timer_getoverrun( timer_t timerid );
-int         timer_gettime( timer_t timerid, struct itimerspec * value );
-int         timer_settime( timer_t timerid, int flags, const struct itimerspec * value, struct itimerspec * ovalue );
-void        tzset( void );
-
-#endif /* _POSIX_C_SOURCE */
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBC_TIME_H__ */
+#endif /* __LIBSYSTEM_TYPES_STRUCT_ITIMERSPEC_H__ */

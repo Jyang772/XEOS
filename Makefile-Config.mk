@@ -271,7 +271,7 @@ PYTHON                                  := python
 
 ARGS_CC_WARN                            := -Weverything -Werror
 ARGS_CC_STD                             := -std=c99
-ARGS_CC_CONST                           := -D __XEOS__ -U __FreeBSD__ -U __FreeBSD_kernel__
+ARGS_CC_CONST                           := -D __XEOS__ -D _POSIX_C_SOURCE=200809L -U __FreeBSD__ -U __FreeBSD_kernel__
 ARGS_CC_INC                             := -I $(PATH_SRC_INC)
 ARGS_CC_MISC                            := -Os -nostdlib -fno-builtin
 ARGS_CC_PIC                             := -fPIC
