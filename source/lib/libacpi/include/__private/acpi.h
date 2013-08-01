@@ -1,7 +1,7 @@
 /*******************************************************************************
  * XEOS - X86 Experimental Operating System
  * 
- * Copyright (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  * All rights reserved.
  * 
  * XEOS Software License - Version 1.0 - December 21, 2012
@@ -64,7 +64,7 @@
 /*!
  * @header          __acpi.h
  * @author          Jean-David Gadina
- * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
 #ifndef __LIBACPI___PRIVATE_ACPI_H__
