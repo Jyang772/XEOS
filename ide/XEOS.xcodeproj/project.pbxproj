@@ -119,6 +119,9 @@
 		050BAB5F17AA1978004D14C5 /* timer_gettime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_gettime.c; sourceTree = "<group>"; };
 		050BAB6017AA1978004D14C5 /* timer_settime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_settime.c; sourceTree = "<group>"; };
 		050BAB6117AA1978004D14C5 /* tzset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tzset.c; sourceTree = "<group>"; };
+		050BAB6217AA1B81004D14C5 /* nlink_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nlink_t.h; sourceTree = "<group>"; };
+		050BAB6317AA1BDD004D14C5 /* pthread_rwlockattr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread_rwlockattr_t.h; sourceTree = "<group>"; };
+		050BAB6417AA1C11004D14C5 /* pthread_spinlock_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread_spinlock_t.h; sourceTree = "<group>"; };
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D305C1798AB75009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -3197,6 +3200,7 @@
 				050BAB4B17AA1547004D14C5 /* struct_sigaction.h */,
 				050BAB4C17AA15D5004D14C5 /* siginfo_t.h */,
 				050BAB4D17AA1685004D14C5 /* mcontext_t.h */,
+				050BAB6217AA1B81004D14C5 /* nlink_t.h */,
 				050BAB4F17AA1877004D14C5 /* stack_t.h */,
 				050BAB4E17AA16CB004D14C5 /* ucontext_t.h */,
 				050BAAA217A9FB33004D14C5 /* blksize_t.h */,
@@ -3248,6 +3252,8 @@
 				050BAAD017A9FB33004D14C5 /* pthread_mutexattr_t.h */,
 				050BAAD117A9FB33004D14C5 /* pthread_once_t.h */,
 				050BAAD217A9FB33004D14C5 /* pthread_rwlock_t.h */,
+				050BAB6317AA1BDD004D14C5 /* pthread_rwlockattr_t.h */,
+				050BAB6417AA1C11004D14C5 /* pthread_spinlock_t.h */,
 				050BAAD317A9FB33004D14C5 /* pthread_t.h */,
 				050BAAD417A9FB33004D14C5 /* ptrdiff_t.h */,
 				050BAAD517A9FB33004D14C5 /* sig_atomic_t.h */,

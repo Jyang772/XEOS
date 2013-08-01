@@ -62,21 +62,17 @@
 /* $Id$ */
 
 /*!
- * @header          pthread_barrier_t.h
+ * @header          nlink_t.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBSYSTEM_TYPES_PTHREAD_BARRIER_T_H__
-#define __LIBSYSTEM_TYPES_PTHREAD_BARRIER_T_H__
+#ifndef __LIBSYSTEM_TYPES_NLINK_T_H__
+#define __LIBSYSTEM_TYPES_NLINK_T_H__
 #pragma once
 
 #include <libsystem/types/__private/stdint.h>
 
-typedef struct
-{
-    __XEOS_UInt32 __reserved[ 8 ];
-}
-pthread_barrier_t;
+typedef __XEOS_UInt16 nlink_t;
 
-#endif /* __LIBSYSTEM_TYPES_PTHREAD_BARRIER_T_H__ */
+#endif /* __LIBSYSTEM_TYPES_NLINK_T_H__ */

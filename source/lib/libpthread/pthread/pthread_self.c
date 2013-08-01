@@ -65,5 +65,7 @@
 
 pthread_t pthread_self( void )
 {
-    return ( pthread_t )0;
+    pthread_t t;
+    
+    return t;
 }
