@@ -398,10 +398,11 @@ $(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ_PIC): $$(notdir $$(subst $(EXT_OBJ_PIC),
 	@$(AS_32) $(ARGS_AS_32) -o $@ $(abspath $<)
 
 # Compiles an assembly file (32 bits)
-$(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$$(subst $(EXT_ASM_32),$(EXT_ASM_64),$$@)) $$(subst $(EXT_OBJ),$(EXT_OBJ_PIC),$$@)
+$(PATH_BUILD_32)%$(EXT_ASM_32)$(EXT_OBJ): $$(notdir $$(subst $(EXT_OBJ),,$$@)) $$(subst $(EXT_OBJ),$(EXT_OBJ_PIC),$$@)
 	
 	@$(PRINT) $(PROMPT)"Compiling assembly file [ 32 bits       ]: "$(COLOR_YELLOW)"$(notdir $< )"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
 	@$(AS_32) $(ARGS_AS_32) -o $@ $(abspath $<)
+	@if [ -f $(abspath $(subst $(EXT_ASM_32),$(EXT_ASM_64),$<)) ]; then $(MAKE) $(subst $(PATH_BUILD_32),$(PATH_BUILD_64),$(subst $(EXT_ASM_32),$(EXT_ASM_64),$@)); fi
 
 # Compiles a C file (64 bits - PIC)
 $(PATH_BUILD_64)%$(EXT_C)$(EXT_OBJ_PIC): $$(notdir $$(subst $(EXT_OBJ_PIC),,$$@))
