@@ -61,12 +61,33 @@
 
 /* $Id$ */
 
-#include "time.h"
+/*!
+ * @header          siginfo_t.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
 
-char * asctime_r( const struct tm * restrict timeptr, char * restrict buf )
+#ifndef __LIBSYSTEM_TYPES_SIGINFO_T_H__
+#define __LIBSYSTEM_TYPES_SIGINFO_T_H__
+#pragma once
+
+#include <libsystem/types/__private/stdint.h>
+#include <libsystem/types/pid_t.h>
+#include <libsystem/types/uid_t.h>
+#include <libsystem/types/union_sigval.h>
+
+typedef struct
 {
-    ( void )timeptr;
-    ( void )buf;
-    
-    return NULL;
+    int             si_signo;
+    int             si_code;
+    int             si_errno;
+    pid_t           si_pid;
+    uid_t           si_uid;
+    void          * si_addr;
+    int             si_status;
+    long            si_band;
+    union sigval    si_value;
 }
+siginfo_t;
+
+#endif /* __LIBSYSTEM_TYPES_SIGINFO_T_H__ */

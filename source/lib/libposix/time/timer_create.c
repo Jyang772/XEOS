@@ -64,7 +64,7 @@
 #include "time.h"
 #include "signal.h"
 
-int timer_create( clockid_t clockid, struct sigevent * evp, timer_t * timerid )
+int timer_create( clockid_t clockid, struct sigevent * restrict evp, timer_t * restrict timerid )
 {
     ( void )clockid;
     ( void )evp;

@@ -61,12 +61,27 @@
 
 /* $Id$ */
 
-#include "time.h"
+/*!
+ * @header          struct_sigaction.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
 
-char * asctime_r( const struct tm * restrict timeptr, char * restrict buf )
+#ifndef __LIBSYSTEM_TYPES_STRUCT_SIGACTION_H__
+#define __LIBSYSTEM_TYPES_STRUCT_SIGACTION_H__
+#pragma once
+
+#include <libsystem/types/__private/stdint.h>
+#include <libsystem/types/sigset_t.h>
+#include <libsystem/types/siginfo_t.h>
+
+struct sigaction
 {
-    ( void )timeptr;
-    ( void )buf;
+    sigset_t sa_mask;
+    int      sa_flags;
     
-    return NULL;
-}
+    void ( * sa_sigaction )( int, siginfo_t *, void * );
+    void ( * sa_handler )( int );
+};
+
+#endif /* __LIBSYSTEM_TYPES_STRUCT_SIGACTION_H__ */

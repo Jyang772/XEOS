@@ -61,12 +61,28 @@
 
 /* $Id$ */
 
-#include "time.h"
+/*!
+ * @header          ucontext_t.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
 
-char * asctime_r( const struct tm * restrict timeptr, char * restrict buf )
+#ifndef __LIBSYSTEM_TYPES_UCONTEXT_T_H__
+#define __LIBSYSTEM_TYPES_UCONTEXT_T_H__
+#pragma once
+
+#include <libsystem/types/__private/stdint.h>
+#include <libsystem/types/sigset_t.h>
+#include <libsystem/types/stack_t.h>
+#include <libsystem/types/mcontext_t.h>
+
+typedef struct __ucontext
 {
-    ( void )timeptr;
-    ( void )buf;
-    
-    return NULL;
+    struct __ucontext * uc_link;
+    sigset_t            uc_sigmask;
+    stack_t             uc_stack;
+    mcontext_t          uc_mcontext;
 }
+ucontext_t;
+
+#endif /* __LIBSYSTEM_TYPES_UCONTEXT_T_H__ */

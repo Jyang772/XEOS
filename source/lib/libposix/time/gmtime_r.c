@@ -63,7 +63,7 @@
 
 #include "time.h"
 
-struct tm * gmtime_r( const time_t * timer, struct tm * result )
+struct tm * gmtime_r( const time_t * restrict timer, struct tm * restrict result )
 {
     ( void )timer;
     ( void )result;

@@ -61,12 +61,22 @@
 
 /* $Id$ */
 
-#include "time.h"
+/*!
+ * @header          mcontext_t.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
 
-char * asctime_r( const struct tm * restrict timeptr, char * restrict buf )
+#ifndef __LIBSYSTEM_TYPES_MCONTEXT_T_H__
+#define __LIBSYSTEM_TYPES_MCONTEXT_T_H__
+#pragma once
+
+#include <libsystem/types/__private/stdint.h>
+
+typedef struct
 {
-    ( void )timeptr;
-    ( void )buf;
-    
-    return NULL;
+    __XEOS_UInt32 __reserved[ 8 ];
 }
+mcontext_t;
+
+#endif /* __LIBSYSTEM_TYPES_MCONTEXT_T_H__ */

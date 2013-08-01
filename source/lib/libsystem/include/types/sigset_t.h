@@ -61,12 +61,18 @@
 
 /* $Id$ */
 
-#include "time.h"
+/*!
+ * @header          sigset_t.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2012, Jean-David Gadina - www.xs-labs.com
+ */
 
-char * asctime_r( const struct tm * restrict timeptr, char * restrict buf )
-{
-    ( void )timeptr;
-    ( void )buf;
-    
-    return NULL;
-}
+#ifndef __LIBSYSTEM_TYPES_SIGSET_T_H__
+#define __LIBSYSTEM_TYPES_SIGSET_T_H__
+#pragma once
+
+#include <libsystem/types/__private/stdint.h>
+
+typedef __XEOS_UInt32 sigset_t;
+
+#endif /* __LIBSYSTEM_TYPES_SIGSET_T_H__ */

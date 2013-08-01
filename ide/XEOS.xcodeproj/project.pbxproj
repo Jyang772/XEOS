@@ -96,6 +96,29 @@
 		050BAB3617AA0928004D14C5 /* struct_itimerspec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_itimerspec.h; sourceTree = "<group>"; };
 		050BAB4817AA0A3B004D14C5 /* struct_sigevent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_sigevent.h; sourceTree = "<group>"; };
 		050BAB4917AA0AD3004D14C5 /* union_sigval.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = union_sigval.h; sourceTree = "<group>"; };
+		050BAB4A17AA14ED004D14C5 /* sigset_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sigset_t.h; sourceTree = "<group>"; };
+		050BAB4B17AA1547004D14C5 /* struct_sigaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_sigaction.h; sourceTree = "<group>"; };
+		050BAB4C17AA15D5004D14C5 /* siginfo_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = siginfo_t.h; sourceTree = "<group>"; };
+		050BAB4D17AA1685004D14C5 /* mcontext_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mcontext_t.h; sourceTree = "<group>"; };
+		050BAB4E17AA16CB004D14C5 /* ucontext_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ucontext_t.h; sourceTree = "<group>"; };
+		050BAB4F17AA1877004D14C5 /* stack_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stack_t.h; sourceTree = "<group>"; };
+		050BAB5117AA1978004D14C5 /* __time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __time.c; sourceTree = "<group>"; };
+		050BAB5217AA1978004D14C5 /* asctime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = asctime_r.c; sourceTree = "<group>"; };
+		050BAB5317AA1978004D14C5 /* clock_getres.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_getres.c; sourceTree = "<group>"; };
+		050BAB5417AA1978004D14C5 /* clock_gettime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_gettime.c; sourceTree = "<group>"; };
+		050BAB5517AA1978004D14C5 /* clock_settime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_settime.c; sourceTree = "<group>"; };
+		050BAB5617AA1978004D14C5 /* ctime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ctime_r.c; sourceTree = "<group>"; };
+		050BAB5717AA1978004D14C5 /* getdate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = getdate.c; sourceTree = "<group>"; };
+		050BAB5817AA1978004D14C5 /* gmtime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gmtime_r.c; sourceTree = "<group>"; };
+		050BAB5917AA1978004D14C5 /* localtime_r.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = localtime_r.c; sourceTree = "<group>"; };
+		050BAB5A17AA1978004D14C5 /* nanosleep.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = nanosleep.c; sourceTree = "<group>"; };
+		050BAB5B17AA1978004D14C5 /* strptime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strptime.c; sourceTree = "<group>"; };
+		050BAB5C17AA1978004D14C5 /* timer_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_create.c; sourceTree = "<group>"; };
+		050BAB5D17AA1978004D14C5 /* timer_delete.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_delete.c; sourceTree = "<group>"; };
+		050BAB5E17AA1978004D14C5 /* timer_getoverrun.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_getoverrun.c; sourceTree = "<group>"; };
+		050BAB5F17AA1978004D14C5 /* timer_gettime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_gettime.c; sourceTree = "<group>"; };
+		050BAB6017AA1978004D14C5 /* timer_settime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer_settime.c; sourceTree = "<group>"; };
+		050BAB6117AA1978004D14C5 /* tzset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tzset.c; sourceTree = "<group>"; };
 		05111DB516249A0500966E40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056A291F1628AA80003FBE80 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		056D305C1798AB75009DC18C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -3170,6 +3193,12 @@
 			children = (
 				050BAA9F17A9FB33004D14C5 /* __private */,
 				050BAAA117A9FB33004D14C5 /* blkcnt_t.h */,
+				050BAB4A17AA14ED004D14C5 /* sigset_t.h */,
+				050BAB4B17AA1547004D14C5 /* struct_sigaction.h */,
+				050BAB4C17AA15D5004D14C5 /* siginfo_t.h */,
+				050BAB4D17AA1685004D14C5 /* mcontext_t.h */,
+				050BAB4F17AA1877004D14C5 /* stack_t.h */,
+				050BAB4E17AA16CB004D14C5 /* ucontext_t.h */,
 				050BAAA217A9FB33004D14C5 /* blksize_t.h */,
 				050BAAA317A9FB33004D14C5 /* clock_t.h */,
 				050BAAA417A9FB33004D14C5 /* clockid_t.h */,
@@ -3267,6 +3296,30 @@
 				050BAAA017A9FB33004D14C5 /* stdint.h */,
 			);
 			path = __private;
+			sourceTree = "<group>";
+		};
+		050BAB5017AA1978004D14C5 /* time */ = {
+			isa = PBXGroup;
+			children = (
+				050BAB5117AA1978004D14C5 /* __time.c */,
+				050BAB5217AA1978004D14C5 /* asctime_r.c */,
+				050BAB5317AA1978004D14C5 /* clock_getres.c */,
+				050BAB5417AA1978004D14C5 /* clock_gettime.c */,
+				050BAB5517AA1978004D14C5 /* clock_settime.c */,
+				050BAB5617AA1978004D14C5 /* ctime_r.c */,
+				050BAB5717AA1978004D14C5 /* getdate.c */,
+				050BAB5817AA1978004D14C5 /* gmtime_r.c */,
+				050BAB5917AA1978004D14C5 /* localtime_r.c */,
+				050BAB5A17AA1978004D14C5 /* nanosleep.c */,
+				050BAB5B17AA1978004D14C5 /* strptime.c */,
+				050BAB5C17AA1978004D14C5 /* timer_create.c */,
+				050BAB5D17AA1978004D14C5 /* timer_delete.c */,
+				050BAB5E17AA1978004D14C5 /* timer_getoverrun.c */,
+				050BAB5F17AA1978004D14C5 /* timer_gettime.c */,
+				050BAB6017AA1978004D14C5 /* timer_settime.c */,
+				050BAB6117AA1978004D14C5 /* tzset.c */,
+			);
+			path = time;
 			sourceTree = "<group>";
 		};
 		0511119016249A0200966E40 /* binutils */ = {
@@ -9620,6 +9673,7 @@
 		059815F417A753960072FDD9 /* libposix */ = {
 			isa = PBXGroup;
 			children = (
+				050BAB5017AA1978004D14C5 /* time */,
 				059815F517A753960072FDD9 /* include */,
 				059815FC17A753960072FDD9 /* Makefile */,
 				059815FD17A753960072FDD9 /* mman */,

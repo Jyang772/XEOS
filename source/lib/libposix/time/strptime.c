@@ -63,7 +63,7 @@
 
 #include "time.h"
 
-char * strptime( const char * buf, const char * format, struct tm * tm )
+char * strptime( const char * restrict buf, const char * restrict format, struct tm * restrict tm )
 {
     ( void )buf;
     ( void )format;

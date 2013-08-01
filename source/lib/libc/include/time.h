@@ -113,21 +113,21 @@ extern int          daylight;
 extern long int     timezone;
 extern char       * tzname[];
 
-char      * asctime_r( const struct tm * timeptr, char * buf );
+char      * asctime_r( const struct tm * restrict timeptr, char * restrict buf );
 int         clock_getres( clockid_t clock_id, struct timespec * res );
 int         clock_gettime( clockid_t clock_id, struct timespec * tp );
 int         clock_settime( clockid_t clock_id, const struct timespec * tp );
 char      * ctime_r( const time_t *, char * buf );
 struct tm * getdate( const char * str );
-struct tm * gmtime_r( const time_t *, struct tm * result );
-struct tm * localtime_r( const time_t *, struct tm * result );
+struct tm * gmtime_r( const time_t * restrict timer, struct tm * restrict result );
+struct tm * localtime_r( const time_t * restrict timer, struct tm * restrict result );
 int         nanosleep( const struct timespec * rqtp, struct timespec * rmtp );
-char      * strptime( const char * buf, const char * format, struct tm * tm );
-int         timer_create( clockid_t clockid, struct sigevent * evp, timer_t * timerid );
+char      * strptime( const char * restrict buf, const char * restrict format, struct tm * restrict tm );
+int         timer_create( clockid_t clockid, struct sigevent * restrict evp, timer_t * restrict timerid );
 int         timer_delete( timer_t timerid );
 int         timer_getoverrun( timer_t timerid );
 int         timer_gettime( timer_t timerid, struct itimerspec * value );
-int         timer_settime( timer_t timerid, int flags, const struct itimerspec * value, struct itimerspec * ovalue );
+int         timer_settime( timer_t timerid, int flags, const struct itimerspec * restrict value, struct itimerspec * restrict ovalue );
 void        tzset( void );
 
 #endif /* _POSIX_C_SOURCE */
