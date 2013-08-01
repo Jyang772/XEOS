@@ -63,7 +63,6 @@
 
 #ifndef __LIBPTHREAD_PTHREAD_H__
 #define __LIBPTHREAD_PTHREAD_H__
-#pragma once
 
 #ifdef __cplusplus
 extern "C" {

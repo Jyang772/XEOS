@@ -63,7 +63,6 @@
 
 #ifndef __LIBPOSIX_SYS___TYPES___OFF_T_H__
 #define __LIBPOSIX_SYS___TYPES___OFF_T_H__
-#pragma once
 
 #ifdef __cplusplus
 extern "C" {

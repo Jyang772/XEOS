@@ -69,7 +69,6 @@
 
 #ifndef __LIBSYSTEM_TYPES_STRUCT_SCHED_PARAM_H__
 #define __LIBSYSTEM_TYPES_STRUCT_SCHED_PARAM_H__
-#pragma once
 
 #include <system/types/__private/stdint.h>
 

@@ -69,7 +69,6 @@
 
 #ifndef __LIBSYSTEM_TYPES_UINTPTR_T_H__
 #define __LIBSYSTEM_TYPES_UINTPTR_T_H__
-#pragma once
 
 #include <system/types/__private/stdint.h>
 

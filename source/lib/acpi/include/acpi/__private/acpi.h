@@ -69,7 +69,6 @@
 
 #ifndef __LIBACPI___PRIVATE_ACPI_H__
 #define __LIBACPI___PRIVATE_ACPI_H__
-#pragma once
 
 #ifdef __cplusplus
 extern "C" {

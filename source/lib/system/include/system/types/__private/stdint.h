@@ -69,7 +69,6 @@
 
 #ifndef __LIBSYSTEM_TYPES___PRIVATE_STDINT_H__
 #define __LIBSYSTEM_TYPES___PRIVATE_STDINT_H__
-#pragma once
 
 typedef signed char         __XEOS_Int8;
 typedef signed short        __XEOS_Int16;

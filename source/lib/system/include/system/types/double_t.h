@@ -69,7 +69,6 @@
 
 #ifndef __LIBSYSTEM_TYPES_DOUBLE_T_H__
 #define __LIBSYSTEM_TYPES_DOUBLE_T_H__
-#pragma once
 
 #include <system/types/flt_eval_method.h>
 

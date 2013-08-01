@@ -69,7 +69,6 @@
 
 #ifndef __LIBACPI_ACPICA_H__
 #define __LIBACPI_ACPICA_H__
-#pragma once
 
 #ifdef __clang__
 #pragma clang diagnostic push

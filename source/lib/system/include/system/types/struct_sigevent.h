@@ -69,7 +69,6 @@
 
 #ifndef __LIBSYSTEM_TYPES_STRUCT_SIGEVENT_H__
 #define __LIBSYSTEM_TYPES_STRUCT_SIGEVENT_H__
-#pragma once
 
 #include <system/types/__private/stdint.h>
 #include <system/types/union_sigval.h>

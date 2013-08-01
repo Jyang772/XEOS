@@ -69,7 +69,6 @@
 
 #ifndef __LIBSYSTEM_ATOMIC_H__
 #define __LIBSYSTEM_ATOMIC_H__
-#pragma once
 
 #include <stdint.h>
 #include <stdbool.h>

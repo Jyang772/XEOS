@@ -69,7 +69,6 @@
 
 #ifndef __LIBACPI_ACPICA_CLANG_WARNINGS_H__
 #define __LIBACPI_ACPICA_CLANG_WARNINGS_H__
-#pragma once
 
 #ifdef __clang__
 
