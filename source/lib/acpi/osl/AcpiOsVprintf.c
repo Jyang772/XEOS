@@ -69,7 +69,7 @@
 
 #include <acpi/acpica.h>
 #include "acpi.h"
-#include "__private/acpi.h"
+#include <acpi/__private/acpi.h>
 #include <xeos/video.h>
 
 void AcpiOsVprintf( const char * format, va_list args )
