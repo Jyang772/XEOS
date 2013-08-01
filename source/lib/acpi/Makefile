@@ -186,8 +186,8 @@ clean:
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_BIN)libacpi.*
 
 # ACPICA library
-acpica: ARGS_CC_32 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_LIB_LIBACPI)include/acpica $(ARGS_CC_32)
-acpica: ARGS_CC_64 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_LIB_LIBACPI)include/acpica $(ARGS_CC_64)
+acpica: ARGS_CC_32 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_LIB_LIBACPI)include/acpi/acpica $(ARGS_CC_32)
+acpica: ARGS_CC_64 := -include acpica-clang-warnings.h -iquote $(PATH_SRC_LIB_LIBACPI)include/acpi/acpica $(ARGS_CC_64)
 acpica: $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DEBUGGER)        \
         $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISASSEMBLER)    \
         $(_FILES_C_OBJ_BUILD_ACPICA_COMPONENTS_DISPATCHER)      \
