@@ -183,32 +183,32 @@ extern "C" {
 #define SI_ASYNCIO      0
 #define SI_MESGQ        0
 
-int     kill( pid_t, int );
-int     killpg( pid_t, int );
-void    psiginfo( const siginfo_t *, const char * );
-void    psignal( int, const char * );
-int     pthread_kill( pthread_t, int );
-int     pthread_sigmask( int, const sigset_t * restrict, sigset_t * restrict );
-int     sigaction( int, const struct sigaction * restrict, struct sigaction * restrict );
-int     sigaddset( sigset_t *, int);
-int     sigaltstack( const stack_t * restrict, stack_t * restrict );
-int     sigdelset( sigset_t *, int );
-int     sigemptyset( sigset_t * );
-int     sigfillset( sigset_t * );
-int     sighold( int );
-int     sigignore( int );
-int     siginterrupt( int, int );
-int     sigismember( const sigset_t *, int );
-int     sigpause( int );
-int     sigpending( sigset_t * );
-int     sigprocmask( int, const sigset_t * restrict, sigset_t * restrict );
-int     sigqueue( pid_t, int, const union sigval );
-int     sigrelse( int );
-void    ( * sigset( int, void ( * )( int ) ) )( int );
-int     sigsuspend( const sigset_t * );
-int     sigtimedwait( const sigset_t * restrict, siginfo_t * restrict, const struct timespec * restrict );
-int     sigwait( const sigset_t * restrict, int * restrict );
-int     sigwaitinfo( const sigset_t * restrict, siginfo_t * restrict );
+int     kill( pid_t pid, int sig );
+int     killpg( pid_t pgrp, int sig );
+void    psiginfo( const siginfo_t * pinfo, const char * message );
+void    psignal( int signum, const char * message );
+int     pthread_kill( pthread_t thread, int sig );
+int     pthread_sigmask( int how, const sigset_t * restrict set, sigset_t * restrict oset );
+int     sigaction( int sig, const struct sigaction * restrict act, struct sigaction * restrict oact );
+int     sigaddset( sigset_t * set, int signo );
+int     sigaltstack( const stack_t * restrict ss, stack_t * restrict oss );
+int     sigdelset( sigset_t * set, int signo );
+int     sigemptyset( sigset_t * set );
+int     sigfillset( sigset_t * set );
+int     sighold( int sig );
+int     sigignore( int sig );
+int     siginterrupt( int sig, int flag );
+int     sigismember( const sigset_t * set, int signo );
+int     sigpause( int sig );
+int     sigpending( sigset_t * set );
+int     sigprocmask( int how, const sigset_t * restrict set, sigset_t * restrict oset );
+int     sigqueue( pid_t pid, int signo, const union sigval value );
+int     sigrelse( int sig );
+int     sigsuspend( const sigset_t * sigmask );
+int     sigtimedwait( const sigset_t * restrict set, siginfo_t * restrict info, const struct timespec * restrict timeout );
+int     sigwait( const sigset_t * restrict set, int * restrict sig );
+int     sigwaitinfo( const sigset_t * restrict set, siginfo_t * restrict info );
+void    ( * sigset( int sig, void ( * disp )( int ) ) )( int );
 
 #endif /* _POSIX_C_SOURCE */
 

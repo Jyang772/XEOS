@@ -3058,6 +3058,32 @@
 		05959E7E17AAB9370021435A /* time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
 		05959E7F17AAB9370021435A /* wchar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wchar.h; sourceTree = "<group>"; };
 		05959E8017AAB9370021435A /* wctype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wctype.h; sourceTree = "<group>"; };
+		05959E8117AAF2F80021435A /* kill.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = kill.c; sourceTree = "<group>"; };
+		05959E8217AAF2F80021435A /* killpg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = killpg.c; sourceTree = "<group>"; };
+		05959E8317AAF2F80021435A /* psiginfo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = psiginfo.c; sourceTree = "<group>"; };
+		05959E8417AAF2F80021435A /* psignal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = psignal.c; sourceTree = "<group>"; };
+		05959E8517AAF2F80021435A /* pthread_kill.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_kill.c; sourceTree = "<group>"; };
+		05959E8617AAF2F80021435A /* pthread_sigmask.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_sigmask.c; sourceTree = "<group>"; };
+		05959E8717AAF2F80021435A /* sigaction.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigaction.c; sourceTree = "<group>"; };
+		05959E8817AAF2F80021435A /* sigaddset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigaddset.c; sourceTree = "<group>"; };
+		05959E8917AAF2F80021435A /* sigaltstack.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigaltstack.c; sourceTree = "<group>"; };
+		05959E8A17AAF2F80021435A /* sigdelset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigdelset.c; sourceTree = "<group>"; };
+		05959E8B17AAF2F80021435A /* sigemptyset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigemptyset.c; sourceTree = "<group>"; };
+		05959E8C17AAF2F80021435A /* sigfillset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigfillset.c; sourceTree = "<group>"; };
+		05959E8D17AAF2F80021435A /* sighold.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sighold.c; sourceTree = "<group>"; };
+		05959E8E17AAF2F80021435A /* sigignore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigignore.c; sourceTree = "<group>"; };
+		05959E8F17AAF2F80021435A /* siginterrupt.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = siginterrupt.c; sourceTree = "<group>"; };
+		05959E9017AAF2F80021435A /* sigismember.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigismember.c; sourceTree = "<group>"; };
+		05959E9117AAF2F80021435A /* sigpause.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigpause.c; sourceTree = "<group>"; };
+		05959E9217AAF2F80021435A /* sigpending.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigpending.c; sourceTree = "<group>"; };
+		05959E9317AAF2F80021435A /* sigprocmask.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigprocmask.c; sourceTree = "<group>"; };
+		05959E9417AAF2F80021435A /* sigqueue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigqueue.c; sourceTree = "<group>"; };
+		05959E9517AAF2F80021435A /* sigrelse.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigrelse.c; sourceTree = "<group>"; };
+		05959E9617AAF2F80021435A /* sigset.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigset.c; sourceTree = "<group>"; };
+		05959E9717AAF2F80021435A /* sigsuspend.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigsuspend.c; sourceTree = "<group>"; };
+		05959E9817AAF2F80021435A /* sigtimedwait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigtimedwait.c; sourceTree = "<group>"; };
+		05959E9917AAF2F80021435A /* sigwait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigwait.c; sourceTree = "<group>"; };
+		05959E9A17AAF2F80021435A /* sigwaitinfo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sigwaitinfo.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -9929,6 +9955,32 @@
 		050BD68317AA9934004D14C5 /* signal */ = {
 			isa = PBXGroup;
 			children = (
+				05959E8117AAF2F80021435A /* kill.c */,
+				05959E8217AAF2F80021435A /* killpg.c */,
+				05959E8317AAF2F80021435A /* psiginfo.c */,
+				05959E8417AAF2F80021435A /* psignal.c */,
+				05959E8517AAF2F80021435A /* pthread_kill.c */,
+				05959E8617AAF2F80021435A /* pthread_sigmask.c */,
+				05959E8717AAF2F80021435A /* sigaction.c */,
+				05959E8817AAF2F80021435A /* sigaddset.c */,
+				05959E8917AAF2F80021435A /* sigaltstack.c */,
+				05959E8A17AAF2F80021435A /* sigdelset.c */,
+				05959E8B17AAF2F80021435A /* sigemptyset.c */,
+				05959E8C17AAF2F80021435A /* sigfillset.c */,
+				05959E8D17AAF2F80021435A /* sighold.c */,
+				05959E8E17AAF2F80021435A /* sigignore.c */,
+				05959E8F17AAF2F80021435A /* siginterrupt.c */,
+				05959E9017AAF2F80021435A /* sigismember.c */,
+				05959E9117AAF2F80021435A /* sigpause.c */,
+				05959E9217AAF2F80021435A /* sigpending.c */,
+				05959E9317AAF2F80021435A /* sigprocmask.c */,
+				05959E9417AAF2F80021435A /* sigqueue.c */,
+				05959E9517AAF2F80021435A /* sigrelse.c */,
+				05959E9617AAF2F80021435A /* sigset.c */,
+				05959E9717AAF2F80021435A /* sigsuspend.c */,
+				05959E9817AAF2F80021435A /* sigtimedwait.c */,
+				05959E9917AAF2F80021435A /* sigwait.c */,
+				05959E9A17AAF2F80021435A /* sigwaitinfo.c */,
 			);
 			path = signal;
 			sourceTree = "<group>";

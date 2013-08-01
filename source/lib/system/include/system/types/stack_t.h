@@ -75,9 +75,11 @@
 
 typedef struct
 {
-    void  * ss_sp;
     size_t  ss_size;
+    void  * ss_sp;
     int     ss_flags;
+    
+    char    __pad_0[ 4 ];
 }
 stack_t;
 

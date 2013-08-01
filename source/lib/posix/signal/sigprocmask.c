@@ -61,40 +61,13 @@
 
 /* $Id$ */
 
-/*!
- * @header          __proc.h
- * @author          Jean-David Gadina
- * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
- */
+#include <signal.h>
 
-#ifndef __XEOS___PRIVATE_MEM_H__
-#define __XEOS___PRIVATE_MEM_H__
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <xeos/macros.h>
-#include <xeos/mem.h>
-
-struct __XEOS_Mem_Zone
+int sigprocmask( int how, const sigset_t * restrict set, sigset_t * restrict oset )
 {
-    char                     __pad_0[ 4 ];
+    ( void )how;
+    ( void )set;
+    ( void )oset;
     
-    XEOS_Mem_ZoneType        type;
-    void                   * base;
-    uint64_t                 length;
-    struct __XEOS_Mem_Zone * next;
-    uint64_t                 pageCount;
-    uint64_t                 freePageCount;
-    uint8_t                  pages[];
-};
-
-extern struct __XEOS_Mem_Zone * __XEOS_Mem_Zones;
-extern unsigned int             __XEOS_Mem_ZoneCount;
-
-#ifdef __cplusplus
+    return 0;
 }
-#endif
-
-#endif /* __XEOS___PRIVATE_MEM_H__ */
