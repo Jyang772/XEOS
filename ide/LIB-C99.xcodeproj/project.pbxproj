@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		05F57C2E17AC133A00DB4ACE /* __libc_assert.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __libc_assert.c; sourceTree = "<group>"; };
+		05F57C2E17AC133A00DB4ACE /* __XEOS_Lib_C99_AssertFail.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_Lib_C99_AssertFail.c; sourceTree = "<group>"; };
 		05F57C3017AC133A00DB4ACE /* isalnum.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalnum.c; sourceTree = "<group>"; };
 		05F57C3117AC133A00DB4ACE /* isalpha.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalpha.c; sourceTree = "<group>"; };
 		05F57C3217AC133A00DB4ACE /* isblank.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isblank.c; sourceTree = "<group>"; };
@@ -403,7 +403,7 @@
 		05F57C2D17AC133A00DB4ACE /* assert */ = {
 			isa = PBXGroup;
 			children = (
-				05F57C2E17AC133A00DB4ACE /* __libc_assert.c */,
+				05F57C2E17AC133A00DB4ACE /* __XEOS_Lib_C99_AssertFail.c */,
 			);
 			name = assert;
 			path = ../source/lib/c99/assert;
