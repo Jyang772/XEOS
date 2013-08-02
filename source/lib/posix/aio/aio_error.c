@@ -61,47 +61,11 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_AIO_H__
-#define __LIBPOSIX_AIO_H__
+#include <aio.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <fcntl.h>
-#include <signal.h>
-#include <time.h>
-
-#include <system/types/struct_aiocb.h>
-#include <system/types/off_t.h>
-#include <system/types/pthread_attr_t.h>
-#include <system/types/size_t.h>
-#include <system/types/ssize_t.h>
-#include <system/types/struct_timespec.h>
-
-struct sigevent;
-
-#define AIO_ALLDONE         0x01
-#define AIO_CANCELED        0x02
-#define AIO_NOTCANCELED     0x04
-
-#define LIO_NOP             0x00
-#define LIO_READ            0x01
-#define LIO_WRITE           0x02
-#define LIO_WAIT            0x01
-#define LIO_NOWAIT          0x02
-
-int     aio_cancel( int fildes, struct aiocb * aiocbp );
-int     aio_error( const struct aiocb * aiocbp );
-int     aio_fsync( int op, struct aiocb * aiocbp );
-int     aio_read( struct aiocb * aiocbp );
-ssize_t aio_return( struct aiocb * aiocbp );
-int     aio_suspend( const struct aiocb * const list[], int nent, const struct timespec * timeout );
-int     aio_write( struct aiocb * aiocbp );
-int     lio_listio( int mode, struct aiocb * restrict const list[ restrict ], int nent, struct sigevent * restrict sig );
-
-#ifdef __cplusplus
+int aio_error( const struct aiocb * aiocbp )
+{
+    ( void )aiocbp;
+    
+    return 0;
 }
-#endif
-
-#endif /* __LIBPOSIX_AIO_H__ */

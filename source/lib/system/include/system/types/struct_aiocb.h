@@ -61,47 +61,31 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_AIO_H__
-#define __LIBPOSIX_AIO_H__
+/*!
+ * @header          struct_aiocb.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef __LIBSYSTEM_TYPES_STRUCT_AIOCB_H__
+#define __LIBSYSTEM_TYPES_STRUCT_AIOCB_H__
 
-#include <fcntl.h>
-#include <signal.h>
-#include <time.h>
-
-#include <system/types/struct_aiocb.h>
-#include <system/types/off_t.h>
-#include <system/types/pthread_attr_t.h>
+#include <system/types/__private/stdint.h>
 #include <system/types/size_t.h>
-#include <system/types/ssize_t.h>
-#include <system/types/struct_timespec.h>
+#include <system/types/off_t.h>
 
 struct sigevent;
 
-#define AIO_ALLDONE         0x01
-#define AIO_CANCELED        0x02
-#define AIO_NOTCANCELED     0x04
+struct aiocb
+{
+    struct sigevent aio_sigevent;
+    volatile void * aio_buf;
+    size_t          aio_nbytes;
+    int             aio_fildes;
+    int             aio_reqprio;
+    int             aio_lio_opcode;
+    char            __pad_0[ 4 ];
+    off_t           aio_offset;
+};
 
-#define LIO_NOP             0x00
-#define LIO_READ            0x01
-#define LIO_WRITE           0x02
-#define LIO_WAIT            0x01
-#define LIO_NOWAIT          0x02
-
-int     aio_cancel( int fildes, struct aiocb * aiocbp );
-int     aio_error( const struct aiocb * aiocbp );
-int     aio_fsync( int op, struct aiocb * aiocbp );
-int     aio_read( struct aiocb * aiocbp );
-ssize_t aio_return( struct aiocb * aiocbp );
-int     aio_suspend( const struct aiocb * const list[], int nent, const struct timespec * timeout );
-int     aio_write( struct aiocb * aiocbp );
-int     lio_listio( int mode, struct aiocb * restrict const list[ restrict ], int nent, struct sigevent * restrict sig );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBPOSIX_AIO_H__ */
+#endif /* __LIBSYSTEM_TYPES_STRUCT_AIOCB_H__ */

@@ -3106,6 +3106,15 @@
 		05959EBC17AB43BE0021435A /* pthread_spin_lock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_lock.c; sourceTree = "<group>"; };
 		05959EBD17AB43BE0021435A /* pthread_spin_trylock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_trylock.c; sourceTree = "<group>"; };
 		05959EBE17AB43BE0021435A /* pthread_spin_unlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_unlock.c; sourceTree = "<group>"; };
+		05959EBF17ABF73E0021435A /* struct_aiocb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_aiocb.h; sourceTree = "<group>"; };
+		05959EC117ABFACA0021435A /* aio_cancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_cancel.c; sourceTree = "<group>"; };
+		05959EC217ABFACA0021435A /* aio_error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_error.c; sourceTree = "<group>"; };
+		05959EC317ABFACA0021435A /* aio_fsync.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_fsync.c; sourceTree = "<group>"; };
+		05959EC417ABFACA0021435A /* aio_read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_read.c; sourceTree = "<group>"; };
+		05959EC517ABFACA0021435A /* aio_return.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_return.c; sourceTree = "<group>"; };
+		05959EC617ABFACA0021435A /* aio_suspend.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_suspend.c; sourceTree = "<group>"; };
+		05959EC717ABFACA0021435A /* aio_write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_write.c; sourceTree = "<group>"; };
+		05959EC817ABFACA0021435A /* lio_listio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lio_listio.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -9941,6 +9950,7 @@
 			children = (
 				050BD63C17AA9934004D14C5 /* include */,
 				050BD66A17AA9934004D14C5 /* Makefile */,
+				05959EC017ABFACA0021435A /* aio */,
 				050BD67A17AA9934004D14C5 /* sched */,
 				050BD68317AA9934004D14C5 /* signal */,
 				05959E3B17AAB1B80021435A /* sys_mman */,
@@ -10389,6 +10399,7 @@
 				05959E9B17AB16EA0021435A /* seek_set.h */,
 				05959E9C17AB16F80021435A /* seek_cur.h */,
 				05959E9D17AB16FF0021435A /* seek_end.h */,
+				05959EBF17ABF73E0021435A /* struct_aiocb.h */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -10581,6 +10592,21 @@
 				05959E4917AAB1B80021435A /* shm_unlink.c */,
 			);
 			path = sys_mman;
+			sourceTree = "<group>";
+		};
+		05959EC017ABFACA0021435A /* aio */ = {
+			isa = PBXGroup;
+			children = (
+				05959EC117ABFACA0021435A /* aio_cancel.c */,
+				05959EC217ABFACA0021435A /* aio_error.c */,
+				05959EC317ABFACA0021435A /* aio_fsync.c */,
+				05959EC417ABFACA0021435A /* aio_read.c */,
+				05959EC517ABFACA0021435A /* aio_return.c */,
+				05959EC617ABFACA0021435A /* aio_suspend.c */,
+				05959EC717ABFACA0021435A /* aio_write.c */,
+				05959EC817ABFACA0021435A /* lio_listio.c */,
+			);
+			path = aio;
 			sourceTree = "<group>";
 		};
 		05A8F94E1625690B000484EB /* yasm */ = {
