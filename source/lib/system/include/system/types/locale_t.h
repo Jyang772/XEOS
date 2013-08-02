@@ -61,12 +61,21 @@
 
 /* $Id$ */
 
-#include <ctype.h>
+/*!
+ * @header          locale_t.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-int isxdigit_l( int c, locale_t l )
+#ifndef __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__
+#define __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__
+
+#include <system/types/__private/stdint.h>
+
+typedef struct
 {
-    ( void )c;
-    ( void )l;
-    
-    return 0;
+    __XEOS_UInt32 __reserved[ 8 ];
 }
+locale_t;
+
+#endif /* __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__ */

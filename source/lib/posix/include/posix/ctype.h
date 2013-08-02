@@ -72,6 +72,8 @@ extern "C" {
 
 #ifdef _POSIX_C_SOURCE
 
+#include <system/types/locale_t.h>
+
 #define _toupper( _c_ ) ( _c_ - 0x20 )
 #define _tolower( _c_ ) ( _c_ + 0x20 )
 

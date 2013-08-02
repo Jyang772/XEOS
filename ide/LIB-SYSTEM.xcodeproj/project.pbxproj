@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		05B4EC6A17AC291F00587E4C /* locale_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale_t.h; sourceTree = "<group>"; };
 		05F57F1A17AC13D500DB4ACE /* System_Atomic.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.32.s; sourceTree = "<group>"; };
 		05F57F1B17AC13D500DB4ACE /* System_Atomic.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.64.s; sourceTree = "<group>"; };
 		05F57F1E17AC13D500DB4ACE /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
@@ -217,6 +218,7 @@
 				05F57F4817AC13D500DB4ACE /* key_t.h */,
 				05F57F4917AC13D500DB4ACE /* ldiv_t.h */,
 				05F57F4A17AC13D500DB4ACE /* lldiv_t.h */,
+				05B4EC6A17AC291F00587E4C /* locale_t.h */,
 				05F57F4B17AC13D500DB4ACE /* mcontext_t.h */,
 				05F57F4C17AC13D500DB4ACE /* mode_t.h */,
 				05F57F4D17AC13D500DB4ACE /* nlink_t.h */,
