@@ -68,7 +68,6 @@
 extern "C" {
 #endif
 
-#include <system/types/null.h>
 #include <system/types/size_t.h>
 #include <system/types/off_t.h>
 #include <system/types/mode_t.h>
@@ -90,18 +89,23 @@ extern "C" {
 #define MCL_CURRENT                             0x0001
 #define MCL_FUTURE                              0x0002
 
+#define MAP_FAILED                              ( ( void * )0 )
+
+/*
 #define POSIX_MADV_NORMAL                       0x0000
-#define POSIX_MADV_RANDOM                       0x0001
-#define POSIX_MADV_SEQUENTIAL                   0x0002
-#define POSIX_MADV_WILLNEED                     0x0003
-#define POSIX_MADV_DONTNEED                     0x0004
-#define POSIX_TYPED_MEM_ALLOCATE                0x0005
-#define POSIX_TYPED_MEM_ALLOCATE_CONTIG         0x0006
-#define POSIX_TYPED_MEM_MAP_ALLOCATABLE         0x0007
+#define POSIX_MADV_RANDOM                       0x0000
+#define POSIX_MADV_SEQUENTIAL                   0x0000
+#define POSIX_MADV_WILLNEED                     0x0000
+#define POSIX_MADV_DONTNEED                     0x0000
+*/
+
+#define POSIX_TYPED_MEM_ALLOCATE                0x0000
+#define POSIX_TYPED_MEM_ALLOCATE_CONTIG         0x0000
+#define POSIX_TYPED_MEM_MAP_ALLOCATABLE         0x0000
 
 int     mlock( const void * addr, size_t len );
 int     mlockall( int flags );
-void *  mmap( void * addr, size_t len, int prot, int flags, int fildes, off_t off );
+void  * mmap( void * addr, size_t len, int prot, int flags, int fildes, off_t off );
 int     mprotect( void * addr, size_t len, int prot );
 int     msync( void * addr, size_t len, int flags );
 int     munlock( const void * addr, size_t len );
