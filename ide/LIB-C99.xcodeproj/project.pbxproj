@@ -22,7 +22,7 @@
 		05F57C3B17AC133A00DB4ACE /* isxdigit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isxdigit.c; sourceTree = "<group>"; };
 		05F57C3C17AC133A00DB4ACE /* tolower.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tolower.c; sourceTree = "<group>"; };
 		05F57C3D17AC133A00DB4ACE /* toupper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = toupper.c; sourceTree = "<group>"; };
-		05F57C3F17AC133A00DB4ACE /* __libc_errno.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __libc_errno.c; sourceTree = "<group>"; };
+		05F57C3F17AC133A00DB4ACE /* __errno.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __errno.c; sourceTree = "<group>"; };
 		05F57C4117AC133A00DB4ACE /* __fenv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __fenv.c; sourceTree = "<group>"; };
 		05F57C4217AC133A00DB4ACE /* feclearexcept.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = feclearexcept.c; sourceTree = "<group>"; };
 		05F57C4317AC133A00DB4ACE /* fegetenv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fegetenv.c; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 		05F57C3E17AC133A00DB4ACE /* errno */ = {
 			isa = PBXGroup;
 			children = (
-				05F57C3F17AC133A00DB4ACE /* __libc_errno.c */,
+				05F57C3F17AC133A00DB4ACE /* __errno.c */,
 			);
 			name = errno;
 			path = ../source/lib/c99/errno;
