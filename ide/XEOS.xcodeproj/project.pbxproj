@@ -3124,6 +3124,17 @@
 		05959ECF17ABFFD50021435A /* struct_sockaddr_in6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_sockaddr_in6.h; sourceTree = "<group>"; };
 		05959ED017ABFFDD0021435A /* struct_ipv6_mreq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_ipv6_mreq.h; sourceTree = "<group>"; };
 		05959ED217AC00700021435A /* __netinet_in.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __netinet_in.c; sourceTree = "<group>"; };
+		05959ED317AC07E80021435A /* inet_addrstrlen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inet_addrstrlen.h; sourceTree = "<group>"; };
+		05959ED417AC07F20021435A /* inet6_addrstrlen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inet6_addrstrlen.h; sourceTree = "<group>"; };
+		05959F1517AC09B70021435A /* socklen_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = socklen_t.h; sourceTree = "<group>"; };
+		05959F1717AC0A800021435A /* htonl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = htonl.c; sourceTree = "<group>"; };
+		05959F1817AC0A800021435A /* htons.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = htons.c; sourceTree = "<group>"; };
+		05959F1917AC0A800021435A /* inet_addr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inet_addr.c; sourceTree = "<group>"; };
+		05959F1A17AC0A800021435A /* inet_ntoa.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inet_ntoa.c; sourceTree = "<group>"; };
+		05959F1B17AC0A800021435A /* inet_ntop.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inet_ntop.c; sourceTree = "<group>"; };
+		05959F1C17AC0A800021435A /* inet_pton.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inet_pton.c; sourceTree = "<group>"; };
+		05959F1D17AC0A800021435A /* ntohl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ntohl.c; sourceTree = "<group>"; };
+		05959F1E17AC0A800021435A /* ntohs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ntohs.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -9959,6 +9970,7 @@
 			children = (
 				050BD63C17AA9934004D14C5 /* include */,
 				050BD66A17AA9934004D14C5 /* Makefile */,
+				05959F1617AC0A3F0021435A /* arpa_inet */,
 				05959ED117AC00700021435A /* netinet_in */,
 				05959EC017ABFACA0021435A /* aio */,
 				050BD67A17AA9934004D14C5 /* sched */,
@@ -10418,6 +10430,9 @@
 				05959ECE17ABFFC90021435A /* struct_in6_addr.h */,
 				05959ECF17ABFFD50021435A /* struct_sockaddr_in6.h */,
 				05959ED017ABFFDD0021435A /* struct_ipv6_mreq.h */,
+				05959ED317AC07E80021435A /* inet_addrstrlen.h */,
+				05959ED417AC07F20021435A /* inet6_addrstrlen.h */,
+				05959F1517AC09B70021435A /* socklen_t.h */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -10633,6 +10648,21 @@
 				05959ED217AC00700021435A /* __netinet_in.c */,
 			);
 			path = netinet_in;
+			sourceTree = "<group>";
+		};
+		05959F1617AC0A3F0021435A /* arpa_inet */ = {
+			isa = PBXGroup;
+			children = (
+				05959F1717AC0A800021435A /* htonl.c */,
+				05959F1817AC0A800021435A /* htons.c */,
+				05959F1D17AC0A800021435A /* ntohl.c */,
+				05959F1E17AC0A800021435A /* ntohs.c */,
+				05959F1917AC0A800021435A /* inet_addr.c */,
+				05959F1A17AC0A800021435A /* inet_ntoa.c */,
+				05959F1B17AC0A800021435A /* inet_ntop.c */,
+				05959F1C17AC0A800021435A /* inet_pton.c */,
+			);
+			path = arpa_inet;
 			sourceTree = "<group>";
 		};
 		05A8F94E1625690B000484EB /* yasm */ = {

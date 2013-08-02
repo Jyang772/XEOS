@@ -68,7 +68,28 @@
 extern "C" {
 #endif
 
+#include <netinet/in.h>
+#include <inttypes.h>
 
+#include <system/types/in_port_t.h>
+#include <system/types/in_addr_t.h>
+#include <system/types/struct_in_addr.h>
+#include <system/types/uint32_t.h>
+#include <system/types/uint16_t.h>
+#include <system/types/socklen_t.h>
+
+#include <system/types/inet_addrstrlen.h>
+#include <system/types/inet6_addrstrlen.h>
+
+uint32_t htonl( uint32_t hostlong );
+uint16_t htons( uint16_t hostshort );
+uint32_t ntohl( uint32_t netlong );
+uint16_t ntohs( uint16_t netshort );
+
+in_addr_t       inet_addr( const char * cp );
+char          * inet_ntoa( struct in_addr in );
+const char    * inet_ntop( int af, const void * restrict src, char * restrict dst, socklen_t size );
+int             inet_pton( int af, const char * restrict src, void * restrict dst );
 
 #ifdef __cplusplus
 }
