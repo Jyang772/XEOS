@@ -68,7 +68,28 @@
 extern "C" {
 #endif
 
+#define MAGIC           "070707"
 
+#define C_IRUSR         0x0000400
+#define C_IWUSR         0x0000200
+#define C_IXUSR         0x0000100
+#define C_IRGRP         0x0000040
+#define C_IWGRP         0x0000020
+#define C_IXGRP         0x0000010
+#define C_IROTH         0x0000004
+#define C_IWOTH         0x0000002
+#define C_IXOTH         0x0000001
+#define C_ISUID         0x0004000
+#define C_ISGID         0x0002000
+#define C_ISVTX         0x0001000
+#define C_ISDIR         0x0040000
+#define C_ISFIFO        0x0010000
+#define C_ISREG         0x0100000
+#define C_ISBLK         0x0060000
+#define C_ISCHR         0x0020000
+#define C_ISCTG         0x0110000
+#define C_ISLNK         0x0120000
+#define C_ISSOCK        0x0140000
 
 #ifdef __cplusplus
 }
