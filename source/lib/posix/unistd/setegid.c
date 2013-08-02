@@ -63,9 +63,9 @@
 
 #include <unistd.h>
 
-int chroot( const char * path )
+int setegid( gid_t gid )
 {
-    ( void )path;
+    ( void )gid;
     
     return 0;
 }

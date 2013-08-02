@@ -63,9 +63,12 @@
 
 #include <unistd.h>
 
-void * sbrk( intptr_t delta )
+int faccessat( int fd, const char * path, int amode, int flag )
 {
-    ( void )delta;
+    ( void )fd;
+    ( void )path;
+    ( void )amode;
+    ( void )flag;
     
-    return NULL;
+    return 0;
 }

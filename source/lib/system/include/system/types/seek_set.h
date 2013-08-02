@@ -61,11 +61,17 @@
 
 /* $Id$ */
 
-#include <unistd.h>
+/*!
+ * @header          seek_set.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-int usleep( useconds_t useconds )
-{
-    ( void )useconds;
-    
-    return 0;
-}
+#ifndef __LIBSYSTEM_TYPES_SEEK_SET_H__
+#define __LIBSYSTEM_TYPES_SEEK_SET_H__
+
+#include <system/types/__private/stdint.h>
+
+#define SEEK_SET 1
+
+#endif /* __LIBSYSTEM_TYPES_SEEK_SET_H__ */

@@ -63,11 +63,13 @@
 
 #include <unistd.h>
 
-int pthread_atfork( void ( * prepare )( void ), void ( * parent )( void ), void ( * child )( void ) )
+int fchownat( int fd, const char * path, uid_t owner, gid_t group, int flag )
 {
-    ( void )prepare;
-    ( void )parent;
-    ( void )child;
+    ( void )fd;
+    ( void )path;
+    ( void )owner;
+    ( void )group;
+    ( void )flag;
     
     return 0;
 }

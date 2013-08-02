@@ -63,7 +63,13 @@
 
 #include <unistd.h>
 
-int getdtablesize( void )
+int linkat( int fd1, const char * path1, int fd2, const char * path2, int flag )
 {
+    ( void )fd1;
+    ( void )path1;
+    ( void )fd2;
+    ( void )path2;
+    ( void )flag;
+    
     return 0;
 }

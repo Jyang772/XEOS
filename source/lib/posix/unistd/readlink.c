@@ -63,7 +63,7 @@
 
 #include <unistd.h>
 
-int readlink( const char * path, char * buf, size_t len )
+int readlink( const char * restrict path, char * restrict buf, size_t len )
 {
     ( void )path;
     ( void )buf;

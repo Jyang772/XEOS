@@ -63,9 +63,11 @@
 
 #include <unistd.h>
 
-char * getwd( char * buf )
+int symlinkat( const char * path1, int fd, const char * path2 )
 {
-    ( void )buf;
+    ( void )path1;
+    ( void )fd;
+    ( void )path2;
     
-    return NULL;
+    return 0;
 }

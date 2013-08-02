@@ -63,7 +63,12 @@
 
 #include <unistd.h>
 
-pid_t vfork( void )
+ssize_t readlinkat( int fd, const char * restrict path, char * restrict buf, size_t bufsize )
 {
+    ( void )fd;
+    ( void )path;
+    ( void )buf;
+    ( void )bufsize;
+    
     return 0;
 }

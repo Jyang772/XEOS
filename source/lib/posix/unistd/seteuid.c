@@ -63,9 +63,9 @@
 
 #include <unistd.h>
 
-char * cuserid( char * s )
+int seteuid( uid_t uid )
 {
-    ( void )s;
+    ( void )uid;
     
-    return NULL;
+    return 0;
 }

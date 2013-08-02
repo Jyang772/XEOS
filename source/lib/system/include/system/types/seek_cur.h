@@ -61,11 +61,17 @@
 
 /* $Id$ */
 
-#include <unistd.h>
+/*!
+ * @header          seek_cur.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-char * getpass( const char * prompt )
-{
-    ( void )prompt;
-    
-    return NULL;
-}
+#ifndef __LIBSYSTEM_TYPES_SEEK_CUR_H__
+#define __LIBSYSTEM_TYPES_SEEK_CUR_H__
+
+#include <system/types/__private/stdint.h>
+
+#define SEEK_CUR 2
+
+#endif /* __LIBSYSTEM_TYPES_SEEK_CUR_H__ */

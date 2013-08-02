@@ -63,10 +63,11 @@
 
 #include <unistd.h>
 
-useconds_t ualarm( useconds_t value, useconds_t interval )
+int unlinkat( int fd, const char * path, int flag )
 {
-    ( void )value;
-    ( void )interval;
+    ( void )fd;
+    ( void )path;
+    ( void )flag;
     
     return 0;
 }

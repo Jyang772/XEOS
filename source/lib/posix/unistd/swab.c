@@ -63,7 +63,7 @@
 
 #include <unistd.h>
 
-void swab( const void * from, void * to, ssize_t n )
+void swab( const void * restrict from, void * restrict to, ssize_t n )
 {
     ( void )from;
     ( void )to;

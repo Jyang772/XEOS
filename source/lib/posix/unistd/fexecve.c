@@ -63,9 +63,11 @@
 
 #include <unistd.h>
 
-int brk( void * addr )
+int fexecve( int fd, char * const argv[], char * const envp[] )
 {
-    ( void )addr;
+    ( void )fd;
+    ( void )argv;
+    ( void )envp;
     
     return 0;
 }
