@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_attr_getinheritsched( const pthread_attr_t * attr, int * inheritsched )
+int pthread_attr_getinheritsched( const pthread_attr_t * restrict attr, int * restrict inheritsched )
 {
     ( void )attr;
     ( void )inheritsched;

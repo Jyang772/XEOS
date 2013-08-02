@@ -63,10 +63,10 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_rwlock_timedrdlock( pthread_rwlock_t * restrict rwlock, const struct timespec * restrict abs_timeout )
 {
-    ( void )attr;
-    ( void )contentionscope;
+    ( void )rwlock;
+    ( void )abs_timeout;
     
     return 0;
 }

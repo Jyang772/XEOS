@@ -63,10 +63,11 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_atfork( void ( * prepare )( void ), void ( * parent )( void ), void ( * child )( void ) )
 {
-    ( void )attr;
-    ( void )contentionscope;
+    ( void )prepare;
+    ( void )parent;
+    ( void )child;
     
     return 0;
 }

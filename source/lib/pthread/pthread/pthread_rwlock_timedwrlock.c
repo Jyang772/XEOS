@@ -63,10 +63,10 @@
 
 #include <pthread.h>
 
-int pthread_attr_setstackaddr( pthread_attr_t * attr, void * stackaddr )
+int pthread_rwlock_timedwrlock( pthread_rwlock_t * restrict rwlock, const struct timespec * restrict abs_timeout )
 {
-    ( void )attr;
-    ( void )stackaddr;
+    ( void )rwlock;
+    ( void )abs_timeout;
     
     return 0;
 }

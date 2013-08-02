@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_attr_getschedpolicy( const pthread_attr_t * attr, int * policy )
+int pthread_attr_getschedpolicy( const pthread_attr_t * restrict attr, int * restrict policy )
 {
     ( void )attr;
     ( void )policy;

@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_cond_timedwait( pthread_cond_t * cond,  pthread_mutex_t * mutex, const struct timespec * abstime )
+int pthread_cond_timedwait( pthread_cond_t * restrict cond,  pthread_mutex_t * restrict mutex, const struct timespec * restrict abstime )
 {
     ( void )cond;
     ( void )mutex;

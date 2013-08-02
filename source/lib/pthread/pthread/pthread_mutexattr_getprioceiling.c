@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_mutexattr_getprioceiling( const pthread_mutexattr_t * attr, int * prioceiling )
+int pthread_mutexattr_getprioceiling( const pthread_mutexattr_t * restrict attr, int * restrict prioceiling )
 {
     ( void )attr;
     ( void )prioceiling;

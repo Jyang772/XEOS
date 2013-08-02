@@ -63,10 +63,9 @@
 
 #include <pthread.h>
 
-int pthread_attr_getstackaddr( const pthread_attr_t * attr, void ** stackaddr )
+int pthread_barrier_destroy( pthread_barrier_t * barrier )
 {
-    ( void )attr;
-    ( void )stackaddr;
+    ( void )barrier;
     
     return 0;
 }

@@ -63,10 +63,10 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_mutex_timedlock( pthread_mutex_t * restrict mutex, const struct timespec * restrict abs_timeout )
 {
-    ( void )attr;
-    ( void )contentionscope;
+    ( void )mutex;
+    ( void )abs_timeout;
     
     return 0;
 }

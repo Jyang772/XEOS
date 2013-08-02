@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_mutexattr_gettype( const pthread_mutexattr_t * attr, int * type )
+int pthread_mutexattr_gettype( const pthread_mutexattr_t * restrict attr, int * restrict type )
 {
     ( void )attr;
     ( void )type;

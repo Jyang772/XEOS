@@ -63,10 +63,11 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_attr_setstack( pthread_attr_t * attr, void * stackaddr, size_t stacksize )
 {
     ( void )attr;
-    ( void )contentionscope;
+    ( void )stackaddr;
+    ( void )stacksize;
     
     return 0;
 }

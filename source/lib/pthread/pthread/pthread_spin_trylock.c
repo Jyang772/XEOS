@@ -63,10 +63,9 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_spin_trylock( pthread_spinlock_t * lock )
 {
-    ( void )attr;
-    ( void )contentionscope;
+    ( void )lock;
     
     return 0;
 }

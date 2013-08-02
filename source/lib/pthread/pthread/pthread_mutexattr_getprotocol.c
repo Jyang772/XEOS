@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_mutexattr_getprotocol( const pthread_mutexattr_t * attr, int * protocol )
+int pthread_mutexattr_getprotocol( const pthread_mutexattr_t * restrict attr, int * restrict protocol )
 {
     ( void )attr;
     ( void )protocol;

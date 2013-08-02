@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_getschedparam( pthread_t thread, int * policy, struct sched_param * param )
+int pthread_getschedparam( pthread_t thread, int * restrict policy, struct sched_param * restrict param )
 {
     ( void )thread;
     ( void )policy;

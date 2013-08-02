@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_create( pthread_t * thread, const pthread_attr_t * attr, void * ( * start_routine )( void * ), void * arg )
+int pthread_create( pthread_t * restrict thread, const pthread_attr_t * restrict attr, void * ( * start_routine )( void * ), void * restrict arg )
 {
     ( void )thread;
     ( void )attr;

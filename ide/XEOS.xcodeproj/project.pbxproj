@@ -2767,7 +2767,6 @@
 		050BD6F717AA9934004D14C5 /* pthread_attr_getschedparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getschedparam.c; sourceTree = "<group>"; };
 		050BD6F817AA9934004D14C5 /* pthread_attr_getschedpolicy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getschedpolicy.c; sourceTree = "<group>"; };
 		050BD6F917AA9934004D14C5 /* pthread_attr_getscope.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getscope.c; sourceTree = "<group>"; };
-		050BD6FA17AA9934004D14C5 /* pthread_attr_getstackaddr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getstackaddr.c; sourceTree = "<group>"; };
 		050BD6FB17AA9934004D14C5 /* pthread_attr_getstacksize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getstacksize.c; sourceTree = "<group>"; };
 		050BD6FC17AA9934004D14C5 /* pthread_attr_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_init.c; sourceTree = "<group>"; };
 		050BD6FD17AA9934004D14C5 /* pthread_attr_setdetachstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setdetachstate.c; sourceTree = "<group>"; };
@@ -2776,7 +2775,6 @@
 		050BD70017AA9934004D14C5 /* pthread_attr_setschedparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setschedparam.c; sourceTree = "<group>"; };
 		050BD70117AA9934004D14C5 /* pthread_attr_setschedpolicy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setschedpolicy.c; sourceTree = "<group>"; };
 		050BD70217AA9934004D14C5 /* pthread_attr_setscope.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setscope.c; sourceTree = "<group>"; };
-		050BD70317AA9934004D14C5 /* pthread_attr_setstackaddr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setstackaddr.c; sourceTree = "<group>"; };
 		050BD70417AA9934004D14C5 /* pthread_attr_setstacksize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setstacksize.c; sourceTree = "<group>"; };
 		050BD70517AA9934004D14C5 /* pthread_cancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cancel.c; sourceTree = "<group>"; };
 		050BD70617AA9934004D14C5 /* pthread_cleanup_pop.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cleanup_pop.c; sourceTree = "<group>"; };
@@ -3084,6 +3082,30 @@
 		05959EA417AB39450021435A /* seteuid.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = seteuid.c; sourceTree = "<group>"; };
 		05959EA517AB39450021435A /* symlinkat.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = symlinkat.c; sourceTree = "<group>"; };
 		05959EA617AB39450021435A /* unlinkat.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = unlinkat.c; sourceTree = "<group>"; };
+		05959EA717AB43BE0021435A /* pthread_atfork.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_atfork.c; sourceTree = "<group>"; };
+		05959EA817AB43BE0021435A /* pthread_attr_getstack.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getstack.c; sourceTree = "<group>"; };
+		05959EA917AB43BE0021435A /* pthread_attr_setstack.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setstack.c; sourceTree = "<group>"; };
+		05959EAA17AB43BE0021435A /* pthread_barrier_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrier_destroy.c; sourceTree = "<group>"; };
+		05959EAB17AB43BE0021435A /* pthread_barrier_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrier_init.c; sourceTree = "<group>"; };
+		05959EAC17AB43BE0021435A /* pthread_barrier_wait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrier_wait.c; sourceTree = "<group>"; };
+		05959EAD17AB43BE0021435A /* pthread_barrierattr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_destroy.c; sourceTree = "<group>"; };
+		05959EAE17AB43BE0021435A /* pthread_barrierattr_getpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_getpshared.c; sourceTree = "<group>"; };
+		05959EAF17AB43BE0021435A /* pthread_barrierattr_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_init.c; sourceTree = "<group>"; };
+		05959EB017AB43BE0021435A /* pthread_barrierattr_setpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_setpshared.c; sourceTree = "<group>"; };
+		05959EB117AB43BE0021435A /* pthread_condattr_getclock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_getclock.c; sourceTree = "<group>"; };
+		05959EB217AB43BE0021435A /* pthread_condattr_setclock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_setclock.c; sourceTree = "<group>"; };
+		05959EB317AB43BE0021435A /* pthread_getcpuclockid.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_getcpuclockid.c; sourceTree = "<group>"; };
+		05959EB417AB43BE0021435A /* pthread_mutex_consistent.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_consistent.c; sourceTree = "<group>"; };
+		05959EB517AB43BE0021435A /* pthread_mutex_timedlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_timedlock.c; sourceTree = "<group>"; };
+		05959EB617AB43BE0021435A /* pthread_mutexattr_getrobust.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_getrobust.c; sourceTree = "<group>"; };
+		05959EB717AB43BE0021435A /* pthread_mutexattr_setrobust.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_setrobust.c; sourceTree = "<group>"; };
+		05959EB817AB43BE0021435A /* pthread_rwlock_timedrdlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_timedrdlock.c; sourceTree = "<group>"; };
+		05959EB917AB43BE0021435A /* pthread_rwlock_timedwrlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_timedwrlock.c; sourceTree = "<group>"; };
+		05959EBA17AB43BE0021435A /* pthread_spin_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_destroy.c; sourceTree = "<group>"; };
+		05959EBB17AB43BE0021435A /* pthread_spin_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_init.c; sourceTree = "<group>"; };
+		05959EBC17AB43BE0021435A /* pthread_spin_lock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_lock.c; sourceTree = "<group>"; };
+		05959EBD17AB43BE0021435A /* pthread_spin_trylock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_trylock.c; sourceTree = "<group>"; };
+		05959EBE17AB43BE0021435A /* pthread_spin_unlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_unlock.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -10120,6 +10142,30 @@
 		050BD6F217AA9934004D14C5 /* pthread */ = {
 			isa = PBXGroup;
 			children = (
+				05959EA717AB43BE0021435A /* pthread_atfork.c */,
+				05959EA817AB43BE0021435A /* pthread_attr_getstack.c */,
+				05959EA917AB43BE0021435A /* pthread_attr_setstack.c */,
+				05959EAA17AB43BE0021435A /* pthread_barrier_destroy.c */,
+				05959EAB17AB43BE0021435A /* pthread_barrier_init.c */,
+				05959EAC17AB43BE0021435A /* pthread_barrier_wait.c */,
+				05959EAD17AB43BE0021435A /* pthread_barrierattr_destroy.c */,
+				05959EAE17AB43BE0021435A /* pthread_barrierattr_getpshared.c */,
+				05959EAF17AB43BE0021435A /* pthread_barrierattr_init.c */,
+				05959EB017AB43BE0021435A /* pthread_barrierattr_setpshared.c */,
+				05959EB117AB43BE0021435A /* pthread_condattr_getclock.c */,
+				05959EB217AB43BE0021435A /* pthread_condattr_setclock.c */,
+				05959EB317AB43BE0021435A /* pthread_getcpuclockid.c */,
+				05959EB417AB43BE0021435A /* pthread_mutex_consistent.c */,
+				05959EB517AB43BE0021435A /* pthread_mutex_timedlock.c */,
+				05959EB617AB43BE0021435A /* pthread_mutexattr_getrobust.c */,
+				05959EB717AB43BE0021435A /* pthread_mutexattr_setrobust.c */,
+				05959EB817AB43BE0021435A /* pthread_rwlock_timedrdlock.c */,
+				05959EB917AB43BE0021435A /* pthread_rwlock_timedwrlock.c */,
+				05959EBA17AB43BE0021435A /* pthread_spin_destroy.c */,
+				05959EBB17AB43BE0021435A /* pthread_spin_init.c */,
+				05959EBC17AB43BE0021435A /* pthread_spin_lock.c */,
+				05959EBD17AB43BE0021435A /* pthread_spin_trylock.c */,
+				05959EBE17AB43BE0021435A /* pthread_spin_unlock.c */,
 				050BD6F317AA9934004D14C5 /* pthread_attr_destroy.c */,
 				050BD6F417AA9934004D14C5 /* pthread_attr_getdetachstate.c */,
 				050BD6F517AA9934004D14C5 /* pthread_attr_getguardsize.c */,
@@ -10127,7 +10173,6 @@
 				050BD6F717AA9934004D14C5 /* pthread_attr_getschedparam.c */,
 				050BD6F817AA9934004D14C5 /* pthread_attr_getschedpolicy.c */,
 				050BD6F917AA9934004D14C5 /* pthread_attr_getscope.c */,
-				050BD6FA17AA9934004D14C5 /* pthread_attr_getstackaddr.c */,
 				050BD6FB17AA9934004D14C5 /* pthread_attr_getstacksize.c */,
 				050BD6FC17AA9934004D14C5 /* pthread_attr_init.c */,
 				050BD6FD17AA9934004D14C5 /* pthread_attr_setdetachstate.c */,
@@ -10136,7 +10181,6 @@
 				050BD70017AA9934004D14C5 /* pthread_attr_setschedparam.c */,
 				050BD70117AA9934004D14C5 /* pthread_attr_setschedpolicy.c */,
 				050BD70217AA9934004D14C5 /* pthread_attr_setscope.c */,
-				050BD70317AA9934004D14C5 /* pthread_attr_setstackaddr.c */,
 				050BD70417AA9934004D14C5 /* pthread_attr_setstacksize.c */,
 				050BD70517AA9934004D14C5 /* pthread_cancel.c */,
 				050BD70617AA9934004D14C5 /* pthread_cleanup_pop.c */,

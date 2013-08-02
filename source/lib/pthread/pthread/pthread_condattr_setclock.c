@@ -63,10 +63,10 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_condattr_setclock( pthread_condattr_t * attr, clockid_t clock_id )
 {
     ( void )attr;
-    ( void )contentionscope;
+    ( void )clock_id;
     
     return 0;
 }

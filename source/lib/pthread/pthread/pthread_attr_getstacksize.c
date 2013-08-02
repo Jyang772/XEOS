@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_attr_getstacksize( const pthread_attr_t * attr, size_t * stacksize )
+int pthread_attr_getstacksize( const pthread_attr_t * restrict attr, size_t * restrict stacksize )
 {
     ( void )attr;
     ( void )stacksize;

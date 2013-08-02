@@ -63,10 +63,9 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_mutex_consistent( pthread_mutex_t * mutex )
 {
-    ( void )attr;
-    ( void )contentionscope;
+    ( void )mutex;
     
     return 0;
 }

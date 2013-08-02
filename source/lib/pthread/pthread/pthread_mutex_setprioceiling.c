@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_mutex_setprioceiling( pthread_mutex_t * mutex, int prioceiling )
+int pthread_mutex_setprioceiling( pthread_mutex_t * restrict mutex, int prioceiling, int * restrict old_ceiling );
 {
     ( void )mutex;
     ( void )prioceiling;

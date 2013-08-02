@@ -63,10 +63,10 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_barrierattr_setpshared( pthread_barrierattr_t * attr, int pshared )
 {
     ( void )attr;
-    ( void )contentionscope;
+    ( void )pshared;
     
     return 0;
 }

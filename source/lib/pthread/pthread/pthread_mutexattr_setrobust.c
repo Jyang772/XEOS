@@ -63,10 +63,10 @@
 
 #include <pthread.h>
 
-int pthread_attr_getscope( const pthread_attr_t * restrict attr, int * restrict contentionscope )
+int pthread_mutexattr_setrobust( pthread_mutexattr_t * attr, int robust )
 {
     ( void )attr;
-    ( void )contentionscope;
+    ( void )robust;
     
     return 0;
 }

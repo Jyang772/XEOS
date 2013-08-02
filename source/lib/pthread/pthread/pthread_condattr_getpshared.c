@@ -63,7 +63,7 @@
 
 #include <pthread.h>
 
-int pthread_condattr_getpshared( const pthread_condattr_t * attr, int * pshared )
+int pthread_condattr_getpshared( const pthread_condattr_t * restrict attr, int * restrict pshared )
 {
     ( void )attr;
     ( void )pshared;
