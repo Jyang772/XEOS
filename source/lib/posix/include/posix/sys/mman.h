@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_SYS_MMAN_H__
-#define __LIBPOSIX_SYS_MMAN_H__
+#ifndef __XEOS_LIB_POSIX_SYS_MMAN_H__
+#define __XEOS_LIB_POSIX_SYS_MMAN_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -122,4 +122,4 @@ int     shm_unlink( const char * name );
 }
 #endif
 
-#endif /* __LIBPOSIX_SYS_MMAN_H__ */
+#endif /* __XEOS_LIB_POSIX_SYS_MMAN_H__ */

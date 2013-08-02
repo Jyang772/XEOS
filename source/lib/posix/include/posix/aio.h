@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_AIO_H__
-#define __LIBPOSIX_AIO_H__
+#ifndef __XEOS_LIB_POSIX_AIO_H__
+#define __XEOS_LIB_POSIX_AIO_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -104,4 +104,4 @@ int     lio_listio( int mode, struct aiocb * restrict const list[ restrict ], in
 }
 #endif
 
-#endif /* __LIBPOSIX_AIO_H__ */
+#endif /* __XEOS_LIB_POSIX_AIO_H__ */

@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBSYSTEM_TYPES___PRIVATE_STDINT_H__
-#define __LIBSYSTEM_TYPES___PRIVATE_STDINT_H__
+#ifndef __XEOS_LIB_SYSTEM_TYPES___PRIVATE_STDINT_H__
+#define __XEOS_LIB_SYSTEM_TYPES___PRIVATE_STDINT_H__
 
 typedef signed char         __XEOS_Int8;
 typedef signed short        __XEOS_Int16;
@@ -80,4 +80,4 @@ typedef unsigned short      __XEOS_UInt16;
 typedef unsigned int        __XEOS_UInt32;
 typedef unsigned long long  __XEOS_UInt64;
 
-#endif /* __LIBSYSTEM_TYPES___PRIVATE_STDINT_H__ */
+#endif /* __XEOS_LIB_SYSTEM_TYPES___PRIVATE_STDINT_H__ */

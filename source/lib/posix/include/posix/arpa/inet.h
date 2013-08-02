@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_ARPA_INET_H__
-#define __LIBPOSIX_ARPA_INET_H__
+#ifndef __XEOS_LIB_POSIX_ARPA_INET_H__
+#define __XEOS_LIB_POSIX_ARPA_INET_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -95,4 +95,4 @@ int             inet_pton( int af, const char * restrict src, void * restrict ds
 }
 #endif
 
-#endif /* __LIBPOSIX_ARPA_INET_H__ */
+#endif /* __XEOS_LIB_POSIX_ARPA_INET_H__ */

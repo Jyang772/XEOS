@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBSYSTEM_TYPES_IPV6_MREQ_H__
-#define __LIBSYSTEM_TYPES_IPV6_MREQ_H__
+#ifndef __XEOS_LIB_SYSTEM_TYPES_IPV6_MREQ_H__
+#define __XEOS_LIB_SYSTEM_TYPES_IPV6_MREQ_H__
 
 #include <system/types/__private/stdint.h>
 #include <system/types/struct_in6_addr.h>
@@ -79,4 +79,4 @@ struct ipv6_mreq
     unsigned int    ipv6mr_interface;
 };
 
-#endif /* __LIBSYSTEM_TYPES_IPV6_MREQ_H__ */
+#endif /* __XEOS_LIB_SYSTEM_TYPES_IPV6_MREQ_H__ */

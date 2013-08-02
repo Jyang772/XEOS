@@ -67,11 +67,11 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBSYSTEM_TYPES_INET_ADDRSTRLEN_H__
-#define __LIBSYSTEM_TYPES_INET_ADDRSTRLEN_H__
+#ifndef __XEOS_LIB_SYSTEM_TYPES_INET_ADDRSTRLEN_H__
+#define __XEOS_LIB_SYSTEM_TYPES_INET_ADDRSTRLEN_H__
 
 #include <system/types/__private/stdint.h>
 
 #define INET_ADDRSTRLEN 16
 
-#endif /* __LIBSYSTEM_TYPES_INET_ADDRSTRLEN_H__ */
+#endif /* __XEOS_LIB_SYSTEM_TYPES_INET_ADDRSTRLEN_H__ */

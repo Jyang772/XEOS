@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBACPI_ACPICA_CLANG_WARNINGS_H__
-#define __LIBACPI_ACPICA_CLANG_WARNINGS_H__
+#ifndef __XEOS_LIB_ACPI_ACPICA_CLANG_WARNINGS_H__
+#define __XEOS_LIB_ACPI_ACPICA_CLANG_WARNINGS_H__
 
 #ifdef __clang__
 
@@ -85,4 +85,4 @@
 
 #endif
 
-#endif /* __LIBACPI_ACPICA_CLANG_WARNINGS_H__ */
+#endif /* __XEOS_LIB_ACPI_ACPICA_CLANG_WARNINGS_H__ */

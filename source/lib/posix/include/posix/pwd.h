@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_PWD_H__
-#define __LIBPOSIX_PWD_H__
+#ifndef __XEOS_LIB_POSIX_PWD_H__
+#define __XEOS_LIB_POSIX_PWD_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,4 +74,4 @@ extern "C" {
 }
 #endif
 
-#endif /* __LIBPOSIX_PWD_H__ */
+#endif /* __XEOS_LIB_POSIX_PWD_H__ */

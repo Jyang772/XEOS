@@ -67,11 +67,11 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBSYSTEM_TYPES_UINT16_T_H__
-#define __LIBSYSTEM_TYPES_UINT16_T_H__
+#ifndef __XEOS_LIB_SYSTEM_TYPES_UINT16_T_H__
+#define __XEOS_LIB_SYSTEM_TYPES_UINT16_T_H__
 
 #include <system/types/__private/stdint.h>
 
 typedef __XEOS_UInt16 uint16_t;
 
-#endif /* __LIBSYSTEM_TYPES_UINT16_T_H__ */
+#endif /* __XEOS_LIB_SYSTEM_TYPES_UINT16_T_H__ */

@@ -67,8 +67,8 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __LIBSYSTEM_TYPES_PTHREAD_ATTR_T_H__
-#define __LIBSYSTEM_TYPES_PTHREAD_ATTR_T_H__
+#ifndef __XEOS_LIB_SYSTEM_TYPES_PTHREAD_ATTR_T_H__
+#define __XEOS_LIB_SYSTEM_TYPES_PTHREAD_ATTR_T_H__
 
 #include <system/types/__private/stdint.h>
 
@@ -78,4 +78,4 @@ typedef struct
 }
 pthread_attr_t;
 
-#endif /* __LIBSYSTEM_TYPES_PTHREAD_ATTR_T_H__ */
+#endif /* __XEOS_LIB_SYSTEM_TYPES_PTHREAD_ATTR_T_H__ */

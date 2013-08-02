@@ -61,8 +61,8 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_FNMATCH_H__
-#define __LIBPOSIX_FNMATCH_H__
+#ifndef __XEOS_LIB_POSIX_FNMATCH_H__
+#define __XEOS_LIB_POSIX_FNMATCH_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,4 +74,4 @@ extern "C" {
 }
 #endif
 
-#endif /* __LIBPOSIX_FNMATCH_H__ */
+#endif /* __XEOS_LIB_POSIX_FNMATCH_H__ */
