@@ -72,7 +72,7 @@ extern "C" {
 
 #ifdef _POSIX_C_SOURCE
 
-
+/* Nothing here - The POSIX standard has no additional definition */
 
 #endif /* _POSIX_C_SOURCE */
 
