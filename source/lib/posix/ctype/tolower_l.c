@@ -63,7 +63,7 @@
 
 #include <ctype.h>
 
-int isxdigit_l( int c, locale_t l )
+int tolower_l( int c, locale_t l )
 {
     ( void )c;
     ( void )l;
