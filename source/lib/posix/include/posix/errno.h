@@ -72,7 +72,84 @@ extern "C" {
 
 #ifdef _POSIX_C_SOURCE
 
-
+#define E2BIG               0x0004
+#define EACCES              0x0005
+#define EADDRINUSE          0x0006
+#define EADDRNOTAVAIL       0x0007
+#define EAFNOSUPPORT        0x0008
+#define EAGAIN              0x0009
+#define EALREADY            0x000A
+#define EBADF               0x000B
+#define EBADMSG             0x000C
+#define EBUSY               0x000D
+#define ECANCELED           0x000E
+#define ECHILD              0x000F
+#define ECONNABORTED        0x0010
+#define ECONNREFUSED        0x0011
+#define ECONNRESET          0x0012
+#define EDEADLK             0x0013
+#define EDESTADDRREQ        0x0014
+#define EDQUOT              0x0015
+#define EEXIST              0x0016
+#define EFAULT              0x0017
+#define EFBIG               0x0018
+#define EHOSTUNREACH        0x0019
+#define EIDRM               0x001A
+#define EINPROGRESS         0x001B
+#define EINTR               0x001C
+#define EINVAL              0x001D
+#define EIO                 0x001E
+#define EISCONN             0x001F
+#define EISDIR              0x0020
+#define ELOOP               0x0021
+#define EMFILE              0x0022
+#define EMLINK              0x0023
+#define EMSGSIZE            0x0024
+#define EMULTIHOP           0x0025
+#define ENAMETOOLONG        0x0026
+#define ENETDOWN            0x0027
+#define ENETRESET           0x0028
+#define ENETUNREACH         0x0029
+#define ENFILE              0x002A
+#define ENOBUFS             0x002B
+#define ENODATA             0x002C
+#define ENODEV              0x002D
+#define ENOENT              0x002E
+#define ENOEXEC             0x002F
+#define ENOLCK              0x0030
+#define ENOLINK             0x0031
+#define ENOMEM              0x0032
+#define ENOMSG              0x0033
+#define ENOPROTOOPT         0x0034
+#define ENOSPC              0x0035
+#define ENOSR               0x0036
+#define ENOSTR              0x0037
+#define ENOSYS              0x0038
+#define ENOTCONN            0x0039
+#define ENOTDIR             0x003A
+#define ENOTEMPTY           0x003B
+#define ENOTRECOVERABL      0x003C
+#define ENOTSOCK            0x003D
+#define ENOTSUP             0x003E
+#define ENOTTY              0x003F
+#define ENXIO               0x0040
+#define EOPNOTSUPP          0x0041
+#define EOVERFLOW           0x0042
+#define EOWNERDEAD          0x0043
+#define EPERM               0x0044
+#define EPIPE               0x0045
+#define EPROTO              0x0046
+#define EPROTONOSUPPOR      0x0047
+#define EPROTOTYPE          0x0048
+#define EROFS               0x0049
+#define ESPIPE              0x004A
+#define ESRCH               0x004B
+#define ESTALE              0x004C
+#define ETIME               0x004D
+#define ETIMEDOUT           0x004E
+#define ETXTBSY             0x004F
+#define EWOULDBLOCK         0x0050
+#define EXDEV               0x0051
 
 #endif /* _POSIX_C_SOURCE */
 
