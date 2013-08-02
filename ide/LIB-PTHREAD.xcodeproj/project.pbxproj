@@ -1,0 +1,316 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05F57EB317AC13A900DB4ACE /* pthread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pthread.h; sourceTree = "<group>"; };
+		05F57EB417AC13A900DB4ACE /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/pthread/Makefile; sourceTree = "<group>"; };
+		05F57EB617AC13A900DB4ACE /* pthread_atfork.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_atfork.c; sourceTree = "<group>"; };
+		05F57EB717AC13A900DB4ACE /* pthread_attr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_destroy.c; sourceTree = "<group>"; };
+		05F57EB817AC13A900DB4ACE /* pthread_attr_getdetachstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getdetachstate.c; sourceTree = "<group>"; };
+		05F57EB917AC13A900DB4ACE /* pthread_attr_getguardsize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getguardsize.c; sourceTree = "<group>"; };
+		05F57EBA17AC13A900DB4ACE /* pthread_attr_getinheritsched.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getinheritsched.c; sourceTree = "<group>"; };
+		05F57EBB17AC13A900DB4ACE /* pthread_attr_getschedparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getschedparam.c; sourceTree = "<group>"; };
+		05F57EBC17AC13A900DB4ACE /* pthread_attr_getschedpolicy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getschedpolicy.c; sourceTree = "<group>"; };
+		05F57EBD17AC13A900DB4ACE /* pthread_attr_getscope.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getscope.c; sourceTree = "<group>"; };
+		05F57EBE17AC13A900DB4ACE /* pthread_attr_getstack.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getstack.c; sourceTree = "<group>"; };
+		05F57EBF17AC13A900DB4ACE /* pthread_attr_getstacksize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_getstacksize.c; sourceTree = "<group>"; };
+		05F57EC017AC13A900DB4ACE /* pthread_attr_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_init.c; sourceTree = "<group>"; };
+		05F57EC117AC13A900DB4ACE /* pthread_attr_setdetachstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setdetachstate.c; sourceTree = "<group>"; };
+		05F57EC217AC13A900DB4ACE /* pthread_attr_setguardsize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setguardsize.c; sourceTree = "<group>"; };
+		05F57EC317AC13A900DB4ACE /* pthread_attr_setinheritsched.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setinheritsched.c; sourceTree = "<group>"; };
+		05F57EC417AC13A900DB4ACE /* pthread_attr_setschedparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setschedparam.c; sourceTree = "<group>"; };
+		05F57EC517AC13A900DB4ACE /* pthread_attr_setschedpolicy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setschedpolicy.c; sourceTree = "<group>"; };
+		05F57EC617AC13A900DB4ACE /* pthread_attr_setscope.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setscope.c; sourceTree = "<group>"; };
+		05F57EC717AC13A900DB4ACE /* pthread_attr_setstack.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setstack.c; sourceTree = "<group>"; };
+		05F57EC817AC13A900DB4ACE /* pthread_attr_setstacksize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_attr_setstacksize.c; sourceTree = "<group>"; };
+		05F57EC917AC13A900DB4ACE /* pthread_barrier_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrier_destroy.c; sourceTree = "<group>"; };
+		05F57ECA17AC13A900DB4ACE /* pthread_barrier_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrier_init.c; sourceTree = "<group>"; };
+		05F57ECB17AC13A900DB4ACE /* pthread_barrier_wait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrier_wait.c; sourceTree = "<group>"; };
+		05F57ECC17AC13A900DB4ACE /* pthread_barrierattr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_destroy.c; sourceTree = "<group>"; };
+		05F57ECD17AC13A900DB4ACE /* pthread_barrierattr_getpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_getpshared.c; sourceTree = "<group>"; };
+		05F57ECE17AC13A900DB4ACE /* pthread_barrierattr_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_init.c; sourceTree = "<group>"; };
+		05F57ECF17AC13A900DB4ACE /* pthread_barrierattr_setpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_barrierattr_setpshared.c; sourceTree = "<group>"; };
+		05F57ED017AC13A900DB4ACE /* pthread_cancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cancel.c; sourceTree = "<group>"; };
+		05F57ED117AC13A900DB4ACE /* pthread_cleanup_pop.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cleanup_pop.c; sourceTree = "<group>"; };
+		05F57ED217AC13A900DB4ACE /* pthread_cleanup_push.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cleanup_push.c; sourceTree = "<group>"; };
+		05F57ED317AC13A900DB4ACE /* pthread_cond_broadcast.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cond_broadcast.c; sourceTree = "<group>"; };
+		05F57ED417AC13A900DB4ACE /* pthread_cond_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cond_destroy.c; sourceTree = "<group>"; };
+		05F57ED517AC13A900DB4ACE /* pthread_cond_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cond_init.c; sourceTree = "<group>"; };
+		05F57ED617AC13A900DB4ACE /* pthread_cond_signal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cond_signal.c; sourceTree = "<group>"; };
+		05F57ED717AC13A900DB4ACE /* pthread_cond_timedwait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cond_timedwait.c; sourceTree = "<group>"; };
+		05F57ED817AC13A900DB4ACE /* pthread_cond_wait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_cond_wait.c; sourceTree = "<group>"; };
+		05F57ED917AC13A900DB4ACE /* pthread_condattr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_destroy.c; sourceTree = "<group>"; };
+		05F57EDA17AC13A900DB4ACE /* pthread_condattr_getclock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_getclock.c; sourceTree = "<group>"; };
+		05F57EDB17AC13A900DB4ACE /* pthread_condattr_getpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_getpshared.c; sourceTree = "<group>"; };
+		05F57EDC17AC13A900DB4ACE /* pthread_condattr_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_init.c; sourceTree = "<group>"; };
+		05F57EDD17AC13A900DB4ACE /* pthread_condattr_setclock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_setclock.c; sourceTree = "<group>"; };
+		05F57EDE17AC13A900DB4ACE /* pthread_condattr_setpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_condattr_setpshared.c; sourceTree = "<group>"; };
+		05F57EDF17AC13A900DB4ACE /* pthread_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_create.c; sourceTree = "<group>"; };
+		05F57EE017AC13A900DB4ACE /* pthread_detach.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_detach.c; sourceTree = "<group>"; };
+		05F57EE117AC13A900DB4ACE /* pthread_equal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_equal.c; sourceTree = "<group>"; };
+		05F57EE217AC13A900DB4ACE /* pthread_exit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_exit.c; sourceTree = "<group>"; };
+		05F57EE317AC13A900DB4ACE /* pthread_getconcurrency.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_getconcurrency.c; sourceTree = "<group>"; };
+		05F57EE417AC13A900DB4ACE /* pthread_getcpuclockid.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_getcpuclockid.c; sourceTree = "<group>"; };
+		05F57EE517AC13A900DB4ACE /* pthread_getschedparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_getschedparam.c; sourceTree = "<group>"; };
+		05F57EE617AC13A900DB4ACE /* pthread_getspecific.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_getspecific.c; sourceTree = "<group>"; };
+		05F57EE717AC13A900DB4ACE /* pthread_join.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_join.c; sourceTree = "<group>"; };
+		05F57EE817AC13A900DB4ACE /* pthread_key_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_key_create.c; sourceTree = "<group>"; };
+		05F57EE917AC13A900DB4ACE /* pthread_key_delete.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_key_delete.c; sourceTree = "<group>"; };
+		05F57EEA17AC13A900DB4ACE /* pthread_mutex_consistent.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_consistent.c; sourceTree = "<group>"; };
+		05F57EEB17AC13A900DB4ACE /* pthread_mutex_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_destroy.c; sourceTree = "<group>"; };
+		05F57EEC17AC13A900DB4ACE /* pthread_mutex_getprioceiling.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_getprioceiling.c; sourceTree = "<group>"; };
+		05F57EED17AC13A900DB4ACE /* pthread_mutex_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_init.c; sourceTree = "<group>"; };
+		05F57EEE17AC13A900DB4ACE /* pthread_mutex_lock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_lock.c; sourceTree = "<group>"; };
+		05F57EEF17AC13A900DB4ACE /* pthread_mutex_setprioceiling.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_setprioceiling.c; sourceTree = "<group>"; };
+		05F57EF017AC13A900DB4ACE /* pthread_mutex_timedlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_timedlock.c; sourceTree = "<group>"; };
+		05F57EF117AC13A900DB4ACE /* pthread_mutex_trylock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_trylock.c; sourceTree = "<group>"; };
+		05F57EF217AC13A900DB4ACE /* pthread_mutex_unlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutex_unlock.c; sourceTree = "<group>"; };
+		05F57EF317AC13A900DB4ACE /* pthread_mutexattr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_destroy.c; sourceTree = "<group>"; };
+		05F57EF417AC13A900DB4ACE /* pthread_mutexattr_getprioceiling.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_getprioceiling.c; sourceTree = "<group>"; };
+		05F57EF517AC13A900DB4ACE /* pthread_mutexattr_getprotocol.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_getprotocol.c; sourceTree = "<group>"; };
+		05F57EF617AC13A900DB4ACE /* pthread_mutexattr_getpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_getpshared.c; sourceTree = "<group>"; };
+		05F57EF717AC13A900DB4ACE /* pthread_mutexattr_getrobust.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_getrobust.c; sourceTree = "<group>"; };
+		05F57EF817AC13A900DB4ACE /* pthread_mutexattr_gettype.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_gettype.c; sourceTree = "<group>"; };
+		05F57EF917AC13A900DB4ACE /* pthread_mutexattr_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_init.c; sourceTree = "<group>"; };
+		05F57EFA17AC13A900DB4ACE /* pthread_mutexattr_setprioceiling.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_setprioceiling.c; sourceTree = "<group>"; };
+		05F57EFB17AC13A900DB4ACE /* pthread_mutexattr_setprotocol.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_setprotocol.c; sourceTree = "<group>"; };
+		05F57EFC17AC13A900DB4ACE /* pthread_mutexattr_setpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_setpshared.c; sourceTree = "<group>"; };
+		05F57EFD17AC13A900DB4ACE /* pthread_mutexattr_setrobust.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_setrobust.c; sourceTree = "<group>"; };
+		05F57EFE17AC13A900DB4ACE /* pthread_mutexattr_settype.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_mutexattr_settype.c; sourceTree = "<group>"; };
+		05F57EFF17AC13A900DB4ACE /* pthread_once.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_once.c; sourceTree = "<group>"; };
+		05F57F0017AC13A900DB4ACE /* pthread_rwlock_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_destroy.c; sourceTree = "<group>"; };
+		05F57F0117AC13A900DB4ACE /* pthread_rwlock_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_init.c; sourceTree = "<group>"; };
+		05F57F0217AC13A900DB4ACE /* pthread_rwlock_rdlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_rdlock.c; sourceTree = "<group>"; };
+		05F57F0317AC13A900DB4ACE /* pthread_rwlock_timedrdlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_timedrdlock.c; sourceTree = "<group>"; };
+		05F57F0417AC13A900DB4ACE /* pthread_rwlock_timedwrlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_timedwrlock.c; sourceTree = "<group>"; };
+		05F57F0517AC13A900DB4ACE /* pthread_rwlock_tryrdlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_tryrdlock.c; sourceTree = "<group>"; };
+		05F57F0617AC13A900DB4ACE /* pthread_rwlock_trywrlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_trywrlock.c; sourceTree = "<group>"; };
+		05F57F0717AC13A900DB4ACE /* pthread_rwlock_unlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_unlock.c; sourceTree = "<group>"; };
+		05F57F0817AC13A900DB4ACE /* pthread_rwlock_wrlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlock_wrlock.c; sourceTree = "<group>"; };
+		05F57F0917AC13A900DB4ACE /* pthread_rwlockattr_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlockattr_destroy.c; sourceTree = "<group>"; };
+		05F57F0A17AC13A900DB4ACE /* pthread_rwlockattr_getpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlockattr_getpshared.c; sourceTree = "<group>"; };
+		05F57F0B17AC13A900DB4ACE /* pthread_rwlockattr_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlockattr_init.c; sourceTree = "<group>"; };
+		05F57F0C17AC13A900DB4ACE /* pthread_rwlockattr_setpshared.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_rwlockattr_setpshared.c; sourceTree = "<group>"; };
+		05F57F0D17AC13A900DB4ACE /* pthread_self.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_self.c; sourceTree = "<group>"; };
+		05F57F0E17AC13A900DB4ACE /* pthread_setcancelstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_setcancelstate.c; sourceTree = "<group>"; };
+		05F57F0F17AC13A900DB4ACE /* pthread_setcanceltype.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_setcanceltype.c; sourceTree = "<group>"; };
+		05F57F1017AC13A900DB4ACE /* pthread_setconcurrency.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_setconcurrency.c; sourceTree = "<group>"; };
+		05F57F1117AC13A900DB4ACE /* pthread_setschedparam.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_setschedparam.c; sourceTree = "<group>"; };
+		05F57F1217AC13A900DB4ACE /* pthread_setspecific.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_setspecific.c; sourceTree = "<group>"; };
+		05F57F1317AC13A900DB4ACE /* pthread_spin_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_destroy.c; sourceTree = "<group>"; };
+		05F57F1417AC13A900DB4ACE /* pthread_spin_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_init.c; sourceTree = "<group>"; };
+		05F57F1517AC13A900DB4ACE /* pthread_spin_lock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_lock.c; sourceTree = "<group>"; };
+		05F57F1617AC13A900DB4ACE /* pthread_spin_trylock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_trylock.c; sourceTree = "<group>"; };
+		05F57F1717AC13A900DB4ACE /* pthread_spin_unlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_spin_unlock.c; sourceTree = "<group>"; };
+		05F57F1817AC13A900DB4ACE /* pthread_testcancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pthread_testcancel.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0595BA7A17AC11A70021435A = {
+			isa = PBXGroup;
+			children = (
+				05F57EB217AC13A900DB4ACE /* include */,
+				05F57EB417AC13A900DB4ACE /* Makefile */,
+				05F57EB517AC13A900DB4ACE /* pthread */,
+			);
+			sourceTree = "<group>";
+		};
+		05F57EB217AC13A900DB4ACE /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05F57EB317AC13A900DB4ACE /* pthread.h */,
+			);
+			name = include;
+			path = ../source/lib/pthread/include;
+			sourceTree = "<group>";
+		};
+		05F57EB517AC13A900DB4ACE /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+				05F57EB617AC13A900DB4ACE /* pthread_atfork.c */,
+				05F57EB717AC13A900DB4ACE /* pthread_attr_destroy.c */,
+				05F57EB817AC13A900DB4ACE /* pthread_attr_getdetachstate.c */,
+				05F57EB917AC13A900DB4ACE /* pthread_attr_getguardsize.c */,
+				05F57EBA17AC13A900DB4ACE /* pthread_attr_getinheritsched.c */,
+				05F57EBB17AC13A900DB4ACE /* pthread_attr_getschedparam.c */,
+				05F57EBC17AC13A900DB4ACE /* pthread_attr_getschedpolicy.c */,
+				05F57EBD17AC13A900DB4ACE /* pthread_attr_getscope.c */,
+				05F57EBE17AC13A900DB4ACE /* pthread_attr_getstack.c */,
+				05F57EBF17AC13A900DB4ACE /* pthread_attr_getstacksize.c */,
+				05F57EC017AC13A900DB4ACE /* pthread_attr_init.c */,
+				05F57EC117AC13A900DB4ACE /* pthread_attr_setdetachstate.c */,
+				05F57EC217AC13A900DB4ACE /* pthread_attr_setguardsize.c */,
+				05F57EC317AC13A900DB4ACE /* pthread_attr_setinheritsched.c */,
+				05F57EC417AC13A900DB4ACE /* pthread_attr_setschedparam.c */,
+				05F57EC517AC13A900DB4ACE /* pthread_attr_setschedpolicy.c */,
+				05F57EC617AC13A900DB4ACE /* pthread_attr_setscope.c */,
+				05F57EC717AC13A900DB4ACE /* pthread_attr_setstack.c */,
+				05F57EC817AC13A900DB4ACE /* pthread_attr_setstacksize.c */,
+				05F57EC917AC13A900DB4ACE /* pthread_barrier_destroy.c */,
+				05F57ECA17AC13A900DB4ACE /* pthread_barrier_init.c */,
+				05F57ECB17AC13A900DB4ACE /* pthread_barrier_wait.c */,
+				05F57ECC17AC13A900DB4ACE /* pthread_barrierattr_destroy.c */,
+				05F57ECD17AC13A900DB4ACE /* pthread_barrierattr_getpshared.c */,
+				05F57ECE17AC13A900DB4ACE /* pthread_barrierattr_init.c */,
+				05F57ECF17AC13A900DB4ACE /* pthread_barrierattr_setpshared.c */,
+				05F57ED017AC13A900DB4ACE /* pthread_cancel.c */,
+				05F57ED117AC13A900DB4ACE /* pthread_cleanup_pop.c */,
+				05F57ED217AC13A900DB4ACE /* pthread_cleanup_push.c */,
+				05F57ED317AC13A900DB4ACE /* pthread_cond_broadcast.c */,
+				05F57ED417AC13A900DB4ACE /* pthread_cond_destroy.c */,
+				05F57ED517AC13A900DB4ACE /* pthread_cond_init.c */,
+				05F57ED617AC13A900DB4ACE /* pthread_cond_signal.c */,
+				05F57ED717AC13A900DB4ACE /* pthread_cond_timedwait.c */,
+				05F57ED817AC13A900DB4ACE /* pthread_cond_wait.c */,
+				05F57ED917AC13A900DB4ACE /* pthread_condattr_destroy.c */,
+				05F57EDA17AC13A900DB4ACE /* pthread_condattr_getclock.c */,
+				05F57EDB17AC13A900DB4ACE /* pthread_condattr_getpshared.c */,
+				05F57EDC17AC13A900DB4ACE /* pthread_condattr_init.c */,
+				05F57EDD17AC13A900DB4ACE /* pthread_condattr_setclock.c */,
+				05F57EDE17AC13A900DB4ACE /* pthread_condattr_setpshared.c */,
+				05F57EDF17AC13A900DB4ACE /* pthread_create.c */,
+				05F57EE017AC13A900DB4ACE /* pthread_detach.c */,
+				05F57EE117AC13A900DB4ACE /* pthread_equal.c */,
+				05F57EE217AC13A900DB4ACE /* pthread_exit.c */,
+				05F57EE317AC13A900DB4ACE /* pthread_getconcurrency.c */,
+				05F57EE417AC13A900DB4ACE /* pthread_getcpuclockid.c */,
+				05F57EE517AC13A900DB4ACE /* pthread_getschedparam.c */,
+				05F57EE617AC13A900DB4ACE /* pthread_getspecific.c */,
+				05F57EE717AC13A900DB4ACE /* pthread_join.c */,
+				05F57EE817AC13A900DB4ACE /* pthread_key_create.c */,
+				05F57EE917AC13A900DB4ACE /* pthread_key_delete.c */,
+				05F57EEA17AC13A900DB4ACE /* pthread_mutex_consistent.c */,
+				05F57EEB17AC13A900DB4ACE /* pthread_mutex_destroy.c */,
+				05F57EEC17AC13A900DB4ACE /* pthread_mutex_getprioceiling.c */,
+				05F57EED17AC13A900DB4ACE /* pthread_mutex_init.c */,
+				05F57EEE17AC13A900DB4ACE /* pthread_mutex_lock.c */,
+				05F57EEF17AC13A900DB4ACE /* pthread_mutex_setprioceiling.c */,
+				05F57EF017AC13A900DB4ACE /* pthread_mutex_timedlock.c */,
+				05F57EF117AC13A900DB4ACE /* pthread_mutex_trylock.c */,
+				05F57EF217AC13A900DB4ACE /* pthread_mutex_unlock.c */,
+				05F57EF317AC13A900DB4ACE /* pthread_mutexattr_destroy.c */,
+				05F57EF417AC13A900DB4ACE /* pthread_mutexattr_getprioceiling.c */,
+				05F57EF517AC13A900DB4ACE /* pthread_mutexattr_getprotocol.c */,
+				05F57EF617AC13A900DB4ACE /* pthread_mutexattr_getpshared.c */,
+				05F57EF717AC13A900DB4ACE /* pthread_mutexattr_getrobust.c */,
+				05F57EF817AC13A900DB4ACE /* pthread_mutexattr_gettype.c */,
+				05F57EF917AC13A900DB4ACE /* pthread_mutexattr_init.c */,
+				05F57EFA17AC13A900DB4ACE /* pthread_mutexattr_setprioceiling.c */,
+				05F57EFB17AC13A900DB4ACE /* pthread_mutexattr_setprotocol.c */,
+				05F57EFC17AC13A900DB4ACE /* pthread_mutexattr_setpshared.c */,
+				05F57EFD17AC13A900DB4ACE /* pthread_mutexattr_setrobust.c */,
+				05F57EFE17AC13A900DB4ACE /* pthread_mutexattr_settype.c */,
+				05F57EFF17AC13A900DB4ACE /* pthread_once.c */,
+				05F57F0017AC13A900DB4ACE /* pthread_rwlock_destroy.c */,
+				05F57F0117AC13A900DB4ACE /* pthread_rwlock_init.c */,
+				05F57F0217AC13A900DB4ACE /* pthread_rwlock_rdlock.c */,
+				05F57F0317AC13A900DB4ACE /* pthread_rwlock_timedrdlock.c */,
+				05F57F0417AC13A900DB4ACE /* pthread_rwlock_timedwrlock.c */,
+				05F57F0517AC13A900DB4ACE /* pthread_rwlock_tryrdlock.c */,
+				05F57F0617AC13A900DB4ACE /* pthread_rwlock_trywrlock.c */,
+				05F57F0717AC13A900DB4ACE /* pthread_rwlock_unlock.c */,
+				05F57F0817AC13A900DB4ACE /* pthread_rwlock_wrlock.c */,
+				05F57F0917AC13A900DB4ACE /* pthread_rwlockattr_destroy.c */,
+				05F57F0A17AC13A900DB4ACE /* pthread_rwlockattr_getpshared.c */,
+				05F57F0B17AC13A900DB4ACE /* pthread_rwlockattr_init.c */,
+				05F57F0C17AC13A900DB4ACE /* pthread_rwlockattr_setpshared.c */,
+				05F57F0D17AC13A900DB4ACE /* pthread_self.c */,
+				05F57F0E17AC13A900DB4ACE /* pthread_setcancelstate.c */,
+				05F57F0F17AC13A900DB4ACE /* pthread_setcanceltype.c */,
+				05F57F1017AC13A900DB4ACE /* pthread_setconcurrency.c */,
+				05F57F1117AC13A900DB4ACE /* pthread_setschedparam.c */,
+				05F57F1217AC13A900DB4ACE /* pthread_setspecific.c */,
+				05F57F1317AC13A900DB4ACE /* pthread_spin_destroy.c */,
+				05F57F1417AC13A900DB4ACE /* pthread_spin_init.c */,
+				05F57F1517AC13A900DB4ACE /* pthread_spin_lock.c */,
+				05F57F1617AC13A900DB4ACE /* pthread_spin_trylock.c */,
+				05F57F1717AC13A900DB4ACE /* pthread_spin_unlock.c */,
+				05F57F1817AC13A900DB4ACE /* pthread_testcancel.c */,
+			);
+			name = pthread;
+			path = ../source/lib/pthread/pthread;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA7F17AC11A70021435A /* LIB-PTHREAD */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-PTHREAD" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/lib/pthread;
+			dependencies = (
+			);
+			name = "LIB-PTHREAD";
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-PTHREAD";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA7B17AC11A70021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-PTHREAD" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA7A17AC11A70021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA7F17AC11A70021435A /* LIB-PTHREAD */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA8117AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA8417AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-PTHREAD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8117AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-PTHREAD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8417AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA7B17AC11A70021435A /* Project object */;
+}

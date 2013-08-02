@@ -1,0 +1,151 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05B4D9D217AC151500587E4C /* boot.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = boot.s; path = ../source/boot/bios/boot.s; sourceTree = "<group>"; };
+		05B4D9D417AC151500587E4C /* xeos.16.a20.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.a20.inc.s; sourceTree = "<group>"; };
+		05B4D9D517AC151500587E4C /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
+		05B4D9D617AC151500587E4C /* xeos.16.debug.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.debug.inc.s; sourceTree = "<group>"; };
+		05B4D9D717AC151500587E4C /* xeos.16.elf.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.elf.inc.s; sourceTree = "<group>"; };
+		05B4D9D817AC151500587E4C /* xeos.16.int.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.int.inc.s; sourceTree = "<group>"; };
+		05B4D9D917AC151500587E4C /* xeos.16.io.fat12.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.io.fat12.inc.s; sourceTree = "<group>"; };
+		05B4D9DA17AC151500587E4C /* xeos.16.mem.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.mem.inc.s; sourceTree = "<group>"; };
+		05B4D9DB17AC151500587E4C /* xeos.16.sse.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.sse.inc.s; sourceTree = "<group>"; };
+		05B4D9DC17AC151500587E4C /* xeos.16.string.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.string.inc.s; sourceTree = "<group>"; };
+		05B4D9DD17AC151500587E4C /* xeos.16.video.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.video.inc.s; sourceTree = "<group>"; };
+		05B4D9DE17AC151500587E4C /* xeos.32.string.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.32.string.inc.s; sourceTree = "<group>"; };
+		05B4D9DF17AC151500587E4C /* xeos.32.video.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.32.video.inc.s; sourceTree = "<group>"; };
+		05B4D9E017AC151500587E4C /* xeos.64.string.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.64.string.inc.s; sourceTree = "<group>"; };
+		05B4D9E117AC151500587E4C /* xeos.64.video.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.64.video.inc.s; sourceTree = "<group>"; };
+		05B4D9E217AC151500587E4C /* xeos.ascii.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.ascii.inc.s; sourceTree = "<group>"; };
+		05B4D9E317AC151500587E4C /* xeos.constants.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.constants.inc.s; sourceTree = "<group>"; };
+		05B4D9E417AC151500587E4C /* xeos.crt.controller.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.crt.controller.inc.s; sourceTree = "<group>"; };
+		05B4D9E517AC151500587E4C /* xeos.gdt.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.gdt.inc.s; sourceTree = "<group>"; };
+		05B4D9E617AC151500587E4C /* xeos.io.fat12.mbr.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.io.fat12.mbr.inc.s; sourceTree = "<group>"; };
+		05B4D9E717AC151500587E4C /* xeos.macros.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.macros.inc.s; sourceTree = "<group>"; };
+		05B4D9E817AC151500587E4C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/boot/bios/Makefile; sourceTree = "<group>"; };
+		05B4D9E917AC151500587E4C /* mbr.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = mbr.s; path = ../source/boot/bios/mbr.s; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		05B4D9BC17AC14C800587E4C = {
+			isa = PBXGroup;
+			children = (
+				05B4D9D217AC151500587E4C /* boot.s */,
+				05B4D9D317AC151500587E4C /* include */,
+				05B4D9E817AC151500587E4C /* Makefile */,
+				05B4D9E917AC151500587E4C /* mbr.s */,
+			);
+			sourceTree = "<group>";
+		};
+		05B4D9D317AC151500587E4C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05B4D9D417AC151500587E4C /* xeos.16.a20.inc.s */,
+				05B4D9D517AC151500587E4C /* xeos.16.cpu.inc.s */,
+				05B4D9D617AC151500587E4C /* xeos.16.debug.inc.s */,
+				05B4D9D717AC151500587E4C /* xeos.16.elf.inc.s */,
+				05B4D9D817AC151500587E4C /* xeos.16.int.inc.s */,
+				05B4D9D917AC151500587E4C /* xeos.16.io.fat12.inc.s */,
+				05B4D9DA17AC151500587E4C /* xeos.16.mem.inc.s */,
+				05B4D9DB17AC151500587E4C /* xeos.16.sse.inc.s */,
+				05B4D9DC17AC151500587E4C /* xeos.16.string.inc.s */,
+				05B4D9DD17AC151500587E4C /* xeos.16.video.inc.s */,
+				05B4D9DE17AC151500587E4C /* xeos.32.string.inc.s */,
+				05B4D9DF17AC151500587E4C /* xeos.32.video.inc.s */,
+				05B4D9E017AC151500587E4C /* xeos.64.string.inc.s */,
+				05B4D9E117AC151500587E4C /* xeos.64.video.inc.s */,
+				05B4D9E217AC151500587E4C /* xeos.ascii.inc.s */,
+				05B4D9E317AC151500587E4C /* xeos.constants.inc.s */,
+				05B4D9E417AC151500587E4C /* xeos.crt.controller.inc.s */,
+				05B4D9E517AC151500587E4C /* xeos.gdt.inc.s */,
+				05B4D9E617AC151500587E4C /* xeos.io.fat12.mbr.inc.s */,
+				05B4D9E717AC151500587E4C /* xeos.macros.inc.s */,
+			);
+			name = include;
+			path = ../source/boot/bios/include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		05B4D9C117AC14C800587E4C /* BOOT-BIOS */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 05B4D9C417AC14C800587E4C /* Build configuration list for PBXLegacyTarget "BOOT-BIOS" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/boot/bios;
+			dependencies = (
+			);
+			name = "BOOT-BIOS";
+			passBuildSettingsInEnvironment = 1;
+			productName = "BOOT-BIOS";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		05B4D9BD17AC14C800587E4C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 05B4D9C017AC14C800587E4C /* Build configuration list for PBXProject "BOOT-BIOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05B4D9BC17AC14C800587E4C;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05B4D9C117AC14C800587E4C /* BOOT-BIOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		05B4D9C317AC14C800587E4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		05B4D9C617AC14C800587E4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05B4D9C017AC14C800587E4C /* Build configuration list for PBXProject "BOOT-BIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B4D9C317AC14C800587E4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05B4D9C417AC14C800587E4C /* Build configuration list for PBXLegacyTarget "BOOT-BIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B4D9C617AC14C800587E4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05B4D9BD17AC14C800587E4C /* Project object */;
+}

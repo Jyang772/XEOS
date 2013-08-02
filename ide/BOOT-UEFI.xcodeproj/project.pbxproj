@@ -1,0 +1,98 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05B4D9EA17AC154600587E4C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/boot/uefi/Makefile; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		05B4D9C717AC14D900587E4C = {
+			isa = PBXGroup;
+			children = (
+				05B4D9EA17AC154600587E4C /* Makefile */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		05B4D9CC17AC14D900587E4C /* BOOT-UEFI */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 05B4D9CF17AC14D900587E4C /* Build configuration list for PBXLegacyTarget "BOOT-UEFI" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/boot/uefi;
+			dependencies = (
+			);
+			name = "BOOT-UEFI";
+			passBuildSettingsInEnvironment = 1;
+			productName = "BOOT-UEFI";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		05B4D9C817AC14D900587E4C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 05B4D9CB17AC14D900587E4C /* Build configuration list for PBXProject "BOOT-UEFI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05B4D9C717AC14D900587E4C;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05B4D9CC17AC14D900587E4C /* BOOT-UEFI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		05B4D9CE17AC14D900587E4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		05B4D9D117AC14D900587E4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05B4D9CB17AC14D900587E4C /* Build configuration list for PBXProject "BOOT-UEFI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B4D9CE17AC14D900587E4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05B4D9CF17AC14D900587E4C /* Build configuration list for PBXLegacyTarget "BOOT-UEFI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B4D9D117AC14D900587E4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05B4D9C817AC14D900587E4C /* Project object */;
+}
