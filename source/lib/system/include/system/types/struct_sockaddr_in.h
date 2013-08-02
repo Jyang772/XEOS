@@ -61,80 +61,25 @@
 
 /* $Id$ */
 
-#ifndef __LIBPOSIX_NETINET_IN_H__
-#define __LIBPOSIX_NETINET_IN_H__
+/*!
+ * @header          struct_sockaddr_in.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef __LIBSYSTEM_TYPES_STRUCT_SOCKADDR_IN_H__
+#define __LIBSYSTEM_TYPES_STRUCT_SOCKADDR_IN_H__
 
-#include <arpa/inet.h>
-#include <inttypes.h>
-#include <sys/socket.h>
-
-#include <system/types/in_port_t.h>
-#include <system/types/in_addr_t.h>
+#include <system/types/__private/stdint.h>
 #include <system/types/sa_family_t.h>
-#include <system/types/uint8_t.h>
-#include <system/types/uint32_t.h>
+#include <system/types/in_port_t.h>
 #include <system/types/struct_in_addr.h>
-#include <system/types/struct_sockaddr_in.h>
-#include <system/types/struct_in6_addr.h>
-#include <system/types/struct_sockaddr_in6.h>
-#include <system/types/struct_ipv6_mreq.h>
 
-extern const struct in6_addr in6addr_any;
-extern const struct in6_addr in6addr_loopback;
+struct sockaddr_in
+{
+    sa_family_t     sin_family;
+    in_port_t       sin_port;
+    struct in_addr  sin_addr;
+};
 
-#define IN6ADDR_ANY_INIT                    {{                              \
-                                                0x00, 0x00, 0x00, 0x00,     \
-                                                0x00, 0x00, 0x00, 0x00,     \
-                                                0x00, 0x00, 0x00, 0x00,     \
-                                                0x00, 0x00, 0x00, 0x00      \
-                                            }}
-#define IN6ADDR_LOOPBACK_INIT               {{                              \
-                                                0x00, 0x00, 0x00, 0x00,     \
-                                                0x00, 0x00, 0x00, 0x00,     \
-                                                0x00, 0x00, 0x00, 0x00,     \
-                                                0x00, 0x00, 0x00, 0x01      \
-                                            }}
-
-#define IPPROTO_IP                          0
-#define IPPROTO_IPV6                        2
-#define IPPROTO_ICMP                        3
-#define IPPROTO_RAW                         4
-#define IPPROTO_TCP                         5
-#define IPPROTO_UDP                         6
-
-#define INADDR_ANY                          ( ( in_addr_t )0x00000000 )
-#define INADDR_BROADCAST                    ( ( in_addr_t )0xFFFFFFFF )
-
-#define INET_ADDRSTRLEN                     16
-#define INET6_ADDRSTRLEN                    46
-
-#define IPV6_JOIN_GROUP                     1
-#define IPV6_LEAVE_GROUP                    2
-#define IPV6_MULTICAST_HOPS                 3
-#define IPV6_MULTICAST_IF                   4
-#define IPV6_MULTICAST_LOOP                 5
-#define IPV6_UNICAST_HOPS                   6
-#define IPV6_V6ONLY                         7
-
-#define IN6_IS_ADDR_UNSPECIFIED( _s_ )      0
-#define IN6_IS_ADDR_LOOPBACK( _s_ )         0
-#define IN6_IS_ADDR_MULTICAST( _s_ )        0
-#define IN6_IS_ADDR_LINKLOCAL( _s_ )        0
-#define IN6_IS_ADDR_SITELOCAL( _s_ )        0
-#define IN6_IS_ADDR_V4MAPPED( _s_ )         0
-#define IN6_IS_ADDR_V4COMPAT( _s_ )         0
-#define IN6_IS_ADDR_MC_NODELOCAL( _s_ )     0
-#define IN6_IS_ADDR_MC_LINKLOCAL( _s_ )     0
-#define IN6_IS_ADDR_MC_SITELOCAL( _s_ )     0
-#define IN6_IS_ADDR_MC_ORGLOCAL( _s_ )      0
-#define IN6_IS_ADDR_MC_GLOBAL( _s_ )        0
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __LIBPOSIX_NETINET_IN_H__ */
+#endif /* __LIBSYSTEM_TYPES_STRUCT_SOCKADDR_IN_H__ */

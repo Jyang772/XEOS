@@ -77,6 +77,7 @@ DIR_SRC_SCHED       = $(PATH_SRC_LIB_LIBPOSIX)sched/
 DIR_SRC_TIME        = $(PATH_SRC_LIB_LIBPOSIX)time/
 DIR_SRC_SIGNAL      = $(PATH_SRC_LIB_LIBPOSIX)signal/
 DIR_SRC_AIO         = $(PATH_SRC_LIB_LIBPOSIX)aio/
+DIR_SRC_NETINET_IN  = $(PATH_SRC_LIB_LIBPOSIX)netinet_in/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -90,6 +91,7 @@ vpath %$(EXT_C)         $(DIR_SRC_SCHED)
 vpath %$(EXT_C)         $(DIR_SRC_TIME)
 vpath %$(EXT_C)         $(DIR_SRC_SIGNAL)
 vpath %$(EXT_C)         $(DIR_SRC_AIO)
+vpath %$(EXT_C)         $(DIR_SRC_NETINET_IN)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -114,6 +116,7 @@ _FILES_C_OBJ_BUILD_SCHED        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 _FILES_C_OBJ_BUILD_TIME         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_TIME))
 _FILES_C_OBJ_BUILD_SIGNAL       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_SIGNAL))
 _FILES_C_OBJ_BUILD_AIO          = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_AIO))
+_FILES_C_OBJ_BUILD_NETINET_IN   = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_NETINET_IN))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -128,14 +131,15 @@ _FILES_C_OBJ_BUILD_AIO          = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    $(_FILES_C_OBJ_BUILD)           \
-        $(_FILES_C_OBJ_BUILD_SYS_MMAN)  \
-        $(_FILES_C_OBJ_BUILD_SYSCALL)   \
-        $(_FILES_C_OBJ_BUILD_UNISTD)    \
-        $(_FILES_C_OBJ_BUILD_SCHED)     \
-        $(_FILES_C_OBJ_BUILD_TIME)      \
-        $(_FILES_C_OBJ_BUILD_SIGNAL)    \
-        $(_FILES_C_OBJ_BUILD_AIO)
+all:    $(_FILES_C_OBJ_BUILD)               \
+        $(_FILES_C_OBJ_BUILD_SYS_MMAN)      \
+        $(_FILES_C_OBJ_BUILD_SYSCALL)       \
+        $(_FILES_C_OBJ_BUILD_UNISTD)        \
+        $(_FILES_C_OBJ_BUILD_SCHED)         \
+        $(_FILES_C_OBJ_BUILD_TIME)          \
+        $(_FILES_C_OBJ_BUILD_SIGNAL)        \
+        $(_FILES_C_OBJ_BUILD_AIO)           \
+        $(_FILES_C_OBJ_BUILD_NETINET_IN)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libposix.a"$(COLOR_NONE)
 	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libposix.a $(PATH_BUILD_32_LIB_OBJ_LIBPOSIX)*$(EXT_OBJ)

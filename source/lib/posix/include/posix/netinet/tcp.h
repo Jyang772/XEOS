@@ -68,7 +68,7 @@
 extern "C" {
 #endif
 
-
+#define TCP_NODELAY     0x01
 
 #ifdef __cplusplus
 }

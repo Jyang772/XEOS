@@ -3115,6 +3115,15 @@
 		05959EC617ABFACA0021435A /* aio_suspend.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_suspend.c; sourceTree = "<group>"; };
 		05959EC717ABFACA0021435A /* aio_write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_write.c; sourceTree = "<group>"; };
 		05959EC817ABFACA0021435A /* lio_listio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lio_listio.c; sourceTree = "<group>"; };
+		05959EC917ABFF980021435A /* in_port_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = in_port_t.h; sourceTree = "<group>"; };
+		05959ECA17ABFFA20021435A /* in_addr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = in_addr_t.h; sourceTree = "<group>"; };
+		05959ECB17ABFFB00021435A /* sa_family_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sa_family_t.h; sourceTree = "<group>"; };
+		05959ECC17ABFFBA0021435A /* struct_in_addr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_in_addr.h; sourceTree = "<group>"; };
+		05959ECD17ABFFC10021435A /* struct_sockaddr_in.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_sockaddr_in.h; sourceTree = "<group>"; };
+		05959ECE17ABFFC90021435A /* struct_in6_addr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_in6_addr.h; sourceTree = "<group>"; };
+		05959ECF17ABFFD50021435A /* struct_sockaddr_in6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_sockaddr_in6.h; sourceTree = "<group>"; };
+		05959ED017ABFFDD0021435A /* struct_ipv6_mreq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = struct_ipv6_mreq.h; sourceTree = "<group>"; };
+		05959ED217AC00700021435A /* __netinet_in.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __netinet_in.c; sourceTree = "<group>"; };
 		05A8F9531625690B000484EB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0685179E725A006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05AA0686179E7262006F75CB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -9950,6 +9959,7 @@
 			children = (
 				050BD63C17AA9934004D14C5 /* include */,
 				050BD66A17AA9934004D14C5 /* Makefile */,
+				05959ED117AC00700021435A /* netinet_in */,
 				05959EC017ABFACA0021435A /* aio */,
 				050BD67A17AA9934004D14C5 /* sched */,
 				050BD68317AA9934004D14C5 /* signal */,
@@ -10400,6 +10410,14 @@
 				05959E9C17AB16F80021435A /* seek_cur.h */,
 				05959E9D17AB16FF0021435A /* seek_end.h */,
 				05959EBF17ABF73E0021435A /* struct_aiocb.h */,
+				05959EC917ABFF980021435A /* in_port_t.h */,
+				05959ECA17ABFFA20021435A /* in_addr_t.h */,
+				05959ECB17ABFFB00021435A /* sa_family_t.h */,
+				05959ECC17ABFFBA0021435A /* struct_in_addr.h */,
+				05959ECD17ABFFC10021435A /* struct_sockaddr_in.h */,
+				05959ECE17ABFFC90021435A /* struct_in6_addr.h */,
+				05959ECF17ABFFD50021435A /* struct_sockaddr_in6.h */,
+				05959ED017ABFFDD0021435A /* struct_ipv6_mreq.h */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -10607,6 +10625,14 @@
 				05959EC817ABFACA0021435A /* lio_listio.c */,
 			);
 			path = aio;
+			sourceTree = "<group>";
+		};
+		05959ED117AC00700021435A /* netinet_in */ = {
+			isa = PBXGroup;
+			children = (
+				05959ED217AC00700021435A /* __netinet_in.c */,
+			);
+			path = netinet_in;
 			sourceTree = "<group>";
 		};
 		05A8F94E1625690B000484EB /* yasm */ = {
