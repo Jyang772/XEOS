@@ -103,7 +103,6 @@ clean:
 	@$(CD) $(DIR_BINUTILS) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	@$(CD) $(DIR_CMAKE) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	@$(CD) $(DIR_LLVM) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(DIR_UDK) && $(MAKE) $(ARGS_MAKE_CLEAN)
 	
 # YASM
 yasm:
