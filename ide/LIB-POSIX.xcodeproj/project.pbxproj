@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		05B4EB3417AC269C00587E4C /* isalnum_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalnum_l.c; sourceTree = "<group>"; };
+		05B4EB3517AC269C00587E4C /* isalpha_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalpha_l.c; sourceTree = "<group>"; };
+		05B4EB3617AC269C00587E4C /* isascii.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isascii.c; sourceTree = "<group>"; };
+		05B4EB3717AC269C00587E4C /* isblank_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isblank_l.c; sourceTree = "<group>"; };
+		05B4EB3817AC269C00587E4C /* iscntrl_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iscntrl_l.c; sourceTree = "<group>"; };
+		05B4EB3917AC269C00587E4C /* isdigit_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isdigit_l.c; sourceTree = "<group>"; };
+		05B4EB3A17AC269C00587E4C /* isgraph_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isgraph_l.c; sourceTree = "<group>"; };
+		05B4EB3B17AC269C00587E4C /* islower_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = islower_l.c; sourceTree = "<group>"; };
+		05B4EB3C17AC269C00587E4C /* isprint_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isprint_l.c; sourceTree = "<group>"; };
+		05B4EB3D17AC269C00587E4C /* ispunct_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ispunct_l.c; sourceTree = "<group>"; };
+		05B4EB3E17AC269C00587E4C /* isspace_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isspace_l.c; sourceTree = "<group>"; };
+		05B4EB3F17AC269C00587E4C /* isupper_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isupper_l.c; sourceTree = "<group>"; };
+		05B4EB4017AC269C00587E4C /* isxdigit_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isxdigit_l.c; sourceTree = "<group>"; };
+		05B4EB4117AC269C00587E4C /* toascii.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = toascii.c; sourceTree = "<group>"; };
+		05B4EB4217AC269C00587E4C /* tolower_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tolower_l.c; sourceTree = "<group>"; };
+		05B4EB4317AC269C00587E4C /* toupper_l.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = toupper_l.c; sourceTree = "<group>"; };
 		05F57DAE17AC136E00DB4ACE /* aio_cancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_cancel.c; sourceTree = "<group>"; };
 		05F57DAF17AC136E00DB4ACE /* aio_error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_error.c; sourceTree = "<group>"; };
 		05F57DB017AC136E00DB4ACE /* aio_fsync.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aio_fsync.c; sourceTree = "<group>"; };
@@ -262,6 +278,7 @@
 			children = (
 				05F57DAD17AC136E00DB4ACE /* aio */,
 				05F57DB617AC136E00DB4ACE /* arpa_inet */,
+				05B4EB3317AC269C00587E4C /* ctype */,
 				05F57DBF17AC136E00DB4ACE /* include */,
 				05F57E1617AC136E00DB4ACE /* Makefile */,
 				05F57E1717AC136E00DB4ACE /* netinet_in */,
@@ -271,6 +288,30 @@
 				05F57E4C17AC136E00DB4ACE /* time */,
 				05F57E5E17AC136E00DB4ACE /* unistd */,
 			);
+			sourceTree = "<group>";
+		};
+		05B4EB3317AC269C00587E4C /* ctype */ = {
+			isa = PBXGroup;
+			children = (
+				05B4EB3417AC269C00587E4C /* isalnum_l.c */,
+				05B4EB3517AC269C00587E4C /* isalpha_l.c */,
+				05B4EB3617AC269C00587E4C /* isascii.c */,
+				05B4EB3717AC269C00587E4C /* isblank_l.c */,
+				05B4EB3817AC269C00587E4C /* iscntrl_l.c */,
+				05B4EB3917AC269C00587E4C /* isdigit_l.c */,
+				05B4EB3A17AC269C00587E4C /* isgraph_l.c */,
+				05B4EB3B17AC269C00587E4C /* islower_l.c */,
+				05B4EB3C17AC269C00587E4C /* isprint_l.c */,
+				05B4EB3D17AC269C00587E4C /* ispunct_l.c */,
+				05B4EB3E17AC269C00587E4C /* isspace_l.c */,
+				05B4EB3F17AC269C00587E4C /* isupper_l.c */,
+				05B4EB4017AC269C00587E4C /* isxdigit_l.c */,
+				05B4EB4117AC269C00587E4C /* toascii.c */,
+				05B4EB4217AC269C00587E4C /* tolower_l.c */,
+				05B4EB4317AC269C00587E4C /* toupper_l.c */,
+			);
+			name = ctype;
+			path = ../source/lib/posix/ctype;
 			sourceTree = "<group>";
 		};
 		05F57DAD17AC136E00DB4ACE /* aio */ = {

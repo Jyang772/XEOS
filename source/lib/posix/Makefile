@@ -79,6 +79,7 @@ DIR_SRC_SIGNAL      = $(PATH_SRC_LIB_LIBPOSIX)signal/
 DIR_SRC_AIO         = $(PATH_SRC_LIB_LIBPOSIX)aio/
 DIR_SRC_NETINET_IN  = $(PATH_SRC_LIB_LIBPOSIX)netinet_in/
 DIR_SRC_ARPA_INET   = $(PATH_SRC_LIB_LIBPOSIX)arpa_inet/
+DIR_SRC_CTYPE       = $(PATH_SRC_LIB_LIBPOSIX)ctype/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -94,6 +95,7 @@ vpath %$(EXT_C)         $(DIR_SRC_SIGNAL)
 vpath %$(EXT_C)         $(DIR_SRC_AIO)
 vpath %$(EXT_C)         $(DIR_SRC_NETINET_IN)
 vpath %$(EXT_C)         $(DIR_SRC_ARPA_INET)
+vpath %$(EXT_C)         $(DIR_SRC_CTYPE)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -120,6 +122,7 @@ _FILES_C_OBJ_BUILD_SIGNAL       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 _FILES_C_OBJ_BUILD_AIO          = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_AIO))
 _FILES_C_OBJ_BUILD_NETINET_IN   = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_NETINET_IN))
 _FILES_C_OBJ_BUILD_ARPA_INET    = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_ARPA_INET))
+_FILES_C_OBJ_BUILD_CTYPE        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_CTYPE))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -143,7 +146,8 @@ all:    $(_FILES_C_OBJ_BUILD)               \
         $(_FILES_C_OBJ_BUILD_SIGNAL)        \
         $(_FILES_C_OBJ_BUILD_AIO)           \
         $(_FILES_C_OBJ_BUILD_NETINET_IN)    \
-        $(_FILES_C_OBJ_BUILD_ARPA_INET)
+        $(_FILES_C_OBJ_BUILD_ARPA_INET)     \
+        $(_FILES_C_OBJ_BUILD_CTYPE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libposix.a"$(COLOR_NONE)
 	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libposix.a $(PATH_BUILD_32_LIB_OBJ_LIBPOSIX)*$(EXT_OBJ)
