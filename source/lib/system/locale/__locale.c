@@ -64,4 +64,4 @@
 #include <system/locale.h>
 #include <system/__private/locale.h>
 
-
+locale_t __System_Locale_DefaultLocale;

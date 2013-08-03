@@ -153,6 +153,8 @@ struct __System_Locale_Time
     const char * t_fmt_ampm;
 };
 
+extern locale_t __System_Locale_DefaultLocale;
+
 #ifdef __cplusplus
 }
 #endif
