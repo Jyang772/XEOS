@@ -67,12 +67,22 @@
 
 int System_Locale_CType_ToUpper( System_Locale_CTypeRef ctype, int c )
 {
+    size_t i;
+    
     if( ctype == NULL )
     {
-        return false;
+        return c;
     }
     
-    ( void )c;
+    i = 0;
     
-    return false;
+    while( i < ctype->toupper_count )
+    {
+        if( ctype->toupper[ i ][ 0 ] == c )
+        {
+            return ctype->tolower[ i ][ 1 ];
+        }
+    }
+    
+    return c;
 }

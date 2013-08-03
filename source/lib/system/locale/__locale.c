@@ -86,6 +86,8 @@ static struct __System_Locale_CType __System_Locale_DefaultLocale_CType =
     NULL,
     NULL,
     0,
+    __PAD_CHAR_4,
+    0,
     0,
     0,
     0,

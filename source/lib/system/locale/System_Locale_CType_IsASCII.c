@@ -72,7 +72,5 @@ bool System_Locale_CType_IsASCII( System_Locale_CTypeRef ctype, int c )
         return false;
     }
     
-    ( void )c;
-    
-    return false;
+    return ( c >= 0 && c <= 128 );
 }

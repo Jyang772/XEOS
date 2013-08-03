@@ -72,7 +72,5 @@ bool System_Locale_CType_IsPrint( System_Locale_CTypeRef ctype, int c )
         return false;
     }
     
-    ( void )c;
-    
-    return false;
+    return c == ctype->space_c || System_Locale_CType_IsPunct( ctype, c ) || System_Locale_CType_IsAlphaNumeric( ctype, c );
 }

@@ -72,7 +72,5 @@ bool System_Locale_CType_IsAlpha( System_Locale_CTypeRef ctype, int c )
         return false;
     }
     
-    ( void )c;
-    
-    return false;
+    return System_Locale_CType_IsUpper( ctype, c ) || System_Locale_CType_IsLower( ctype, c );
 }

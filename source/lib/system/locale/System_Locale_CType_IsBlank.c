@@ -67,12 +67,24 @@
 
 bool System_Locale_CType_IsBlank( System_Locale_CTypeRef ctype, int c )
 {
+    size_t i;
+    
     if( ctype == NULL )
     {
         return false;
     }
     
-    ( void )c;
+    i = 0;
+    
+    while( i < ctype->blank_count )
+    {
+        if( ctype->blank[ i ] == c )
+        {
+            return true;
+        }
+        
+        i++;
+    }
     
     return false;
 }

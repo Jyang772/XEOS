@@ -67,12 +67,24 @@
 
 bool System_Locale_CType_IsLower( System_Locale_CTypeRef ctype, int c )
 {
+    size_t i;
+    
     if( ctype == NULL )
     {
         return false;
     }
     
-    ( void )c;
+    i = 0;
+    
+    while( i < ctype->lower_count )
+    {
+        if( ctype->lower[ i ] == c )
+        {
+            return true;
+        }
+        
+        i++;
+    }
     
     return false;
 }

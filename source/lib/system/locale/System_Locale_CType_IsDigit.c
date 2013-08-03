@@ -67,12 +67,24 @@
 
 bool System_Locale_CType_IsDigit( System_Locale_CTypeRef ctype, int c )
 {
+    size_t i;
+    
     if( ctype == NULL )
     {
         return false;
     }
     
-    ( void )c;
+    i = 0;
+    
+    while( i < ctype->digit_count )
+    {
+        if( ctype->digit[ i ] == c )
+        {
+            return true;
+        }
+        
+        i++;
+    }
     
     return false;
 }

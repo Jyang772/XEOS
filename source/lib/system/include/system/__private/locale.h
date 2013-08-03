@@ -88,6 +88,8 @@ struct __System_Locale_CType
     int   * blank;
     int ( * toupper )[ 2 ];
     int ( * tolower )[ 2 ];
+    int     space_c;
+    char    __pad_0[ 4 ];
     size_t  upper_count;
     size_t  lower_count;
     size_t  digit_count;

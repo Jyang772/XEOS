@@ -72,7 +72,5 @@ bool System_Locale_CType_IsAlphaNumeric( System_Locale_CTypeRef ctype, int c )
         return false;
     }
     
-    ( void )c;
-    
-    return false;
+    return System_Locale_CType_IsDigit( ctype, c ) || System_Locale_CType_IsAlpha( ctype, c );
 }
