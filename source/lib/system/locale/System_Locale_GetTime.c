@@ -72,5 +72,5 @@ System_Locale_TimeRef System_Locale_GetTime( System_LocaleRef locale )
         return NULL;
     }
     
-    return NULL;
+    return locale->lc_time;
 }
