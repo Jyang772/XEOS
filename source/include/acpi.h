@@ -1,1 +1,1 @@
-../lib/acpi/include/acpi.h
+../core/acpi/include/acpi.h

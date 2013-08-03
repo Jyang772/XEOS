@@ -93,9 +93,6 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS ACPI library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_LIBACPI) && $(MAKE)
-	
 # Cleans the build files
 clean:
 	
@@ -103,4 +100,3 @@ clean:
 	@$(CD) $(PATH_SRC_LIB_LIBPOSIX) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_LIBPTHREAD) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_LIBACPI) && $(MAKE) clean

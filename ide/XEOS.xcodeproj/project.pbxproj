@@ -10,7 +10,6 @@
 		05B4D9EB17AC155500587E4C /* BOOT-BIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "BOOT-BIOS.xcodeproj"; sourceTree = "<group>"; };
 		05B4D9EE17AC155500587E4C /* BOOT-UEFI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "BOOT-UEFI.xcodeproj"; sourceTree = "<group>"; };
 		05B4D9F117AC155500587E4C /* CORE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CORE.xcodeproj; sourceTree = "<group>"; };
-		05B4D9F417AC155500587E4C /* LIB-ACPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-ACPI.xcodeproj"; sourceTree = "<group>"; };
 		05B4D9F717AC155500587E4C /* LIB-C99.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-C99.xcodeproj"; sourceTree = "<group>"; };
 		05B4D9FA17AC155600587E4C /* LIB-POSIX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-POSIX.xcodeproj"; sourceTree = "<group>"; };
 		05B4D9FD17AC155600587E4C /* LIB-PTHREAD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-PTHREAD.xcodeproj"; sourceTree = "<group>"; };
@@ -46,7 +45,6 @@
 				05B4D9EB17AC155500587E4C /* BOOT-BIOS.xcodeproj */,
 				05B4D9EE17AC155500587E4C /* BOOT-UEFI.xcodeproj */,
 				05B4D9F117AC155500587E4C /* CORE.xcodeproj */,
-				05B4D9F417AC155500587E4C /* LIB-ACPI.xcodeproj */,
 				05B4D9F717AC155500587E4C /* LIB-C99.xcodeproj */,
 				05B4D9FA17AC155600587E4C /* LIB-POSIX.xcodeproj */,
 				05B4D9FD17AC155600587E4C /* LIB-PTHREAD.xcodeproj */,
@@ -69,13 +67,6 @@
 			sourceTree = "<group>";
 		};
 		05B4D9F217AC155500587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05B4D9F517AC155500587E4C /* Products */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -256,10 +247,6 @@
 				{
 					ProductGroup = 05B4D9F217AC155500587E4C /* Products */;
 					ProjectRef = 05B4D9F117AC155500587E4C /* CORE.xcodeproj */;
-				},
-				{
-					ProductGroup = 05B4D9F517AC155500587E4C /* Products */;
-					ProjectRef = 05B4D9F417AC155500587E4C /* LIB-ACPI.xcodeproj */;
 				},
 				{
 					ProductGroup = 05B4D9F817AC155500587E4C /* Products */;

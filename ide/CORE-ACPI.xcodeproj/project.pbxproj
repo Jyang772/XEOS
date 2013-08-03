@@ -1,0 +1,257 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05C7630B17AD6EAE00236B3F /* __ACPI.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __ACPI.c; sourceTree = "<group>"; };
+		05C7630C17AD6EAE00236B3F /* ACPI_DisableLogging.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ACPI_DisableLogging.c; sourceTree = "<group>"; };
+		05C7630D17AD6EAE00236B3F /* ACPI_EnableLogging.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ACPI_EnableLogging.c; sourceTree = "<group>"; };
+		05C7630E17AD6EAE00236B3F /* ACPI_SetLoggingFunction.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ACPI_SetLoggingFunction.c; sourceTree = "<group>"; };
+		05C76C6417AD6EB300236B3F /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
+		05C76C6517AD6EB300236B3F /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
+		05C76C9A17AD6EB300236B3F /* acpica-clang-warnings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "acpica-clang-warnings.h"; sourceTree = "<group>"; };
+		05C76C9B17AD6EB300236B3F /* acpica.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpica.h; sourceTree = "<group>"; };
+		05C76C9C17AD6EB300236B3F /* acpi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acpi.h; sourceTree = "<group>"; };
+		05C76C9D17AD6EB300236B3F /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/core/acpi/Makefile; sourceTree = "<group>"; };
+		05C76C9F17AD6EB300236B3F /* AcpiOsAcquireLock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsAcquireLock.c; sourceTree = "<group>"; };
+		05C76CA017AD6EB300236B3F /* AcpiOsAcquireMutex.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsAcquireMutex.c; sourceTree = "<group>"; };
+		05C76CA117AD6EB300236B3F /* AcpiOsAcquireObject.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsAcquireObject.c; sourceTree = "<group>"; };
+		05C76CA217AD6EB300236B3F /* AcpiOsAllocate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsAllocate.c; sourceTree = "<group>"; };
+		05C76CA317AD6EB300236B3F /* AcpiOsCreateCache.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsCreateCache.c; sourceTree = "<group>"; };
+		05C76CA417AD6EB300236B3F /* AcpiOsCreateLock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsCreateLock.c; sourceTree = "<group>"; };
+		05C76CA517AD6EB300236B3F /* AcpiOsCreateMutex.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsCreateMutex.c; sourceTree = "<group>"; };
+		05C76CA617AD6EB300236B3F /* AcpiOsCreateSemaphore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsCreateSemaphore.c; sourceTree = "<group>"; };
+		05C76CA717AD6EB300236B3F /* AcpiOsDeleteCache.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsDeleteCache.c; sourceTree = "<group>"; };
+		05C76CA817AD6EB300236B3F /* AcpiOsDeleteLock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsDeleteLock.c; sourceTree = "<group>"; };
+		05C76CA917AD6EB300236B3F /* AcpiOsDeleteMutex.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsDeleteMutex.c; sourceTree = "<group>"; };
+		05C76CAA17AD6EB300236B3F /* AcpiOsDeleteSemaphore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsDeleteSemaphore.c; sourceTree = "<group>"; };
+		05C76CAB17AD6EB300236B3F /* AcpiOsExecute.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsExecute.c; sourceTree = "<group>"; };
+		05C76CAC17AD6EB300236B3F /* AcpiOsFree.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsFree.c; sourceTree = "<group>"; };
+		05C76CAD17AD6EB300236B3F /* AcpiOsGetLine.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsGetLine.c; sourceTree = "<group>"; };
+		05C76CAE17AD6EB300236B3F /* AcpiOsGetPhysicalAddress.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsGetPhysicalAddress.c; sourceTree = "<group>"; };
+		05C76CAF17AD6EB300236B3F /* AcpiOsGetRootPointer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsGetRootPointer.c; sourceTree = "<group>"; };
+		05C76CB017AD6EB300236B3F /* AcpiOsGetThreadId.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsGetThreadId.c; sourceTree = "<group>"; };
+		05C76CB117AD6EB300236B3F /* AcpiOsGetTimer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsGetTimer.c; sourceTree = "<group>"; };
+		05C76CB217AD6EB300236B3F /* AcpiOsInitialize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsInitialize.c; sourceTree = "<group>"; };
+		05C76CB317AD6EB300236B3F /* AcpiOsInstallInterruptHandler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsInstallInterruptHandler.c; sourceTree = "<group>"; };
+		05C76CB417AD6EB300236B3F /* AcpiOsMapMemory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsMapMemory.c; sourceTree = "<group>"; };
+		05C76CB517AD6EB300236B3F /* AcpiOsPhysicalTableOverride.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsPhysicalTableOverride.c; sourceTree = "<group>"; };
+		05C76CB617AD6EB300236B3F /* AcpiOsPredefinedOverride.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsPredefinedOverride.c; sourceTree = "<group>"; };
+		05C76CB717AD6EB300236B3F /* AcpiOsPrintf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsPrintf.c; sourceTree = "<group>"; };
+		05C76CB817AD6EB300236B3F /* AcpiOsPurgeCache.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsPurgeCache.c; sourceTree = "<group>"; };
+		05C76CB917AD6EB300236B3F /* AcpiOsReadable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsReadable.c; sourceTree = "<group>"; };
+		05C76CBA17AD6EB300236B3F /* AcpiOsReadMemory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsReadMemory.c; sourceTree = "<group>"; };
+		05C76CBB17AD6EB300236B3F /* AcpiOsReadPciConfiguration.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsReadPciConfiguration.c; sourceTree = "<group>"; };
+		05C76CBC17AD6EB300236B3F /* AcpiOsReadPort.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsReadPort.c; sourceTree = "<group>"; };
+		05C76CBD17AD6EB300236B3F /* AcpiOsRedirectOutput.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsRedirectOutput.c; sourceTree = "<group>"; };
+		05C76CBE17AD6EB300236B3F /* AcpiOsReleaseLock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsReleaseLock.c; sourceTree = "<group>"; };
+		05C76CBF17AD6EB300236B3F /* AcpiOsReleaseMutex.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsReleaseMutex.c; sourceTree = "<group>"; };
+		05C76CC017AD6EB300236B3F /* AcpiOsReleaseObject.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsReleaseObject.c; sourceTree = "<group>"; };
+		05C76CC117AD6EB300236B3F /* AcpiOsRemoveInterruptHandler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsRemoveInterruptHandler.c; sourceTree = "<group>"; };
+		05C76CC217AD6EB300236B3F /* AcpiOsSignal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsSignal.c; sourceTree = "<group>"; };
+		05C76CC317AD6EB300236B3F /* AcpiOsSignalSemaphore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsSignalSemaphore.c; sourceTree = "<group>"; };
+		05C76CC417AD6EB300236B3F /* AcpiOsSleep.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsSleep.c; sourceTree = "<group>"; };
+		05C76CC517AD6EB300236B3F /* AcpiOsStall.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsStall.c; sourceTree = "<group>"; };
+		05C76CC617AD6EB300236B3F /* AcpiOsTableOverride.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsTableOverride.c; sourceTree = "<group>"; };
+		05C76CC717AD6EB300236B3F /* AcpiOsTerminate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsTerminate.c; sourceTree = "<group>"; };
+		05C76CC817AD6EB300236B3F /* AcpiOsUnmapMemory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsUnmapMemory.c; sourceTree = "<group>"; };
+		05C76CC917AD6EB300236B3F /* AcpiOsVprintf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsVprintf.c; sourceTree = "<group>"; };
+		05C76CCA17AD6EB300236B3F /* AcpiOsWaitEventsComplete.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsWaitEventsComplete.c; sourceTree = "<group>"; };
+		05C76CCB17AD6EB300236B3F /* AcpiOsWaitSemaphore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsWaitSemaphore.c; sourceTree = "<group>"; };
+		05C76CCC17AD6EB300236B3F /* AcpiOsWritable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsWritable.c; sourceTree = "<group>"; };
+		05C76CCD17AD6EB300236B3F /* AcpiOsWriteMemory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsWriteMemory.c; sourceTree = "<group>"; };
+		05C76CCE17AD6EB300236B3F /* AcpiOsWritePciConfiguration.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsWritePciConfiguration.c; sourceTree = "<group>"; };
+		05C76CCF17AD6EB300236B3F /* AcpiOsWritePort.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AcpiOsWritePort.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0595BA5917AC118E0021435A = {
+			isa = PBXGroup;
+			children = (
+				05C7630A17AD6EAE00236B3F /* acpi */,
+				05C76C6117AD6EB300236B3F /* include */,
+				05C76C9D17AD6EB300236B3F /* Makefile */,
+				05C76C9E17AD6EB300236B3F /* osl */,
+			);
+			sourceTree = "<group>";
+		};
+		05C7630A17AD6EAE00236B3F /* acpi */ = {
+			isa = PBXGroup;
+			children = (
+				05C7630B17AD6EAE00236B3F /* __ACPI.c */,
+				05C7630C17AD6EAE00236B3F /* ACPI_DisableLogging.c */,
+				05C7630D17AD6EAE00236B3F /* ACPI_EnableLogging.c */,
+				05C7630E17AD6EAE00236B3F /* ACPI_SetLoggingFunction.c */,
+			);
+			name = acpi;
+			path = ../source/core/acpi/acpi;
+			sourceTree = "<group>";
+		};
+		05C76C6117AD6EB300236B3F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05C76C6217AD6EB300236B3F /* acpi */,
+				05C76C9C17AD6EB300236B3F /* acpi.h */,
+			);
+			name = include;
+			path = ../source/core/acpi/include;
+			sourceTree = "<group>";
+		};
+		05C76C6217AD6EB300236B3F /* acpi */ = {
+			isa = PBXGroup;
+			children = (
+				05C76C6317AD6EB300236B3F /* __private */,
+				05C76C6517AD6EB300236B3F /* acpi.h */,
+				05C76C9A17AD6EB300236B3F /* acpica-clang-warnings.h */,
+				05C76C9B17AD6EB300236B3F /* acpica.h */,
+			);
+			path = acpi;
+			sourceTree = "<group>";
+		};
+		05C76C6317AD6EB300236B3F /* __private */ = {
+			isa = PBXGroup;
+			children = (
+				05C76C6417AD6EB300236B3F /* acpi.h */,
+			);
+			path = __private;
+			sourceTree = "<group>";
+		};
+		05C76C9E17AD6EB300236B3F /* osl */ = {
+			isa = PBXGroup;
+			children = (
+				05C76C9F17AD6EB300236B3F /* AcpiOsAcquireLock.c */,
+				05C76CA017AD6EB300236B3F /* AcpiOsAcquireMutex.c */,
+				05C76CA117AD6EB300236B3F /* AcpiOsAcquireObject.c */,
+				05C76CA217AD6EB300236B3F /* AcpiOsAllocate.c */,
+				05C76CA317AD6EB300236B3F /* AcpiOsCreateCache.c */,
+				05C76CA417AD6EB300236B3F /* AcpiOsCreateLock.c */,
+				05C76CA517AD6EB300236B3F /* AcpiOsCreateMutex.c */,
+				05C76CA617AD6EB300236B3F /* AcpiOsCreateSemaphore.c */,
+				05C76CA717AD6EB300236B3F /* AcpiOsDeleteCache.c */,
+				05C76CA817AD6EB300236B3F /* AcpiOsDeleteLock.c */,
+				05C76CA917AD6EB300236B3F /* AcpiOsDeleteMutex.c */,
+				05C76CAA17AD6EB300236B3F /* AcpiOsDeleteSemaphore.c */,
+				05C76CAB17AD6EB300236B3F /* AcpiOsExecute.c */,
+				05C76CAC17AD6EB300236B3F /* AcpiOsFree.c */,
+				05C76CAD17AD6EB300236B3F /* AcpiOsGetLine.c */,
+				05C76CAE17AD6EB300236B3F /* AcpiOsGetPhysicalAddress.c */,
+				05C76CAF17AD6EB300236B3F /* AcpiOsGetRootPointer.c */,
+				05C76CB017AD6EB300236B3F /* AcpiOsGetThreadId.c */,
+				05C76CB117AD6EB300236B3F /* AcpiOsGetTimer.c */,
+				05C76CB217AD6EB300236B3F /* AcpiOsInitialize.c */,
+				05C76CB317AD6EB300236B3F /* AcpiOsInstallInterruptHandler.c */,
+				05C76CB417AD6EB300236B3F /* AcpiOsMapMemory.c */,
+				05C76CB517AD6EB300236B3F /* AcpiOsPhysicalTableOverride.c */,
+				05C76CB617AD6EB300236B3F /* AcpiOsPredefinedOverride.c */,
+				05C76CB717AD6EB300236B3F /* AcpiOsPrintf.c */,
+				05C76CB817AD6EB300236B3F /* AcpiOsPurgeCache.c */,
+				05C76CB917AD6EB300236B3F /* AcpiOsReadable.c */,
+				05C76CBA17AD6EB300236B3F /* AcpiOsReadMemory.c */,
+				05C76CBB17AD6EB300236B3F /* AcpiOsReadPciConfiguration.c */,
+				05C76CBC17AD6EB300236B3F /* AcpiOsReadPort.c */,
+				05C76CBD17AD6EB300236B3F /* AcpiOsRedirectOutput.c */,
+				05C76CBE17AD6EB300236B3F /* AcpiOsReleaseLock.c */,
+				05C76CBF17AD6EB300236B3F /* AcpiOsReleaseMutex.c */,
+				05C76CC017AD6EB300236B3F /* AcpiOsReleaseObject.c */,
+				05C76CC117AD6EB300236B3F /* AcpiOsRemoveInterruptHandler.c */,
+				05C76CC217AD6EB300236B3F /* AcpiOsSignal.c */,
+				05C76CC317AD6EB300236B3F /* AcpiOsSignalSemaphore.c */,
+				05C76CC417AD6EB300236B3F /* AcpiOsSleep.c */,
+				05C76CC517AD6EB300236B3F /* AcpiOsStall.c */,
+				05C76CC617AD6EB300236B3F /* AcpiOsTableOverride.c */,
+				05C76CC717AD6EB300236B3F /* AcpiOsTerminate.c */,
+				05C76CC817AD6EB300236B3F /* AcpiOsUnmapMemory.c */,
+				05C76CC917AD6EB300236B3F /* AcpiOsVprintf.c */,
+				05C76CCA17AD6EB300236B3F /* AcpiOsWaitEventsComplete.c */,
+				05C76CCB17AD6EB300236B3F /* AcpiOsWaitSemaphore.c */,
+				05C76CCC17AD6EB300236B3F /* AcpiOsWritable.c */,
+				05C76CCD17AD6EB300236B3F /* AcpiOsWriteMemory.c */,
+				05C76CCE17AD6EB300236B3F /* AcpiOsWritePciConfiguration.c */,
+				05C76CCF17AD6EB300236B3F /* AcpiOsWritePort.c */,
+			);
+			name = osl;
+			path = ../source/core/acpi/osl;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA5E17AC118E0021435A /* CORE-ACPI */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA6117AC118E0021435A /* Build configuration list for PBXLegacyTarget "CORE-ACPI" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/core;
+			dependencies = (
+			);
+			name = "CORE-ACPI";
+			passBuildSettingsInEnvironment = 1;
+			productName = CORE;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA5A17AC118E0021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA5D17AC118E0021435A /* Build configuration list for PBXProject "CORE-ACPI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA5917AC118E0021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA5E17AC118E0021435A /* CORE-ACPI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA6017AC118E0021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA6317AC118E0021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA5D17AC118E0021435A /* Build configuration list for PBXProject "CORE-ACPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA6017AC118E0021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA6117AC118E0021435A /* Build configuration list for PBXLegacyTarget "CORE-ACPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA6317AC118E0021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA5A17AC118E0021435A /* Project object */;
+}
