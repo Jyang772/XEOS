@@ -61,17 +61,21 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_POSIX_ICONV_H__
-#define __XEOS_LIB_POSIX_ICONV_H__
+/*!
+ * @header          iconv_t.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef __XEOS_LIB_SYSTEM_TYPES_ICONV_T_H__
+#define __XEOS_LIB_SYSTEM_TYPES_ICONV_T_H__
 
+#include <system/types/__private/stdint.h>
 
-
-#ifdef __cplusplus
+typedef struct
+{
+    __XEOS_UInt32 __reserved[ 8 ];
 }
-#endif
+iconv_t;
 
-#endif /* __XEOS_LIB_POSIX_ICONV_H__ */
+#endif /* __XEOS_LIB_SYSTEM_TYPES_ICONV_T_H__ */

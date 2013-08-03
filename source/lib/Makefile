@@ -90,6 +90,9 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX Thread library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE)
 	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS IConv library"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_LIB_ICONV) && $(MAKE)
+	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE)
 	
@@ -99,4 +102,5 @@ clean:
 	@$(CD) $(PATH_SRC_LIB_C99) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_POSIX) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_ICONV) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE) clean

@@ -159,6 +159,8 @@ PATH_BUILD_32_LIB_OBJ_POSIX             := $(PATH_BUILD_32_LIB_OBJ)posix/
 PATH_BUILD_64_LIB_OBJ_POSIX             := $(PATH_BUILD_64_LIB_OBJ)posix/
 PATH_BUILD_32_LIB_OBJ_PTHREAD           := $(PATH_BUILD_32_LIB_OBJ)pthread/
 PATH_BUILD_64_LIB_OBJ_PTHREAD           := $(PATH_BUILD_64_LIB_OBJ)pthread/
+PATH_BUILD_32_LIB_OBJ_ICONV             := $(PATH_BUILD_32_LIB_OBJ)iconv/
+PATH_BUILD_64_LIB_OBJ_ICONV             := $(PATH_BUILD_64_LIB_OBJ)iconv/
 
 # Source directories
 
@@ -174,6 +176,7 @@ PATH_SRC_LIB_C99                        := $(PATH_SRC_LIB)c99/
 PATH_SRC_LIB_SYSTEM                     := $(PATH_SRC_LIB)system/
 PATH_SRC_LIB_POSIX                      := $(PATH_SRC_LIB)posix/
 PATH_SRC_LIB_PTHREAD                    := $(PATH_SRC_LIB)pthread/
+PATH_SRC_LIB_ICONV                      := $(PATH_SRC_LIB)iconv/
 
 # Release directories
 

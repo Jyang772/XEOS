@@ -1,0 +1,124 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05C76CD217AD76EB00236B3F /* iconv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iconv.h; sourceTree = "<group>"; };
+		05C76CD317AD76EB00236B3F /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/iconv/Makefile; sourceTree = "<group>"; };
+		05C76CD417AD780700236B3F /* iconv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iconv.c; sourceTree = "<group>"; };
+		05C76CD517AD780E00236B3F /* iconv_open.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iconv_open.c; sourceTree = "<group>"; };
+		05C76CD617AD781700236B3F /* iconv_close.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iconv_close.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0595BA7A17AC11A70021435A = {
+			isa = PBXGroup;
+			children = (
+				05C76CD017AD76EB00236B3F /* iconv */,
+				05C76CD117AD76EB00236B3F /* include */,
+				05C76CD317AD76EB00236B3F /* Makefile */,
+			);
+			sourceTree = "<group>";
+		};
+		05C76CD017AD76EB00236B3F /* iconv */ = {
+			isa = PBXGroup;
+			children = (
+				05C76CD417AD780700236B3F /* iconv.c */,
+				05C76CD617AD781700236B3F /* iconv_close.c */,
+				05C76CD517AD780E00236B3F /* iconv_open.c */,
+			);
+			name = iconv;
+			path = ../source/lib/iconv/iconv;
+			sourceTree = "<group>";
+		};
+		05C76CD117AD76EB00236B3F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05C76CD217AD76EB00236B3F /* iconv.h */,
+			);
+			name = include;
+			path = ../source/lib/iconv/include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA7F17AC11A70021435A /* LIB-ICONV */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-ICONV" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/lib/pthread;
+			dependencies = (
+			);
+			name = "LIB-ICONV";
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-PTHREAD";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA7B17AC11A70021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-ICONV" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA7A17AC11A70021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA7F17AC11A70021435A /* LIB-ICONV */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA8117AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA8417AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-ICONV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8117AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-ICONV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8417AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA7B17AC11A70021435A /* Project object */;
+}

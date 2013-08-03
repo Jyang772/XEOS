@@ -47,6 +47,7 @@
 		05C7593117AD4DE600236B3F /* LC_MONETARY.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MONETARY.txt; sourceTree = "<group>"; };
 		05C7593217AD4DE700236B3F /* LC_NUMERIC.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_NUMERIC.txt; sourceTree = "<group>"; };
 		05C7593317AD4DE700236B3F /* LC_TIME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_TIME.txt; sourceTree = "<group>"; };
+		05C76CD717AD78C700236B3F /* iconv_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iconv_t.h; sourceTree = "<group>"; };
 		05F57F1A17AC13D500DB4ACE /* System_Atomic.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.32.s; sourceTree = "<group>"; };
 		05F57F1B17AC13D500DB4ACE /* System_Atomic.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.64.s; sourceTree = "<group>"; };
 		05F57F1E17AC13D500DB4ACE /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
@@ -322,6 +323,7 @@
 				05F57F3017AC13D500DB4ACE /* fsblkcnt_t.h */,
 				05F57F3117AC13D500DB4ACE /* fsfilcnt_t.h */,
 				05F57F3217AC13D500DB4ACE /* gid_t.h */,
+				05C76CD717AD78C700236B3F /* iconv_t.h */,
 				05F57F3317AC13D500DB4ACE /* id_t.h */,
 				05F57F3417AC13D500DB4ACE /* in_addr_t.h */,
 				05F57F3517AC13D500DB4ACE /* in_port_t.h */,
