@@ -66,5 +66,5 @@
 
 int isdigit_l( int c, locale_t l )
 {
-    return System_Locale_CType_IsDigit( System_Locale_GetCType( &l ), c );
+    return System_Locale_CType_IsDigit( System_Locale_GetCType( l ), c );
 }

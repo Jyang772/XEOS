@@ -66,5 +66,5 @@
 
 int isspace_l( int c, locale_t l )
 {
-    return System_Locale_CType_IsSpace( System_Locale_GetCType( &l ), c );
+    return System_Locale_CType_IsSpace( System_Locale_GetCType( l ), c );
 }

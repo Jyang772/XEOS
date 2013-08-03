@@ -72,16 +72,6 @@
 
 #include <system/types/__private/stdint.h>
 
-typedef struct
-{
-    const char                      * name;
-    struct __System_Locale_Collate  * lc_collate;
-    struct __System_Locale_CType    * lc_ctype;
-    struct __System_Locale_Messages * lc_messages;
-    struct __System_Locale_Monetary * lc_monetary;
-    struct __System_Locale_Numeric  * lc_numeric;
-    struct __System_Locale_Time     * lc_time;
-}
-locale_t;
+typedef struct __System_Locale * locale_t;
 
 #endif /* __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__ */

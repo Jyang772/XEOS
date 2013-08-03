@@ -154,8 +154,19 @@ struct __System_Locale_Time
     const char * t_fmt_ampm;
 };
 
-extern locale_t __System_Locale_DefaultLocale;
-extern bool     __System_Locale_LocalConvNeedUpdate;
+struct __System_Locale
+{
+    const char                      * name;
+    struct __System_Locale_Collate  * lc_collate;
+    struct __System_Locale_CType    * lc_ctype;
+    struct __System_Locale_Messages * lc_messages;
+    struct __System_Locale_Monetary * lc_monetary;
+    struct __System_Locale_Numeric  * lc_numeric;
+    struct __System_Locale_Time     * lc_time;
+};
+
+extern struct __System_Locale __System_Locale_DefaultLocale;
+extern bool                   __System_Locale_LocalConvNeedUpdate;
 
 #ifdef __cplusplus
 }

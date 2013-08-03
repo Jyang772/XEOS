@@ -80,7 +80,7 @@ typedef struct __System_Locale_Monetary  * System_Locale_MonetaryRef;
 typedef struct __System_Locale_Numeric   * System_Locale_NumericRef;
 typedef struct __System_Locale_Time      * System_Locale_TimeRef;
 
-typedef locale_t * System_LocaleRef;
+typedef struct __System_Locale * System_LocaleRef;
 
 System_LocaleRef System_Locale_GetCurrentLocale( void );
 System_LocaleRef System_Locale_GetDefaultLocale( void );

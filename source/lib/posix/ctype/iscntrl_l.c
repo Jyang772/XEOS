@@ -66,5 +66,5 @@
 
 int iscntrl_l( int c, locale_t l )
 {
-    return System_Locale_CType_IsControl( System_Locale_GetCType( &l ), c );
+    return System_Locale_CType_IsControl( System_Locale_GetCType( l ), c );
 }

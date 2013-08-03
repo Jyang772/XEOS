@@ -66,5 +66,5 @@
 
 int isupper_l( int c, locale_t l )
 {
-    return System_Locale_CType_IsUpper( System_Locale_GetCType( &l ), c );
+    return System_Locale_CType_IsUpper( System_Locale_GetCType( l ), c );
 }

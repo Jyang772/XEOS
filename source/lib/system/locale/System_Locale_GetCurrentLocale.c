@@ -66,8 +66,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-static bool     __inited = false;
-static locale_t __locale = 
+static bool                   __inited = false;
+static struct __System_Locale __locale = 
 {
     NULL,
     NULL,

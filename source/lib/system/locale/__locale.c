@@ -318,7 +318,7 @@ static struct __System_Locale_Time __System_Locale_DefaultLocale_Time =
     "%I:%M:%S %p"
 };
 
-locale_t __System_Locale_DefaultLocale =
+struct __System_Locale __System_Locale_DefaultLocale =
 {
     "C",
     &__System_Locale_DefaultLocale_Collate,
