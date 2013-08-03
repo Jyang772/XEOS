@@ -72,7 +72,25 @@ extern "C" {
 
 #ifdef _POSIX_C_SOURCE
 
-#define LC_MESSAGES 6
+#include <system/types/locale_t.h>
+
+#define LC_MESSAGES         6
+
+#define LC_COLLATE_MASK     0x01
+#define LC_CTYPE_MASK       0x02
+#define LC_MESSAGES_MASK    0x04
+#define LC_MONETARY_MASK    0x08
+#define LC_NUMERIC_MASK     0x10
+#define LC_TIME_MASK        0x20
+
+#define LC_ALL_MASK         0x3F
+
+#define LC_GLOBAL_LOCALE    ( ( locale_t )-1 )
+
+locale_t    duplocale( locale_t locobj );
+void        freelocale( locale_t locobj );
+locale_t    newlocale( int category_mask, const char * locale, locale_t base );
+locale_t    uselocale( locale_t ocobj );
 
 #endif /* _POSIX_C_SOURCE */
 

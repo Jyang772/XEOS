@@ -48,6 +48,10 @@
 		05C7593217AD4DE700236B3F /* LC_NUMERIC.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_NUMERIC.txt; sourceTree = "<group>"; };
 		05C7593317AD4DE700236B3F /* LC_TIME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_TIME.txt; sourceTree = "<group>"; };
 		05C76CD717AD78C700236B3F /* iconv_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iconv_t.h; sourceTree = "<group>"; };
+		05C76CD817AD832200236B3F /* System_Locale_Create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_Create.c; sourceTree = "<group>"; };
+		05C76CD917AD832E00236B3F /* System_Locale_Use.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_Use.c; sourceTree = "<group>"; };
+		05C76CDA17AD833C00236B3F /* System_Locale_Free.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_Free.c; sourceTree = "<group>"; };
+		05C76CDB17AD834400236B3F /* System_Locale_Duplicate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_Duplicate.c; sourceTree = "<group>"; };
 		05F57F1A17AC13D500DB4ACE /* System_Atomic.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.32.s; sourceTree = "<group>"; };
 		05F57F1B17AC13D500DB4ACE /* System_Atomic.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.64.s; sourceTree = "<group>"; };
 		05F57F1E17AC13D500DB4ACE /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				05C7589217AC81EF00236B3F /* __locale.c */,
+				05C76CD817AD832200236B3F /* System_Locale_Create.c */,
 				05C7589A17AC866F00236B3F /* System_Locale_CType_IsAlpha.c */,
 				05C7589B17AC866F00236B3F /* System_Locale_CType_IsAlphaNumeric.c */,
 				05C758BD17AC8BC700236B3F /* System_Locale_CType_IsASCII.c */,
@@ -206,6 +211,8 @@
 				05C758BE17AC8BD500236B3F /* System_Locale_CType_ToASCII.c */,
 				05C758A617AC866F00236B3F /* System_Locale_CType_ToLower.c */,
 				05C758A717AC866F00236B3F /* System_Locale_CType_ToUpper.c */,
+				05C76CDB17AD834400236B3F /* System_Locale_Duplicate.c */,
+				05C76CDA17AD833C00236B3F /* System_Locale_Free.c */,
 				05C758A817AC866F00236B3F /* System_Locale_GetCLocale.c */,
 				05C758A917AC866F00236B3F /* System_Locale_GetCollate.c */,
 				05C758AA17AC866F00236B3F /* System_Locale_GetCType.c */,
@@ -219,6 +226,7 @@
 				05C758B017AC866F00236B3F /* System_Locale_GetPOSIXLocale.c */,
 				05C758B117AC866F00236B3F /* System_Locale_GetTime.c */,
 				05C7592C17AD490A00236B3F /* System_Locale_SetLocale.c */,
+				05C76CD917AD832E00236B3F /* System_Locale_Use.c */,
 			);
 			name = locale;
 			path = ../source/lib/system/locale;

@@ -61,62 +61,64 @@
 
 /* $Id$ */
 
-/*!
- * @header          atomic.h
- * @author          Jean-David Gadina
- * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
- */
+#include <system/locale.h>
+#include <system/__private/locale.h>
+#include <stdlib.h>
+#include <string.h>
 
-#ifndef __XEOS_LIB_SYSTEM_LOCALE_H__
-#define __XEOS_LIB_SYSTEM_LOCALE_H__
-
-#include <stdbool.h>
-#include <system/types/locale_t.h>
-
-typedef struct __System_Locale_Collate   * System_Locale_CollateRef;
-typedef struct __System_Locale_CType     * System_Locale_CTypeRef;
-typedef struct __System_Locale_Messages  * System_Locale_MessagesRef;
-typedef struct __System_Locale_Monetary  * System_Locale_MonetaryRef;
-typedef struct __System_Locale_Numeric   * System_Locale_NumericRef;
-typedef struct __System_Locale_Time      * System_Locale_TimeRef;
-
-typedef struct __System_Locale * System_LocaleRef;
-
-System_LocaleRef System_Locale_GetCurrentLocale( void );
-System_LocaleRef System_Locale_GetDefaultLocale( void );
-System_LocaleRef System_Locale_GetCLocale( void );
-System_LocaleRef System_Locale_GetPOSIXLocale( void );
-System_LocaleRef System_Locale_GetLocale( const char * name );
-char           * System_Locale_SetLocale( int category, const char * name );
-struct lconv   * System_Locale_GetLConv( void );
-System_LocaleRef System_Locale_Create( int categoryMask, const char * name, System_LocaleRef base );
-
-System_LocaleRef System_Locale_Use( System_LocaleRef locale );
-void             System_Locale_Free( System_LocaleRef locale );
-System_LocaleRef System_Locale_Duplicate( System_LocaleRef locale );
-
-System_Locale_CollateRef  System_Locale_GetCollate( System_LocaleRef locale );
-System_Locale_CTypeRef    System_Locale_GetCType( System_LocaleRef locale );
-System_Locale_MessagesRef System_Locale_GetMessages( System_LocaleRef locale );
-System_Locale_MonetaryRef System_Locale_GetMonetary( System_LocaleRef locale );
-System_Locale_NumericRef  System_Locale_GetNumeric( System_LocaleRef locale );
-System_Locale_TimeRef     System_Locale_GetTime( System_LocaleRef locale );
-
-bool System_Locale_CType_IsAlphaNumeric( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsAlpha( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsBlank( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsControl( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsDigit( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsGraph( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsLower( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsPrint( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsPunct( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsSpace( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsUpper( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsXDigit( System_Locale_CTypeRef ctype, int c );
-bool System_Locale_CType_IsASCII( System_Locale_CTypeRef ctype, int c );
-int  System_Locale_CType_ToLower( System_Locale_CTypeRef ctype, int c );
-int  System_Locale_CType_ToUpper( System_Locale_CTypeRef ctype, int c );
-int  System_Locale_CType_ToASCII( System_Locale_CTypeRef ctype, int c );
-
-#endif /* __XEOS_LIB_SYSTEM_LOCALE_H__ */
+System_LocaleRef System_Locale_Duplicate( System_LocaleRef locale )
+{
+    System_LocaleRef                  newLocale;
+    char                            * name;
+    struct __System_Locale_Collate  * collate;
+    struct __System_Locale_CType    * ctype;
+    struct __System_Locale_Messages * messages;
+    struct __System_Locale_Monetary * monetary;
+    struct __System_Locale_Numeric  * numeric;
+    struct __System_Locale_Time     * time;
+    
+    if( locale == NULL )
+    {
+        return NULL;
+    }
+    
+    newLocale   = calloc( sizeof( struct __System_Locale ), 1 );
+    name        = calloc( strlen( locale->name ) + 1, 1 );
+    collate     = malloc( sizeof( struct __System_Locale_Collate ) );
+    ctype       = malloc( sizeof( struct __System_Locale_CType ) );
+    messages    = malloc( sizeof( struct __System_Locale_Messages ) );
+    monetary    = malloc( sizeof( struct __System_Locale_Monetary ) );
+    numeric     = malloc( sizeof( struct __System_Locale_Numeric ) );
+    time        = malloc( sizeof( struct __System_Locale_Time ) );
+    
+    if( name     != NULL ) { strcpy( name, locale->name ); }
+    if( collate  != NULL ) { memcpy( collate,    locale->lc_collate,    sizeof( struct __System_Locale_Collate ) ); }
+    if( ctype    != NULL ) { memcpy( ctype,      locale->lc_ctype,      sizeof( struct __System_Locale_CType ) ); }
+    if( messages != NULL ) { memcpy( messages,   locale->lc_messages,   sizeof( struct __System_Locale_Messages ) ); }
+    if( monetary != NULL ) { memcpy( monetary,   locale->lc_monetary,   sizeof( struct __System_Locale_Monetary ) ); }
+    if( numeric  != NULL ) { memcpy( numeric,    locale->lc_numeric,    sizeof( struct __System_Locale_Numeric ) ); }
+    if( time     != NULL ) { memcpy( time,       locale->lc_time,       sizeof( struct __System_Locale_Time ) ); }
+    
+    if( newLocale != NULL )
+    {
+        newLocale->name         = name;
+        newLocale->lc_collate   = collate;
+        newLocale->lc_ctype     = ctype;
+        newLocale->lc_messages  = messages;
+        newLocale->lc_monetary  = monetary;
+        newLocale->lc_numeric   = numeric;
+        newLocale->lc_time      = time;
+    }
+    else
+    {
+        free( name );
+        free( collate );
+        free( ctype );
+        free( messages );
+        free( monetary );
+        free( numeric );
+        free( time );
+    }
+    
+    return newLocale;
+}
