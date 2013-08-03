@@ -7,13 +7,6 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		05C7588317AC6A6C00236B3F /* US-ASCII.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "US-ASCII.txt"; sourceTree = "<group>"; };
-		05C7588717AC6C2A00236B3F /* LC_COLLATE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_COLLATE.txt; sourceTree = "<group>"; };
-		05C7588917AC6C2A00236B3F /* LC_CTYPE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_CTYPE.txt; sourceTree = "<group>"; };
-		05C7588A17AC6C2A00236B3F /* LC_MESSAGES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MESSAGES.txt; sourceTree = "<group>"; };
-		05C7588B17AC6C2A00236B3F /* LC_MONETARY.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MONETARY.txt; sourceTree = "<group>"; };
-		05C7588C17AC6C2A00236B3F /* LC_NUMERIC.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_NUMERIC.txt; sourceTree = "<group>"; };
-		05C7588D17AC6C2A00236B3F /* LC_TIME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_TIME.txt; sourceTree = "<group>"; };
 		05F57C2E17AC133A00DB4ACE /* __XEOS_Lib_C99_AssertFail.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_Lib_C99_AssertFail.c; sourceTree = "<group>"; };
 		05F57C3017AC133A00DB4ACE /* isalnum.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalnum.c; sourceTree = "<group>"; };
 		05F57C3117AC133A00DB4ACE /* isalpha.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalpha.c; sourceTree = "<group>"; };
@@ -407,44 +400,6 @@
 			);
 			sourceTree = "<group>";
 		};
-		05C7588117AC6A6C00236B3F /* locale-data */ = {
-			isa = PBXGroup;
-			children = (
-				05C7588217AC6A6C00236B3F /* charmaps */,
-				05C7588417AC6A6C00236B3F /* locales */,
-			);
-			path = "locale-data";
-			sourceTree = "<group>";
-		};
-		05C7588217AC6A6C00236B3F /* charmaps */ = {
-			isa = PBXGroup;
-			children = (
-				05C7588317AC6A6C00236B3F /* US-ASCII.txt */,
-			);
-			path = charmaps;
-			sourceTree = "<group>";
-		};
-		05C7588417AC6A6C00236B3F /* locales */ = {
-			isa = PBXGroup;
-			children = (
-				05C7588617AC6C2A00236B3F /* C */,
-			);
-			path = locales;
-			sourceTree = "<group>";
-		};
-		05C7588617AC6C2A00236B3F /* C */ = {
-			isa = PBXGroup;
-			children = (
-				05C7588717AC6C2A00236B3F /* LC_COLLATE.txt */,
-				05C7588917AC6C2A00236B3F /* LC_CTYPE.txt */,
-				05C7588A17AC6C2A00236B3F /* LC_MESSAGES.txt */,
-				05C7588B17AC6C2A00236B3F /* LC_MONETARY.txt */,
-				05C7588C17AC6C2A00236B3F /* LC_NUMERIC.txt */,
-				05C7588D17AC6C2A00236B3F /* LC_TIME.txt */,
-			);
-			path = C;
-			sourceTree = "<group>";
-		};
 		05F57C2D17AC133A00DB4ACE /* assert */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,7 +504,6 @@
 		05F57C6817AC133A00DB4ACE /* locale */ = {
 			isa = PBXGroup;
 			children = (
-				05C7588117AC6A6C00236B3F /* locale-data */,
 				05F57C6917AC133A00DB4ACE /* localeconv.c */,
 				05F57C6A17AC133A00DB4ACE /* setlocale.c */,
 			);
