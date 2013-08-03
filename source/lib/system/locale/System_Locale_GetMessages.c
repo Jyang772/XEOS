@@ -72,5 +72,5 @@ System_Locale_MessagesRef System_Locale_GetMessages( System_LocaleRef locale )
         return NULL;
     }
     
-    return NULL;
+    return locale->lc_messages;
 }

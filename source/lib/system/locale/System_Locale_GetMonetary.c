@@ -72,5 +72,5 @@ System_Locale_MonetaryRef System_Locale_GetMonetary( System_LocaleRef locale )
         return NULL;
     }
     
-    return NULL;
+    return locale->lc_monetary;
 }

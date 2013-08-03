@@ -72,5 +72,5 @@ System_Locale_CTypeRef System_Locale_GetCType( System_LocaleRef locale )
         return NULL;
     }
     
-    return NULL;
+    return locale->lc_ctype;
 }

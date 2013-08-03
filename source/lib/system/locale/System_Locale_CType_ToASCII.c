@@ -65,7 +65,7 @@
 #include <system/__private/locale.h>
 #include <stdlib.h>
 
-int  System_Locale_CType_ToASCII( System_Locale_CTypeRef ctype, int c )
+int System_Locale_CType_ToASCII( System_Locale_CTypeRef ctype, int c )
 {
     if( ctype == NULL )
     {

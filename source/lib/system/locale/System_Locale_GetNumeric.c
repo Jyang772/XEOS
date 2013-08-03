@@ -72,5 +72,5 @@ System_Locale_NumericRef System_Locale_GetNumeric( System_LocaleRef locale )
         return NULL;
     }
     
-    return NULL;
+    return locale->lc_numeric;
 }

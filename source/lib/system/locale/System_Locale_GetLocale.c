@@ -64,10 +64,22 @@
 #include <system/locale.h>
 #include <system/__private/locale.h>
 #include <stdlib.h>
+#include <string.h>
 
 System_LocaleRef System_Locale_GetLocale( const char * name )
 {
-    ( void )name;
+    if( strlen( name ) == 0 )
+    {
+        return System_Locale_GetCLocale();
+    }
+    else if( strcmp( name, "C" ) == 0 )
+    {
+        return System_Locale_GetCLocale();
+    }
+    else if( strcmp( name, "POSIX" ) == 0 )
+    {
+        return System_Locale_GetPOSIXLocale();
+    }
     
     return NULL;
 }

@@ -72,5 +72,5 @@ System_Locale_CollateRef  System_Locale_GetCollate( System_LocaleRef locale )
         return NULL;
     }
     
-    return NULL;
+    return locale->lc_collate;
 }

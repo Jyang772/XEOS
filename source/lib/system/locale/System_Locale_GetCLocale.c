@@ -67,5 +67,5 @@
 
 System_LocaleRef System_Locale_GetCLocale( void )
 {
-    return NULL;
+    return System_Locale_GetDefaultLocale();
 }
