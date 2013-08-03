@@ -44,6 +44,7 @@
 		05C7592717ACA27D00236B3F /* LC_MONETARY.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MONETARY.txt; sourceTree = "<group>"; };
 		05C7592817ACA27D00236B3F /* LC_NUMERIC.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_NUMERIC.txt; sourceTree = "<group>"; };
 		05C7592917ACA27D00236B3F /* LC_TIME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_TIME.txt; sourceTree = "<group>"; };
+		05C7592A17ACA5BE00236B3F /* System_Locale_GetLConv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetLConv.c; sourceTree = "<group>"; };
 		05F57F1A17AC13D500DB4ACE /* System_Atomic.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.32.s; sourceTree = "<group>"; };
 		05F57F1B17AC13D500DB4ACE /* System_Atomic.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.64.s; sourceTree = "<group>"; };
 		05F57F1E17AC13D500DB4ACE /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
@@ -206,6 +207,7 @@
 				05C758A917AC866F00236B3F /* System_Locale_GetCollate.c */,
 				05C758AA17AC866F00236B3F /* System_Locale_GetCType.c */,
 				05C758AB17AC866F00236B3F /* System_Locale_GetDefaultLocale.c */,
+				05C7592A17ACA5BE00236B3F /* System_Locale_GetLConv.c */,
 				05C758AC17AC866F00236B3F /* System_Locale_GetLocale.c */,
 				05C758AD17AC866F00236B3F /* System_Locale_GetMessages.c */,
 				05C758AE17AC866F00236B3F /* System_Locale_GetMonetary.c */,
