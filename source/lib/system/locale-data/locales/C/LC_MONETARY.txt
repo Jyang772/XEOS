@@ -69,9 +69,9 @@ int_curr_symbol         ""
 currency_symbol         ""
 mon_decimal_point       ""
 mon_thousands_sep       ""
-mon_grouping            -1
 positive_sign           ""
 negative_sign           ""
+mon_grouping            -1
 int_frac_digits         -1
 frac_digits             -1
 p_cs_precedes           -1
