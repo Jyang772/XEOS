@@ -63,5 +63,144 @@
 
 #include <system/locale.h>
 #include <system/__private/locale.h>
+#include <stdlib.h>
 
-locale_t __System_Locale_DefaultLocale;
+#define __PAD_CHAR_4 { 0, 0, 0, 0 }
+
+static struct __System_Locale_Collate __System_Locale_DefaultLocale_Collate =
+{
+    0,
+    NULL
+};
+
+static struct __System_Locale_CType __System_Locale_DefaultLocale_CType =
+{
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+};
+
+static struct __System_Locale_Messages __System_Locale_DefaultLocale_Messages =
+{
+    "",
+    ""
+};
+
+static struct __System_Locale_Monetary __System_Locale_DefaultLocale_Monetary =
+{
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    __PAD_CHAR_4
+};
+
+static struct __System_Locale_Numeric __System_Locale_DefaultLocale_Numeric =
+{
+    "",
+    "",
+    0,
+    __PAD_CHAR_4
+};
+
+static struct __System_Locale_Time __System_Locale_DefaultLocale_Time =
+{
+    {
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    },
+    {
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    },
+    {
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    },
+    {
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    },
+    {
+        "",
+        ""
+    },
+    "",
+    "",
+    "",
+    ""
+};
+
+locale_t __System_Locale_DefaultLocale =
+{
+    &__System_Locale_DefaultLocale_Collate,
+    &__System_Locale_DefaultLocale_CType,
+    &__System_Locale_DefaultLocale_Messages,
+    &__System_Locale_DefaultLocale_Monetary,
+    &__System_Locale_DefaultLocale_Numeric,
+    &__System_Locale_DefaultLocale_Time,
+};
