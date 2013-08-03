@@ -56,7 +56,6 @@
 		05B4ECF417AC2A5D00587E4C /* ftw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ftw.h; sourceTree = "<group>"; };
 		05B4ECF517AC2A5D00587E4C /* glob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glob.h; sourceTree = "<group>"; };
 		05B4ECF617AC2A5D00587E4C /* grp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = grp.h; sourceTree = "<group>"; };
-		05B4ECF717AC2A5D00587E4C /* iconv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iconv.h; sourceTree = "<group>"; };
 		05B4ECF817AC2A5D00587E4C /* inttypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
 		05B4ECF917AC2A5D00587E4C /* iso646.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iso646.h; sourceTree = "<group>"; };
 		05B4ECFA17AC2A5D00587E4C /* langinfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = langinfo.h; sourceTree = "<group>"; };
@@ -376,7 +375,6 @@
 				05B4ECF417AC2A5D00587E4C /* ftw.h */,
 				05B4ECF517AC2A5D00587E4C /* glob.h */,
 				05B4ECF617AC2A5D00587E4C /* grp.h */,
-				05B4ECF717AC2A5D00587E4C /* iconv.h */,
 				05B4ECF817AC2A5D00587E4C /* inttypes.h */,
 				05B4ECF917AC2A5D00587E4C /* iso646.h */,
 				05B4ECFA17AC2A5D00587E4C /* langinfo.h */,
