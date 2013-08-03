@@ -151,14 +151,14 @@ PATH_BUILD_32_LIB_BIN                   := $(PATH_BUILD_32_LIB)bin/
 PATH_BUILD_64_LIB_BIN                   := $(PATH_BUILD_64_LIB)bin/
 PATH_BUILD_32_LIB_OBJ                   := $(PATH_BUILD_32_LIB)obj/
 PATH_BUILD_64_LIB_OBJ                   := $(PATH_BUILD_64_LIB)obj/
-PATH_BUILD_32_LIB_OBJ_LIBC              := $(PATH_BUILD_32_LIB_OBJ)c99/
-PATH_BUILD_64_LIB_OBJ_LIBC              := $(PATH_BUILD_64_LIB_OBJ)c99/
-PATH_BUILD_32_LIB_OBJ_LIBSYSTEM         := $(PATH_BUILD_32_LIB_OBJ)system/
-PATH_BUILD_64_LIB_OBJ_LIBSYSTEM         := $(PATH_BUILD_64_LIB_OBJ)system/
-PATH_BUILD_32_LIB_OBJ_LIBPOSIX          := $(PATH_BUILD_32_LIB_OBJ)posix/
-PATH_BUILD_64_LIB_OBJ_LIBPOSIX          := $(PATH_BUILD_64_LIB_OBJ)posix/
-PATH_BUILD_32_LIB_OBJ_LIBPTHREAD        := $(PATH_BUILD_32_LIB_OBJ)pthread/
-PATH_BUILD_64_LIB_OBJ_LIBPTHREAD        := $(PATH_BUILD_64_LIB_OBJ)pthread/
+PATH_BUILD_32_LIB_OBJ_C99               := $(PATH_BUILD_32_LIB_OBJ)c99/
+PATH_BUILD_64_LIB_OBJ_C99               := $(PATH_BUILD_64_LIB_OBJ)c99/
+PATH_BUILD_32_LIB_OBJ_SYSTEM            := $(PATH_BUILD_32_LIB_OBJ)system/
+PATH_BUILD_64_LIB_OBJ_SYSTEM            := $(PATH_BUILD_64_LIB_OBJ)system/
+PATH_BUILD_32_LIB_OBJ_POSIX             := $(PATH_BUILD_32_LIB_OBJ)posix/
+PATH_BUILD_64_LIB_OBJ_POSIX             := $(PATH_BUILD_64_LIB_OBJ)posix/
+PATH_BUILD_32_LIB_OBJ_PTHREAD           := $(PATH_BUILD_32_LIB_OBJ)pthread/
+PATH_BUILD_64_LIB_OBJ_PTHREAD           := $(PATH_BUILD_64_LIB_OBJ)pthread/
 
 # Source directories
 
@@ -170,10 +170,10 @@ PATH_SRC_CORE                           := $(PATH_SRC)core/
 PATH_SRC_CORE_KERNEL                    := $(PATH_SRC_CORE)xeos/
 PATH_SRC_CORE_ACPI                      := $(PATH_SRC_CORE)acpi/
 PATH_SRC_LIB                            := $(PATH_SRC)lib/
-PATH_SRC_LIB_LIBC                       := $(PATH_SRC_LIB)c99/
-PATH_SRC_LIB_LIBSYSTEM                  := $(PATH_SRC_LIB)system/
-PATH_SRC_LIB_LIBPOSIX                   := $(PATH_SRC_LIB)posix/
-PATH_SRC_LIB_LIBPTHREAD                 := $(PATH_SRC_LIB)pthread/
+PATH_SRC_LIB_C99                        := $(PATH_SRC_LIB)c99/
+PATH_SRC_LIB_SYSTEM                     := $(PATH_SRC_LIB)system/
+PATH_SRC_LIB_POSIX                      := $(PATH_SRC_LIB)posix/
+PATH_SRC_LIB_PTHREAD                    := $(PATH_SRC_LIB)pthread/
 
 # Release directories
 

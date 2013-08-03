@@ -71,22 +71,22 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_SRC_SYS_MMAN    = $(PATH_SRC_LIB_LIBPOSIX)sys_mman/
-DIR_SRC_UNISTD      = $(PATH_SRC_LIB_LIBPOSIX)unistd/
-DIR_SRC_SCHED       = $(PATH_SRC_LIB_LIBPOSIX)sched/
-DIR_SRC_TIME        = $(PATH_SRC_LIB_LIBPOSIX)time/
-DIR_SRC_SIGNAL      = $(PATH_SRC_LIB_LIBPOSIX)signal/
-DIR_SRC_AIO         = $(PATH_SRC_LIB_LIBPOSIX)aio/
-DIR_SRC_NETINET_IN  = $(PATH_SRC_LIB_LIBPOSIX)netinet_in/
-DIR_SRC_ARPA_INET   = $(PATH_SRC_LIB_LIBPOSIX)arpa_inet/
-DIR_SRC_CTYPE       = $(PATH_SRC_LIB_LIBPOSIX)ctype/
+DIR_SRC_SYS_MMAN    = $(PATH_SRC_LIB_POSIX)sys_mman/
+DIR_SRC_UNISTD      = $(PATH_SRC_LIB_POSIX)unistd/
+DIR_SRC_SCHED       = $(PATH_SRC_LIB_POSIX)sched/
+DIR_SRC_TIME        = $(PATH_SRC_LIB_POSIX)time/
+DIR_SRC_SIGNAL      = $(PATH_SRC_LIB_POSIX)signal/
+DIR_SRC_AIO         = $(PATH_SRC_LIB_POSIX)aio/
+DIR_SRC_NETINET_IN  = $(PATH_SRC_LIB_POSIX)netinet_in/
+DIR_SRC_ARPA_INET   = $(PATH_SRC_LIB_POSIX)arpa_inet/
+DIR_SRC_CTYPE       = $(PATH_SRC_LIB_POSIX)ctype/
 
 #-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
 # Define the search paths for source files
-vpath %$(EXT_C)         $(PATH_SRC_LIB_LIBPOSIX)
+vpath %$(EXT_C)         $(PATH_SRC_LIB_POSIX)
 vpath %$(EXT_C)         $(DIR_SRC_SYS_MMAN)
 vpath %$(EXT_C)         $(DIR_SRC_UNISTD)
 vpath %$(EXT_C)         $(DIR_SRC_SCHED)
@@ -113,16 +113,16 @@ vpath %$(EXT_C)         $(DIR_SRC_CTYPE)
 # Files
 #-------------------------------------------------------------------------------
 
-_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(PATH_SRC_LIB_LIBPOSIX))
-_FILES_C_OBJ_BUILD_SYS_MMAN     = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_SYS_MMAN))
-_FILES_C_OBJ_BUILD_UNISTD       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_UNISTD))
-_FILES_C_OBJ_BUILD_SCHED        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_SCHED))
-_FILES_C_OBJ_BUILD_TIME         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_TIME))
-_FILES_C_OBJ_BUILD_SIGNAL       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_SIGNAL))
-_FILES_C_OBJ_BUILD_AIO          = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_AIO))
-_FILES_C_OBJ_BUILD_NETINET_IN   = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_NETINET_IN))
-_FILES_C_OBJ_BUILD_ARPA_INET    = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_ARPA_INET))
-_FILES_C_OBJ_BUILD_CTYPE        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPOSIX),$(DIR_SRC_CTYPE))
+_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(PATH_SRC_LIB_POSIX))
+_FILES_C_OBJ_BUILD_SYS_MMAN     = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_SYS_MMAN))
+_FILES_C_OBJ_BUILD_UNISTD       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_UNISTD))
+_FILES_C_OBJ_BUILD_SCHED        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_SCHED))
+_FILES_C_OBJ_BUILD_TIME         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_TIME))
+_FILES_C_OBJ_BUILD_SIGNAL       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_SIGNAL))
+_FILES_C_OBJ_BUILD_AIO          = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_AIO))
+_FILES_C_OBJ_BUILD_NETINET_IN   = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_NETINET_IN))
+_FILES_C_OBJ_BUILD_ARPA_INET    = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_ARPA_INET))
+_FILES_C_OBJ_BUILD_CTYPE        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_POSIX),$(DIR_SRC_CTYPE))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -150,24 +150,24 @@ all:    $(_FILES_C_OBJ_BUILD)               \
         $(_FILES_C_OBJ_BUILD_CTYPE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libposix.a"$(COLOR_NONE)
-	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libposix.a $(PATH_BUILD_32_LIB_OBJ_LIBPOSIX)*$(EXT_OBJ)
+	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libposix.a $(PATH_BUILD_32_LIB_OBJ_POSIX)*$(EXT_OBJ)
 	@$(RANLIB_32) $(PATH_BUILD_32_LIB_BIN)libposix.a
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libposix.a"$(COLOR_NONE)
-	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libposix.a $(PATH_BUILD_64_LIB_OBJ_LIBPOSIX)*$(EXT_OBJ)
+	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libposix.a $(PATH_BUILD_64_LIB_OBJ_POSIX)*$(EXT_OBJ)
 	@$(RANLIB_64) $(PATH_BUILD_64_LIB_BIN)libposix.a
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libposix.so"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libposix.so $(PATH_BUILD_32_LIB_OBJ_LIBPOSIX)*$(EXT_OBJ_PIC)
+	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libposix.so $(PATH_BUILD_32_LIB_OBJ_POSIX)*$(EXT_OBJ_PIC)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libposix.so"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libposix.so $(PATH_BUILD_64_LIB_OBJ_LIBPOSIX)*$(EXT_OBJ_PIC)
+	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libposix.so $(PATH_BUILD_64_LIB_OBJ_POSIX)*$(EXT_OBJ_PIC)
 
 # Cleans the build files
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_OBJ_LIBPOSIX)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_OBJ_LIBPOSIX)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_OBJ_POSIX)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_OBJ_POSIX)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_BIN)libposix.*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_BIN)libposix.*

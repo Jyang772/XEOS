@@ -71,14 +71,14 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_SRC_PTHREAD     = $(PATH_SRC_LIB_LIBPTHREAD)pthread/
+DIR_SRC_PTHREAD     = $(PATH_SRC_LIB_PTHREAD)pthread/
 
 #-------------------------------------------------------------------------------
 # Search paths
 #-------------------------------------------------------------------------------
 
 # Define the search paths for source files
-vpath %$(EXT_C)         $(PATH_SRC_LIB_LIBPTHREAD)
+vpath %$(EXT_C)         $(PATH_SRC_LIB_PTHREAD)
 vpath %$(EXT_C)         $(DIR_SRC_PTHREAD)
 
 #-------------------------------------------------------------------------------
@@ -97,8 +97,8 @@ vpath %$(EXT_C)         $(DIR_SRC_PTHREAD)
 # Files
 #-------------------------------------------------------------------------------
 
-_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPTHREAD),$(PATH_SRC_LIB_LIBPTHREAD))
-_FILES_C_OBJ_BUILD_PTHREAD      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBPTHREAD),$(DIR_SRC_PTHREAD))
+_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_PTHREAD),$(PATH_SRC_LIB_PTHREAD))
+_FILES_C_OBJ_BUILD_PTHREAD      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_PTHREAD),$(DIR_SRC_PTHREAD))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -117,24 +117,24 @@ all:    $(_FILES_C_OBJ_BUILD_PTHREAD)   \
         $(_FILES_C_OBJ_BUILD)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libpthread.a"$(COLOR_NONE)
-	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libpthread.a $(PATH_BUILD_32_LIB_OBJ_LIBPTHREAD)*$(EXT_OBJ)
+	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libpthread.a $(PATH_BUILD_32_LIB_OBJ_PTHREAD)*$(EXT_OBJ)
 	@$(RANLIB_32) $(PATH_BUILD_32_LIB_BIN)libpthread.a
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libpthread.a"$(COLOR_NONE)
-	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libpthread.a $(PATH_BUILD_64_LIB_OBJ_LIBPTHREAD)*$(EXT_OBJ)
+	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libpthread.a $(PATH_BUILD_64_LIB_OBJ_PTHREAD)*$(EXT_OBJ)
 	@$(RANLIB_64) $(PATH_BUILD_64_LIB_BIN)libpthread.a
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libpthread.so"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libpthread.so $(PATH_BUILD_32_LIB_OBJ_LIBPTHREAD)*$(EXT_OBJ_PIC)
+	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libpthread.so $(PATH_BUILD_32_LIB_OBJ_PTHREAD)*$(EXT_OBJ_PIC)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libpthread.so"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libpthread.so $(PATH_BUILD_64_LIB_OBJ_LIBPTHREAD)*$(EXT_OBJ_PIC)
+	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libpthread.so $(PATH_BUILD_64_LIB_OBJ_PTHREAD)*$(EXT_OBJ_PIC)
 
 # Cleans the build files
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_OBJ_LIBPTHREAD)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_OBJ_LIBPTHREAD)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_OBJ_PTHREAD)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_OBJ_PTHREAD)*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_BIN)libpthread.*
 	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_BIN)libpthread.*

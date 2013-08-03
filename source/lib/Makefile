@@ -82,21 +82,21 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 all:
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C standard library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_LIBC) && $(MAKE)
+	@$(CD) $(PATH_SRC_LIB_C99) && $(MAKE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_LIBPOSIX) && $(MAKE)
+	@$(CD) $(PATH_SRC_LIB_POSIX) && $(MAKE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX Thread library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_LIBPTHREAD) && $(MAKE)
+	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE)
+	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE)
 	
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_LIB_LIBC) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_LIBPOSIX) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_LIBPTHREAD) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_LIBSYSTEM) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_C99) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_POSIX) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE) clean
