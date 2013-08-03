@@ -72,7 +72,7 @@ extern "C" {
 
 #ifdef _POSIX_C_SOURCE
 
-
+#define LC_MESSAGES 6
 
 #endif /* _POSIX_C_SOURCE */
 

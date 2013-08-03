@@ -61,10 +61,59 @@
 
 /* $Id$ */
 
-#include <ctype.h>
+#include <locale.h>
 #include <system/locale.h>
+#include <system/__private/locale.h>
+#include <stdlib.h>
+#include <string.h>
 
-int isdigit( int c )
+char * System_Locale_SetLocale( int category, const char * name )
 {
-    return System_Locale_CType_IsDigit( System_Locale_GetCType( System_Locale_GetCurrentLocale() ), c );
+    System_LocaleRef currentLocale;
+    System_LocaleRef newLocale;
+    
+    currentLocale   = System_Locale_GetCurrentLocale();
+    newLocale       = System_Locale_GetLocale( name );
+    
+    if( category == LC_ALL )
+    {
+        currentLocale->lc_collate   = newLocale->lc_collate;
+        currentLocale->lc_ctype     = newLocale->lc_ctype;
+        currentLocale->lc_messages  = newLocale->lc_messages;
+        currentLocale->lc_monetary  = newLocale->lc_monetary;
+        currentLocale->lc_numeric   = newLocale->lc_numeric;
+        currentLocale->lc_time      = newLocale->lc_time;
+        
+        __System_Locale_LocalConvNeedUpdate = true;
+    }
+    else if( category == LC_COLLATE )
+    {
+        currentLocale->lc_collate = newLocale->lc_collate;
+    }
+    else if( category == LC_CTYPE )
+    {
+        currentLocale->lc_ctype = newLocale->lc_ctype;
+    }
+    else if( category == LC_MESSAGES )
+    {
+        currentLocale->lc_messages = newLocale->lc_messages;
+    }
+    else if( category == LC_MONETARY )
+    {
+        currentLocale->lc_monetary = newLocale->lc_monetary;
+        
+        __System_Locale_LocalConvNeedUpdate = true;
+    }
+    else if( category == LC_NUMERIC )
+    {
+        currentLocale->lc_numeric = newLocale->lc_numeric;
+        
+        __System_Locale_LocalConvNeedUpdate = true;
+    }
+    else if( category == LC_TIME )
+    {
+        currentLocale->lc_time = newLocale->lc_time;
+    }
+    
+    return ( char * )( newLocale->name );
 }

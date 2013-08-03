@@ -61,10 +61,39 @@
 
 /* $Id$ */
 
-#include <ctype.h>
 #include <system/locale.h>
+#include <system/__private/locale.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int isdigit( int c )
+static bool     __inited = false;
+static locale_t __locale = 
 {
-    return System_Locale_CType_IsDigit( System_Locale_GetCType( System_Locale_GetCurrentLocale() ), c );
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+System_LocaleRef System_Locale_GetCurrentLocale( void )
+{
+    System_LocaleRef defaultLocale;
+    
+    if( __inited == false )
+    {
+        defaultLocale = System_Locale_GetDefaultLocale();
+        __inited      = true;
+        
+        __locale.lc_collate     = defaultLocale->lc_collate;
+        __locale.lc_ctype       = defaultLocale->lc_ctype;
+        __locale.lc_messages    = defaultLocale->lc_messages;
+        __locale.lc_monetary    = defaultLocale->lc_monetary;
+        __locale.lc_numeric     = defaultLocale->lc_numeric;
+        __locale.lc_time        = defaultLocale->lc_time;
+    }
+    
+    return &__locale;
 }

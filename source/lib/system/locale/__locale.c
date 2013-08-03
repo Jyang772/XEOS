@@ -236,6 +236,7 @@ static struct __System_Locale_Monetary __System_Locale_DefaultLocale_Monetary =
     "",
     "",
     "",
+    "-1",
     -1,
     -1,
     -1,
@@ -250,16 +251,13 @@ static struct __System_Locale_Monetary __System_Locale_DefaultLocale_Monetary =
     -1,
     -1,
     -1,
-    -1,
-    __PAD_CHAR_4
 };
 
 static struct __System_Locale_Numeric __System_Locale_DefaultLocale_Numeric =
 {
     ".",
     "",
-    -1,
-    __PAD_CHAR_4
+    "-1"
 };
 
 static struct __System_Locale_Time __System_Locale_DefaultLocale_Time =
@@ -322,6 +320,7 @@ static struct __System_Locale_Time __System_Locale_DefaultLocale_Time =
 
 locale_t __System_Locale_DefaultLocale =
 {
+    "C",
     &__System_Locale_DefaultLocale_Collate,
     &__System_Locale_DefaultLocale_CType,
     &__System_Locale_DefaultLocale_Messages,

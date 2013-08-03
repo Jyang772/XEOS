@@ -61,16 +61,55 @@
 
 /* $Id$ */
 
+#include <locale.h>
 #include <system/locale.h>
 #include <system/__private/locale.h>
 #include <stdlib.h>
+#include <limits.h>
 
-struct lconv * System_Locale_GetLConv( System_LocaleRef locale )
+bool                __System_Locale_LocalConvNeedUpdate = true;
+static struct lconv __lconv;
+
+struct lconv * System_Locale_GetLConv( void )
 {
-    if( locale == NULL )
+    System_LocaleRef            locale;
+    System_Locale_NumericRef    numeric;
+    System_Locale_MonetaryRef   monetary;
+    
+    if( __System_Locale_LocalConvNeedUpdate == true )
     {
-        return NULL;
+        __System_Locale_LocalConvNeedUpdate = false;
+        locale                              = System_Locale_GetCurrentLocale();
+        numeric                             = System_Locale_GetNumeric( locale );
+        monetary                            = System_Locale_GetMonetary( locale );
+        
+        __lconv.decimal_point   = ( char * )( numeric->decimal_point );
+        __lconv.thousands_sep   = ( char * )( numeric->thousands_sep );
+        __lconv.grouping        = ( char * )( numeric->grouping );
+        
+        __lconv.mon_decimal_point   = ( char * )( monetary->mon_decimal_point );
+        __lconv.mon_thousands_sep   = ( char * )( monetary->mon_thousands_sep );
+        __lconv.mon_grouping        = ( char * )( monetary->mon_grouping );
+        __lconv.positive_sign       = ( char * )( monetary->positive_sign );
+        __lconv.negative_sign       = ( char * )( monetary->negative_sign );
+        __lconv.currency_symbol     = ( char * )( monetary->currency_symbol );
+        __lconv.int_curr_symbol     = ( char * )( monetary->int_curr_symbol );
+        
+        __lconv.frac_digits         = ( monetary->frac_digits           == - 1 ) ? CHAR_MAX : ( char )( monetary->frac_digits );
+        __lconv.p_cs_precedes       = ( monetary->p_cs_precedes         == - 1 ) ? CHAR_MAX : ( char )( monetary->p_cs_precedes );
+        __lconv.n_cs_precedes       = ( monetary->n_cs_precedes         == - 1 ) ? CHAR_MAX : ( char )( monetary->n_cs_precedes );
+        __lconv.p_sep_by_space      = ( monetary->p_sep_by_space        == - 1 ) ? CHAR_MAX : ( char )( monetary->p_sep_by_space );
+        __lconv.n_sep_by_space      = ( monetary->n_sep_by_space        == - 1 ) ? CHAR_MAX : ( char )( monetary->n_sep_by_space );
+        __lconv.p_sign_posn         = ( monetary->p_sign_posn           == - 1 ) ? CHAR_MAX : ( char )( monetary->p_sign_posn );
+        __lconv.n_sign_posn         = ( monetary->n_sign_posn           == - 1 ) ? CHAR_MAX : ( char )( monetary->n_sign_posn );
+        __lconv.int_frac_digits     = ( monetary->int_frac_digits       == - 1 ) ? CHAR_MAX : ( char )( monetary->int_frac_digits );
+        __lconv.int_p_cs_precedes   = ( monetary->int_p_cs_precedes     == - 1 ) ? CHAR_MAX : ( char )( monetary->int_p_cs_precedes );
+        __lconv.int_n_cs_precedes   = ( monetary->int_n_cs_precedes     == - 1 ) ? CHAR_MAX : ( char )( monetary->int_n_cs_precedes );
+        __lconv.int_p_sep_by_space  = ( monetary->int_p_sep_by_space    == - 1 ) ? CHAR_MAX : ( char )( monetary->int_p_sep_by_space );
+        __lconv.int_n_sep_by_space  = ( monetary->int_n_sep_by_space    == - 1 ) ? CHAR_MAX : ( char )( monetary->int_n_sep_by_space );
+        __lconv.int_p_sign_posn     = ( monetary->int_p_sign_posn       == - 1 ) ? CHAR_MAX : ( char )( monetary->int_p_sign_posn );
+        __lconv.int_n_sign_posn     = ( monetary->int_n_sign_posn       == - 1 ) ? CHAR_MAX : ( char )( monetary->int_n_sign_posn );
     }
     
-    return NULL;
+    return &__lconv;
 }

@@ -38,13 +38,15 @@
 		05C758B417AC869B00236B3F /* US-ASCII.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "US-ASCII.txt"; sourceTree = "<group>"; };
 		05C758BD17AC8BC700236B3F /* System_Locale_CType_IsASCII.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsASCII.c; sourceTree = "<group>"; };
 		05C758BE17AC8BD500236B3F /* System_Locale_CType_ToASCII.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_ToASCII.c; sourceTree = "<group>"; };
-		05C7592417ACA27D00236B3F /* LC_COLLATE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_COLLATE.txt; sourceTree = "<group>"; };
-		05C7592517ACA27D00236B3F /* LC_CTYPE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_CTYPE.txt; sourceTree = "<group>"; };
-		05C7592617ACA27D00236B3F /* LC_MESSAGES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MESSAGES.txt; sourceTree = "<group>"; };
-		05C7592717ACA27D00236B3F /* LC_MONETARY.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MONETARY.txt; sourceTree = "<group>"; };
-		05C7592817ACA27D00236B3F /* LC_NUMERIC.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_NUMERIC.txt; sourceTree = "<group>"; };
-		05C7592917ACA27D00236B3F /* LC_TIME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_TIME.txt; sourceTree = "<group>"; };
 		05C7592A17ACA5BE00236B3F /* System_Locale_GetLConv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetLConv.c; sourceTree = "<group>"; };
+		05C7592B17AD479900236B3F /* System_Locale_GetCurrentLocale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetCurrentLocale.c; sourceTree = "<group>"; };
+		05C7592C17AD490A00236B3F /* System_Locale_SetLocale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_SetLocale.c; sourceTree = "<group>"; };
+		05C7592E17AD4DE600236B3F /* LC_COLLATE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_COLLATE.txt; sourceTree = "<group>"; };
+		05C7592F17AD4DE600236B3F /* LC_CTYPE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_CTYPE.txt; sourceTree = "<group>"; };
+		05C7593017AD4DE600236B3F /* LC_MESSAGES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MESSAGES.txt; sourceTree = "<group>"; };
+		05C7593117AD4DE600236B3F /* LC_MONETARY.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MONETARY.txt; sourceTree = "<group>"; };
+		05C7593217AD4DE700236B3F /* LC_NUMERIC.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_NUMERIC.txt; sourceTree = "<group>"; };
+		05C7593317AD4DE700236B3F /* LC_TIME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_TIME.txt; sourceTree = "<group>"; };
 		05F57F1A17AC13D500DB4ACE /* System_Atomic.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.32.s; sourceTree = "<group>"; };
 		05F57F1B17AC13D500DB4ACE /* System_Atomic.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.64.s; sourceTree = "<group>"; };
 		05F57F1E17AC13D500DB4ACE /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				05C758A817AC866F00236B3F /* System_Locale_GetCLocale.c */,
 				05C758A917AC866F00236B3F /* System_Locale_GetCollate.c */,
 				05C758AA17AC866F00236B3F /* System_Locale_GetCType.c */,
+				05C7592B17AD479900236B3F /* System_Locale_GetCurrentLocale.c */,
 				05C758AB17AC866F00236B3F /* System_Locale_GetDefaultLocale.c */,
 				05C7592A17ACA5BE00236B3F /* System_Locale_GetLConv.c */,
 				05C758AC17AC866F00236B3F /* System_Locale_GetLocale.c */,
@@ -214,6 +217,7 @@
 				05C758AF17AC866F00236B3F /* System_Locale_GetNumeric.c */,
 				05C758B017AC866F00236B3F /* System_Locale_GetPOSIXLocale.c */,
 				05C758B117AC866F00236B3F /* System_Locale_GetTime.c */,
+				05C7592C17AD490A00236B3F /* System_Locale_SetLocale.c */,
 			);
 			name = locale;
 			path = ../source/lib/system/locale;
@@ -248,22 +252,22 @@
 		05C758B517AC869B00236B3F /* locales */ = {
 			isa = PBXGroup;
 			children = (
-				05C7592317ACA27D00236B3F /* default.US-ASCII */,
+				05C7592D17AD4DE600236B3F /* C.US-ASCII */,
 			);
 			path = locales;
 			sourceTree = "<group>";
 		};
-		05C7592317ACA27D00236B3F /* default.US-ASCII */ = {
+		05C7592D17AD4DE600236B3F /* C.US-ASCII */ = {
 			isa = PBXGroup;
 			children = (
-				05C7592417ACA27D00236B3F /* LC_COLLATE.txt */,
-				05C7592517ACA27D00236B3F /* LC_CTYPE.txt */,
-				05C7592617ACA27D00236B3F /* LC_MESSAGES.txt */,
-				05C7592717ACA27D00236B3F /* LC_MONETARY.txt */,
-				05C7592817ACA27D00236B3F /* LC_NUMERIC.txt */,
-				05C7592917ACA27D00236B3F /* LC_TIME.txt */,
+				05C7592E17AD4DE600236B3F /* LC_COLLATE.txt */,
+				05C7592F17AD4DE600236B3F /* LC_CTYPE.txt */,
+				05C7593017AD4DE600236B3F /* LC_MESSAGES.txt */,
+				05C7593117AD4DE600236B3F /* LC_MONETARY.txt */,
+				05C7593217AD4DE700236B3F /* LC_NUMERIC.txt */,
+				05C7593317AD4DE700236B3F /* LC_TIME.txt */,
 			);
-			path = "default.US-ASCII";
+			path = "C.US-ASCII";
 			sourceTree = "<group>";
 		};
 		05F57F1917AC13D500DB4ACE /* atomic */ = {

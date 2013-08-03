@@ -81,5 +81,5 @@ System_LocaleRef System_Locale_GetLocale( const char * name )
         return System_Locale_GetPOSIXLocale();
     }
     
-    return NULL;
+    return System_Locale_GetDefaultLocale();
 }

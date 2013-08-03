@@ -69,6 +69,7 @@ extern "C" {
 #endif
 
 #include <system/types/size_t.h>
+#include <stdbool.h>
 
 struct __System_Locale_Collate
 {
@@ -116,7 +117,7 @@ struct __System_Locale_Monetary
     const char    * mon_thousands_sep;
     const char    * positive_sign;
     const char    * negative_sign;
-    int             mon_grouping;
+    const char    * mon_grouping;
     int             int_frac_digits;
     int             frac_digits;
     int             p_cs_precedes;
@@ -131,15 +132,13 @@ struct __System_Locale_Monetary
     int             int_n_sep_by_space;
     int             int_p_sign_posn;
     int             int_n_sign_posn;
-    char            __pad_0[ 4 ];
 };
 
 struct __System_Locale_Numeric
 {
     const char * decimal_point;
     const char * thousands_sep;
-    int          grouping;
-    char         __pad_0[ 4 ];
+    const char * grouping;
 };
 
 struct __System_Locale_Time
@@ -156,6 +155,7 @@ struct __System_Locale_Time
 };
 
 extern locale_t __System_Locale_DefaultLocale;
+extern bool     __System_Locale_LocalConvNeedUpdate;
 
 #ifdef __cplusplus
 }

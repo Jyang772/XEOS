@@ -74,6 +74,7 @@
 
 typedef struct
 {
+    const char                      * name;
     struct __System_Locale_Collate  * lc_collate;
     struct __System_Locale_CType    * lc_ctype;
     struct __System_Locale_Messages * lc_messages;

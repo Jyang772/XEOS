@@ -82,11 +82,13 @@ typedef struct __System_Locale_Time      * System_Locale_TimeRef;
 
 typedef locale_t * System_LocaleRef;
 
+System_LocaleRef System_Locale_GetCurrentLocale( void );
 System_LocaleRef System_Locale_GetDefaultLocale( void );
 System_LocaleRef System_Locale_GetCLocale( void );
 System_LocaleRef System_Locale_GetPOSIXLocale( void );
 System_LocaleRef System_Locale_GetLocale( const char * name );
 char           * System_Locale_SetLocale( int category, const char * name );
+struct lconv   * System_Locale_GetLConv( void );
 
 System_Locale_CollateRef  System_Locale_GetCollate( System_LocaleRef locale );
 System_Locale_CTypeRef    System_Locale_GetCType( System_LocaleRef locale );
@@ -94,7 +96,6 @@ System_Locale_MessagesRef System_Locale_GetMessages( System_LocaleRef locale );
 System_Locale_MonetaryRef System_Locale_GetMonetary( System_LocaleRef locale );
 System_Locale_NumericRef  System_Locale_GetNumeric( System_LocaleRef locale );
 System_Locale_TimeRef     System_Locale_GetTime( System_LocaleRef locale );
-struct lconv            * System_Locale_GetLConv( System_LocaleRef locale );
 
 bool System_Locale_CType_IsAlphaNumeric( System_Locale_CTypeRef ctype, int c );
 bool System_Locale_CType_IsAlpha( System_Locale_CTypeRef ctype, int c );
