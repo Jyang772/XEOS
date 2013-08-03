@@ -62,25 +62,55 @@
 /* $Id$ */
 
 /*!
- * @header          locale_t.h
+ * @header          atomic.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__
-#define __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__
+#ifndef __XEOS_LIB_SYSTEM_LOCALE_H__
+#define __XEOS_LIB_SYSTEM_LOCALE_H__
 
-#include <system/types/__private/stdint.h>
+#include <stdbool.h>
+#include <system/types/locale_t.h>
 
-typedef struct
-{
-    struct __System_Locale_LCCollate  * lc_collate;
-    struct __System_Locale_LCCType    * lc_ctype;
-    struct __System_Locale_LCMessages * lc_messages;
-    struct __System_Locale_LCMonetary * lc_monetary;
-    struct __System_Locale_LCNumeric  * lc_numeric;
-    struct __System_Locale_LCTime     * lc_time;
-}
-locale_t;
+typedef struct __System_Locale_Collate   * System_Locale_CollateRef;
+typedef struct __System_Locale_CType     * System_Locale_CTypeRef;
+typedef struct __System_Locale_Messages  * System_Locale_MessagesRef;
+typedef struct __System_Locale_Monetary  * System_Locale_MonetaryRef;
+typedef struct __System_Locale_Numeric   * System_Locale_NumericRef;
+typedef struct __System_Locale_Time      * System_Locale_TimeRef;
 
-#endif /* __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__ */
+typedef locale_t * System_LocaleRef;
+
+System_LocaleRef System_Locale_GetDefaultLocale( void );
+System_LocaleRef System_Locale_GetCLocale( void );
+System_LocaleRef System_Locale_GetPOSIXLocale( void );
+System_LocaleRef System_Locale_GetLocale( const char * name );
+char           * System_Locale_SetLocale( int category, const char * name );
+
+System_Locale_CollateRef  System_Locale_GetCollate( System_LocaleRef locale );
+System_Locale_CTypeRef    System_Locale_GetCType( System_LocaleRef locale );
+System_Locale_MessagesRef System_Locale_GetMessages( System_LocaleRef locale );
+System_Locale_MonetaryRef System_Locale_GetMonetary( System_LocaleRef locale );
+System_Locale_NumericRef  System_Locale_GetNumeric( System_LocaleRef locale );
+System_Locale_TimeRef     System_Locale_GetTime( System_LocaleRef locale );
+struct lconv            * System_Locale_GetLConv( System_LocaleRef locale );
+
+bool System_Locale_CType_IsAlphaNumeric( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsAlpha( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsBlank( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsControl( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsDigit( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsGraph( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsLower( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsPrint( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsPunct( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsSpace( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsUpper( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsXDigit( System_Locale_CTypeRef ctype, int c );
+bool System_Locale_CType_IsASCII( System_Locale_CTypeRef ctype, int c );
+int  System_Locale_CType_ToLower( System_Locale_CTypeRef ctype, int c );
+int  System_Locale_CType_ToUpper( System_Locale_CTypeRef ctype, int c );
+int  System_Locale_CType_ToASCII( System_Locale_CTypeRef ctype, int c );
+
+#endif /* __XEOS_LIB_SYSTEM_LOCALE_H__ */

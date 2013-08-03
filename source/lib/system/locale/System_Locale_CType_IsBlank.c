@@ -61,26 +61,18 @@
 
 /* $Id$ */
 
-/*!
- * @header          locale_t.h
- * @author          Jean-David Gadina
- * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
- */
+#include <system/locale.h>
+#include <system/__private/locale.h>
+#include <stdlib.h>
 
-#ifndef __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__
-#define __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__
-
-#include <system/types/__private/stdint.h>
-
-typedef struct
+bool System_Locale_CType_IsBlank( System_Locale_CTypeRef ctype, int c )
 {
-    struct __System_Locale_LCCollate  * lc_collate;
-    struct __System_Locale_LCCType    * lc_ctype;
-    struct __System_Locale_LCMessages * lc_messages;
-    struct __System_Locale_LCMonetary * lc_monetary;
-    struct __System_Locale_LCNumeric  * lc_numeric;
-    struct __System_Locale_LCTime     * lc_time;
+    if( ctype == NULL )
+    {
+        return false;
+    }
+    
+    ( void )c;
+    
+    return false;
 }
-locale_t;
-
-#endif /* __XEOS_LIB_SYSTEM_TYPES_LOCALE_T_H__ */

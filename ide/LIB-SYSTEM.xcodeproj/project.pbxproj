@@ -8,6 +8,42 @@
 
 /* Begin PBXFileReference section */
 		05B4EC6A17AC291F00587E4C /* locale_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale_t.h; sourceTree = "<group>"; };
+		05C7589217AC81EF00236B3F /* __locale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __locale.c; sourceTree = "<group>"; };
+		05C7589317AC81F800236B3F /* locale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale.h; sourceTree = "<group>"; };
+		05C7589517AC826500236B3F /* locale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale.h; sourceTree = "<group>"; };
+		05C7589A17AC866F00236B3F /* System_Locale_CType_IsAlpha.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsAlpha.c; sourceTree = "<group>"; };
+		05C7589B17AC866F00236B3F /* System_Locale_CType_IsAlphaNumeric.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsAlphaNumeric.c; sourceTree = "<group>"; };
+		05C7589C17AC866F00236B3F /* System_Locale_CType_IsBlank.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsBlank.c; sourceTree = "<group>"; };
+		05C7589D17AC866F00236B3F /* System_Locale_CType_IsControl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsControl.c; sourceTree = "<group>"; };
+		05C7589E17AC866F00236B3F /* System_Locale_CType_IsDigit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsDigit.c; sourceTree = "<group>"; };
+		05C7589F17AC866F00236B3F /* System_Locale_CType_IsGraph.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsGraph.c; sourceTree = "<group>"; };
+		05C758A017AC866F00236B3F /* System_Locale_CType_IsLower.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsLower.c; sourceTree = "<group>"; };
+		05C758A117AC866F00236B3F /* System_Locale_CType_IsPrint.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsPrint.c; sourceTree = "<group>"; };
+		05C758A217AC866F00236B3F /* System_Locale_CType_IsPunct.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsPunct.c; sourceTree = "<group>"; };
+		05C758A317AC866F00236B3F /* System_Locale_CType_IsSpace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsSpace.c; sourceTree = "<group>"; };
+		05C758A417AC866F00236B3F /* System_Locale_CType_IsUpper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsUpper.c; sourceTree = "<group>"; };
+		05C758A517AC866F00236B3F /* System_Locale_CType_IsXDigit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsXDigit.c; sourceTree = "<group>"; };
+		05C758A617AC866F00236B3F /* System_Locale_CType_ToLower.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_ToLower.c; sourceTree = "<group>"; };
+		05C758A717AC866F00236B3F /* System_Locale_CType_ToUpper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_ToUpper.c; sourceTree = "<group>"; };
+		05C758A817AC866F00236B3F /* System_Locale_GetCLocale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetCLocale.c; sourceTree = "<group>"; };
+		05C758A917AC866F00236B3F /* System_Locale_GetCollate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetCollate.c; sourceTree = "<group>"; };
+		05C758AA17AC866F00236B3F /* System_Locale_GetCType.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetCType.c; sourceTree = "<group>"; };
+		05C758AB17AC866F00236B3F /* System_Locale_GetDefaultLocale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetDefaultLocale.c; sourceTree = "<group>"; };
+		05C758AC17AC866F00236B3F /* System_Locale_GetLocale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetLocale.c; sourceTree = "<group>"; };
+		05C758AD17AC866F00236B3F /* System_Locale_GetMessages.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetMessages.c; sourceTree = "<group>"; };
+		05C758AE17AC866F00236B3F /* System_Locale_GetMonetary.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetMonetary.c; sourceTree = "<group>"; };
+		05C758AF17AC866F00236B3F /* System_Locale_GetNumeric.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetNumeric.c; sourceTree = "<group>"; };
+		05C758B017AC866F00236B3F /* System_Locale_GetPOSIXLocale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetPOSIXLocale.c; sourceTree = "<group>"; };
+		05C758B117AC866F00236B3F /* System_Locale_GetTime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_GetTime.c; sourceTree = "<group>"; };
+		05C758B417AC869B00236B3F /* US-ASCII.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "US-ASCII.txt"; sourceTree = "<group>"; };
+		05C758B717AC869B00236B3F /* LC_COLLATE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_COLLATE.txt; sourceTree = "<group>"; };
+		05C758B817AC869B00236B3F /* LC_CTYPE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_CTYPE.txt; sourceTree = "<group>"; };
+		05C758B917AC869B00236B3F /* LC_MESSAGES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MESSAGES.txt; sourceTree = "<group>"; };
+		05C758BA17AC869B00236B3F /* LC_MONETARY.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_MONETARY.txt; sourceTree = "<group>"; };
+		05C758BB17AC869B00236B3F /* LC_NUMERIC.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_NUMERIC.txt; sourceTree = "<group>"; };
+		05C758BC17AC869B00236B3F /* LC_TIME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LC_TIME.txt; sourceTree = "<group>"; };
+		05C758BD17AC8BC700236B3F /* System_Locale_CType_IsASCII.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_IsASCII.c; sourceTree = "<group>"; };
+		05C758BE17AC8BD500236B3F /* System_Locale_CType_ToASCII.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_CType_ToASCII.c; sourceTree = "<group>"; };
 		05F57F1A17AC13D500DB4ACE /* System_Atomic.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.32.s; sourceTree = "<group>"; };
 		05F57F1B17AC13D500DB4ACE /* System_Atomic.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.64.s; sourceTree = "<group>"; };
 		05F57F1E17AC13D500DB4ACE /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
@@ -137,11 +173,95 @@
 			isa = PBXGroup;
 			children = (
 				05F57F1917AC13D500DB4ACE /* atomic */,
+				05C7589117AC81EF00236B3F /* locale */,
+				05C758B217AC869B00236B3F /* locale-data */,
 				05F57F1C17AC13D500DB4ACE /* include */,
 				05F57F9417AC13D600DB4ACE /* Makefile */,
 				05F57F9517AC13D600DB4ACE /* rt */,
 				05F57F9817AC13D600DB4ACE /* syscall */,
 			);
+			sourceTree = "<group>";
+		};
+		05C7589117AC81EF00236B3F /* locale */ = {
+			isa = PBXGroup;
+			children = (
+				05C7589217AC81EF00236B3F /* __locale.c */,
+				05C7589A17AC866F00236B3F /* System_Locale_CType_IsAlpha.c */,
+				05C7589B17AC866F00236B3F /* System_Locale_CType_IsAlphaNumeric.c */,
+				05C758BD17AC8BC700236B3F /* System_Locale_CType_IsASCII.c */,
+				05C7589C17AC866F00236B3F /* System_Locale_CType_IsBlank.c */,
+				05C7589D17AC866F00236B3F /* System_Locale_CType_IsControl.c */,
+				05C7589E17AC866F00236B3F /* System_Locale_CType_IsDigit.c */,
+				05C7589F17AC866F00236B3F /* System_Locale_CType_IsGraph.c */,
+				05C758A017AC866F00236B3F /* System_Locale_CType_IsLower.c */,
+				05C758A117AC866F00236B3F /* System_Locale_CType_IsPrint.c */,
+				05C758A217AC866F00236B3F /* System_Locale_CType_IsPunct.c */,
+				05C758A317AC866F00236B3F /* System_Locale_CType_IsSpace.c */,
+				05C758A417AC866F00236B3F /* System_Locale_CType_IsUpper.c */,
+				05C758A517AC866F00236B3F /* System_Locale_CType_IsXDigit.c */,
+				05C758BE17AC8BD500236B3F /* System_Locale_CType_ToASCII.c */,
+				05C758A617AC866F00236B3F /* System_Locale_CType_ToLower.c */,
+				05C758A717AC866F00236B3F /* System_Locale_CType_ToUpper.c */,
+				05C758A817AC866F00236B3F /* System_Locale_GetCLocale.c */,
+				05C758A917AC866F00236B3F /* System_Locale_GetCollate.c */,
+				05C758AA17AC866F00236B3F /* System_Locale_GetCType.c */,
+				05C758AB17AC866F00236B3F /* System_Locale_GetDefaultLocale.c */,
+				05C758AC17AC866F00236B3F /* System_Locale_GetLocale.c */,
+				05C758AD17AC866F00236B3F /* System_Locale_GetMessages.c */,
+				05C758AE17AC866F00236B3F /* System_Locale_GetMonetary.c */,
+				05C758AF17AC866F00236B3F /* System_Locale_GetNumeric.c */,
+				05C758B017AC866F00236B3F /* System_Locale_GetPOSIXLocale.c */,
+				05C758B117AC866F00236B3F /* System_Locale_GetTime.c */,
+			);
+			name = locale;
+			path = ../source/lib/system/locale;
+			sourceTree = "<group>";
+		};
+		05C7589417AC826500236B3F /* __private */ = {
+			isa = PBXGroup;
+			children = (
+				05C7589517AC826500236B3F /* locale.h */,
+			);
+			path = __private;
+			sourceTree = "<group>";
+		};
+		05C758B217AC869B00236B3F /* locale-data */ = {
+			isa = PBXGroup;
+			children = (
+				05C758B317AC869B00236B3F /* charmaps */,
+				05C758B517AC869B00236B3F /* locales */,
+			);
+			name = "locale-data";
+			path = "../source/lib/system/locale-data";
+			sourceTree = "<group>";
+		};
+		05C758B317AC869B00236B3F /* charmaps */ = {
+			isa = PBXGroup;
+			children = (
+				05C758B417AC869B00236B3F /* US-ASCII.txt */,
+			);
+			path = charmaps;
+			sourceTree = "<group>";
+		};
+		05C758B517AC869B00236B3F /* locales */ = {
+			isa = PBXGroup;
+			children = (
+				05C758B617AC869B00236B3F /* C */,
+			);
+			path = locales;
+			sourceTree = "<group>";
+		};
+		05C758B617AC869B00236B3F /* C */ = {
+			isa = PBXGroup;
+			children = (
+				05C758B717AC869B00236B3F /* LC_COLLATE.txt */,
+				05C758B817AC869B00236B3F /* LC_CTYPE.txt */,
+				05C758B917AC869B00236B3F /* LC_MESSAGES.txt */,
+				05C758BA17AC869B00236B3F /* LC_MONETARY.txt */,
+				05C758BB17AC869B00236B3F /* LC_NUMERIC.txt */,
+				05C758BC17AC869B00236B3F /* LC_TIME.txt */,
+			);
+			path = C;
 			sourceTree = "<group>";
 		};
 		05F57F1917AC13D500DB4ACE /* atomic */ = {
@@ -167,7 +287,9 @@
 		05F57F1D17AC13D500DB4ACE /* system */ = {
 			isa = PBXGroup;
 			children = (
+				05C7589417AC826500236B3F /* __private */,
 				05F57F1E17AC13D500DB4ACE /* atomic.h */,
+				05C7589317AC81F800236B3F /* locale.h */,
 				05F57F1F17AC13D500DB4ACE /* syscall.h */,
 				05F57F2017AC13D500DB4ACE /* types */,
 			);

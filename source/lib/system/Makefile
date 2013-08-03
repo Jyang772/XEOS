@@ -74,6 +74,7 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 DIR_SRC_ATOMIC      = $(PATH_SRC_LIB_LIBSYSTEM)atomic/
 DIR_SRC_RT          = $(PATH_SRC_LIB_LIBSYSTEM)rt/
 DIR_SRC_SYSCALL     = $(PATH_SRC_LIB_LIBSYSTEM)syscall/
+DIR_SRC_LOCALE      = $(PATH_SRC_LIB_LIBSYSTEM)locale/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -86,6 +87,7 @@ vpath %$(EXT_ASM_64)    $(DIR_SRC_ATOMIC)
 vpath %$(EXT_ASM_32)    $(DIR_SRC_RT)
 vpath %$(EXT_ASM_64)    $(DIR_SRC_RT)
 vpath %$(EXT_C)         $(DIR_SRC_SYSCALL)
+vpath %$(EXT_C)         $(DIR_SRC_LOCALE)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -107,6 +109,7 @@ _FILES_ASM_OBJ_BUILD_RT         = $(call XEOS_FUNC_S_OBJ,$(PATH_BUILD_32_LIB_OBJ
 _FILES_ASM_OBJ_BUILD_ATOMIC     = $(call XEOS_FUNC_S_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(DIR_SRC_ATOMIC))
 _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(PATH_SRC_LIB_LIBSYSTEM))
 _FILES_C_OBJ_BUILD_SYSCALL      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(DIR_SRC_SYSCALL))
+_FILES_C_OBJ_BUILD_LOCALE       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM),$(DIR_SRC_LOCALE))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -124,7 +127,8 @@ _FILES_C_OBJ_BUILD_SYSCALL      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 all:    $(_FILES_ASM_OBJ_BUILD_RT)      \
         $(_FILES_ASM_OBJ_BUILD_ATOMIC)  \
         $(_FILES_C_OBJ_BUILD)           \
-        $(_FILES_C_OBJ_BUILD_SYSCALL)
+        $(_FILES_C_OBJ_BUILD_SYSCALL)   \
+        $(_FILES_C_OBJ_BUILD_LOCALE)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libsystem.a"$(COLOR_NONE)
 	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libsystem.a $(PATH_BUILD_32_LIB_OBJ_LIBSYSTEM)*$(EXT_OBJ)
