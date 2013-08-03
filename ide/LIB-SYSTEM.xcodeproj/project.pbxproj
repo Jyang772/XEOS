@@ -52,6 +52,8 @@
 		05C76CD917AD832E00236B3F /* System_Locale_Use.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_Use.c; sourceTree = "<group>"; };
 		05C76CDA17AD833C00236B3F /* System_Locale_Free.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_Free.c; sourceTree = "<group>"; };
 		05C76CDB17AD834400236B3F /* System_Locale_Duplicate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Locale_Duplicate.c; sourceTree = "<group>"; };
+		05C76CDD17AD9FDD00236B3F /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		05C76CDE17ADA01E00236B3F /* System_Error_StringFromError.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = System_Error_StringFromError.c; sourceTree = "<group>"; };
 		05F57F1A17AC13D500DB4ACE /* System_Atomic.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.32.s; sourceTree = "<group>"; };
 		05F57F1B17AC13D500DB4ACE /* System_Atomic.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = System_Atomic.64.s; sourceTree = "<group>"; };
 		05F57F1E17AC13D500DB4ACE /* atomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				05F57F1917AC13D500DB4ACE /* atomic */,
+				05C76CDC17AD9FBD00236B3F /* error */,
 				05C7589117AC81EF00236B3F /* locale */,
 				05C758B217AC869B00236B3F /* locale-data */,
 				05F57F1C17AC13D500DB4ACE /* include */,
@@ -279,6 +282,15 @@
 			path = "C.US-ASCII";
 			sourceTree = "<group>";
 		};
+		05C76CDC17AD9FBD00236B3F /* error */ = {
+			isa = PBXGroup;
+			children = (
+				05C76CDE17ADA01E00236B3F /* System_Error_StringFromError.c */,
+			);
+			name = error;
+			path = ../source/lib/system/error;
+			sourceTree = "<group>";
+		};
 		05F57F1917AC13D500DB4ACE /* atomic */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +316,7 @@
 			children = (
 				05C7589417AC826500236B3F /* __private */,
 				05F57F1E17AC13D500DB4ACE /* atomic.h */,
+				05C76CDD17AD9FDD00236B3F /* error.h */,
 				05C7589317AC81F800236B3F /* locale.h */,
 				05F57F1F17AC13D500DB4ACE /* syscall.h */,
 				05F57F2017AC13D500DB4ACE /* types */,

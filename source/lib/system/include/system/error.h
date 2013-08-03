@@ -61,10 +61,15 @@
 
 /* $Id$ */
 
-#include <string.h>
-#include <system/error.h>
+/*!
+ * @header          error.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-char * strerror( int errnum )
-{
-    return ( char * )System_Error_StringFromError( errnum );
-}
+#ifndef __XEOS_LIB_SYSTEM_ERROR_H__
+#define __XEOS_LIB_SYSTEM_ERROR_H__
+
+const char * System_Error_StringFromError( int errnum );
+
+#endif /* __XEOS_LIB_SYSTEM_ERROR_H__ */
