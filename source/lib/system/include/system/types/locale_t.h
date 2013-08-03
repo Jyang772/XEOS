@@ -74,12 +74,12 @@
 
 typedef struct
 {
-    struct __System_Locale_LCCollate  * lc_collate;
-    struct __System_Locale_LCCType    * lc_ctype;
-    struct __System_Locale_LCMessages * lc_messages;
-    struct __System_Locale_LCMonetary * lc_monetary;
-    struct __System_Locale_LCNumeric  * lc_numeric;
-    struct __System_Locale_LCTime     * lc_time;
+    struct __System_Locale_Collate  * lc_collate;
+    struct __System_Locale_CType    * lc_ctype;
+    struct __System_Locale_Messages * lc_messages;
+    struct __System_Locale_Monetary * lc_monetary;
+    struct __System_Locale_Numeric  * lc_numeric;
+    struct __System_Locale_Time     * lc_time;
 }
 locale_t;
 
