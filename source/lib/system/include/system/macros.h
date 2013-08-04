@@ -67,101 +67,107 @@
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __XEOS_MACROS_H__
-#define __XEOS_MACROS_H__
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef __XEOS_LIB_SYSTEM_MACROS_H__
+#define __XEOS_LIB_SYSTEM_MACROS_H__
 
 /*!
- * @def         XEOS_WEAK_ATTRIBUTE
+ * @def         WEAK_ATTRIBUTE
  * @brief       Standardization of the weak compiler attribute
  * @details     Not all compiler support this attribute, so it may be defined
  *              to nothing.
  */
-#if defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) )
-    #define XEOS_WEAK_ATTRIBUTE __attribute__( ( weak ) )
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define WEAK_ATTRIBUTE __attribute__( ( weak ) )
 #else
-    #define XEOS_WEAK_ATTRIBUTE
+    #define WEAK_ATTRIBUTE
 #endif
 
 /*!
- * @def         XEOS_WEAK_IMPORT_ATTRIBUTE
+ * @def         WEAK_IMPORT_ATTRIBUTE
  * @brief       Standardization of the weak import compiler attribute
  * @details     Not all compiler support this attribute, so it may be defined
  *              to nothing.
  */
-#if defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) )
-    #define XEOS_WEAK_IMPORT_ATTRIBUTE __attribute__( ( weak_import ) )
-#elif defined(__MWERKS__) && ( __MWERKS__ >= 0x3205 )
-    #define XEOS_WEAK_IMPORT_ATTRIBUTE __attribute__( ( weak_import ) )
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define WEAK_IMPORT_ATTRIBUTE __attribute__( ( weak_import ) )
 #else
-    #define XEOS_WEAK_IMPORT_ATTRIBUTE
+    #define WEAK_IMPORT_ATTRIBUTE
 #endif
 
 /*!
- * @def         XEOS_DEPRECATED_ATTRIBUTE
+ * @def         DEPRECATED_ATTRIBUTE
  * @brief       Standardization of the deprecated compiler attribute
  * @details     Not all compiler support this attribute, so it may be defined
  *              to nothing.
  */
-#if defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) )
-    #define XEOS_DEPRECATED_ATTRIBUTE __attribute__( ( deprecated ) )
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define DEPRECATED_ATTRIBUTE __attribute__( ( deprecated ) )
 #else
-    #define XEOS_DEPRECATED_ATTRIBUTE
+    #define DEPRECATED_ATTRIBUTE
 #endif
 
 /*!
- * @def         XEOS_UNAVAILABLE_ATTRIBUTE
+ * @def         UNAVAILABLE_ATTRIBUTE
  * @brief       Standardization of the unavailable compiler attribute
  * @details     Not all compiler support this attribute, so it may be defined
  *              to nothing.
  */
-#if defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) )
-    #define XEOS_UNAVAILABLE_ATTRIBUTE __attribute__( ( unavailable ) )
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define UNAVAILABLE_ATTRIBUTE __attribute__( ( unavailable ) )
 #else
-    #define XEOS_UNAVAILABLE_ATTRIBUTE
+    #define UNAVAILABLE_ATTRIBUTE
 #endif
 
 /*!
- * @def         XEOS_FORMAT_ATTRIBUTE
+ * @def         FORMAT_ATTRIBUTE
  * @brief       Standardization of the format compiler attribute
  * @details     Not all compiler support this attribute, so it may be defined
  *              to nothing.
  */
-#if defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) )
-    #define XEOS_FORMAT_ATTRIBUTE( f, s, v ) __attribute__( ( format( f, s, v ) ) )
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define FORMAT_ATTRIBUTE( f, s, v ) __attribute__( ( format( f, s, v ) ) )
 #else
-    #define XEOS_FORMAT_ATTRIBUTE( f, s, v )
+    #define FORMAT_ATTRIBUTE( f, s, v )
 #endif
 
 /*!
- * @def         XEOS_CONST_ATTRIBUTE
+ * @def         CONST_ATTRIBUTE
  * @brief       Standardization of the const compiler attribute
  * @details     Not all compiler support this attribute, so it may be defined
  *              to nothing.
  */
-#if defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) )
-    #define XEOS_CONST_ATTRIBUTE __attribute__( ( const ) )
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define CONST_ATTRIBUTE __attribute__( ( const ) )
 #else
-    #define XEOS_CONST_ATTRIBUTE
+    #define CONST_ATTRIBUTE
 #endif
 
 /*!
- * @def         XEOS_NORETURN_ATTRIBUTE
+ * @def         NORETURN_ATTRIBUTE
  * @brief       Standardization of the noreturn compiler attribute
  * @details     Not all compiler support this attribute, so it may be defined
  *              to nothing.
  */
-#if defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) )
-    #define XEOS_NORETURN_ATTRIBUTE __attribute__( ( noreturn ) )
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define NORETURN_ATTRIBUTE __attribute__( ( noreturn ) )
 #else
-    #define XEOS_NORETURN_ATTRIBUTE
+    #define NORETURN_ATTRIBUTE
 #endif
 
-#ifdef __cplusplus
-}
+/*!
+ * @def         LIKELY
+ * @brief       Branch prediction
+ */
+ /*!
+ * @def         UNLIKELY
+ * @brief       Branch prediction
+ */
+#if ( defined( __GNUC__ ) && ( ( __GNUC__ >= 4 ) || ( ( __GNUC__ == 3 ) && ( __GNUC_MINOR__ >= 1 ) ) ) ) || defined( __clang__ )
+    #define LIKELY( _x_ )       __builtin_expect( !!( _x_ ), 1 )
+    #define UNLIKELY( _x_ )     __builtin_expect( !!( _x_ ), 0 )
+#else
+    #define LIKELY( _x_ )       !!( _x_ )
+    #define UNLIKELY( _x_ )     !!( _x_ )
 #endif
 
-#endif /* __XEOS_MACROS_H__ */
+#endif /* __XEOS_LIB_SYSTEM_MACROS_H__ */

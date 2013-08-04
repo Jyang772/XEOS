@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		0595B2BE17AE0D0600C47BA0 /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
 		05B4EC6A17AC291F00587E4C /* locale_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale_t.h; sourceTree = "<group>"; };
 		05C7589217AC81EF00236B3F /* __locale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __locale.c; sourceTree = "<group>"; };
 		05C7589317AC81F800236B3F /* locale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale.h; sourceTree = "<group>"; };
@@ -316,6 +317,7 @@
 			children = (
 				05C7589417AC826500236B3F /* __private */,
 				05F57F1E17AC13D500DB4ACE /* atomic.h */,
+				0595B2BE17AE0D0600C47BA0 /* macros.h */,
 				05C76CDD17AD9FDD00236B3F /* error.h */,
 				05C7589317AC81F800236B3F /* locale.h */,
 				05F57F1F17AC13D500DB4ACE /* syscall.h */,

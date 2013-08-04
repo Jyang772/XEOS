@@ -146,7 +146,6 @@
 		0595BB3317AC11F90021435A /* info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
 		0595BB3417AC11F90021435A /* irq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = irq.h; sourceTree = "<group>"; };
 		0595BB3517AC11F90021435A /* isr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = isr.h; sourceTree = "<group>"; };
-		0595BB3617AC11F90021435A /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
 		0595BB3717AC11F90021435A /* mem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mem.h; sourceTree = "<group>"; };
 		0595BB3817AC11F90021435A /* proc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = proc.h; sourceTree = "<group>"; };
 		0595BB3917AC11F90021435A /* syscall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = syscall.h; sourceTree = "<group>"; };
@@ -516,7 +515,6 @@
 				0595BB3317AC11F90021435A /* info.h */,
 				0595BB3417AC11F90021435A /* irq.h */,
 				0595BB3517AC11F90021435A /* isr.h */,
-				0595BB3617AC11F90021435A /* macros.h */,
 				0595BB3717AC11F90021435A /* mem.h */,
 				0595BB3817AC11F90021435A /* proc.h */,
 				0595BB3917AC11F90021435A /* syscall.h */,
