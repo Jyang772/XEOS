@@ -117,8 +117,11 @@ all:    llvm_co     \
         crt_co      \
         lld_co      \
         llvm_build
-
-	@:
+	
+	@if [ -d $(PATH_TOOLCHAIN_LLVM)tools ]; then $(SUDO) $(RM) $(ARGS_RM) $(PATH_TOOLCHAIN_LLVM)tools; fi
+	@$(SUDO) $(MKDIR) $(PATH_TOOLCHAIN_LLVM)tools
+	@$(SUDO) $(CP) -rf $(DIR_LLVM)tools/clang/tools/scan-build $(PATH_TOOLCHAIN_LLVM)tools/
+	@$(SUDO) $(CP) -rf $(DIR_LLVM)tools/clang/tools/scan-view $(PATH_TOOLCHAIN_LLVM)tools/
 
 # Cleans the build files
 clean:

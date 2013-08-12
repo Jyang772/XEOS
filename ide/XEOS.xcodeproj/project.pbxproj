@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		05B4D9EB17AC155500587E4C /* BOOT-BIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "BOOT-BIOS.xcodeproj"; sourceTree = "<group>"; };
-		05B4D9EE17AC155500587E4C /* BOOT-UEFI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "BOOT-UEFI.xcodeproj"; sourceTree = "<group>"; };
-		05B4D9F117AC155500587E4C /* CORE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CORE.xcodeproj; sourceTree = "<group>"; };
-		05B4D9F717AC155500587E4C /* LIB-C99.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-C99.xcodeproj"; sourceTree = "<group>"; };
-		05B4D9FA17AC155600587E4C /* LIB-POSIX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-POSIX.xcodeproj"; sourceTree = "<group>"; };
-		05B4D9FD17AC155600587E4C /* LIB-PTHREAD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-PTHREAD.xcodeproj"; sourceTree = "<group>"; };
-		05B4DA0017AC155600587E4C /* LIB-SYSTEM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-SYSTEM.xcodeproj"; sourceTree = "<group>"; };
+		0595B2D517AE363000C47BA0 /* BOOT-BIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "BOOT-BIOS.xcodeproj"; sourceTree = "<group>"; };
+		0595B2D817AE363000C47BA0 /* BOOT-UEFI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "BOOT-UEFI.xcodeproj"; sourceTree = "<group>"; };
+		0595B2DB17AE363000C47BA0 /* CORE-ACPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "CORE-ACPI.xcodeproj"; sourceTree = "<group>"; };
+		0595B2DE17AE363000C47BA0 /* CORE-XEOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "CORE-XEOS.xcodeproj"; sourceTree = "<group>"; };
+		0595B2E117AE363000C47BA0 /* LIB-C99.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-C99.xcodeproj"; sourceTree = "<group>"; };
+		0595B2E417AE363000C47BA0 /* LIB-ICONV.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-ICONV.xcodeproj"; sourceTree = "<group>"; };
+		0595B2E717AE363000C47BA0 /* LIB-POSIX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-POSIX.xcodeproj"; sourceTree = "<group>"; };
+		0595B2EA17AE363000C47BA0 /* LIB-PTHREAD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-PTHREAD.xcodeproj"; sourceTree = "<group>"; };
+		0595B2ED17AE363000C47BA0 /* LIB-SYSTEM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "LIB-SYSTEM.xcodeproj"; sourceTree = "<group>"; };
 		05B4DA0B17AC156700587E4C /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
 		05B4DA0C17AC156700587E4C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		05B4DA0D17AC156700587E4C /* Makefile-Config.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Makefile-Config.mk"; path = "../Makefile-Config.mk"; sourceTree = "<group>"; };
@@ -32,9 +34,81 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		0595B2D617AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2D917AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2DC17AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2DF17AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2E217AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2E517AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2E817AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2EB17AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0595B2EE17AE363000C47BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		05AFEDB01620F26400740041 = {
 			isa = PBXGroup;
 			children = (
+				0595B2D517AE363000C47BA0 /* BOOT-BIOS.xcodeproj */,
+				0595B2D817AE363000C47BA0 /* BOOT-UEFI.xcodeproj */,
+				0595B2DB17AE363000C47BA0 /* CORE-ACPI.xcodeproj */,
+				0595B2DE17AE363000C47BA0 /* CORE-XEOS.xcodeproj */,
+				0595B2E117AE363000C47BA0 /* LIB-C99.xcodeproj */,
+				0595B2E417AE363000C47BA0 /* LIB-ICONV.xcodeproj */,
+				0595B2E717AE363000C47BA0 /* LIB-POSIX.xcodeproj */,
+				0595B2EA17AE363000C47BA0 /* LIB-PTHREAD.xcodeproj */,
+				0595B2ED17AE363000C47BA0 /* LIB-SYSTEM.xcodeproj */,
 				05B4DA0B17AC156700587E4C /* LICENSE.txt */,
 				05B4DA0C17AC156700587E4C /* Makefile */,
 				05B4DA0D17AC156700587E4C /* Makefile-Config.mk */,
@@ -42,63 +116,7 @@
 				05B4DA0F17AC156700587E4C /* release */,
 				05B4EA9717AC163100587E4C /* software-deps */,
 				05B4DA7917AC156700587E4C /* source */,
-				05B4D9EB17AC155500587E4C /* BOOT-BIOS.xcodeproj */,
-				05B4D9EE17AC155500587E4C /* BOOT-UEFI.xcodeproj */,
-				05B4D9F117AC155500587E4C /* CORE.xcodeproj */,
-				05B4D9F717AC155500587E4C /* LIB-C99.xcodeproj */,
-				05B4D9FA17AC155600587E4C /* LIB-POSIX.xcodeproj */,
-				05B4D9FD17AC155600587E4C /* LIB-PTHREAD.xcodeproj */,
-				05B4DA0017AC155600587E4C /* LIB-SYSTEM.xcodeproj */,
 			);
-			sourceTree = "<group>";
-		};
-		05B4D9EC17AC155500587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05B4D9EF17AC155500587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05B4D9F217AC155500587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05B4D9F817AC155500587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05B4D9FB17AC155600587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05B4D9FE17AC155600587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05B4DA0117AC155600587E4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		05B4DA0F17AC156700587E4C /* release */ = {
@@ -237,32 +255,40 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 05B4D9EC17AC155500587E4C /* Products */;
-					ProjectRef = 05B4D9EB17AC155500587E4C /* BOOT-BIOS.xcodeproj */;
+					ProductGroup = 0595B2D617AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2D517AE363000C47BA0 /* BOOT-BIOS.xcodeproj */;
 				},
 				{
-					ProductGroup = 05B4D9EF17AC155500587E4C /* Products */;
-					ProjectRef = 05B4D9EE17AC155500587E4C /* BOOT-UEFI.xcodeproj */;
+					ProductGroup = 0595B2D917AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2D817AE363000C47BA0 /* BOOT-UEFI.xcodeproj */;
 				},
 				{
-					ProductGroup = 05B4D9F217AC155500587E4C /* Products */;
-					ProjectRef = 05B4D9F117AC155500587E4C /* CORE.xcodeproj */;
+					ProductGroup = 0595B2DC17AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2DB17AE363000C47BA0 /* CORE-ACPI.xcodeproj */;
 				},
 				{
-					ProductGroup = 05B4D9F817AC155500587E4C /* Products */;
-					ProjectRef = 05B4D9F717AC155500587E4C /* LIB-C99.xcodeproj */;
+					ProductGroup = 0595B2DF17AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2DE17AE363000C47BA0 /* CORE-XEOS.xcodeproj */;
 				},
 				{
-					ProductGroup = 05B4D9FB17AC155600587E4C /* Products */;
-					ProjectRef = 05B4D9FA17AC155600587E4C /* LIB-POSIX.xcodeproj */;
+					ProductGroup = 0595B2E217AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2E117AE363000C47BA0 /* LIB-C99.xcodeproj */;
 				},
 				{
-					ProductGroup = 05B4D9FE17AC155600587E4C /* Products */;
-					ProjectRef = 05B4D9FD17AC155600587E4C /* LIB-PTHREAD.xcodeproj */;
+					ProductGroup = 0595B2E517AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2E417AE363000C47BA0 /* LIB-ICONV.xcodeproj */;
 				},
 				{
-					ProductGroup = 05B4DA0117AC155600587E4C /* Products */;
-					ProjectRef = 05B4DA0017AC155600587E4C /* LIB-SYSTEM.xcodeproj */;
+					ProductGroup = 0595B2E817AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2E717AE363000C47BA0 /* LIB-POSIX.xcodeproj */;
+				},
+				{
+					ProductGroup = 0595B2EB17AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2EA17AE363000C47BA0 /* LIB-PTHREAD.xcodeproj */;
+				},
+				{
+					ProductGroup = 0595B2EE17AE363000C47BA0 /* Products */;
+					ProjectRef = 0595B2ED17AE363000C47BA0 /* LIB-SYSTEM.xcodeproj */;
 				},
 			);
 			projectRoot = "";
