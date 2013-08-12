@@ -244,6 +244,11 @@ RANLIB_EFI_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32
 RANLIB_32                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ranlib
 RANLIB_64                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ranlib
 
+# Static analyzer
+
+SCANBUILD                               := $(PATH_TOOLCHAIN_LLVM)tools/scan-build/scan-build
+SCANVIEW                                := $(PATH_TOOLCHAIN_LLVM)tools/scan-view/scan-view
+
 # Utilities
 
 MAKE                                    := make
@@ -311,6 +316,11 @@ ARGS_AR_64                              := rcs
 
 ARGS_AS_32                              := -f $(TARGET_ABI)
 ARGS_AS_64                              := -f $(TARGET_ABI)64
+
+# Static analyzer
+
+ARGS_SCANBUILD                          := --use-analyzer $(CC)
+ARGS_SCANVIEW                           := 
 
 # Utilities
 
