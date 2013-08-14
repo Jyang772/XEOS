@@ -35,6 +35,8 @@
 		05A55CFF17BA55A9000E9E00 /* strstr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strstr.c; sourceTree = "<group>"; };
 		05A55D0017BA55A9000E9E00 /* strtok.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strtok.c; sourceTree = "<group>"; };
 		05A55D0117BA55A9000E9E00 /* strxfrm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strxfrm.c; sourceTree = "<group>"; };
+		05A55D0717BC48A4000E9E00 /* memcpy.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = memcpy.32.s; sourceTree = "<group>"; };
+		05A55D0817BC48AF000E9E00 /* memcpy.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = memcpy.64.s; sourceTree = "<group>"; };
 		05F57C2E17AC133A00DB4ACE /* __XEOS_Lib_C99_AssertFail.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_Lib_C99_AssertFail.c; sourceTree = "<group>"; };
 		05F57C3017AC133A00DB4ACE /* isalnum.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalnum.c; sourceTree = "<group>"; };
 		05F57C3117AC133A00DB4ACE /* isalpha.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = isalpha.c; sourceTree = "<group>"; };
@@ -847,6 +849,8 @@
 				05A55CE717BA55A9000E9E00 /* memchr.64.s */,
 				05A55CE817BA55A9000E9E00 /* memchr.c */,
 				05A55CE917BA55A9000E9E00 /* memcmp.c */,
+				05A55D0717BC48A4000E9E00 /* memcpy.32.s */,
+				05A55D0817BC48AF000E9E00 /* memcpy.64.s */,
 				05A55CEA17BA55A9000E9E00 /* memcpy.c */,
 				05A55CEB17BA55A9000E9E00 /* memmove.c */,
 				05A55CEC17BA55A9000E9E00 /* memset.32.s */,
