@@ -59,52 +59,86 @@
 
 # $Id$
 
-include ../../Makefile-Config.mk
+include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LIB  "$(COLOR_NONE)"]>           *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LIB  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" OBJC "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
+# Paths
+#-------------------------------------------------------------------------------
+
+DIR_SRC_MESSAGE         = $(PATH_SRC_LIB_OBJC)message/
+DIR_SRC_RUNTIME         = $(PATH_SRC_LIB_OBJC)runtime/
+
+#-------------------------------------------------------------------------------
+# Search paths
+#-------------------------------------------------------------------------------
+
+# Define the search paths for source files
+vpath %$(EXT_C)         $(PATH_SRC_LIB_OBJC)
+vpath %$(EXT_C)         $(DIR_SRC_MESSAGE)
+vpath %$(EXT_C)         $(DIR_SRC_RUNTIME)
+
+#-------------------------------------------------------------------------------
+# File suffixes
+#-------------------------------------------------------------------------------
+
+# Adds the suffixes used in this file
+.SUFFIXES:  $(EXT_ASM_32)   \
+            $(EXT_ASM_64)   \
+            $(EXT_C)        \
+            $(EXT_H)        \
+            $(EXT_OBJ)      \
+            $(EXT_BIN)
+
+#-------------------------------------------------------------------------------
+# Files
+#-------------------------------------------------------------------------------
+
+_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_OBJC),$(PATH_SRC_LIB_OBJC))
+_FILES_C_OBJ_BUILD_MESSAGE      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_OBJC),$(DIR_SRC_MESSAGE))
+_FILES_C_OBJ_BUILD_RUNTIME      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_OBJC),$(DIR_SRC_RUNTIME))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean
+.PHONY: all     \
+        clean
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:
+all:    $(_FILES_C_OBJ_BUILD)               \
+        $(_FILES_C_OBJ_BUILD_MESSAGE)       \
+        $(_FILES_C_OBJ_BUILD_RUNTIME)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C standard library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_C99) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libobjc.a"$(COLOR_NONE)
+	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libobjc.a $(PATH_BUILD_32_LIB_OBJ_OBJC)*$(EXT_OBJ)
+	@$(RANLIB_32) $(PATH_BUILD_32_LIB_BIN)libobjc.a
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_POSIX) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libobjc.a"$(COLOR_NONE)
+	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libobjc.a $(PATH_BUILD_64_LIB_OBJ_OBJC)*$(EXT_OBJ)
+	@$(RANLIB_64) $(PATH_BUILD_64_LIB_BIN)libobjc.a
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX Thread library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libobjc.so"$(COLOR_NONE)
+	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libobjc.so $(PATH_BUILD_32_LIB_OBJ_OBJC)*$(EXT_OBJ_PIC)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS IConv library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_ICONV) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS Objective-C library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE)
-	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libobjc.so"$(COLOR_NONE)
+	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libobjc.so $(PATH_BUILD_64_LIB_OBJ_OBJC)*$(EXT_OBJ_PIC)
+
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_LIB_C99) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_POSIX) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_ICONV) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE) clean
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_OBJ_OBJC)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_OBJ_OBJC)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_BIN)libobjc.*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_BIN)libobjc.*

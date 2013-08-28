@@ -1,0 +1,149 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05ECB40D17CE6E7E000042E4 /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = message.h; sourceTree = "<group>"; };
+		05ECB40E17CE6E7E000042E4 /* objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
+		05ECB40F17CE6E7E000042E4 /* runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = runtime.h; sourceTree = "<group>"; };
+		05ECB41017CE6E7E000042E4 /* objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
+		05ECB41117CE6E7E000042E4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/objc/Makefile; sourceTree = "<group>"; };
+		05ECB41417CE6F7C000042E4 /* objc_msgSend.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objc_msgSend.c; sourceTree = "<group>"; };
+		05ECB41517CE6F85000042E4 /* objc_msgSendSuper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objc_msgSendSuper.c; sourceTree = "<group>"; };
+		05ECB41617CE6F8B000042E4 /* objc_msgSend_stret.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objc_msgSend_stret.c; sourceTree = "<group>"; };
+		05ECB41717CE6F91000042E4 /* objc_msgSendSuper_stret.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objc_msgSendSuper_stret.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0595BA6417AC11980021435A = {
+			isa = PBXGroup;
+			children = (
+				05ECB40B17CE6E7E000042E4 /* include */,
+				05ECB41117CE6E7E000042E4 /* Makefile */,
+				05ECB41217CE6E7E000042E4 /* message */,
+				05ECB41317CE6E7E000042E4 /* runtime */,
+			);
+			sourceTree = "<group>";
+		};
+		05ECB40B17CE6E7E000042E4 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05ECB40C17CE6E7E000042E4 /* objc */,
+				05ECB41017CE6E7E000042E4 /* objc.h */,
+			);
+			name = include;
+			path = ../source/lib/objc/include;
+			sourceTree = "<group>";
+		};
+		05ECB40C17CE6E7E000042E4 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				05ECB40D17CE6E7E000042E4 /* message.h */,
+				05ECB40E17CE6E7E000042E4 /* objc.h */,
+				05ECB40F17CE6E7E000042E4 /* runtime.h */,
+			);
+			path = objc;
+			sourceTree = "<group>";
+		};
+		05ECB41217CE6E7E000042E4 /* message */ = {
+			isa = PBXGroup;
+			children = (
+				05ECB41417CE6F7C000042E4 /* objc_msgSend.c */,
+				05ECB41517CE6F85000042E4 /* objc_msgSendSuper.c */,
+				05ECB41617CE6F8B000042E4 /* objc_msgSend_stret.c */,
+				05ECB41717CE6F91000042E4 /* objc_msgSendSuper_stret.c */,
+			);
+			name = message;
+			path = ../source/lib/objc/message;
+			sourceTree = "<group>";
+		};
+		05ECB41317CE6E7E000042E4 /* runtime */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = runtime;
+			path = ../source/lib/objc/runtime;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA6917AC11980021435A /* LIB-OBJC */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA6C17AC11980021435A /* Build configuration list for PBXLegacyTarget "LIB-OBJC" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/lib/objc;
+			dependencies = (
+			);
+			name = "LIB-OBJC";
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-C99";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA6517AC11980021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA6817AC11980021435A /* Build configuration list for PBXProject "LIB-OBJC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA6417AC11980021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA6917AC11980021435A /* LIB-OBJC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA6B17AC11980021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA6E17AC11980021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA6817AC11980021435A /* Build configuration list for PBXProject "LIB-OBJC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA6B17AC11980021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA6C17AC11980021435A /* Build configuration list for PBXLegacyTarget "LIB-OBJC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA6E17AC11980021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA6517AC11980021435A /* Project object */;
+}
