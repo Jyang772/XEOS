@@ -68,7 +68,18 @@
 extern "C" {
 #endif
 
+#include <objc/objc.h>
 
+struct objc_super
+{
+    __unsafe_unretained id      receiver;
+    __unsafe_unretained Class   super_class;
+};
+
+id   objc_msgSend( id receiver, SEL selector, ... );
+id   objc_msgSendSuper( struct objc_super * super, SEL selector,  ... );
+void objc_msgSend_stret( void * addr, id receiver, SEL selector,  ... );
+void objc_msgSendSuper_stret( struct objc_super * super, SEL selector, ... );
 
 #ifdef __cplusplus
 }

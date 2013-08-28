@@ -16,6 +16,7 @@
 		05ECB41517CE6F85000042E4 /* objc_msgSendSuper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objc_msgSendSuper.c; sourceTree = "<group>"; };
 		05ECB41617CE6F8B000042E4 /* objc_msgSend_stret.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objc_msgSend_stret.c; sourceTree = "<group>"; };
 		05ECB41717CE6F91000042E4 /* objc_msgSendSuper_stret.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objc_msgSendSuper_stret.c; sourceTree = "<group>"; };
+		05ECB41817CE7175000042E4 /* objc-api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "objc-api.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -44,6 +45,7 @@
 			children = (
 				05ECB40D17CE6E7E000042E4 /* message.h */,
 				05ECB40E17CE6E7E000042E4 /* objc.h */,
+				05ECB41817CE7175000042E4 /* objc-api.h */,
 				05ECB40F17CE6E7E000042E4 /* runtime.h */,
 			);
 			path = objc;

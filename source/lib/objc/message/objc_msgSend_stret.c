@@ -68,6 +68,4 @@ void objc_msgSend_stret( void * addr, id receiver, SEL selector,  ... )
     ( void )addr;
     ( void )receiver;
     ( void )selector;
-    
-    return NULL;
 }

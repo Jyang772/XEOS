@@ -68,6 +68,7 @@
 extern "C" {
 #endif
 
+#include <objc/objc-api.h>
 #include <objc/objc.h>
 #include <objc/runtime.h>
 #include <objc/message.h>

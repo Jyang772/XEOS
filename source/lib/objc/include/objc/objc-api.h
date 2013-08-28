@@ -61,68 +61,17 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_OBJC_OBJC_H__
-#define __XEOS_LIB_OBJC_OBJC_H__
+#ifndef __XEOS_LIB_OBJC_OBJC_API_H__
+#define __XEOS_LIB_OBJC_OBJC_API_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <objc/objc-api.h>
-#include <system/types/null.h>
 
-typedef struct objc_class * Class;
-
-struct objc_object
-{
-    Class isa;
-};
-
-typedef struct objc_object * id;
-
-typedef struct objc_selector * SEL;
-
-typedef id ( * IMP )( id, SEL, ... ); 
-
-typedef signed char BOOL;
-
-#define OBJC_BOOL_DEFINED
-
-#if __has_feature( objc_bool )
-    #define YES             __objc_yes
-    #define NO              __objc_no
-#else
-    #define YES             ( ( BOOL )1 )
-    #define NO              ( ( BOOL )0 )
-#endif
-
-#ifndef Nil
-    #if __has_feature( cxx_nullptr )
-        #define Nil         nullptr
-    #else
-        #define Nil         NULL
-    #endif
-#endif
-
-#ifndef nil
-    #if __has_feature( cxx_nullptr )
-        #define nil         nullptr
-    #else
-        #define nil         NULL
-    #endif
-#endif
-
-#if !( defined( __OBJC_GC__ ) || __has_feature( objc_arc ) )
-    #define __strong
-#endif
-
-#if !__has_feature( objc_arc )
-    #define __unsafe_unretained
-    #define __autoreleasing
-#endif
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_OBJC_OBJC_H__ */
+#endif /* __XEOS_LIB_OBJC_OBJC_API_H__ */

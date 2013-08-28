@@ -67,6 +67,4 @@ void objc_msgSendSuper_stret( struct objc_super * super, SEL selector, ... )
 {
     ( void )super;
     ( void )selector;
-    
-    return NULL;
 }
