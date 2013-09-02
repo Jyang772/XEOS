@@ -46,6 +46,8 @@
 		0555FBB517D52DA300C0B437 /* dispatch_source_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_source_t.h; sourceTree = "<group>"; };
 		0555FBB617D52DA300C0B437 /* dispatch_source_type_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_source_type_t.h; sourceTree = "<group>"; };
 		0555FBB717D52DA300C0B437 /* dispatch_time_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_time_t.h; sourceTree = "<group>"; };
+		0555FBB817D5329A00C0B437 /* dispatch_time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_time.c; sourceTree = "<group>"; };
+		0555FBB917D532A300C0B437 /* dispatch_walltime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_walltime.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -152,6 +154,8 @@
 		0555FB5117D510D000C0B437 /* time */ = {
 			isa = PBXGroup;
 			children = (
+				0555FBB817D5329A00C0B437 /* dispatch_time.c */,
+				0555FBB917D532A300C0B437 /* dispatch_walltime.c */,
 			);
 			name = time;
 			path = ../source/lib/dispatch/time;

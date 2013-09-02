@@ -61,19 +61,12 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_TYPES_DISPATCH_TIME_T_H__
-#define __XEOS_LIB_DISPATCH_TYPES_DISPATCH_TIME_T_H__
+#include <dispatch/time.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <system/types/uint64_t.h>
-
-typedef uint64_t dispatch_time_t;
-
-#ifdef __cplusplus
+dispatch_time_t dispatch_time( dispatch_time_t when, int64_t delta )
+{
+    ( void )when;
+    ( void )delta;
+    
+    return 0;
 }
-#endif
-
-#endif /* __XEOS_LIB_DISPATCH_TYPES_DISPATCH_TIME_T_H__ */
