@@ -68,7 +68,34 @@
 extern "C" {
 #endif
 
+enum
+{
+    BLOCK_HAS_COPY_DISPOSE  = ( 1 << 25 ),
+    BLOCK_HAS_CTOR          = ( 1 << 26 ),
+    BLOCK_IS_GLOBAL         = ( 1 << 28 ),
+    BLOCK_HAS_STRET         = ( 1 << 29 ),
+    BLOCK_HAS_SIGNATURE     = ( 1 << 30 )
+};
 
+typedef struct
+{
+    unsigned long int reserved;
+    unsigned long int size;
+    void ( * copy_helper)( void * dst, void * src );
+    void ( * dispose_helper)( void * src );
+    const char * signature;
+}
+Block_Descriptor;
+
+typedef struct
+{
+    void  * isa;
+    int     flags;
+    int     reserved;
+    void ( * invoke )( void *, ... );
+    Block_Descriptor * descriptor;
+}
+Block_Literal;
 
 #ifdef __cplusplus
 }
