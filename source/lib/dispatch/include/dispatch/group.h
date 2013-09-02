@@ -61,17 +61,30 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_H__
-#define __XEOS_LIB_DISPATCH_H__
+#ifndef __XEOS_LIB_DISPATCH_GROUP_H__
+#define __XEOS_LIB_DISPATCH_GROUP_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include <dispatch/types/dispatch_group_t.h>
+#include <dispatch/types/dispatch_queue_t.h>
+#include <dispatch/types/dispatch_block_t.h>
+#include <dispatch/types/dispatch_function_t.h>
+#include <dispatch/types/dispatch_time_t.h>
 
+void                dispatch_group_async( dispatch_group_t group, dispatch_queue_t queue, dispatch_block_t block );
+void                dispatch_group_async_f( dispatch_group_t group, dispatch_queue_t queue, void * context, dispatch_function_t work );
+dispatch_group_t    dispatch_group_create( void );
+void                dispatch_group_enter( dispatch_group_t group );
+void                dispatch_group_leave( dispatch_group_t group );
+void                dispatch_group_notify( dispatch_group_t group, dispatch_queue_t queue, dispatch_block_t block );
+void                dispatch_group_notify_f( dispatch_group_t group, dispatch_queue_t queue, void * context, dispatch_function_t work );
+long                dispatch_group_wait( dispatch_group_t group, dispatch_time_t timeout );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_DISPATCH_H__ */
+#endif /* __XEOS_LIB_DISPATCH_GROUP_H__ */

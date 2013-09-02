@@ -61,17 +61,29 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_H__
-#define __XEOS_LIB_DISPATCH_H__
+#ifndef __XEOS_LIB_DISPATCH_TIME_H__
+#define __XEOS_LIB_DISPATCH_TIME_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include <system/types/int64_t.h>
+#include <system/types/struct_timespec.h>
+#include <dispatch/types/dispatch_time_t.h>
 
+#define DISPATCH_TIME_NOW       0
+#define DISPATCH_TIME_FOREVER   ( ~0ull )
+
+#define NSEC_PER_SEC            1000000000ull
+#define USEC_PER_SEC            1000000ull
+#define NSEC_PER_USEC           1000ull
+
+dispatch_time_t dispatch_time( dispatch_time_t when, int64_t delta );
+dispatch_time_t dispatch_walltime( const struct timespec * when, int64_t delta );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_DISPATCH_H__ */
+#endif /* __XEOS_LIB_DISPATCH_TIME_H__ */

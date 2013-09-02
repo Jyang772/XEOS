@@ -18,12 +18,47 @@
 		0555FB4817D510D000C0B437 /* time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
 		0555FB4917D510D000C0B437 /* dispatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch.h; sourceTree = "<group>"; };
 		0555FB4B17D510D000C0B437 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/dispatch/Makefile; sourceTree = "<group>"; };
+		0555FB5217D513FA00C0B437 /* base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = base.h; sourceTree = "<group>"; };
+		0555FB5317D5221E00C0B437 /* dispatch_data_apply.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_data_apply.c; sourceTree = "<group>"; };
+		0555FB5417D5221E00C0B437 /* dispatch_data_copy_region.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_data_copy_region.c; sourceTree = "<group>"; };
+		0555FB5517D5221E00C0B437 /* dispatch_data_create_concat.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_data_create_concat.c; sourceTree = "<group>"; };
+		0555FB5617D5221E00C0B437 /* dispatch_data_create_map.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_data_create_map.c; sourceTree = "<group>"; };
+		0555FB5717D5221E00C0B437 /* dispatch_data_create_subrange.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_data_create_subrange.c; sourceTree = "<group>"; };
+		0555FB5817D5221E00C0B437 /* dispatch_data_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_data_create.c; sourceTree = "<group>"; };
+		0555FB5917D5221E00C0B437 /* dispatch_data_get_size.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_data_get_size.c; sourceTree = "<group>"; };
+		0555FB9E17D52CF600C0B437 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		0555FBA517D52DA300C0B437 /* dispatch_block_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_block_t.h; sourceTree = "<group>"; };
+		0555FBA617D52DA300C0B437 /* dispatch_data_applier_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_data_applier_t.h; sourceTree = "<group>"; };
+		0555FBA717D52DA300C0B437 /* dispatch_data_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_data_t.h; sourceTree = "<group>"; };
+		0555FBA817D52DA300C0B437 /* dispatch_fd_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_fd_t.h; sourceTree = "<group>"; };
+		0555FBA917D52DA300C0B437 /* dispatch_function_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_function_t.h; sourceTree = "<group>"; };
+		0555FBAA17D52DA300C0B437 /* dispatch_group_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_group_t.h; sourceTree = "<group>"; };
+		0555FBAB17D52DA300C0B437 /* dispatch_io_close_flags_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_io_close_flags_t.h; sourceTree = "<group>"; };
+		0555FBAC17D52DA300C0B437 /* dispatch_io_handler_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_io_handler_t.h; sourceTree = "<group>"; };
+		0555FBAD17D52DA300C0B437 /* dispatch_io_interval_flags_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_io_interval_flags_t.h; sourceTree = "<group>"; };
+		0555FBAE17D52DA300C0B437 /* dispatch_io_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_io_t.h; sourceTree = "<group>"; };
+		0555FBAF17D52DA300C0B437 /* dispatch_io_type_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_io_type_t.h; sourceTree = "<group>"; };
+		0555FBB017D52DA300C0B437 /* dispatch_object_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_object_t.h; sourceTree = "<group>"; };
+		0555FBB117D52DA300C0B437 /* dispatch_once_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_once_t.h; sourceTree = "<group>"; };
+		0555FBB217D52DA300C0B437 /* dispatch_queue_attr_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_queue_attr_t.h; sourceTree = "<group>"; };
+		0555FBB317D52DA300C0B437 /* dispatch_queue_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_queue_t.h; sourceTree = "<group>"; };
+		0555FBB417D52DA300C0B437 /* dispatch_semaphore_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_semaphore_t.h; sourceTree = "<group>"; };
+		0555FBB517D52DA300C0B437 /* dispatch_source_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_source_t.h; sourceTree = "<group>"; };
+		0555FBB617D52DA300C0B437 /* dispatch_source_type_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_source_type_t.h; sourceTree = "<group>"; };
+		0555FBB717D52DA300C0B437 /* dispatch_time_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_time_t.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		0555FB3C17D510D000C0B437 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				0555FB5317D5221E00C0B437 /* dispatch_data_apply.c */,
+				0555FB5417D5221E00C0B437 /* dispatch_data_copy_region.c */,
+				0555FB5517D5221E00C0B437 /* dispatch_data_create_concat.c */,
+				0555FB5617D5221E00C0B437 /* dispatch_data_create_map.c */,
+				0555FB5717D5221E00C0B437 /* dispatch_data_create_subrange.c */,
+				0555FB5817D5221E00C0B437 /* dispatch_data_create.c */,
+				0555FB5917D5221E00C0B437 /* dispatch_data_get_size.c */,
 			);
 			name = data;
 			path = ../source/lib/dispatch/data;
@@ -50,6 +85,9 @@
 		0555FB3F17D510D000C0B437 /* dispatch */ = {
 			isa = PBXGroup;
 			children = (
+				0555FB9D17D52CF600C0B437 /* __private */,
+				0555FB9F17D52CF600C0B437 /* types */,
+				0555FB5217D513FA00C0B437 /* base.h */,
 				0555FB4017D510D000C0B437 /* data.h */,
 				0555FB4117D510D000C0B437 /* group.h */,
 				0555FB4217D510D000C0B437 /* io.h */,
@@ -119,6 +157,40 @@
 			path = ../source/lib/dispatch/time;
 			sourceTree = "<group>";
 		};
+		0555FB9D17D52CF600C0B437 /* __private */ = {
+			isa = PBXGroup;
+			children = (
+				0555FB9E17D52CF600C0B437 /* types.h */,
+			);
+			path = __private;
+			sourceTree = "<group>";
+		};
+		0555FB9F17D52CF600C0B437 /* types */ = {
+			isa = PBXGroup;
+			children = (
+				0555FBA517D52DA300C0B437 /* dispatch_block_t.h */,
+				0555FBA617D52DA300C0B437 /* dispatch_data_applier_t.h */,
+				0555FBA717D52DA300C0B437 /* dispatch_data_t.h */,
+				0555FBA817D52DA300C0B437 /* dispatch_fd_t.h */,
+				0555FBA917D52DA300C0B437 /* dispatch_function_t.h */,
+				0555FBAA17D52DA300C0B437 /* dispatch_group_t.h */,
+				0555FBAB17D52DA300C0B437 /* dispatch_io_close_flags_t.h */,
+				0555FBAC17D52DA300C0B437 /* dispatch_io_handler_t.h */,
+				0555FBAD17D52DA300C0B437 /* dispatch_io_interval_flags_t.h */,
+				0555FBAE17D52DA300C0B437 /* dispatch_io_t.h */,
+				0555FBAF17D52DA300C0B437 /* dispatch_io_type_t.h */,
+				0555FBB017D52DA300C0B437 /* dispatch_object_t.h */,
+				0555FBB117D52DA300C0B437 /* dispatch_once_t.h */,
+				0555FBB217D52DA300C0B437 /* dispatch_queue_attr_t.h */,
+				0555FBB317D52DA300C0B437 /* dispatch_queue_t.h */,
+				0555FBB417D52DA300C0B437 /* dispatch_semaphore_t.h */,
+				0555FBB517D52DA300C0B437 /* dispatch_source_t.h */,
+				0555FBB617D52DA300C0B437 /* dispatch_source_type_t.h */,
+				0555FBB717D52DA300C0B437 /* dispatch_time_t.h */,
+			);
+			path = types;
+			sourceTree = "<group>";
+		};
 		0595BA7A17AC11A70021435A = {
 			isa = PBXGroup;
 			children = (
@@ -146,7 +218,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = ../source/lib/iconv;
+			buildWorkingDirectory = ../source/lib/dispatch;
 			dependencies = (
 			);
 			name = "LIB-DISPATCH";

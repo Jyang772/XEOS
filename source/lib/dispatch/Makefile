@@ -71,7 +71,15 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
-DIR_SRC_DISPATCH        = $(PATH_SRC_LIB_DISPATCH)dispatch/
+DIR_SRC_DATA            = $(PATH_SRC_LIB_DISPATCH)data/
+DIR_SRC_GROUP           = $(PATH_SRC_LIB_DISPATCH)group/
+DIR_SRC_IO              = $(PATH_SRC_LIB_DISPATCH)io/
+DIR_SRC_OBJECT          = $(PATH_SRC_LIB_DISPATCH)object/
+DIR_SRC_ONCE            = $(PATH_SRC_LIB_DISPATCH)once/
+DIR_SRC_QUEUE           = $(PATH_SRC_LIB_DISPATCH)queue/
+DIR_SRC_SEMAPHORE       = $(PATH_SRC_LIB_DISPATCH)semaphore/
+DIR_SRC_SOURCE          = $(PATH_SRC_LIB_DISPATCH)source/
+DIR_SRC_TIME            = $(PATH_SRC_LIB_DISPATCH)time/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -79,7 +87,15 @@ DIR_SRC_DISPATCH        = $(PATH_SRC_LIB_DISPATCH)dispatch/
 
 # Define the search paths for source files
 vpath %$(EXT_C)         $(PATH_SRC_LIB_DISPATCH)
-vpath %$(EXT_C)         $(DIR_SRC_DISPATCH)
+vpath %$(EXT_C)         $(DIR_SRC_DATA)
+vpath %$(EXT_C)         $(DIR_SRC_GROUP)
+vpath %$(EXT_C)         $(DIR_SRC_IO)
+vpath %$(EXT_C)         $(DIR_SRC_OBJECT)
+vpath %$(EXT_C)         $(DIR_SRC_ONCE)
+vpath %$(EXT_C)         $(DIR_SRC_QUEUE)
+vpath %$(EXT_C)         $(DIR_SRC_SEMAPHORE)
+vpath %$(EXT_C)         $(DIR_SRC_SOURCE)
+vpath %$(EXT_C)         $(DIR_SRC_TIME)
 
 #-------------------------------------------------------------------------------
 # File suffixes
@@ -98,7 +114,15 @@ vpath %$(EXT_C)         $(DIR_SRC_DISPATCH)
 #-------------------------------------------------------------------------------
 
 _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(PATH_SRC_LIB_DISPATCH))
-_FILES_C_OBJ_BUILD_DISPATCH     = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_DISPATCH))
+_FILES_C_OBJ_BUILD_DATA         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_DATA))
+_FILES_C_OBJ_BUILD_GROUP        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_GROUP))
+_FILES_C_OBJ_BUILD_IO           = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_IO))
+_FILES_C_OBJ_BUILD_OBJECT       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_OBJECT))
+_FILES_C_OBJ_BUILD_ONCE         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_ONCE))
+_FILES_C_OBJ_BUILD_QUEUE        = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_QUEUE))
+_FILES_C_OBJ_BUILD_SEMAPHORE    = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_SEMAPHORE))
+_FILES_C_OBJ_BUILD_SOURCE       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_SOURCE))
+_FILES_C_OBJ_BUILD_TIME         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_DISPATCH),$(DIR_SRC_TIME))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -113,7 +137,15 @@ _FILES_C_OBJ_BUILD_DISPATCH     = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    $(_FILES_C_OBJ_BUILD_DISPATCH)   \
+all:    $(_FILES_C_OBJ_BUILD_DATA)      \
+        $(_FILES_C_OBJ_BUILD_GROUP)     \
+        $(_FILES_C_OBJ_BUILD_IO)        \
+        $(_FILES_C_OBJ_BUILD_OBJECT)    \
+        $(_FILES_C_OBJ_BUILD_ONCE)      \
+        $(_FILES_C_OBJ_BUILD_QUEUE)     \
+        $(_FILES_C_OBJ_BUILD_SEMAPHORE) \
+        $(_FILES_C_OBJ_BUILD_SOURCE)    \
+        $(_FILES_C_OBJ_BUILD_TIME)      \
         $(_FILES_C_OBJ_BUILD)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libdispatch.a"$(COLOR_NONE)

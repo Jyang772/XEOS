@@ -61,27 +61,20 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_OBJECT_H__
-#define __XEOS_LIB_DISPATCH_OBJECT_H__
+#ifndef __XEOS_LIB_DISPATCH_TYPES_DISPATCH_DATA_APPLIER_T_H__
+#define __XEOS_LIB_DISPATCH_TYPES_DISPATCH_DATA_APPLIER_T_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <dispatch/types/dispatch_object_t.h>
-#include <dispatch/types/dispatch_function_t.h>
+#include <system/types/size_t.h>
+#include <dispatch/types/dispatch_data_t.h>
 
-void    dispatch_debug( dispatch_object_t object, const char * message, ... );
-void  * dispatch_get_context( dispatch_object_t object );
-void    dispatch_release( dispatch_object_t object );
-void    dispatch_resume( dispatch_object_t object );
-void    dispatch_retain( dispatch_object_t object );
-void    dispatch_set_context( dispatch_object_t object, void * context );
-void    dispatch_set_finalizer_f( dispatch_object_t object, dispatch_function_t finalizer );
-void    dispatch_suspend( dispatch_object_t object );
+typedef bool ( ^ dispatch_data_applier_t )( dispatch_data_t region, size_t offset, const void * buffer, size_t size );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_DISPATCH_OBJECT_H__ */
+#endif /* __XEOS_LIB_DISPATCH_TYPES_DISPATCH_DATA_APPLIER_T_H__ */

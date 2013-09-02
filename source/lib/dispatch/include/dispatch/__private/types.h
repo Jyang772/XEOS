@@ -61,27 +61,87 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_OBJECT_H__
-#define __XEOS_LIB_DISPATCH_OBJECT_H__
+#ifndef __XEOS_LIB_DISPATCH___PRIVATE_TYPES_H__
+#define __XEOS_LIB_DISPATCH___PRIVATE_TYPES_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <dispatch/types/dispatch_object_t.h>
-#include <dispatch/types/dispatch_function_t.h>
+struct __dispatch_object_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
 
-void    dispatch_debug( dispatch_object_t object, const char * message, ... );
-void  * dispatch_get_context( dispatch_object_t object );
-void    dispatch_release( dispatch_object_t object );
-void    dispatch_resume( dispatch_object_t object );
-void    dispatch_retain( dispatch_object_t object );
-void    dispatch_set_context( dispatch_object_t object, void * context );
-void    dispatch_set_finalizer_f( dispatch_object_t object, dispatch_function_t finalizer );
-void    dispatch_suspend( dispatch_object_t object );
+struct __dispatch_continuation_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_queue_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_queue_attr_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_group_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_source_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_source_attr_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_semaphore_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_data_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_io_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_operation_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
+
+struct __dispatch_fld_s
+{
+    void * isa;
+    char   __reserved[ 256 ];
+};
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_DISPATCH_OBJECT_H__ */
+#endif /* __XEOS_LIB_DISPATCH___PRIVATE_TYPES_H__ */

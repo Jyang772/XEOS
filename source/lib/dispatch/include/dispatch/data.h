@@ -61,17 +61,36 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_H__
-#define __XEOS_LIB_DISPATCH_H__
+#ifndef __XEOS_LIB_DISPATCH_DATA_H__
+#define __XEOS_LIB_DISPATCH_DATA_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include <system/types/null.h>
+#include <system/types/size_t.h>
+#include <stdbool.h>
+#include <dispatch/types/dispatch_data_t.h>
+#include <dispatch/types/dispatch_data_applier_t.h>
+#include <dispatch/types/dispatch_queue_t.h>
+#include <dispatch/types/dispatch_block_t.h>
 
+#define dispatch_data_empty                 
+
+#define DISPATCH_DATA_DESTRUCTOR_DEFAULT    NULL
+#define DISPATCH_DATA_DESTRUCTOR_FREE       
+
+bool            dispatch_data_apply( dispatch_data_t data, dispatch_data_applier_t applier );
+dispatch_data_t dispatch_data_copy_region( dispatch_data_t data, size_t location, size_t * offset_ptr );
+dispatch_data_t dispatch_data_create( const void * buffer, size_t size, dispatch_queue_t queue, dispatch_block_t destructor );
+dispatch_data_t dispatch_data_create_concat( dispatch_data_t data1, dispatch_data_t data2 );
+dispatch_data_t dispatch_data_create_map( dispatch_data_t data, const void ** buffer_ptr, size_t * size_ptr );
+dispatch_data_t dispatch_data_create_subrange( dispatch_data_t data, size_t offset, size_t length );
+size_t          dispatch_data_get_size( dispatch_data_t data );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_DISPATCH_H__ */
+#endif /* __XEOS_LIB_DISPATCH_DATA_H__ */

@@ -68,7 +68,16 @@
 extern "C" {
 #endif
 
-
+#include <dispatch/base.h>
+#include <dispatch/data.h>
+#include <dispatch/group.h>
+#include <dispatch/io.h>
+#include <dispatch/object.h>
+#include <dispatch/once.h>
+#include <dispatch/queue.h>
+#include <dispatch/semaphore.h>
+#include <dispatch/source.h>
+#include <dispatch/time.h>
 
 #ifdef __cplusplus
 }

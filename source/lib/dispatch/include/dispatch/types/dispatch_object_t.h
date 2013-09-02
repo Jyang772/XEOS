@@ -61,27 +61,32 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_OBJECT_H__
-#define __XEOS_LIB_DISPATCH_OBJECT_H__
+#ifndef __XEOS_LIB_DISPATCH_TYPES_DISPATCH_OBJECT_T_H__
+#define __XEOS_LIB_DISPATCH_TYPES_DISPATCH_OBJECT_T_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <dispatch/types/dispatch_object_t.h>
-#include <dispatch/types/dispatch_function_t.h>
-
-void    dispatch_debug( dispatch_object_t object, const char * message, ... );
-void  * dispatch_get_context( dispatch_object_t object );
-void    dispatch_release( dispatch_object_t object );
-void    dispatch_resume( dispatch_object_t object );
-void    dispatch_retain( dispatch_object_t object );
-void    dispatch_set_context( dispatch_object_t object, void * context );
-void    dispatch_set_finalizer_f( dispatch_object_t object, dispatch_function_t finalizer );
-void    dispatch_suspend( dispatch_object_t object );
+typedef union
+{
+    struct __dispatch_object_s        * _do;
+    struct __dispatch_continuation_s  * _dc;
+    struct __dispatch_queue_s         * _dq;
+    struct __dispatch_queue_attr_s    * _dqa;
+    struct __dispatch_group_s         * _dg;
+    struct __dispatch_source_s        * _ds;
+    struct __dispatch_source_attr_s   * _dsa;
+    struct __dispatch_semaphore_s     * _dsema;
+    struct __dispatch_data_s          * _ddata;
+    struct __dispatch_io_s            * _dchannel;
+    struct __dispatch_operation_s     * _doperation;
+    struct __dispatch_fld_s           * _dfld;
+}
+dispatch_object_t __attribute__( ( transparent_union ) );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_DISPATCH_OBJECT_H__ */
+#endif /* __XEOS_LIB_DISPATCH_TYPES_DISPATCH_OBJECT_T_H__ */

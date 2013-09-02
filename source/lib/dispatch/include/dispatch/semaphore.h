@@ -61,17 +61,22 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_H__
-#define __XEOS_LIB_DISPATCH_H__
+#ifndef __XEOS_LIB_DISPATCH_SEMAPHORE_H__
+#define __XEOS_LIB_DISPATCH_SEMAPHORE_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include <dispatch/types/dispatch_semaphore_t.h>
+#include <dispatch/types/dispatch_time_t.h>
 
+dispatch_semaphore_t    dispatch_semaphore_create( long value );
+long                    dispatch_semaphore_signal( dispatch_semaphore_t dsema );
+long                    dispatch_semaphore_wait( dispatch_semaphore_t dsema, dispatch_time_t timeout );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_DISPATCH_H__ */
+#endif /* __XEOS_LIB_DISPATCH_SEMAPHORE_H__ */

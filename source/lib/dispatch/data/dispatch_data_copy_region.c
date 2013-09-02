@@ -61,27 +61,7 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_OBJECT_H__
-#define __XEOS_LIB_DISPATCH_OBJECT_H__
+#include <dispatch/data.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+dispatch_data_t dispatch_data_copy_region( dispatch_data_t data, size_t location, size_t * offset_ptr );
 
-#include <dispatch/types/dispatch_object_t.h>
-#include <dispatch/types/dispatch_function_t.h>
-
-void    dispatch_debug( dispatch_object_t object, const char * message, ... );
-void  * dispatch_get_context( dispatch_object_t object );
-void    dispatch_release( dispatch_object_t object );
-void    dispatch_resume( dispatch_object_t object );
-void    dispatch_retain( dispatch_object_t object );
-void    dispatch_set_context( dispatch_object_t object, void * context );
-void    dispatch_set_finalizer_f( dispatch_object_t object, dispatch_function_t finalizer );
-void    dispatch_suspend( dispatch_object_t object );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __XEOS_LIB_DISPATCH_OBJECT_H__ */
