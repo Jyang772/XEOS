@@ -96,6 +96,9 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE)
 	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS blocks library"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_LIB_BLOCKS) && $(MAKE)
+	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS Objective-C library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE)
 	
@@ -107,4 +110,5 @@ clean:
 	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_ICONV) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_BLOCKS) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE) clean
