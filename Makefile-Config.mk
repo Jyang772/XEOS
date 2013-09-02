@@ -161,6 +161,8 @@ PATH_BUILD_32_LIB_OBJ_PTHREAD           := $(PATH_BUILD_32_LIB_OBJ)pthread/
 PATH_BUILD_64_LIB_OBJ_PTHREAD           := $(PATH_BUILD_64_LIB_OBJ)pthread/
 PATH_BUILD_32_LIB_OBJ_ICONV             := $(PATH_BUILD_32_LIB_OBJ)iconv/
 PATH_BUILD_64_LIB_OBJ_ICONV             := $(PATH_BUILD_64_LIB_OBJ)iconv/
+PATH_BUILD_32_LIB_OBJ_BLOCKS            := $(PATH_BUILD_32_LIB_OBJ)blocks/
+PATH_BUILD_64_LIB_OBJ_BLOCKS            := $(PATH_BUILD_64_LIB_OBJ)blocks/
 PATH_BUILD_32_LIB_OBJ_OBJC              := $(PATH_BUILD_32_LIB_OBJ)objc/
 PATH_BUILD_64_LIB_OBJ_OBJC              := $(PATH_BUILD_64_LIB_OBJ)objc/
 
@@ -179,6 +181,7 @@ PATH_SRC_LIB_SYSTEM                     := $(PATH_SRC_LIB)system/
 PATH_SRC_LIB_POSIX                      := $(PATH_SRC_LIB)posix/
 PATH_SRC_LIB_PTHREAD                    := $(PATH_SRC_LIB)pthread/
 PATH_SRC_LIB_ICONV                      := $(PATH_SRC_LIB)iconv/
+PATH_SRC_LIB_BLOCKS                     := $(PATH_SRC_LIB)blocks/
 PATH_SRC_LIB_OBJC                       := $(PATH_SRC_LIB)objc/
 
 # Release directories
@@ -282,7 +285,7 @@ ARGS_CC_WARN                            := -Weverything -Werror
 ARGS_CC_STD                             := -std=c99
 ARGS_CC_CONST                           := -D __XEOS__ -D _POSIX_C_SOURCE=200809L -U __FreeBSD__ -U __FreeBSD_kernel__
 ARGS_CC_INC                             := -I $(PATH_SRC_INC)
-ARGS_CC_MISC                            := -Os -nostdlib -nostdinc -fno-builtin
+ARGS_CC_MISC                            := -Os -nostdlib -nostdinc -fno-builtin -fblocks
 ARGS_CC_PIC                             := -fPIC
 
 ARGS_CC_TARGET_MACHO_32                 := -march=$(TARGET_32_MARCH_MACHO) -target $(TARGET_32_TRIPLE_MACHO)
