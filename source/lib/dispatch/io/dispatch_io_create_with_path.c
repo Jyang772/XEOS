@@ -61,46 +61,17 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_IO_H__
-#define __XEOS_LIB_DISPATCH_IO_H__
+#include <dispatch/io.h>
+#include <system/types/null.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <stdbool.h>
-#include <system/types/size_t.h>
-#include <system/types/mode_t.h>
-#include <system/types/off_t.h>
-#include <system/types/uint64_t.h>
-#include <dispatch/types/dispatch_fd_t.h>
-#include <dispatch/types/dispatch_io_t.h>
-#include <dispatch/types/dispatch_io_handler_t.h>
-#include <dispatch/types/dispatch_io_type_t.h>
-#include <dispatch/types/dispatch_io_close_flags_t.h>
-#include <dispatch/types/dispatch_io_interval_flags_t.h>
-#include <dispatch/types/dispatch_queue_t.h>
-
-#define DISPATCH_IO_STREAM          0x00
-#define DISPATCH_IO_RANDOM          0x01
-
-#define DISPATCH_IO_STOP            0x01
-
-#define DISPATCH_IO_STRICT_INTERVAL 0x01
-
-void            dispatch_io_close( dispatch_io_t channel, dispatch_io_close_flags_t flags );
-dispatch_io_t   dispatch_io_create( dispatch_io_type_t type, dispatch_fd_t fd, dispatch_queue_t queue, void ( ^ cleanup_handler )( int error ) );
-dispatch_io_t   dispatch_io_create_with_path( dispatch_io_type_t type, const char * path, int oflag, mode_t mode, dispatch_queue_t queue, void ( ^ cleanup_handler )( int error ) );
-void            dispatch_io_read( dispatch_io_t channel, off_t offset, size_t length, dispatch_queue_t queue, dispatch_io_handler_t io_handler );
-void            dispatch_io_set_high_water( dispatch_io_t channel, size_t high_water );
-void            dispatch_io_set_interval( dispatch_io_t channel, uint64_t interval, dispatch_io_interval_flags_t flags );
-void            dispatch_io_set_low_water( dispatch_io_t channel, size_t low_water );
-void            dispatch_io_write( dispatch_io_t channel, off_t offset, dispatch_data_t data, dispatch_queue_t queue, dispatch_io_handler_t io_handler );
-void            dispatch_read( dispatch_fd_t fd, size_t length, dispatch_queue_t queue, void ( ^ handler )( dispatch_data_t data, int error ) );
-void            dispatch_write( dispatch_fd_t fd, dispatch_data_t data, dispatch_queue_t queue, void ( ^ handler )( dispatch_data_t data, int error ) );
-
-#ifdef __cplusplus
+dispatch_io_t dispatch_io_create_with_path( dispatch_io_type_t type, const char * path, int oflag, mode_t mode, dispatch_queue_t queue, void ( ^ cleanup_handler )( int error ) )
+{
+    ( void )type;
+    ( void )path;
+    ( void )oflag;
+    ( void )mode;
+    ( void )queue;
+    ( void )cleanup_handler;
+    
+    return NULL;
 }
-#endif
-
-#endif /* __XEOS_LIB_DISPATCH_IO_H__ */

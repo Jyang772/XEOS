@@ -82,6 +82,16 @@
 		05DE1C7817D53B22004C1B06 /* dispatch_set_context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_set_context.c; sourceTree = "<group>"; };
 		05DE1C7917D53B22004C1B06 /* dispatch_set_finalizer_f.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_set_finalizer_f.c; sourceTree = "<group>"; };
 		05DE1C7A17D53B22004C1B06 /* dispatch_suspend.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_suspend.c; sourceTree = "<group>"; };
+		05DE1C7B17D53C6D004C1B06 /* dispatch_io_close.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_close.c; sourceTree = "<group>"; };
+		05DE1C7C17D53C6D004C1B06 /* dispatch_io_create_with_path.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_create_with_path.c; sourceTree = "<group>"; };
+		05DE1C7D17D53C6D004C1B06 /* dispatch_io_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_create.c; sourceTree = "<group>"; };
+		05DE1C7E17D53C6D004C1B06 /* dispatch_io_read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_read.c; sourceTree = "<group>"; };
+		05DE1C7F17D53C6D004C1B06 /* dispatch_io_set_high_water.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_set_high_water.c; sourceTree = "<group>"; };
+		05DE1C8017D53C6D004C1B06 /* dispatch_io_set_interval.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_set_interval.c; sourceTree = "<group>"; };
+		05DE1C8117D53C6D004C1B06 /* dispatch_io_set_low_water.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_set_low_water.c; sourceTree = "<group>"; };
+		05DE1C8217D53C6D004C1B06 /* dispatch_io_write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_io_write.c; sourceTree = "<group>"; };
+		05DE1C8317D53C6D004C1B06 /* dispatch_read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_read.c; sourceTree = "<group>"; };
+		05DE1C8417D53C6D004C1B06 /* dispatch_write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_write.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -148,6 +158,16 @@
 		0555FB4A17D510D000C0B437 /* io */ = {
 			isa = PBXGroup;
 			children = (
+				05DE1C7B17D53C6D004C1B06 /* dispatch_io_close.c */,
+				05DE1C7C17D53C6D004C1B06 /* dispatch_io_create_with_path.c */,
+				05DE1C7D17D53C6D004C1B06 /* dispatch_io_create.c */,
+				05DE1C7E17D53C6D004C1B06 /* dispatch_io_read.c */,
+				05DE1C7F17D53C6D004C1B06 /* dispatch_io_set_high_water.c */,
+				05DE1C8017D53C6D004C1B06 /* dispatch_io_set_interval.c */,
+				05DE1C8117D53C6D004C1B06 /* dispatch_io_set_low_water.c */,
+				05DE1C8217D53C6D004C1B06 /* dispatch_io_write.c */,
+				05DE1C8317D53C6D004C1B06 /* dispatch_read.c */,
+				05DE1C8417D53C6D004C1B06 /* dispatch_write.c */,
 			);
 			name = io;
 			path = ../source/lib/dispatch/io;
