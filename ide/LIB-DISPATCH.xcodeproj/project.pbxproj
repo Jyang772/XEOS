@@ -49,6 +49,9 @@
 		0555FBB817D5329A00C0B437 /* dispatch_time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_time.c; sourceTree = "<group>"; };
 		0555FBB917D532A300C0B437 /* dispatch_walltime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_walltime.c; sourceTree = "<group>"; };
 		0555FBBA17D5332D00C0B437 /* dispatch_once.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_once.c; sourceTree = "<group>"; };
+		0555FBBB17D533B100C0B437 /* dispatch_semaphore_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_semaphore_create.c; sourceTree = "<group>"; };
+		0555FBBC17D533B100C0B437 /* dispatch_semaphore_signal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_semaphore_signal.c; sourceTree = "<group>"; };
+		0555FBBD17D533B100C0B437 /* dispatch_semaphore_wait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_semaphore_wait.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -140,6 +143,9 @@
 		0555FB4F17D510D000C0B437 /* semaphore */ = {
 			isa = PBXGroup;
 			children = (
+				0555FBBB17D533B100C0B437 /* dispatch_semaphore_create.c */,
+				0555FBBC17D533B100C0B437 /* dispatch_semaphore_signal.c */,
+				0555FBBD17D533B100C0B437 /* dispatch_semaphore_wait.c */,
 			);
 			name = semaphore;
 			path = ../source/lib/dispatch/semaphore;
