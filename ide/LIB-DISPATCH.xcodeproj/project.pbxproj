@@ -1,0 +1,216 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		0555FB4017D510D000C0B437 /* data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
+		0555FB4117D510D000C0B437 /* group.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = group.h; sourceTree = "<group>"; };
+		0555FB4217D510D000C0B437 /* io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
+		0555FB4317D510D000C0B437 /* object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = object.h; sourceTree = "<group>"; };
+		0555FB4417D510D000C0B437 /* once.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = once.h; sourceTree = "<group>"; };
+		0555FB4517D510D000C0B437 /* queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
+		0555FB4617D510D000C0B437 /* semaphore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = semaphore.h; sourceTree = "<group>"; };
+		0555FB4717D510D000C0B437 /* source.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = source.h; sourceTree = "<group>"; };
+		0555FB4817D510D000C0B437 /* time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
+		0555FB4917D510D000C0B437 /* dispatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch.h; sourceTree = "<group>"; };
+		0555FB4B17D510D000C0B437 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/dispatch/Makefile; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0555FB3C17D510D000C0B437 /* data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = data;
+			path = ../source/lib/dispatch/data;
+			sourceTree = "<group>";
+		};
+		0555FB3D17D510D000C0B437 /* group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = group;
+			path = ../source/lib/dispatch/group;
+			sourceTree = "<group>";
+		};
+		0555FB3E17D510D000C0B437 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				0555FB3F17D510D000C0B437 /* dispatch */,
+				0555FB4917D510D000C0B437 /* dispatch.h */,
+			);
+			name = include;
+			path = ../source/lib/dispatch/include;
+			sourceTree = "<group>";
+		};
+		0555FB3F17D510D000C0B437 /* dispatch */ = {
+			isa = PBXGroup;
+			children = (
+				0555FB4017D510D000C0B437 /* data.h */,
+				0555FB4117D510D000C0B437 /* group.h */,
+				0555FB4217D510D000C0B437 /* io.h */,
+				0555FB4317D510D000C0B437 /* object.h */,
+				0555FB4417D510D000C0B437 /* once.h */,
+				0555FB4517D510D000C0B437 /* queue.h */,
+				0555FB4617D510D000C0B437 /* semaphore.h */,
+				0555FB4717D510D000C0B437 /* source.h */,
+				0555FB4817D510D000C0B437 /* time.h */,
+			);
+			path = dispatch;
+			sourceTree = "<group>";
+		};
+		0555FB4A17D510D000C0B437 /* io */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = io;
+			path = ../source/lib/dispatch/io;
+			sourceTree = "<group>";
+		};
+		0555FB4C17D510D000C0B437 /* object */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = object;
+			path = ../source/lib/dispatch/object;
+			sourceTree = "<group>";
+		};
+		0555FB4D17D510D000C0B437 /* once */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = once;
+			path = ../source/lib/dispatch/once;
+			sourceTree = "<group>";
+		};
+		0555FB4E17D510D000C0B437 /* queue */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = queue;
+			path = ../source/lib/dispatch/queue;
+			sourceTree = "<group>";
+		};
+		0555FB4F17D510D000C0B437 /* semaphore */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = semaphore;
+			path = ../source/lib/dispatch/semaphore;
+			sourceTree = "<group>";
+		};
+		0555FB5017D510D000C0B437 /* source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = source;
+			path = ../source/lib/dispatch/source;
+			sourceTree = "<group>";
+		};
+		0555FB5117D510D000C0B437 /* time */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = time;
+			path = ../source/lib/dispatch/time;
+			sourceTree = "<group>";
+		};
+		0595BA7A17AC11A70021435A = {
+			isa = PBXGroup;
+			children = (
+				0555FB3C17D510D000C0B437 /* data */,
+				0555FB3D17D510D000C0B437 /* group */,
+				0555FB3E17D510D000C0B437 /* include */,
+				0555FB4A17D510D000C0B437 /* io */,
+				0555FB4B17D510D000C0B437 /* Makefile */,
+				0555FB4C17D510D000C0B437 /* object */,
+				0555FB4D17D510D000C0B437 /* once */,
+				0555FB4E17D510D000C0B437 /* queue */,
+				0555FB4F17D510D000C0B437 /* semaphore */,
+				0555FB5017D510D000C0B437 /* source */,
+				0555FB5117D510D000C0B437 /* time */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA7F17AC11A70021435A /* LIB-DISPATCH */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-DISPATCH" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/lib/iconv;
+			dependencies = (
+			);
+			name = "LIB-DISPATCH";
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-PTHREAD";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA7B17AC11A70021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-DISPATCH" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA7A17AC11A70021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA7F17AC11A70021435A /* LIB-DISPATCH */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA8117AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA8417AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-DISPATCH" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8117AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-DISPATCH" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8417AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA7B17AC11A70021435A /* Project object */;
+}

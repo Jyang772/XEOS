@@ -163,6 +163,8 @@ PATH_BUILD_32_LIB_OBJ_ICONV             := $(PATH_BUILD_32_LIB_OBJ)iconv/
 PATH_BUILD_64_LIB_OBJ_ICONV             := $(PATH_BUILD_64_LIB_OBJ)iconv/
 PATH_BUILD_32_LIB_OBJ_BLOCKS            := $(PATH_BUILD_32_LIB_OBJ)blocks/
 PATH_BUILD_64_LIB_OBJ_BLOCKS            := $(PATH_BUILD_64_LIB_OBJ)blocks/
+PATH_BUILD_32_LIB_OBJ_DISPATCH          := $(PATH_BUILD_32_LIB_OBJ)dispatch/
+PATH_BUILD_64_LIB_OBJ_DISPATCH          := $(PATH_BUILD_64_LIB_OBJ)dispatch/
 PATH_BUILD_32_LIB_OBJ_OBJC              := $(PATH_BUILD_32_LIB_OBJ)objc/
 PATH_BUILD_64_LIB_OBJ_OBJC              := $(PATH_BUILD_64_LIB_OBJ)objc/
 
@@ -182,6 +184,7 @@ PATH_SRC_LIB_POSIX                      := $(PATH_SRC_LIB)posix/
 PATH_SRC_LIB_PTHREAD                    := $(PATH_SRC_LIB)pthread/
 PATH_SRC_LIB_ICONV                      := $(PATH_SRC_LIB)iconv/
 PATH_SRC_LIB_BLOCKS                     := $(PATH_SRC_LIB)blocks/
+PATH_SRC_LIB_DISPATCH                   := $(PATH_SRC_LIB)dispatch/
 PATH_SRC_LIB_OBJC                       := $(PATH_SRC_LIB)objc/
 
 # Release directories
