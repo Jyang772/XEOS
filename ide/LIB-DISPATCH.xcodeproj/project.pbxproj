@@ -48,6 +48,7 @@
 		0555FBB717D52DA300C0B437 /* dispatch_time_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dispatch_time_t.h; sourceTree = "<group>"; };
 		0555FBB817D5329A00C0B437 /* dispatch_time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_time.c; sourceTree = "<group>"; };
 		0555FBB917D532A300C0B437 /* dispatch_walltime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_walltime.c; sourceTree = "<group>"; };
+		0555FBBA17D5332D00C0B437 /* dispatch_once.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_once.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -122,6 +123,7 @@
 		0555FB4D17D510D000C0B437 /* once */ = {
 			isa = PBXGroup;
 			children = (
+				0555FBBA17D5332D00C0B437 /* dispatch_once.c */,
 			);
 			name = once;
 			path = ../source/lib/dispatch/once;

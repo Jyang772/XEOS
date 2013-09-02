@@ -61,20 +61,10 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_ONCE_H__
-#define __XEOS_LIB_DISPATCH_ONCE_H__
+#include <dispatch/once.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <dispatch/types/dispatch_once_t.h>
-#include <dispatch/types/dispatch_block_t.h>
-
-void dispatch_once( dispatch_once_t * predicate, dispatch_block_t block );
-
-#ifdef __cplusplus
+void dispatch_once( dispatch_once_t * predicate, dispatch_block_t block )
+{
+    ( void )predicate;
+    ( void )block;
 }
-#endif
-
-#endif /* __XEOS_LIB_DISPATCH_ONCE_H__ */
