@@ -74,6 +74,14 @@
 		0555FBD117D535CD00C0B437 /* dispatch_source_set_registration_handler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_registration_handler.c; sourceTree = "<group>"; };
 		0555FBD217D535CD00C0B437 /* dispatch_source_set_timer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_timer.c; sourceTree = "<group>"; };
 		0555FBD317D535CD00C0B437 /* dispatch_source_testcancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_testcancel.c; sourceTree = "<group>"; };
+		05DE1C7317D53B22004C1B06 /* dispatch_debug.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_debug.c; sourceTree = "<group>"; };
+		05DE1C7417D53B22004C1B06 /* dispatch_get_context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_get_context.c; sourceTree = "<group>"; };
+		05DE1C7517D53B22004C1B06 /* dispatch_release.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_release.c; sourceTree = "<group>"; };
+		05DE1C7617D53B22004C1B06 /* dispatch_resume.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_resume.c; sourceTree = "<group>"; };
+		05DE1C7717D53B22004C1B06 /* dispatch_retain.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_retain.c; sourceTree = "<group>"; };
+		05DE1C7817D53B22004C1B06 /* dispatch_set_context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_set_context.c; sourceTree = "<group>"; };
+		05DE1C7917D53B22004C1B06 /* dispatch_set_finalizer_f.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_set_finalizer_f.c; sourceTree = "<group>"; };
+		05DE1C7A17D53B22004C1B06 /* dispatch_suspend.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_suspend.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -148,6 +156,14 @@
 		0555FB4C17D510D000C0B437 /* object */ = {
 			isa = PBXGroup;
 			children = (
+				05DE1C7317D53B22004C1B06 /* dispatch_debug.c */,
+				05DE1C7417D53B22004C1B06 /* dispatch_get_context.c */,
+				05DE1C7517D53B22004C1B06 /* dispatch_release.c */,
+				05DE1C7617D53B22004C1B06 /* dispatch_resume.c */,
+				05DE1C7717D53B22004C1B06 /* dispatch_retain.c */,
+				05DE1C7817D53B22004C1B06 /* dispatch_set_context.c */,
+				05DE1C7917D53B22004C1B06 /* dispatch_set_finalizer_f.c */,
+				05DE1C7A17D53B22004C1B06 /* dispatch_suspend.c */,
 			);
 			name = object;
 			path = ../source/lib/dispatch/object;
