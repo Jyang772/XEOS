@@ -54,7 +54,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = ../source/lib/pthread;
+			buildWorkingDirectory = ../source/lib/iconv;
 			dependencies = (
 			);
 			name = "LIB-ICONV";
