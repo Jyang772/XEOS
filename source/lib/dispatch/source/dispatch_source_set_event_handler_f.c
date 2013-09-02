@@ -61,74 +61,10 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_SOURCE_H__
-#define __XEOS_LIB_DISPATCH_SOURCE_H__
+#include <dispatch/source.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <system/types/uintptr_t.h>
-#include <system/types/uint64_t.h>
-#include <dispatch/types/dispatch_source_type_t.h>
-#include <dispatch/types/dispatch_source_t.h>
-#include <dispatch/types/dispatch_block_t.h>
-#include <dispatch/types/dispatch_function_t.h>
-#include <dispatch/types/dispatch_queue_t.h>
-#include <dispatch/types/dispatch_time_t.h>
-
-#define DISPATCH_SOURCE_TYPE_DATA_ADD
-#define DISPATCH_SOURCE_TYPE_DATA_OR
-#define DISPATCH_SOURCE_TYPE_MACH_RECV
-#define DISPATCH_SOURCE_TYPE_MACH_SEND
-#define DISPATCH_SOURCE_TYPE_PROC
-#define DISPATCH_SOURCE_TYPE_READ
-#define DISPATCH_SOURCE_TYPE_SIGNAL
-#define DISPATCH_SOURCE_TYPE_TIMER
-#define DISPATCH_SOURCE_TYPE_VNODE
-#define DISPATCH_SOURCE_TYPE_WRITE
-
-enum
+void dispatch_source_set_event_handler_f( dispatch_source_t source, dispatch_function_t handler )
 {
-    DISPATCH_MACH_SEND_DEAD = 0x01,
-};
-
-enum
-{
-    DISPATCH_PROC_EXIT      = 0x08000000,
-    DISPATCH_PROC_FORK      = 0x04000000,
-    DISPATCH_PROC_EXEC      = 0x02000000,
-    DISPATCH_PROC_SIGNAL    = 0x00800000
-};
-
-enum
-{
-    DISPATCH_VNODE_DELETE   = 0x01,
-    DISPATCH_VNODE_WRITE    = 0x02,
-    DISPATCH_VNODE_EXTEND   = 0x04,
-    DISPATCH_VNODE_ATTRIB   = 0x08,
-    DISPATCH_VNODE_LINK     = 0x10,
-    DISPATCH_VNODE_RENAME   = 0x20,
-    DISPATCH_VNODE_REVOKE   = 0x40
-};
-
-void                dispatch_source_cancel( dispatch_source_t source );
-dispatch_source_t   dispatch_source_create( dispatch_source_type_t type, uintptr_t handle, unsigned long mask, dispatch_queue_t queue );
-unsigned long       dispatch_source_get_data( dispatch_source_t source );
-uintptr_t           dispatch_source_get_handle( dispatch_source_t source );
-unsigned long       dispatch_source_get_mask( dispatch_source_t source );
-void                dispatch_source_merge_data( dispatch_source_t source, unsigned long value );
-void                dispatch_source_set_cancel_handler( dispatch_source_t source, dispatch_block_t cancel_handler );
-void                dispatch_source_set_cancel_handler_f( dispatch_source_t source, dispatch_function_t cancel_handler );
-void                dispatch_source_set_event_handler( dispatch_source_t source, dispatch_block_t handler );
-void                dispatch_source_set_event_handler_f( dispatch_source_t source, dispatch_function_t handler );
-void                dispatch_source_set_registration_handler( dispatch_source_t source, dispatch_block_t registration_handler );
-void                dispatch_source_set_registration_handler_f( dispatch_source_t source, dispatch_function_t registration_handler );
-void                dispatch_source_set_timer( dispatch_source_t source, dispatch_time_t start, uint64_t interval, uint64_t leeway );
-long                dispatch_source_testcancel( dispatch_source_t source );
-
-#ifdef __cplusplus
+    ( void )source;
+    ( void )handler;
 }
-#endif
-
-#endif /* __XEOS_LIB_DISPATCH_SOURCE_H__ */

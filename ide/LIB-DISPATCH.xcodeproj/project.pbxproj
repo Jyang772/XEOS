@@ -60,6 +60,20 @@
 		0555FBC317D5345E00C0B437 /* dispatch_group_notify_f.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_group_notify_f.c; sourceTree = "<group>"; };
 		0555FBC417D5345E00C0B437 /* dispatch_group_notify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_group_notify.c; sourceTree = "<group>"; };
 		0555FBC517D5345E00C0B437 /* dispatch_group_wait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_group_wait.c; sourceTree = "<group>"; };
+		0555FBC617D535CD00C0B437 /* dispatch_source_cancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_cancel.c; sourceTree = "<group>"; };
+		0555FBC717D535CD00C0B437 /* dispatch_source_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_create.c; sourceTree = "<group>"; };
+		0555FBC817D535CD00C0B437 /* dispatch_source_get_data.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_get_data.c; sourceTree = "<group>"; };
+		0555FBC917D535CD00C0B437 /* dispatch_source_get_handle.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_get_handle.c; sourceTree = "<group>"; };
+		0555FBCA17D535CD00C0B437 /* dispatch_source_get_mask.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_get_mask.c; sourceTree = "<group>"; };
+		0555FBCB17D535CD00C0B437 /* dispatch_source_merge_data.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_merge_data.c; sourceTree = "<group>"; };
+		0555FBCC17D535CD00C0B437 /* dispatch_source_set_cancel_handler_f.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_cancel_handler_f.c; sourceTree = "<group>"; };
+		0555FBCD17D535CD00C0B437 /* dispatch_source_set_cancel_handler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_cancel_handler.c; sourceTree = "<group>"; };
+		0555FBCE17D535CD00C0B437 /* dispatch_source_set_event_handler_f.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_event_handler_f.c; sourceTree = "<group>"; };
+		0555FBCF17D535CD00C0B437 /* dispatch_source_set_event_handler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_event_handler.c; sourceTree = "<group>"; };
+		0555FBD017D535CD00C0B437 /* dispatch_source_set_registration_handler_f.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_registration_handler_f.c; sourceTree = "<group>"; };
+		0555FBD117D535CD00C0B437 /* dispatch_source_set_registration_handler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_registration_handler.c; sourceTree = "<group>"; };
+		0555FBD217D535CD00C0B437 /* dispatch_source_set_timer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_set_timer.c; sourceTree = "<group>"; };
+		0555FBD317D535CD00C0B437 /* dispatch_source_testcancel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dispatch_source_testcancel.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -170,6 +184,20 @@
 		0555FB5017D510D000C0B437 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				0555FBC617D535CD00C0B437 /* dispatch_source_cancel.c */,
+				0555FBC717D535CD00C0B437 /* dispatch_source_create.c */,
+				0555FBC817D535CD00C0B437 /* dispatch_source_get_data.c */,
+				0555FBC917D535CD00C0B437 /* dispatch_source_get_handle.c */,
+				0555FBCA17D535CD00C0B437 /* dispatch_source_get_mask.c */,
+				0555FBCB17D535CD00C0B437 /* dispatch_source_merge_data.c */,
+				0555FBCC17D535CD00C0B437 /* dispatch_source_set_cancel_handler_f.c */,
+				0555FBCD17D535CD00C0B437 /* dispatch_source_set_cancel_handler.c */,
+				0555FBCE17D535CD00C0B437 /* dispatch_source_set_event_handler_f.c */,
+				0555FBCF17D535CD00C0B437 /* dispatch_source_set_event_handler.c */,
+				0555FBD017D535CD00C0B437 /* dispatch_source_set_registration_handler_f.c */,
+				0555FBD117D535CD00C0B437 /* dispatch_source_set_registration_handler.c */,
+				0555FBD217D535CD00C0B437 /* dispatch_source_set_timer.c */,
+				0555FBD317D535CD00C0B437 /* dispatch_source_testcancel.c */,
 			);
 			name = source;
 			path = ../source/lib/dispatch/source;
