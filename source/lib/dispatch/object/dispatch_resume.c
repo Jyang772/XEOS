@@ -68,10 +68,10 @@
 
 void dispatch_resume( dispatch_object_t object )
 {
-    if( object._do == NULL )
+    if( object.object == NULL )
     {
         return;
     }
     
-    System_Atomic_Decrement32( &( object._do->suspendCount ) );
+    System_Atomic_Decrement32( &( object.object->suspendCount ) );
 }

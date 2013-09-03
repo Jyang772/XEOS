@@ -68,10 +68,10 @@
 
 void dispatch_suspend( dispatch_object_t object )
 {
-    if( object._do == NULL )
+    if( object.object == NULL )
     {
         return;
     }
     
-    System_Atomic_Increment32( &( object._do->suspendCount ) );
+    System_Atomic_Increment32( &( object.object->suspendCount ) );
 }

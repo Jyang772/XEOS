@@ -67,10 +67,10 @@
 
 void dispatch_set_context( dispatch_object_t object, void * context )
 {
-    if( object._do == NULL )
+    if( object.object == NULL )
     {
         return;
     }
     
-    object._do->context = context;
+    object.object->context = context;
 }

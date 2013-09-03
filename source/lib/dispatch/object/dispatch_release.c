@@ -69,32 +69,32 @@
 
 void dispatch_release( dispatch_object_t object )
 {
-    if( object._do == NULL )
+    if( object.object == NULL )
     {
         return;
     }
     
-    if( System_Atomic_Decrement32( &( object._do->retainCount ) ) == 0 )
+    if( System_Atomic_Decrement32( &( object.object->retainCount ) ) == 0 )
     {
-        if( object._do->context != NULL && object._do->queue != NULL && object._do->finalizer != NULL )
+        if( object.object->context != NULL && object.object->queue != NULL && object.object->finalizer != NULL )
         {
-            if( object._do->queue == dispatch_get_current_queue() )
+            if( object.object->queue == dispatch_get_current_queue() )
             {
-                object._do->finalizer( object._do->context );
+                object.object->finalizer( object.object->context );
             }
             else
             {
                 dispatch_sync
                 (
-                    object._do->queue,
+                    object.object->queue,
                     ^( void )
                     {
-                        object._do->finalizer( object._do->context );
+                        object.object->finalizer( object.object->context );
                     }
                 );
             }
         }
         
-        free( object._do );
+        free( object.object );
     }
 }

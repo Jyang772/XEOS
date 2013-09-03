@@ -67,7 +67,7 @@
 
 void dispatch_debug( dispatch_object_t object, const char * message, ... )
 {
-    if( object._do == NULL )
+    if( object.object == NULL )
     {
         return;
     }

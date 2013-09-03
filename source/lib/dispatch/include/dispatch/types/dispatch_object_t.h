@@ -70,18 +70,18 @@ extern "C" {
 
 typedef union
 {
-    struct __dispatch_object_s        * _do;
-    struct __dispatch_continuation_s  * _dc;
-    struct __dispatch_queue_s         * _dq;
-    struct __dispatch_queue_attr_s    * _dqa;
-    struct __dispatch_group_s         * _dg;
-    struct __dispatch_source_s        * _ds;
-    struct __dispatch_source_attr_s   * _dsa;
-    struct __dispatch_semaphore_s     * _dsema;
-    struct __dispatch_data_s          * _ddata;
-    struct __dispatch_io_s            * _dchannel;
-    struct __dispatch_operation_s     * _doperation;
-    struct __dispatch_fld_s           * _dfld;
+    struct __dispatch_object_s        * object;
+    struct __dispatch_continuation_s  * continuation;
+    struct __dispatch_queue_s         * queue;
+    struct __dispatch_queue_attr_s    * queue_attr;
+    struct __dispatch_group_s         * group;
+    struct __dispatch_source_s        * source;
+    struct __dispatch_source_attr_s   * source_attr;
+    struct __dispatch_semaphore_s     * semaphore;
+    struct __dispatch_data_s          * data;
+    struct __dispatch_io_s            * io;
+    struct __dispatch_operation_s     * operation;
+    struct __dispatch_fld_s           * fld;
 }
 dispatch_object_t __attribute__( ( transparent_union ) );
 

@@ -67,10 +67,10 @@
 
 void dispatch_set_finalizer_f( dispatch_object_t object, dispatch_function_t finalizer )
 {
-    if( object._do == NULL )
+    if( object.object == NULL )
     {
         return;
     }
     
-    object._do->finalizer = finalizer;
+    object.object->finalizer = finalizer;
 }
