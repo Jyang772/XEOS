@@ -62,14 +62,39 @@
 /* $Id$ */
 
 #include <dispatch/object.h>
+#include <dispatch/queue.h>
 #include <dispatch/__private/types.h>
 #include <system/atomic.h>
 #include <stdlib.h>
 
 void dispatch_release( dispatch_object_t object )
 {
+    if( object._do == NULL )
+    {
+        return;
+    }
+    
     if( System_Atomic_Decrement32( &( object._do->retainCount ) ) == 0 )
     {
+        if( object._do->context != NULL && object._do->queue != NULL && object._do->finalizer != NULL )
+        {
+            if( object._do->queue == dispatch_get_current_queue() )
+            {
+                object._do->finalizer( object._do->context );
+            }
+            else
+            {
+                dispatch_sync
+                (
+                    object._do->queue,
+                    ^( void )
+                    {
+                        object._do->finalizer( object._do->context );
+                    }
+                );
+            }
+        }
+        
         free( object._do );
     }
 }

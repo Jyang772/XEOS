@@ -62,11 +62,15 @@
 /* $Id$ */
 
 #include <dispatch/object.h>
+#include <dispatch/__private/types.h>
 #include <system/types/null.h>
 
 void * dispatch_get_context( dispatch_object_t object )
 {
-    ( void )object;
+    if( object._do == NULL )
+    {
+        return NULL;
+    }
     
-    return NULL;
+    return object._do->context;
 }

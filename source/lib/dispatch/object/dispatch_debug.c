@@ -62,9 +62,15 @@
 /* $Id$ */
 
 #include <dispatch/object.h>
+#include <dispatch/__private/types.h>
+#include <system/types/null.h>
 
 void dispatch_debug( dispatch_object_t object, const char * message, ... )
 {
-    ( void )object;
+    if( object._do == NULL )
+    {
+        return;
+    }
+    
     ( void )message;
 }

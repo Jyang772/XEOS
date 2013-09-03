@@ -61,9 +61,17 @@
 
 /* $Id$ */
 
+#include <system/types/null.h>
 #include <dispatch/object.h>
+#include <dispatch/__private/types.h>
+#include <system/atomic.h>
 
 void dispatch_suspend( dispatch_object_t object )
 {
-    ( void )object;
+    if( object._do == NULL )
+    {
+        return;
+    }
+    
+    System_Atomic_Increment32( &( object._do->suspendCount ) );
 }

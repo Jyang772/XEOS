@@ -69,89 +69,87 @@ extern "C" {
 #endif
 
 #include <system/types/int32_t.h>
+#include <dispatch/types/dispatch_queue_t.h>
+#include <dispatch/types/dispatch_function_t.h>
+
+#define __DISPATCH_OBJECT_HEADER        \
+    void              * isa;            \
+    int32_t             retainCount;    \
+    int32_t             suspendCount;   \
+    void              * context;        \
+    dispatch_queue_t    queue;          \
+    dispatch_function_t finalizer;
 
 struct __dispatch_object_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_continuation_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_queue_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_queue_attr_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_group_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_source_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_source_attr_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_semaphore_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_data_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_io_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_operation_s
 {
-    void          * isa;
-    int32_t         retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 struct __dispatch_fld_s
 {
-    void          * isa;
-    unsigned int    retainCount;
-    char            __reserved[ 260 ];
+    __DISPATCH_OBJECT_HEADER
+    char __reserved[ 256 ];
 };
 
 #ifdef __cplusplus

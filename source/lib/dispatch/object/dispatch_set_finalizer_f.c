@@ -61,10 +61,16 @@
 
 /* $Id$ */
 
+#include <system/types/null.h>
 #include <dispatch/object.h>
+#include <dispatch/__private/types.h>
 
 void dispatch_set_finalizer_f( dispatch_object_t object, dispatch_function_t finalizer )
 {
-    ( void )object;
-    ( void )finalizer;
+    if( object._do == NULL )
+    {
+        return;
+    }
+    
+    object._do->finalizer = finalizer;
 }

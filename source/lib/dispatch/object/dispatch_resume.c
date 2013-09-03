@@ -62,8 +62,16 @@
 /* $Id$ */
 
 #include <dispatch/object.h>
+#include <dispatch/__private/types.h>
+#include <system/types/null.h>
+#include <system/atomic.h>
 
 void dispatch_resume( dispatch_object_t object )
 {
-    ( void )object;
+    if( object._do == NULL )
+    {
+        return;
+    }
+    
+    System_Atomic_Decrement32( &( object._do->suspendCount ) );
 }
