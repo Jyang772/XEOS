@@ -61,54 +61,12 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_DISPATCH_QUEUE_H__
-#define __XEOS_LIB_DISPATCH_QUEUE_H__
+#include <dispatch/queue.h>
+#include <system/types/null.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define DISPATCH_QUEUE_PRIORITY_HIGH        2
-#define DISPATCH_QUEUE_PRIORITY_DEFAULT     0
-#define DISPATCH_QUEUE_PRIORITY_LOW         ( -2 )
-#define DISPATCH_QUEUE_PRIORITY_BACKGROUND  INT16_MIN
-
-#define DISPATCH_QUEUE_SERIAL
-#define DISPATCH_QUEUE_CONCURRENT
-
-#include <system/types/size_t.h>
-#include <dispatch/types/dispatch_block_t.h>
-#include <dispatch/types/dispatch_queue_t.h>
-#include <dispatch/types/dispatch_queue_attr_t.h>
-#include <dispatch/types/dispatch_time_t.h>
-#include <dispatch/types/dispatch_function_t.h>
-#include <dispatch/types/dispatch_object_t.h>
-
-void                dispatch_after( dispatch_time_t when, dispatch_queue_t queue, dispatch_block_t block );
-void                dispatch_after_f( dispatch_time_t when, dispatch_queue_t queue, void * context, dispatch_function_t work );
-void                dispatch_apply( size_t iterations, dispatch_queue_t queue, void ( ^ block )( size_t ) );
-void                dispatch_apply_f( size_t iterations, dispatch_queue_t queue, void * context, void ( * work )( void *, size_t ) );
-void                dispatch_async( dispatch_queue_t queue, dispatch_block_t block );
-void                dispatch_async_f( dispatch_queue_t queue, void * context, dispatch_function_t work );
-void                dispatch_barrier_async( dispatch_queue_t queue, dispatch_block_t block );
-void                dispatch_barrier_async_f( dispatch_queue_t queue, void * context, dispatch_function_t work );
-void                dispatch_barrier_sync( dispatch_queue_t queue, dispatch_block_t block );
-void                dispatch_barrier_sync_f( dispatch_queue_t queue, void * context, dispatch_function_t work );
-dispatch_queue_t    dispatch_get_current_queue( void );
-dispatch_queue_t    dispatch_get_global_queue( long priority, unsigned long flags );
-dispatch_queue_t    dispatch_get_main_queue( void );
-void              * dispatch_get_specific( const void * key );
-void                dispatch_main( void );
-dispatch_queue_t    dispatch_queue_create( const char * label, dispatch_queue_attr_t attr );
-const char        * dispatch_queue_get_label( dispatch_queue_t queue );
-void              * dispatch_queue_get_specific( dispatch_queue_t queue, const void * key );
-void                dispatch_queue_set_specific( dispatch_queue_t queue, const void * key, void * context, dispatch_function_t destructor );
-void                dispatch_set_target_queue( dispatch_object_t object, dispatch_queue_t queue );
-void                dispatch_sync( dispatch_queue_t queue, dispatch_block_t block );
-void                dispatch_sync_f( dispatch_queue_t queue, void * context, dispatch_function_t work );
-
-#ifdef __cplusplus
+void * dispatch_get_specific( const void * key )
+{
+    ( void )key;
+    
+    return NULL;
 }
-#endif
-
-#endif /* __XEOS_LIB_DISPATCH_QUEUE_H__ */
