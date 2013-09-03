@@ -62,8 +62,10 @@
 /* $Id$ */
 
 #include <dispatch/object.h>
+#include <dispatch/__private/types.h>
+#include <system/atomic.h>
 
 void dispatch_retain( dispatch_object_t object )
 {
-    ( void )object;
+    System_Atomic_Increment32( &( object._do->retainCount ) );
 }

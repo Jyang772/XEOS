@@ -62,8 +62,14 @@
 /* $Id$ */
 
 #include <dispatch/object.h>
+#include <dispatch/__private/types.h>
+#include <system/atomic.h>
+#include <stdlib.h>
 
 void dispatch_release( dispatch_object_t object )
 {
-    ( void )object;
+    if( System_Atomic_Decrement32( &( object._do->retainCount ) ) == 0 )
+    {
+        free( object._do );
+    }
 }
