@@ -63,4 +63,8 @@
 
 #include <threads.h>
 
-static int __foo __attribute__( ( unused ) );
+void call_once( once_flag * flag, void ( * func )( void ) )
+{
+    ( void )flag;
+    ( void )func;
+}

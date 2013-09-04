@@ -10,7 +10,31 @@
 		05B4A28E17D7E9D6008E0CA4 /* threads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
 		05B4A28F17D7E9D6008E0CA4 /* c11.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = c11.h; sourceTree = "<group>"; };
 		05B4A29017D7E9D6008E0CA4 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/c11/Makefile; sourceTree = "<group>"; };
-		05B4A29217D7EBFB008E0CA4 /* call_once.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = call_once.c; sourceTree = "<group>"; };
+		05B4A29317D7EECC008E0CA4 /* call_once.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = call_once.c; sourceTree = "<group>"; };
+		05B4A29417D7EECC008E0CA4 /* cnd_broadcast.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnd_broadcast.c; sourceTree = "<group>"; };
+		05B4A29517D7EECC008E0CA4 /* cnd_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnd_destroy.c; sourceTree = "<group>"; };
+		05B4A29617D7EECC008E0CA4 /* cnd_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnd_init.c; sourceTree = "<group>"; };
+		05B4A29717D7EECC008E0CA4 /* cnd_signal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnd_signal.c; sourceTree = "<group>"; };
+		05B4A29817D7EECC008E0CA4 /* cnd_timedwait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnd_timedwait.c; sourceTree = "<group>"; };
+		05B4A29917D7EECC008E0CA4 /* cnd_wait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cnd_wait.c; sourceTree = "<group>"; };
+		05B4A29A17D7EECC008E0CA4 /* mtx_destroy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mtx_destroy.c; sourceTree = "<group>"; };
+		05B4A29B17D7EECC008E0CA4 /* mtx_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mtx_init.c; sourceTree = "<group>"; };
+		05B4A29C17D7EECC008E0CA4 /* mtx_lock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mtx_lock.c; sourceTree = "<group>"; };
+		05B4A29D17D7EECC008E0CA4 /* mtx_timedlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mtx_timedlock.c; sourceTree = "<group>"; };
+		05B4A29E17D7EECC008E0CA4 /* mtx_trylock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mtx_trylock.c; sourceTree = "<group>"; };
+		05B4A29F17D7EECC008E0CA4 /* mtx_unlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mtx_unlock.c; sourceTree = "<group>"; };
+		05B4A2A017D7EECC008E0CA4 /* thrd_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_create.c; sourceTree = "<group>"; };
+		05B4A2A117D7EECC008E0CA4 /* thrd_current.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_current.c; sourceTree = "<group>"; };
+		05B4A2A217D7EECC008E0CA4 /* thrd_detach.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_detach.c; sourceTree = "<group>"; };
+		05B4A2A317D7EECC008E0CA4 /* thrd_equal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_equal.c; sourceTree = "<group>"; };
+		05B4A2A417D7EECC008E0CA4 /* thrd_exit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_exit.c; sourceTree = "<group>"; };
+		05B4A2A517D7EECC008E0CA4 /* thrd_join.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_join.c; sourceTree = "<group>"; };
+		05B4A2A617D7EECC008E0CA4 /* thrd_sleep.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_sleep.c; sourceTree = "<group>"; };
+		05B4A2A717D7EECC008E0CA4 /* thrd_yield.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = thrd_yield.c; sourceTree = "<group>"; };
+		05B4A2A817D7EECC008E0CA4 /* tss_create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tss_create.c; sourceTree = "<group>"; };
+		05B4A2A917D7EECC008E0CA4 /* tss_delete.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tss_delete.c; sourceTree = "<group>"; };
+		05B4A2AA17D7EECC008E0CA4 /* tss_get.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tss_get.c; sourceTree = "<group>"; };
+		05B4A2AB17D7EECC008E0CA4 /* tss_set.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tss_set.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -44,7 +68,31 @@
 		05B4A29117D7E9D6008E0CA4 /* threads */ = {
 			isa = PBXGroup;
 			children = (
-				05B4A29217D7EBFB008E0CA4 /* call_once.c */,
+				05B4A29317D7EECC008E0CA4 /* call_once.c */,
+				05B4A29417D7EECC008E0CA4 /* cnd_broadcast.c */,
+				05B4A29517D7EECC008E0CA4 /* cnd_destroy.c */,
+				05B4A29617D7EECC008E0CA4 /* cnd_init.c */,
+				05B4A29717D7EECC008E0CA4 /* cnd_signal.c */,
+				05B4A29817D7EECC008E0CA4 /* cnd_timedwait.c */,
+				05B4A29917D7EECC008E0CA4 /* cnd_wait.c */,
+				05B4A29A17D7EECC008E0CA4 /* mtx_destroy.c */,
+				05B4A29B17D7EECC008E0CA4 /* mtx_init.c */,
+				05B4A29C17D7EECC008E0CA4 /* mtx_lock.c */,
+				05B4A29D17D7EECC008E0CA4 /* mtx_timedlock.c */,
+				05B4A29E17D7EECC008E0CA4 /* mtx_trylock.c */,
+				05B4A29F17D7EECC008E0CA4 /* mtx_unlock.c */,
+				05B4A2A017D7EECC008E0CA4 /* thrd_create.c */,
+				05B4A2A117D7EECC008E0CA4 /* thrd_current.c */,
+				05B4A2A217D7EECC008E0CA4 /* thrd_detach.c */,
+				05B4A2A317D7EECC008E0CA4 /* thrd_equal.c */,
+				05B4A2A417D7EECC008E0CA4 /* thrd_exit.c */,
+				05B4A2A517D7EECC008E0CA4 /* thrd_join.c */,
+				05B4A2A617D7EECC008E0CA4 /* thrd_sleep.c */,
+				05B4A2A717D7EECC008E0CA4 /* thrd_yield.c */,
+				05B4A2A817D7EECC008E0CA4 /* tss_create.c */,
+				05B4A2A917D7EECC008E0CA4 /* tss_delete.c */,
+				05B4A2AA17D7EECC008E0CA4 /* tss_get.c */,
+				05B4A2AB17D7EECC008E0CA4 /* tss_set.c */,
 			);
 			name = threads;
 			path = ../source/lib/c11/threads;

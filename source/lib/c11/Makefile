@@ -111,6 +111,8 @@ _FILES_C_OBJ_BUILD_THREADS  = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_C11
 #-------------------------------------------------------------------------------
 
 # Build the full project
+all:    ARGS_CC_32 := $(ARGS_CC_32) -std=c11
+all:    ARGS_CC_64 := $(ARGS_CC_64) -std=c11
 all:    $(_FILES_C_OBJ_BUILD)           \
         $(_FILES_C_OBJ_BUILD_THREADS)
 	
