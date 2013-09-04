@@ -1,0 +1,130 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05B4A28E17D7E9D6008E0CA4 /* threads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
+		05B4A28F17D7E9D6008E0CA4 /* c11.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = c11.h; sourceTree = "<group>"; };
+		05B4A29017D7E9D6008E0CA4 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/c11/Makefile; sourceTree = "<group>"; };
+		05B4A29217D7EBFB008E0CA4 /* call_once.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = call_once.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0595BA7A17AC11A70021435A = {
+			isa = PBXGroup;
+			children = (
+				05B4A28C17D7E9D6008E0CA4 /* include */,
+				05B4A29017D7E9D6008E0CA4 /* Makefile */,
+				05B4A29117D7E9D6008E0CA4 /* threads */,
+			);
+			sourceTree = "<group>";
+		};
+		05B4A28C17D7E9D6008E0CA4 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05B4A28D17D7E9D6008E0CA4 /* c11 */,
+				05B4A28F17D7E9D6008E0CA4 /* c11.h */,
+			);
+			name = include;
+			path = ../source/lib/c11/include;
+			sourceTree = "<group>";
+		};
+		05B4A28D17D7E9D6008E0CA4 /* c11 */ = {
+			isa = PBXGroup;
+			children = (
+				05B4A28E17D7E9D6008E0CA4 /* threads.h */,
+			);
+			path = c11;
+			sourceTree = "<group>";
+		};
+		05B4A29117D7E9D6008E0CA4 /* threads */ = {
+			isa = PBXGroup;
+			children = (
+				05B4A29217D7EBFB008E0CA4 /* call_once.c */,
+			);
+			name = threads;
+			path = ../source/lib/c11/threads;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA7F17AC11A70021435A /* LIB-C11 */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-C11" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/lib/c11;
+			dependencies = (
+			);
+			name = "LIB-C11";
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-PTHREAD";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA7B17AC11A70021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-C11" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA7A17AC11A70021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA7F17AC11A70021435A /* LIB-C11 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA8117AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA8417AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-C11" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8117AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-C11" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8417AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA7B17AC11A70021435A /* Project object */;
+}

@@ -59,64 +59,80 @@
 
 # $Id$
 
-include ../../Makefile-Config.mk
+include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LIB  "$(COLOR_NONE)"]>           *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LIB  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" C11  "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
+# Paths
+#-------------------------------------------------------------------------------
+
+DIR_SRC_THREADS     = $(PATH_SRC_LIB_C11)threads/
+
+#-------------------------------------------------------------------------------
+# Search paths
+#-------------------------------------------------------------------------------
+
+# Define the search paths for source files
+vpath %$(EXT_C)         $(PATH_SRC_LIB_C11)
+vpath %$(EXT_C)         $(DIR_SRC_THREADS)
+
+#-------------------------------------------------------------------------------
+# File suffixes
+#-------------------------------------------------------------------------------
+
+# Adds the suffixes used in this file
+.SUFFIXES:  $(EXT_C)    \
+            $(EXT_H)    \
+            $(EXT_OBJ)  \
+            $(EXT_BIN)
+
+#-------------------------------------------------------------------------------
+# Files
+#-------------------------------------------------------------------------------
+
+_FILES_C_OBJ_BUILD          = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_C11),$(PATH_SRC_LIB_C11))
+_FILES_C_OBJ_BUILD_THREADS  = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_C11),$(DIR_SRC_THREADS))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all clean
+.PHONY: all     \
+        clean
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:
+all:    $(_FILES_C_OBJ_BUILD)           \
+        $(_FILES_C_OBJ_BUILD_THREADS)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C99 standard library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_C99) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libc11.a"$(COLOR_NONE)
+	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libc11.a $(PATH_BUILD_32_LIB_OBJ_C11)*$(EXT_OBJ)
+	@$(RANLIB_32) $(PATH_BUILD_32_LIB_BIN)libc11.a
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS C11 standard library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_C11) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libc11.a"$(COLOR_NONE)
+	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libc11.a $(PATH_BUILD_64_LIB_OBJ_C11)*$(EXT_OBJ)
+	@$(RANLIB_64) $(PATH_BUILD_64_LIB_BIN)libc11.a
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_POSIX) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libc11.so"$(COLOR_NONE)
+	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libc11.so $(PATH_BUILD_32_LIB_OBJ_C11)*$(EXT_OBJ_PIC)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS POSIX Thread library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS IConv library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_ICONV) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS system library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS blocks library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_BLOCKS) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS dispatch library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_DISPATCH) && $(MAKE)
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS Objective-C library"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libc11.so"$(COLOR_NONE)
+	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libc11.so $(PATH_BUILD_64_LIB_OBJ_C11)*$(EXT_OBJ_PIC)
 	
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_LIB_C99) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_C11) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_POSIX) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_PTHREAD) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_ICONV) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_SYSTEM) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_BLOCKS) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_DISPATCH) && $(MAKE) clean
-	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE) clean
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_OBJ_C11)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_OBJ_C11)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_BIN)libc11.*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_BIN)libc11.*
