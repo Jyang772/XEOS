@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		05B4A27617D79AD6008E0CA4 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		05ECB40D17CE6E7E000042E4 /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = message.h; sourceTree = "<group>"; };
 		05ECB40E17CE6E7E000042E4 /* objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
 		05ECB40F17CE6E7E000042E4 /* runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = runtime.h; sourceTree = "<group>"; };
@@ -30,6 +31,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		05B4A27517D79AD6008E0CA4 /* __private */ = {
+			isa = PBXGroup;
+			children = (
+				05B4A27617D79AD6008E0CA4 /* types.h */,
+			);
+			path = __private;
+			sourceTree = "<group>";
+		};
 		05ECB40B17CE6E7E000042E4 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -43,6 +52,7 @@
 		05ECB40C17CE6E7E000042E4 /* objc */ = {
 			isa = PBXGroup;
 			children = (
+				05B4A27517D79AD6008E0CA4 /* __private */,
 				05ECB40D17CE6E7E000042E4 /* message.h */,
 				05ECB40E17CE6E7E000042E4 /* objc.h */,
 				05ECB41817CE7175000042E4 /* objc-api.h */,
