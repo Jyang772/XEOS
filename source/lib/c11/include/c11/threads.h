@@ -70,20 +70,16 @@ extern "C" {
 
 #include <time.h>
 
+#include <system/types/cnd_t.h>
+#include <system/types/thrd_t.h>
+#include <system/types/tss_t.h>
+#include <system/types/mtx_t.h>
+#include <system/types/tss_dtor_t.h>
+#include <system/types/thrd_start_t.h>
+#include <system/types/once_flag.h>
+
 #define thread_local            _Thread_local
-
-#define ONCE_FLAG_INIT          0
 #define TSS_DTOR_ITERATIONS     0
-
-typedef int cnd_t;
-typedef int thrd_t;
-typedef int tss_t;
-typedef int mtx_t;
-
-typedef void ( * tss_dtor_t   )( void * );
-typedef int  ( * thrd_start_t )( void * );
-
-typedef int once_flag;
 
 enum
 {
