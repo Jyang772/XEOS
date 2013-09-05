@@ -70,12 +70,8 @@
 #ifndef __XEOS_LIB_SYSTEM_TYPES_PTHREAD_T_H__
 #define __XEOS_LIB_SYSTEM_TYPES_PTHREAD_T_H__
 
-#include <system/types/__private/stdint.h>
+#include <system/types/__private/threads.h>
 
-typedef struct
-{
-    __XEOS_UInt32 __reserved[ 8 ];
-}
-pthread_t;
+typedef struct __XEOS_Thread * pthread_t;
 
 #endif /* __XEOS_LIB_SYSTEM_TYPES_PTHREAD_T_H__ */

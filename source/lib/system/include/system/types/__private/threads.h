@@ -62,18 +62,45 @@
 /* $Id$ */
 
 /*!
- * @header          pthread_mutex_t.h
+ * @header          threads.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __XEOS_LIB_SYSTEM_TYPES_PTHREAD_MUTEX_T_H__
-#define __XEOS_LIB_SYSTEM_TYPES_PTHREAD_MUTEX_T_H__
+#ifndef __XEOS_LIB_SYSTEM_TYPES___PRIVATE_THREADS_H__
+#define __XEOS_LIB_SYSTEM_TYPES___PRIVATE_THREADS_H__
 
-#include <system/types/__private/threads.h>
+#include <system/types/__private/stdint.h>
 
-#define PTHREAD_MUTEX_INITIALIZER __XEOS_THREAD_MUTEX_INITIALIZER
+struct __XEOS_Thread
+{
+    __XEOS_UInt32 __reserved[ 8 ];
+};
 
-typedef struct __XEOS_ThreadMutex pthread_mutex_t;
+#define __XEOS_THREAD_COND_INITIALIZER  { 0, 0, 0, 0, 0, 0, 0, 0 }
 
-#endif /* __XEOS_LIB_SYSTEM_TYPES_PTHREAD_MUTEX_T_H__ */
+struct __XEOS_ThreadCond
+{
+    __XEOS_UInt32 __reserved[ 8 ];
+};
+
+#define __XEOS_THREAD_MUTEX_INITIALIZER { 0, 0, 0, 0, 0, 0, 0, 0 }
+
+struct __XEOS_ThreadMutex
+{
+    __XEOS_UInt32 __reserved[ 8 ];
+};
+
+struct __XEOS_ThreadKey
+{
+    __XEOS_UInt32 __reserved[ 8 ];
+};
+
+#define __XEOS_THREAD_ONCE_INITIALIZER  { 0, 0, 0, 0, 0, 0, 0, 0 }
+
+struct __XEOS_ThreadOnce
+{
+    __XEOS_UInt32 __reserved[ 8 ];
+};
+
+#endif /* __XEOS_LIB_SYSTEM_TYPES___PRIVATE_THREADS_H__ */

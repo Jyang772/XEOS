@@ -70,12 +70,8 @@
 #ifndef __XEOS_LIB_SYSTEM_TYPES_PTHREAD_KEY_T_H__
 #define __XEOS_LIB_SYSTEM_TYPES_PTHREAD_KEY_T_H__
 
-#include <system/types/__private/stdint.h>
+#include <system/types/__private/threads.h>
 
-typedef struct
-{
-    __XEOS_UInt32 __reserved[ 8 ];
-}
-pthread_key_t;
+typedef struct __XEOS_ThreadKey pthread_key_t;
 
 #endif /* __XEOS_LIB_SYSTEM_TYPES_PTHREAD_KEY_T_H__ */

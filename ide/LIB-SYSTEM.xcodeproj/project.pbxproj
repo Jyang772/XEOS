@@ -8,6 +8,14 @@
 
 /* Begin PBXFileReference section */
 		0595B2BE17AE0D0600C47BA0 /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
+		05B4A2C117D7FA5A008E0CA4 /* threads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
+		05B4A2C217D7FFF0008E0CA4 /* cnd_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cnd_t.h; sourceTree = "<group>"; };
+		05B4A2C317D7FFFA008E0CA4 /* thrd_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = thrd_t.h; sourceTree = "<group>"; };
+		05B4A2C417D80002008E0CA4 /* tss_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tss_t.h; sourceTree = "<group>"; };
+		05B4A2C517D8000A008E0CA4 /* mtx_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mtx_t.h; sourceTree = "<group>"; };
+		05B4A2C617D80016008E0CA4 /* tss_dtor_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tss_dtor_t.h; sourceTree = "<group>"; };
+		05B4A2C717D80021008E0CA4 /* thrd_start_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = thrd_start_t.h; sourceTree = "<group>"; };
+		05B4A2C817D80035008E0CA4 /* once_flag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = once_flag.h; sourceTree = "<group>"; };
 		05B4EC6A17AC291F00587E4C /* locale_t.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale_t.h; sourceTree = "<group>"; };
 		05C7589217AC81EF00236B3F /* __locale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __locale.c; sourceTree = "<group>"; };
 		05C7589317AC81F800236B3F /* locale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = locale.h; sourceTree = "<group>"; };
@@ -391,6 +399,13 @@
 				05F57F5B17AC13D500DB4ACE /* pthread_rwlockattr_t.h */,
 				05F57F5C17AC13D500DB4ACE /* pthread_spinlock_t.h */,
 				05F57F5D17AC13D500DB4ACE /* pthread_t.h */,
+				05B4A2C217D7FFF0008E0CA4 /* cnd_t.h */,
+				05B4A2C317D7FFFA008E0CA4 /* thrd_t.h */,
+				05B4A2C417D80002008E0CA4 /* tss_t.h */,
+				05B4A2C517D8000A008E0CA4 /* mtx_t.h */,
+				05B4A2C617D80016008E0CA4 /* tss_dtor_t.h */,
+				05B4A2C717D80021008E0CA4 /* thrd_start_t.h */,
+				05B4A2C817D80035008E0CA4 /* once_flag.h */,
 				05F57F5E17AC13D500DB4ACE /* ptrdiff_t.h */,
 				05F57F5F17AC13D500DB4ACE /* sa_family_t.h */,
 				05F57F6017AC13D500DB4ACE /* seek_cur.h */,
@@ -452,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				05F57F2217AC13D500DB4ACE /* stdint.h */,
+				05B4A2C117D7FA5A008E0CA4 /* threads.h */,
 			);
 			path = __private;
 			sourceTree = "<group>";

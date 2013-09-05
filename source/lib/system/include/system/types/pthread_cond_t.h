@@ -70,12 +70,10 @@
 #ifndef __XEOS_LIB_SYSTEM_TYPES_PTHREAD_COND_T_H__
 #define __XEOS_LIB_SYSTEM_TYPES_PTHREAD_COND_T_H__
 
-#include <system/types/__private/stdint.h>
+#include <system/types/__private/threads.h>
 
-typedef struct
-{
-    __XEOS_UInt32 __reserved[ 8 ];
-}
-pthread_cond_t;
+#define PTHREAD_COND_INITIALIZER __XEOS_THREAD_COND_INITIALIZER
+
+typedef struct __XEOS_ThreadCond pthread_cond_t;
 
 #endif /* __XEOS_LIB_SYSTEM_TYPES_PTHREAD_COND_T_H__ */

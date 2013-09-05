@@ -72,6 +72,8 @@
 
 #include <system/types/__private/stdint.h>
 
+#define PTHREAD_RWLOCK_INITIALIZER { 0, 0, 0, 0, 0, 0, 0, 0 }
+
 typedef struct
 {
     __XEOS_UInt32 __reserved[ 8 ];

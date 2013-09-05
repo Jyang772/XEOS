@@ -70,12 +70,10 @@
 #ifndef __XEOS_LIB_SYSTEM_TYPES_PTHREAD_ONCE_T_H__
 #define __XEOS_LIB_SYSTEM_TYPES_PTHREAD_ONCE_T_H__
 
-#include <system/types/__private/stdint.h>
+#include <system/types/__private/threads.h>
 
-typedef struct
-{
-    __XEOS_UInt32 __reserved[ 8 ];
-}
-pthread_once_t;
+#define PTHREAD_ONCE_INIT __XEOS_THREAD_ONCE_INITIALIZER
+
+typedef struct __XEOS_ThreadOnce pthread_once_t;
 
 #endif /* __XEOS_LIB_SYSTEM_TYPES_PTHREAD_ONCE_T_H__ */

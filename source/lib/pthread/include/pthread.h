@@ -95,8 +95,6 @@ extern "C" {
 #define PTHREAD_CREATE_JOINABLE         0x01
 #define PTHREAD_CREATE_DETACHED         0x02
 
-#define PTHREAD_ONCE_INIT               0x00
-
 #define PTHREAD_MUTEX_NORMAL            0x00
 #define PTHREAD_MUTEX_DEFAULT           0x00
 #define PTHREAD_MUTEX_ERRORCHECK        0x01
@@ -118,10 +116,6 @@ extern "C" {
 #define PTHREAD_SCOPE_PROCESS           0x02
 
 #define PTHREAD_BARRIER_SERIAL_THREAD   0x00
-
-#define PTHREAD_COND_INITIALIZER        0x00
-#define PTHREAD_MUTEX_INITIALIZER       0x00
-#define PTHREAD_RWLOCK_INITIALIZER      0x00
 
 int         pthread_create( pthread_t * restrict thread, const pthread_attr_t * restrict attr, void * ( * start_routine )( void * ), void * restrict arg );
 int         pthread_once( pthread_once_t * once_control, void ( * init_routine )( void ) );

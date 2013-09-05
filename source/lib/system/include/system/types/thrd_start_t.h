@@ -62,18 +62,14 @@
 /* $Id$ */
 
 /*!
- * @header          pthread_mutex_t.h
+ * @header          thrd_start_t.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __XEOS_LIB_SYSTEM_TYPES_PTHREAD_MUTEX_T_H__
-#define __XEOS_LIB_SYSTEM_TYPES_PTHREAD_MUTEX_T_H__
+#ifndef __XEOS_LIB_SYSTEM_TYPES_THRD_START_T_H__
+#define __XEOS_LIB_SYSTEM_TYPES_THRD_START_T_H__
 
-#include <system/types/__private/threads.h>
+typedef int ( * thrd_start_t )( void * );
 
-#define PTHREAD_MUTEX_INITIALIZER __XEOS_THREAD_MUTEX_INITIALIZER
-
-typedef struct __XEOS_ThreadMutex pthread_mutex_t;
-
-#endif /* __XEOS_LIB_SYSTEM_TYPES_PTHREAD_MUTEX_T_H__ */
+#endif /* __XEOS_LIB_SYSTEM_TYPES_THRD_START_T_H__ */
