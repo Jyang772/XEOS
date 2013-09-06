@@ -62,10 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int mtx_unlock( mtx_t * mtx )
 {
-    ( void )mtx;
-    
-    return thrd_success;
+    return ( mtx_unlock( mtx ) == 0 ) ? thrd_success : thrd_error;
 }

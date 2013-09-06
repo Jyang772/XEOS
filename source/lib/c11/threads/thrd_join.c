@@ -62,11 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int thrd_join( thrd_t thr, int * res )
 {
-    ( void )thr;
-    ( void )res;
-    
-    return thrd_success;
+    return ( pthread_join( thr, ( void ** )( ( void * )res ) ) == 0 ) ? thrd_success : thrd_error;
 }

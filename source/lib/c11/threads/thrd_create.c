@@ -62,12 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int thrd_create( thrd_t * thr, thrd_start_t func, void * arg )
 {
-    ( void )thr;
-    ( void )func;
-    ( void )arg;
-    
-    return thrd_success;
+    return ( pthread_create( thr, NULL, ( void * ( * )( void * ) )func, arg ) ) ? thrd_success : thrd_error;
 }

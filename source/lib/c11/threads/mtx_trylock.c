@@ -62,10 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int mtx_trylock( mtx_t * mtx )
 {
-    ( void )mtx;
-    
-    return thrd_success;
+    return ( pthread_mutex_trylock( mtx ) == 0 ) ? thrd_success : thrd_error;
 }

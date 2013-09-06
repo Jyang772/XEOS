@@ -79,7 +79,7 @@ extern "C" {
 #include <system/types/once_flag.h>
 
 #define thread_local            _Thread_local
-#define TSS_DTOR_ITERATIONS     0
+#define TSS_DTOR_ITERATIONS     1
 
 enum
 {
@@ -91,9 +91,9 @@ enum
 enum
 {
     thrd_success    = 0x00,
-    thrd_timedout   = 0x01,
-    thrd_busy       = 0x02,
-    thrd_error      = 0x03,
+    thrd_error      = 0x01,
+    thrd_timedout   = 0x02,
+    thrd_busy       = 0x03,
     thrd_nomem      = 0x04
 };
 

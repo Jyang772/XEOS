@@ -62,12 +62,19 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
+#include <errno.h>
 
 int cnd_timedwait( cnd_t * restrict cond, mtx_t * restrict mtx, const struct timespec * restrict ts )
 {
-    ( void )cond;
-    ( void )mtx;
-    ( void )ts;
+    int res;
     
-    return thrd_success;
+    res = pthread_cond_timedwait( cond, mtx, ts );
+    
+    if( res == ETIMEDOUT )
+    {
+        return thrd_timedout;
+    }
+    
+    return ( res == 0 ) ? thrd_success : thrd_error;
 }

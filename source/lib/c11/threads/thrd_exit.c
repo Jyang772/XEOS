@@ -62,10 +62,11 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <stdint.h>
+
+extern _Noreturn void pthread_exit( void * );
 
 _Noreturn void thrd_exit( int res )
 {
-    ( void )res;
-    
-    while( 1 );
+    pthread_exit( ( void * )( ( uintptr_t )res ) );
 }

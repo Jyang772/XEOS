@@ -62,8 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 thrd_t thrd_current( void )
 {
-    return 0;
+    return pthread_self();
 }

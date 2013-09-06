@@ -62,10 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int thrd_detach( thrd_t thr )
 {
-    ( void )thr;
-    
-    return thrd_success;
+    return ( pthread_detach( thr ) == 0 ) ? thrd_success : thrd_error;
 }

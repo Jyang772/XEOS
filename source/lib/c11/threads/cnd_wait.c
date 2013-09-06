@@ -62,11 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int cnd_wait( cnd_t * cond, mtx_t * mtx )
 {
-    ( void )cond;
-    ( void )mtx;
-    
-    return thrd_success;
+    return ( pthread_cond_wait( cond, mtx ) ) ? thrd_success : thrd_error;
 }

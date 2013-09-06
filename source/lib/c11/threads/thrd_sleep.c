@@ -62,11 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <time.h>
 
 int thrd_sleep( const struct timespec * duration, struct timespec * remaining )
 {
-    ( void )duration;
-    ( void )remaining;
-    
-    return 0;
+    return nanosleep( duration, remaining );
 }

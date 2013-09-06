@@ -62,9 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 void call_once( once_flag * flag, void ( * func )( void ) )
 {
-    ( void )flag;
-    ( void )func;
+    pthread_once( flag, func );
 }

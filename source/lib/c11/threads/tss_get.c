@@ -62,11 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
-#include <system/types/null.h>
+#include <pthread.h>
 
 void * tss_get( tss_t key )
 {
-    ( void )key;
-    
-    return NULL;
+    return pthread_getspecific( key );
 }

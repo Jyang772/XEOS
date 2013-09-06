@@ -62,10 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int cnd_init( cnd_t * cond )
 {
-    ( void )cond;
-    
-    return thrd_success;
+    return ( pthread_cond_init( cond, NULL ) == 0 ) ? thrd_success : thrd_error;
 }

@@ -62,11 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int thrd_equal( thrd_t thr0, thrd_t thr1 )
 {
-    ( void )thr0;
-    ( void )thr1;
-    
-    return 0;
+    return pthread_equal( thr0, thr1 );
 }

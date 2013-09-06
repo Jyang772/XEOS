@@ -62,11 +62,38 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 int mtx_init( mtx_t * mtx, int type )
 {
-    ( void )mtx;
-    ( void )type;
+    pthread_mutexattr_t mta;
     
-    return thrd_success;
+    pthread_mutexattr_init( &mta );
+    
+    if( type & mtx_recursive && type & mtx_timed )
+    {
+        pthread_mutexattr_settype( &mta, PTHREAD_MUTEX_RECURSIVE );
+    }
+    else if( type == mtx_timed )
+    {
+        pthread_mutexattr_settype( &mta, PTHREAD_MUTEX_NORMAL );
+    }
+    else if( type & mtx_recursive && type & mtx_plain )
+    {
+        pthread_mutexattr_settype( &mta, PTHREAD_MUTEX_RECURSIVE );
+    }
+    else if( type == mtx_plain )
+    {
+        pthread_mutexattr_settype( &mta, PTHREAD_MUTEX_NORMAL );
+    }
+    else
+    {
+        pthread_mutexattr_destroy( &mta );
+        
+        return thrd_error;
+    }
+    
+    pthread_mutexattr_destroy( &mta );
+    
+    return ( pthread_mutex_init( mtx, &mta ) == 0 ) ? thrd_success : thrd_error;
 }

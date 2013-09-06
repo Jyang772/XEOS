@@ -62,8 +62,9 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
 
 void cnd_destroy( cnd_t * cond )
 {
-    ( void )cond;
+    pthread_cond_destroy( cond );
 }

@@ -62,11 +62,19 @@
 /* $Id$ */
 
 #include <threads.h>
+#include <pthread.h>
+#include <errno.h>
 
 int mtx_timedlock( mtx_t * restrict mtx, const struct timespec * restrict ts )
 {
-    ( void )mtx;
-    ( void )ts;
+    int res;
     
-    return thrd_success;
+    res = pthread_mutex_timedlock( mtx, ts );
+    
+    if( res == ETIMEDOUT )
+    {
+        return thrd_timedout;
+    }
+    
+    return ( res == 0 ) ? thrd_success : thrd_error;
 }
