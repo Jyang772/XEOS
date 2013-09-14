@@ -30,6 +30,7 @@
 		05B4D9E717AC151500587E4C /* xeos.macros.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.macros.inc.s; sourceTree = "<group>"; };
 		05B4D9E817AC151500587E4C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/boot/bios/Makefile; sourceTree = "<group>"; };
 		05B4D9E917AC151500587E4C /* mbr.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = mbr.s; path = ../source/boot/bios/mbr.s; sourceTree = "<group>"; };
+		05B5BEC417E1A550007C3335 /* xeos.16.vesa.inc.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = xeos.16.vesa.inc.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -56,6 +57,7 @@
 				05B4D9DB17AC151500587E4C /* xeos.16.sse.inc.s */,
 				05B4D9DC17AC151500587E4C /* xeos.16.string.inc.s */,
 				05B4D9DD17AC151500587E4C /* xeos.16.video.inc.s */,
+				05B5BEC417E1A550007C3335 /* xeos.16.vesa.inc.s */,
 				05B4D9DE17AC151500587E4C /* xeos.32.string.inc.s */,
 				05B4D9DF17AC151500587E4C /* xeos.32.video.inc.s */,
 				05B4D9E017AC151500587E4C /* xeos.64.string.inc.s */,
