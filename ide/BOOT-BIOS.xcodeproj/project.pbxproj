@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		050308B517E497B5004006DD /* xeos.16.video.ext.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.video.ext.inc.s; sourceTree = "<group>"; };
 		05B4D9D217AC151500587E4C /* boot.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = boot.s; path = ../source/boot/bios/boot.s; sourceTree = "<group>"; };
 		05B4D9D417AC151500587E4C /* xeos.16.a20.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.a20.inc.s; sourceTree = "<group>"; };
 		05B4D9D517AC151500587E4C /* xeos.16.cpu.inc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = xeos.16.cpu.inc.s; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 				05B4D9DB17AC151500587E4C /* xeos.16.sse.inc.s */,
 				05B4D9DC17AC151500587E4C /* xeos.16.string.inc.s */,
 				05B4D9DD17AC151500587E4C /* xeos.16.video.inc.s */,
+				050308B517E497B5004006DD /* xeos.16.video.ext.inc.s */,
 				05B5BEC417E1A550007C3335 /* xeos.16.vesa.inc.s */,
 				05B4D9DE17AC151500587E4C /* xeos.32.string.inc.s */,
 				05B4D9DF17AC151500587E4C /* xeos.32.video.inc.s */,
