@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		055765E117DF8225000F7919 /* gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui.h; sourceTree = "<group>"; };
+		055765E317DF83F8000F7919 /* __XEOS_GUI.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_GUI.c; sourceTree = "<group>"; };
+		055765E417DFC724000F7919 /* XEOS_GUI_GetPredefinedColor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_GetPredefinedColor.c; sourceTree = "<group>"; };
+		055765E517DFC72F000F7919 /* XEOS_GUI_SetPredefinedColor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_SetPredefinedColor.c; sourceTree = "<group>"; };
+		055765E617DFC73A000F7919 /* XEOS_GUI_MakePoint.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_MakePoint.c; sourceTree = "<group>"; };
+		055765E717DFC744000F7919 /* XEOS_GUI_MakeSize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_MakeSize.c; sourceTree = "<group>"; };
+		055765E817DFC74E000F7919 /* XEOS_GUI_MakeRect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_MakeRect.c; sourceTree = "<group>"; };
+		055765E917DFC874000F7919 /* gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui.h; sourceTree = "<group>"; };
 		0595BA9B17AC11F90021435A /* linker.ld */ = {isa = PBXFileReference; lastKnownFileType = text; name = linker.ld; path = ../source/core/linker.ld; sourceTree = "<group>"; };
 		0595BA9C17AC11F90021435A /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/core/Makefile; sourceTree = "<group>"; };
 		0595BA9E17AC11F90021435A /* __XEOS_Main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_Main.c; sourceTree = "<group>"; };
@@ -274,9 +282,46 @@
 		0595BBBD17AC11FA0021435A /* XEOS_Main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XEOS_Main.h; sourceTree = "<group>"; };
 		0595BBBE17AC11FA0021435A /* XEOS_Stub.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = XEOS_Stub.32.s; sourceTree = "<group>"; };
 		0595BBBF17AC11FA0021435A /* XEOS_Stub.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = XEOS_Stub.64.s; sourceTree = "<group>"; };
+		05B5BEB717E11FD7007C3335 /* XEOS_GUI_BitmapFontGetBitmapFont.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetBitmapFont.c; sourceTree = "<group>"; };
+		05B5BEB817E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphAtIndex.c; sourceTree = "<group>"; };
+		05B5BEB917E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphCount.c; sourceTree = "<group>"; };
+		05B5BEBA17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphHeight.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphHeight.c; sourceTree = "<group>"; };
+		05B5BEBC17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetMonospaceSystemBitmapFont.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetMonospaceSystemBitmapFont.c; sourceTree = "<group>"; };
+		05B5BEBD17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetName.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetName.c; sourceTree = "<group>"; };
+		05B5BEBE17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetSize.c; sourceTree = "<group>"; };
+		05B5BEBF17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetSystemBitmapFont.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetSystemBitmapFont.c; sourceTree = "<group>"; };
+		05B5BEC017E11FD7007C3335 /* XEOS_GUI_BitmapFontGetSystemBitmapFontSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetSystemBitmapFontSize.c; sourceTree = "<group>"; };
+		05B5BEC117E11FD7007C3335 /* XEOS_GUI_BitmapFontGetTraits.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetTraits.c; sourceTree = "<group>"; };
+		05B5BEC217E11FD7007C3335 /* XEOS_GUI_BitmapFontGlyphGetData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGlyphGetData.c; sourceTree = "<group>"; };
+		05B5BEC317E11FD7007C3335 /* XEOS_GUI_BitmapFontGlyphGetWidth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGlyphGetWidth.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		055765E217DF8232000F7919 /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				055765E317DF83F8000F7919 /* __XEOS_GUI.c */,
+				055765E417DFC724000F7919 /* XEOS_GUI_GetPredefinedColor.c */,
+				055765E517DFC72F000F7919 /* XEOS_GUI_SetPredefinedColor.c */,
+				055765E617DFC73A000F7919 /* XEOS_GUI_MakePoint.c */,
+				055765E717DFC744000F7919 /* XEOS_GUI_MakeSize.c */,
+				055765E817DFC74E000F7919 /* XEOS_GUI_MakeRect.c */,
+				05B5BEB717E11FD7007C3335 /* XEOS_GUI_BitmapFontGetBitmapFont.c */,
+				05B5BEBF17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetSystemBitmapFont.c */,
+				05B5BEBC17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetMonospaceSystemBitmapFont.c */,
+				05B5BEC017E11FD7007C3335 /* XEOS_GUI_BitmapFontGetSystemBitmapFontSize.c */,
+				05B5BEB817E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphAtIndex.c */,
+				05B5BEB917E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphCount.c */,
+				05B5BEBA17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphHeight.c */,
+				05B5BEBD17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetName.c */,
+				05B5BEBE17E11FD7007C3335 /* XEOS_GUI_BitmapFontGetSize.c */,
+				05B5BEC117E11FD7007C3335 /* XEOS_GUI_BitmapFontGetTraits.c */,
+				05B5BEC217E11FD7007C3335 /* XEOS_GUI_BitmapFontGlyphGetData.c */,
+				05B5BEC317E11FD7007C3335 /* XEOS_GUI_BitmapFontGlyphGetWidth.c */,
+			);
+			path = gui;
+			sourceTree = "<group>";
+		};
 		0595BA5917AC118E0021435A = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +336,7 @@
 			children = (
 				0595BA9E17AC11F90021435A /* __XEOS_Main.c */,
 				0595BA9F17AC11F90021435A /* __XEOS_Main.h */,
+				055765E217DF8232000F7919 /* gui */,
 				0595BAA017AC11F90021435A /* hal */,
 				0595BB1517AC11F90021435A /* include */,
 				0595BB3D17AC11F90021435A /* info */,
@@ -510,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				0595BB1717AC11F90021435A /* __private */,
+				055765E117DF8225000F7919 /* gui.h */,
 				0595BB1F17AC11F90021435A /* hal */,
 				0595BB3217AC11F90021435A /* hal.h */,
 				0595BB3317AC11F90021435A /* info.h */,
@@ -528,6 +575,7 @@
 		0595BB1717AC11F90021435A /* __private */ = {
 			isa = PBXGroup;
 			children = (
+				055765E917DFC874000F7919 /* gui.h */,
 				0595BB1817AC11F90021435A /* info.h */,
 				0595BB1917AC11F90021435A /* irq.h */,
 				0595BB1A17AC11F90021435A /* mem.h */,
