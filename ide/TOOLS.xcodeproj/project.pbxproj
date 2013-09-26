@@ -1,0 +1,111 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05A05A7017F4B8380084DCB3 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../tools/Makefile; sourceTree = "<group>"; };
+		05A05A7217F4B8380084DCB3 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05A05A7317F4B8380084DCB3 /* mkinitrd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mkinitrd.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0595BA9017AC11B70021435A = {
+			isa = PBXGroup;
+			children = (
+				05A05A7017F4B8380084DCB3 /* Makefile */,
+				05A05A7117F4B8380084DCB3 /* mkinitrd */,
+			);
+			sourceTree = "<group>";
+		};
+		05A05A7117F4B8380084DCB3 /* mkinitrd */ = {
+			isa = PBXGroup;
+			children = (
+				05A05A7217F4B8380084DCB3 /* Makefile */,
+				05A05A7317F4B8380084DCB3 /* mkinitrd.c */,
+			);
+			name = mkinitrd;
+			path = ../tools/mkinitrd;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA9517AC11B70021435A /* TOOLS */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA9817AC11B70021435A /* Build configuration list for PBXLegacyTarget "TOOLS" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../tools/;
+			dependencies = (
+			);
+			name = TOOLS;
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-SYSTEM";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA9117AC11B70021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA9417AC11B70021435A /* Build configuration list for PBXProject "TOOLS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA9017AC11B70021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA9517AC11B70021435A /* TOOLS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA9717AC11B70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA9A17AC11B70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA9417AC11B70021435A /* Build configuration list for PBXProject "TOOLS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA9717AC11B70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA9817AC11B70021435A /* Build configuration list for PBXLegacyTarget "TOOLS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA9A17AC11B70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA9117AC11B70021435A /* Project object */;
+}

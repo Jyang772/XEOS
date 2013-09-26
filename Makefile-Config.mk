@@ -120,10 +120,14 @@ PATH_PROJECT                            := $(realpath $(dir $(CURDIR)/$(word $(w
 PATH_BUILD                              := $(PATH_PROJECT)build/
 PATH_RELEASE                            := $(PATH_PROJECT)release/
 PATH_SRC                                := $(PATH_PROJECT)source/
+PATH_TOOLS                              := $(PATH_PROJECT)tools/
 PATH_SW                                 := $(PATH_PROJECT)software-deps/
 
 # Build directories
 
+PATH_BUILD_TOOLS                        := $(PATH_BUILD)tools/
+PATH_BUILD_TOOLS_BIN                    := $(PATH_BUILD_TOOLS)bin/
+PATH_BUILD_TOOLS_MKINITRD               := $(PATH_BUILD_TOOLS)mkinitrd/
 PATH_BUILD_BOOT                         := $(PATH_BUILD)boot/
 PATH_BUILD_BOOT_BIOS                    := $(PATH_BUILD_BOOT)bios/
 PATH_BUILD_BOOT_UEFI                    := $(PATH_BUILD_BOOT)uefi/
@@ -189,6 +193,10 @@ PATH_SRC_LIB_ICONV                      := $(PATH_SRC_LIB)iconv/
 PATH_SRC_LIB_BLOCKS                     := $(PATH_SRC_LIB)blocks/
 PATH_SRC_LIB_DISPATCH                   := $(PATH_SRC_LIB)dispatch/
 PATH_SRC_LIB_OBJC                       := $(PATH_SRC_LIB)objc/
+
+# Tools directories
+
+PATH_TOOLS_MKINITRD                     := $(PATH_TOOLS)mkinitrd/
 
 # Release directories
 
@@ -280,6 +288,7 @@ PATCH                                   := patch
 TOUCH                                   := touch
 SOURCE                                  := source
 PYTHON                                  := python
+TOOLS_CC                                := cc
 
 #-------------------------------------------------------------------------------
 # Software arguments

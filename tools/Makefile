@@ -59,13 +59,13 @@
 
 # $Id$
 
-include ./Makefile-Config.mk
+include ../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>                               *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" TOOL "$(COLOR_NONE)"]>                     *** "
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -74,53 +74,24 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]>            
 # Declaration for phony targets, to avoid problems with local files
 .PHONY: all         \
         clean       \
-        tools       \
-        source      \
-        release     \
-        toolchain   \
-        test
+        mkinitrd
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    tools       \
-        source      \
-        release
+all:    mkinitrd
 	
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_TOOLS) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_RELEASE) && $(MAKE) $(ARGS_MAKE_CLEAN)
+	@$(PRINT) $(PROMPT)"Cleaning all tools"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_TOOLS_BIN)*
+	@$(CD) $(PATH_TOOLS_MKINITRD) && $(MAKE) $(ARGS_MAKE_CLEAN)
 
-# Builds the XEOS toolchain
-toolchain:
+# Builds mkinitrd
+mkinitrd:
 	
-	@$(PRINT) $(PROMPT)"Building the XEOS toolchain"
-	@$(CD) $(PATH_SW) && $(MAKE)
-
-# Builds the tools
-tools:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS tools"$(COLOR_NONE)
-	@$(CD) $(PATH_TOOLS) && $(MAKE)
-
-# Builds the source files
-source:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS source files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC) && $(MAKE)
-
-# Builds the release files
-release:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS release files"$(COLOR_NONE)
-	@$(CD) $(PATH_RELEASE) && $(MAKE)
-	
-# Runs XEOS in VirtualBox with debug support
-test: all
-	
-	@/Applications/VirtualBox.app/Contents/MacOS/VirtualBox --startvm XEOS --debug --start-running
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building mkinitrd"$(COLOR_NONE)
+	@$(CD) $(PATH_TOOLS_MKINITRD) && $(MAKE)
