@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		050364BC17F4E13F00FA2E4F /* XEOS_InitRDGetSignature.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRDGetSignature.c; sourceTree = "<group>"; };
+		050364BD17F4E14600FA2E4F /* XEOS_InitRDIsValid.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRDIsValid.c; sourceTree = "<group>"; };
 		053240AE17F41C6900FE3B41 /* vfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vfs.h; sourceTree = "<group>"; };
 		053240AF17F41C9A00FE3B41 /* vfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vfs.h; sourceTree = "<group>"; };
 		055765E117DF8225000F7919 /* gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui.h; sourceTree = "<group>"; };
@@ -852,6 +854,8 @@
 				05A05A5A17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetFilename.c */,
 				05A05A5B17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetOffset.c */,
 				05A05A5C17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetSize.c */,
+				050364BC17F4E13F00FA2E4F /* XEOS_InitRDGetSignature.c */,
+				050364BD17F4E14600FA2E4F /* XEOS_InitRDIsValid.c */,
 				05A05A5D17F4B17F0084DCB3 /* XEOS_InitRDGetEntryCount.c */,
 			);
 			path = initrd;
