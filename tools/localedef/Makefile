@@ -59,13 +59,38 @@
 
 # $Id$
 
-include ../Makefile-Config.mk
+include ../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" TOOL "$(COLOR_NONE)"]>                     *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" TOOL "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LDEF "$(COLOR_NONE)"]>           *** "
+
+#-------------------------------------------------------------------------------
+# Search paths
+#-------------------------------------------------------------------------------
+
+# Define the search paths for source files
+vpath %$(EXT_C)         $(DIR_TOOLS_LOCALEDEF)
+
+#-------------------------------------------------------------------------------
+# File suffixes
+#-------------------------------------------------------------------------------
+
+# Adds the suffixes used in this file
+.SUFFIXES:  $(EXT_C)        \
+            $(EXT_H)        \
+            $(EXT_OBJ)
+
+#-------------------------------------------------------------------------------
+# Files
+#-------------------------------------------------------------------------------
+
+_FILES_C_SRC        = $(foreach dir,$(PATH_TOOLS_LOCALEDEF),$(wildcard $(PATH_TOOLS_LOCALEDEF)*$(EXT_C)))
+_FILES_C_SRC_REL    = $(notdir $(_FILES_C_SRC))
+_FILES_C_OBJ_REL    = $(subst $(EXT_C),$(EXT_C)$(EXT_OBJ),$(_FILES_C_SRC_REL))
+_FILES_C_OBJ        = $(addprefix $(PATH_BUILD_TOOLS_LOCALEDEF),$(_FILES_C_OBJ_REL))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -73,33 +98,32 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 
 # Declaration for phony targets, to avoid problems with local files
 .PHONY: all         \
-        clean       \
-        mkinitrd    \
-        localedef
+        localedef   \
+        clean
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    mkinitrd localedef
+all: localedef
 	
+	@:
+
+# Links the executable
+localedef: $(_FILES_C_OBJ)
+	
+	@$(PRINT) $(PROMPT)"Linking executable: "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(TOOLS_CC) -o $(PATH_BUILD_TOOLS_BIN)$@ $(_FILES_C_OBJ)
+
+# Compiles a C file
+$(PATH_BUILD_TOOLS_LOCALEDEF)%$(EXT_C)$(EXT_OBJ): %$(EXT_C)
+	
+	@$(PRINT) $(PROMPT)"Compiling C file:   "$(COLOR_YELLOW)"$(notdir $<)"$(COLOR_NONE)" -> "$(COLOR_GRAY)"$(notdir $@)"$(COLOR_NONE)
+	@$(TOOLS_CC) -o $@ -c $<
+
 # Cleans the build files
 clean:
 	
-	@$(PRINT) $(PROMPT)"Cleaning all tools"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_TOOLS_BIN)*
-	@$(CD) $(PATH_TOOLS_MKINITRD) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_TOOLS_LOCALEDEF) && $(MAKE) $(ARGS_MAKE_CLEAN)
-
-# Builds mkinitrd
-mkinitrd:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building mkinitrd"$(COLOR_NONE)
-	@$(CD) $(PATH_TOOLS_MKINITRD) && $(MAKE)
-
-# Builds localedef
-localedef:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building localedef"$(COLOR_NONE)
-	@$(CD) $(PATH_TOOLS_LOCALEDEF) && $(MAKE)
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_TOOLS_LOCALEDEF)*

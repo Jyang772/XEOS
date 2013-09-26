@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		050364C017F4E68100FA2E4F /* localedef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = localedef.h; sourceTree = "<group>"; };
+		050364C117F4E68100FA2E4F /* localedef.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = localedef.c; sourceTree = "<group>"; };
+		050364C217F4E68100FA2E4F /* localedef_help.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = localedef_help.c; sourceTree = "<group>"; };
+		050364C317F4E68100FA2E4F /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05A05A7017F4B8380084DCB3 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../tools/Makefile; sourceTree = "<group>"; };
 		05A05A7217F4B8380084DCB3 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05A05A7317F4B8380084DCB3 /* mkinitrd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mkinitrd.c; sourceTree = "<group>"; };
@@ -17,11 +21,32 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		050364BE17F4E68100FA2E4F /* localedef */ = {
+			isa = PBXGroup;
+			children = (
+				050364BF17F4E68100FA2E4F /* include */,
+				050364C117F4E68100FA2E4F /* localedef.c */,
+				050364C217F4E68100FA2E4F /* localedef_help.c */,
+				050364C317F4E68100FA2E4F /* Makefile */,
+			);
+			name = localedef;
+			path = ../tools/localedef;
+			sourceTree = "<group>";
+		};
+		050364BF17F4E68100FA2E4F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				050364C017F4E68100FA2E4F /* localedef.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		0595BA9017AC11B70021435A = {
 			isa = PBXGroup;
 			children = (
 				05A05A7017F4B8380084DCB3 /* Makefile */,
 				05A05A7117F4B8380084DCB3 /* mkinitrd */,
+				050364BE17F4E68100FA2E4F /* localedef */,
 			);
 			sourceTree = "<group>";
 		};

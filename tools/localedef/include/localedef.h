@@ -61,25 +61,28 @@
 
 /* $Id$ */
 
-#include "include/mkinitrd.h"
+/*!
+ * @header          localedef.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-void mkinitrd_help( void )
-{
-    printf
-    (
-        "mkinitrd - XEOS Initial RAM Disk Creator\n"
-        "Copyright (c) 2010-2013, Jean-David Gadina - www.xs-labs.com\n"
-        "\n"
-        "Usage: mkinitrd OPTIONS FILES\n"
-        "\n"
-        "Options:\n"
-        "\n"
-        "    -o FILE    Output file path\n"
-        "    -v         Verbose mode\n"
-        "    -h         Prints this help message\n"
-        "\n"
-        "Example:\n"
-        "\n"
-        "    mkinitrd -o initrd.bin file1.bin file2.bin file3.bin\n"
-     );
+#ifndef __TOOLS_LOCALEDEF_H__
+#define __TOOLS_LOCALEDEF_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void localedef_help( void );
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* __TOOLS_LOCALEDEF_H__ */

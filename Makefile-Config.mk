@@ -128,6 +128,7 @@ PATH_SW                                 := $(PATH_PROJECT)software-deps/
 PATH_BUILD_TOOLS                        := $(PATH_BUILD)tools/
 PATH_BUILD_TOOLS_BIN                    := $(PATH_BUILD_TOOLS)bin/
 PATH_BUILD_TOOLS_MKINITRD               := $(PATH_BUILD_TOOLS)mkinitrd/
+PATH_BUILD_TOOLS_LOCALEDEF              := $(PATH_BUILD_TOOLS)localedef/
 PATH_BUILD_BOOT                         := $(PATH_BUILD)boot/
 PATH_BUILD_BOOT_BIOS                    := $(PATH_BUILD_BOOT)bios/
 PATH_BUILD_BOOT_UEFI                    := $(PATH_BUILD_BOOT)uefi/
@@ -197,6 +198,7 @@ PATH_SRC_LIB_OBJC                       := $(PATH_SRC_LIB)objc/
 # Tools directories
 
 PATH_TOOLS_MKINITRD                     := $(PATH_TOOLS)mkinitrd/
+PATH_TOOLS_LOCALEDEF                    := $(PATH_TOOLS)localedef/
 
 # Release directories
 
