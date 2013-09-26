@@ -59,64 +59,72 @@
 
 # $Id$
 
-include ../Makefile-Config.mk
+include ../../../Makefile-Config.mk
 
 #-------------------------------------------------------------------------------
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]>                     *** "
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" KMOD "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" TEST "$(COLOR_NONE)"]> *** "
+
+#-------------------------------------------------------------------------------
+# Software arguments
+#-------------------------------------------------------------------------------
+
+ARGS_LD_32          := -T ../linker.ld $(ARGS_LD_32)
+ARGS_LD_64          := -T ../linker.ld $(ARGS_LD_64)
+
+#-------------------------------------------------------------------------------
+# Paths
+#-------------------------------------------------------------------------------
+
+
+
+#-------------------------------------------------------------------------------
+# Search paths
+#-------------------------------------------------------------------------------
+
+# Define the search paths for source files
+vpath %$(EXT_C)         $(PATH_SRC_MODULES_TEST)
+
+#-------------------------------------------------------------------------------
+# File suffixes
+#-------------------------------------------------------------------------------
+
+# Adds the suffixes used in this file
+.SUFFIXES:  $(EXT_C)        \
+            $(EXT_H)        \
+            $(EXT_OBJ)
+
+#-------------------------------------------------------------------------------
+# Files
+#-------------------------------------------------------------------------------
+
+_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_MODULES_OBJ_TEST),$(PATH_SRC_MODULES_TEST))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
 #-------------------------------------------------------------------------------
 
 # Declaration for phony targets, to avoid problems with local files
-.PHONY: all         \
-        clean       \
-        boot        \
-        lib         \
-        modules     \
-        core
+.PHONY: all     \
+        clean
 
 #-------------------------------------------------------------------------------
 # Phony targets
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    boot    \
-        lib     \
-        modules \
-        core
+all:    $(_FILES_C_OBJ_BUILD)
 	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the kernel module file"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"test$(EXT_KMOD)"$(COLOR_NONE)
+	@$(LD_32) $(ARGS_LD_32) -o $(PATH_BUILD_32_MODULES_BIN)test$(EXT_KMOD) $(PATH_BUILD_32_MODULES_OBJ_TEST)*$(EXT_OBJ)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the kernel module file"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"test$(EXT_KMOD)"$(COLOR_NONE)
+	@$(LD_64) $(ARGS_LD_64) -o $(PATH_BUILD_64_MODULES_BIN)test$(EXT_KMOD) $(PATH_BUILD_64_MODULES_OBJ_TEST)*$(EXT_OBJ)
+
 # Cleans the build files
 clean:
 	
-	@$(CD) $(PATH_SRC_BOOT) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC_LIB) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC_MODULES) && $(MAKE) $(ARGS_MAKE_CLEAN)
-	@$(CD) $(PATH_SRC_CORE) && $(MAKE) $(ARGS_MAKE_CLEAN)
-
-# Builds the boot files
-boot:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS boot files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_BOOT) && $(MAKE)
-
-# Builds the library files
-lib:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS library files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_LIB) && $(MAKE)
-
-# Builds the module files
-modules:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS kernel module files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_MODULES) && $(MAKE)
-
-# Builds the core files
-core:
-	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS core files"$(COLOR_NONE)
-	@$(CD) $(PATH_SRC_CORE) && $(MAKE)
+	@$(PRINT) $(PROMPT)"Cleaning all build files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_MODULES_OBJ_TEST)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_MODULES_OBJ_TEST)*

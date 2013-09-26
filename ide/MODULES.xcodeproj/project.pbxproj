@@ -1,0 +1,121 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		056E07B517F4F43700908694 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/modules/Makefile; sourceTree = "<group>"; };
+		056E07B817F4F43700908694 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		056E07B917F4F74400908694 /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
+		056E07BA17F4FA2400908694 /* linker.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = linker.ld; path = ../source/modules/linker.ld; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		056E07B617F4F43700908694 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				056E07B717F4F43700908694 /* include */,
+				056E07B817F4F43700908694 /* Makefile */,
+				056E07B917F4F74400908694 /* test.c */,
+			);
+			name = test;
+			path = ../source/modules/test;
+			sourceTree = "<group>";
+		};
+		056E07B717F4F43700908694 /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		0595BA9017AC11B70021435A = {
+			isa = PBXGroup;
+			children = (
+				056E07BA17F4FA2400908694 /* linker.ld */,
+				056E07B517F4F43700908694 /* Makefile */,
+				056E07B617F4F43700908694 /* test */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA9517AC11B70021435A /* MODULES */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA9817AC11B70021435A /* Build configuration list for PBXLegacyTarget "MODULES" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/modules/;
+			dependencies = (
+			);
+			name = MODULES;
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-SYSTEM";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA9117AC11B70021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA9417AC11B70021435A /* Build configuration list for PBXProject "MODULES" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA9017AC11B70021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA9517AC11B70021435A /* MODULES */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA9717AC11B70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA9A17AC11B70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA9417AC11B70021435A /* Build configuration list for PBXProject "MODULES" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA9717AC11B70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA9817AC11B70021435A /* Build configuration list for PBXLegacyTarget "MODULES" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA9A17AC11B70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA9117AC11B70021435A /* Project object */;
+}

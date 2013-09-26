@@ -174,6 +174,14 @@ PATH_BUILD_32_LIB_OBJ_DISPATCH          := $(PATH_BUILD_32_LIB_OBJ)dispatch/
 PATH_BUILD_64_LIB_OBJ_DISPATCH          := $(PATH_BUILD_64_LIB_OBJ)dispatch/
 PATH_BUILD_32_LIB_OBJ_OBJC              := $(PATH_BUILD_32_LIB_OBJ)objc/
 PATH_BUILD_64_LIB_OBJ_OBJC              := $(PATH_BUILD_64_LIB_OBJ)objc/
+PATH_BUILD_32_MODULES                   := $(PATH_BUILD_32)modules/
+PATH_BUILD_64_MODULES                   := $(PATH_BUILD_64)modules/
+PATH_BUILD_32_MODULES_BIN               := $(PATH_BUILD_32_MODULES)bin/
+PATH_BUILD_64_MODULES_BIN               := $(PATH_BUILD_64_MODULES)bin/
+PATH_BUILD_32_MODULES_OBJ               := $(PATH_BUILD_32_MODULES)obj/
+PATH_BUILD_64_MODULES_OBJ               := $(PATH_BUILD_64_MODULES)obj/
+PATH_BUILD_32_MODULES_OBJ_TEST          := $(PATH_BUILD_32_MODULES_OBJ)test/
+PATH_BUILD_64_MODULES_OBJ_TEST           = $(PATH_BUILD_64_MODULES_OBJ)test/
 
 # Source directories
 
@@ -194,6 +202,8 @@ PATH_SRC_LIB_ICONV                      := $(PATH_SRC_LIB)iconv/
 PATH_SRC_LIB_BLOCKS                     := $(PATH_SRC_LIB)blocks/
 PATH_SRC_LIB_DISPATCH                   := $(PATH_SRC_LIB)dispatch/
 PATH_SRC_LIB_OBJC                       := $(PATH_SRC_LIB)objc/
+PATH_SRC_MODULES                        := $(PATH_SRC)modules/
+PATH_SRC_MODULES_TEST                   := $(PATH_SRC_MODULES)test/
 
 # Tools directories
 
@@ -218,6 +228,7 @@ EXT_OBJ                                 := .o
 EXT_OBJ_PIC                             := .o-pic
 EXT_BIN_RAW                             := .BIN
 EXT_BIN                                 := .$(TARGET_ABI)
+EXT_KMOD                                := .kmod
 
 #-------------------------------------------------------------------------------
 # Software
