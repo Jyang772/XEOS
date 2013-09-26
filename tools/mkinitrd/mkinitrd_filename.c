@@ -61,32 +61,13 @@
 
 /* $Id$ */
 
-/*!
- * @header          initrd.h
- * @author          Jean-David Gadina
- * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
- */
+#include "include/mkinitrd.h"
 
-#ifndef __XEOS_INITRD_H__
-#define __XEOS_INITRD_H__
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <system/types/uint32_t.h>
-
-typedef struct __XEOS_InitRD       * XEOS_InitRDRef;
-typedef struct __XEOS_InitRD_Entry * XEOS_InitRD_EntryRef;
-
-uint32_t XEOS_InitRDGetEntryCount( XEOS_InitRDRef initrd );
-
-const char *    XEOS_InitRD_EntryGetFilename( XEOS_InitRD_EntryRef entry );
-uint32_t        XEOS_InitRD_EntryGetSize( XEOS_InitRD_EntryRef entry );
-uint32_t        XEOS_InitRD_EntryGetOffset( XEOS_InitRD_EntryRef entry );
-
-#ifdef __cplusplus
+const char * mkinitrd_filename( const char * path )
+{
+    const char * s;
+    
+    s = strrchr( path, '/' );
+    
+    return ( s == NULL ) ? path : ++s;
 }
-#endif
-
-#endif /* __XEOS_INITRD_H__ */

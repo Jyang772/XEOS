@@ -62,31 +62,45 @@
 /* $Id$ */
 
 /*!
- * @header          initrd.h
+ * @header          mkinitrd.h
  * @author          Jean-David Gadina
  * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef __XEOS_INITRD_H__
-#define __XEOS_INITRD_H__
+#ifndef __TOOLS_MKINITRD_H__
+#define __TOOLS_MKINITRD_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <system/types/uint32_t.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct __XEOS_InitRD       * XEOS_InitRDRef;
-typedef struct __XEOS_InitRD_Entry * XEOS_InitRD_EntryRef;
+#define INITRD_FILENAME_MAXLENGTH   255
 
-uint32_t XEOS_InitRDGetEntryCount( XEOS_InitRDRef initrd );
+typedef struct
+{
+    uint32_t    fileCount;
+}
+InitRD_Header;
 
-const char *    XEOS_InitRD_EntryGetFilename( XEOS_InitRD_EntryRef entry );
-uint32_t        XEOS_InitRD_EntryGetSize( XEOS_InitRD_EntryRef entry );
-uint32_t        XEOS_InitRD_EntryGetOffset( XEOS_InitRD_EntryRef entry );
+typedef struct
+{
+    char        filename[ INITRD_FILENAME_MAXLENGTH + 1 ];
+    uint32_t    size;
+    uint32_t    offset;
+}
+InitRD_Entry;
+
+void            mkinitrd_help( void );
+const char    * mkinitrd_filename( const char * path );
+uint32_t        mkinitrd_filesize( FILE * fp );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_INITRD_H__ */
+#endif /* __TOOLS_MKINITRD_H__ */

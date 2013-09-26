@@ -61,32 +61,25 @@
 
 /* $Id$ */
 
-/*!
- * @header          initrd.h
- * @author          Jean-David Gadina
- * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
- */
+#include "include/mkinitrd.h"
 
-#ifndef __XEOS_INITRD_H__
-#define __XEOS_INITRD_H__
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <system/types/uint32_t.h>
-
-typedef struct __XEOS_InitRD       * XEOS_InitRDRef;
-typedef struct __XEOS_InitRD_Entry * XEOS_InitRD_EntryRef;
-
-uint32_t XEOS_InitRDGetEntryCount( XEOS_InitRDRef initrd );
-
-const char *    XEOS_InitRD_EntryGetFilename( XEOS_InitRD_EntryRef entry );
-uint32_t        XEOS_InitRD_EntryGetSize( XEOS_InitRD_EntryRef entry );
-uint32_t        XEOS_InitRD_EntryGetOffset( XEOS_InitRD_EntryRef entry );
-
-#ifdef __cplusplus
+void mkinitrd_help( void )
+{
+    printf
+    (
+        "mkinitrd - XEOS Initial RAM Disk Creator\n"
+        "Copyright (c) 2010-2013, Jean-David Gadina - www.xs-labs.com\n"
+        "\n"
+        "Usage: mkinitrd OPTIONS FILES\n"
+        "\n"
+        "Options:\n"
+        "\n"
+        "    -o    Output file path\n"
+        "    -v    Verbose mode\n"
+        "    -h    Prints this help message\n"
+        "\n"
+        "Example:\n"
+        "\n"
+        "    mkinitrd -o initrd.bin file1.bin file2.bin file3.bin\n"
+     );
 }
-#endif
-
-#endif /* __XEOS_INITRD_H__ */

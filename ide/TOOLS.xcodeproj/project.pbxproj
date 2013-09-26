@@ -10,6 +10,10 @@
 		05A05A7017F4B8380084DCB3 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../tools/Makefile; sourceTree = "<group>"; };
 		05A05A7217F4B8380084DCB3 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		05A05A7317F4B8380084DCB3 /* mkinitrd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mkinitrd.c; sourceTree = "<group>"; };
+		05A05A7417F4C1AC0084DCB3 /* mkinitrd_help.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mkinitrd_help.c; sourceTree = "<group>"; };
+		05A05A7617F4C1C60084DCB3 /* mkinitrd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mkinitrd.h; sourceTree = "<group>"; };
+		05A05A7717F4CD2A0084DCB3 /* mkinitrd_filename.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mkinitrd_filename.c; sourceTree = "<group>"; };
+		05A05A7817F4D1560084DCB3 /* mkinitrd_filesize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mkinitrd_filesize.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -24,11 +28,23 @@
 		05A05A7117F4B8380084DCB3 /* mkinitrd */ = {
 			isa = PBXGroup;
 			children = (
+				05A05A7517F4C1C60084DCB3 /* include */,
 				05A05A7217F4B8380084DCB3 /* Makefile */,
 				05A05A7317F4B8380084DCB3 /* mkinitrd.c */,
+				05A05A7417F4C1AC0084DCB3 /* mkinitrd_help.c */,
+				05A05A7717F4CD2A0084DCB3 /* mkinitrd_filename.c */,
+				05A05A7817F4D1560084DCB3 /* mkinitrd_filesize.c */,
 			);
 			name = mkinitrd;
 			path = ../tools/mkinitrd;
+			sourceTree = "<group>";
+		};
+		05A05A7517F4C1C60084DCB3 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05A05A7617F4C1C60084DCB3 /* mkinitrd.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
