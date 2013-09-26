@@ -297,6 +297,12 @@
 		05A05A5417F4AC630084DCB3 /* XEOS_VFS_EntryGetFilename.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetFilename.c; sourceTree = "<group>"; };
 		05A05A5517F4AC630084DCB3 /* XEOS_VFS_EntryGetSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetSize.c; sourceTree = "<group>"; };
 		05A05A5617F4AC630084DCB3 /* XEOS_VFS_EntryGetUID.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetUID.c; sourceTree = "<group>"; };
+		05A05A5717F4AF910084DCB3 /* initrd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = initrd.h; sourceTree = "<group>"; };
+		05A05A5817F4AFA80084DCB3 /* initrd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = initrd.h; sourceTree = "<group>"; };
+		05A05A5A17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetFilename.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRD_EntryGetFilename.c; sourceTree = "<group>"; };
+		05A05A5B17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRD_EntryGetOffset.c; sourceTree = "<group>"; };
+		05A05A5C17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRD_EntryGetSize.c; sourceTree = "<group>"; };
+		05A05A5D17F4B17F0084DCB3 /* XEOS_InitRDGetEntryCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRDGetEntryCount.c; sourceTree = "<group>"; };
 		05B5BEB717E11FD7007C3335 /* XEOS_GUI_BitmapFontGetBitmapFont.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetBitmapFont.c; sourceTree = "<group>"; };
 		05B5BEB817E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphAtIndex.c; sourceTree = "<group>"; };
 		05B5BEB917E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphCount.c; sourceTree = "<group>"; };
@@ -374,6 +380,7 @@
 				055765E217DF8232000F7919 /* gui */,
 				0595BAA017AC11F90021435A /* hal */,
 				0595BB1517AC11F90021435A /* include */,
+				05A05A5917F4B17F0084DCB3 /* initrd */,
 				0595BB3D17AC11F90021435A /* info */,
 				0595BB4F17AC11FA0021435A /* irq */,
 				0595BB5817AC11FA0021435A /* isr */,
@@ -596,6 +603,7 @@
 				0595BB1F17AC11F90021435A /* hal */,
 				0595BB3217AC11F90021435A /* hal.h */,
 				0595BB3317AC11F90021435A /* info.h */,
+				05A05A5817F4AFA80084DCB3 /* initrd.h */,
 				0595BB3417AC11F90021435A /* irq.h */,
 				0595BB3517AC11F90021435A /* isr.h */,
 				0595BB3717AC11F90021435A /* mem.h */,
@@ -614,6 +622,7 @@
 			children = (
 				055765E917DFC874000F7919 /* gui.h */,
 				0595BB1817AC11F90021435A /* info.h */,
+				05A05A5717F4AF910084DCB3 /* initrd.h */,
 				0595BB1917AC11F90021435A /* irq.h */,
 				0595BB1A17AC11F90021435A /* mem.h */,
 				0595BB1B17AC11F90021435A /* proc.h */,
@@ -835,6 +844,17 @@
 				0595BBBB17AC11FA0021435A /* XEOS_VM_SystemMapInitialize.c */,
 			);
 			path = vm;
+			sourceTree = "<group>";
+		};
+		05A05A5917F4B17F0084DCB3 /* initrd */ = {
+			isa = PBXGroup;
+			children = (
+				05A05A5A17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetFilename.c */,
+				05A05A5B17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetOffset.c */,
+				05A05A5C17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetSize.c */,
+				05A05A5D17F4B17F0084DCB3 /* XEOS_InitRDGetEntryCount.c */,
+			);
+			path = initrd;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
