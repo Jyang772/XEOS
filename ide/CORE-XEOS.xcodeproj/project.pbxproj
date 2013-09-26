@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		053240AE17F41C6900FE3B41 /* vfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vfs.h; sourceTree = "<group>"; };
+		053240AF17F41C9A00FE3B41 /* vfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vfs.h; sourceTree = "<group>"; };
 		055765E117DF8225000F7919 /* gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui.h; sourceTree = "<group>"; };
 		055765E317DF83F8000F7919 /* __XEOS_GUI.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_GUI.c; sourceTree = "<group>"; };
 		055765E417DFC724000F7919 /* XEOS_GUI_GetPredefinedColor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_GetPredefinedColor.c; sourceTree = "<group>"; };
@@ -282,6 +284,19 @@
 		0595BBBD17AC11FA0021435A /* XEOS_Main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XEOS_Main.h; sourceTree = "<group>"; };
 		0595BBBE17AC11FA0021435A /* XEOS_Stub.32.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = XEOS_Stub.32.s; sourceTree = "<group>"; };
 		0595BBBF17AC11FA0021435A /* XEOS_Stub.64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = XEOS_Stub.64.s; sourceTree = "<group>"; };
+		05A05A4A17F4AC630084DCB3 /* XEOS_VFS_DriverGetName.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_DriverGetName.c; sourceTree = "<group>"; };
+		05A05A4B17F4AC630084DCB3 /* XEOS_VFS_DriverGetOpenFunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_DriverGetOpenFunc.c; sourceTree = "<group>"; };
+		05A05A4C17F4AC630084DCB3 /* XEOS_VFS_DriverGetReadFunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_DriverGetReadFunc.c; sourceTree = "<group>"; };
+		05A05A4D17F4AC630084DCB3 /* XEOS_VFS_DriverGetWriteFunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_DriverGetWriteFunc.c; sourceTree = "<group>"; };
+		05A05A4E17F4AC630084DCB3 /* XEOS_VFS_EntryGetATime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetATime.c; sourceTree = "<group>"; };
+		05A05A4F17F4AC630084DCB3 /* XEOS_VFS_EntryGetCTime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetCTime.c; sourceTree = "<group>"; };
+		05A05A5017F4AC630084DCB3 /* XEOS_VFS_EntryGetDriver.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetDriver.c; sourceTree = "<group>"; };
+		05A05A5117F4AC630084DCB3 /* XEOS_VFS_EntryGetGID.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetGID.c; sourceTree = "<group>"; };
+		05A05A5217F4AC630084DCB3 /* XEOS_VFS_EntryGetInode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetInode.c; sourceTree = "<group>"; };
+		05A05A5317F4AC630084DCB3 /* XEOS_VFS_EntryGetMTime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetMTime.c; sourceTree = "<group>"; };
+		05A05A5417F4AC630084DCB3 /* XEOS_VFS_EntryGetFilename.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetFilename.c; sourceTree = "<group>"; };
+		05A05A5517F4AC630084DCB3 /* XEOS_VFS_EntryGetSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetSize.c; sourceTree = "<group>"; };
+		05A05A5617F4AC630084DCB3 /* XEOS_VFS_EntryGetUID.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_VFS_EntryGetUID.c; sourceTree = "<group>"; };
 		05B5BEB717E11FD7007C3335 /* XEOS_GUI_BitmapFontGetBitmapFont.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetBitmapFont.c; sourceTree = "<group>"; };
 		05B5BEB817E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphAtIndex.c; sourceTree = "<group>"; };
 		05B5BEB917E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphCount.c; sourceTree = "<group>"; };
@@ -297,6 +312,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		053240AD17F41C5000FE3B41 /* vfs */ = {
+			isa = PBXGroup;
+			children = (
+				05A05A4A17F4AC630084DCB3 /* XEOS_VFS_DriverGetName.c */,
+				05A05A4B17F4AC630084DCB3 /* XEOS_VFS_DriverGetOpenFunc.c */,
+				05A05A4C17F4AC630084DCB3 /* XEOS_VFS_DriverGetReadFunc.c */,
+				05A05A4D17F4AC630084DCB3 /* XEOS_VFS_DriverGetWriteFunc.c */,
+				05A05A4E17F4AC630084DCB3 /* XEOS_VFS_EntryGetATime.c */,
+				05A05A4F17F4AC630084DCB3 /* XEOS_VFS_EntryGetCTime.c */,
+				05A05A5017F4AC630084DCB3 /* XEOS_VFS_EntryGetDriver.c */,
+				05A05A5117F4AC630084DCB3 /* XEOS_VFS_EntryGetGID.c */,
+				05A05A5217F4AC630084DCB3 /* XEOS_VFS_EntryGetInode.c */,
+				05A05A5317F4AC630084DCB3 /* XEOS_VFS_EntryGetMTime.c */,
+				05A05A5417F4AC630084DCB3 /* XEOS_VFS_EntryGetFilename.c */,
+				05A05A5517F4AC630084DCB3 /* XEOS_VFS_EntryGetSize.c */,
+				05A05A5617F4AC630084DCB3 /* XEOS_VFS_EntryGetUID.c */,
+			);
+			path = vfs;
+			sourceTree = "<group>";
+		};
 		055765E217DF8232000F7919 /* gui */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +382,7 @@
 				0595BB6E17AC11FA0021435A /* proc */,
 				0595BB7017AC11FA0021435A /* syscall */,
 				0595BB7317AC11FA0021435A /* system */,
+				053240AD17F41C5000FE3B41 /* vfs */,
 				0595BB7917AC11FA0021435A /* video */,
 				0595BB8C17AC11FA0021435A /* vm */,
 				0595BBBC17AC11FA0021435A /* XEOS_Main.c */,
@@ -566,6 +602,7 @@
 				0595BB3817AC11F90021435A /* proc.h */,
 				0595BB3917AC11F90021435A /* syscall.h */,
 				0595BB3A17AC11F90021435A /* system.h */,
+				053240AE17F41C6900FE3B41 /* vfs.h */,
 				0595BB3B17AC11F90021435A /* video.h */,
 				0595BB3C17AC11F90021435A /* vm.h */,
 			);
@@ -582,6 +619,7 @@
 				0595BB1B17AC11F90021435A /* proc.h */,
 				0595BB1C17AC11F90021435A /* system.h */,
 				0595BB1D17AC11F90021435A /* video.h */,
+				053240AF17F41C9A00FE3B41 /* vfs.h */,
 				0595BB1E17AC11F90021435A /* vm.h */,
 			);
 			path = __private;
