@@ -132,6 +132,7 @@ PATH_BUILD_TOOLS_LOCALEDEF              := $(PATH_BUILD_TOOLS)localedef/
 PATH_BUILD_BOOT                         := $(PATH_BUILD)boot/
 PATH_BUILD_BOOT_BIOS                    := $(PATH_BUILD_BOOT)bios/
 PATH_BUILD_BOOT_UEFI                    := $(PATH_BUILD_BOOT)uefi/
+PATH_BUILD_INITRD                       := $(PATH_BUILD)initrd/
 PATH_BUILD_TMP                          := $(PATH_BUILD)tmp/
 PATH_BUILD_MOUNT                        := $(PATH_BUILD)mount/
 PATH_BUILD_32                           := $(PATH_BUILD)$(TARGET_32)/

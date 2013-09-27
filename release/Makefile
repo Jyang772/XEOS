@@ -73,11 +73,20 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 
 MBR                 := $(PATH_BUILD_BOOT_BIOS)MBR.BIN
 BOOTLOADER          := $(PATH_BUILD_BOOT_BIOS)BOOT.BIN
+INITRD32            := $(PATH_BUILD_INITRD)INITRD32.IMG
+INITRD64            := $(PATH_BUILD_INITRD)INITRD64.IMG
 KERNEL32            := $(PATH_BUILD_32_CORE_BIN)XEOS32.ELF
 KERNEL64            := $(PATH_BUILD_64_CORE_BIN)XEOS64.ELF
 FLOPPY_DMG          := $(PATH_BUILD_TMP)boot.dmg
 FLOPPY_IMG          := $(PATH_RELEASE_CDROM)boot/boot.img
 CD_IMG              := $(PATH_RELEASE)XEOS.iso
+
+#-------------------------------------------------------------------------------
+# Modules for initrd
+#-------------------------------------------------------------------------------
+
+INITRD32_KMODS      := $(PATH_BUILD_32_MODULES_BIN)test.kmod
+INITRD64_KMODS      := $(subst $(PATH_BUILD_32_MODULES_BIN),$(PATH_BUILD_64_MODULES_BIN),$(INITRD32_KMODS))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -111,6 +120,16 @@ boot_floppy:
 	
 	@$(PRINT) $(PROMPT)"Copying the XEOS boot files"
 	@$(CP) $(BOOTLOADER) $(PATH_RELEASE_FLOPPY)
+	
+	@$(PRINT) $(PROMPT)"Generating the initial RAM disk files"
+	@$(PATH_BUILD_TOOLS_BIN)mkinitrd -o $(INITRD32) $(INITRD32_KMODS)
+	@$(PATH_BUILD_TOOLS_BIN)mkinitrd -o $(INITRD64) $(INITRD64_KMODS)
+	
+	@$(PRINT) $(PROMPT)"Copying the initial RAM disk files"
+	@$(CP) $(INITRD32) $(PATH_RELEASE_FLOPPY)
+	@$(CP) $(INITRD64) $(PATH_RELEASE_FLOPPY)
+	
+	@$(PRINT) $(PROMPT)"Copying the XEOS kernel"
 	@$(CP) $(KERNEL32) $(PATH_RELEASE_FLOPPY)
 	@$(CP) $(KERNEL64) $(PATH_RELEASE_FLOPPY)
 	
@@ -138,6 +157,7 @@ cdrom:
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all release files"
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_INITRD)*
 	@$(RM) $(ARGS_RM) $(FLOPPY_DMG)
 	@$(RM) $(ARGS_RM) $(FLOPPY_IMG)
 	@$(RM) $(ARGS_RM) $(PATH_RELEASE_FLOPPY)*
