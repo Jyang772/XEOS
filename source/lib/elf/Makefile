@@ -65,14 +65,7 @@ include ../../../Makefile-Config.mk
 # Display
 #-------------------------------------------------------------------------------
 
-PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" KMOD "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" TEST "$(COLOR_NONE)"]> *** "
-
-#-------------------------------------------------------------------------------
-# Software arguments
-#-------------------------------------------------------------------------------
-
-ARGS_LD_32          := -T ../linker.ld $(ARGS_LD_32)
-ARGS_LD_64          := -T ../linker.ld $(ARGS_LD_64)
+PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" SRC  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" LIB  "$(COLOR_NONE)"]> ["$(COLOR_GREEN)" ELF  "$(COLOR_NONE)"]> *** "
 
 #-------------------------------------------------------------------------------
 # Paths
@@ -85,22 +78,25 @@ ARGS_LD_64          := -T ../linker.ld $(ARGS_LD_64)
 #-------------------------------------------------------------------------------
 
 # Define the search paths for source files
-vpath %$(EXT_C)         $(PATH_SRC_MODULES_TEST)
+vpath %$(EXT_C)         $(PATH_SRC_LIB_ELF)
 
 #-------------------------------------------------------------------------------
 # File suffixes
 #-------------------------------------------------------------------------------
 
 # Adds the suffixes used in this file
-.SUFFIXES:  $(EXT_C)        \
+.SUFFIXES:  $(EXT_ASM_32)   \
+            $(EXT_ASM_64)   \
+            $(EXT_C)        \
             $(EXT_H)        \
-            $(EXT_OBJ)
+            $(EXT_OBJ)      \
+            $(EXT_BIN)
 
 #-------------------------------------------------------------------------------
 # Files
 #-------------------------------------------------------------------------------
 
-_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_MODULES_OBJ_TEST),$(PATH_SRC_MODULES_TEST))
+_FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(PATH_SRC_LIB_ELF))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -117,14 +113,25 @@ _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_MODULES
 # Build the full project
 all:    $(_FILES_C_OBJ_BUILD)
 	
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the kernel module file"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"test$(EXT_KMOD)"$(COLOR_NONE)
-	@$(LD_32) $(ARGS_LD_32) -r -o $(PATH_BUILD_32_MODULES_BIN)test$(EXT_KMOD) $(PATH_BUILD_32_MODULES_OBJ_TEST)*$(EXT_OBJ)
-	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the kernel module file"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"test$(EXT_KMOD)"$(COLOR_NONE)
-	@$(LD_64) $(ARGS_LD_64) -r -o $(PATH_BUILD_64_MODULES_BIN)test$(EXT_KMOD) $(PATH_BUILD_64_MODULES_OBJ_TEST)*$(EXT_OBJ)
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libelf.a"$(COLOR_NONE)
+	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libelf.a $(PATH_BUILD_32_LIB_OBJ_ELF)*$(EXT_OBJ)
+	@$(RANLIB_32) $(PATH_BUILD_32_LIB_BIN)libelf.a
+	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libelf.a"$(COLOR_NONE)
+	@$(AR_64) $(ARGS_AR_64) $(PATH_BUILD_64_LIB_BIN)libelf.a $(PATH_BUILD_64_LIB_OBJ_ELF)*$(EXT_OBJ)
+	@$(RANLIB_64) $(PATH_BUILD_64_LIB_BIN)libelf.a
+	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libelf.so"$(COLOR_NONE)
+	@$(LD_32) $(ARGS_LD_SHARED_32) -o $(PATH_BUILD_32_LIB_BIN)libelf.so $(PATH_BUILD_32_LIB_OBJ_ELF)*$(EXT_OBJ_PIC)
+	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the dynamic library"$(COLOR_NONE)" [ 64 bits ]: "$(COLOR_GRAY)"libelf.so"$(COLOR_NONE)
+	@$(LD_64) $(ARGS_LD_SHARED_64) -o $(PATH_BUILD_64_LIB_BIN)libelf.so $(PATH_BUILD_64_LIB_OBJ_ELF)*$(EXT_OBJ_PIC)
 
 # Cleans the build files
 clean:
 	
 	@$(PRINT) $(PROMPT)"Cleaning all build files"
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_MODULES_OBJ_TEST)*
-	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_MODULES_OBJ_TEST)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_OBJ_ELF)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_OBJ_ELF)*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_32_LIB_BIN)libelf.*
+	@$(RM) $(ARGS_RM) $(PATH_BUILD_64_LIB_BIN)libelf.*

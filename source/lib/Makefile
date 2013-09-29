@@ -108,6 +108,9 @@ all:
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS Objective-C library"$(COLOR_NONE)
 	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE)
 	
+	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Building the XEOS ELF library"$(COLOR_NONE)
+	@$(CD) $(PATH_SRC_LIB_ELF) && $(MAKE)
+	
 # Cleans the build files
 clean:
 	
@@ -120,3 +123,4 @@ clean:
 	@$(CD) $(PATH_SRC_LIB_BLOCKS) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_DISPATCH) && $(MAKE) clean
 	@$(CD) $(PATH_SRC_LIB_OBJC) && $(MAKE) clean
+	@$(CD) $(PATH_SRC_LIB_ELF) && $(MAKE) clean

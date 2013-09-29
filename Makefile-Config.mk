@@ -175,6 +175,8 @@ PATH_BUILD_32_LIB_OBJ_DISPATCH          := $(PATH_BUILD_32_LIB_OBJ)dispatch/
 PATH_BUILD_64_LIB_OBJ_DISPATCH          := $(PATH_BUILD_64_LIB_OBJ)dispatch/
 PATH_BUILD_32_LIB_OBJ_OBJC              := $(PATH_BUILD_32_LIB_OBJ)objc/
 PATH_BUILD_64_LIB_OBJ_OBJC              := $(PATH_BUILD_64_LIB_OBJ)objc/
+PATH_BUILD_32_LIB_OBJ_ELF               := $(PATH_BUILD_32_LIB_OBJ)elf/
+PATH_BUILD_64_LIB_OBJ_ELF               := $(PATH_BUILD_64_LIB_OBJ)elf/
 PATH_BUILD_32_MODULES                   := $(PATH_BUILD_32)modules/
 PATH_BUILD_64_MODULES                   := $(PATH_BUILD_64)modules/
 PATH_BUILD_32_MODULES_BIN               := $(PATH_BUILD_32_MODULES)bin/
@@ -203,6 +205,7 @@ PATH_SRC_LIB_ICONV                      := $(PATH_SRC_LIB)iconv/
 PATH_SRC_LIB_BLOCKS                     := $(PATH_SRC_LIB)blocks/
 PATH_SRC_LIB_DISPATCH                   := $(PATH_SRC_LIB)dispatch/
 PATH_SRC_LIB_OBJC                       := $(PATH_SRC_LIB)objc/
+PATH_SRC_LIB_ELF                        := $(PATH_SRC_LIB)elf/
 PATH_SRC_MODULES                        := $(PATH_SRC)modules/
 PATH_SRC_MODULES_TEST                   := $(PATH_SRC_MODULES)test/
 
