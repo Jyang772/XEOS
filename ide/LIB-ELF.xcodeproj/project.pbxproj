@@ -1,0 +1,119 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05265D48189D00F900DC7291 /* elf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = elf.h; sourceTree = "<group>"; };
+		05265D49189D00F900DC7291 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/elf/Makefile; sourceTree = "<group>"; };
+		05265D4A189D013A00DC7291 /* dummy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dummy.c; path = ../source/lib/elf/dummy.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		05265D46189D00F900DC7291 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05265D47189D00F900DC7291 /* elf */,
+				05265D48189D00F900DC7291 /* elf.h */,
+			);
+			name = include;
+			path = ../source/lib/elf/include;
+			sourceTree = "<group>";
+		};
+		05265D47189D00F900DC7291 /* elf */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = elf;
+			sourceTree = "<group>";
+		};
+		0595BA7A17AC11A70021435A = {
+			isa = PBXGroup;
+			children = (
+				05265D4A189D013A00DC7291 /* dummy.c */,
+				05265D46189D00F900DC7291 /* include */,
+				05265D49189D00F900DC7291 /* Makefile */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		0595BA7F17AC11A70021435A /* LIB-ELF */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-ELF" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../source/lib/elf;
+			dependencies = (
+			);
+			name = "LIB-ELF";
+			passBuildSettingsInEnvironment = 1;
+			productName = "LIB-PTHREAD";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		0595BA7B17AC11A70021435A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "XS-Labs";
+			};
+			buildConfigurationList = 0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-ELF" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0595BA7A17AC11A70021435A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0595BA7F17AC11A70021435A /* LIB-ELF */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0595BA8117AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0595BA8417AC11A70021435A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0595BA7E17AC11A70021435A /* Build configuration list for PBXProject "LIB-ELF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8117AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0595BA8217AC11A70021435A /* Build configuration list for PBXLegacyTarget "LIB-ELF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0595BA8417AC11A70021435A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0595BA7B17AC11A70021435A /* Project object */;
+}
