@@ -264,22 +264,22 @@ CC_64                                   := $(CC)
 # Archiver
 
 AR_MACHO_32                             := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ar
-AR_MACHO_64                             := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ar
+AR_MACHO_64                             := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_MACHO)/bin/ar
 AR_ELF_32                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ar
-AR_ELF_64                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ar
+AR_ELF_64                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_ELF)/bin/ar
 AR_EFI_32                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ar
-AR_EFI_64                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ar
+AR_EFI_64                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_EFI)/bin/ar
 AR_32                                   := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ar
-AR_64                                   := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ar
+AR_64                                   := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE)/bin/ar
 
 RANLIB_MACHO_32                         := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ranlib
-RANLIB_MACHO_64                         := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_MACHO)/bin/ranlib
+RANLIB_MACHO_64                         := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_MACHO)/bin/ranlib
 RANLIB_ELF_32                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ranlib
-RANLIB_ELF_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_ELF)/bin/ranlib
+RANLIB_ELF_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_ELF)/bin/ranlib
 RANLIB_EFI_32                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ranlib
-RANLIB_EFI_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE_EFI)/bin/ranlib
+RANLIB_EFI_64                           := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE_EFI)/bin/ranlib
 RANLIB_32                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ranlib
-RANLIB_64                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_32_TRIPLE)/bin/ranlib
+RANLIB_64                               := $(PATH_TOOLCHAIN_BINUTILS)$(TARGET_64_TRIPLE)/bin/ranlib
 
 # Static analyzer
 
@@ -317,7 +317,8 @@ ARGS_CC_WARN                            := -Weverything -Werror
 ARGS_CC_STD                             := -std=c99
 ARGS_CC_CONST                           := -D __XEOS__ -D _POSIX_C_SOURCE=200809L -U __FreeBSD__ -U __FreeBSD_kernel__
 ARGS_CC_INC                             := -I $(PATH_SRC_INC)
-ARGS_CC_MISC                            := -Os -nostdlib -nostdinc -fno-builtin -fblocks
+ARGS_CC_MISC                            := -Os -fno-strict-aliasing -nostdlib -nostdinc -fno-builtin -fblocks
+ARGS_CC_PROFILE                         := -finstrument-functions
 ARGS_CC_PIC                             := -fPIC
 
 ARGS_CC_TARGET_MACHO_32                 := -march=$(TARGET_32_MARCH_MACHO) -target $(TARGET_32_TRIPLE_MACHO)
@@ -329,21 +330,21 @@ ARGS_CC_TARGET_EFI_64                   := -march=$(TARGET_64_MARCH_EFI) -target
 ARGS_CC_TARGET_32                       := -march=$(TARGET_32_MARCH) -target $(TARGET_32_TRIPLE)
 ARGS_CC_TARGET_64                       := -march=$(TARGET_64_MARCH) -target $(TARGET_64_TRIPLE)
 
-ARGS_CC_MACHO_32                        := $(ARGS_CC_TARGET_MACHO_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
-ARGS_CC_MACHO_64                        := $(ARGS_CC_TARGET_MACHO_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
-ARGS_CC_ELF_32                          := $(ARGS_CC_TARGET_ELF_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
-ARGS_CC_ELF_64                          := $(ARGS_CC_TARGET_ELF_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
-ARGS_CC_EFI_32                          := $(ARGS_CC_TARGET_EFI_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
-ARGS_CC_EFI_64                          := $(ARGS_CC_TARGET_EFI_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
-ARGS_CC_32                              := $(ARGS_CC_TARGET_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
-ARGS_CC_64                              := $(ARGS_CC_TARGET_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST)
+ARGS_CC_MACHO_32                        := $(ARGS_CC_TARGET_MACHO_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
+ARGS_CC_MACHO_64                        := $(ARGS_CC_TARGET_MACHO_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
+ARGS_CC_ELF_32                          := $(ARGS_CC_TARGET_ELF_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
+ARGS_CC_ELF_64                          := $(ARGS_CC_TARGET_ELF_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
+ARGS_CC_EFI_32                          := $(ARGS_CC_TARGET_EFI_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
+ARGS_CC_EFI_64                          := $(ARGS_CC_TARGET_EFI_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
+ARGS_CC_32                              := $(ARGS_CC_TARGET_32) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
+ARGS_CC_64                              := $(ARGS_CC_TARGET_64) $(ARGS_CC_MISC) $(ARGS_CC_INC) $(ARGS_CC_STD) $(ARGS_CC_WARN) $(ARGS_CC_CONST) $(ARGS_CC_PROFILE)
 
 # Linker flags
 
-ARGS_LD_32                              := -z max-page-size=0x1000 -s
-ARGS_LD_64                              := -z max-page-size=0x1000 -s
-ARGS_LD_SHARED_32                       := -z max-page-size=0x1000 -s --shared
-ARGS_LD_SHARED_64                       := -z max-page-size=0x1000 -s --shared
+ARGS_LD_32                              := -z max-page-size=0x1000
+ARGS_LD_64                              := -z max-page-size=0x1000
+ARGS_LD_SHARED_32                       := -z max-page-size=0x1000 --shared
+ARGS_LD_SHARED_64                       := -z max-page-size=0x1000 --shared
 
 # Archiver flags
 
