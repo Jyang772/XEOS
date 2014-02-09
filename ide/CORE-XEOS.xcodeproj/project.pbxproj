@@ -9,6 +9,8 @@
 /* Begin PBXFileReference section */
 		050364BC17F4E13F00FA2E4F /* XEOS_InitRDGetSignature.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRDGetSignature.c; sourceTree = "<group>"; };
 		050364BD17F4E14600FA2E4F /* XEOS_InitRDIsValid.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRDIsValid.c; sourceTree = "<group>"; };
+		05265D4C189E91FD00DC7291 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		05265D4E189E925600DC7291 /* __XEOS_Debug.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = __XEOS_Debug.c; sourceTree = "<group>"; };
 		053240AE17F41C6900FE3B41 /* vfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vfs.h; sourceTree = "<group>"; };
 		053240AF17F41C9A00FE3B41 /* vfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vfs.h; sourceTree = "<group>"; };
 		055765E117DF8225000F7919 /* gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui.h; sourceTree = "<group>"; };
@@ -305,6 +307,14 @@
 		05A05A5B17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRD_EntryGetOffset.c; sourceTree = "<group>"; };
 		05A05A5C17F4B17F0084DCB3 /* XEOS_InitRD_EntryGetSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRD_EntryGetSize.c; sourceTree = "<group>"; };
 		05A05A5D17F4B17F0084DCB3 /* XEOS_InitRDGetEntryCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_InitRDGetEntryCount.c; sourceTree = "<group>"; };
+		05AC472C189FC88E0075EB87 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		05AC472D189FCB360075EB87 /* XEOS_Debug_TraceGetSymbolCount.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Debug_TraceGetSymbolCount.c; sourceTree = "<group>"; };
+		05AC472E189FCB4B0075EB87 /* XEOS_Debug_GetKernelTrace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Debug_GetKernelTrace.c; sourceTree = "<group>"; };
+		05AC472F189FCB540075EB87 /* XEOS_Debug_TraceGetSymbolAtIndex.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Debug_TraceGetSymbolAtIndex.c; sourceTree = "<group>"; };
+		05AC4730189FCB5C0075EB87 /* XEOS_Debug_SymbolGetFunctionAddress.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Debug_SymbolGetFunctionAddress.c; sourceTree = "<group>"; };
+		05AC4731189FCB630075EB87 /* XEOS_Debug_SymbolGetCallSiteAddress.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Debug_SymbolGetCallSiteAddress.c; sourceTree = "<group>"; };
+		05AC4732189FCB6E0075EB87 /* XEOS_Debug_SymbolGetFunctionName.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Debug_SymbolGetFunctionName.c; sourceTree = "<group>"; };
+		05AC4733189FCB770075EB87 /* XEOS_Debug_SymbolGetCallSiteFunctionName.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XEOS_Debug_SymbolGetCallSiteFunctionName.c; sourceTree = "<group>"; };
 		05B5BEB717E11FD7007C3335 /* XEOS_GUI_BitmapFontGetBitmapFont.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetBitmapFont.c; sourceTree = "<group>"; };
 		05B5BEB817E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphAtIndex.c; sourceTree = "<group>"; };
 		05B5BEB917E11FD7007C3335 /* XEOS_GUI_BitmapFontGetGlyphCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XEOS_GUI_BitmapFontGetGlyphCount.c; sourceTree = "<group>"; };
@@ -320,6 +330,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		05265D4D189E920900DC7291 /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				05265D4E189E925600DC7291 /* __XEOS_Debug.c */,
+				05AC472E189FCB4B0075EB87 /* XEOS_Debug_GetKernelTrace.c */,
+				05AC472D189FCB360075EB87 /* XEOS_Debug_TraceGetSymbolCount.c */,
+				05AC472F189FCB540075EB87 /* XEOS_Debug_TraceGetSymbolAtIndex.c */,
+				05AC4730189FCB5C0075EB87 /* XEOS_Debug_SymbolGetFunctionAddress.c */,
+				05AC4731189FCB630075EB87 /* XEOS_Debug_SymbolGetCallSiteAddress.c */,
+				05AC4732189FCB6E0075EB87 /* XEOS_Debug_SymbolGetFunctionName.c */,
+				05AC4733189FCB770075EB87 /* XEOS_Debug_SymbolGetCallSiteFunctionName.c */,
+			);
+			path = debug;
+			sourceTree = "<group>";
+		};
 		053240AD17F41C5000FE3B41 /* vfs */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +404,7 @@
 			children = (
 				0595BA9E17AC11F90021435A /* __XEOS_Main.c */,
 				0595BA9F17AC11F90021435A /* __XEOS_Main.h */,
+				05265D4D189E920900DC7291 /* debug */,
 				055765E217DF8232000F7919 /* gui */,
 				0595BAA017AC11F90021435A /* hal */,
 				0595BB1517AC11F90021435A /* include */,
@@ -601,6 +627,7 @@
 			isa = PBXGroup;
 			children = (
 				0595BB1717AC11F90021435A /* __private */,
+				05265D4C189E91FD00DC7291 /* debug.h */,
 				055765E117DF8225000F7919 /* gui.h */,
 				0595BB1F17AC11F90021435A /* hal */,
 				0595BB3217AC11F90021435A /* hal.h */,
@@ -622,6 +649,7 @@
 		0595BB1717AC11F90021435A /* __private */ = {
 			isa = PBXGroup;
 			children = (
+				05AC472C189FC88E0075EB87 /* debug.h */,
 				055765E917DFC874000F7919 /* gui.h */,
 				0595BB1817AC11F90021435A /* info.h */,
 				05A05A5717F4AF910084DCB3 /* initrd.h */,

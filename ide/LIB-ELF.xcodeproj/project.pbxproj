@@ -7,35 +7,249 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		05265D48189D00F900DC7291 /* elf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = elf.h; sourceTree = "<group>"; };
-		05265D49189D00F900DC7291 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/elf/Makefile; sourceTree = "<group>"; };
-		05265D4A189D013A00DC7291 /* dummy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dummy.c; path = ../source/lib/elf/dummy.c; sourceTree = "<group>"; };
+		05946CB518A7BEE800D2FD40 /* ELF64_FileGetDataForSection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetDataForSection.c; sourceTree = "<group>"; };
+		05946CB618A7BEE800D2FD40 /* ELF64_FileGetDataForSectionAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetDataForSectionAtIndex.c; sourceTree = "<group>"; };
+		05946CB718A7BEE800D2FD40 /* ELF64_FileGetHeader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetHeader.c; sourceTree = "<group>"; };
+		05946CB818A7BEE800D2FD40 /* ELF64_FileGetNameOfSection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetNameOfSection.c; sourceTree = "<group>"; };
+		05946CB918A7BEE800D2FD40 /* ELF64_FileGetNameOfSectionAtIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetNameOfSectionAtIndex.c; sourceTree = "<group>"; };
+		05946CBA18A7BEE800D2FD40 /* ELF64_FileGetProgramHeaderEntry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetProgramHeaderEntry.c; sourceTree = "<group>"; };
+		05946CBB18A7BEE800D2FD40 /* ELF64_FileGetSectionHeaderEntry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetSectionHeaderEntry.c; sourceTree = "<group>"; };
+		05946CBC18A7BEE800D2FD40 /* ELF64_FileGetSectionHeaderEntryWithName.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetSectionHeaderEntryWithName.c; sourceTree = "<group>"; };
+		05946CBD18A7BEE800D2FD40 /* ELF64_FileGetStringTableHeaderEntry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetStringTableHeaderEntry.c; sourceTree = "<group>"; };
+		05946CBE18A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryCountForSection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetSymbolTableEntryCountForSection.c; sourceTree = "<group>"; };
+		05946CBF18A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryForSection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetSymbolTableEntryForSection.c; sourceTree = "<group>"; };
+		05946CC018A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryNameForSection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetSymbolTableEntryNameForSection.c; sourceTree = "<group>"; };
+		05946CC118A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryWithAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetSymbolTableEntryWithAddress.c; sourceTree = "<group>"; };
+		05946CC218A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryWithName.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileGetSymbolTableEntryWithName.c; sourceTree = "<group>"; };
+		05946CC318A7BEE800D2FD40 /* ELF64_FileIsValid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_FileIsValid.c; sourceTree = "<group>"; };
+		05946CC518A7BEE800D2FD40 /* ELF64_Hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_Hash.c; sourceTree = "<group>"; };
+		05946CC618A7BEE800D2FD40 /* ELF64_ReadFromData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ReadFromData.c; sourceTree = "<group>"; };
+		05946CC818A7BEE800D2FD40 /* ELF64_HeaderGetDataEncoding.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetDataEncoding.c; sourceTree = "<group>"; };
+		05946CC918A7BEE800D2FD40 /* ELF64_HeaderGetDataEncodingString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetDataEncodingString.c; sourceTree = "<group>"; };
+		05946CCA18A7BEE800D2FD40 /* ELF64_HeaderGetEntryPointAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetEntryPointAddress.c; sourceTree = "<group>"; };
+		05946CCB18A7BEE800D2FD40 /* ELF64_HeaderGetFileVersion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetFileVersion.c; sourceTree = "<group>"; };
+		05946CCC18A7BEE800D2FD40 /* ELF64_HeaderGetHeaderSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetHeaderSize.c; sourceTree = "<group>"; };
+		05946CCD18A7BEE800D2FD40 /* ELF64_HeaderGetMachine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetMachine.c; sourceTree = "<group>"; };
+		05946CCE18A7BEE800D2FD40 /* ELF64_HeaderGetMachineType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetMachineType.c; sourceTree = "<group>"; };
+		05946CCF18A7BEE800D2FD40 /* ELF64_HeaderGetMachineTypeString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetMachineTypeString.c; sourceTree = "<group>"; };
+		05946CD018A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetObjectFileClass.c; sourceTree = "<group>"; };
+		05946CD118A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileClassString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetObjectFileClassString.c; sourceTree = "<group>"; };
+		05946CD218A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetObjectFileType.c; sourceTree = "<group>"; };
+		05946CD318A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileTypeString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetObjectFileTypeString.c; sourceTree = "<group>"; };
+		05946CD418A7BEE800D2FD40 /* ELF64_HeaderGetOSABI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetOSABI.c; sourceTree = "<group>"; };
+		05946CD518A7BEE800D2FD40 /* ELF64_HeaderGetOSABIString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetOSABIString.c; sourceTree = "<group>"; };
+		05946CD618A7BEE800D2FD40 /* ELF64_HeaderGetProcessorSpecificFlags.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetProcessorSpecificFlags.c; sourceTree = "<group>"; };
+		05946CD718A7BEE800D2FD40 /* ELF64_HeaderGetProgramHeaderEntryCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetProgramHeaderEntryCount.c; sourceTree = "<group>"; };
+		05946CD818A7BEE800D2FD40 /* ELF64_HeaderGetProgramHeaderEntrySize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetProgramHeaderEntrySize.c; sourceTree = "<group>"; };
+		05946CD918A7BEE800D2FD40 /* ELF64_HeaderGetProgramHeaderOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetProgramHeaderOffset.c; sourceTree = "<group>"; };
+		05946CDA18A7BEE800D2FD40 /* ELF64_HeaderGetSectionHeaderEntryCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetSectionHeaderEntryCount.c; sourceTree = "<group>"; };
+		05946CDB18A7BEE800D2FD40 /* ELF64_HeaderGetSectionHeaderEntrySize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetSectionHeaderEntrySize.c; sourceTree = "<group>"; };
+		05946CDC18A7BEE800D2FD40 /* ELF64_HeaderGetSectionHeaderOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetSectionHeaderOffset.c; sourceTree = "<group>"; };
+		05946CDD18A7BEE800D2FD40 /* ELF64_HeaderGetSectionNameStringTableIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetSectionNameStringTableIndex.c; sourceTree = "<group>"; };
+		05946CDE18A7BEE800D2FD40 /* ELF64_HeaderGetVersion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_HeaderGetVersion.c; sourceTree = "<group>"; };
+		05946CE218A7BEE800D2FD40 /* file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file.h; sourceTree = "<group>"; };
+		05946CE318A7BEE800D2FD40 /* functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
+		05946CE418A7BEE800D2FD40 /* header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
+		05946CE518A7BEE800D2FD40 /* pheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pheader.h; sourceTree = "<group>"; };
+		05946CE618A7BEE800D2FD40 /* sheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sheader.h; sourceTree = "<group>"; };
+		05946CE718A7BEE800D2FD40 /* symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = symbol.h; sourceTree = "<group>"; };
+		05946CE818A7BEE800D2FD40 /* elf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = elf.h; sourceTree = "<group>"; };
+		05946CE918A7BEE800D2FD40 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../source/lib/elf/Makefile; sourceTree = "<group>"; };
+		05946CEB18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetAlignment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetAlignment.c; sourceTree = "<group>"; };
+		05946CEC18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetAttributes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetAttributes.c; sourceTree = "<group>"; };
+		05946CED18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetAttributesString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetAttributesString.c; sourceTree = "<group>"; };
+		05946CEE18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetFileOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetFileOffset.c; sourceTree = "<group>"; };
+		05946CEF18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetFileSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetFileSize.c; sourceTree = "<group>"; };
+		05946CF018A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetMemorySize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetMemorySize.c; sourceTree = "<group>"; };
+		05946CF118A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetMemoryVirtualAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetMemoryVirtualAddress.c; sourceTree = "<group>"; };
+		05946CF218A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetType.c; sourceTree = "<group>"; };
+		05946CF318A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetTypeString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_ProgramHeaderEntryGetTypeString.c; sourceTree = "<group>"; };
+		05946CF518A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetAddressAlignmentBoundary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetAddressAlignmentBoundary.c; sourceTree = "<group>"; };
+		05946CF618A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetAttributes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetAttributes.c; sourceTree = "<group>"; };
+		05946CF718A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetAttributesString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetAttributesString.c; sourceTree = "<group>"; };
+		05946CF818A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetEntrySize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetEntrySize.c; sourceTree = "<group>"; };
+		05946CF918A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetFileOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetFileOffset.c; sourceTree = "<group>"; };
+		05946CFA18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetLinkedSectionIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetLinkedSectionIndex.c; sourceTree = "<group>"; };
+		05946CFB18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetMemoryVirtualAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetMemoryVirtualAddress.c; sourceTree = "<group>"; };
+		05946CFC18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetMiscInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetMiscInfo.c; sourceTree = "<group>"; };
+		05946CFD18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetNameOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetNameOffset.c; sourceTree = "<group>"; };
+		05946CFE18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetSectionSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetSectionSize.c; sourceTree = "<group>"; };
+		05946CFF18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetSymbolTableEntryCount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetSymbolTableEntryCount.c; sourceTree = "<group>"; };
+		05946D0018A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetType.c; sourceTree = "<group>"; };
+		05946D0118A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetTypeString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SectionHeaderEntryGetTypeString.c; sourceTree = "<group>"; };
+		05946D0318A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetBinding.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetBinding.c; sourceTree = "<group>"; };
+		05946D0418A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetBindingString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetBindingString.c; sourceTree = "<group>"; };
+		05946D0518A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetInfo.c; sourceTree = "<group>"; };
+		05946D0618A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetNameOffset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetNameOffset.c; sourceTree = "<group>"; };
+		05946D0718A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetObjectSize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetObjectSize.c; sourceTree = "<group>"; };
+		05946D0818A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetSectionTableIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetSectionTableIndex.c; sourceTree = "<group>"; };
+		05946D0918A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetSymbolValue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetSymbolValue.c; sourceTree = "<group>"; };
+		05946D0A18A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetType.c; sourceTree = "<group>"; };
+		05946D0B18A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetTypeString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ELF64_SymbolTableEntryGetTypeString.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		05265D46189D00F900DC7291 /* include */ = {
+		05946CB418A7BEE800D2FD40 /* file */ = {
 			isa = PBXGroup;
 			children = (
-				05265D47189D00F900DC7291 /* elf */,
-				05265D48189D00F900DC7291 /* elf.h */,
+				05946CB518A7BEE800D2FD40 /* ELF64_FileGetDataForSection.c */,
+				05946CB618A7BEE800D2FD40 /* ELF64_FileGetDataForSectionAtIndex.c */,
+				05946CB718A7BEE800D2FD40 /* ELF64_FileGetHeader.c */,
+				05946CB818A7BEE800D2FD40 /* ELF64_FileGetNameOfSection.c */,
+				05946CB918A7BEE800D2FD40 /* ELF64_FileGetNameOfSectionAtIndex.c */,
+				05946CBA18A7BEE800D2FD40 /* ELF64_FileGetProgramHeaderEntry.c */,
+				05946CBB18A7BEE800D2FD40 /* ELF64_FileGetSectionHeaderEntry.c */,
+				05946CBC18A7BEE800D2FD40 /* ELF64_FileGetSectionHeaderEntryWithName.c */,
+				05946CBD18A7BEE800D2FD40 /* ELF64_FileGetStringTableHeaderEntry.c */,
+				05946CBE18A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryCountForSection.c */,
+				05946CBF18A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryForSection.c */,
+				05946CC018A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryNameForSection.c */,
+				05946CC118A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryWithAddress.c */,
+				05946CC218A7BEE800D2FD40 /* ELF64_FileGetSymbolTableEntryWithName.c */,
+				05946CC318A7BEE800D2FD40 /* ELF64_FileIsValid.c */,
+			);
+			name = file;
+			path = ../source/lib/elf/file;
+			sourceTree = "<group>";
+		};
+		05946CC418A7BEE800D2FD40 /* functions */ = {
+			isa = PBXGroup;
+			children = (
+				05946CC518A7BEE800D2FD40 /* ELF64_Hash.c */,
+				05946CC618A7BEE800D2FD40 /* ELF64_ReadFromData.c */,
+			);
+			name = functions;
+			path = ../source/lib/elf/functions;
+			sourceTree = "<group>";
+		};
+		05946CC718A7BEE800D2FD40 /* header */ = {
+			isa = PBXGroup;
+			children = (
+				05946CC818A7BEE800D2FD40 /* ELF64_HeaderGetDataEncoding.c */,
+				05946CC918A7BEE800D2FD40 /* ELF64_HeaderGetDataEncodingString.c */,
+				05946CCA18A7BEE800D2FD40 /* ELF64_HeaderGetEntryPointAddress.c */,
+				05946CCB18A7BEE800D2FD40 /* ELF64_HeaderGetFileVersion.c */,
+				05946CCC18A7BEE800D2FD40 /* ELF64_HeaderGetHeaderSize.c */,
+				05946CCD18A7BEE800D2FD40 /* ELF64_HeaderGetMachine.c */,
+				05946CCE18A7BEE800D2FD40 /* ELF64_HeaderGetMachineType.c */,
+				05946CCF18A7BEE800D2FD40 /* ELF64_HeaderGetMachineTypeString.c */,
+				05946CD018A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileClass.c */,
+				05946CD118A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileClassString.c */,
+				05946CD218A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileType.c */,
+				05946CD318A7BEE800D2FD40 /* ELF64_HeaderGetObjectFileTypeString.c */,
+				05946CD418A7BEE800D2FD40 /* ELF64_HeaderGetOSABI.c */,
+				05946CD518A7BEE800D2FD40 /* ELF64_HeaderGetOSABIString.c */,
+				05946CD618A7BEE800D2FD40 /* ELF64_HeaderGetProcessorSpecificFlags.c */,
+				05946CD718A7BEE800D2FD40 /* ELF64_HeaderGetProgramHeaderEntryCount.c */,
+				05946CD818A7BEE800D2FD40 /* ELF64_HeaderGetProgramHeaderEntrySize.c */,
+				05946CD918A7BEE800D2FD40 /* ELF64_HeaderGetProgramHeaderOffset.c */,
+				05946CDA18A7BEE800D2FD40 /* ELF64_HeaderGetSectionHeaderEntryCount.c */,
+				05946CDB18A7BEE800D2FD40 /* ELF64_HeaderGetSectionHeaderEntrySize.c */,
+				05946CDC18A7BEE800D2FD40 /* ELF64_HeaderGetSectionHeaderOffset.c */,
+				05946CDD18A7BEE800D2FD40 /* ELF64_HeaderGetSectionNameStringTableIndex.c */,
+				05946CDE18A7BEE800D2FD40 /* ELF64_HeaderGetVersion.c */,
+			);
+			name = header;
+			path = ../source/lib/elf/header;
+			sourceTree = "<group>";
+		};
+		05946CDF18A7BEE800D2FD40 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05946CE018A7BEE800D2FD40 /* elf */,
+				05946CE818A7BEE800D2FD40 /* elf.h */,
 			);
 			name = include;
 			path = ../source/lib/elf/include;
 			sourceTree = "<group>";
 		};
-		05265D47189D00F900DC7291 /* elf */ = {
+		05946CE018A7BEE800D2FD40 /* elf */ = {
+			isa = PBXGroup;
+			children = (
+				05946CE118A7BEE800D2FD40 /* __private */,
+				05946CE218A7BEE800D2FD40 /* file.h */,
+				05946CE318A7BEE800D2FD40 /* functions.h */,
+				05946CE418A7BEE800D2FD40 /* header.h */,
+				05946CE518A7BEE800D2FD40 /* pheader.h */,
+				05946CE618A7BEE800D2FD40 /* sheader.h */,
+				05946CE718A7BEE800D2FD40 /* symbol.h */,
+			);
+			path = elf;
+			sourceTree = "<group>";
+		};
+		05946CE118A7BEE800D2FD40 /* __private */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = elf;
+			path = __private;
+			sourceTree = "<group>";
+		};
+		05946CEA18A7BEE800D2FD40 /* pheader */ = {
+			isa = PBXGroup;
+			children = (
+				05946CEB18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetAlignment.c */,
+				05946CEC18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetAttributes.c */,
+				05946CED18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetAttributesString.c */,
+				05946CEE18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetFileOffset.c */,
+				05946CEF18A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetFileSize.c */,
+				05946CF018A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetMemorySize.c */,
+				05946CF118A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetMemoryVirtualAddress.c */,
+				05946CF218A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetType.c */,
+				05946CF318A7BEE800D2FD40 /* ELF64_ProgramHeaderEntryGetTypeString.c */,
+			);
+			name = pheader;
+			path = ../source/lib/elf/pheader;
+			sourceTree = "<group>";
+		};
+		05946CF418A7BEE800D2FD40 /* sheader */ = {
+			isa = PBXGroup;
+			children = (
+				05946CF518A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetAddressAlignmentBoundary.c */,
+				05946CF618A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetAttributes.c */,
+				05946CF718A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetAttributesString.c */,
+				05946CF818A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetEntrySize.c */,
+				05946CF918A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetFileOffset.c */,
+				05946CFA18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetLinkedSectionIndex.c */,
+				05946CFB18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetMemoryVirtualAddress.c */,
+				05946CFC18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetMiscInfo.c */,
+				05946CFD18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetNameOffset.c */,
+				05946CFE18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetSectionSize.c */,
+				05946CFF18A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetSymbolTableEntryCount.c */,
+				05946D0018A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetType.c */,
+				05946D0118A7BEE800D2FD40 /* ELF64_SectionHeaderEntryGetTypeString.c */,
+			);
+			name = sheader;
+			path = ../source/lib/elf/sheader;
+			sourceTree = "<group>";
+		};
+		05946D0218A7BEE800D2FD40 /* symbol */ = {
+			isa = PBXGroup;
+			children = (
+				05946D0318A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetBinding.c */,
+				05946D0418A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetBindingString.c */,
+				05946D0518A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetInfo.c */,
+				05946D0618A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetNameOffset.c */,
+				05946D0718A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetObjectSize.c */,
+				05946D0818A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetSectionTableIndex.c */,
+				05946D0918A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetSymbolValue.c */,
+				05946D0A18A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetType.c */,
+				05946D0B18A7BEE800D2FD40 /* ELF64_SymbolTableEntryGetTypeString.c */,
+			);
+			name = symbol;
+			path = ../source/lib/elf/symbol;
 			sourceTree = "<group>";
 		};
 		0595BA7A17AC11A70021435A = {
 			isa = PBXGroup;
 			children = (
-				05265D4A189D013A00DC7291 /* dummy.c */,
-				05265D46189D00F900DC7291 /* include */,
-				05265D49189D00F900DC7291 /* Makefile */,
+				05946CB418A7BEE800D2FD40 /* file */,
+				05946CC418A7BEE800D2FD40 /* functions */,
+				05946CC718A7BEE800D2FD40 /* header */,
+				05946CDF18A7BEE800D2FD40 /* include */,
+				05946CE918A7BEE800D2FD40 /* Makefile */,
+				05946CEA18A7BEE800D2FD40 /* pheader */,
+				05946CF418A7BEE800D2FD40 /* sheader */,
+				05946D0218A7BEE800D2FD40 /* symbol */,
 			);
 			sourceTree = "<group>";
 		};
