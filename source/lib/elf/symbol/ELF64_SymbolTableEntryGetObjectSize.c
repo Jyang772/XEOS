@@ -61,23 +61,16 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_XWord ELF64_SymbolTableEntryGetObjectSize( ELF64_SymbolTableEntryRef sym )
+{
+    if( sym == NULL )
+    {
+        return 0;
+    }
+    
+    return sym->st_size;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

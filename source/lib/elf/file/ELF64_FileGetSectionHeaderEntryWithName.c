@@ -61,23 +61,40 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
+#include <string.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_SectionHeaderEntryRef ELF64_FileGetSectionHeaderEntryWithName( ELF64_FileRef file, const char * name )
+{
+    ELF64_Half                  i;
+    ELF64_HeaderRef             header;
+    ELF64_SectionHeaderEntryRef section;
+    const char                * sName;
+    
+    if( file == NULL )
+    {
+        return NULL;
+    }
+    
+    header = ELF64_FileGetHeader( file );
+    
+    if( header == NULL )
+    {
+        return NULL;
+    }
+    
+    for( i = 0; i < ELF64_HeaderGetSectionHeaderEntryCount( header ); i++ )
+    {
+        section = ELF64_FileGetSectionHeaderEntry( file, i );
+        sName   = ELF64_FileGetNameOfSection( file, section );
+        
+        if( strcmp( name, sName ) == 0 )
+        {
+            return section;
+        }
+    }
+    
+    return NULL;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

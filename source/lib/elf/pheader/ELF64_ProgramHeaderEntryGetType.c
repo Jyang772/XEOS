@@ -61,23 +61,27 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_SegmentType ELF64_ProgramHeaderEntryGetType( ELF64_ProgramHeaderEntryRef entry )
+{
+    if( entry == NULL )
+    {
+        return ELF64_SegmentTypeUnused;
+    }
+    
+    switch( entry->p_type )
+    {
+        case 0:     return ELF64_SegmentTypeUnused;
+        case 1:     return ELF64_SegmentTypeLoadable;
+        case 2:     return ELF64_SegmentTypeDynamicLinkingTables;
+        case 3:     return ELF64_SegmentTypeProgramInterpreterPathName;
+        case 4:     return ELF64_SegmentTypeNoteSections;
+        case 6:     return ELF64_SegmentTypeProgramHeaderTable;
+        default:    break;
+    }
+    
+    return ELF64_SegmentTypeUnused;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

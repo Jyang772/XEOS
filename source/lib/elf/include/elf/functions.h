@@ -61,23 +61,18 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#ifndef __XEOS_LIB_ELF_FUNCTIONS_H__
+#define __XEOS_LIB_ELF_FUNCTIONS_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+ELF64_FileRef   ELF64_ReadFromData( const char * data );
+unsigned long   ELF64_Hash( const char * name );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS_LIB_ELF_FUNCTIONS_H__ */

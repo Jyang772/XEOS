@@ -61,23 +61,80 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_MachineType ELF64_HeaderGetMachineType( ELF64_HeaderRef header )
+{
+    if( header == NULL )
+    {
+        return ELF64_MachineTypeUnknown;
+    }
+    
+    switch( ELF64_HeaderGetMachine( header ) )
+    {
+        case 0:     return ELF64_MachineTypeUnknown;
+        case 1:     return ELF64_MachineTypeM32;
+        case 2:     return ELF64_MachineTypeSPARC;
+        case 3:     return ELF64_MachineType386;
+        case 4:     return ELF64_MachineType68K;
+        case 5:     return ELF64_MachineType88K;
+        case 7:     return ELF64_MachineType860;
+        case 8:     return ELF64_MachineTypeMIPS;
+        case 9:     return ELF64_MachineTypeS370;
+        case 10:    return ELF64_MachineTypeMIPSRS3LE;
+        case 15:    return ELF64_MachineTypePARISC;
+        case 17:    return ELF64_MachineTypeVPP500;
+        case 18:    return ELF64_MachineTypeSPARC32Plus;
+        case 19:    return ELF64_MachineType960;
+        case 20:    return ELF64_MachineTypePPC;
+        case 21:    return ELF64_MachineTypePPC64;
+        case 36:    return ELF64_MachineTypeV800;
+        case 37:    return ELF64_MachineTypeFR20;
+        case 38:    return ELF64_MachineTypeRH32;
+        case 39:    return ELF64_MachineTypeRCE;
+        case 40:    return ELF64_MachineTypeARM;
+        case 41:    return ELF64_MachineTypeAlpha;
+        case 42:    return ELF64_MachineTypeSH;
+        case 43:    return ELF64_MachineTypeSPARCV9;
+        case 44:    return ELF64_MachineTypeTricore;
+        case 45:    return ELF64_MachineTypeARC;
+        case 46:    return ELF64_MachineTypeH8300;
+        case 47:    return ELF64_MachineTypeH8300H;
+        case 48:    return ELF64_MachineTypeH8S;
+        case 49:    return ELF64_MachineTypeH8500;
+        case 50:    return ELF64_MachineTypeIA64;
+        case 51:    return ELF64_MachineTypeMIPSX;
+        case 52:    return ELF64_MachineTypeColdFire;
+        case 53:    return ELF64_MachineType68HC12;
+        case 54:    return ELF64_MachineTypeMMA;
+        case 55:    return ELF64_MachineTypePCP;
+        case 56:    return ELF64_MachineTypeNCPU;
+        case 57:    return ELF64_MachineTypeNDR1;
+        case 58:    return ELF64_MachineTypeStarCore;
+        case 59:    return ELF64_MachineTypeME16;
+        case 60:    return ELF64_MachineTypeST100;
+        case 61:    return ELF64_MachineTypeTinyJ;
+        case 66:    return ELF64_MachineTypeFX66;
+        case 67:    return ELF64_MachineTypeST9Plus;
+        case 68:    return ELF64_MachineTypeST7;
+        case 69:    return ELF64_MachineType68HC16;
+        case 70:    return ELF64_MachineType68HC11;
+        case 71:    return ELF64_MachineType68HC08;
+        case 72:    return ELF64_MachineType68HC05;
+        case 73:    return ELF64_MachineTypeSVX;
+        case 74:    return ELF64_MachineTypeST19;
+        case 75:    return ELF64_MachineTypeVAX;
+        case 76:    return ELF64_MachineTypeCRIS;
+        case 77:    return ELF64_MachineTypeJavelin;
+        case 78:    return ELF64_MachineTypeFirePath;
+        case 79:    return ELF64_MachineTypeZSP;
+        case 80:    return ELF64_MachineTypeMMIX;
+        case 81:    return ELF64_MachineTypeHUANY;
+        case 82:    return ELF64_MachineTypePrism;
+        default:    break;
+    }
+    
+    return ELF64_MachineTypeUnknown;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

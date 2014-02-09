@@ -61,23 +61,17 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+/*!
+ * @file            XEOS_Debug_GetKernelTrace.c
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <xeos/debug.h>
+#include <xeos/__private/debug.h>
+#include <stdlib.h>
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+XEOS_Debug_TraceRef XEOS_Debug_GetKernelTrace( void )
+{
+    return &__XEOS_Debug_KernelTrace;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

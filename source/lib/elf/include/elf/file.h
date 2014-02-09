@@ -61,23 +61,30 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#ifndef __XEOS_LIB_ELF_FILE_H__
+#define __XEOS_LIB_ELF_FILE_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+bool                        ELF64_FileIsValid( ELF64_FileRef file );
+ELF64_HeaderRef             ELF64_FileGetHeader( ELF64_FileRef file );
+ELF64_ProgramHeaderEntryRef ELF64_FileGetProgramHeaderEntry( ELF64_FileRef file, unsigned int index );
+ELF64_SectionHeaderEntryRef ELF64_FileGetSectionHeaderEntry( ELF64_FileRef file, unsigned int index );
+const char                * ELF64_FileGetNameOfSection( ELF64_FileRef file, ELF64_SectionHeaderEntryRef section );
+const char                * ELF64_FileGetNameOfSectionAtIndex( ELF64_FileRef file, unsigned int index );
+ELF64_UChar               * ELF64_FileGetDataForSection( ELF64_FileRef file, ELF64_SectionHeaderEntryRef section );
+ELF64_UChar               * ELF64_FileGetDataForSectionAtIndex( ELF64_FileRef file, unsigned int index );
+ELF64_SymbolTableEntryRef   ELF64_FileGetSymbolTableEntryForSection( ELF64_FileRef file, ELF64_SectionHeaderEntryRef section, unsigned int index );
+const char                * ELF64_FileGetSymbolTableEntryNameForSection( ELF64_FileRef file, ELF64_SymbolTableEntryRef sym, ELF64_SectionHeaderEntryRef section );
+ELF64_SectionHeaderEntryRef ELF64_FileGetStringTableHeaderEntry( ELF64_FileRef file );
+ELF64_SectionHeaderEntryRef ELF64_FileGetSectionHeaderEntryWithName( ELF64_FileRef file, const char * name );
+ELF64_SymbolTableEntryRef   ELF64_FileGetSymbolTableEntryWithName( ELF64_FileRef file, const char * name );
+ELF64_SymbolTableEntryRef   ELF64_FileGetSymbolTableEntryWithAddress( ELF64_FileRef file, ELF64_Addr address );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS_LIB_ELF_FILE_H__ */

@@ -61,23 +61,43 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+/*!
+ * @header          debug.h
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
+
+#ifndef __XEOS___PRIVATE_PRIVATE_H__
+#define __XEOS___PRIVATE_PRIVATE_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+#include <xeos/debug.h>
+
+#define __XEOS_DEBUG_KERNEL_TRACE_MAX_LENGTH 50
+
+struct __XEOS_Debug_Trace
+{
+    struct __XEOS_Debug_Symbol * symbols;
+    unsigned int                 count;
+    unsigned int                 capacity;
+};
+
+struct __XEOS_Debug_Symbol
+{
+    void * function;
+    void * callSite;
+};
+
+extern struct __XEOS_Debug_Trace __XEOS_Debug_KernelTrace;
+
+void __cyg_profile_func_enter( void * function, void * caller ) __attribute__( ( no_instrument_function ) );
+void __cyg_profile_func_exit(  void * function, void * caller ) __attribute__( ( no_instrument_function ) );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS___PRIVATE_PRIVATE_H__ */

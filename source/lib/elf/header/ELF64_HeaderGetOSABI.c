@@ -61,23 +61,24 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_OSABI ELF64_HeaderGetOSABI( ELF64_HeaderRef header )
+{
+    if( header == NULL )
+    {
+        return ELF64_OSABIUnknown;
+    }
+    
+    switch( header->e_ident[ 8 ] )
+    {
+        case 0:     return ELF64_OSABISysV;
+        case 1:     return ELF64_OSABIHPUX;
+        case 255:   return ELF64_OSABIStandalone;
+        default:    break;
+    }
+    
+    return ELF64_OSABIUnknown;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

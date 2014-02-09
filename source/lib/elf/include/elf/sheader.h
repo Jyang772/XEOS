@@ -61,23 +61,29 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#ifndef __XEOS_LIB_ELF_SHEADER_H__
+#define __XEOS_LIB_ELF_SHEADER_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+ELF64_Word          ELF64_SectionHeaderEntryGetNameOffset( ELF64_SectionHeaderEntryRef entry );
+ELF64_SectionType   ELF64_SectionHeaderEntryGetType( ELF64_SectionHeaderEntryRef entry );
+const char        * ELF64_SectionHeaderEntryGetTypeString( ELF64_SectionHeaderEntryRef entry );
+ELF64_XWord         ELF64_SectionHeaderEntryGetAttributes( ELF64_SectionHeaderEntryRef entry );
+const char        * ELF64_SectionHeaderEntryGetAttributesString( ELF64_SectionHeaderEntryRef entry );
+ELF64_Addr          ELF64_SectionHeaderEntryGetMemoryVirtualAddress( ELF64_SectionHeaderEntryRef entry );
+ELF64_Off           ELF64_SectionHeaderEntryGetFileOffset( ELF64_SectionHeaderEntryRef entry );
+ELF64_XWord         ELF64_SectionHeaderEntryGetSectionSize( ELF64_SectionHeaderEntryRef entry );
+ELF64_Word          ELF64_SectionHeaderEntryGetLinkedSectionIndex( ELF64_SectionHeaderEntryRef entry );
+ELF64_Word          ELF64_SectionHeaderEntryGetMiscInfo( ELF64_SectionHeaderEntryRef entry );
+ELF64_XWord         ELF64_SectionHeaderEntryGetAddressAlignmentBoundary( ELF64_SectionHeaderEntryRef entry );
+ELF64_XWord         ELF64_SectionHeaderEntryGetEntrySize( ELF64_SectionHeaderEntryRef entry );
+unsigned int        ELF64_SectionHeaderEntryGetSymbolTableEntryCount( ELF64_SectionHeaderEntryRef section );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS_LIB_ELF_SHEADER_H__ */

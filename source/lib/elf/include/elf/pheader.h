@@ -61,23 +61,25 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#ifndef __XEOS_LIB_ELF_PHEADER_H__
+#define __XEOS_LIB_ELF_PHEADER_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+ELF64_SegmentType   ELF64_ProgramHeaderEntryGetType( ELF64_ProgramHeaderEntryRef entry );
+const char        * ELF64_ProgramHeaderEntryGetTypeString( ELF64_ProgramHeaderEntryRef entry );
+ELF64_Word          ELF64_ProgramHeaderEntryGetAttributes( ELF64_ProgramHeaderEntryRef entry );
+const char        * ELF64_ProgramHeaderEntryGetAttributesString( ELF64_ProgramHeaderEntryRef entry );
+ELF64_Off           ELF64_ProgramHeaderEntryGetFileOffset( ELF64_ProgramHeaderEntryRef entry );
+ELF64_Addr          ELF64_ProgramHeaderEntryGetMemoryVirtualAddress( ELF64_ProgramHeaderEntryRef entry );
+ELF64_XWord         ELF64_ProgramHeaderEntryGetFileSize( ELF64_ProgramHeaderEntryRef entry );
+ELF64_XWord         ELF64_ProgramHeaderEntryGetMemorySize( ELF64_ProgramHeaderEntryRef entry );
+ELF64_XWord         ELF64_ProgramHeaderEntryGetAlignment( ELF64_ProgramHeaderEntryRef entry );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS_LIB_ELF_PHEADER_H__ */

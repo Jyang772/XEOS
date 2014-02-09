@@ -61,23 +61,18 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+const char * ELF64_SymbolTableEntryGetTypeString( ELF64_SymbolTableEntryRef sym )
+{
+    switch( ELF64_SymbolTableEntryGetType( sym ) )
+    {
+        case ELF64_SymbolTypeNone:                  return "No type specified";
+        case ELF64_SymbolTypeDataObject:            return "Data object";
+        case ELF64_SymbolTypeFunctionEntryPoint:    return "Function entry point";
+        case ELF64_SymbolTypeSection:               return "Symbol associated with a section";
+        case ELF64_SymbolTypeFile:                  return "Source file associated with the object file";
+    }
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

@@ -61,23 +61,25 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#ifndef __XEOS_LIB_ELF_SYMBOL_H__
+#define __XEOS_LIB_ELF_SYMBOL_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+ELF64_Word          ELF64_SymbolTableEntryGetNameOffset( ELF64_SymbolTableEntryRef sym );
+ELF64_UChar         ELF64_SymbolTableEntryGetInfo( ELF64_SymbolTableEntryRef sym );
+ELF64_SymbolType    ELF64_SymbolTableEntryGetType( ELF64_SymbolTableEntryRef sym );
+const char        * ELF64_SymbolTableEntryGetTypeString( ELF64_SymbolTableEntryRef sym );
+ELF64_SymbolBinding ELF64_SymbolTableEntryGetBinding( ELF64_SymbolTableEntryRef sym );
+const char        * ELF64_SymbolTableEntryGetBindingString( ELF64_SymbolTableEntryRef sym );
+ELF64_Half          ELF64_SymbolTableEntryGetSectionTableIndex( ELF64_SymbolTableEntryRef sym );
+ELF64_Addr          ELF64_SymbolTableEntryGetSymbolValue( ELF64_SymbolTableEntryRef sym );
+ELF64_XWord         ELF64_SymbolTableEntryGetObjectSize( ELF64_SymbolTableEntryRef sym );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS_LIB_ELF_SYMBOL_H__ */

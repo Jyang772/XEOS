@@ -61,23 +61,23 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_DataEncoding ELF64_HeaderGetDataEncoding( ELF64_HeaderRef header )
+{
+    if( header == NULL )
+    {
+        return ELF64_DataEncodingUnknown;
+    }
+    
+    switch( header->e_ident[ 5 ] )
+    {
+        case 1:     return ELF64_DataEncodingLSB;
+        case 2:     return ELF64_DataEncodingMSB;
+        default:    break;
+    }
+    
+    return ELF64_DataEncodingUnknown;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

@@ -78,7 +78,7 @@ ARGS_LD_64          := -T linker.ld $(ARGS_LD_64)
 # Libraries
 #-------------------------------------------------------------------------------
 
-XEOS_LIBS           := -lc99 -lposix -lpthread -liconv -lsystem -lblocks -ldispatch -lobjc
+XEOS_LIBS           := -lc99 -lposix -lpthread -liconv -lsystem -lblocks -ldispatch -lobjc -lelf
 
 #-------------------------------------------------------------------------------
 # Built-in targets

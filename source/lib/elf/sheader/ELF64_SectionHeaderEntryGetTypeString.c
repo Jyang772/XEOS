@@ -61,23 +61,24 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+const char * ELF64_SectionHeaderEntryGetTypeString( ELF64_SectionHeaderEntryRef entry )
+{
+        switch( ELF64_SectionHeaderEntryGetType( entry ) )
+    {
+        case        ELF64_SectionTypeUnused:                    return "Unused section";
+        case        ELF64_SectionTypeProgBits:                  return "Program information";
+        case        ELF64_SectionTypeLinkerSymbolTable:         return "Linker symbol table";
+        case        ELF64_SectionTypeStringTable:               return "String table";
+        case        ELF64_SectionTypeRelaRelocationEntries:     return "\"Rela\" type relocation entries";
+        case        ELF64_SectionTypeSymbolHashTable:           return "Symbol hash table";
+        case        ELF64_SectionTypeDynamicLinkingTables:      return "Dynamic linking tables";
+        case        ELF64_SectionTypeNoteInformation:           return "Note information";
+        case        ELF64_SectionTypeUninitializedSpace:        return "Uninitialized space";
+        case        ELF64_SectionTypeRelRelocationEntries:      return "\"Rel\" type relocation entries";
+        case        ELF64_SectionTypeDynamicLoaderSymbolTable:  return "Dynamic loader symbol table";
+    }
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

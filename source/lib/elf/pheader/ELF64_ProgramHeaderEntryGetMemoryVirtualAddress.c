@@ -61,23 +61,16 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_Addr ELF64_ProgramHeaderEntryGetMemoryVirtualAddress( ELF64_ProgramHeaderEntryRef entry )
+{
+    if( entry == NULL )
+    {
+        return 0;
+    }
+    
+    return entry->p_vaddr;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

@@ -61,23 +61,28 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+unsigned long ELF64_Hash( const char * name )
+{
+    unsigned long h;
+    unsigned long g;
+    
+    h = 0;
+    
+    while( *( name ) )
+    {
+        h = ( h << 4 ) + *( ( unsigned char * )name++ );
+        
+        if( ( g = h & 0xF0000000 ) )
+        {
+            h ^= g >> 24;
+        }
+        
+        h &= 0x0FFFFFFF;
+    }
+    
+    return h;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

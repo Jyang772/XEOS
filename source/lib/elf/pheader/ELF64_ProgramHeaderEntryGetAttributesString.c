@@ -61,23 +61,44 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+const char * ELF64_ProgramHeaderEntryGetAttributesString( ELF64_ProgramHeaderEntryRef entry )
+{
+    ELF64_Word flags;
+    
+    flags = ELF64_ProgramHeaderEntryGetAttributes( entry );
+    
+    if( flags & ELF64_SegmentAttributeRead && flags & ELF64_SegmentAttributeWrite && flags & ELF64_SegmentAttributeExecute )
+    {
+        return "rwx";
+    }
+    else if( flags & ELF64_SegmentAttributeRead && flags & ELF64_SegmentAttributeWrite )
+    {
+        return "rw-";
+    }
+    else if( flags & ELF64_SegmentAttributeRead && flags & ELF64_SegmentAttributeExecute )
+    {
+        return "r-x";
+    }
+    else if( flags & ELF64_SegmentAttributeWrite && flags & ELF64_SegmentAttributeExecute )
+    {
+        return "-wx";
+    }
+    else if( flags & ELF64_SegmentAttributeRead )
+    {
+        return "r--";
+    }
+    else if( flags & ELF64_SegmentAttributeWrite )
+    {
+        return "-w-";
+    }
+    else if( flags & ELF64_SegmentAttributeExecute )
+    {
+        return "--x";
+    }
+    
+    return "---";
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

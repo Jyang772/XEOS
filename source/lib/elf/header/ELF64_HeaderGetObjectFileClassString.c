@@ -61,23 +61,16 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+const char * ELF64_HeaderGetObjectFileClassString( ELF64_HeaderRef header )
+{
+    switch( ELF64_HeaderGetObjectFileClass( header ) )
+    {
+        case ELF64_ObjectFileClassUnknown:  return "Unknown";
+        case ELF64_ObjectFileClass32:       return "32 bits";
+        case ELF64_ObjectFileClass64:       return "64 bits";
+    }
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

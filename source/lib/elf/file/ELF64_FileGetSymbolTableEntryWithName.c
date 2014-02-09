@@ -61,23 +61,55 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
+#include <string.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_SymbolTableEntryRef ELF64_FileGetSymbolTableEntryWithName( ELF64_FileRef file, const char * name )
+{
+    ELF64_HeaderRef             header;
+    ELF64_SectionHeaderEntryRef sHeader;
+    ELF64_Half                  i;
+    unsigned int                symCount;
+    unsigned int                j;
+    ELF64_SymbolTableEntryRef   sym;
+    const char                * symName;
+    
+    if( file == NULL )
+    {
+        return NULL;
+    }
+    
+    header = ELF64_FileGetHeader( file );
+    
+    if( header == NULL )
+    {
+        return NULL;
+    }
+    
+    for( i = 0; i < ELF64_HeaderGetSectionHeaderEntryCount( header ); i++ )
+    {
+        sHeader = ELF64_FileGetSectionHeaderEntry( file, i );
+        
+        if( ELF64_SectionHeaderEntryGetType( sHeader ) != ELF64_SectionTypeLinkerSymbolTable )
+        {
+            continue;
+        }
+        
+        symCount = ELF64_SectionHeaderEntryGetSymbolTableEntryCount( sHeader );
+            
+        for( j = 0; j < symCount; j++ )
+        {
+            sym     = ELF64_FileGetSymbolTableEntryForSection( file, sHeader, j );
+            symName = ELF64_FileGetSymbolTableEntryNameForSection( file, sym, sHeader );
+            
+            if( strcmp( name, symName ) == 0 )
+            {
+                return sym;
+            }
+        }
+    }
+    
+    return NULL;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

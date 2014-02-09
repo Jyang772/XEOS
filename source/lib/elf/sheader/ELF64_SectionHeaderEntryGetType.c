@@ -61,23 +61,32 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_SectionType ELF64_SectionHeaderEntryGetType( ELF64_SectionHeaderEntryRef entry )
+{
+    if( entry == NULL )
+    {
+        return ELF64_SectionTypeUnused;
+    }
+    
+    switch( entry->sh_type )
+    {
+        case 0:     return ELF64_SectionTypeUnused;
+        case 1:     return ELF64_SectionTypeProgBits;
+        case 2:     return ELF64_SectionTypeLinkerSymbolTable;
+        case 3:     return ELF64_SectionTypeStringTable;
+        case 4:     return ELF64_SectionTypeRelaRelocationEntries;
+        case 5:     return ELF64_SectionTypeSymbolHashTable;
+        case 6:     return ELF64_SectionTypeDynamicLinkingTables;
+        case 7:     return ELF64_SectionTypeNoteInformation;
+        case 8:     return ELF64_SectionTypeUninitializedSpace;
+        case 9:     return ELF64_SectionTypeRelRelocationEntries;
+        case 11:    return ELF64_SectionTypeDynamicLoaderSymbolTable;
+        default:    break;
+    }
+    
+    return ELF64_SectionTypeUnused;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

@@ -71,7 +71,13 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 # Paths
 #-------------------------------------------------------------------------------
 
-
+DIR_SRC_FILE        := $(PATH_SRC_LIB_ELF)file/
+DIR_SRC_HEADER      := $(PATH_SRC_LIB_ELF)header/
+DIR_SRC_PHEADER     := $(PATH_SRC_LIB_ELF)pheader/
+DIR_SRC_SHEADER     := $(PATH_SRC_LIB_ELF)sheader/
+DIR_SRC_SYMBOL      := $(PATH_SRC_LIB_ELF)symbol/
+DIR_SRC_FUNCTIONS   := $(PATH_SRC_LIB_ELF)functions/
+DIR_SRC_INC         := $(PATH_SRC_LIB_ELF)include/
 
 #-------------------------------------------------------------------------------
 # Search paths
@@ -79,15 +85,20 @@ PROMPT              := "    ["$(COLOR_GREEN)" XEOS "$(COLOR_NONE)"]> ["$(COLOR_G
 
 # Define the search paths for source files
 vpath %$(EXT_C)         $(PATH_SRC_LIB_ELF)
+vpath %$(EXT_C)         $(DIR_SRC_FILE)
+vpath %$(EXT_C)         $(DIR_SRC_HEADER)
+vpath %$(EXT_C)         $(DIR_SRC_PHEADER)
+vpath %$(EXT_C)         $(DIR_SRC_SHEADER)
+vpath %$(EXT_C)         $(DIR_SRC_SYMBOL)
+vpath %$(EXT_C)         $(DIR_SRC_FUNCTIONS)
+vpath %$(EXT_H)         $(DIR_SRC_INC)
 
 #-------------------------------------------------------------------------------
 # File suffixes
 #-------------------------------------------------------------------------------
 
 # Adds the suffixes used in this file
-.SUFFIXES:  $(EXT_ASM_32)   \
-            $(EXT_ASM_64)   \
-            $(EXT_C)        \
+.SUFFIXES:  $(EXT_C)        \
             $(EXT_H)        \
             $(EXT_OBJ)      \
             $(EXT_BIN)
@@ -97,6 +108,12 @@ vpath %$(EXT_C)         $(PATH_SRC_LIB_ELF)
 #-------------------------------------------------------------------------------
 
 _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(PATH_SRC_LIB_ELF))
+_FILES_C_OBJ_BUILD_FILE         = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(DIR_SRC_FILE))
+_FILES_C_OBJ_BUILD_HEADER       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(DIR_SRC_HEADER))
+_FILES_C_OBJ_BUILD_PHEADER      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(DIR_SRC_PHEADER))
+_FILES_C_OBJ_BUILD_SHEADER      = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(DIR_SRC_SHEADER))
+_FILES_C_OBJ_BUILD_SYMBOL       = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(DIR_SRC_SYMBOL))
+_FILES_C_OBJ_BUILD_FUNCTIONS    = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ_ELF),$(DIR_SRC_FUNCTIONS))
 
 #-------------------------------------------------------------------------------
 # Built-in targets
@@ -111,7 +128,13 @@ _FILES_C_OBJ_BUILD              = $(call XEOS_FUNC_C_OBJ,$(PATH_BUILD_32_LIB_OBJ
 #-------------------------------------------------------------------------------
 
 # Build the full project
-all:    $(_FILES_C_OBJ_BUILD)
+all:    $(_FILES_C_OBJ_BUILD)           \
+        $(_FILES_C_OBJ_BUILD_FILE)      \
+        $(_FILES_C_OBJ_BUILD_HEADER)    \
+        $(_FILES_C_OBJ_BUILD_PHEADER)   \
+        $(_FILES_C_OBJ_BUILD_SHEADER)   \
+        $(_FILES_C_OBJ_BUILD_SYMBOL)    \
+        $(_FILES_C_OBJ_BUILD_FUNCTIONS)
 	
 	@$(PRINT) $(PROMPT)$(COLOR_CYAN)"Generating the library archive"$(COLOR_NONE)" [ 32 bits ]: "$(COLOR_GRAY)"libelf.a"$(COLOR_NONE)
 	@$(AR_32) $(ARGS_AR_32) $(PATH_BUILD_32_LIB_BIN)libelf.a $(PATH_BUILD_32_LIB_OBJ_ELF)*$(EXT_OBJ)

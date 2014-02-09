@@ -61,23 +61,30 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_ProgramHeaderEntryRef ELF64_FileGetProgramHeaderEntry( ELF64_FileRef file, unsigned int index )
+{
+    ELF64_HeaderRef header;
+    ELF64_Off       offset;
+    ELF64_Half      entrySize;
+    
+    if( file == NULL )
+    {
+        return NULL;
+    }
+    
+    header = ELF64_FileGetHeader( file );
+    
+    if( header == NULL || index >= ELF64_HeaderGetProgramHeaderEntryCount( header ) )
+    {
+        return NULL;
+    }
+    
+    offset      = ELF64_HeaderGetProgramHeaderOffset( header );
+    entrySize   = ELF64_HeaderGetProgramHeaderEntrySize( header );
+    
+    return ( ELF64_ProgramHeaderEntryRef )( ( void * )( ( char * )file + offset + ( entrySize * index ) ) );
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

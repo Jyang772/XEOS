@@ -61,23 +61,25 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_SymbolTableEntryRef ELF64_FileGetSymbolTableEntryForSection( ELF64_FileRef file, ELF64_SectionHeaderEntryRef section, unsigned int index )
+{
+    ELF64_XWord entrySize;
+    
+    if( ELF64_SectionHeaderEntryGetType( section ) != ELF64_SectionTypeLinkerSymbolTable )
+    {
+        return NULL;
+    }
+    
+    if( index >= ELF64_SectionHeaderEntryGetSymbolTableEntryCount( section ) )
+    {
+        return NULL;
+    }
+    
+    entrySize = ELF64_SectionHeaderEntryGetEntrySize( section );
+    
+    return ( ELF64_SymbolTableEntryRef )( ( void * )( ELF64_FileGetDataForSection( file, section ) + ( index * entrySize ) ) );
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

@@ -61,6 +61,27 @@
 
 /* $Id$ */
 
-void elf_dummy( void );
-void elf_dummy( void )
-{}
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
+
+unsigned int ELF64_SectionHeaderEntryGetSymbolTableEntryCount( ELF64_SectionHeaderEntryRef section )
+{
+    ELF64_XWord entrySize;
+    ELF64_XWord sectionSize;
+    
+    if( ELF64_SectionHeaderEntryGetType( section ) != ELF64_SectionTypeLinkerSymbolTable )
+    {
+        return 0;
+    }
+    
+    entrySize   = ELF64_SectionHeaderEntryGetEntrySize( section );
+    sectionSize = ELF64_SectionHeaderEntryGetSectionSize( section );
+    
+    if( entrySize == 0 )
+    {
+        return 0;
+    }
+    
+    return ( unsigned int )( sectionSize / entrySize );
+}

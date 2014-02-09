@@ -61,23 +61,24 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_SymbolBinding ELF64_SymbolTableEntryGetBinding( ELF64_SymbolTableEntryRef sym )
+{
+    if( sym == NULL )
+    {
+        return ELF64_SymbolBindingLocal;
+    }
+    
+    switch( ELF64_SymbolTableEntryGetInfo( sym ) & 0xF0 )
+    {
+        case 0:     return ELF64_SymbolBindingLocal;
+        case 1:     return ELF64_SymbolBindingGlobal;
+        case 2:     return ELF64_SymbolBindingWeak;
+        default:    break;
+    }
+    
+    return ELF64_SymbolBindingLocal;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

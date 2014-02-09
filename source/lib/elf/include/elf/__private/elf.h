@@ -61,23 +61,76 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#ifndef __XEOS_LIB_ELF___PRIVATE_ELF_H__
+#define __XEOS_LIB_ELF___PRIVATE_ELF_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+#include <elf.h>
+
+struct __ELF64_SymbolTableEntry
+{
+    ELF64_Word  st_name;    /* Symbol name */
+    ELF64_UChar st_info;    /* Type and binding attributes */
+    ELF64_UChar st_other;   /* Reserved */
+    ELF64_Half  st_shndx;   /* Section table index */
+    ELF64_Addr  st_value;   /* Symbol value */
+    ELF64_XWord st_size;    /* Size of object */
+};
+
+struct __ELF64_ProgramHeaderEntry
+{
+    ELF64_Word  p_type;     /* Type of segment */
+    ELF64_Word  p_flags;    /* Segment attributes */
+    ELF64_Off   p_offset;   /* Offset in file */
+    ELF64_Addr  p_vaddr;    /* Virtual address in memory */
+    ELF64_Addr  p_paddr;    /* Reserved */
+    ELF64_XWord p_filesz;   /* Size of segment in file */
+    ELF64_XWord p_memsz;    /* Size of segment in memory */
+    ELF64_XWord p_align;    /* Alignment of segment */
+};
+
+struct __ELF64_SectionHeaderEntry
+{
+    ELF64_Word  sh_name;        /* Section name */
+    ELF64_Word  sh_type;        /* Section type */
+    ELF64_XWord sh_flags;       /* Section attributes */
+    ELF64_Addr  sh_addr;        /* Virtual address in memory */
+    ELF64_Off   sh_offset;      /* Offset in file */
+    ELF64_XWord sh_size;        /* Size of section */
+    ELF64_Word  sh_link;        /* Link to other section */
+    ELF64_Word  sh_info;        /* Miscellaneous information */
+    ELF64_XWord sh_addralign;   /* Address alignment boundary */
+    ELF64_XWord sh_entsize;     /* Size of entries, if section has table */
+};
+
+struct __ELF64_Header
+{
+    ELF64_UChar   e_ident[ 16 ];  /* ELF identification */
+    ELF64_Half    e_type;         /* Object file type */
+    ELF64_Half    e_machine;      /* Machine type */
+    ELF64_Word    e_version;      /* Object file version */
+    ELF64_Addr    e_entry;        /* Entry point address */
+    ELF64_Off     e_phoff;        /* Program header offset */
+    ELF64_Off     e_shoff;        /* Section header offset */
+    ELF64_Word    e_flags;        /* Processor-specific flags */
+    ELF64_Half    e_ehsize;       /* ELF header size */
+    ELF64_Half    e_phentsize;    /* Size of program header entry */
+    ELF64_Half    e_phnum;        /* Number of program header entries */
+    ELF64_Half    e_shentsize;    /* Size of section header entry */
+    ELF64_Half    e_shnum;        /* Number of section header entries */
+    ELF64_Half    e_shstrndx;     /* Section name string table index */
+};
+
+struct __ELF64_File
+{
+    struct __ELF64_Header header;
+};
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS_LIB_ELF___PRIVATE_ELF_H__ */

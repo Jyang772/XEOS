@@ -61,23 +61,39 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#ifndef __XEOS_LIB_ELF_HEADER_H__
+#define __XEOS_LIB_ELF_HEADER_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+ELF64_ObjectFileClass   ELF64_HeaderGetObjectFileClass( ELF64_HeaderRef header );
+const char            * ELF64_HeaderGetObjectFileClassString( ELF64_HeaderRef header );
+ELF64_DataEncoding      ELF64_HeaderGetDataEncoding( ELF64_HeaderRef header );
+const char            * ELF64_HeaderGetDataEncodingString( ELF64_HeaderRef header );
+ELF64_UChar             ELF64_HeaderGetFileVersion( ELF64_HeaderRef header );
+ELF64_OSABI             ELF64_HeaderGetOSABI( ELF64_HeaderRef header );
+const char            * ELF64_HeaderGetOSABIString( ELF64_HeaderRef header );
+ELF64_ObjectFileType    ELF64_HeaderGetObjectFileType( ELF64_HeaderRef header );
+const char            * ELF64_HeaderGetObjectFileTypeString( ELF64_HeaderRef header );
+ELF64_Half              ELF64_HeaderGetMachine( ELF64_HeaderRef header );
+ELF64_MachineType       ELF64_HeaderGetMachineType( ELF64_HeaderRef header );
+const char *            ELF64_HeaderGetMachineTypeString( ELF64_HeaderRef header );
+ELF64_Word              ELF64_HeaderGetVersion( ELF64_HeaderRef header );
+ELF64_Addr              ELF64_HeaderGetEntryPointAddress( ELF64_HeaderRef header );
+ELF64_Off               ELF64_HeaderGetProgramHeaderOffset( ELF64_HeaderRef header );
+ELF64_Off               ELF64_HeaderGetSectionHeaderOffset( ELF64_HeaderRef header );
+ELF64_Word              ELF64_HeaderGetProcessorSpecificFlags( ELF64_HeaderRef header );
+ELF64_Half              ELF64_HeaderGetHeaderSize( ELF64_HeaderRef header );
+ELF64_Half              ELF64_HeaderGetProgramHeaderEntrySize( ELF64_HeaderRef header );
+ELF64_Half              ELF64_HeaderGetProgramHeaderEntryCount( ELF64_HeaderRef header );
+ELF64_Half              ELF64_HeaderGetSectionHeaderEntrySize( ELF64_HeaderRef header );
+ELF64_Half              ELF64_HeaderGetSectionHeaderEntryCount( ELF64_HeaderRef header );
+ELF64_Half              ELF64_HeaderGetSectionNameStringTableIndex( ELF64_HeaderRef header );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+#endif /* __XEOS_LIB_ELF_HEADER_H__ */

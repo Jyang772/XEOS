@@ -61,23 +61,90 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+/*!
+ * @file            __XEOS_Debug.c
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <xeos/__private/debug.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
+static struct __XEOS_Debug_Symbol __XEOS_Debug_KernelTraceSymbols[ __XEOS_DEBUG_KERNEL_TRACE_MAX_LENGTH ];
 
-#ifdef __cplusplus
+static bool __XEOS_Debug_KernelTraceSymbolsInited = false;
+
+struct __XEOS_Debug_Trace __XEOS_Debug_KernelTrace =
+{
+    __XEOS_Debug_KernelTraceSymbols,
+    0,
+    __XEOS_DEBUG_KERNEL_TRACE_MAX_LENGTH
+};
+
+void __cyg_profile_func_enter( void * function, void * caller )
+{
+    unsigned int i;
+    
+    ( void )function;
+    ( void )caller;
+    ( void )i;
+    
+    #ifdef __clang__
+    
+    if( __XEOS_Debug_KernelTraceSymbolsInited == false )
+    {
+        __XEOS_Debug_KernelTraceSymbolsInited = true;
+        
+        for( i = 0; i < __XEOS_Debug_KernelTrace.capacity; i++ )
+        {
+            __XEOS_Debug_KernelTrace.symbols[ i ].function = NULL;
+            __XEOS_Debug_KernelTrace.symbols[ i ].callSite = NULL;
+        }
+    }
+    
+    for( i = 1; i < __XEOS_Debug_KernelTrace.capacity; i++ )
+    {
+        __XEOS_Debug_KernelTrace.symbols[ __XEOS_Debug_KernelTrace.capacity - i ].function = __XEOS_Debug_KernelTrace.symbols[ ( __XEOS_Debug_KernelTrace.capacity - 1 ) - i ].function;
+        __XEOS_Debug_KernelTrace.symbols[ __XEOS_Debug_KernelTrace.capacity - i ].callSite = __XEOS_Debug_KernelTrace.symbols[ ( __XEOS_Debug_KernelTrace.capacity - 1 ) - i ].callSite;
+    }
+    
+    __XEOS_Debug_KernelTrace.symbols[ 0 ].function = function;
+    __XEOS_Debug_KernelTrace.symbols[ 0 ].callSite = caller;
+    
+    if( __XEOS_Debug_KernelTrace.count < __XEOS_Debug_KernelTrace.capacity )
+    {
+        __XEOS_Debug_KernelTrace.count++;
+    }
+    
+    #endif
 }
-#endif
 
-#endif /* __XEOS_LIB_ELF_H__ */
+void __cyg_profile_func_exit( void * function, void * caller  )
+{
+    unsigned int i;
+    
+    ( void )function;
+    ( void )caller;
+    ( void )i;
+    
+    if( __XEOS_Debug_KernelTrace.count == 0 || __XEOS_Debug_KernelTraceSymbolsInited == false )
+    {
+        return;
+    }
+    
+    #ifdef __clang__
+    
+    for( i = 0; i < __XEOS_Debug_KernelTrace.capacity - 1; i++ )
+    {
+        __XEOS_Debug_KernelTrace.symbols[ i ].function = __XEOS_Debug_KernelTrace.symbols[ i + 1 ].function;
+        __XEOS_Debug_KernelTrace.symbols[ i ].callSite = __XEOS_Debug_KernelTrace.symbols[ i + 1 ].callSite;
+    }
+    
+    __XEOS_Debug_KernelTrace.symbols[ __XEOS_Debug_KernelTrace.capacity - 1 ].function = NULL;
+    __XEOS_Debug_KernelTrace.symbols[ __XEOS_Debug_KernelTrace.capacity - 1 ].callSite = NULL;
+    
+    __XEOS_Debug_KernelTrace.count--;
+    
+    #endif
+}

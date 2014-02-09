@@ -61,23 +61,11 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+ELF64_UChar * ELF64_FileGetDataForSectionAtIndex( ELF64_FileRef file, unsigned int index )
+{
+    return ELF64_FileGetDataForSection( file, ELF64_FileGetSectionHeaderEntry( file, index ) );
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

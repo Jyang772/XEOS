@@ -61,23 +61,27 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+bool ELF64_FileIsValid( ELF64_FileRef file )
+{
+    if( file == NULL )
+    {
+        return false;
+    }
+    
+    if
+    (
+           file->header.e_ident[ 0 ] == 0x7F
+        && file->header.e_ident[ 1 ] == 0x45    /* E */
+        && file->header.e_ident[ 2 ] == 0x4C    /* L */
+        && file->header.e_ident[ 3 ] == 0x46    /* F */
+    )
+    {
+        return true;
+    }
+    
+    return false;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

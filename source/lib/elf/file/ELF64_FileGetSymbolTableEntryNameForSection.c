@@ -61,23 +61,38 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
+#include <string.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+const char * ELF64_FileGetSymbolTableEntryNameForSection( ELF64_FileRef file, ELF64_SymbolTableEntryRef sym, ELF64_SectionHeaderEntryRef section )
+{
+    ELF64_Word                  stringTableIndex;
+    ELF64_SectionHeaderEntryRef stringTable;
+    ELF64_Word                  nameOffset;
+    const char                * name;
+    
+    if( file == NULL || sym == NULL || section == NULL )
+    {
+        return NULL;
+    }
+    
+    stringTableIndex = ELF64_SectionHeaderEntryGetLinkedSectionIndex( section );
+    stringTable      = ELF64_FileGetSectionHeaderEntry( file, stringTableIndex );
+    
+    if( stringTable == NULL )
+    {
+        return NULL;
+    }
+    
+    nameOffset = ELF64_SymbolTableEntryGetNameOffset( sym );
+    name       = ( const char * )( ELF64_FileGetDataForSection( file, stringTable ) + nameOffset );
+    
+    if( strlen( name ) == 0 )
+    {
+        return "<unnamed-symbol>";
+    }
+    
+    return name;
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

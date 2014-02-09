@@ -61,23 +61,27 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+/*!
+ * @file            XEOS_Debug_TraceGetSymbolAtIndex.c
+ * @author          Jean-David Gadina
+ * @copyright       (c) 2010-2013, Jean-David Gadina - www.xs-labs.com
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <xeos/debug.h>
+#include <xeos/__private/debug.h>
+#include <stdlib.h>
 
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+XEOS_Debug_SymbolRef XEOS_Debug_TraceGetSymbolAtIndex( XEOS_Debug_TraceRef trace, unsigned int index )
+{
+    if( trace == NULL )
+    {
+        return NULL;
+    }
+    
+    if( index >= XEOS_Debug_TraceGetSymbolCount( trace ) )
+    {
+        return NULL;
+    }
+    
+    return &( trace->symbols[ index ] );
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */

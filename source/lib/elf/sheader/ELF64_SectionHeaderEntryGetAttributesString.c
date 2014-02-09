@@ -61,23 +61,44 @@
 
 /* $Id$ */
 
-#ifndef __XEOS_LIB_ELF_H__
-#define __XEOS_LIB_ELF_H__
+#include <elf.h>
+#include <elf/__private/elf.h>
+#include <stdlib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <elf/types.h>
-#include <elf/file.h>
-#include <elf/functions.h>
-#include <elf/header.h>
-#include <elf/pheader.h>
-#include <elf/sheader.h>
-#include <elf/symbol.h>
-
-#ifdef __cplusplus
+const char * ELF64_SectionHeaderEntryGetAttributesString( ELF64_SectionHeaderEntryRef entry )
+{
+    ELF64_XWord flags;
+    
+    flags = ELF64_SectionHeaderEntryGetAttributes( entry );
+    
+    if( flags & ELF64_SectionAttributeWrite && flags & ELF64_SectionAttributeAlloc && flags & ELF64_SectionAttributeExecute )
+    {
+        return "wax";
+    }
+    else if( flags & ELF64_SectionAttributeWrite && flags & ELF64_SectionAttributeAlloc )
+    {
+        return "wa-";
+    }
+    else if( flags & ELF64_SectionAttributeWrite && flags & ELF64_SegmentAttributeExecute )
+    {
+        return "w-x";
+    }
+    else if( flags & ELF64_SectionAttributeAlloc && flags & ELF64_SegmentAttributeExecute )
+    {
+        return "-ax";
+    }
+    else if( flags & ELF64_SectionAttributeWrite )
+    {
+        return "w--";
+    }
+    else if( flags & ELF64_SectionAttributeAlloc )
+    {
+        return "-a-";
+    }
+    else if( flags & ELF64_SectionAttributeExecute )
+    {
+        return "--x";
+    }
+    
+    return "---";
 }
-#endif
-
-#endif /* __XEOS_LIB_ELF_H__ */
